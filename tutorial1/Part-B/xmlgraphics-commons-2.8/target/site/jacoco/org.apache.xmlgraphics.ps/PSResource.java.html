@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSResource.java</span></div><h1>PSResource.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSResource.java 1598621 2014-05-30 14:55:00Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+/**
+ * Represents a PostScript resource (file, font, procset etc.).
+ */
+public class PSResource implements Comparable {
+
+    /** a file resource */
+    public static final String TYPE_FILE = &quot;file&quot;;
+    /** a font resource */
+    public static final String TYPE_FONT = &quot;font&quot;;
+    /** a procset resource */
+    public static final String TYPE_PROCSET = &quot;procset&quot;;
+    /** a procset resource */
+    public static final String TYPE_PATTERN = &quot;pattern&quot;;
+    /** a procset resource */
+    public static final String TYPE_FORM = &quot;form&quot;;
+    /** a procset resource */
+    public static final String TYPE_ENCODING = &quot;encoding&quot;;
+    /** A CMap resource. */
+    public static final String TYPE_CMAP = &quot;cmap&quot;;
+    /** A CIDFont resource. */
+    public static final String TYPE_CIDFONT = &quot;cidfont&quot;;
+
+    private String type;
+    private String name;
+
+    /**
+     * Main constructor
+     * @param type type of the resource
+     * @param name name of the resource
+     */
+<span class="fc" id="L52">    public PSResource(String type, String name) {</span>
+<span class="fc" id="L53">        this.type = type;</span>
+<span class="fc" id="L54">        this.name = name;</span>
+<span class="fc" id="L55">    }</span>
+
+    /** @return the type of the resource */
+    public String getType() {
+<span class="fc" id="L59">        return this.type;</span>
+    }
+
+    /** @return the name of the resource */
+    public String getName() {
+<span class="fc" id="L64">        return this.name;</span>
+    }
+
+    /** @return the &amp;lt;resource&amp;gt; specification as defined in DSC v3.0 spec. */
+    public String getResourceSpecification() {
+<span class="fc" id="L69">        StringBuffer sb = new StringBuffer();</span>
+<span class="fc" id="L70">        sb.append(getType()).append(&quot; &quot;).append(PSGenerator.convertStringToDSC(getName()));</span>
+<span class="fc" id="L71">        return sb.toString();</span>
+    }
+
+    /** {@inheritDoc} */
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        if (obj == this) {</span>
+<span class="nc" id="L77">            return true;</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        } else if (obj instanceof PSResource) {</span>
+<span class="nc" id="L79">            PSResource other = (PSResource)obj;</span>
+<span class="nc" id="L80">            return other.toString().equals(toString());</span>
+        } else {
+<span class="nc" id="L82">            return false;</span>
+        }
+    }
+
+    /** {@inheritDoc} */
+    public int hashCode() {
+<span class="fc" id="L88">        return toString().hashCode();</span>
+    }
+
+    /** {@inheritDoc} */
+    public int compareTo(Object o) {
+<span class="fc" id="L93">        PSResource other = (PSResource)o;</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (this == other) {</span>
+<span class="fc" id="L95">            return 0;</span>
+        }
+<span class="fc" id="L97">        int result = this.getType().compareTo(other.getType());</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (result == 0) {</span>
+<span class="fc" id="L99">            result = this.getName().compareTo(other.getName());</span>
+        }
+<span class="fc" id="L101">        return result;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String toString() {
+<span class="fc" id="L106">        return getResourceSpecification();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

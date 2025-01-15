@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMPArray.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp</a> &gt; <span class="el_source">XMPArray.java</span></div><h1>XMPArray.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: XMPArray.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.xmp;
+
+import java.net.URI;
+
+import java.util.List;
+
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
+
+/**
+ * Represents an XMP array as defined by the XMP specification.
+ */
+public class XMPArray extends XMPComplexValue {
+    //TODO Property qualifiers are currently not supported, yet.
+
+    private XMPArrayType type;
+<span class="fc" id="L37">    private List values = new java.util.ArrayList();</span>
+<span class="fc" id="L38">    private List xmllang = new java.util.ArrayList();</span>
+
+    /**
+     * Main constructor
+     * @param type the intended type of array
+     */
+<span class="fc" id="L44">    public XMPArray(XMPArrayType type) {</span>
+<span class="fc" id="L45">        this.type = type;</span>
+<span class="fc" id="L46">    }</span>
+
+    /** @return the type of array */
+    public XMPArrayType getType() {
+<span class="nc" id="L50">        return this.type;</span>
+    }
+
+    /**
+     * Returns the value at a given position.
+     * @param idx the index of the requested value
+     * @return the value at the given position
+     */
+    public Object getValue(int idx) {
+<span class="fc" id="L59">        return this.values.get(idx);</span>
+    }
+
+    /**
+     * Returns the structure at a given position. If the value is not a structure a
+     * ClassCastException is thrown.
+     * @param idx the index of the requested value
+     * @return the structure at the given position
+     */
+    public XMPStructure getStructure(int idx) {
+<span class="fc" id="L69">        return (XMPStructure)this.values.get(idx);</span>
+    }
+
+    /** {@inheritDoc} */
+    public Object getSimpleValue() {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (values.size() == 1) {</span>
+<span class="nc" id="L75">            return getValue(0);</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        } else if (values.size() &gt; 1) {</span>
+<span class="nc" id="L77">            return getLangValue(XMPConstants.DEFAULT_LANGUAGE);</span>
+        } else {
+<span class="nc" id="L79">            return null;</span>
+        }
+    }
+
+    private String getParentLanguage(String lang) {
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (lang == null) {</span>
+<span class="nc" id="L85">            return null;</span>
+        }
+<span class="fc" id="L87">        int pos = lang.indexOf('-');</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (pos &gt; 0) {</span>
+<span class="fc" id="L89">            String parent = lang.substring(0, pos);</span>
+<span class="fc" id="L90">            return parent;</span>
+        }
+<span class="nc" id="L92">        return null;</span>
+    }
+
+    /**
+     * Returns a language-dependent values (available for alternative arrays).
+     * @param lang the language (&quot;x-default&quot; for the default value)
+     * @return the requested value
+     */
+    public String getLangValue(String lang) {
+<span class="fc" id="L101">        String v = null;</span>
+<span class="fc" id="L102">        String valueForParentLanguage = null;</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (int i = 0, c = values.size(); i &lt; c; i++) {</span>
+<span class="fc" id="L104">            String l = (String)xmllang.get(i);</span>
+<span class="pc bpc" id="L105" title="4 of 8 branches missed.">            if ((l == null &amp;&amp; lang == null) || (l != null &amp;&amp; l.equals(lang))) {</span>
+<span class="fc" id="L106">                v = values.get(i).toString();</span>
+<span class="fc" id="L107">                break;</span>
+            }
+<span class="pc bpc" id="L109" title="1 of 4 branches missed.">            if (l != null &amp;&amp; lang != null) {</span>
+                //Check for &quot;parent&quot; language, too (&quot;en&quot; matches &quot;en-GB&quot;)
+<span class="fc" id="L111">                String parent = getParentLanguage(l);</span>
+<span class="pc bpc" id="L112" title="2 of 4 branches missed.">                if (parent != null &amp;&amp; parent.equals(lang)) {</span>
+<span class="nc" id="L113">                    valueForParentLanguage = values.get(i).toString();</span>
+                }
+            }
+        }
+<span class="pc bpc" id="L117" title="1 of 6 branches missed.">        if (lang != null &amp;&amp; v == null &amp;&amp; valueForParentLanguage != null) {</span>
+            //Use value found for parent language
+<span class="nc" id="L119">            v = valueForParentLanguage;</span>
+        }
+<span class="pc bpc" id="L121" title="1 of 4 branches missed.">        if (lang == null &amp;&amp; v == null) {</span>
+<span class="fc" id="L122">            v = getLangValue(XMPConstants.DEFAULT_LANGUAGE);</span>
+<span class="pc bpc" id="L123" title="3 of 4 branches missed.">            if (v == null &amp;&amp; values.size() &gt; 0) {</span>
+<span class="nc" id="L124">                v = getValue(0).toString(); //get first</span>
+            }
+        }
+<span class="fc" id="L127">        return v;</span>
+    }
+
+    /**
+     * Removes a language-dependent value.
+     * @param lang the language (&quot;x-default&quot; for the default value)
+     * @return the removed value (or null if no value was set)
+     */
+    public String removeLangValue(String lang) {
+<span class="pc bpc" id="L136" title="2 of 4 branches missed.">        if (lang == null || &quot;&quot;.equals(lang)) {</span>
+<span class="nc" id="L137">            lang = XMPConstants.DEFAULT_LANGUAGE;</span>
+        }
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        for (int i = 0, c = values.size(); i &lt; c; i++) {</span>
+<span class="fc" id="L140">            String l = (String)xmllang.get(i);</span>
+<span class="fc bfc" id="L141" title="All 6 branches covered.">            if ((XMPConstants.DEFAULT_LANGUAGE.equals(lang) &amp;&amp; l == null) || lang.equals(l)) {</span>
+<span class="fc" id="L142">                String value = (String)values.remove(i);</span>
+<span class="fc" id="L143">                xmllang.remove(i);</span>
+<span class="fc" id="L144">                return value;</span>
+            }
+        }
+<span class="fc" id="L147">        return null;</span>
+    }
+
+    /**
+     * Adds a new value to the array
+     * @param value the value
+     */
+    public void add(Object value) {
+<span class="fc" id="L155">        values.add(value);</span>
+<span class="fc" id="L156">        xmllang.add(null);</span>
+<span class="fc" id="L157">    }</span>
+
+    /**
+     * Removes a value from the array. If the value doesn't exist, nothing happens.
+     * @param value the value to be removed
+     * @return true if the value was removed, false if it wasn't found
+     */
+    public boolean remove(String value) {
+<span class="fc" id="L165">        int idx = values.indexOf(value);</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (idx &gt;= 0) {</span>
+<span class="fc" id="L167">            values.remove(idx);</span>
+<span class="fc" id="L168">            xmllang.remove(idx);</span>
+<span class="fc" id="L169">            return true;</span>
+        }
+<span class="fc" id="L171">        return false;</span>
+
+    }
+
+    /**
+     * Adds a language-dependent value to the array. Make sure not to add the same language twice.
+     * @param value the value
+     * @param lang the language (&quot;x-default&quot; for the default value)
+     */
+    public void add(String value, String lang) {
+<span class="fc" id="L181">        values.add(value);</span>
+<span class="fc" id="L182">        xmllang.add(lang);</span>
+<span class="fc" id="L183">    }</span>
+
+    /**
+     * Returns the current number of values in the array.
+     * @return the current number of values in the array
+     */
+    public int getSize() {
+<span class="fc" id="L190">        return this.values.size();</span>
+    }
+
+    /**
+     * Indicates whether the array is empty or not.
+     * @return true if the array is empty
+     */
+    public boolean isEmpty() {
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        return getSize() == 0;</span>
+    }
+
+    /**
+     * Converts the array to an object array.
+     * @return an object array of all values in the array
+     */
+    public Object[] toObjectArray() {
+<span class="fc" id="L206">        Object[] res = new Object[getSize()];</span>
+<span class="fc bfc" id="L207" title="All 2 branches covered.">        for (int i = 0, c = res.length; i &lt; c; i++) {</span>
+<span class="fc" id="L208">            res[i] = getValue(i);</span>
+        }
+<span class="fc" id="L210">        return res;</span>
+    }
+
+    /** {@inheritDoc} */
+    public void toSAX(ContentHandler handler) throws SAXException {
+<span class="fc" id="L215">        AttributesImpl atts = new AttributesImpl();</span>
+<span class="fc" id="L216">        handler.startElement(XMPConstants.RDF_NAMESPACE,</span>
+<span class="fc" id="L217">                type.getName(), &quot;rdf:&quot; + type.getName(), atts);</span>
+<span class="fc bfc" id="L218" title="All 2 branches covered.">        for (int i = 0, c = values.size(); i &lt; c; i++) {</span>
+<span class="fc" id="L219">            String lang = (String)xmllang.get(i);</span>
+<span class="fc" id="L220">            atts.clear();</span>
+<span class="fc" id="L221">            Object v = values.get(i);</span>
+<span class="pc bpc" id="L222" title="1 of 2 branches missed.">            if (lang != null) {</span>
+<span class="nc" id="L223">                atts.addAttribute(XMPConstants.XML_NS, &quot;lang&quot;, &quot;xml:lang&quot;, &quot;CDATA&quot;, lang);</span>
+            }
+<span class="pc bpc" id="L225" title="1 of 2 branches missed.">            if (v instanceof URI) {</span>
+<span class="nc" id="L226">                atts.addAttribute(XMPConstants.RDF_NAMESPACE, &quot;resource&quot;,</span>
+<span class="nc" id="L227">                        &quot;rdf:resource&quot;, &quot;CDATA&quot;, ((URI)v).toString());</span>
+            }
+<span class="fc" id="L229">            handler.startElement(XMPConstants.RDF_NAMESPACE,</span>
+                    &quot;li&quot;, &quot;rdf:li&quot;, atts);
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">            if (v instanceof XMPComplexValue) {</span>
+<span class="fc" id="L232">                ((XMPComplexValue)v).toSAX(handler);</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">            } else if (!(v instanceof URI)) {</span>
+<span class="nc" id="L234">                String value = (String)values.get(i);</span>
+<span class="nc" id="L235">                char[] chars = value.toCharArray();</span>
+<span class="nc" id="L236">                handler.characters(chars, 0, chars.length);</span>
+            }
+<span class="fc" id="L238">            handler.endElement(XMPConstants.RDF_NAMESPACE,</span>
+                    &quot;li&quot;, &quot;rdf:li&quot;);
+        }
+<span class="fc" id="L241">        handler.endElement(XMPConstants.RDF_NAMESPACE,</span>
+<span class="fc" id="L242">                type.getName(), &quot;rdf:&quot; + type.getName());</span>
+<span class="fc" id="L243">    }</span>
+
+    /** {@inheritDoc} */
+    public String toString() {
+<span class="nc" id="L247">        return &quot;XMP array: &quot; + type + &quot;, &quot; + getSize();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

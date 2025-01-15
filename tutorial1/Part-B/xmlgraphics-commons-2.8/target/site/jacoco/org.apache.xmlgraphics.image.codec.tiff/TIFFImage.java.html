@@ -1,0 +1,1744 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TIFFImage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.tiff</a> &gt; <span class="el_source">TIFFImage.java</span></div><h1>TIFFImage.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: TIFFImage.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.tiff;
+
+import java.awt.Rectangle;
+import java.awt.Transparency;
+import java.awt.color.ColorSpace;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.DataBufferInt;
+import java.awt.image.DataBufferShort;
+import java.awt.image.DataBufferUShort;
+import java.awt.image.IndexColorModel;
+import java.awt.image.MultiPixelPackedSampleModel;
+import java.awt.image.PixelInterleavedSampleModel;
+import java.awt.image.Raster;
+import java.awt.image.SampleModel;
+import java.awt.image.WritableRaster;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
+
+import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
+import org.apache.xmlgraphics.image.codec.util.SeekableStream;
+import org.apache.xmlgraphics.image.rendered.AbstractRed;
+import org.apache.xmlgraphics.image.rendered.CachableRed;
+
+// CSOFF: LocalVariableName
+// CSOFF: MissingSwitchDefault
+// CSOFF: MultipleVariableDeclarations
+// CSOFF: OperatorWrap
+// CSOFF: WhitespaceAround
+
+public class TIFFImage extends AbstractRed {
+
+    // Compression types
+    public static final int COMP_NONE      = 1;
+    public static final int COMP_FAX_G3_1D = 2;
+    public static final int COMP_FAX_G3_2D = 3;
+    public static final int COMP_FAX_G4_2D = 4;
+    public static final int COMP_LZW       = 5;
+    public static final int COMP_JPEG_OLD  = 6;
+    public static final int COMP_JPEG_TTN2 = 7;
+    public static final int COMP_PACKBITS  = 32773;
+    public static final int COMP_DEFLATE   = 32946;
+
+    // Image types
+    private static final int TYPE_UNSUPPORTED = -1;
+    private static final int TYPE_BILEVEL      = 0;
+    private static final int TYPE_GRAY_4BIT    = 1;
+    private static final int TYPE_GRAY         = 2;
+    private static final int TYPE_GRAY_ALPHA   = 3;
+    private static final int TYPE_PALETTE      = 4;
+    private static final int TYPE_RGB          = 5;
+    private static final int TYPE_RGB_ALPHA    = 6;
+    private static final int TYPE_YCBCR_SUB    = 7;
+    private static final int TYPE_GENERIC      = 8;
+
+    // Incidental tags
+    private static final int TIFF_JPEG_TABLES       = 347;
+    private static final int TIFF_YCBCR_SUBSAMPLING = 530;
+
+    SeekableStream stream;
+    int tileSize;
+    int tilesX;
+    int tilesY;
+    long[] tileOffsets;
+    long[] tileByteCounts;
+    char[] colormap;
+    int sampleSize;
+    int compression;
+    byte[] palette;
+    int numBands;
+
+    int chromaSubH;
+    int chromaSubV;
+
+    // Fax compression related variables
+    long tiffT4Options;
+    long tiffT6Options;
+    int fillOrder;
+
+    // LZW compression related variable
+    int predictor;
+
+    // DEFLATE variables
+    Inflater inflater;
+
+    // Endian-ness indicator
+    boolean isBigEndian;
+
+    int imageType;
+    boolean isWhiteZero;
+    int dataType;
+
+    boolean decodePaletteAsShorts;
+    boolean tiled;
+
+    // Decoders
+    private TIFFFaxDecoder decoder;
+    private TIFFLZWDecoder lzwDecoder;
+
+    /**
+     * Inflates &lt;code&gt;deflated&lt;/code&gt; into &lt;code&gt;inflated&lt;/code&gt; using the
+     * &lt;code&gt;Inflater&lt;/code&gt; constructed during class instantiation.
+     */
+    private void inflate(byte[] deflated, byte[] inflated) {
+<span class="nc" id="L129">        inflater.setInput(deflated);</span>
+        try {
+<span class="nc" id="L131">            inflater.inflate(inflated);</span>
+<span class="nc" id="L132">        } catch (DataFormatException dfe) {</span>
+<span class="nc" id="L133">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage17&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L134">                                       + dfe.getMessage());</span>
+<span class="nc" id="L135">        }</span>
+<span class="nc" id="L136">        inflater.reset();</span>
+<span class="nc" id="L137">    }</span>
+
+    private static SampleModel createPixelInterleavedSampleModel(
+        int dataType, int tileWidth, int tileHeight, int bands) {
+<span class="nc" id="L141">        int [] bandOffsets = new int[bands];</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        for (int i = 0; i &lt; bands; i++) {</span>
+<span class="nc" id="L143">            bandOffsets[i] = i;</span>
+        }
+<span class="nc" id="L145">        return new PixelInterleavedSampleModel(</span>
+            dataType, tileWidth, tileHeight, bands,
+             tileWidth * bands, bandOffsets);
+    }
+
+    /**
+     * Return as a long[] the value of a TIFF_LONG or TIFF_SHORT field.
+     */
+    private long[] getFieldAsLongs(TIFFField field) {
+<span class="nc" id="L154">        long[] value = null;</span>
+
+<span class="nc bnc" id="L156" title="All 2 branches missed.">        if (field.getType() == TIFFField.TIFF_SHORT) {</span>
+<span class="nc" id="L157">            char[] charValue = field.getAsChars();</span>
+<span class="nc" id="L158">            value = new long[charValue.length];</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">            for (int i = 0; i &lt; charValue.length; i++) {</span>
+<span class="nc" id="L160">                value[i] = charValue[i] &amp; 0xffff;</span>
+            }
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        } else if (field.getType() == TIFFField.TIFF_LONG) {</span>
+<span class="nc" id="L163">            value = field.getAsLongs();</span>
+        } else {
+<span class="nc" id="L165">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage18&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L166">                                       + field.getType());</span>
+        }
+
+<span class="nc" id="L169">        return value;</span>
+    }
+
+    /**
+     * Constructs a TIFFImage that acquires its data from a given
+     * SeekableStream and reads from a particular IFD of the stream.
+     * The index of the first IFD is 0.
+     *
+     * @param stream the SeekableStream to read from.
+     * @param param an instance of TIFFDecodeParam, or null.
+     * @param directory the index of the IFD to read from.
+     */
+    public TIFFImage(SeekableStream stream,
+                     TIFFDecodeParam param,
+                     int directory)
+<span class="nc" id="L184">        throws IOException {</span>
+
+<span class="nc" id="L186">        this.stream = stream;</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        if (param == null) {</span>
+<span class="nc" id="L188">            param = new TIFFDecodeParam();</span>
+        }
+
+<span class="nc" id="L191">        decodePaletteAsShorts = param.getDecodePaletteAsShorts();</span>
+
+        // Read the specified directory.
+<span class="nc bnc" id="L194" title="All 2 branches missed.">        TIFFDirectory dir = param.getIFDOffset() == null</span>
+<span class="nc" id="L195">            ? new TIFFDirectory(stream, directory)</span>
+<span class="nc" id="L196">            : new TIFFDirectory(stream, param.getIFDOffset(),</span>
+                              directory);
+
+        // Get the number of samples per pixel
+<span class="nc" id="L200">        TIFFField sfield = dir.getField(TIFFImageDecoder.TIFF_SAMPLES_PER_PIXEL);</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        int samplesPerPixel = sfield == null ? 1 : (int)sfield.getAsLong(0);</span>
+
+        // Read the TIFF_PLANAR_CONFIGURATION field
+<span class="nc" id="L204">        TIFFField planarConfigurationField =</span>
+<span class="nc" id="L205">            dir.getField(TIFFImageDecoder.TIFF_PLANAR_CONFIGURATION);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">        char[] planarConfiguration = planarConfigurationField == null</span>
+<span class="nc" id="L207">            ? new char[] {1}</span>
+<span class="nc" id="L208">            : planarConfigurationField.getAsChars();</span>
+
+            // Support planar format (band sequential) only for 1 sample/pixel.
+<span class="nc bnc" id="L211" title="All 4 branches missed.">            if (planarConfiguration[0] != 1 &amp;&amp; samplesPerPixel != 1) {</span>
+<span class="nc" id="L212">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage0&quot;));</span>
+            }
+
+            // Read the TIFF_BITS_PER_SAMPLE field
+<span class="nc" id="L216">            TIFFField bitsField =</span>
+<span class="nc" id="L217">                dir.getField(TIFFImageDecoder.TIFF_BITS_PER_SAMPLE);</span>
+<span class="nc" id="L218">            char[] bitsPerSample = null;</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            if (bitsField != null) {</span>
+<span class="nc" id="L220">                bitsPerSample = bitsField.getAsChars();</span>
+            } else {
+<span class="nc" id="L222">                bitsPerSample = new char[] {1};</span>
+
+                // Ensure that all samples have the same bit depth.
+<span class="nc bnc" id="L225" title="All 2 branches missed.">                for (int i = 1; i &lt; bitsPerSample.length; i++) {</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">                    if (bitsPerSample[i] != bitsPerSample[0]) {</span>
+<span class="nc" id="L227">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage1&quot;));</span>
+                    }
+                }
+            }
+<span class="nc" id="L231">            sampleSize = bitsPerSample[0];</span>
+
+            // Read the TIFF_SAMPLE_FORMAT tag to see whether the data might be
+            // signed or floating point
+<span class="nc" id="L235">            TIFFField sampleFormatField =</span>
+<span class="nc" id="L236">                dir.getField(TIFFImageDecoder.TIFF_SAMPLE_FORMAT);</span>
+
+<span class="nc" id="L238">            char[] sampleFormat = null;</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">            if (sampleFormatField != null) {</span>
+<span class="nc" id="L240">                sampleFormat = sampleFormatField.getAsChars();</span>
+
+                // Check that all the samples have the same format
+<span class="nc bnc" id="L243" title="All 2 branches missed.">                for (int l = 1; l &lt; sampleFormat.length; l++) {</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">                    if (sampleFormat[l] != sampleFormat[0]) {</span>
+<span class="nc" id="L245">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage2&quot;));</span>
+                    }
+                }
+
+            } else {
+<span class="nc" id="L250">                sampleFormat = new char[] {1};</span>
+            }
+
+            // Set the data type based on the sample size and format.
+<span class="nc" id="L254">            boolean isValidDataFormat = false;</span>
+<span class="nc bnc" id="L255" title="All 4 branches missed.">            switch (sampleSize) {</span>
+            case 1:
+            case 4:
+            case 8:
+<span class="nc bnc" id="L259" title="All 2 branches missed.">                if (sampleFormat[0] != 3) {</span>
+                    // Ignore whether signed or unsigned: treat all as unsigned.
+<span class="nc" id="L261">                    dataType = DataBuffer.TYPE_BYTE;</span>
+<span class="nc" id="L262">                    isValidDataFormat = true;</span>
+                }
+                break;
+            case 16:
+<span class="nc bnc" id="L266" title="All 2 branches missed.">                if (sampleFormat[0] != 3) {</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">                    dataType = sampleFormat[0] == 2</span>
+<span class="nc" id="L268">                        ? DataBuffer.TYPE_SHORT : DataBuffer.TYPE_USHORT;</span>
+<span class="nc" id="L269">                    isValidDataFormat = true;</span>
+                }
+                break;
+            case 32:
+<span class="nc bnc" id="L273" title="All 2 branches missed.">              if (sampleFormat[0] == 3) {</span>
+<span class="nc" id="L274">                isValidDataFormat = false;</span>
+            } else {
+<span class="nc" id="L276">                dataType = DataBuffer.TYPE_INT;</span>
+<span class="nc" id="L277">                isValidDataFormat = true;</span>
+              }
+              break;
+            }
+
+<span class="nc bnc" id="L282" title="All 2 branches missed.">            if (!isValidDataFormat) {</span>
+<span class="nc" id="L283">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage3&quot;));</span>
+            }
+
+            // Figure out what compression if any, is being used.
+<span class="nc" id="L287">            TIFFField compField = dir.getField(TIFFImageDecoder.TIFF_COMPRESSION);</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">            compression = compField == null ? COMP_NONE : compField.getAsInt(0);</span>
+
+            // Get the photometric interpretation.
+            int photometricType;
+<span class="nc" id="L292">            TIFFField photometricTypeField = dir.getField(</span>
+                    TIFFImageDecoder.TIFF_PHOTOMETRIC_INTERPRETATION);
+<span class="nc bnc" id="L294" title="All 2 branches missed.">            if (photometricTypeField == null) {</span>
+<span class="nc" id="L295">                photometricType = 0; // White is zero</span>
+            } else {
+<span class="nc" id="L297">                photometricType = photometricTypeField.getAsInt(0);</span>
+            }
+
+            // Determine which kind of image we are dealing with.
+<span class="nc" id="L301">            imageType = TYPE_UNSUPPORTED;</span>
+<span class="nc bnc" id="L302" title="All 6 branches missed.">            switch(photometricType) {</span>
+            case 0: // WhiteIsZero
+<span class="nc" id="L304">                isWhiteZero = true;</span>
+            case 1: // BlackIsZero
+<span class="nc bnc" id="L306" title="All 4 branches missed.">                if (sampleSize == 1 &amp;&amp; samplesPerPixel == 1) {</span>
+<span class="nc" id="L307">                    imageType = TYPE_BILEVEL;</span>
+<span class="nc bnc" id="L308" title="All 4 branches missed.">                } else if (sampleSize == 4 &amp;&amp; samplesPerPixel == 1) {</span>
+<span class="nc" id="L309">                    imageType = TYPE_GRAY_4BIT;</span>
+<span class="nc bnc" id="L310" title="All 2 branches missed.">                } else if (sampleSize % 8 == 0) {</span>
+<span class="nc bnc" id="L311" title="All 2 branches missed.">                    if (samplesPerPixel == 1) {</span>
+<span class="nc" id="L312">                        imageType = TYPE_GRAY;</span>
+<span class="nc bnc" id="L313" title="All 2 branches missed.">                    } else if (samplesPerPixel == 2) {</span>
+<span class="nc" id="L314">                        imageType = TYPE_GRAY_ALPHA;</span>
+                    } else {
+<span class="nc" id="L316">                        imageType = TYPE_GENERIC;</span>
+                    }
+                }
+                break;
+            case 2: // RGB
+<span class="nc bnc" id="L321" title="All 2 branches missed.">                if (sampleSize % 8 == 0) {</span>
+<span class="nc bnc" id="L322" title="All 2 branches missed.">                    if (samplesPerPixel == 3) {</span>
+<span class="nc" id="L323">                        imageType = TYPE_RGB;</span>
+<span class="nc bnc" id="L324" title="All 2 branches missed.">                    } else if (samplesPerPixel == 4) {</span>
+<span class="nc" id="L325">                        imageType = TYPE_RGB_ALPHA;</span>
+                    } else {
+<span class="nc" id="L327">                        imageType = TYPE_GENERIC;</span>
+                    }
+                }
+                break;
+            case 3: // RGB Palette
+<span class="nc bnc" id="L332" title="All 8 branches missed.">                if (samplesPerPixel == 1</span>
+                   &amp;&amp; (sampleSize == 4 || sampleSize == 8 || sampleSize == 16)) {
+<span class="nc" id="L334">                    imageType = TYPE_PALETTE;</span>
+                }
+                break;
+            case 4: // Transparency mask
+<span class="nc bnc" id="L338" title="All 4 branches missed.">                if (sampleSize == 1 &amp;&amp; samplesPerPixel == 1) {</span>
+<span class="nc" id="L339">                    imageType = TYPE_BILEVEL;</span>
+                }
+                break;
+            default: // Other including CMYK, CIE L*a*b*, unknown.
+<span class="nc bnc" id="L343" title="All 2 branches missed.">                if (sampleSize % 8 == 0) {</span>
+<span class="nc" id="L344">                    imageType = TYPE_GENERIC;</span>
+                }
+            }
+
+            // Bail out if not one of the supported types.
+<span class="nc bnc" id="L349" title="All 2 branches missed.">            if (imageType == TYPE_UNSUPPORTED) {</span>
+<span class="nc" id="L350">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage4&quot;) + &quot;: &quot;</span>
+                                           + imageType);
+            }
+
+            // Set basic image layout
+<span class="nc" id="L355">            Rectangle bounds = new Rectangle(</span>
+                0, 0,
+<span class="nc" id="L357">                 (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_IMAGE_WIDTH),</span>
+<span class="nc" id="L358">                 (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_IMAGE_LENGTH));</span>
+
+            // Set a preliminary band count. This may be changed later as needed.
+<span class="nc" id="L361">            numBands = samplesPerPixel;</span>
+
+            // Figure out if any extra samples are present.
+<span class="nc" id="L364">            TIFFField efield = dir.getField(TIFFImageDecoder.TIFF_EXTRA_SAMPLES);</span>
+<span class="nc bnc" id="L365" title="All 2 branches missed.">            int extraSamples = efield == null ? 0 : (int)efield.getAsLong(0);</span>
+
+            int tileWidth;
+            int tileHeight;
+<span class="nc bnc" id="L369" title="All 2 branches missed.">            if (dir.getField(TIFFImageDecoder.TIFF_TILE_OFFSETS) != null) {</span>
+<span class="nc" id="L370">                tiled = true;</span>
+                // Image is in tiled format
+<span class="nc" id="L372">                tileWidth =</span>
+<span class="nc" id="L373">                    (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_TILE_WIDTH);</span>
+<span class="nc" id="L374">                tileHeight =</span>
+<span class="nc" id="L375">                    (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_TILE_LENGTH);</span>
+<span class="nc" id="L376">                tileOffsets =</span>
+<span class="nc" id="L377">                    (dir.getField(TIFFImageDecoder.TIFF_TILE_OFFSETS)).getAsLongs();</span>
+<span class="nc" id="L378">                tileByteCounts =</span>
+<span class="nc" id="L379">                    getFieldAsLongs(dir.getField(TIFFImageDecoder.TIFF_TILE_BYTE_COUNTS));</span>
+
+            } else {
+<span class="nc" id="L382">                tiled = false;</span>
+
+                // Image is in stripped format, looks like tiles to us
+                // Note: Some legacy files may have tile width and height
+                // written but use the strip offsets and byte counts fields
+                // instead of the tile offsets and byte counts. Therefore
+                // we default here to the tile dimensions if they are written.
+                tileWidth =
+<span class="nc bnc" id="L390" title="All 2 branches missed.">                    dir.getField(TIFFImageDecoder.TIFF_TILE_WIDTH) != null</span>
+<span class="nc" id="L391">                    ? (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_TILE_WIDTH)</span>
+<span class="nc" id="L392">                    : bounds.width;</span>
+<span class="nc" id="L393">                TIFFField field =</span>
+<span class="nc" id="L394">                    dir.getField(TIFFImageDecoder.TIFF_ROWS_PER_STRIP);</span>
+<span class="nc bnc" id="L395" title="All 2 branches missed.">                if (field == null) {</span>
+                    // Default is infinity (2^32 -1), basically the entire image
+
+                    tileHeight =
+<span class="nc bnc" id="L399" title="All 2 branches missed.">                        dir.getField(TIFFImageDecoder.TIFF_TILE_LENGTH) != null</span>
+<span class="nc" id="L400">                        ? (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_TILE_LENGTH)</span>
+<span class="nc" id="L401">                        : bounds.height;</span>
+                } else {
+<span class="nc" id="L403">                    long l = field.getAsLong(0);</span>
+<span class="nc" id="L404">                    long infinity = 1;</span>
+<span class="nc" id="L405">                    infinity = (infinity &lt;&lt; 32) - 1;</span>
+<span class="nc bnc" id="L406" title="All 2 branches missed.">                    if (l == infinity) {</span>
+                        // 2^32 - 1 (effectively infinity, entire image is 1 strip)
+<span class="nc" id="L408">                        tileHeight = bounds.height;</span>
+                    } else {
+<span class="nc" id="L410">                        tileHeight = (int)l;</span>
+                    }
+                }
+
+<span class="nc" id="L414">                TIFFField tileOffsetsField =</span>
+<span class="nc" id="L415">                    dir.getField(TIFFImageDecoder.TIFF_STRIP_OFFSETS);</span>
+<span class="nc bnc" id="L416" title="All 2 branches missed.">                if (tileOffsetsField == null) {</span>
+<span class="nc" id="L417">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage5&quot;));</span>
+                } else {
+<span class="nc" id="L419">                    tileOffsets = getFieldAsLongs(tileOffsetsField);</span>
+                }
+
+<span class="nc" id="L422">                TIFFField tileByteCountsField =</span>
+<span class="nc" id="L423">                    dir.getField(TIFFImageDecoder.TIFF_STRIP_BYTE_COUNTS);</span>
+<span class="nc bnc" id="L424" title="All 2 branches missed.">                if (tileByteCountsField == null) {</span>
+<span class="nc" id="L425">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage6&quot;));</span>
+                } else {
+<span class="nc" id="L427">                    tileByteCounts = getFieldAsLongs(tileByteCountsField);</span>
+                }
+            }
+
+            // Calculate number of tiles and the tileSize in bytes
+<span class="nc" id="L432">            tilesX = (bounds.width + tileWidth - 1) / tileWidth;</span>
+<span class="nc" id="L433">            tilesY = (bounds.height + tileHeight - 1) / tileHeight;</span>
+<span class="nc" id="L434">            tileSize = tileWidth * tileHeight * numBands;</span>
+
+            // Check whether big endian or little endian format is used.
+<span class="nc" id="L437">            isBigEndian = dir.isBigEndian();</span>
+
+<span class="nc" id="L439">            TIFFField fillOrderField =</span>
+<span class="nc" id="L440">                dir.getField(TIFFImageDecoder.TIFF_FILL_ORDER);</span>
+<span class="nc bnc" id="L441" title="All 2 branches missed.">            if (fillOrderField != null) {</span>
+<span class="nc" id="L442">                fillOrder = fillOrderField.getAsInt(0);</span>
+            } else {
+                // Default Fill Order
+<span class="nc" id="L445">                fillOrder = 1;</span>
+            }
+
+<span class="nc bnc" id="L448" title="All 6 branches missed.">            switch(compression) {</span>
+            case COMP_NONE:
+            case COMP_PACKBITS:
+                // Do nothing.
+<span class="nc" id="L452">                break;</span>
+            case COMP_DEFLATE:
+<span class="nc" id="L454">                inflater = new Inflater();</span>
+<span class="nc" id="L455">                break;</span>
+            case COMP_FAX_G3_1D:
+            case COMP_FAX_G3_2D:
+            case COMP_FAX_G4_2D:
+<span class="nc bnc" id="L459" title="All 2 branches missed.">                if (sampleSize != 1) {</span>
+<span class="nc" id="L460">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage7&quot;));</span>
+                }
+
+                // Fax T.4 compression options
+<span class="nc bnc" id="L464" title="All 2 branches missed.">                if (compression == 3) {</span>
+<span class="nc" id="L465">                    TIFFField t4OptionsField =</span>
+<span class="nc" id="L466">                        dir.getField(TIFFImageDecoder.TIFF_T4_OPTIONS);</span>
+<span class="nc bnc" id="L467" title="All 2 branches missed.">                    if (t4OptionsField != null) {</span>
+<span class="nc" id="L468">                        tiffT4Options = t4OptionsField.getAsLong(0);</span>
+                    } else {
+                        // Use default value
+<span class="nc" id="L471">                        tiffT4Options = 0;</span>
+                    }
+                }
+
+                // Fax T.6 compression options
+<span class="nc bnc" id="L476" title="All 2 branches missed.">                if (compression == 4) {</span>
+<span class="nc" id="L477">                    TIFFField t6OptionsField =</span>
+<span class="nc" id="L478">                        dir.getField(TIFFImageDecoder.TIFF_T6_OPTIONS);</span>
+<span class="nc bnc" id="L479" title="All 2 branches missed.">                    if (t6OptionsField != null) {</span>
+<span class="nc" id="L480">                        tiffT6Options = t6OptionsField.getAsLong(0);</span>
+                    } else {
+                        // Use default value
+<span class="nc" id="L483">                        tiffT6Options = 0;</span>
+                    }
+                }
+
+                // Fax encoding, need to create the Fax decoder.
+<span class="nc" id="L488">                decoder = new TIFFFaxDecoder(fillOrder,</span>
+                                             tileWidth, tileHeight);
+<span class="nc" id="L490">                break;</span>
+
+            case COMP_LZW:
+                // LZW compression used, need to create the LZW decoder.
+<span class="nc" id="L494">                TIFFField predictorField =</span>
+<span class="nc" id="L495">                    dir.getField(TIFFImageDecoder.TIFF_PREDICTOR);</span>
+
+<span class="nc bnc" id="L497" title="All 2 branches missed.">                if (predictorField == null) {</span>
+<span class="nc" id="L498">                    predictor = 1;</span>
+                } else {
+<span class="nc" id="L500">                    predictor = predictorField.getAsInt(0);</span>
+
+<span class="nc bnc" id="L502" title="All 4 branches missed.">                    if (predictor != 1 &amp;&amp; predictor != 2) {</span>
+<span class="nc" id="L503">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage8&quot;));</span>
+                    }
+
+<span class="nc bnc" id="L506" title="All 4 branches missed.">                    if (predictor == 2 &amp;&amp; sampleSize != 8) {</span>
+<span class="nc" id="L507">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage9&quot;));</span>
+                    }
+                }
+
+<span class="nc" id="L511">                lzwDecoder = new TIFFLZWDecoder(tileWidth, predictor,</span>
+                                                samplesPerPixel);
+<span class="nc" id="L513">                break;</span>
+
+            case COMP_JPEG_OLD:
+<span class="nc" id="L516">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage15&quot;));</span>
+
+            default:
+<span class="nc" id="L519">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage10&quot;) + &quot;: &quot;</span>
+                                           + compression);
+            }
+
+<span class="nc" id="L523">            ColorModel  colorModel  = null;</span>
+<span class="nc" id="L524">            SampleModel sampleModel = null;</span>
+<span class="nc bnc" id="L525" title="All 5 branches missed.">            switch(imageType) {</span>
+            case TYPE_BILEVEL:
+            case TYPE_GRAY_4BIT:
+<span class="nc" id="L528">                sampleModel =</span>
+                    new MultiPixelPackedSampleModel(dataType,
+                                                    tileWidth,
+                                                    tileHeight,
+                                                    sampleSize);
+<span class="nc bnc" id="L533" title="All 2 branches missed.">                if (imageType == TYPE_BILEVEL) {</span>
+<span class="nc bnc" id="L534" title="All 2 branches missed.">                    byte[] map = new byte[] {(byte)(isWhiteZero ? 255 : 0),</span>
+<span class="nc bnc" id="L535" title="All 2 branches missed.">                                             (byte)(isWhiteZero ? 0 : 255)};</span>
+<span class="nc" id="L536">                    colorModel = new IndexColorModel(1, 2, map, map, map);</span>
+<span class="nc" id="L537">                } else {</span>
+<span class="nc" id="L538">                    byte [] map = new byte[16];</span>
+<span class="nc bnc" id="L539" title="All 2 branches missed.">                    if (isWhiteZero) {</span>
+<span class="nc bnc" id="L540" title="All 2 branches missed.">                        for (int i = 0; i &lt; map.length; i++) {</span>
+<span class="nc" id="L541">                            map[i] = (byte)(255 - (16 * i));</span>
+                        }
+                    } else {
+<span class="nc bnc" id="L544" title="All 2 branches missed.">                        for (int i = 0; i &lt; map.length; i++) {</span>
+<span class="nc" id="L545">                            map[i] = (byte)(16 * i);</span>
+                        }
+                    }
+<span class="nc" id="L548">                    colorModel = new IndexColorModel(4, 16, map, map, map);</span>
+                }
+<span class="nc" id="L550">                break;</span>
+
+            case TYPE_GRAY:
+            case TYPE_GRAY_ALPHA:
+            case TYPE_RGB:
+            case TYPE_RGB_ALPHA:
+                // Create a pixel interleaved SampleModel with decreasing
+                // band offsets.
+<span class="nc" id="L558">                int[] reverseOffsets = new int[numBands];</span>
+<span class="nc bnc" id="L559" title="All 2 branches missed.">                for (int i = 0; i &lt; numBands; i++) {</span>
+<span class="nc" id="L560">                    reverseOffsets[i] = numBands - 1 - i;</span>
+                }
+<span class="nc" id="L562">                sampleModel = new PixelInterleavedSampleModel(</span>
+                    dataType, tileWidth, tileHeight,
+                     numBands, numBands * tileWidth, reverseOffsets);
+
+<span class="nc bnc" id="L566" title="All 2 branches missed.">                if (imageType == TYPE_GRAY) {</span>
+<span class="nc" id="L567">                  colorModel = new ComponentColorModel(</span>
+<span class="nc" id="L568">                    ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                     new int[] {sampleSize}, false, false,
+                     Transparency.OPAQUE, dataType);
+<span class="nc bnc" id="L571" title="All 2 branches missed.">                } else if (imageType == TYPE_RGB) {</span>
+<span class="nc" id="L572">                  colorModel = new ComponentColorModel(</span>
+<span class="nc" id="L573">                    ColorSpace.getInstance(ColorSpace.CS_sRGB),</span>
+                     new int[] {sampleSize, sampleSize, sampleSize},
+                     false, false, Transparency.OPAQUE, dataType);
+                } else { // hasAlpha
+                    // Transparency.OPAQUE signifies image data that is
+                    // completely opaque, meaning that all pixels have an alpha
+                    // value of 1.0. So the extra band gets ignored, which is
+                    // what we want.
+<span class="nc" id="L581">                    int transparency = Transparency.OPAQUE;</span>
+<span class="nc bnc" id="L582" title="All 2 branches missed.">                    if (extraSamples == 1) { // associated (premultiplied) alpha</span>
+<span class="nc" id="L583">                        transparency = Transparency.TRANSLUCENT;</span>
+<span class="nc bnc" id="L584" title="All 2 branches missed.">                    } else if (extraSamples == 2) { // unassociated alpha</span>
+<span class="nc" id="L585">                        transparency = Transparency.BITMASK;</span>
+                    }
+
+<span class="nc bnc" id="L588" title="All 2 branches missed.">                    colorModel =</span>
+<span class="nc" id="L589">                        createAlphaComponentColorModel(dataType,</span>
+                                                       numBands,
+                                                       extraSamples == 1,
+                                                       transparency);
+                }
+<span class="nc" id="L594">                break;</span>
+
+            case TYPE_GENERIC:
+            case TYPE_YCBCR_SUB:
+                // For this case we can't display the image, so we create a
+                // SampleModel with increasing bandOffsets, and keep the
+                // ColorModel as null, as there is no appropriate ColorModel.
+
+<span class="nc" id="L602">                int[] bandOffsets = new int[numBands];</span>
+<span class="nc bnc" id="L603" title="All 2 branches missed.">                for (int i = 0; i &lt; numBands; i++) {</span>
+<span class="nc" id="L604">                    bandOffsets[i] = i;</span>
+                }
+
+<span class="nc" id="L607">                sampleModel = new PixelInterleavedSampleModel(</span>
+                    dataType, tileWidth, tileHeight,
+                     numBands, numBands * tileWidth, bandOffsets);
+<span class="nc" id="L610">                colorModel = null;</span>
+<span class="nc" id="L611">                break;</span>
+
+            case TYPE_PALETTE:
+                // Get the colormap
+<span class="nc" id="L615">                TIFFField cfield = dir.getField(TIFFImageDecoder.TIFF_COLORMAP);</span>
+<span class="nc bnc" id="L616" title="All 2 branches missed.">                if (cfield == null) {</span>
+<span class="nc" id="L617">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage11&quot;));</span>
+                } else {
+<span class="nc" id="L619">                    colormap = cfield.getAsChars();</span>
+                }
+
+                // Could be either 1 or 3 bands depending on whether we use
+                // IndexColorModel or not.
+<span class="nc bnc" id="L624" title="All 2 branches missed.">                if (decodePaletteAsShorts) {</span>
+<span class="nc" id="L625">                    numBands = 3;</span>
+
+                    // If no SampleFormat tag was specified and if the
+                    // sampleSize is less than or equal to 8, then the
+                    // dataType was initially set to byte, but now we want to
+                    // expand the palette as shorts, so the dataType should
+                    // be ushort.
+<span class="nc bnc" id="L632" title="All 2 branches missed.">                    if (dataType == DataBuffer.TYPE_BYTE) {</span>
+<span class="nc" id="L633">                        dataType = DataBuffer.TYPE_USHORT;</span>
+                    }
+
+                    // Data will have to be unpacked into a 3 band short image
+                    // as we do not have a IndexColorModel that can deal with
+                    // a colormodel whose entries are of short data type.
+<span class="nc" id="L639">                    sampleModel = createPixelInterleavedSampleModel(</span>
+                        dataType, tileWidth, tileHeight, numBands);
+
+<span class="nc" id="L642">                  colorModel = new ComponentColorModel(</span>
+<span class="nc" id="L643">                    ColorSpace.getInstance(ColorSpace.CS_sRGB),</span>
+                     new int[] {16, 16, 16}, false, false,
+                     Transparency.OPAQUE, dataType);
+
+                } else {
+
+<span class="nc" id="L649">                    numBands = 1;</span>
+
+<span class="nc bnc" id="L651" title="All 2 branches missed.">                    if (sampleSize == 4) {</span>
+                        // Pixel data will not be unpacked, will use
+                        // MPPSM to store packed data and
+                        // IndexColorModel to do the unpacking.
+<span class="nc" id="L655">                        sampleModel = new MultiPixelPackedSampleModel(</span>
+                            DataBuffer.TYPE_BYTE, tileWidth, tileHeight,
+                             sampleSize);
+<span class="nc bnc" id="L658" title="All 2 branches missed.">                    } else if (sampleSize == 8) {</span>
+
+<span class="nc" id="L660">                        sampleModel = createPixelInterleavedSampleModel(</span>
+                            DataBuffer.TYPE_BYTE, tileWidth, tileHeight,
+                             numBands);
+<span class="nc bnc" id="L663" title="All 2 branches missed.">                    } else if (sampleSize == 16) {</span>
+
+                        // Here datatype has to be unsigned since we
+                        // are storing indices into the
+                        // IndexColorModel palette. Ofcourse the
+                        // actual palette entries are allowed to be
+                        // negative.
+<span class="nc" id="L670">                        dataType = DataBuffer.TYPE_USHORT;</span>
+<span class="nc" id="L671">                        sampleModel = createPixelInterleavedSampleModel(</span>
+                            DataBuffer.TYPE_USHORT, tileWidth, tileHeight,
+                             numBands);
+                    }
+
+<span class="nc" id="L676">                    int bandLength = colormap.length / 3;</span>
+<span class="nc" id="L677">                    byte[] r = new byte[bandLength];</span>
+<span class="nc" id="L678">                    byte[] g = new byte[bandLength];</span>
+<span class="nc" id="L679">                    byte[] b = new byte[bandLength];</span>
+
+<span class="nc" id="L681">                    int gIndex = bandLength;</span>
+<span class="nc" id="L682">                    int bIndex = bandLength * 2;</span>
+
+<span class="nc bnc" id="L684" title="All 2 branches missed.">                    if (dataType == DataBuffer.TYPE_SHORT) {</span>
+
+<span class="nc bnc" id="L686" title="All 2 branches missed.">                        for (int i = 0; i &lt; bandLength; i++) {</span>
+<span class="nc" id="L687">                            r[i] = param.decodeSigned16BitsTo8Bits(</span>
+                                (short)colormap[i]);
+<span class="nc" id="L689">                            g[i] = param.decodeSigned16BitsTo8Bits(</span>
+                                (short)colormap[gIndex + i]);
+<span class="nc" id="L691">                            b[i] = param.decodeSigned16BitsTo8Bits(</span>
+                                (short)colormap[bIndex + i]);
+                        }
+
+                    } else {
+
+<span class="nc bnc" id="L697" title="All 2 branches missed.">                        for (int i = 0; i &lt; bandLength; i++) {</span>
+<span class="nc" id="L698">                            r[i] = param.decode16BitsTo8Bits(</span>
+                                colormap[i] &amp; 0xffff);
+<span class="nc" id="L700">                            g[i] = param.decode16BitsTo8Bits(</span>
+                                colormap[gIndex + i] &amp; 0xffff);
+<span class="nc" id="L702">                            b[i] = param.decode16BitsTo8Bits(</span>
+                                colormap[bIndex + i] &amp; 0xffff);
+                        }
+
+                    }
+
+<span class="nc" id="L708">                    colorModel = new IndexColorModel(sampleSize,</span>
+                                                     bandLength, r, g, b);
+                }
+<span class="nc" id="L711">                break;</span>
+
+            default:
+<span class="nc" id="L714">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage4&quot;) + &quot;: &quot;</span>
+                                           + imageType);
+            }
+
+<span class="nc" id="L718">        Map properties = new HashMap();</span>
+        // Set a property &quot;tiff_directory&quot;.
+<span class="nc" id="L720">        properties.put(&quot;tiff_directory&quot;, dir);</span>
+
+        // System.out.println(&quot;Constructed TIFF&quot;);
+
+<span class="nc" id="L724">        init((CachableRed)null, bounds, colorModel, sampleModel,</span>
+             0, 0, properties);
+<span class="nc" id="L726">    }</span>
+
+    /**
+     * Reads a private IFD from a given offset in the stream.  This
+     * method may be used to obtain IFDs that are referenced
+     * only by private tag values.
+     */
+    public TIFFDirectory getPrivateIFD(long offset) throws IOException {
+<span class="nc" id="L734">        return new TIFFDirectory(stream, offset, 0);</span>
+    }
+
+
+    public WritableRaster copyData(WritableRaster wr) {
+<span class="nc" id="L739">        copyToRaster(wr);</span>
+<span class="nc" id="L740">        return wr;</span>
+    }
+
+
+    /**
+     * Returns tile (tileX, tileY) as a Raster.
+     */
+    public synchronized Raster getTile(int tileX, int tileY) {
+<span class="nc bnc" id="L748" title="All 8 branches missed.">        if ((tileX &lt; 0) || (tileX &gt;= tilesX)</span>
+            || (tileY &lt; 0) || (tileY &gt;= tilesY)) {
+<span class="nc" id="L750">            throw new IllegalArgumentException(PropertyUtil.getString(&quot;TIFFImage12&quot;));</span>
+        }
+
+        // System.out.println(&quot;Called TIFF getTile:&quot; + tileX + &quot;,&quot; + tileY);
+
+
+        // Get the data array out of the DataBuffer
+<span class="nc" id="L757">        byte[] bdata = null;</span>
+<span class="nc" id="L758">        short[] sdata = null;</span>
+<span class="nc" id="L759">        int[] idata = null;</span>
+
+<span class="nc" id="L761">        SampleModel sampleModel = getSampleModel();</span>
+<span class="nc" id="L762">        WritableRaster tile = makeTile(tileX, tileY);</span>
+
+<span class="nc" id="L764">        DataBuffer buffer = tile.getDataBuffer();</span>
+
+<span class="nc" id="L766">        int dataType = sampleModel.getDataType();</span>
+<span class="nc bnc" id="L767" title="All 2 branches missed.">        if (dataType == DataBuffer.TYPE_BYTE) {</span>
+<span class="nc" id="L768">            bdata = ((DataBufferByte)buffer).getData();</span>
+<span class="nc bnc" id="L769" title="All 2 branches missed.">        } else if (dataType == DataBuffer.TYPE_USHORT) {</span>
+<span class="nc" id="L770">            sdata = ((DataBufferUShort)buffer).getData();</span>
+<span class="nc bnc" id="L771" title="All 2 branches missed.">        } else if (dataType == DataBuffer.TYPE_SHORT) {</span>
+<span class="nc" id="L772">            sdata = ((DataBufferShort)buffer).getData();</span>
+<span class="nc bnc" id="L773" title="All 2 branches missed.">        } else if (dataType == DataBuffer.TYPE_INT) {</span>
+<span class="nc" id="L774">            idata = ((DataBufferInt)buffer).getData();</span>
+        }
+
+        // Variables used for swapping when converting from RGB to BGR
+        byte bswap;
+        short sswap;
+        int iswap;
+
+        // Save original file pointer position and seek to tile data location.
+<span class="nc" id="L783">        long saveOffset = 0;</span>
+        try {
+<span class="nc" id="L785">            saveOffset = stream.getFilePointer();</span>
+<span class="nc" id="L786">            stream.seek(tileOffsets[tileY * tilesX + tileX]);</span>
+<span class="nc" id="L787">        } catch (IOException ioe) {</span>
+<span class="nc" id="L788">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L789">                                       + ioe.getMessage());</span>
+<span class="nc" id="L790">        }</span>
+
+        // Number of bytes in this tile (strip) after compression.
+<span class="nc" id="L793">        int byteCount = (int)tileByteCounts[tileY * tilesX + tileX];</span>
+
+        // Find out the number of bytes in the current tile
+        Rectangle newRect;
+<span class="nc bnc" id="L797" title="All 2 branches missed.">        if (!tiled) {</span>
+<span class="nc" id="L798">            newRect = tile.getBounds();</span>
+        } else {
+<span class="nc" id="L800">            newRect = new Rectangle(tile.getMinX(), tile.getMinY(),</span>
+                                    tileWidth, tileHeight);
+        }
+
+<span class="nc" id="L804">        int unitsInThisTile = newRect.width * newRect.height * numBands;</span>
+
+        // Allocate read buffer if needed.
+<span class="nc bnc" id="L807" title="All 4 branches missed.">        byte[] data = compression != COMP_NONE || imageType == TYPE_PALETTE</span>
+<span class="nc" id="L808">            ? new byte[byteCount] : null;</span>
+
+        // Read the data, uncompressing as needed. There are four cases:
+        // bilevel, palette-RGB, 4-bit grayscale, and everything else.
+<span class="nc bnc" id="L812" title="All 2 branches missed.">        if (imageType == TYPE_BILEVEL) { // bilevel</span>
+            try {
+<span class="nc bnc" id="L814" title="All 2 branches missed.">                if (compression == COMP_PACKBITS) {</span>
+<span class="nc" id="L815">                    stream.readFully(data, 0, byteCount);</span>
+
+                    // Since the decompressed data will still be packed
+                    // 8 pixels into 1 byte, calculate bytesInThisTile
+                    int bytesInThisTile;
+<span class="nc bnc" id="L820" title="All 2 branches missed.">                    if ((newRect.width % 8) == 0) {</span>
+<span class="nc" id="L821">                        bytesInThisTile = (newRect.width / 8) * newRect.height;</span>
+                    } else {
+<span class="nc" id="L823">                        bytesInThisTile =</span>
+                            (newRect.width / 8 + 1) * newRect.height;
+                    }
+<span class="nc" id="L826">                    decodePackbits(data, bytesInThisTile, bdata);</span>
+<span class="nc bnc" id="L827" title="All 2 branches missed.">                } else if (compression == COMP_LZW) {</span>
+<span class="nc" id="L828">                    stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L829">                    lzwDecoder.decode(data, bdata, newRect.height);</span>
+<span class="nc bnc" id="L830" title="All 2 branches missed.">                } else if (compression == COMP_FAX_G3_1D) {</span>
+<span class="nc" id="L831">                    stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L832">                    decoder.decode1D(bdata, data, 0, newRect.height);</span>
+<span class="nc bnc" id="L833" title="All 2 branches missed.">                } else if (compression == COMP_FAX_G3_2D) {</span>
+<span class="nc" id="L834">                    stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L835">                    decoder.decode2D(bdata, data, 0, newRect.height,</span>
+                                     tiffT4Options);
+<span class="nc bnc" id="L837" title="All 2 branches missed.">                } else if (compression == COMP_FAX_G4_2D) {</span>
+<span class="nc" id="L838">                    stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L839">                    decoder.decodeT6(bdata, data, 0, newRect.height,</span>
+                                     tiffT6Options);
+<span class="nc bnc" id="L841" title="All 2 branches missed.">                } else if (compression == COMP_DEFLATE) {</span>
+<span class="nc" id="L842">                    stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L843">                    inflate(data, bdata);</span>
+<span class="nc bnc" id="L844" title="All 2 branches missed.">                } else if (compression == COMP_NONE) {</span>
+<span class="nc" id="L845">                    stream.readFully(bdata, 0, byteCount);</span>
+                }
+
+<span class="nc" id="L848">                stream.seek(saveOffset);</span>
+<span class="nc" id="L849">            } catch (IOException ioe) {</span>
+<span class="nc" id="L850">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L851">                                       + ioe.getMessage());</span>
+<span class="nc" id="L852">            }</span>
+<span class="nc bnc" id="L853" title="All 2 branches missed.">        } else if (imageType == TYPE_PALETTE) { // palette-RGB</span>
+<span class="nc bnc" id="L854" title="All 2 branches missed.">            if (sampleSize == 16) {</span>
+
+<span class="nc bnc" id="L856" title="All 2 branches missed.">                if (decodePaletteAsShorts) {</span>
+
+<span class="nc" id="L858">                    short[] tempData = null;</span>
+
+                    // At this point the data is 1 banded and will
+                    // become 3 banded only after we've done the palette
+                    // lookup, since unitsInThisTile was calculated with
+                    // 3 bands, we need to divide this by 3.
+<span class="nc" id="L864">                    int unitsBeforeLookup = unitsInThisTile / 3;</span>
+
+                    // Since unitsBeforeLookup is the number of shorts,
+                    // but we do our decompression in terms of bytes, we
+                    // need to multiply it by 2 in order to figure out
+                    // how many bytes we'll get after decompression.
+<span class="nc" id="L870">                    int entries = unitsBeforeLookup * 2;</span>
+
+                    // Read the data, if compressed, decode it, reset the pointer
+                    try {
+
+<span class="nc bnc" id="L875" title="All 2 branches missed.">                        if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L877">                            stream.readFully(data, 0, byteCount);</span>
+
+<span class="nc" id="L879">                            byte[] byteArray = new byte[entries];</span>
+<span class="nc" id="L880">                            decodePackbits(data, entries, byteArray);</span>
+<span class="nc" id="L881">                            tempData = new short[unitsBeforeLookup];</span>
+<span class="nc" id="L882">                            interpretBytesAsShorts(byteArray, tempData,</span>
+                                                   unitsBeforeLookup);
+
+<span class="nc bnc" id="L885" title="All 2 branches missed.">                        }  else if (compression == COMP_LZW) {</span>
+
+                            // Read in all the compressed data for this tile
+<span class="nc" id="L888">                            stream.readFully(data, 0, byteCount);</span>
+
+<span class="nc" id="L890">                            byte[] byteArray = new byte[entries];</span>
+<span class="nc" id="L891">                            lzwDecoder.decode(data, byteArray, newRect.height);</span>
+<span class="nc" id="L892">                            tempData = new short[unitsBeforeLookup];</span>
+<span class="nc" id="L893">                            interpretBytesAsShorts(byteArray, tempData,</span>
+                                                   unitsBeforeLookup);
+
+<span class="nc bnc" id="L896" title="All 2 branches missed.">                        }  else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L898">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L899">                            byte[] byteArray = new byte[entries];</span>
+<span class="nc" id="L900">                            inflate(data, byteArray);</span>
+<span class="nc" id="L901">                            tempData = new short[unitsBeforeLookup];</span>
+<span class="nc" id="L902">                            interpretBytesAsShorts(byteArray, tempData,</span>
+                                                   unitsBeforeLookup);
+
+<span class="nc bnc" id="L905" title="All 2 branches missed.">                        } else if (compression == COMP_NONE) {</span>
+
+                            // byteCount tells us how many bytes are there
+                            // in this tile, but we need to read in shorts,
+                            // which will take half the space, so while
+                            // allocating we divide byteCount by 2.
+<span class="nc" id="L911">                            tempData = new short[byteCount / 2];</span>
+<span class="nc" id="L912">                            readShorts(byteCount / 2, tempData);</span>
+                        }
+
+<span class="nc" id="L915">                        stream.seek(saveOffset);</span>
+
+<span class="nc" id="L917">                    } catch (IOException ioe) {</span>
+<span class="nc" id="L918">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L919">                                       + ioe.getMessage());</span>
+<span class="nc" id="L920">                    }</span>
+
+<span class="nc bnc" id="L922" title="All 2 branches missed.">                    if (dataType == DataBuffer.TYPE_USHORT) {</span>
+
+                        // Expand the palette image into an rgb image with ushort
+                        // data type.
+                        int cmapValue;
+<span class="nc" id="L927">                        int count = 0;</span>
+                        int lookup;
+<span class="nc" id="L929">                        int len = colormap.length / 3;</span>
+<span class="nc" id="L930">                        int len2 = len * 2;</span>
+<span class="nc bnc" id="L931" title="All 2 branches missed.">                        for (int i = 0; i &lt; unitsBeforeLookup; i++) {</span>
+                            // Get the index into the colormap
+<span class="nc" id="L933">                            lookup = tempData[i] &amp; 0xffff;</span>
+                            // Get the blue value
+<span class="nc" id="L935">                            cmapValue = colormap[lookup + len2];</span>
+<span class="nc" id="L936">                            sdata[count++] = (short)(cmapValue &amp; 0xffff);</span>
+                            // Get the green value
+<span class="nc" id="L938">                            cmapValue = colormap[lookup + len];</span>
+<span class="nc" id="L939">                            sdata[count++] = (short)(cmapValue &amp; 0xffff);</span>
+                            // Get the red value
+<span class="nc" id="L941">                            cmapValue = colormap[lookup];</span>
+<span class="nc" id="L942">                            sdata[count++] = (short)(cmapValue &amp; 0xffff);</span>
+                        }
+
+<span class="nc bnc" id="L945" title="All 2 branches missed.">                    } else if (dataType == DataBuffer.TYPE_SHORT) {</span>
+
+                        // Expand the palette image into an rgb image with
+                        // short data type.
+                        int cmapValue;
+<span class="nc" id="L950">                        int count = 0;</span>
+                        int lookup;
+<span class="nc" id="L952">                        int len = colormap.length / 3;</span>
+<span class="nc" id="L953">                        int len2 = len * 2;</span>
+<span class="nc bnc" id="L954" title="All 2 branches missed.">                        for (int i = 0; i &lt; unitsBeforeLookup; i++) {</span>
+                            // Get the index into the colormap
+<span class="nc" id="L956">                            lookup = tempData[i] &amp; 0xffff;</span>
+                            // Get the blue value
+<span class="nc" id="L958">                            cmapValue = colormap[lookup + len2];</span>
+<span class="nc" id="L959">                            sdata[count++] = (short)cmapValue;</span>
+                            // Get the green value
+<span class="nc" id="L961">                            cmapValue = colormap[lookup + len];</span>
+<span class="nc" id="L962">                            sdata[count++] = (short)cmapValue;</span>
+                            // Get the red value
+<span class="nc" id="L964">                            cmapValue = colormap[lookup];</span>
+<span class="nc" id="L965">                            sdata[count++] = (short)cmapValue;</span>
+                        }
+                    }
+
+<span class="nc" id="L969">                } else {</span>
+
+                    // No lookup being done here, when RGB values are needed,
+                    // the associated IndexColorModel can be used to get them.
+
+                    try {
+
+<span class="nc bnc" id="L976" title="All 2 branches missed.">                        if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L978">                            stream.readFully(data, 0, byteCount);</span>
+
+                            // Since unitsInThisTile is the number of shorts,
+                            // but we do our decompression in terms of bytes, we
+                            // need to multiply unitsInThisTile by 2 in order to
+                            // figure out how many bytes we'll get after
+                            // decompression.
+<span class="nc" id="L985">                            int bytesInThisTile = unitsInThisTile * 2;</span>
+
+<span class="nc" id="L987">                            byte[] byteArray = new byte[bytesInThisTile];</span>
+<span class="nc" id="L988">                            decodePackbits(data, bytesInThisTile, byteArray);</span>
+<span class="nc" id="L989">                            interpretBytesAsShorts(byteArray, sdata,</span>
+                                                   unitsInThisTile);
+
+<span class="nc bnc" id="L992" title="All 2 branches missed.">                        } else if (compression == COMP_LZW) {</span>
+
+<span class="nc" id="L994">                            stream.readFully(data, 0, byteCount);</span>
+
+                            // Since unitsInThisTile is the number of shorts,
+                            // but we do our decompression in terms of bytes, we
+                            // need to multiply unitsInThisTile by 2 in order to
+                            // figure out how many bytes we'll get after
+                            // decompression.
+<span class="nc" id="L1001">                            byte[] byteArray = new byte[unitsInThisTile * 2];</span>
+<span class="nc" id="L1002">                            lzwDecoder.decode(data, byteArray, newRect.height);</span>
+<span class="nc" id="L1003">                            interpretBytesAsShorts(byteArray, sdata,</span>
+                                                   unitsInThisTile);
+
+<span class="nc bnc" id="L1006" title="All 2 branches missed.">                        }  else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L1008">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1009">                            byte[] byteArray = new byte[unitsInThisTile * 2];</span>
+<span class="nc" id="L1010">                            inflate(data, byteArray);</span>
+<span class="nc" id="L1011">                            interpretBytesAsShorts(byteArray, sdata,</span>
+                                                   unitsInThisTile);
+
+<span class="nc bnc" id="L1014" title="All 2 branches missed.">                        } else if (compression == COMP_NONE) {</span>
+
+<span class="nc" id="L1016">                            readShorts(byteCount / 2, sdata);</span>
+                        }
+
+<span class="nc" id="L1019">                        stream.seek(saveOffset);</span>
+
+<span class="nc" id="L1021">                    } catch (IOException ioe) {</span>
+<span class="nc" id="L1022">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1023">                                       + ioe.getMessage());</span>
+<span class="nc" id="L1024">                    }</span>
+                }
+
+<span class="nc bnc" id="L1027" title="All 2 branches missed.">            } else if (sampleSize == 8) {</span>
+
+<span class="nc bnc" id="L1029" title="All 2 branches missed.">                if (decodePaletteAsShorts) {</span>
+
+<span class="nc" id="L1031">                    byte[] tempData = null;</span>
+
+                    // At this point the data is 1 banded and will
+                    // become 3 banded only after we've done the palette
+                    // lookup, since unitsInThisTile was calculated with
+                    // 3 bands, we need to divide this by 3.
+<span class="nc" id="L1037">                    int unitsBeforeLookup = unitsInThisTile / 3;</span>
+
+                    // Read the data, if compressed, decode it, reset the pointer
+                    try {
+
+<span class="nc bnc" id="L1042" title="All 2 branches missed.">                        if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L1044">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1045">                            tempData = new byte[unitsBeforeLookup];</span>
+<span class="nc" id="L1046">                            decodePackbits(data, unitsBeforeLookup, tempData);</span>
+
+<span class="nc bnc" id="L1048" title="All 2 branches missed.">                        }  else if (compression == COMP_LZW) {</span>
+
+<span class="nc" id="L1050">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1051">                            tempData = new byte[unitsBeforeLookup];</span>
+<span class="nc" id="L1052">                            lzwDecoder.decode(data, tempData, newRect.height);</span>
+
+<span class="nc bnc" id="L1054" title="All 2 branches missed.">                        }  else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L1056">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1057">                            tempData = new byte[unitsBeforeLookup];</span>
+<span class="nc" id="L1058">                            inflate(data, tempData);</span>
+
+<span class="nc bnc" id="L1060" title="All 2 branches missed.">                        } else if (compression == COMP_NONE) {</span>
+
+<span class="nc" id="L1062">                            tempData = new byte[byteCount];</span>
+<span class="nc" id="L1063">                            stream.readFully(tempData, 0, byteCount);</span>
+                        } else {
+<span class="nc" id="L1065">                            throw new RuntimeException(PropertyUtil.getString(&quot;IFFImage10&quot;) + &quot;: &quot;</span>
+                                                       + compression);
+                        }
+
+<span class="nc" id="L1069">                        stream.seek(saveOffset);</span>
+
+<span class="nc" id="L1071">                    } catch (IOException ioe) {</span>
+<span class="nc" id="L1072">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1073">                                       + ioe.getMessage());</span>
+<span class="nc" id="L1074">                    }</span>
+
+                    // Expand the palette image into an rgb image with ushort
+                    // data type.
+                    int cmapValue;
+<span class="nc" id="L1079">                    int count = 0;</span>
+                    int lookup;
+<span class="nc" id="L1081">                    int len = colormap.length / 3;</span>
+<span class="nc" id="L1082">                    int len2 = len * 2;</span>
+<span class="nc bnc" id="L1083" title="All 2 branches missed.">                    for (int i = 0; i &lt; unitsBeforeLookup; i++) {</span>
+                        // Get the index into the colormap
+<span class="nc" id="L1085">                        lookup = tempData[i] &amp; 0xff;</span>
+                        // Get the blue value
+<span class="nc" id="L1087">                        cmapValue = colormap[lookup + len2];</span>
+<span class="nc" id="L1088">                        sdata[count++] = (short)(cmapValue &amp; 0xffff);</span>
+                        // Get the green value
+<span class="nc" id="L1090">                        cmapValue = colormap[lookup + len];</span>
+<span class="nc" id="L1091">                        sdata[count++] = (short)(cmapValue &amp; 0xffff);</span>
+                        // Get the red value
+<span class="nc" id="L1093">                        cmapValue = colormap[lookup];</span>
+<span class="nc" id="L1094">                        sdata[count++] = (short)(cmapValue &amp; 0xffff);</span>
+                    }
+<span class="nc" id="L1096">                } else {</span>
+
+                    // No lookup being done here, when RGB values are needed,
+                    // the associated IndexColorModel can be used to get them.
+
+                    try {
+
+<span class="nc bnc" id="L1103" title="All 2 branches missed.">                        if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L1105">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1106">                            decodePackbits(data, unitsInThisTile, bdata);</span>
+
+<span class="nc bnc" id="L1108" title="All 2 branches missed.">                        } else if (compression == COMP_LZW) {</span>
+
+<span class="nc" id="L1110">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1111">                            lzwDecoder.decode(data, bdata, newRect.height);</span>
+
+<span class="nc bnc" id="L1113" title="All 2 branches missed.">                        }  else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L1115">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1116">                            inflate(data, bdata);</span>
+
+<span class="nc bnc" id="L1118" title="All 2 branches missed.">                        } else if (compression == COMP_NONE) {</span>
+
+<span class="nc" id="L1120">                            stream.readFully(bdata, 0, byteCount);</span>
+
+                        } else {
+<span class="nc" id="L1123">                            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage10&quot;)</span>
+                                                       + &quot;: &quot; + compression);
+                        }
+
+<span class="nc" id="L1127">                        stream.seek(saveOffset);</span>
+
+<span class="nc" id="L1129">                    } catch (IOException ioe) {</span>
+<span class="nc" id="L1130">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1131">                                       + ioe.getMessage());</span>
+<span class="nc" id="L1132">                    }</span>
+                }
+
+<span class="nc bnc" id="L1135" title="All 2 branches missed.">            } else if (sampleSize == 4) {</span>
+
+<span class="nc bnc" id="L1137" title="All 2 branches missed.">                int padding = (newRect.width % 2 == 0) ? 0 : 1;</span>
+<span class="nc" id="L1138">                int bytesPostDecoding = ((newRect.width / 2 + padding) * newRect.height);</span>
+
+                // Output short images
+<span class="nc bnc" id="L1141" title="All 2 branches missed.">                if (decodePaletteAsShorts) {</span>
+
+<span class="nc" id="L1143">                    byte[] tempData = null;</span>
+
+                    try {
+<span class="nc" id="L1146">                        stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1147">                        stream.seek(saveOffset);</span>
+<span class="nc" id="L1148">                    } catch (IOException ioe) {</span>
+<span class="nc" id="L1149">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1150">                                       + ioe.getMessage());</span>
+<span class="nc" id="L1151">                    }</span>
+
+                    // If compressed, decode the data.
+<span class="nc bnc" id="L1154" title="All 2 branches missed.">                    if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L1156">                        tempData = new byte[bytesPostDecoding];</span>
+<span class="nc" id="L1157">                        decodePackbits(data, bytesPostDecoding, tempData);</span>
+
+<span class="nc bnc" id="L1159" title="All 2 branches missed.">                    }  else if (compression == COMP_LZW) {</span>
+
+<span class="nc" id="L1161">                        tempData = new byte[bytesPostDecoding];</span>
+<span class="nc" id="L1162">                        lzwDecoder.decode(data, tempData, newRect.height);</span>
+
+<span class="nc bnc" id="L1164" title="All 2 branches missed.">                    }  else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L1166">                        tempData = new byte[bytesPostDecoding];</span>
+<span class="nc" id="L1167">                        inflate(data, tempData);</span>
+
+<span class="nc bnc" id="L1169" title="All 2 branches missed.">                    } else if (compression == COMP_NONE) {</span>
+
+<span class="nc" id="L1171">                        tempData = data;</span>
+                    }
+
+<span class="nc" id="L1174">                    int bytes = unitsInThisTile / 3;</span>
+
+                    // Unpack the 2 pixels packed into each byte.
+<span class="nc" id="L1177">                    data = new byte[bytes];</span>
+
+<span class="nc" id="L1179">                    int srcCount = 0;</span>
+<span class="nc" id="L1180">                    int dstCount = 0;</span>
+<span class="nc bnc" id="L1181" title="All 2 branches missed.">                    for (int j = 0; j &lt; newRect.height; j++) {</span>
+<span class="nc bnc" id="L1182" title="All 2 branches missed.">                        for (int i = 0; i &lt; newRect.width / 2; i++) {</span>
+<span class="nc" id="L1183">                            data[dstCount++] =</span>
+                                (byte)((tempData[srcCount] &amp; 0xf0) &gt;&gt; 4);
+<span class="nc" id="L1185">                            data[dstCount++] =</span>
+                                (byte)(tempData[srcCount++] &amp; 0x0f);
+                        }
+
+<span class="nc bnc" id="L1189" title="All 2 branches missed.">                        if (padding == 1) {</span>
+<span class="nc" id="L1190">                            data[dstCount++] =</span>
+                                (byte)((tempData[srcCount++] &amp; 0xf0) &gt;&gt; 4);
+                        }
+                    }
+
+<span class="nc" id="L1195">                    int len = colormap.length / 3;</span>
+<span class="nc" id="L1196">                    int len2 = len * 2;</span>
+                    int cmapValue;
+                    int lookup;
+<span class="nc" id="L1199">                    int count = 0;</span>
+<span class="nc bnc" id="L1200" title="All 2 branches missed.">                    for (int i = 0; i &lt; bytes; i++) {</span>
+<span class="nc" id="L1201">                        lookup = data[i] &amp; 0xff;</span>
+<span class="nc" id="L1202">                        cmapValue = colormap[lookup + len2];</span>
+<span class="nc" id="L1203">                        sdata[count++] = (short)(cmapValue &amp; 0xffff);</span>
+<span class="nc" id="L1204">                        cmapValue = colormap[lookup + len];</span>
+<span class="nc" id="L1205">                        sdata[count++] = (short)(cmapValue &amp; 0xffff);</span>
+<span class="nc" id="L1206">                        cmapValue = colormap[lookup];</span>
+<span class="nc" id="L1207">                        sdata[count++] = (short)(cmapValue &amp; 0xffff);</span>
+                    }
+<span class="nc" id="L1209">                } else {</span>
+
+                    // Output byte values, use IndexColorModel for unpacking
+                    try {
+
+                        // If compressed, decode the data.
+<span class="nc bnc" id="L1215" title="All 2 branches missed.">                        if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L1217">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1218">                            decodePackbits(data, bytesPostDecoding, bdata);</span>
+
+<span class="nc bnc" id="L1220" title="All 2 branches missed.">                        }  else if (compression == COMP_LZW) {</span>
+
+<span class="nc" id="L1222">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1223">                            lzwDecoder.decode(data, bdata, newRect.height);</span>
+
+<span class="nc bnc" id="L1225" title="All 2 branches missed.">                        }  else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L1227">                            stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1228">                            inflate(data, bdata);</span>
+
+<span class="nc bnc" id="L1230" title="All 2 branches missed.">                        } else if (compression == COMP_NONE) {</span>
+
+<span class="nc" id="L1232">                            stream.readFully(bdata, 0, byteCount);</span>
+                        }
+
+<span class="nc" id="L1235">                        stream.seek(saveOffset);</span>
+
+<span class="nc" id="L1237">                    } catch (IOException ioe) {</span>
+<span class="nc" id="L1238">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1239">                                       + ioe.getMessage());</span>
+<span class="nc" id="L1240">                    }</span>
+                }
+<span class="nc" id="L1242">            }</span>
+<span class="nc bnc" id="L1243" title="All 2 branches missed.">        } else if (imageType == TYPE_GRAY_4BIT) { // 4-bit gray</span>
+            try {
+<span class="nc bnc" id="L1245" title="All 2 branches missed.">                if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L1247">                    stream.readFully(data, 0, byteCount);</span>
+
+                    // Since the decompressed data will still be packed
+                    // 2 pixels into 1 byte, calculate bytesInThisTile
+                    int bytesInThisTile;
+<span class="nc bnc" id="L1252" title="All 2 branches missed.">                    if ((newRect.width % 8) == 0) {</span>
+<span class="nc" id="L1253">                        bytesInThisTile = (newRect.width / 2) * newRect.height;</span>
+                    } else {
+<span class="nc" id="L1255">                        bytesInThisTile = (newRect.width / 2 + 1)</span>
+                            * newRect.height;
+                    }
+
+<span class="nc" id="L1259">                    decodePackbits(data, bytesInThisTile, bdata);</span>
+
+<span class="nc bnc" id="L1261" title="All 2 branches missed.">                } else if (compression == COMP_LZW) {</span>
+
+<span class="nc" id="L1263">                    stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1264">                    lzwDecoder.decode(data, bdata, newRect.height);</span>
+
+<span class="nc bnc" id="L1266" title="All 2 branches missed.">                }  else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L1268">                    stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1269">                    inflate(data, bdata);</span>
+
+                } else {
+
+<span class="nc" id="L1273">                    stream.readFully(bdata, 0, byteCount);</span>
+                }
+
+<span class="nc" id="L1276">                stream.seek(saveOffset);</span>
+<span class="nc" id="L1277">            } catch (IOException ioe) {</span>
+<span class="nc" id="L1278">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1279">                                       + ioe.getMessage());</span>
+<span class="nc" id="L1280">            }</span>
+        } else { // everything else
+            try {
+
+<span class="nc bnc" id="L1284" title="All 2 branches missed.">                if (sampleSize == 8) {</span>
+
+<span class="nc bnc" id="L1286" title="All 2 branches missed.">                    if (compression == COMP_NONE) {</span>
+<span class="nc" id="L1287">                        stream.readFully(bdata, 0, byteCount);</span>
+
+<span class="nc bnc" id="L1289" title="All 2 branches missed.">                    } else if (compression == COMP_LZW) {</span>
+
+<span class="nc" id="L1291">                        stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1292">                        lzwDecoder.decode(data, bdata, newRect.height);</span>
+
+<span class="nc bnc" id="L1294" title="All 2 branches missed.">                    } else if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L1296">                        stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1297">                        decodePackbits(data, unitsInThisTile, bdata);</span>
+
+<span class="nc bnc" id="L1299" title="All 2 branches missed.">                    } else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L1301">                        stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1302">                        inflate(data, bdata);</span>
+
+                    } else {
+<span class="nc" id="L1305">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage10&quot;)</span>
+                                                   + &quot;: &quot; + compression);
+                    }
+
+<span class="nc bnc" id="L1309" title="All 2 branches missed.">                } else if (sampleSize == 16) {</span>
+
+<span class="nc bnc" id="L1311" title="All 2 branches missed.">                    if (compression == COMP_NONE) {</span>
+
+<span class="nc" id="L1313">                        readShorts(byteCount / 2, sdata);</span>
+
+<span class="nc bnc" id="L1315" title="All 2 branches missed.">                    } else if (compression == COMP_LZW) {</span>
+
+<span class="nc" id="L1317">                        stream.readFully(data, 0, byteCount);</span>
+
+                        // Since unitsInThisTile is the number of shorts,
+                        // but we do our decompression in terms of bytes, we
+                        // need to multiply unitsInThisTile by 2 in order to
+                        // figure out how many bytes we'll get after
+                        // decompression.
+<span class="nc" id="L1324">                        byte[] byteArray = new byte[unitsInThisTile * 2];</span>
+<span class="nc" id="L1325">                        lzwDecoder.decode(data, byteArray, newRect.height);</span>
+<span class="nc" id="L1326">                        interpretBytesAsShorts(byteArray, sdata,</span>
+                                               unitsInThisTile);
+
+<span class="nc bnc" id="L1329" title="All 2 branches missed.">                    } else if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L1331">                        stream.readFully(data, 0, byteCount);</span>
+
+                        // Since unitsInThisTile is the number of shorts,
+                        // but we do our decompression in terms of bytes, we
+                        // need to multiply unitsInThisTile by 2 in order to
+                        // figure out how many bytes we'll get after
+                        // decompression.
+<span class="nc" id="L1338">                        int bytesInThisTile = unitsInThisTile * 2;</span>
+
+<span class="nc" id="L1340">                        byte[] byteArray = new byte[bytesInThisTile];</span>
+<span class="nc" id="L1341">                        decodePackbits(data, bytesInThisTile, byteArray);</span>
+<span class="nc" id="L1342">                        interpretBytesAsShorts(byteArray, sdata,</span>
+                                               unitsInThisTile);
+<span class="nc bnc" id="L1344" title="All 2 branches missed.">                    } else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L1346">                        stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1347">                        byte[] byteArray = new byte[unitsInThisTile * 2];</span>
+<span class="nc" id="L1348">                        inflate(data, byteArray);</span>
+<span class="nc" id="L1349">                        interpretBytesAsShorts(byteArray, sdata,</span>
+                                               unitsInThisTile);
+
+<span class="nc" id="L1352">                    }</span>
+<span class="nc bnc" id="L1353" title="All 4 branches missed.">                } else if (sampleSize == 32</span>
+                           &amp;&amp; dataType == DataBuffer.TYPE_INT) { // redundant
+<span class="nc bnc" id="L1355" title="All 2 branches missed.">                    if (compression == COMP_NONE) {</span>
+
+<span class="nc" id="L1357">                        readInts(byteCount / 4, idata);</span>
+
+<span class="nc bnc" id="L1359" title="All 2 branches missed.">                    } else if (compression == COMP_LZW) {</span>
+
+<span class="nc" id="L1361">                        stream.readFully(data, 0, byteCount);</span>
+
+                        // Since unitsInThisTile is the number of ints,
+                        // but we do our decompression in terms of bytes, we
+                        // need to multiply unitsInThisTile by 4 in order to
+                        // figure out how many bytes we'll get after
+                        // decompression.
+<span class="nc" id="L1368">                        byte[] byteArray = new byte[unitsInThisTile * 4];</span>
+<span class="nc" id="L1369">                        lzwDecoder.decode(data, byteArray, newRect.height);</span>
+<span class="nc" id="L1370">                        interpretBytesAsInts(byteArray, idata,</span>
+                                             unitsInThisTile);
+
+<span class="nc bnc" id="L1373" title="All 2 branches missed.">                    } else if (compression == COMP_PACKBITS) {</span>
+
+<span class="nc" id="L1375">                        stream.readFully(data, 0, byteCount);</span>
+
+                        // Since unitsInThisTile is the number of ints,
+                        // but we do our decompression in terms of bytes, we
+                        // need to multiply unitsInThisTile by 4 in order to
+                        // figure out how many bytes we'll get after
+                        // decompression.
+<span class="nc" id="L1382">                        int bytesInThisTile = unitsInThisTile * 4;</span>
+
+<span class="nc" id="L1384">                        byte[] byteArray = new byte[bytesInThisTile];</span>
+<span class="nc" id="L1385">                        decodePackbits(data, bytesInThisTile, byteArray);</span>
+<span class="nc" id="L1386">                        interpretBytesAsInts(byteArray, idata,</span>
+                                             unitsInThisTile);
+<span class="nc bnc" id="L1388" title="All 2 branches missed.">                    } else if (compression == COMP_DEFLATE) {</span>
+
+<span class="nc" id="L1390">                        stream.readFully(data, 0, byteCount);</span>
+<span class="nc" id="L1391">                        byte[] byteArray = new byte[unitsInThisTile * 4];</span>
+<span class="nc" id="L1392">                        inflate(data, byteArray);</span>
+<span class="nc" id="L1393">                        interpretBytesAsInts(byteArray, idata,</span>
+                                             unitsInThisTile);
+
+                    }
+                }
+
+<span class="nc" id="L1399">                stream.seek(saveOffset);</span>
+
+<span class="nc" id="L1401">            } catch (IOException ioe) {</span>
+<span class="nc" id="L1402">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1403">                                       + ioe.getMessage());</span>
+<span class="nc" id="L1404">            }</span>
+
+            // Modify the data for certain special cases.
+<span class="nc bnc" id="L1407" title="All 5 branches missed.">            switch (imageType) {</span>
+            case TYPE_GRAY:
+            case TYPE_GRAY_ALPHA:
+<span class="nc bnc" id="L1410" title="All 2 branches missed.">                if (isWhiteZero) {</span>
+                    // Since we are using a ComponentColorModel with this
+                    // image, we need to change the WhiteIsZero data to
+                    // BlackIsZero data so it will display properly.
+<span class="nc bnc" id="L1414" title="All 2 branches missed.">                    if (dataType == DataBuffer.TYPE_BYTE</span>
+<span class="nc bnc" id="L1415" title="All 2 branches missed.">                        &amp;&amp; !(getColorModel() instanceof IndexColorModel)) {</span>
+
+<span class="nc bnc" id="L1417" title="All 2 branches missed.">                        for (int l = 0; l &lt; bdata.length; l += numBands) {</span>
+<span class="nc" id="L1418">                            bdata[l] = (byte)(255 - bdata[l]);</span>
+                        }
+<span class="nc bnc" id="L1420" title="All 2 branches missed.">                    } else if (dataType == DataBuffer.TYPE_USHORT) {</span>
+
+<span class="nc" id="L1422">                        int ushortMax = Short.MAX_VALUE - Short.MIN_VALUE;</span>
+<span class="nc bnc" id="L1423" title="All 2 branches missed.">                        for (int l = 0; l &lt; sdata.length; l += numBands) {</span>
+<span class="nc" id="L1424">                            sdata[l] = (short)(ushortMax - sdata[l]);</span>
+                        }
+
+<span class="nc bnc" id="L1427" title="All 2 branches missed.">                    } else if (dataType == DataBuffer.TYPE_SHORT) {</span>
+
+<span class="nc bnc" id="L1429" title="All 2 branches missed.">                        for (int l = 0; l &lt; sdata.length; l += numBands) {</span>
+<span class="nc" id="L1430">                            sdata[l] = (short)(~sdata[l]);</span>
+                        }
+<span class="nc bnc" id="L1432" title="All 2 branches missed.">                    } else if (dataType == DataBuffer.TYPE_INT) {</span>
+
+<span class="nc" id="L1434">                        long uintMax = ((long)Integer.MAX_VALUE</span>
+                                        - (long)Integer.MIN_VALUE);
+<span class="nc bnc" id="L1436" title="All 2 branches missed.">                        for (int l = 0; l &lt; idata.length; l += numBands) {</span>
+<span class="nc" id="L1437">                            idata[l] = (int)(uintMax - idata[l]);</span>
+                        }
+<span class="nc" id="L1439">                    }</span>
+                }
+                break;
+            case TYPE_RGB:
+                // Change RGB to BGR order, as Java2D displays that faster.
+                // Unnecessary for JPEG-in-TIFF as the decoder handles it.
+<span class="nc bnc" id="L1445" title="All 4 branches missed.">                if (sampleSize == 8 &amp;&amp; compression != COMP_JPEG_TTN2) {</span>
+<span class="nc bnc" id="L1446" title="All 2 branches missed.">                    for (int i = 0; i &lt; unitsInThisTile; i += 3) {</span>
+<span class="nc" id="L1447">                        bswap = bdata[i];</span>
+<span class="nc" id="L1448">                        bdata[i] = bdata[i + 2];</span>
+<span class="nc" id="L1449">                        bdata[i + 2] = bswap;</span>
+                    }
+<span class="nc bnc" id="L1451" title="All 2 branches missed.">                } else if (sampleSize == 16) {</span>
+<span class="nc bnc" id="L1452" title="All 2 branches missed.">                    for (int i = 0; i &lt; unitsInThisTile; i += 3) {</span>
+<span class="nc" id="L1453">                        sswap = sdata[i];</span>
+<span class="nc" id="L1454">                        sdata[i] = sdata[i + 2];</span>
+<span class="nc" id="L1455">                        sdata[i + 2] = sswap;</span>
+                    }
+<span class="nc bnc" id="L1457" title="All 2 branches missed.">                } else if (sampleSize == 32) {</span>
+<span class="nc bnc" id="L1458" title="All 2 branches missed.">                    if (dataType == DataBuffer.TYPE_INT) {</span>
+<span class="nc bnc" id="L1459" title="All 2 branches missed.">                        for (int i = 0; i &lt; unitsInThisTile; i += 3) {</span>
+<span class="nc" id="L1460">                            iswap = idata[i];</span>
+<span class="nc" id="L1461">                            idata[i] = idata[i + 2];</span>
+<span class="nc" id="L1462">                            idata[i + 2] = iswap;</span>
+                        }
+                    }
+                }
+                break;
+            case TYPE_RGB_ALPHA:
+                // Convert from RGBA to ABGR for Java2D
+<span class="nc bnc" id="L1469" title="All 2 branches missed.">                if (sampleSize == 8) {</span>
+<span class="nc bnc" id="L1470" title="All 2 branches missed.">                    for (int i = 0; i &lt; unitsInThisTile; i += 4) {</span>
+                        // Swap R and A
+<span class="nc" id="L1472">                        bswap = bdata[i];</span>
+<span class="nc" id="L1473">                        bdata[i] = bdata[i + 3];</span>
+<span class="nc" id="L1474">                        bdata[i + 3] = bswap;</span>
+
+                        // Swap G and B
+<span class="nc" id="L1477">                        bswap = bdata[i + 1];</span>
+<span class="nc" id="L1478">                        bdata[i + 1] = bdata[i + 2];</span>
+<span class="nc" id="L1479">                        bdata[i + 2] = bswap;</span>
+                    }
+<span class="nc bnc" id="L1481" title="All 2 branches missed.">                } else if (sampleSize == 16) {</span>
+<span class="nc bnc" id="L1482" title="All 2 branches missed.">                    for (int i = 0; i &lt; unitsInThisTile; i += 4) {</span>
+                        // Swap R and A
+<span class="nc" id="L1484">                        sswap = sdata[i];</span>
+<span class="nc" id="L1485">                        sdata[i] = sdata[i + 3];</span>
+<span class="nc" id="L1486">                        sdata[i + 3] = sswap;</span>
+
+                        // Swap G and B
+<span class="nc" id="L1489">                        sswap = sdata[i + 1];</span>
+<span class="nc" id="L1490">                        sdata[i + 1] = sdata[i + 2];</span>
+<span class="nc" id="L1491">                        sdata[i + 2] = sswap;</span>
+                    }
+<span class="nc bnc" id="L1493" title="All 2 branches missed.">                } else if (sampleSize == 32) {</span>
+<span class="nc bnc" id="L1494" title="All 2 branches missed.">                    if (dataType == DataBuffer.TYPE_INT) {</span>
+<span class="nc bnc" id="L1495" title="All 2 branches missed.">                        for (int i = 0; i &lt; unitsInThisTile; i += 4) {</span>
+                            // Swap R and A
+<span class="nc" id="L1497">                            iswap = idata[i];</span>
+<span class="nc" id="L1498">                            idata[i] = idata[i + 3];</span>
+<span class="nc" id="L1499">                            idata[i + 3] = iswap;</span>
+
+                            // Swap G and B
+<span class="nc" id="L1502">                            iswap = idata[i + 1];</span>
+<span class="nc" id="L1503">                            idata[i + 1] = idata[i + 2];</span>
+<span class="nc" id="L1504">                            idata[i + 2] = iswap;</span>
+                        }
+                    }
+                }
+                break;
+            case TYPE_YCBCR_SUB:
+                // Post-processing for YCbCr with subsampled chrominance:
+                // simply replicate the chroma channels for displayability.
+<span class="nc" id="L1512">                int pixelsPerDataUnit = chromaSubH * chromaSubV;</span>
+
+<span class="nc" id="L1514">                int numH = newRect.width / chromaSubH;</span>
+<span class="nc" id="L1515">                int numV = newRect.height / chromaSubV;</span>
+
+<span class="nc" id="L1517">                byte[] tempData = new byte[numH * numV * (pixelsPerDataUnit + 2)];</span>
+<span class="nc" id="L1518">                System.arraycopy(bdata, 0, tempData, 0, tempData.length);</span>
+
+<span class="nc" id="L1520">                int samplesPerDataUnit = pixelsPerDataUnit * 3;</span>
+<span class="nc" id="L1521">                int[] pixels = new int[samplesPerDataUnit];</span>
+
+<span class="nc" id="L1523">                int bOffset = 0;</span>
+<span class="nc" id="L1524">                int offsetCb = pixelsPerDataUnit;</span>
+<span class="nc" id="L1525">                int offsetCr = offsetCb + 1;</span>
+
+<span class="nc" id="L1527">                int y = newRect.y;</span>
+<span class="nc bnc" id="L1528" title="All 2 branches missed.">                for (int j = 0; j &lt; numV; j++) {</span>
+<span class="nc" id="L1529">                    int x = newRect.x;</span>
+<span class="nc bnc" id="L1530" title="All 2 branches missed.">                    for (int i = 0; i &lt; numH; i++) {</span>
+<span class="nc" id="L1531">                        int cb = tempData[bOffset + offsetCb];</span>
+<span class="nc" id="L1532">                        int cr = tempData[bOffset + offsetCr];</span>
+<span class="nc" id="L1533">                        int k = 0;</span>
+<span class="nc bnc" id="L1534" title="All 2 branches missed.">                        while (k &lt; samplesPerDataUnit) {</span>
+<span class="nc" id="L1535">                            pixels[k++] = tempData[bOffset++];</span>
+<span class="nc" id="L1536">                            pixels[k++] = cb;</span>
+<span class="nc" id="L1537">                            pixels[k++] = cr;</span>
+                        }
+<span class="nc" id="L1539">                        bOffset += 2;</span>
+<span class="nc" id="L1540">                        tile.setPixels(x, y, chromaSubH, chromaSubV, pixels);</span>
+<span class="nc" id="L1541">                        x += chromaSubH;</span>
+                    }
+<span class="nc" id="L1543">                    y += chromaSubV;</span>
+                }
+
+                break;
+            }
+        }
+
+<span class="nc" id="L1550">        return tile;</span>
+    }
+
+    private void readShorts(int shortCount, short[] shortArray) {
+
+        // Since each short consists of 2 bytes, we need a
+        // byte array of double size
+<span class="nc" id="L1557">        int byteCount = 2 * shortCount;</span>
+<span class="nc" id="L1558">        byte[] byteArray = new byte[byteCount];</span>
+
+        try {
+<span class="nc" id="L1561">            stream.readFully(byteArray, 0, byteCount);</span>
+<span class="nc" id="L1562">        } catch (IOException ioe) {</span>
+<span class="nc" id="L1563">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1564">                                       + ioe.getMessage());</span>
+<span class="nc" id="L1565">        }</span>
+
+<span class="nc" id="L1567">        interpretBytesAsShorts(byteArray, shortArray, shortCount);</span>
+<span class="nc" id="L1568">    }</span>
+
+    private void readInts(int intCount, int[] intArray) {
+
+        // Since each int consists of 4 bytes, we need a
+        // byte array of quadruple size
+<span class="nc" id="L1574">        int byteCount = 4 * intCount;</span>
+<span class="nc" id="L1575">        byte[] byteArray = new byte[byteCount];</span>
+
+        try {
+<span class="nc" id="L1578">            stream.readFully(byteArray, 0, byteCount);</span>
+<span class="nc" id="L1579">        } catch (IOException ioe) {</span>
+<span class="nc" id="L1580">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage13&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1581">                                       + ioe.getMessage());</span>
+<span class="nc" id="L1582">        }</span>
+
+<span class="nc" id="L1584">        interpretBytesAsInts(byteArray, intArray, intCount);</span>
+<span class="nc" id="L1585">    }</span>
+
+    // Method to interpret a byte array to a short array, depending on
+    // whether the bytes are stored in a big endian or little endian format.
+    private void interpretBytesAsShorts(byte[] byteArray,
+                                        short[] shortArray,
+                                        int shortCount) {
+
+<span class="nc" id="L1593">        int j = 0;</span>
+        int firstByte;
+        int secondByte;
+
+<span class="nc bnc" id="L1597" title="All 2 branches missed.">        if (isBigEndian) {</span>
+
+<span class="nc bnc" id="L1599" title="All 2 branches missed.">            for (int i = 0; i &lt; shortCount; i++) {</span>
+<span class="nc" id="L1600">                firstByte = byteArray[j++] &amp; 0xff;</span>
+<span class="nc" id="L1601">                secondByte = byteArray[j++] &amp; 0xff;</span>
+<span class="nc" id="L1602">                shortArray[i] = (short)((firstByte &lt;&lt; 8) + secondByte);</span>
+            }
+
+        } else {
+
+<span class="nc bnc" id="L1607" title="All 2 branches missed.">            for (int i = 0; i &lt; shortCount; i++) {</span>
+<span class="nc" id="L1608">                firstByte = byteArray[j++] &amp; 0xff;</span>
+<span class="nc" id="L1609">                secondByte = byteArray[j++] &amp; 0xff;</span>
+<span class="nc" id="L1610">                shortArray[i] = (short)((secondByte &lt;&lt; 8) + firstByte);</span>
+            }
+        }
+<span class="nc" id="L1613">    }</span>
+
+    // Method to interpret a byte array to a int array, depending on
+    // whether the bytes are stored in a big endian or little endian format.
+    private void interpretBytesAsInts(byte[] byteArray,
+                                      int[] intArray,
+                                      int intCount) {
+
+<span class="nc" id="L1621">        int j = 0;</span>
+
+<span class="nc bnc" id="L1623" title="All 2 branches missed.">        if (isBigEndian) {</span>
+
+<span class="nc bnc" id="L1625" title="All 2 branches missed.">            for (int i = 0; i &lt; intCount; i++) {</span>
+<span class="nc" id="L1626">                intArray[i] = (((byteArray[j++] &amp; 0xff) &lt;&lt; 24)</span>
+                               | ((byteArray[j++] &amp; 0xff) &lt;&lt; 16)
+                               | ((byteArray[j++] &amp; 0xff) &lt;&lt; 8)
+                               | (byteArray[j++] &amp; 0xff));
+            }
+
+        } else {
+
+<span class="nc bnc" id="L1634" title="All 2 branches missed.">            for (int i = 0; i &lt; intCount; i++) {</span>
+<span class="nc" id="L1635">                intArray[i] = ((byteArray[j++] &amp; 0xff)</span>
+                              | ((byteArray[j++] &amp; 0xff) &lt;&lt; 8)
+                              | ((byteArray[j++] &amp; 0xff) &lt;&lt; 16)
+                              | ((byteArray[j++] &amp; 0xff) &lt;&lt; 24));
+            }
+        }
+<span class="nc" id="L1641">    }</span>
+
+    // Uncompress packbits compressed image data.
+    private byte[] decodePackbits(byte[] data, int arraySize, byte[] dst) {
+
+<span class="nc bnc" id="L1646" title="All 2 branches missed.">        if (dst == null) {</span>
+<span class="nc" id="L1647">            dst = new byte[arraySize];</span>
+        }
+
+<span class="nc" id="L1650">        int srcCount = 0;</span>
+<span class="nc" id="L1651">        int dstCount = 0;</span>
+        byte repeat;
+        byte b;
+
+        try {
+
+<span class="nc bnc" id="L1657" title="All 2 branches missed.">            while (dstCount &lt; arraySize) {</span>
+
+<span class="nc" id="L1659">                b = data[srcCount++];</span>
+
+<span class="nc bnc" id="L1661" title="All 4 branches missed.">                if (b &gt;= 0 &amp;&amp; b &lt;= 127) {</span>
+
+                    // literal run packet
+<span class="nc bnc" id="L1664" title="All 2 branches missed.">                    for (int i = 0; i &lt; (b + 1); i++) {</span>
+<span class="nc" id="L1665">                        dst[dstCount++] = data[srcCount++];</span>
+                    }
+
+<span class="nc bnc" id="L1668" title="All 4 branches missed.">                } else if (b &lt;= -1 &amp;&amp; b &gt;= -127) {</span>
+
+                    // 2 byte encoded run packet
+<span class="nc" id="L1671">                    repeat = data[srcCount++];</span>
+<span class="nc bnc" id="L1672" title="All 2 branches missed.">                    for (int i = 0; i &lt; (-b + 1); i++) {</span>
+<span class="nc" id="L1673">                        dst[dstCount++] = repeat;</span>
+                    }
+
+                } else {
+                    // no-op packet. Do nothing
+<span class="nc" id="L1678">                    srcCount++;</span>
+                }
+            }
+<span class="nc" id="L1681">        } catch (java.lang.ArrayIndexOutOfBoundsException ae) {</span>
+<span class="nc" id="L1682">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFImage14&quot;) + &quot;: &quot;</span>
+<span class="nc" id="L1683">                                       + ae.getMessage());</span>
+<span class="nc" id="L1684">        }</span>
+
+<span class="nc" id="L1686">        return dst;</span>
+    }
+
+    // Need a createColorModel().
+    // Create ComponentColorModel for TYPE_RGB images
+    private ComponentColorModel createAlphaComponentColorModel(
+    int dataType, int numBands,
+     boolean isAlphaPremultiplied, int transparency) {
+
+<span class="nc" id="L1695">        ComponentColorModel ccm = null;</span>
+<span class="nc" id="L1696">        int[] rgbBits = null;</span>
+<span class="nc" id="L1697">        ColorSpace cs = null;</span>
+<span class="nc bnc" id="L1698" title="All 3 branches missed.">        switch(numBands) {</span>
+            case 2: // gray+alpha
+<span class="nc" id="L1700">                cs = ColorSpace.getInstance(ColorSpace.CS_GRAY);</span>
+<span class="nc" id="L1701">                break;</span>
+            case 4: // RGB+alpha
+<span class="nc" id="L1703">                cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);</span>
+<span class="nc" id="L1704">                break;</span>
+            default:
+<span class="nc" id="L1706">                throw new IllegalArgumentException(PropertyUtil.getString(&quot;TIFFImage19&quot;) + &quot;: &quot;</span>
+                                                   + numBands);
+        }
+
+<span class="nc" id="L1710">        int componentSize = 0;</span>
+<span class="nc bnc" id="L1711" title="All 4 branches missed.">        switch(dataType) {</span>
+            case DataBuffer.TYPE_BYTE:
+<span class="nc" id="L1713">                componentSize = 8;</span>
+<span class="nc" id="L1714">                break;</span>
+            case DataBuffer.TYPE_USHORT:
+            case DataBuffer.TYPE_SHORT:
+<span class="nc" id="L1717">                componentSize = 16;</span>
+<span class="nc" id="L1718">                break;</span>
+            case DataBuffer.TYPE_INT:
+<span class="nc" id="L1720">                componentSize = 32;</span>
+<span class="nc" id="L1721">                break;</span>
+            default:
+<span class="nc" id="L1723">                throw new IllegalArgumentException(PropertyUtil.getString(&quot;TIFFImage20&quot;) + &quot;: &quot;</span>
+                                                   + dataType);
+        }
+
+<span class="nc" id="L1727">        rgbBits = new int[numBands];</span>
+<span class="nc bnc" id="L1728" title="All 2 branches missed.">        for (int i = 0; i &lt; numBands; i++) {</span>
+<span class="nc" id="L1729">            rgbBits[i] = componentSize;</span>
+        }
+
+<span class="nc" id="L1732">        ccm = new ComponentColorModel(cs,</span>
+                                      rgbBits,
+                                      true,
+                                      isAlphaPremultiplied,
+                                      transparency,
+                                      dataType);
+
+
+<span class="nc" id="L1740">        return ccm;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractImageSessionContext.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">AbstractImageSessionContext.java</span></div><h1>AbstractImageSessionContext.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: AbstractImageSessionContext.java 1895651 2021-12-07 08:03:10Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.stream.StreamSource;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.apache.xmlgraphics.image.loader.ImageSessionContext;
+import org.apache.xmlgraphics.image.loader.ImageSource;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+import org.apache.xmlgraphics.image.loader.util.SoftMapCache;
+import org.apache.xmlgraphics.io.XmlSourceUtil;
+
+/**
+ * Abstract base class for classes implementing ImageSessionContext. This class provides all the
+ * special treatment for Source creation, i.e. it provides optimized Source objects where possible.
+ */
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">public abstract class AbstractImageSessionContext implements ImageSessionContext {</span>
+
+    /** logger */
+<span class="fc" id="L59">    private static final Log log = LogFactory.getLog(AbstractImageSessionContext.class);</span>
+
+    private static boolean noSourceReuse;
+
+    static {
+<span class="fc" id="L64">        noSourceReuse = AccessController.doPrivileged(</span>
+<span class="fc" id="L65">            new PrivilegedAction&lt;Boolean&gt;() {</span>
+                public Boolean run() {
+                    //See: http://markmail.org/message/k6mno3jsxmovaz2e
+<span class="fc" id="L68">                    String noSourceReuseString = System.getProperty(</span>
+<span class="fc" id="L69">                            AbstractImageSessionContext.class.getName() + &quot;.no-source-reuse&quot;);</span>
+<span class="fc" id="L70">                    return Boolean.valueOf(noSourceReuseString);</span>
+                }
+            }
+        );
+<span class="fc" id="L74">    }</span>
+
+    private final FallbackResolver fallbackResolver;
+
+<span class="fc" id="L78">    public AbstractImageSessionContext() {</span>
+<span class="fc" id="L79">        fallbackResolver = new UnrestrictedFallbackResolver();</span>
+<span class="fc" id="L80">    }</span>
+
+    /**
+     * @param fallbackResolver the fallback resolution mechanism to be used when simply getting an
+     * {@link InputStream} that backs a {@link Source} isn't possible.
+     */
+<span class="nc" id="L86">    public AbstractImageSessionContext(FallbackResolver fallbackResolver) {</span>
+<span class="nc" id="L87">        this.fallbackResolver = fallbackResolver;</span>
+<span class="nc" id="L88">    }</span>
+
+    /**
+     * Attempts to resolve the given URI.
+     * @param uri URI to access
+     * @return A {@link javax.xml.transform.Source} object, or null if the URI
+     * cannot be resolved.
+     */
+    protected abstract Source resolveURI(String uri);
+
+    /** {@inheritDoc} */
+    public Source newSource(String uri) {
+<span class="fc" id="L100">        Source source = resolveURI(uri);</span>
+<span class="fc bfc" id="L101" title="All 4 branches covered.">        if (source instanceof StreamSource || source instanceof SAXSource) {</span>
+<span class="fc" id="L102">            return fallbackResolver.createSource(source, uri);</span>
+        }
+        //Return any non-stream Sources and let the ImageLoaders deal with them
+<span class="fc" id="L105">        return source;</span>
+    }
+
+    protected static ImageInputStream createImageInputStream(InputStream in) throws IOException {
+<span class="fc" id="L109">        ImageInputStream iin = ImageIO.createImageInputStream(in);</span>
+<span class="fc" id="L110">        return (ImageInputStream) Proxy.newProxyInstance(</span>
+<span class="fc" id="L111">                ImageInputStream.class.getClassLoader(),</span>
+                new Class[] {ImageInputStream.class},
+                new ObservingImageInputStreamInvocationHandler(iin, in));
+    }
+
+    private static class ObservingImageInputStreamInvocationHandler
+        implements InvocationHandler {
+
+        private ImageInputStream iin;
+        private InputStream in;
+
+        public ObservingImageInputStreamInvocationHandler(ImageInputStream iin,
+<span class="fc" id="L123">                InputStream underlyingStream) {</span>
+<span class="fc" id="L124">            this.iin = iin;</span>
+<span class="fc" id="L125">            this.in = underlyingStream;</span>
+<span class="fc" id="L126">        }</span>
+
+        /** {@inheritDoc} */
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            try {
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">                if (&quot;close&quot;.equals(method.getName())) {</span>
+                    try {
+<span class="nc" id="L133">                        return method.invoke(iin, args);</span>
+                    } finally {
+<span class="nc" id="L135">                        IOUtils.closeQuietly(this.in);</span>
+<span class="nc" id="L136">                        this.in = null;</span>
+                    }
+                } else {
+<span class="fc" id="L139">                    return method.invoke(iin, args);</span>
+                }
+<span class="nc" id="L141">            } catch (InvocationTargetException e) {</span>
+<span class="nc" id="L142">                throw e.getCause();</span>
+            }
+        }
+
+    }
+
+    /**
+     * Convert from a &lt;code&gt;URL&lt;/code&gt; to a &lt;code&gt;File&lt;/code&gt;.
+     * &lt;p&gt;
+     * This method will decode the URL.
+     * Syntax such as &lt;code&gt;file:///my%20docs/file.txt&lt;/code&gt; will be
+     * correctly decoded to &lt;code&gt;/my docs/file.txt&lt;/code&gt;.
+     * &lt;p&gt;
+     * Note: this method has been copied over from Apache Commons IO and enhanced to support
+     * UNC paths.
+     *
+     * @param url  the file URL to convert, &lt;code&gt;null&lt;/code&gt; returns &lt;code&gt;null&lt;/code&gt;
+     * @return the equivalent &lt;code&gt;File&lt;/code&gt; object, or &lt;code&gt;null&lt;/code&gt;
+     *  if the URL's protocol is not &lt;code&gt;file&lt;/code&gt;
+     * @throws IllegalArgumentException if the file is incorrectly encoded
+     */
+    public static File toFile(URL url) {
+<span class="pc bpc" id="L164" title="1 of 4 branches missed.">        if (url == null || !url.getProtocol().equals(&quot;file&quot;)) {</span>
+<span class="fc" id="L165">            return null;</span>
+        } else {
+            try {
+<span class="fc" id="L168">                String filename = &quot;&quot;;</span>
+<span class="pc bpc" id="L169" title="2 of 4 branches missed.">                if (url.getHost() != null &amp;&amp; url.getHost().length() &gt; 0) {</span>
+<span class="nc" id="L170">                    filename += Character.toString(File.separatorChar)</span>
+<span class="nc" id="L171">                            + Character.toString(File.separatorChar)</span>
+<span class="nc" id="L172">                            + url.getHost();</span>
+                }
+<span class="fc" id="L174">                filename += url.getFile().replace('/', File.separatorChar);</span>
+<span class="fc" id="L175">                filename = java.net.URLDecoder.decode(filename, &quot;UTF-8&quot;);</span>
+<span class="fc" id="L176">                final File f = new File(filename);</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">                if (!f.isFile()) {</span>
+<span class="nc" id="L178">                    return null;</span>
+                }
+<span class="fc" id="L180">                return f;</span>
+<span class="nc" id="L181">            } catch (java.io.UnsupportedEncodingException uee) {</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">                assert false;</span>
+<span class="nc" id="L183">                return null;</span>
+            }
+        }
+    }
+
+<span class="pc" id="L188">    private SoftMapCache sessionSources = new SoftMapCache(false); //no need for synchronization</span>
+
+    /** {@inheritDoc} */
+    public Source getSource(String uri) {
+<span class="fc" id="L192">        return (Source) sessionSources.remove(uri);</span>
+    }
+
+    /** {@inheritDoc} */
+    public Source needSource(String uri) throws FileNotFoundException {
+<span class="fc" id="L197">        Source src = getSource(uri);</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        if (src == null) {</span>
+<span class="pc bpc" id="L199" title="1 of 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L200">                log.debug(&quot;Creating new Source for &quot; + uri);</span>
+
+            }
+<span class="fc" id="L203">            src = newSource(uri);</span>
+<span class="fc bfc" id="L204" title="All 2 branches covered.">            if (src == null) {</span>
+<span class="fc" id="L205">                throw new FileNotFoundException(&quot;Image not found: &quot; + uri);</span>
+            }
+        } else {
+<span class="pc bpc" id="L208" title="1 of 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L209">                log.debug(&quot;Reusing Source for &quot; + uri);</span>
+            }
+        }
+<span class="fc" id="L212">        return src;</span>
+    }
+
+    /** {@inheritDoc} */
+    public void returnSource(String uri, Source src) {
+        //Safety check to make sure the Preloaders behave
+<span class="fc" id="L218">        ImageInputStream in = ImageUtil.getImageInputStream(src);</span>
+        try {
+<span class="pc bpc" id="L220" title="2 of 4 branches missed.">            if (in != null &amp;&amp; in.getStreamPosition() != 0) {</span>
+<span class="nc" id="L221">                throw new IllegalStateException(&quot;ImageInputStream is not reset for: &quot; + uri);</span>
+            }
+<span class="nc" id="L223">        } catch (IOException ioe) {</span>
+            //Ignore exception
+<span class="nc" id="L225">            XmlSourceUtil.closeQuietly(src);</span>
+<span class="fc" id="L226">        }</span>
+
+<span class="pc bpc" id="L228" title="1 of 2 branches missed.">        if (isReusable(src)) {</span>
+            //Only return the Source if it's reusable
+<span class="fc" id="L230">            log.debug(&quot;Returning Source for &quot; + uri);</span>
+<span class="fc" id="L231">            sessionSources.put(uri, src);</span>
+        } else {
+            //Otherwise, try to close if possible and forget about it
+<span class="nc" id="L234">            XmlSourceUtil.closeQuietly(src);</span>
+        }
+<span class="fc" id="L236">    }</span>
+
+    /**
+     * Indicates whether a Source is reusable. A Source object is reusable if it's an
+     * {@link ImageSource} (containing an {@link ImageInputStream}) or a {@link DOMSource}.
+     * @param src the Source object
+     * @return true if the Source is reusable
+     */
+    protected boolean isReusable(Source src) {
+<span class="pc bpc" id="L245" title="1 of 2 branches missed.">        if (noSourceReuse) {</span>
+<span class="nc" id="L246">            return false;</span>
+        }
+<span class="pc bpc" id="L248" title="1 of 2 branches missed.">        if (src instanceof ImageSource) {</span>
+<span class="fc" id="L249">            ImageSource is = (ImageSource) src;</span>
+<span class="pc bpc" id="L250" title="1 of 2 branches missed.">            if (is.getImageInputStream() != null) {</span>
+<span class="fc" id="L251">                return true;</span>
+            }
+        }
+<span class="nc bnc" id="L254" title="All 2 branches missed.">        if (src instanceof DOMSource) {</span>
+<span class="nc" id="L255">            return true;</span>
+        }
+<span class="nc" id="L257">        return false;</span>
+    }
+
+    /**
+     * Implementations of this interface will be used as the mechanism for creating the
+     * {@link Source} that wraps resources. This interface allows clients to define their own
+     * implementations so that they have fine-grained control over how resources are acquired.
+     */
+    public interface FallbackResolver {
+
+        /**
+         * The fallback mechanism used to create the source which takes in both the {@link Source}
+         * that the the regular mechanisms attempted to create and the URI that the user provided.
+         *
+         * @param source the source
+         * @param uri the URI provided by the user
+         * @return the source that the contingency mechanism has been acquired
+         */
+        Source createSource(Source source, String uri);
+    }
+
+    /**
+     * An unrestricted resolver that has various contingency mechanisms that access the file-system.
+     * This is most suitable for use via the CLI or in environments where controlling I/O isn't a
+     * priority.
+     */
+<span class="pc bpc" id="L283" title="1 of 2 branches missed.">    public static final class UnrestrictedFallbackResolver implements FallbackResolver {</span>
+
+        /** {@inheritDoc} */
+        public Source createSource(Source source, String uri) {
+<span class="pc bpc" id="L287" title="1 of 2 branches missed.">            if (source == null) {</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">                if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L289">                    log.debug(&quot;URI could not be resolved: &quot; + uri);</span>
+                }
+<span class="nc" id="L291">                return null;</span>
+            }
+<span class="fc" id="L293">            ImageSource imageSource = null;</span>
+
+<span class="fc" id="L295">            String resolvedURI = source.getSystemId();</span>
+            URL url;
+            try {
+<span class="fc" id="L298">                url = new URL(resolvedURI);</span>
+<span class="fc" id="L299">            } catch (MalformedURLException e) {</span>
+<span class="fc" id="L300">                url = null;</span>
+<span class="fc" id="L301">            }</span>
+<span class="fc" id="L302">            File f = /*FileUtils.*/toFile(url);</span>
+<span class="fc bfc" id="L303" title="All 2 branches covered.">            if (f != null) {</span>
+<span class="fc" id="L304">                boolean directFileAccess = true;</span>
+<span class="pc bpc" id="L305" title="2 of 6 branches missed.">                assert (source instanceof StreamSource) || (source instanceof SAXSource);</span>
+<span class="fc" id="L306">                InputStream in = XmlSourceUtil.getInputStream(source);</span>
+<span class="fc bfc" id="L307" title="All 2 branches covered.">                if (in == null) {</span>
+                    try {
+<span class="fc" id="L309">                        in = new java.io.FileInputStream(f);</span>
+<span class="nc" id="L310">                    } catch (FileNotFoundException fnfe) {</span>
+<span class="nc" id="L311">                        log.error(&quot;Error while opening file.&quot;</span>
+                                + &quot; Could not load image from system identifier '&quot;
+<span class="nc" id="L313">                                + source.getSystemId() + &quot;' (&quot; + fnfe.getMessage() + &quot;)&quot;);</span>
+<span class="nc" id="L314">                        return null;</span>
+<span class="fc" id="L315">                    }</span>
+                }
+<span class="fc" id="L317">                in = ImageUtil.decorateMarkSupported(in);</span>
+                try {
+<span class="pc bpc" id="L319" title="1 of 2 branches missed.">                    if (ImageUtil.isGZIPCompressed(in)) {</span>
+                        //GZIPped stream are not seekable, so buffer/cache like other URLs
+<span class="nc" id="L321">                        directFileAccess = false;</span>
+                    }
+<span class="nc" id="L323">                } catch (IOException ioe) {</span>
+<span class="nc" id="L324">                    log.error(&quot;Error while checking the InputStream for GZIP compression.&quot;</span>
+                            + &quot; Could not load image from system identifier '&quot;
+<span class="nc" id="L326">                            + source.getSystemId() + &quot;' (&quot; + ioe.getMessage() + &quot;)&quot;);</span>
+<span class="nc" id="L327">                    return null;</span>
+<span class="fc" id="L328">                }</span>
+
+<span class="pc bpc" id="L330" title="1 of 2 branches missed.">                if (directFileAccess) {</span>
+                    //Close as the file is reopened in a more optimal way
+<span class="fc" id="L332">                    IOUtils.closeQuietly(in);</span>
+                    try {
+                        // We let the OS' file system cache do the caching for us
+                        // --&gt; lower Java memory consumption, probably no speed loss
+<span class="fc" id="L336">                        final ImageInputStream newInputStream = ImageIO</span>
+<span class="fc" id="L337">                                                                       .createImageInputStream(f);</span>
+<span class="pc bpc" id="L338" title="1 of 2 branches missed.">                        if (newInputStream == null) {</span>
+<span class="nc" id="L339">                            log.error(&quot;Unable to create ImageInputStream for local file &quot;</span>
+                                    + f
+                                    + &quot; from system identifier '&quot;
+<span class="nc" id="L342">                                    + source.getSystemId() + &quot;'&quot;);</span>
+<span class="nc" id="L343">                            return null;</span>
+                        } else {
+<span class="fc" id="L345">                            imageSource = new ImageSource(newInputStream,</span>
+                                    resolvedURI, true);
+                        }
+<span class="nc" id="L348">                    } catch (IOException ioe) {</span>
+<span class="nc" id="L349">                        log.error(&quot;Unable to create ImageInputStream for local file&quot;</span>
+                                + &quot; from system identifier '&quot;
+<span class="nc" id="L351">                                + source.getSystemId() + &quot;' (&quot; + ioe.getMessage() + &quot;)&quot;);</span>
+<span class="fc" id="L352">                    }</span>
+                }
+            }
+
+<span class="fc bfc" id="L356" title="All 2 branches covered.">            if (imageSource == null) {</span>
+<span class="pc bpc" id="L357" title="1 of 4 branches missed.">                if (XmlSourceUtil.hasReader(source) &amp;&amp; !ImageUtil.hasInputStream(source)) {</span>
+                    //We don't handle Reader instances here so return the Source unchanged
+<span class="fc" id="L359">                    return source;</span>
+                }
+                // Got a valid source, obtain an InputStream from it
+<span class="fc" id="L362">                InputStream in = XmlSourceUtil.getInputStream(source);</span>
+<span class="pc bpc" id="L363" title="3 of 4 branches missed.">                if (in == null &amp;&amp; url != null) {</span>
+                    try {
+<span class="nc" id="L365">                        in = url.openStream();</span>
+<span class="nc" id="L366">                    } catch (Exception ex) {</span>
+<span class="nc" id="L367">                        log.error(&quot;Unable to obtain stream from system identifier '&quot;</span>
+<span class="nc" id="L368">                                + source.getSystemId() + &quot;'&quot;);</span>
+<span class="nc" id="L369">                    }</span>
+                }
+<span class="pc bpc" id="L371" title="1 of 2 branches missed.">                if (in == null) {</span>
+<span class="nc" id="L372">                    log.error(&quot;The Source that was returned from URI resolution didn't contain&quot;</span>
+                            + &quot; an InputStream for URI: &quot; + uri);
+<span class="nc" id="L374">                    return null;</span>
+                }
+<span class="fc" id="L376">                return createImageSource(in, source);</span>
+            }
+<span class="fc" id="L378">            return imageSource;</span>
+        }
+    }
+
+    private static ImageSource createImageSource(InputStream in, Source source) {
+        try {
+            //Buffer and uncompress if necessary
+<span class="fc" id="L385">            return new ImageSource(createImageInputStream(ImageUtil.autoDecorateInputStream(in)),</span>
+<span class="fc" id="L386">                    source.getSystemId(), false);</span>
+<span class="nc" id="L387">        } catch (IOException ioe) {</span>
+<span class="nc" id="L388">            log.error(&quot;Unable to create ImageInputStream for InputStream&quot;</span>
+                    + &quot; from system identifier '&quot;
+<span class="nc" id="L390">                    + source.getSystemId() + &quot;' (&quot; + ioe.getMessage() + &quot;)&quot;);</span>
+        }
+<span class="nc" id="L392">        return null;</span>
+    }
+
+    /**
+     * This fallback resolver is to be used in environments where controlling file access is of
+     * critical importance. It disallows any contingency mechanisms by which a {@link Source} object
+     * would be created.
+     */
+<span class="nc" id="L400">    public static final class RestrictedFallbackResolver implements FallbackResolver {</span>
+
+        /** {@inheritDoc} */
+        public Source createSource(Source source, String uri) {
+<span class="nc bnc" id="L404" title="All 2 branches missed.">            if (source == null) {</span>
+<span class="nc bnc" id="L405" title="All 2 branches missed.">                if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L406">                    log.debug(&quot;URI could not be resolved: &quot; + uri);</span>
+                }
+<span class="nc" id="L408">                return null;</span>
+            }
+<span class="nc bnc" id="L410" title="All 2 branches missed.">            if (ImageUtil.hasInputStream(source)) {</span>
+<span class="nc" id="L411">                return createImageSource(XmlSourceUtil.getInputStream(source), source);</span>
+            }
+<span class="nc" id="L413">            throw new UnsupportedOperationException(&quot;There are no contingency mechanisms for I/O.&quot;);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

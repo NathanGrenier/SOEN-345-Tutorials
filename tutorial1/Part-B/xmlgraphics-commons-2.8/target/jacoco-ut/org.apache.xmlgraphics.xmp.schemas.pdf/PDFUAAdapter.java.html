@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PDFUAAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp.schemas.pdf</a> &gt; <span class="el_source">PDFUAAdapter.java</span></div><h1>PDFUAAdapter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PDFUAAdapter.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.xmp.schemas.pdf;
+
+import org.apache.xmlgraphics.xmp.Metadata;
+import org.apache.xmlgraphics.xmp.XMPSchemaAdapter;
+import org.apache.xmlgraphics.xmp.XMPSchemaRegistry;
+
+/**
+ * Schema adapter implementation for both the old (deprecated) and the current PDF/UA schema.
+ * The old namespace is still needed to make Adobe Acrobat happy.
+ */
+public class PDFUAAdapter extends XMPSchemaAdapter {
+
+    private static final String PART = &quot;part&quot;;
+
+    /**
+     * Constructs a new adapter for PDF/UA around the given metadata object.
+     * @param meta the underlying metadata
+     * @param namespace the namespace to access the schema (must be one of the PDF/UA schema
+     *                  namespaces)
+     */
+    public PDFUAAdapter(Metadata meta, String namespace) {
+<span class="nc" id="L41">        super(meta, XMPSchemaRegistry.getInstance().getSchema(namespace));</span>
+<span class="nc" id="L42">    }</span>
+
+    public void setPart(int value) {
+<span class="nc" id="L45">        setValue(PART, Integer.toString(value));</span>
+<span class="nc" id="L46">    }</span>
+
+    public int getPart() {
+<span class="nc" id="L49">        return Integer.parseInt(getValue(PART));</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

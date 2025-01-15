@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreloaderImageIO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl.imageio</a> &gt; <span class="el_source">PreloaderImageIO.java</span></div><h1>PreloaderImageIO.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PreloaderImageIO.java 1904425 2022-10-06 12:37:37Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.impl.imageio;
+
+import java.io.IOException;
+import java.util.Iterator;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.metadata.IIOMetadata;
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+
+import org.apache.xmlgraphics.image.loader.ImageContext;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.ImageSize;
+import org.apache.xmlgraphics.image.loader.impl.AbstractImagePreloader;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+
+/**
+ * Image preloader for images supported by ImageIO.
+ * &lt;p&gt;
+ * Note: The implementation relies on the presence of a working ImageIO implementation which
+ * provides accurate image metadata. This is particularly important for PNG image because the
+ * PNG loader relies on that.
+ */
+<span class="fc" id="L45">public class PreloaderImageIO extends AbstractImagePreloader {</span>
+
+    /** {@inheritDoc}
+     * @throws ImageException */
+    public ImageInfo preloadImage(String uri, Source src, ImageContext context)
+            throws IOException, ImageException {
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (!ImageUtil.hasImageInputStream(src)) {</span>
+<span class="nc" id="L52">            return null;</span>
+        }
+<span class="fc" id="L54">        ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
+<span class="fc" id="L55">        long startPos = in.getStreamPosition();</span>
+<span class="fc" id="L56">        Iterator iter = ImageIO.getImageReaders(in);</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if (!iter.hasNext()) {</span>
+<span class="nc" id="L58">            return null;</span>
+        }
+
+<span class="fc" id="L61">        IOException firstIOException = null;</span>
+<span class="fc" id="L62">        IIOMetadata iiometa = null;</span>
+<span class="fc" id="L63">        ImageSize size = null;</span>
+<span class="fc" id="L64">        String mime = null;</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        while (iter.hasNext()) {</span>
+<span class="fc" id="L66">            in.mark();</span>
+
+<span class="fc" id="L68">            ImageReader reader = (ImageReader)iter.next();</span>
+            try {
+<span class="fc" id="L70">                reader.setInput(ImageUtil.ignoreFlushing(in), true, false);</span>
+<span class="fc" id="L71">                final int imageIndex = 0;</span>
+<span class="fc" id="L72">                iiometa = reader.getImageMetadata(imageIndex);</span>
+<span class="fc" id="L73">                size = new ImageSize();</span>
+<span class="fc" id="L74">                size.setSizeInPixels(reader.getWidth(imageIndex), reader.getHeight(imageIndex));</span>
+<span class="fc" id="L75">                mime = reader.getOriginatingProvider().getMIMETypes()[0];</span>
+                break;
+<span class="nc" id="L77">            } catch (IOException ioe) {</span>
+                //remember the first exception, ignore all others and continue
+<span class="nc bnc" id="L79" title="All 2 branches missed.">                if (firstIOException == null) {</span>
+<span class="nc" id="L80">                    firstIOException = ioe;</span>
+                }
+            } finally {
+<span class="fc" id="L83">                reader.dispose();</span>
+<span class="fc" id="L84">                in.reset();</span>
+            }
+<span class="nc" id="L86">        }</span>
+
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (iiometa == null) {</span>
+<span class="nc" id="L89">            in.seek(startPos);</span>
+<span class="nc" id="L90">            return null;</span>
+        }
+
+        //Resolution (first a default, then try to read the metadata)
+<span class="fc" id="L94">        size.setResolution(context.getSourceResolution());</span>
+<span class="fc" id="L95">        ImageIOUtil.extractResolution(iiometa, size);</span>
+<span class="pc bpc" id="L96" title="2 of 4 branches missed.">        if (size.getWidthPx() &lt;= 0 || size.getHeightPx() &lt;= 0) {</span>
+            //Watch out for a special case: a TGA image was erroneously identified
+            //as a WBMP image by a Sun ImageIO codec.
+<span class="nc" id="L99">            return null;</span>
+        }
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (size.getWidthMpt() == 0) {</span>
+<span class="nc" id="L102">            size.calcSizeFromPixels();</span>
+        }
+
+<span class="fc" id="L105">        ImageInfo info = new ImageInfo(uri, mime);</span>
+<span class="fc" id="L106">        info.getCustomObjects().put(ImageIOUtil.IMAGEIO_METADATA, iiometa);</span>
+<span class="fc" id="L107">        info.setSize(size);</span>
+
+<span class="fc" id="L109">        return info;</span>
+    }
+
+    /** {@inheritDoc} */
+    public int getPriority() {
+        //Lower priority than default to give the specialized preloaders a chance.
+<span class="fc" id="L115">        return 2 * DEFAULT_PRIORITY;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

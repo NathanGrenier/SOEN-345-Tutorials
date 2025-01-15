@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractResourcesDSCComment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps.dsc.events</a> &gt; <span class="el_source">AbstractResourcesDSCComment.java</span></div><h1>AbstractResourcesDSCComment.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: AbstractResourcesDSCComment.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps.dsc.events;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.xmlgraphics.ps.PSGenerator;
+import org.apache.xmlgraphics.ps.PSProcSet;
+import org.apache.xmlgraphics.ps.PSResource;
+
+/**
+ * Abstract base class for Resource DSC comments (DocumentNeededResources,
+ * DocumentSuppliedResources and PageResources).
+ */
+public abstract class AbstractResourcesDSCComment extends AbstractDSCComment {
+
+    private Set resources;
+
+    /**
+     * Creates a new instance.
+     */
+    public AbstractResourcesDSCComment() {
+<span class="fc" id="L45">        super();</span>
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Creates a new instance.
+     * @param resources a Collection of PSResource instances
+     */
+<span class="nc" id="L52">    public AbstractResourcesDSCComment(Collection resources) {</span>
+<span class="nc" id="L53">        addResources(resources);</span>
+<span class="nc" id="L54">    }</span>
+
+    /** {@inheritDoc} */
+    public boolean hasValues() {
+<span class="nc" id="L58">        return true;</span>
+    }
+
+    private void prepareResourceSet() {
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        if (this.resources == null) {</span>
+<span class="fc" id="L63">            this.resources = new java.util.TreeSet();</span>
+        }
+<span class="fc" id="L65">    }</span>
+
+    /**
+     * Adds a new resource.
+     * @param res the resource
+     */
+    public void addResource(PSResource res) {
+<span class="fc" id="L72">        prepareResourceSet();</span>
+<span class="fc" id="L73">        this.resources.add(res);</span>
+<span class="fc" id="L74">    }</span>
+
+    /**
+     * Adds a collection of resources.
+     * @param resources a Collection of PSResource instances.
+     */
+    public void addResources(Collection resources) {
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (resources != null) {</span>
+<span class="nc" id="L82">            prepareResourceSet();</span>
+<span class="nc" id="L83">            this.resources.addAll(resources);</span>
+        }
+<span class="nc" id="L85">    }</span>
+
+    /**
+     * Returns the set of resources associated with this DSC comment.
+     * @return the set of resources
+     */
+    public Set getResources() {
+<span class="nc" id="L92">        return Collections.unmodifiableSet(this.resources);</span>
+    }
+
+    /**
+     * Defines the known resource types (font, procset, file, pattern etc.).
+     */
+<span class="fc" id="L98">    static final Set RESOURCE_TYPES = new java.util.HashSet();</span>
+
+    static {
+<span class="fc" id="L101">        RESOURCE_TYPES.add(PSResource.TYPE_FONT);</span>
+<span class="fc" id="L102">        RESOURCE_TYPES.add(PSResource.TYPE_PROCSET);</span>
+<span class="fc" id="L103">        RESOURCE_TYPES.add(PSResource.TYPE_FILE);</span>
+<span class="fc" id="L104">        RESOURCE_TYPES.add(PSResource.TYPE_PATTERN);</span>
+<span class="fc" id="L105">        RESOURCE_TYPES.add(PSResource.TYPE_FORM);</span>
+<span class="fc" id="L106">        RESOURCE_TYPES.add(PSResource.TYPE_ENCODING);</span>
+<span class="fc" id="L107">    }</span>
+
+    /** {@inheritDoc} */
+    public void parseValue(String value) {
+<span class="fc" id="L111">        List params = splitParams(value);</span>
+<span class="fc" id="L112">        String currentResourceType = null;</span>
+<span class="fc" id="L113">        Iterator iter = params.iterator();</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        while (iter.hasNext()) {</span>
+<span class="fc" id="L115">            String name = (String)iter.next();</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">            if (RESOURCE_TYPES.contains(name)) {</span>
+<span class="fc" id="L117">                currentResourceType = name;</span>
+            }
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">            if (currentResourceType == null) {</span>
+<span class="nc" id="L120">                throw new IllegalArgumentException(</span>
+                        &quot;&lt;resources&gt; must begin with a resource type. Found: &quot; + name);
+            }
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">            if (PSResource.TYPE_FONT.equals(currentResourceType)) {</span>
+<span class="nc" id="L124">                String fontname = (String)iter.next();</span>
+<span class="nc" id="L125">                addResource(new PSResource(name, fontname));</span>
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">            } else if (PSResource.TYPE_FORM.equals(currentResourceType)) {</span>
+<span class="nc" id="L127">                String formname = (String)iter.next();</span>
+<span class="nc" id="L128">                addResource(new PSResource(name, formname));</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">            } else if (PSResource.TYPE_PROCSET.equals(currentResourceType)) {</span>
+<span class="fc" id="L130">                String procname = (String)iter.next();</span>
+<span class="fc" id="L131">                String version = (String)iter.next();</span>
+<span class="fc" id="L132">                String revision = (String)iter.next();</span>
+<span class="fc" id="L133">                addResource(new PSProcSet(procname,</span>
+<span class="fc" id="L134">                        Float.parseFloat(version), Integer.parseInt(revision)));</span>
+<span class="pc bnc" id="L135" title="All 2 branches missed.">            } else if (PSResource.TYPE_FILE.equals(currentResourceType)) {</span>
+<span class="nc" id="L136">                String filename = (String)iter.next();</span>
+<span class="nc" id="L137">                addResource(new PSResource(name, filename));</span>
+<span class="nc" id="L138">            } else {</span>
+<span class="nc" id="L139">                throw new IllegalArgumentException(&quot;Invalid resource type: &quot; + currentResourceType);</span>
+            }
+<span class="fc" id="L141">        }</span>
+<span class="fc" id="L142">    }</span>
+
+    /** {@inheritDoc} */
+    public void generate(PSGenerator gen) throws IOException {
+<span class="nc bnc" id="L146" title="All 4 branches missed.">        if (resources == null || resources.size() == 0) {</span>
+<span class="nc" id="L147">            return;</span>
+        }
+<span class="nc" id="L149">        StringBuffer sb = new StringBuffer();</span>
+<span class="nc" id="L150">        sb.append(&quot;%%&quot;).append(getName()).append(&quot;: &quot;);</span>
+<span class="nc" id="L151">        boolean first = true;</span>
+<span class="nc bnc" id="L152" title="All 2 branches missed.">        for (Object resource : resources) {</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">            if (!first) {</span>
+<span class="nc" id="L154">                gen.writeln(sb.toString());</span>
+<span class="nc" id="L155">                sb.setLength(0);</span>
+<span class="nc" id="L156">                sb.append(&quot;%%+ &quot;);</span>
+            }
+<span class="nc" id="L158">            PSResource res = (PSResource) resource;</span>
+<span class="nc" id="L159">            sb.append(res.getResourceSpecification());</span>
+<span class="nc" id="L160">            first = false;</span>
+<span class="nc" id="L161">        }</span>
+<span class="nc" id="L162">        gen.writeln(sb.toString());</span>
+<span class="nc" id="L163">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

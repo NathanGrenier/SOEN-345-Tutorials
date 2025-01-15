@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DSCCommentPage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps.dsc.events</a> &gt; <span class="el_source">DSCCommentPage.java</span></div><h1>DSCCommentPage.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DSCCommentPage.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps.dsc.events;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.xmlgraphics.ps.DSCConstants;
+import org.apache.xmlgraphics.ps.PSGenerator;
+
+/**
+ * Represents a %%Page DSC comment.
+ */
+public class DSCCommentPage extends AbstractDSCComment {
+
+    private String pageName;
+<span class="nc" id="L35">    private int pagePosition = -1;</span>
+
+    /**
+     * Creates a new instance.
+     */
+<span class="nc" id="L40">    public DSCCommentPage() {</span>
+<span class="nc" id="L41">    }</span>
+
+    /**
+     * Creates a new instance.
+     * @param pageName the name of the page
+     * @param pagePosition the position of the page within the file (1-based)
+     */
+<span class="nc" id="L48">    public DSCCommentPage(String pageName, int pagePosition) {</span>
+<span class="nc" id="L49">        setPageName(pageName);</span>
+<span class="nc" id="L50">        setPagePosition(pagePosition);</span>
+<span class="nc" id="L51">    }</span>
+
+    /**
+     * Creates a new instance. The page name will be set to the same value as the page position.
+     * @param pagePosition the position of the page within the file (1-based)
+     */
+    public DSCCommentPage(int pagePosition) {
+<span class="nc" id="L58">        this(Integer.toString(pagePosition), pagePosition);</span>
+<span class="nc" id="L59">    }</span>
+
+    /**
+     * Returns the name of the page.
+     * @return the page name
+     */
+    public String getPageName() {
+<span class="nc" id="L66">        return this.pageName;</span>
+    }
+
+    /**
+     * Sets the page name.
+     * @param name the page name
+     */
+    public void setPageName(String name) {
+<span class="nc" id="L74">        this.pageName = name;</span>
+<span class="nc" id="L75">    }</span>
+
+    /**
+     * Returns the page position.
+     * @return the page position (1-based)
+     */
+    public int getPagePosition() {
+<span class="nc" id="L82">        return this.pagePosition;</span>
+    }
+
+    /**
+     * Sets the page position.
+     * @param position the page position (1-based)
+     */
+    public void setPagePosition(int position) {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (position &lt;= 0) {</span>
+<span class="nc" id="L91">            throw new IllegalArgumentException(&quot;position must be 1 or above&quot;);</span>
+        }
+<span class="nc" id="L93">        this.pagePosition = position;</span>
+<span class="nc" id="L94">    }</span>
+
+    /**
+     * @see org.apache.xmlgraphics.ps.dsc.events.DSCComment#getName()
+     */
+    public String getName() {
+<span class="nc" id="L100">        return DSCConstants.PAGE;</span>
+    }
+
+    /**
+     * @see org.apache.xmlgraphics.ps.dsc.events.DSCComment#hasValues()
+     */
+    public boolean hasValues() {
+<span class="nc" id="L107">        return true;</span>
+    }
+
+    /**
+     * @see org.apache.xmlgraphics.ps.dsc.events.DSCComment#parseValue(java.lang.String)
+     */
+    public void parseValue(String value) {
+<span class="nc" id="L114">        List params = splitParams(value);</span>
+<span class="nc" id="L115">        Iterator iter = params.iterator();</span>
+<span class="nc" id="L116">        this.pageName = (String)iter.next();</span>
+<span class="nc" id="L117">        this.pagePosition = Integer.parseInt((String)iter.next());</span>
+<span class="nc" id="L118">    }</span>
+
+    /**
+     * @see org.apache.xmlgraphics.ps.dsc.events.DSCEvent#generate(
+     *          org.apache.xmlgraphics.ps.PSGenerator)
+     */
+    public void generate(PSGenerator gen) throws IOException {
+<span class="nc" id="L125">        gen.writeDSCComment(getName(),</span>
+<span class="nc" id="L126">                new Object[] {getPageName(), getPagePosition()});</span>
+<span class="nc" id="L127">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,894 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSGenerator.java</span></div><h1>PSGenerator.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSGenerator.java 1809627 2017-09-25 13:42:08Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+import java.awt.Color;
+import java.awt.color.ColorSpace;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Stack;
+
+import javax.xml.transform.Source;
+
+import org.apache.commons.io.IOUtils;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.apache.xmlgraphics.java2d.color.ColorUtil;
+import org.apache.xmlgraphics.java2d.color.ColorWithAlternatives;
+import org.apache.xmlgraphics.ps.dsc.ResourceTracker;
+import org.apache.xmlgraphics.util.DoubleFormatUtil;
+
+/**
+ * This class is used to output PostScript code to an OutputStream. This class assumes that
+ * the {@link PSProcSets#STD_PROCSET} has been added to the PostScript file.
+ *
+ * @version $Id: PSGenerator.java 1809627 2017-09-25 13:42:08Z ssteiner $
+ */
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">public class PSGenerator implements PSCommandMap {</span>
+
+    /**
+     * Default postscript language level
+     */
+    public static final int DEFAULT_LANGUAGE_LEVEL = 3;
+
+    /**
+     * Indicator for the PostScript interpreter that the value is provided
+     * later in the document (mostly in the %%Trailer section).
+     * @deprecated Please use DSCConstants.ATEND. This constant was in the wrong place.
+     */
+    @Deprecated
+<span class="fc" id="L64">    public static final Object ATEND = DSCConstants.ATEND;</span>
+
+    /** Line feed used by PostScript */
+    public static final char LF = '\n';
+
+    private static final String IDENTITY_H = &quot;Identity-H&quot;;
+
+<span class="fc" id="L71">    private Log log = LogFactory.getLog(getClass());</span>
+    private OutputStream out;
+<span class="fc" id="L73">    private int psLevel = DEFAULT_LANGUAGE_LEVEL;</span>
+    private boolean acrobatDownsample;
+<span class="fc" id="L75">    private boolean commentsEnabled = true;</span>
+<span class="fc" id="L76">    private boolean compactMode = true;</span>
+<span class="fc" id="L77">    private PSCommandMap commandMap = PSProcSets.STD_COMMAND_MAP;</span>
+
+<span class="fc" id="L79">    private Stack&lt;PSState&gt; graphicsStateStack = new Stack&lt;PSState&gt;();</span>
+    private PSState currentState;
+
+<span class="fc" id="L82">    private StringBuffer doubleBuffer = new StringBuffer(16);</span>
+
+<span class="fc" id="L84">    private StringBuffer tempBuffer = new StringBuffer(256);</span>
+
+    private boolean identityHEmbedded;
+
+    private PSResource procsetCIDInitResource;
+
+    private PSResource identityHCMapResource;
+
+    /**
+     * Creates a new instance.
+     * @param out the OutputStream to write the generated PostScript code to
+     */
+<span class="fc" id="L96">    public PSGenerator(OutputStream out) {</span>
+<span class="fc" id="L97">        this.out = out;</span>
+<span class="fc" id="L98">        resetGraphicsState();</span>
+<span class="fc" id="L99">    }</span>
+
+    /**
+     * Indicates whether this instance is in compact mode. See {@link #setCompactMode(boolean)}
+     * for details.
+     * @return true if compact mode is enabled (the default)
+     */
+    public boolean isCompactMode() {
+<span class="fc" id="L107">        return this.compactMode;</span>
+    }
+
+    /**
+     * Controls whether this instance shall produce compact PostScript (omitting comments and
+     * using short macros). Enabling this mode requires that the standard procset
+     * ({@link PSProcSets#STD_PROCSET}) is included in the PostScript file. Setting this to
+     * false produces more verbose PostScript suitable for debugging.
+     * @param value true to enable compact mode, false for verbose mode
+     */
+    public void setCompactMode(boolean value) {
+<span class="nc" id="L118">        this.compactMode = value;</span>
+<span class="nc" id="L119">    }</span>
+
+    /**
+     * Indicates whether this instance allows to write comments. See
+     * {@link #setCommentsEnabled(boolean)} for details.
+     * @return true if comments are enabled (the default)
+     */
+    public boolean isCommentsEnabled() {
+<span class="fc" id="L127">        return this.commentsEnabled;</span>
+    }
+
+    /**
+     * Controls whether this instance allows to write comments using the {@link #commentln(String)}
+     * method.
+     * @param value true to enable comments, false to disable them
+     */
+    public void setCommentsEnabled(boolean value) {
+<span class="nc" id="L136">        this.commentsEnabled = value;</span>
+<span class="nc" id="L137">    }</span>
+
+    private void resetGraphicsState() {
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">        if (!this.graphicsStateStack.isEmpty()) {</span>
+<span class="nc" id="L141">            throw new IllegalStateException(&quot;Graphics state stack should be empty at this point&quot;);</span>
+        }
+<span class="fc" id="L143">        this.currentState = new PSState();</span>
+<span class="fc" id="L144">    }</span>
+
+    /**
+     * Returns the OutputStream the PSGenerator writes to.
+     * @return the OutputStream
+     */
+    public OutputStream getOutputStream() {
+<span class="fc" id="L151">        return this.out;</span>
+    }
+
+    /**
+     * Returns the selected PostScript level.
+     * @return the PostScript level
+     */
+    public int getPSLevel() {
+<span class="fc" id="L159">        return this.psLevel;</span>
+    }
+
+    /**
+     * Sets the PostScript level that is used to generate the current document.
+     * @param level the PostScript level (currently 1, 2 and 3 are known)
+     */
+    public void setPSLevel(int level) {
+<span class="fc" id="L167">        this.psLevel = level;</span>
+<span class="fc" id="L168">    }</span>
+
+    public boolean isAcrobatDownsample() {
+<span class="fc" id="L171">        return acrobatDownsample;</span>
+    }
+
+    public void setAcrobatDownsample(boolean b) {
+<span class="fc" id="L175">        acrobatDownsample = b;</span>
+<span class="fc" id="L176">    }</span>
+
+    /**
+     * Attempts to resolve the given URI. PSGenerator should be subclasses to provide more
+     * sophisticated URI resolution.
+     * @param uri URI to access
+     * @return A {@link javax.xml.transform.Source} object, or null if the URI
+     * cannot be resolved.
+     */
+    public Source resolveURI(String uri) {
+<span class="nc" id="L186">        return new javax.xml.transform.stream.StreamSource(uri);</span>
+    }
+
+    /**
+     * Writes a newline character to the OutputStream.
+     *
+     * @throws IOException In case of an I/O problem
+     */
+    public final void newLine() throws IOException {
+<span class="fc" id="L195">        out.write(LF);</span>
+<span class="fc" id="L196">    }</span>
+
+    /**
+     * Formats a double value for PostScript output.
+     *
+     * @param value value to format
+     * @return the formatted value
+     */
+    public String formatDouble(double value) {
+<span class="fc" id="L205">        doubleBuffer.setLength(0);</span>
+<span class="fc" id="L206">        DoubleFormatUtil.formatDouble(value, 3, 3, doubleBuffer);</span>
+<span class="fc" id="L207">        return doubleBuffer.toString();</span>
+    }
+
+    /**
+     * Formats a double value for PostScript output (higher resolution).
+     *
+     * @param value value to format
+     * @return the formatted value
+     */
+    public String formatDouble5(double value) {
+<span class="fc" id="L217">        doubleBuffer.setLength(0);</span>
+<span class="fc" id="L218">        DoubleFormatUtil.formatDouble(value, 5, 5, doubleBuffer);</span>
+<span class="fc" id="L219">        return doubleBuffer.toString();</span>
+    }
+
+    /**
+     * Writes a PostScript command to the stream.
+     *
+     * @param cmd              The PostScript code to be written.
+     * @exception IOException  In case of an I/O problem
+     */
+    public void write(String cmd) throws IOException {
+        /* TODO Check disabled until clarification.
+        if (cmd.length() &gt; 255) {
+            throw new RuntimeException(&quot;PostScript command exceeded limit of 255 characters&quot;);
+        } */
+<span class="fc" id="L233">        out.write(cmd.getBytes(&quot;US-ASCII&quot;));</span>
+<span class="fc" id="L234">    }</span>
+
+    /**
+     * Writes the given number to the stream in decimal format.
+     *
+     * @param n a number
+     * @throws IOException in case of an I/O problem
+     */
+    public void write(int n) throws IOException {
+<span class="nc" id="L243">        write(Integer.toString(n));</span>
+<span class="nc" id="L244">    }</span>
+
+    /**
+     * Writes a PostScript command to the stream and ends the line.
+     *
+     * @param cmd              The PostScript code to be written.
+     * @exception IOException  In case of an I/O problem
+     */
+    public void writeln(String cmd) throws IOException {
+<span class="fc" id="L253">        write(cmd);</span>
+<span class="fc" id="L254">        newLine();</span>
+<span class="fc" id="L255">    }</span>
+
+    /**
+     * Writes a comment to the stream and ends the line. Output of comments can
+     * be disabled to reduce the size of the generated file.
+     *
+     * @param comment          comment to write
+     * @exception IOException  In case of an I/O problem
+     */
+    public void commentln(String comment) throws IOException {
+<span class="pc bpc" id="L265" title="1 of 2 branches missed.">        if (isCommentsEnabled()) {</span>
+<span class="fc" id="L266">            writeln(comment);</span>
+        }
+<span class="fc" id="L268">    }</span>
+
+    /** {@inheritDoc} */
+    public String mapCommand(String command) {
+<span class="pc bpc" id="L272" title="1 of 2 branches missed.">        if (isCompactMode()) {</span>
+<span class="fc" id="L273">            return this.commandMap.mapCommand(command);</span>
+        } else {
+<span class="nc" id="L275">            return command;</span>
+        }
+    }
+
+    /**
+     * Writes encoded data to the PostScript stream.
+     *
+     * @param cmd              The encoded PostScript code to be written.
+     * @exception IOException  In case of an I/O problem
+     */
+    public void writeByteArr(byte[] cmd) throws IOException {
+<span class="nc" id="L286">        out.write(cmd);</span>
+<span class="nc" id="L287">        newLine();</span>
+<span class="nc" id="L288">    }</span>
+
+
+    /**
+     * Flushes the OutputStream.
+     *
+     * @exception IOException In case of an I/O problem
+     */
+    public void flush() throws IOException {
+<span class="nc" id="L297">        out.flush();</span>
+<span class="nc" id="L298">    }</span>
+
+    /**
+     * Escapes a character conforming to the rules established in the PostScript
+     * Language Reference (Search for &quot;Literal Text Strings&quot;).
+     * @param c character to escape
+     * @param target target StringBuffer to write the escaped character to
+     */
+    public static final void escapeChar(char c, StringBuffer target) {
+<span class="pc bpc" id="L307" title="4 of 9 branches missed.">        switch (c) {</span>
+            case '\n':
+<span class="fc" id="L309">                target.append(&quot;\\n&quot;);</span>
+<span class="fc" id="L310">                break;</span>
+            case '\r':
+<span class="nc" id="L312">                target.append(&quot;\\r&quot;);</span>
+<span class="nc" id="L313">                break;</span>
+            case '\t':
+<span class="fc" id="L315">                target.append(&quot;\\t&quot;);</span>
+<span class="fc" id="L316">                break;</span>
+            case '\b':
+<span class="nc" id="L318">                target.append(&quot;\\b&quot;);</span>
+<span class="nc" id="L319">                break;</span>
+            case '\f':
+<span class="nc" id="L321">                target.append(&quot;\\f&quot;);</span>
+<span class="nc" id="L322">                break;</span>
+            case '\\':
+<span class="nc" id="L324">                target.append(&quot;\\\\&quot;);</span>
+<span class="nc" id="L325">                break;</span>
+            case '(':
+<span class="fc" id="L327">                target.append(&quot;\\(&quot;);</span>
+<span class="fc" id="L328">                break;</span>
+            case ')':
+<span class="fc" id="L330">                target.append(&quot;\\)&quot;);</span>
+<span class="fc" id="L331">                break;</span>
+            default:
+<span class="fc bfc" id="L333" title="All 2 branches covered.">                if (c &gt; 255) {</span>
+                    //Ignoring non Latin-1 characters
+<span class="fc" id="L335">                    target.append('?');</span>
+<span class="fc bfc" id="L336" title="All 4 branches covered.">                } else if (c &lt; 32 || c &gt; 127) {</span>
+<span class="fc" id="L337">                    target.append('\\');</span>
+
+<span class="fc" id="L339">                    target.append((char)('0' + (c &gt;&gt; 6)));</span>
+<span class="fc" id="L340">                    target.append((char)('0' + ((c &gt;&gt; 3) % 8)));</span>
+<span class="fc" id="L341">                    target.append((char)('0' + (c % 8)));</span>
+                    //Integer.toOctalString(i)
+                } else {
+<span class="fc" id="L344">                    target.append(c);</span>
+                }
+        }
+<span class="fc" id="L347">    }</span>
+
+
+    /**
+     * Converts text by applying escaping rules established in the DSC specs.
+     * @param text Text to convert
+     * @return String The resulting String
+     */
+    public static final String convertStringToDSC(String text) {
+<span class="fc" id="L356">        return convertStringToDSC(text, false);</span>
+    }
+
+    /**
+     * Converts a &amp;lt;real&amp;gt; value for use in DSC comments.
+     * @param value the value to convert
+     * @return String The resulting String
+     */
+    public static final String convertRealToDSC(float value) {
+<span class="nc" id="L365">        return Float.toString(value);</span>
+    }
+
+    /**
+     * Converts text by applying escaping rules established in the DSC specs.
+     * @param text Text to convert
+     * @param forceParentheses Force the use of parentheses
+     * @return String The resulting String
+     */
+    public static final String convertStringToDSC(String text,
+                                                  boolean forceParentheses) {
+<span class="pc bpc" id="L376" title="2 of 4 branches missed.">        if ((text == null) || (text.length() == 0)) {</span>
+<span class="nc" id="L377">            return &quot;()&quot;;</span>
+        } else {
+<span class="fc" id="L379">            int initialSize = text.length();</span>
+<span class="fc" id="L380">            initialSize += initialSize / 2;</span>
+<span class="fc" id="L381">            StringBuffer sb = new StringBuffer(initialSize);</span>
+<span class="fc bfc" id="L382" title="All 4 branches covered.">            if ((text.indexOf(' ') &gt;= 0) || forceParentheses) {</span>
+<span class="fc" id="L383">                sb.append('(');</span>
+<span class="fc bfc" id="L384" title="All 2 branches covered.">                for (int i = 0; i &lt; text.length(); i++) {</span>
+<span class="fc" id="L385">                    final char c = text.charAt(i);</span>
+<span class="fc" id="L386">                    escapeChar(c, sb);</span>
+                }
+<span class="fc" id="L388">                sb.append(')');</span>
+<span class="fc" id="L389">                return sb.toString();</span>
+            } else {
+<span class="fc bfc" id="L391" title="All 2 branches covered.">                for (int i = 0; i &lt; text.length(); i++) {</span>
+<span class="fc" id="L392">                    final char c = text.charAt(i);</span>
+<span class="fc" id="L393">                    escapeChar(c, sb);</span>
+                }
+<span class="fc" id="L395">                return sb.toString();</span>
+            }
+        }
+    }
+
+
+    /**
+     * Writes a DSC comment to the output stream.
+     * @param name Name of the DSC comment
+     * @exception IOException In case of an I/O problem
+     * @see org.apache.xmlgraphics.ps.DSCConstants
+     */
+    public void writeDSCComment(String name) throws IOException {
+<span class="fc" id="L408">        writeln(&quot;%%&quot; + name);</span>
+<span class="fc" id="L409">    }</span>
+
+
+    /**
+     * Writes a DSC comment to the output stream. The parameter to the DSC
+     * comment can be any object. The object is converted to a String as
+     * necessary.
+     * @param name Name of the DSC comment
+     * @param param Single parameter to the DSC comment
+     * @exception IOException In case of an I/O problem
+     * @see org.apache.xmlgraphics.ps.DSCConstants
+     */
+    public void writeDSCComment(String name, Object param) throws IOException {
+<span class="fc" id="L422">        writeDSCComment(name, new Object[] {param});</span>
+<span class="fc" id="L423">    }</span>
+
+
+    /**
+     * Writes a DSC comment to the output stream. The parameters to the DSC
+     * comment can be any object. The objects are converted to Strings as
+     * necessary. Please see the source code to find out what parameters are
+     * currently supported.
+     * @param name Name of the DSC comment
+     * @param params Array of parameters to the DSC comment
+     * @exception IOException In case of an I/O problem
+     * @see org.apache.xmlgraphics.ps.DSCConstants
+     */
+    public void writeDSCComment(String name, Object[] params) throws IOException {
+<span class="fc" id="L437">        tempBuffer.setLength(0);</span>
+<span class="fc" id="L438">        tempBuffer.append(&quot;%%&quot;);</span>
+<span class="fc" id="L439">        tempBuffer.append(name);</span>
+<span class="pc bpc" id="L440" title="2 of 4 branches missed.">        if ((params != null) &amp;&amp; (params.length &gt; 0)) {</span>
+<span class="fc" id="L441">            tempBuffer.append(&quot;: &quot;);</span>
+<span class="fc bfc" id="L442" title="All 2 branches covered.">            for (int i = 0; i &lt; params.length; i++) {</span>
+<span class="fc bfc" id="L443" title="All 2 branches covered.">                if (i &gt; 0) {</span>
+<span class="fc" id="L444">                    tempBuffer.append(&quot; &quot;);</span>
+                }
+
+<span class="pc bpc" id="L447" title="1 of 2 branches missed.">                if (params[i] instanceof String) {</span>
+<span class="fc" id="L448">                    tempBuffer.append(convertStringToDSC((String)params[i]));</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">                } else if (params[i] == DSCConstants.ATEND) {</span>
+<span class="nc" id="L450">                    tempBuffer.append(DSCConstants.ATEND);</span>
+<span class="nc bnc" id="L451" title="All 2 branches missed.">                } else if (params[i] instanceof Double) {</span>
+<span class="nc" id="L452">                    tempBuffer.append(formatDouble((Double) params[i]));</span>
+<span class="nc bnc" id="L453" title="All 2 branches missed.">                } else if (params[i] instanceof Number) {</span>
+<span class="nc" id="L454">                    tempBuffer.append(params[i].toString());</span>
+<span class="nc bnc" id="L455" title="All 2 branches missed.">                } else if (params[i] instanceof Date) {</span>
+<span class="nc" id="L456">                    DateFormat datef = new java.text.SimpleDateFormat(&quot;yyyy-MM-dd'T'HH:mm:ss&quot;);</span>
+<span class="nc" id="L457">                    tempBuffer.append(convertStringToDSC(datef.format((Date)params[i])));</span>
+<span class="nc bnc" id="L458" title="All 2 branches missed.">                } else if (params[i] instanceof PSResource) {</span>
+<span class="nc" id="L459">                    tempBuffer.append(((PSResource)params[i]).getResourceSpecification());</span>
+                } else {
+<span class="nc" id="L461">                    throw new IllegalArgumentException(&quot;Unsupported parameter type: &quot;</span>
+<span class="nc" id="L462">                            + params[i].getClass().getName());</span>
+                }
+            }
+        }
+<span class="fc" id="L466">        writeln(tempBuffer.toString());</span>
+<span class="fc" id="L467">    }</span>
+
+
+    /**
+     * Saves the graphics state of the rendering engine.
+     * @exception IOException In case of an I/O problem
+     */
+    public void saveGraphicsState() throws IOException {
+<span class="fc" id="L475">        writeln(mapCommand(&quot;gsave&quot;));</span>
+
+<span class="fc" id="L477">        PSState state = new PSState(this.currentState, false);</span>
+<span class="fc" id="L478">        this.graphicsStateStack.push(this.currentState);</span>
+<span class="fc" id="L479">        this.currentState = state;</span>
+<span class="fc" id="L480">    }</span>
+
+    /**
+     * Restores the last graphics state of the rendering engine.
+     * @return true if the state was restored, false if there's a stack underflow.
+     * @exception IOException In case of an I/O problem
+     */
+    public boolean restoreGraphicsState() throws IOException {
+<span class="pc bpc" id="L488" title="1 of 2 branches missed.">        if (this.graphicsStateStack.size() &gt; 0) {</span>
+<span class="fc" id="L489">            writeln(mapCommand(&quot;grestore&quot;));</span>
+<span class="fc" id="L490">            this.currentState = this.graphicsStateStack.pop();</span>
+<span class="fc" id="L491">            return true;</span>
+        } else {
+<span class="nc" id="L493">            return false;</span>
+        }
+    }
+
+
+    /**
+     * Returns the current graphics state.
+     * @return the current graphics state
+     */
+    public PSState getCurrentState() {
+<span class="fc" id="L503">        return this.currentState;</span>
+    }
+
+    /**
+     * Issues the &quot;showpage&quot; command and resets the painting state accordingly.
+     * @exception IOException In case of an I/O problem
+     */
+    public void showPage() throws IOException {
+<span class="nc" id="L511">        writeln(&quot;showpage&quot;);</span>
+<span class="nc" id="L512">        resetGraphicsState();</span>
+<span class="nc" id="L513">    }</span>
+
+    /**
+     * Concats the transformation matrix.
+     * @param a A part
+     * @param b B part
+     * @param c C part
+     * @param d D part
+     * @param e E part
+     * @param f F part
+     * @exception IOException In case of an I/O problem
+     */
+    public void concatMatrix(double a, double b,
+            double c, double d,
+            double e, double f) throws IOException {
+<span class="nc" id="L528">        AffineTransform at = new AffineTransform(a, b, c, d, e, f);</span>
+<span class="nc" id="L529">        concatMatrix(at);</span>
+
+<span class="nc" id="L531">    }</span>
+
+    /**
+     * Concats the transformations matrix.
+     * @param matrix Matrix to use
+     * @exception IOException In case of an I/O problem
+     */
+    public void concatMatrix(double[] matrix) throws IOException {
+<span class="nc" id="L539">        concatMatrix(matrix[0], matrix[1],</span>
+                     matrix[2], matrix[3],
+                     matrix[4], matrix[5]);
+<span class="nc" id="L542">    }</span>
+
+    /**
+     * Formats a transformation matrix.
+     * @param at the AffineTransform with the matrix
+     * @return the formatted transformation matrix (example: &quot;[1 0 0 1 0 0]&quot;)
+     */
+    public String formatMatrix(AffineTransform at) {
+<span class="fc" id="L550">        double[] matrix = new double[6];</span>
+<span class="fc" id="L551">        at.getMatrix(matrix);</span>
+<span class="fc" id="L552">        return &quot;[&quot; + formatDouble5(matrix[0]) + &quot; &quot;</span>
+<span class="fc" id="L553">            + formatDouble5(matrix[1]) + &quot; &quot;</span>
+<span class="fc" id="L554">            + formatDouble5(matrix[2]) + &quot; &quot;</span>
+<span class="fc" id="L555">            + formatDouble5(matrix[3]) + &quot; &quot;</span>
+<span class="fc" id="L556">            + formatDouble5(matrix[4]) + &quot; &quot;</span>
+<span class="fc" id="L557">            + formatDouble5(matrix[5]) + &quot;]&quot;;</span>
+    }
+
+    /**
+     * Concats the transformations matric.
+     * @param at the AffineTransform whose matrix to use
+     * @exception IOException In case of an I/O problem
+     */
+    public void concatMatrix(AffineTransform at) throws IOException {
+<span class="fc" id="L566">        getCurrentState().concatMatrix(at);</span>
+<span class="fc" id="L567">        writeln(formatMatrix(at) + &quot; &quot; + mapCommand(&quot;concat&quot;));</span>
+<span class="fc" id="L568">    }</span>
+
+    /**
+     * Formats a Rectangle2D to an array.
+     * @param rect the rectangle
+     * @return the formatted array
+     */
+    public String formatRectangleToArray(Rectangle2D rect) {
+<span class="fc" id="L576">        return &quot;[&quot; + formatDouble(rect.getX()) + &quot; &quot;</span>
+<span class="fc" id="L577">        + formatDouble(rect.getY()) + &quot; &quot;</span>
+<span class="fc" id="L578">        + formatDouble(rect.getWidth()) + &quot; &quot;</span>
+<span class="fc" id="L579">        + formatDouble(rect.getHeight()) + &quot;]&quot;;</span>
+    }
+
+    /**
+     * Adds a rectangle to the current path.
+     * @param x upper left corner
+     * @param y upper left corner
+     * @param w width
+     * @param h height
+     * @exception IOException In case of an I/O problem
+     */
+    public void defineRect(double x, double y, double w, double h)
+                throws IOException {
+<span class="fc" id="L592">        writeln(formatDouble(x)</span>
+<span class="fc" id="L593">            + &quot; &quot; + formatDouble(y)</span>
+<span class="fc" id="L594">            + &quot; &quot; + formatDouble(w)</span>
+<span class="fc" id="L595">            + &quot; &quot; + formatDouble(h)</span>
+            + &quot; re&quot;);
+<span class="fc" id="L597">    }</span>
+
+    /**
+     * Establishes the specified line cap style.
+     * @param linecap the line cap style (0, 1 or 2) as defined by the setlinecap command.
+     * @exception IOException In case of an I/O problem
+     */
+    public void useLineCap(int linecap) throws IOException {
+<span class="nc bnc" id="L605" title="All 2 branches missed.">        if (getCurrentState().useLineCap(linecap)) {</span>
+<span class="nc" id="L606">            writeln(linecap + &quot; &quot; + mapCommand(&quot;setlinecap&quot;));</span>
+        }
+<span class="nc" id="L608">    }</span>
+
+    /**
+     * Establishes the specified line join style.
+     * @param linejoin the line join style (0, 1 or 2) as defined by the setlinejoin command.
+     * @exception IOException In case of an I/O problem
+     */
+    public void useLineJoin(int linejoin) throws IOException {
+<span class="nc bnc" id="L616" title="All 2 branches missed.">        if (getCurrentState().useLineJoin(linejoin)) {</span>
+<span class="nc" id="L617">            writeln(linejoin + &quot; &quot; + mapCommand(&quot;setlinejoin&quot;));</span>
+        }
+<span class="nc" id="L619">    }</span>
+
+    /**
+     * Establishes the specified miter limit.
+     * @param miterlimit the miter limit as defined by the setmiterlimit command.
+     * @exception IOException In case of an I/O problem
+     */
+    public void useMiterLimit(float miterlimit) throws IOException {
+<span class="nc bnc" id="L627" title="All 2 branches missed.">        if (getCurrentState().useMiterLimit(miterlimit)) {</span>
+<span class="nc" id="L628">            writeln(miterlimit + &quot; &quot; + mapCommand(&quot;setmiterlimit&quot;));</span>
+        }
+<span class="nc" id="L630">    }</span>
+
+    /**
+     * Establishes the specified line width.
+     * @param width the line width as defined by the setlinewidth command.
+     * @exception IOException In case of an I/O problem
+     */
+    public void useLineWidth(double width) throws IOException {
+<span class="nc bnc" id="L638" title="All 2 branches missed.">        if (getCurrentState().useLineWidth(width)) {</span>
+<span class="nc" id="L639">            writeln(formatDouble(width) + &quot; &quot; + mapCommand(&quot;setlinewidth&quot;));</span>
+        }
+<span class="nc" id="L641">    }</span>
+
+    /**
+     * Establishes the specified dash pattern.
+     * @param pattern the dash pattern as defined by the setdash command.
+     * @exception IOException In case of an I/O problem
+     */
+    public void useDash(String pattern) throws IOException {
+<span class="nc bnc" id="L649" title="All 2 branches missed.">        if (pattern == null) {</span>
+<span class="nc" id="L650">            pattern = PSState.DEFAULT_DASH;</span>
+        }
+<span class="nc bnc" id="L652" title="All 2 branches missed.">        if (getCurrentState().useDash(pattern)) {</span>
+<span class="nc" id="L653">            writeln(pattern + &quot; &quot; + mapCommand(&quot;setdash&quot;));</span>
+        }
+<span class="nc" id="L655">    }</span>
+
+    /**
+     * Establishes the specified color (RGB).
+     * @param col the color as defined by the setrgbcolor command.
+     * @exception IOException In case of an I/O problem
+     * @deprecated use useColor method instead
+     */
+    @Deprecated
+    public void useRGBColor(Color col) throws IOException {
+<span class="nc" id="L665">        useColor(col);</span>
+<span class="nc" id="L666">    }</span>
+
+    /**
+     * Establishes the specified color.
+     * @param col the color.
+     * @exception IOException In case of an I/O problem
+     */
+    public void useColor(Color col) throws IOException {
+<span class="pc bpc" id="L674" title="1 of 2 branches missed.">        if (getCurrentState().useColor(col)) {</span>
+<span class="nc" id="L675">            writeln(convertColorToPS(col));</span>
+        }
+<span class="fc" id="L677">    }</span>
+
+    private String convertColorToPS(Color color) {
+<span class="nc" id="L680">        StringBuffer codeBuffer = new StringBuffer();</span>
+
+        //Important: Right now, CMYK colors are treated as device colors (DeviceCMYK) irrespective
+        //of any associated color profile. All other colors are converted to sRGB (if necessary)
+        //and the resulting RGB components are treated as DeviceRGB colors.
+        //If all three RGB components are the same, DeviceGray is used.
+
+<span class="nc" id="L687">        boolean established = false;</span>
+<span class="nc bnc" id="L688" title="All 2 branches missed.">        if (color instanceof ColorWithAlternatives) {</span>
+<span class="nc" id="L689">            ColorWithAlternatives colExt = (ColorWithAlternatives)color;</span>
+            //Alternative colors have priority
+<span class="nc" id="L691">            Color[] alt = colExt.getAlternativeColors();</span>
+<span class="nc bnc" id="L692" title="All 2 branches missed.">            for (Color col : alt) {</span>
+<span class="nc" id="L693">                established = establishColorFromColor(codeBuffer, col);</span>
+<span class="nc bnc" id="L694" title="All 2 branches missed.">                if (established) {</span>
+<span class="nc" id="L695">                    break;</span>
+                }
+            }
+<span class="nc bnc" id="L698" title="All 4 branches missed.">            if (log.isDebugEnabled() &amp;&amp; alt.length &gt; 0) {</span>
+<span class="nc" id="L699">                log.debug(&quot;None of the alternative colors are supported. Using fallback: &quot;</span>
+                        + color);
+            }
+        }
+
+        //Fallback
+<span class="nc bnc" id="L705" title="All 2 branches missed.">        if (!established) {</span>
+<span class="nc" id="L706">            established = establishColorFromColor(codeBuffer, color);</span>
+        }
+<span class="nc bnc" id="L708" title="All 2 branches missed.">        if (!established) {</span>
+<span class="nc" id="L709">            establishFallbackRGB(codeBuffer, color);</span>
+        }
+
+<span class="nc" id="L712">        return codeBuffer.toString();</span>
+    }
+
+    private boolean establishColorFromColor(StringBuffer codeBuffer, Color color) {
+        //Important: see above note about color handling!
+<span class="nc" id="L717">        float[] comps = color.getColorComponents(null);</span>
+<span class="nc bnc" id="L718" title="All 2 branches missed.">        if (color.getColorSpace().getType() == ColorSpace.TYPE_CMYK) {</span>
+            // colorspace is CMYK
+<span class="nc" id="L720">            writeSetColor(codeBuffer, comps, &quot;setcmykcolor&quot;);</span>
+<span class="nc" id="L721">            return true;</span>
+        }
+<span class="nc" id="L723">        return false;</span>
+    }
+
+    private void writeSetColor(StringBuffer codeBuffer, float[] comps, String command) {
+<span class="nc bnc" id="L727" title="All 2 branches missed.">        for (int i = 0, c = comps.length; i &lt; c; i++) {</span>
+<span class="nc bnc" id="L728" title="All 2 branches missed.">            if (i &gt; 0) {</span>
+<span class="nc" id="L729">                codeBuffer.append(&quot; &quot;);</span>
+            }
+<span class="nc" id="L731">            codeBuffer.append(formatDouble(comps[i]));</span>
+        }
+<span class="nc" id="L733">        codeBuffer.append(&quot; &quot;).append(mapCommand(command));</span>
+<span class="nc" id="L734">    }</span>
+
+    private void establishFallbackRGB(StringBuffer codeBuffer, Color color) {
+        float[] comps;
+<span class="nc bnc" id="L738" title="All 2 branches missed.">        if (color.getColorSpace().isCS_sRGB()) {</span>
+<span class="nc" id="L739">            comps = color.getColorComponents(null);</span>
+        } else {
+<span class="nc bnc" id="L741" title="All 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L742">                log.debug(&quot;Converting color to sRGB as a fallback: &quot; + color);</span>
+            }
+<span class="nc" id="L744">            ColorSpace sRGB = ColorSpace.getInstance(ColorSpace.CS_sRGB);</span>
+<span class="nc" id="L745">            comps = color.getColorComponents(sRGB, null);</span>
+        }
+<span class="nc bnc" id="L747" title="All 4 branches missed.">        assert comps.length == 3;</span>
+<span class="nc" id="L748">        boolean gray = ColorUtil.isGray(color);</span>
+<span class="nc bnc" id="L749" title="All 2 branches missed.">        if (gray) {</span>
+<span class="nc" id="L750">            comps = new float[] {comps[0]};</span>
+        }
+<span class="nc bnc" id="L752" title="All 2 branches missed.">        writeSetColor(codeBuffer, comps, gray ? &quot;setgray&quot; : &quot;setrgbcolor&quot;);</span>
+<span class="nc" id="L753">    }</span>
+
+    /**
+     * Establishes the specified font and size.
+     * @param name name of the font for the &quot;F&quot; command (see FOP Std Proc Set)
+     * @param size size of the font
+     * @exception IOException In case of an I/O problem
+     */
+    public void useFont(String name, float size) throws IOException {
+<span class="nc bnc" id="L762" title="All 2 branches missed.">        if (getCurrentState().useFont(name, size)) {</span>
+<span class="nc" id="L763">            writeln(name + &quot; &quot; + formatDouble(size) + &quot; F&quot;);</span>
+        }
+<span class="nc" id="L765">    }</span>
+
+<span class="fc" id="L767">    private ResourceTracker resTracker = new ResourceTracker();</span>
+
+    /**
+     * Resturns the ResourceTracker instance associated with this PSGenerator.
+     * @return the ResourceTracker instance or null if none is assigned
+     */
+    public ResourceTracker getResourceTracker() {
+<span class="fc" id="L774">        return this.resTracker;</span>
+    }
+
+    /**
+     * Sets the ResourceTracker instance to be associated with this PSGenerator.
+     * @param resTracker the ResourceTracker instance
+     */
+    public void setResourceTracker(ResourceTracker resTracker) {
+<span class="nc" id="L782">        this.resTracker = resTracker;</span>
+<span class="nc" id="L783">    }</span>
+
+    /**
+     * Notifies the generator that a new page has been started and that the page resource
+     * set can be cleared.
+     * @deprecated Use the notifyStartNewPage() on ResourceTracker instead.
+     */
+    @Deprecated
+    public void notifyStartNewPage() {
+<span class="nc" id="L792">        getResourceTracker().notifyStartNewPage();</span>
+<span class="nc" id="L793">    }</span>
+
+    /**
+     * Notifies the generator about the usage of a resource on the current page.
+     * @param res the resource being used
+     * @param needed true if this is a needed resource, false for a supplied resource
+     * @deprecated Use the notifyResourceUsageOnPage() on ResourceTracker instead
+     */
+    @Deprecated
+    public void notifyResourceUsage(PSResource res, boolean needed) {
+<span class="nc" id="L803">        getResourceTracker().notifyResourceUsageOnPage(res);</span>
+<span class="nc" id="L804">    }</span>
+
+    /**
+     * Writes a DSC comment for the accumulated used resources, either at page level or
+     * at document level.
+     * @param pageLevel true if the DSC comment for the page level should be generated,
+     *                  false for the document level (in the trailer)
+     * @exception IOException In case of an I/O problem
+     * @deprecated Use the writeResources() on ResourceTracker instead.
+     */
+    @Deprecated
+    public void writeResources(boolean pageLevel) throws IOException {
+<span class="nc" id="L816">        getResourceTracker().writeResources(pageLevel, this);</span>
+<span class="nc" id="L817">    }</span>
+
+    /**
+     * Indicates whether a particular resource is supplied, rather than needed.
+     * @param res the resource
+     * @return true if the resource is registered as being supplied.
+     * @deprecated Use the isResourceSupplied() on ResourceTracker instead.
+     */
+    @Deprecated
+    public boolean isResourceSupplied(PSResource res) {
+<span class="nc" id="L827">        return getResourceTracker().isResourceSupplied(res);</span>
+    }
+
+    /**
+     * Embeds the Identity-H CMap file into the output stream, if that has not
+     * already been done.
+     *
+     * @return true if embedding has actually been performed, false otherwise
+     * (which means that a call to this method had already been made earlier)
+     * @throws IOException in case of an I/O problem
+     */
+    public boolean embedIdentityH() throws IOException {
+<span class="nc bnc" id="L839" title="All 2 branches missed.">        if (identityHEmbedded) {</span>
+<span class="nc" id="L840">            return false;</span>
+        } else {
+<span class="nc" id="L842">            resTracker.registerNeededResource(getProcsetCIDInitResource());</span>
+<span class="nc" id="L843">            writeDSCComment(DSCConstants.BEGIN_DOCUMENT, IDENTITY_H);</span>
+<span class="nc" id="L844">            InputStream cmap = PSGenerator.class.getResourceAsStream(IDENTITY_H);</span>
+            try {
+<span class="nc" id="L846">                IOUtils.copyLarge(cmap, out);</span>
+            } finally {
+<span class="nc" id="L848">                IOUtils.closeQuietly(cmap);</span>
+            }
+<span class="nc" id="L850">            writeDSCComment(DSCConstants.END_DOCUMENT);</span>
+<span class="nc" id="L851">            resTracker.registerSuppliedResource(getIdentityHCMapResource());</span>
+<span class="nc" id="L852">            identityHEmbedded = true;</span>
+<span class="nc" id="L853">            return true;</span>
+        }
+    }
+
+    /**
+     * Returns the PSResource instance corresponding to the Identity-H CMap
+     * resource.
+     *
+     * @return the Identity-H CMap resource.
+     */
+    public PSResource getIdentityHCMapResource() {
+<span class="nc bnc" id="L864" title="All 2 branches missed.">        if (identityHCMapResource == null) {</span>
+<span class="nc" id="L865">            identityHCMapResource = new PSResource(PSResource.TYPE_CMAP, IDENTITY_H);</span>
+        }
+<span class="nc" id="L867">        return identityHCMapResource;</span>
+    }
+
+    /**
+     * Returns the PSResource instance corresponding to the CIDInit ProcSet
+     * resource.
+     *
+     * @return the ProcSet CIDInit resource
+     */
+    public PSResource getProcsetCIDInitResource() {
+<span class="nc bnc" id="L877" title="All 2 branches missed.">        if (procsetCIDInitResource == null) {</span>
+<span class="nc" id="L878">            procsetCIDInitResource = new PSResource(PSResource.TYPE_PROCSET, &quot;CIDInit&quot;);</span>
+        }
+<span class="nc" id="L880">        return procsetCIDInitResource;</span>
+    }
+
+    /**
+     * Adds a PostScript DSC comment to the output stream requiring the
+     * inclusion of the CIDInit ProcSet resource.
+     *
+     * @throws IOException in case of an I/O problem
+     */
+    public void includeProcsetCIDInitResource() throws IOException {
+<span class="nc" id="L890">        writeDSCComment(DSCConstants.INCLUDE_RESOURCE, getProcsetCIDInitResource());</span>
+<span class="nc" id="L891">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

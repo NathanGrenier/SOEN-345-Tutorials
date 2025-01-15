@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMPProperty.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp</a> &gt; <span class="el_source">XMPProperty.java</span></div><h1>XMPProperty.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: XMPProperty.java 1731596 2016-02-22 08:28:54Z gadams $ */
+
+package org.apache.xmlgraphics.xmp;
+
+import java.net.URI;
+
+import java.util.Iterator;
+import java.util.Map;
+
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
+
+import org.apache.xmlgraphics.util.QName;
+import org.apache.xmlgraphics.util.XMLizable;
+
+/**
+ * This class is the base class for all XMP properties.
+ */
+public class XMPProperty implements XMLizable {
+
+    private QName name;
+    private Object value;
+    private String xmllang;
+    private Map qualifiers;
+
+    /**
+     * Creates a new XMP property.
+     * @param name the name of the property
+     * @param value the value for the property
+     */
+<span class="fc" id="L49">    public XMPProperty(QName name, Object value) {</span>
+<span class="fc" id="L50">        this.name = name;</span>
+<span class="fc" id="L51">        this.value = value;</span>
+<span class="fc" id="L52">    }</span>
+
+    /** @return the qualified name of the property (namespace URI + local name) */
+    public QName getName() {
+<span class="fc" id="L56">        return this.name;</span>
+    }
+
+    /** @return the namespace URI of the property */
+    public String getNamespace() {
+<span class="nc" id="L61">        return getName().getNamespaceURI();</span>
+    }
+
+    /**
+     * Sets the value of the property
+     * @param value the new value
+     */
+    public void setValue(Object value) {
+<span class="fc" id="L69">        this.value = value;</span>
+<span class="fc" id="L70">    }</span>
+
+    /**
+     * @return the property value (can be a normal Java object (normally a String) or a descendant
+     *         of XMPComplexValue.
+     */
+    public Object getValue() {
+<span class="fc" id="L77">        return this.value;</span>
+    }
+
+    /**
+     * Sets the xml:lang value for this property
+     * @param lang the language (&quot;x-default&quot; for the default language, null to make the value
+     *             language-independent)
+     */
+    public void setXMLLang(String lang) {
+<span class="fc" id="L86">        this.xmllang = lang;</span>
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * @return the language for language-dependent values (&quot;x-default&quot; for the default language)
+     */
+    public String getXMLLang() {
+<span class="fc" id="L93">        return this.xmllang;</span>
+    }
+
+    /**
+     * Indicates whether the property is an array.
+     * @return true if the property is an array
+     */
+    public boolean isArray() {
+<span class="fc" id="L101">        return value instanceof XMPArray;</span>
+    }
+
+    /** @return the XMPArray for an array or null if the value is not an array. */
+    public XMPArray getArrayValue() {
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        return (isArray() ? (XMPArray)value : null);</span>
+    }
+
+    /**
+     * Converts a simple value to an array of a given type if the value is not already an array.
+     * @param type the desired type of array
+     * @return the array value
+     */
+    public XMPArray convertSimpleValueToArray(XMPArrayType type) {
+<span class="fc bfc" id="L115" title="All 2 branches covered.">        if (getArrayValue() == null) {</span>
+<span class="fc" id="L116">            XMPArray array = new XMPArray(type);</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            if (getXMLLang() != null) {</span>
+<span class="fc" id="L118">                array.add(getValue().toString(), getXMLLang());</span>
+            } else {
+<span class="fc" id="L120">                array.add(getValue());</span>
+            }
+<span class="fc" id="L122">            setValue(array);</span>
+<span class="fc" id="L123">            setXMLLang(null);</span>
+<span class="fc" id="L124">            return array;</span>
+        } else {
+<span class="fc" id="L126">            return getArrayValue();</span>
+        }
+    }
+
+    /** @return the XMPStructure for a structure or null if the value is not a structure. */
+    public PropertyAccess getStructureValue() {
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        return (value instanceof XMPStructure ? (XMPStructure)value : null);</span>
+    }
+
+    private boolean hasPropertyQualifiers() {
+<span class="nc bnc" id="L136" title="All 4 branches missed.">        return (this.qualifiers == null) || (this.qualifiers.size() == 0);</span>
+    }
+
+    /**
+     * Indicates whether this property is actually not a structure, but a normal property with
+     * property qualifiers. If this method returns true, this structure can be converted to
+     * an simple XMPProperty using the simplify() method.
+     * @return true if this property is a structure property with property qualifiers
+     */
+    public boolean isQualifiedProperty() {
+<span class="nc" id="L146">        PropertyAccess props = getStructureValue();</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (props != null) {</span>
+<span class="nc" id="L148">            XMPProperty rdfValue = props.getValueProperty();</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">            return (rdfValue != null);</span>
+        } else {
+<span class="nc" id="L151">            return hasPropertyQualifiers();</span>
+        }
+    }
+
+    public void simplify() {
+<span class="nc" id="L156">        PropertyAccess props = getStructureValue();</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        if (props != null) {</span>
+<span class="nc" id="L158">            XMPProperty rdfValue = props.getValueProperty();</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">            if (rdfValue != null) {</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">                if (hasPropertyQualifiers()) {</span>
+<span class="nc" id="L161">                    throw new IllegalStateException(&quot;Illegal internal state&quot;</span>
+                            + &quot; (qualifiers present on non-simplified property)&quot;);
+                }
+<span class="nc" id="L164">                XMPProperty prop = new XMPProperty(getName(), rdfValue);</span>
+<span class="nc" id="L165">                Iterator iter = props.iterator();</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">                while (iter.hasNext()) {</span>
+<span class="nc" id="L167">                    QName name = (QName)iter.next();</span>
+<span class="nc bnc" id="L168" title="All 2 branches missed.">                    if (!XMPConstants.RDF_VALUE.equals(name)) {</span>
+<span class="nc" id="L169">                        prop.setPropertyQualifier(name, props.getProperty(name));</span>
+                    }
+<span class="nc" id="L171">                }</span>
+<span class="nc" id="L172">                props.setProperty(prop);</span>
+            }
+        }
+<span class="nc" id="L175">    }</span>
+
+
+    private void setPropertyQualifier(QName name, XMPProperty property) {
+<span class="nc bnc" id="L179" title="All 2 branches missed.">        if (this.qualifiers == null) {</span>
+<span class="nc" id="L180">            this.qualifiers = new java.util.HashMap();</span>
+        }
+<span class="nc" id="L182">        this.qualifiers.put(name, property);</span>
+<span class="nc" id="L183">    }</span>
+
+    private String getEffectiveQName() {
+<span class="fc" id="L186">        String prefix = getName().getPrefix();</span>
+<span class="pc bpc" id="L187" title="2 of 4 branches missed.">        if (prefix == null || &quot;&quot;.equals(prefix)) {</span>
+<span class="nc" id="L188">            XMPSchema schema = XMPSchemaRegistry.getInstance().getSchema(getNamespace());</span>
+<span class="nc" id="L189">            prefix = schema.getPreferredPrefix();</span>
+        }
+<span class="fc" id="L191">        return prefix + &quot;:&quot; + getName().getLocalName();</span>
+    }
+
+    /** @see org.apache.xmlgraphics.util.XMLizable#toSAX(org.xml.sax.ContentHandler) */
+    public void toSAX(ContentHandler handler) throws SAXException {
+<span class="fc" id="L196">        AttributesImpl atts = new AttributesImpl();</span>
+<span class="fc" id="L197">        String qName = getEffectiveQName();</span>
+<span class="pc bpc" id="L198" title="1 of 2 branches missed.">        if (value instanceof URI) {</span>
+<span class="nc" id="L199">            atts.addAttribute(XMPConstants.RDF_NAMESPACE, &quot;resource&quot;, &quot;rdf:resource&quot;, &quot;CDATA&quot;, ((URI)value).toString());</span>
+        }
+<span class="fc" id="L201">        handler.startElement(getName().getNamespaceURI(),</span>
+<span class="fc" id="L202">                getName().getLocalName(), qName, atts);</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">        if (value instanceof XMPComplexValue) {</span>
+<span class="fc" id="L204">            XMPComplexValue cv = ((XMPComplexValue)value);</span>
+<span class="fc" id="L205">            cv.toSAX(handler);</span>
+<span class="pc bpc" id="L206" title="1 of 2 branches missed.">        } else if (!(value instanceof URI)) {</span>
+<span class="fc" id="L207">            char[] chars = value.toString().toCharArray();</span>
+<span class="fc" id="L208">            handler.characters(chars, 0, chars.length);</span>
+        }
+<span class="fc" id="L210">        handler.endElement(getName().getNamespaceURI(),</span>
+<span class="fc" id="L211">                getName().getLocalName(), qName);</span>
+<span class="fc" id="L212">    }</span>
+
+    /** @see java.lang.Object#toString() */
+    public String toString() {
+<span class="nc" id="L216">        StringBuffer sb = new StringBuffer(&quot;XMP Property &quot;);</span>
+<span class="nc" id="L217">        sb.append(getName()).append(&quot;: &quot;);</span>
+<span class="nc" id="L218">        sb.append(getValue());</span>
+<span class="nc" id="L219">        return sb.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

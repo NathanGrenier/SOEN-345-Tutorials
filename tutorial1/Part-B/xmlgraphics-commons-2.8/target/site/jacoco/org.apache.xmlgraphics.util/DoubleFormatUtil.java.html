@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoubleFormatUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util</a> &gt; <span class="el_source">DoubleFormatUtil.java</span></div><h1>DoubleFormatUtil.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DoubleFormatUtil.java 1732019 2016-02-24 05:01:10Z gadams $ */
+
+package org.apache.xmlgraphics.util;
+
+/**
+ * This class implements fast, thread-safe format of a double value
+ * with a given number of decimal digits.
+ * &lt;p&gt;
+ * The contract for the format methods is this one:
+ * if the source is greater than or equal to 1 (in absolute value),
+ * use the decimals parameter to define the number of decimal digits; else,
+ * use the precision parameter to define the number of decimal digits.
+ * &lt;p&gt;
+ * A few examples (consider decimals being 4 and precision being 8):
+ * &lt;ul&gt;
+ * &lt;li&gt;0.0 should be rendered as &quot;0&quot;
+ * &lt;li&gt;0.1 should be rendered as &quot;0.1&quot;
+ * &lt;li&gt;1234.1 should be rendered as &quot;1234.1&quot;
+ * &lt;li&gt;1234.1234567 should be rendered as &quot;1234.1235&quot; (note the trailing 5! Rounding!)
+ * &lt;li&gt;1234.00001 should be rendered as &quot;1234&quot;
+ * &lt;li&gt;0.00001 should be rendered as &quot;0.00001&quot; (here you see the effect of the &quot;precision&quot; parameter)
+ * &lt;li&gt;0.00000001 should be rendered as &quot;0.00000001&quot;
+ * &lt;li&gt;0.000000001 should be rendered as &quot;0&quot;
+ * &lt;/ul&gt;
+ *
+ * Originally authored by Julien Aym&amp;eacute;.
+ */
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">public final class DoubleFormatUtil {</span>
+
+    private DoubleFormatUtil() {
+    }
+
+    /**
+     * Rounds the given source value at the given precision
+     * and writes the rounded value into the given target
+     *
+     * @param source the source value to round
+     * @param decimals the decimals to round at (use if abs(source) &amp;ge; 1.0)
+     * @param precision the precision to round at (use if abs(source) &amp;lt; 1.0)
+     * @param target the buffer to write to
+     */
+    public static void formatDouble(double source, int decimals, int precision, StringBuffer target) {
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        int scale = (Math.abs(source) &gt;= 1.0) ? decimals : precision;</span>
+<span class="fc bfc" id="L61" title="All 4 branches covered.">        if (tooManyDigitsUsed(source, scale) || tooCloseToRound(source, scale)) {</span>
+<span class="fc" id="L62">            formatDoublePrecise(source, decimals, precision, target);</span>
+        } else {
+<span class="fc" id="L64">            formatDoubleFast(source, decimals, precision, target);</span>
+        }
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * Rounds the given source value at the given precision
+     * and writes the rounded value into the given target
+     * &lt;p&gt;
+     * This method internally uses the String representation of the source value,
+     * in order to avoid any double precision computation error.
+     *
+     * @param source the source value to round
+     * @param decimals the decimals to round at (use if abs(source) &amp;ge; 1.0)
+     * @param precision the precision to round at (use if abs(source) &amp;lt; 1.0)
+     * @param target the buffer to write to
+     */
+    public static void formatDoublePrecise(double source, int decimals, int precision, StringBuffer target) {
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (isRoundedToZero(source, decimals, precision)) {</span>
+            // Will always be rounded to 0
+<span class="fc" id="L83">            target.append('0');</span>
+<span class="fc" id="L84">            return;</span>
+<span class="pc bpc" id="L85" title="1 of 4 branches missed.">        } else if (Double.isNaN(source) || Double.isInfinite(source)) {</span>
+            // Cannot be formated
+<span class="fc" id="L87">            target.append(Double.toString(source));</span>
+<span class="fc" id="L88">            return;</span>
+        }
+
+<span class="fc bfc" id="L91" title="All 2 branches covered.">        boolean negative = source &lt; 0.0;</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (negative) {</span>
+<span class="fc" id="L93">            source = -source;</span>
+            // Done once and for all
+<span class="fc" id="L95">            target.append('-');</span>
+        }
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        int scale = (source &gt;= 1.0) ? decimals : precision;</span>
+
+        // The only way to format precisely the double is to use the String
+        // representation of the double, and then to do mathematical integer operation on it.
+<span class="fc" id="L101">        String s = Double.toString(source);</span>
+<span class="fc bfc" id="L102" title="All 4 branches covered.">        if (source &gt;= 1e-3 &amp;&amp; source &lt; 1e7) {</span>
+            // Plain representation of double: &quot;intPart.decimalPart&quot;
+<span class="fc" id="L104">            int dot = s.indexOf('.');</span>
+<span class="fc" id="L105">            String decS = s.substring(dot + 1);</span>
+<span class="fc" id="L106">            int decLength = decS.length();</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            if (scale &gt;= decLength) {</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">                if (&quot;0&quot;.equals(decS)) {</span>
+                    // source is a mathematical integer
+<span class="fc" id="L110">                    target.append(s.substring(0, dot));</span>
+                } else {
+<span class="fc" id="L112">                    target.append(s);</span>
+                    // Remove trailing zeroes
+<span class="pc bpc" id="L114" title="2 of 4 branches missed.">                    for (int l = target.length() - 1; l &gt;= 0 &amp;&amp; target.charAt(l) == '0'; l--) {</span>
+<span class="nc" id="L115">                        target.setLength(l);</span>
+                    }
+                }
+<span class="fc" id="L118">                return;</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">            } else if (scale + 1 &lt; decLength) {</span>
+                // ignore unnecessary digits
+<span class="fc" id="L121">                decLength = scale + 1;</span>
+<span class="fc" id="L122">                decS = decS.substring(0, decLength);</span>
+            }
+<span class="fc" id="L124">            long intP = Long.parseLong(s.substring(0, dot));</span>
+<span class="fc" id="L125">            long decP = Long.parseLong(decS);</span>
+<span class="fc" id="L126">            format(target, scale, intP, decP);</span>
+<span class="fc" id="L127">        } else {</span>
+            // Scientific representation of double: &quot;x.xxxxxEyyy&quot;
+<span class="fc" id="L129">            int dot = s.indexOf('.');</span>
+<span class="pc bpc" id="L130" title="2 of 4 branches missed.">            assert dot &gt;= 0;</span>
+<span class="fc" id="L131">            int exp = s.indexOf('E');</span>
+<span class="pc bpc" id="L132" title="2 of 4 branches missed.">            assert exp &gt;= 0;</span>
+<span class="fc" id="L133">            int exposant = Integer.parseInt(s.substring(exp + 1));</span>
+<span class="fc" id="L134">            String intS = s.substring(0, dot);</span>
+<span class="fc" id="L135">            String decS = s.substring(dot + 1, exp);</span>
+<span class="fc" id="L136">            int decLength = decS.length();</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">            if (exposant &gt;= 0) {</span>
+<span class="fc" id="L138">                int digits = decLength - exposant;</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">                if (digits &lt;= 0) {</span>
+                    // no decimal part,
+                    // no rounding involved
+<span class="fc" id="L142">                    target.append(intS);</span>
+<span class="fc" id="L143">                    target.append(decS);</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">                    for (int i = -digits; i &gt; 0; i--) {</span>
+<span class="fc" id="L145">                        target.append('0');</span>
+                    }
+<span class="fc bfc" id="L147" title="All 2 branches covered.">                } else if (digits &lt;= scale) {</span>
+                    // decimal part precision is lower than scale,
+                    // no rounding involved
+<span class="fc" id="L150">                    target.append(intS);</span>
+<span class="fc" id="L151">                    target.append(decS.substring(0, exposant));</span>
+<span class="fc" id="L152">                    target.append('.');</span>
+<span class="fc" id="L153">                    target.append(decS.substring(exposant));</span>
+                } else {
+                    // decimalDigits &gt; scale,
+                    // Rounding involved
+<span class="fc" id="L157">                    long intP = Long.parseLong(intS) * tenPow(exposant) + Long.parseLong(decS.substring(0, exposant));</span>
+<span class="fc" id="L158">                    long decP = Long.parseLong(decS.substring(exposant, exposant + scale + 1));</span>
+<span class="fc" id="L159">                    format(target, scale, intP, decP);</span>
+                }
+<span class="fc" id="L161">            } else {</span>
+                // Only a decimal part is supplied
+<span class="fc" id="L163">                exposant = -exposant;</span>
+<span class="fc" id="L164">                int digits = scale - exposant + 1;</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">                if (digits &lt; 0) {</span>
+<span class="fc" id="L166">                    target.append('0');</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">                } else if (digits == 0) {</span>
+<span class="fc" id="L168">                    long decP = Long.parseLong(intS);</span>
+<span class="fc" id="L169">                    format(target, scale, 0L, decP);</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">                } else if (decLength &lt; digits) {</span>
+<span class="fc" id="L171">                    long decP = Long.parseLong(intS) * tenPow(decLength + 1) + Long.parseLong(decS) * 10;</span>
+<span class="fc" id="L172">                    format(target, exposant + decLength, 0L, decP);</span>
+<span class="fc" id="L173">                } else {</span>
+<span class="fc" id="L174">                    long subDecP = Long.parseLong(decS.substring(0, digits));</span>
+<span class="fc" id="L175">                    long decP = Long.parseLong(intS) * tenPow(digits) + subDecP;</span>
+<span class="fc" id="L176">                    format(target, scale, 0L, decP);</span>
+                }
+            }
+        }
+<span class="fc" id="L180">    }</span>
+
+    /**
+     * Returns true if the given source value will be rounded to zero
+     *
+     * @param source the source value to round
+     * @param decimals the decimals to round at (use if abs(source) &amp;ge; 1.0)
+     * @param precision the precision to round at (use if abs(source) &amp;lt; 1.0)
+     * @return true if the source value will be rounded to zero
+     */
+    private static boolean isRoundedToZero(double source, int decimals, int precision) {
+        // Use 4.999999999999999 instead of 5 since in some cases, 5.0 / 1eN &gt; 5e-N (e.g. for N = 37, 42, 45, 66, ...)
+<span class="fc bfc" id="L192" title="All 4 branches covered.">        return source == 0.0 || Math.abs(source) &lt; 4.999999999999999 / tenPowDouble(Math.max(decimals, precision) + 1);</span>
+    }
+
+    /**
+     * Most used power of ten (to avoid the cost of Math.pow(10, n)
+     */
+<span class="fc" id="L198">    private static final long[] POWERS_OF_TEN_LONG = new long[19];</span>
+<span class="fc" id="L199">    private static final double[] POWERS_OF_TEN_DOUBLE = new double[30];</span>
+    static {
+<span class="fc" id="L201">        POWERS_OF_TEN_LONG[0] = 1L;</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">        for (int i = 1; i &lt; POWERS_OF_TEN_LONG.length; i++) {</span>
+<span class="fc" id="L203">            POWERS_OF_TEN_LONG[i] = POWERS_OF_TEN_LONG[i - 1] * 10L;</span>
+        }
+<span class="fc bfc" id="L205" title="All 2 branches covered.">        for (int i = 0; i &lt; POWERS_OF_TEN_DOUBLE.length; i++) {</span>
+<span class="fc" id="L206">            POWERS_OF_TEN_DOUBLE[i] = Double.parseDouble(&quot;1e&quot; + i);</span>
+        }
+<span class="fc" id="L208">    }</span>
+
+    /**
+     * Returns ten to the power of n
+     *
+     * @param n the nth power of ten to get
+     * @return ten to the power of n
+     */
+    public static long tenPow(int n) {
+<span class="pc bpc" id="L217" title="2 of 4 branches missed.">        assert n &gt;= 0;</span>
+<span class="pc bpc" id="L218" title="1 of 2 branches missed.">        return n &lt; POWERS_OF_TEN_LONG.length ? POWERS_OF_TEN_LONG[n] : (long) Math.pow(10, n);</span>
+    }
+
+    private static double tenPowDouble(int n) {
+<span class="pc bpc" id="L222" title="2 of 4 branches missed.">        assert n &gt;= 0;</span>
+<span class="fc bfc" id="L223" title="All 2 branches covered.">        return n &lt; POWERS_OF_TEN_DOUBLE.length ? POWERS_OF_TEN_DOUBLE[n] : Math.pow(10, n);</span>
+    }
+
+    /**
+     * Helper method to do the custom rounding used within formatDoublePrecise
+     *
+     * @param target the buffer to write to
+     * @param scale the expected rounding scale
+     * @param intP the source integer part
+     * @param decP the source decimal part, truncated to scale + 1 digit
+     */
+    private static void format(StringBuffer target, int scale, long intP, long decP) {
+<span class="fc bfc" id="L235" title="All 2 branches covered.">        if (decP != 0L) {</span>
+            // decP is the decimal part of source, truncated to scale + 1 digit.
+            // Custom rounding: add 5
+<span class="fc" id="L238">            decP += 5L;</span>
+<span class="fc" id="L239">            decP /= 10L;</span>
+<span class="fc bfc" id="L240" title="All 2 branches covered.">            if (decP &gt;= tenPowDouble(scale)) {</span>
+<span class="fc" id="L241">                intP++;</span>
+<span class="fc" id="L242">                decP -= tenPow(scale);</span>
+            }
+<span class="fc bfc" id="L244" title="All 2 branches covered.">            if (decP != 0L) {</span>
+                // Remove trailing zeroes
+<span class="fc bfc" id="L246" title="All 2 branches covered.">                while (decP % 10L == 0L) {</span>
+<span class="fc" id="L247">                    decP = decP / 10L;</span>
+<span class="fc" id="L248">                    scale--;</span>
+                }
+            }
+        }
+<span class="fc" id="L252">        target.append(intP);</span>
+<span class="fc bfc" id="L253" title="All 2 branches covered.">        if (decP != 0L) {</span>
+<span class="fc" id="L254">            target.append('.');</span>
+            // Use tenPow instead of tenPowDouble for scale below 18,
+            // since the casting of decP to double may cause some imprecisions:
+            // E.g. for decP = 9999999999999999L and scale = 17,
+            // decP &lt; tenPow(16) while (double) decP == tenPowDouble(16)
+<span class="pc bpc" id="L259" title="2 of 8 branches missed.">            while (scale &gt; 0 &amp;&amp; (scale &gt; 18 ? decP &lt; tenPowDouble(--scale) : decP &lt; tenPow(--scale))) {</span>
+                // Insert leading zeroes
+<span class="fc" id="L261">                target.append('0');</span>
+            }
+<span class="fc" id="L263">            target.append(decP);</span>
+        }
+<span class="fc" id="L265">    }</span>
+
+    /**
+     * Rounds the given source value at the given precision
+     * and writes the rounded value into the given target
+     * &lt;p&gt;
+     * This method internally uses double precision computation and rounding,
+     * so the result may not be accurate (see formatDouble method for conditions).
+     *
+     * @param source the source value to round
+     * @param decimals the decimals to round at (use if abs(source) &amp;ge; 1.0)
+     * @param precision the precision to round at (use if abs(source) &amp;lt; 1.0)
+     * @param target the buffer to write to
+     */
+    public static void formatDoubleFast(double source, int decimals, int precision, StringBuffer target) {
+<span class="fc bfc" id="L280" title="All 2 branches covered.">        if (isRoundedToZero(source, decimals, precision)) {</span>
+            // Will always be rounded to 0
+<span class="fc" id="L282">            target.append('0');</span>
+<span class="fc" id="L283">            return;</span>
+<span class="fc bfc" id="L284" title="All 4 branches covered.">        } else if (Double.isNaN(source) || Double.isInfinite(source)) {</span>
+            // Cannot be formated
+<span class="fc" id="L286">            target.append(Double.toString(source));</span>
+<span class="fc" id="L287">            return;</span>
+        }
+
+<span class="fc bfc" id="L290" title="All 2 branches covered.">        boolean isPositive = source &gt;= 0.0;</span>
+<span class="fc" id="L291">        source = Math.abs(source);</span>
+<span class="fc bfc" id="L292" title="All 2 branches covered.">        int scale = (source &gt;= 1.0) ? decimals : precision;</span>
+
+<span class="fc" id="L294">        long intPart = (long) Math.floor(source);</span>
+<span class="fc" id="L295">        double tenScale = tenPowDouble(scale);</span>
+<span class="fc" id="L296">        double fracUnroundedPart = (source - intPart) * tenScale;</span>
+<span class="fc" id="L297">        long fracPart = Math.round(fracUnroundedPart);</span>
+<span class="fc bfc" id="L298" title="All 2 branches covered.">        if (fracPart &gt;= tenScale) {</span>
+<span class="fc" id="L299">            intPart++;</span>
+<span class="fc" id="L300">            fracPart = Math.round(fracPart - tenScale);</span>
+        }
+<span class="fc bfc" id="L302" title="All 2 branches covered.">        if (fracPart != 0L) {</span>
+            // Remove trailing zeroes
+<span class="fc bfc" id="L304" title="All 2 branches covered.">            while (fracPart % 10L == 0L) {</span>
+<span class="fc" id="L305">                fracPart = fracPart / 10L;</span>
+<span class="fc" id="L306">                scale--;</span>
+            }
+        }
+
+<span class="pc bpc" id="L310" title="1 of 4 branches missed.">        if (intPart != 0L || fracPart != 0L) {</span>
+            // non-zero value
+<span class="fc bfc" id="L312" title="All 2 branches covered.">            if (!isPositive) {</span>
+                // negative value, insert sign
+<span class="fc" id="L314">                target.append('-');</span>
+            }
+            // append integer part
+<span class="fc" id="L317">            target.append(intPart);</span>
+<span class="fc bfc" id="L318" title="All 2 branches covered.">            if (fracPart != 0L) {</span>
+                // append fractional part
+<span class="fc" id="L320">                target.append('.');</span>
+                // insert leading zeroes
+<span class="pc bpc" id="L322" title="1 of 4 branches missed.">                while (scale &gt; 0 &amp;&amp; fracPart &lt; tenPowDouble(--scale)) {</span>
+<span class="fc" id="L323">                    target.append('0');</span>
+                }
+<span class="fc" id="L325">                target.append(fracPart);</span>
+            }
+        } else {
+<span class="nc" id="L328">            target.append('0');</span>
+        }
+<span class="fc" id="L330">    }</span>
+
+    /**
+     * Returns the exponent of the given value
+     *
+     * @param value the value to get the exponent from
+     * @return the value's exponent
+     */
+    public static int getExponant(double value) {
+        // See Double.doubleToRawLongBits javadoc or IEEE-754 spec
+        // to have this algorithm
+<span class="nc" id="L341">        long exp = Double.doubleToRawLongBits(value) &amp; 0x7ff0000000000000L;</span>
+<span class="nc" id="L342">        exp = exp &gt;&gt; 52;</span>
+<span class="nc" id="L343">        return (int) (exp - 1023L);</span>
+    }
+
+    /**
+     * Returns true if the rounding is considered to use too many digits
+     * of the double for a fast rounding
+     *
+     * @param source the source to round
+     * @param scale the scale to round at
+     * @return true if the rounding will potentially use too many digits
+     */
+    private static boolean tooManyDigitsUsed(double source, int scale) {
+        // if scale &gt;= 308, 10^308 ~= Infinity
+<span class="fc" id="L356">        double decExp = Math.log10(source);</span>
+<span class="fc bfc" id="L357" title="All 4 branches covered.">        return scale &gt;= 308 || decExp + scale &gt;= 14.5;</span>
+    }
+
+    /**
+     * Returns true if the given source is considered to be too close
+     * of a rounding value for the given scale.
+     *
+     * @param source the source to round
+     * @param scale the scale to round at
+     * @return true if the source will be potentially rounded at the scale
+     */
+    private static boolean tooCloseToRound(double source, int scale) {
+<span class="fc" id="L369">        source = Math.abs(source);</span>
+<span class="fc" id="L370">        long intPart = (long) Math.floor(source);</span>
+<span class="fc" id="L371">        double fracPart = (source - intPart) * tenPowDouble(scale);</span>
+<span class="fc" id="L372">        double decExp = Math.log10(source);</span>
+<span class="fc bfc" id="L373" title="All 2 branches covered.">        double range = decExp + scale &gt;= 12 ? .1 : .001;</span>
+<span class="fc" id="L374">        double distanceToRound1 = Math.abs(fracPart - Math.floor(fracPart));</span>
+<span class="fc" id="L375">        double distanceToRound2 = Math.abs(fracPart - Math.floor(fracPart) - 0.5);</span>
+<span class="fc bfc" id="L376" title="All 4 branches covered.">        return distanceToRound1 &lt;= range || distanceToRound2 &lt;= range;</span>
+        // .001 range: Totally arbitrary range,
+        // I never had a failure in 10e7 random tests with this value
+        // May be JVM dependent or architecture dependent
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

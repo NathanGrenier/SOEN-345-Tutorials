@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreloaderRawPNG.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">PreloaderRawPNG.java</span></div><h1>PreloaderRawPNG.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PreloaderRawPNG.java 1732018 2016-02-24 04:51:06Z gadams $ */
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+
+import org.apache.xmlgraphics.image.codec.png.PNGImageDecoder;
+import org.apache.xmlgraphics.image.loader.ImageContext;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.ImageSize;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+
+<span class="fc" id="L34">public class PreloaderRawPNG extends AbstractImagePreloader {</span>
+    public ImageInfo preloadImage(String uri, Source src, ImageContext context) throws ImageException, IOException {
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (!ImageUtil.hasImageInputStream(src)) {</span>
+<span class="nc" id="L37">            return null;</span>
+        }
+<span class="fc" id="L39">        ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
+<span class="fc" id="L40">        long bb = ByteBuffer.wrap(getHeader(in, 8)).getLong();</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (bb != PNGConstants.PNG_SIGNATURE) {</span>
+<span class="nc" id="L42">            return null;</span>
+        }
+<span class="fc" id="L44">        in.mark();</span>
+<span class="fc" id="L45">        ImageSize size = new ImageSize();</span>
+        //Resolution (first a default, then try to read the metadata)
+<span class="fc" id="L47">        size.setResolution(context.getSourceResolution());</span>
+        try {
+<span class="fc" id="L49">            PNGImageDecoder.readPNGHeader(in, size);</span>
+        } finally {
+<span class="fc" id="L51">            in.reset();</span>
+        }
+
+<span class="fc" id="L54">        ImageInfo info = new ImageInfo(uri, &quot;image/png&quot;);</span>
+<span class="fc" id="L55">        info.setSize(size);</span>
+<span class="fc" id="L56">        return info;</span>
+    }
+
+    public int getPriority() {
+<span class="fc" id="L60">        return DEFAULT_PRIORITY * 2;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

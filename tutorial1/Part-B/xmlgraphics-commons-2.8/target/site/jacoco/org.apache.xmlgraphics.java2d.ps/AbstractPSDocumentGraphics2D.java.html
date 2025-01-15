@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractPSDocumentGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.ps</a> &gt; <span class="el_source">AbstractPSDocumentGraphics2D.java</span></div><h1>AbstractPSDocumentGraphics2D.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: AbstractPSDocumentGraphics2D.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.java2d.ps;
+
+import java.awt.Color;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import org.apache.xmlgraphics.ps.DSCConstants;
+import org.apache.xmlgraphics.ps.PSGenerator;
+import org.apache.xmlgraphics.ps.PSProcSets;
+
+/**
+ * This class is a wrapper for the &lt;tt&gt;PSGraphics2D&lt;/tt&gt; that
+ * is used to create a full document around the PostScript rendering from
+ * &lt;tt&gt;PSGraphics2D&lt;/tt&gt;.
+ *
+ * @version $Id: AbstractPSDocumentGraphics2D.java 1732018 2016-02-24 04:51:06Z gadams $
+ * @see org.apache.xmlgraphics.java2d.ps.PSGraphics2D
+ *
+ * Originally authored by Keiron Liddle.
+ */
+public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
+
+<span class="nc" id="L44">    protected static final Integer ZERO = 0;</span>
+
+    protected int width;
+    protected int height;
+
+    protected float viewportWidth;
+    protected float viewportHeight;
+
+    protected int pagecount;
+    protected boolean pagePending;
+
+    protected Shape initialClip;
+    protected AffineTransform initialTransform;
+
+
+    /**
+     * Create a new AbstractPSDocumentGraphics2D.
+     * This is used to create a new PostScript document, the height,
+     * width and output stream can be setup later.
+     * For use by the transcoder which needs font information
+     * for the bridge before the document size is known.
+     * The resulting document is written to the stream after rendering.
+     *
+     * @param textAsShapes set this to true so that text will be rendered
+     * using curves and not the font.
+     */
+    AbstractPSDocumentGraphics2D(boolean textAsShapes) {
+<span class="nc" id="L71">        super(textAsShapes);</span>
+<span class="nc" id="L72">    }</span>
+
+    /**
+     * Setup the document.
+     * @param stream the output stream to write the document
+     * @param width the width of the page
+     * @param height the height of the page
+     * @throws IOException an io exception if there is a problem
+     *         writing to the output stream
+     */
+    public void setupDocument(OutputStream stream, int width, int height) throws IOException {
+<span class="nc" id="L83">        this.width = width;</span>
+<span class="nc" id="L84">        this.height = height;</span>
+<span class="nc" id="L85">        this.pagecount = 0;</span>
+<span class="nc" id="L86">        this.pagePending = false;</span>
+
+        //Setup for PostScript generation
+<span class="nc" id="L89">        setPSGenerator(new PSGenerator(stream));</span>
+
+<span class="nc" id="L91">        writeFileHeader();</span>
+<span class="nc" id="L92">    }</span>
+
+    /**
+     * Writes the file header.
+     * @throws IOException if an I/O error occurs
+     */
+    protected abstract void writeFileHeader() throws IOException;
+
+    /**
+     * Create a new AbstractPSDocumentGraphics2D.
+     * This is used to create a new PostScript document of the given height
+     * and width.
+     * The resulting document is written to the stream after rendering.
+     *
+     * @param textAsShapes set this to true so that text will be rendered
+     * using curves and not the font.
+     * @param stream the stream that the final document should be written to.
+     * @param width the width of the document
+     * @param height the height of the document
+     * @throws IOException an io exception if there is a problem
+     *         writing to the output stream
+     */
+    public AbstractPSDocumentGraphics2D(boolean textAsShapes, OutputStream stream,
+                                 int width, int height) throws IOException {
+<span class="nc" id="L116">        this(textAsShapes);</span>
+<span class="nc" id="L117">        setupDocument(stream, width, height);</span>
+<span class="nc" id="L118">    }</span>
+
+    /**
+     * Set the dimensions of the document that will be drawn.
+     * This is useful if the dimensions of the document are different
+     * from the PostScript document that is to be created.
+     * The result is scaled so that the document fits correctly inside the
+     * PostScript document.
+     * @param w the width of the page
+     * @param h the height of the page
+     * @throws IOException in case of an I/O problem
+     */
+    public void setViewportDimension(float w, float h) throws IOException {
+<span class="nc" id="L131">        this.viewportWidth = w;</span>
+<span class="nc" id="L132">        this.viewportHeight = h;</span>
+        /*
+        if (w != this.width || h != this.height) {
+            gen.concatMatrix(width / w, 0, 0, height / h, 0, 0);
+        }*/
+<span class="nc" id="L137">    }</span>
+
+    /**
+     * Set the background of the PostScript document.
+     * This is used to set the background for the PostScript document
+     * Rather than leaving it as the default white.
+     * @param col the background colour to fill
+     */
+    public void setBackgroundColor(Color col) {
+        /**(todo) Implement this */
+        /*
+        Color c = col;
+        PDFColor currentColour = new PDFColor(c.getRed(), c.getGreen(), c.getBlue());
+        currentStream.write(&quot;q\n&quot;);
+        currentStream.write(currentColour.getColorSpaceOut(true));
+
+        currentStream.write(&quot;0 0 &quot; + width + &quot; &quot; + height + &quot; re\n&quot;);
+
+        currentStream.write(&quot;f\n&quot;);
+        currentStream.write(&quot;Q\n&quot;);
+        */
+<span class="nc" id="L158">    }</span>
+
+    /**
+     * Returns the number of pages generated so far.
+     * @return the number of pages
+     */
+    public int getPageCount() {
+<span class="nc" id="L165">        return this.pagecount;</span>
+    }
+
+    /**
+     * Closes the current page and prepares to start a new one.
+     * @throws IOException if an I/O error occurs
+     */
+    public void nextPage() throws IOException {
+<span class="nc" id="L173">        closePage();</span>
+<span class="nc" id="L174">    }</span>
+
+    /**
+     * Closes the current page.
+     * @throws IOException if an I/O error occurs
+     */
+    protected void closePage() throws IOException {
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        if (!this.pagePending) {</span>
+<span class="nc" id="L182">            return; //ignore</span>
+        }
+        //Finish page
+<span class="nc" id="L185">        writePageTrailer();</span>
+<span class="nc" id="L186">        this.pagePending = false;</span>
+<span class="nc" id="L187">    }</span>
+
+    /**
+     * Writes the page header for a page.
+     * @throws IOException In case an I/O error occurs
+     */
+    protected abstract void writePageHeader() throws IOException;
+
+    /**
+     * Writes the page trailer for a page.
+     * @throws IOException In case an I/O error occurs
+     */
+    protected abstract void writePageTrailer() throws IOException;
+
+    /**
+     * Writes the ProcSets ending up in the prolog to the PostScript file. Override to add your
+     * own ProcSets if so desired.
+     * @throws IOException In case an I/O error occurs
+     */
+    protected void writeProcSets() throws IOException {
+<span class="nc" id="L207">        PSProcSets.writeStdProcSet(gen);</span>
+<span class="nc" id="L208">        PSProcSets.writeEPSProcSet(gen);</span>
+<span class="nc" id="L209">    }</span>
+
+    /** {@inheritDoc} */
+    public void preparePainting() {
+<span class="nc bnc" id="L213" title="All 2 branches missed.">        if (this.pagePending) {</span>
+<span class="nc" id="L214">            return;</span>
+        }
+        try {
+<span class="nc" id="L217">            startPage();</span>
+<span class="nc" id="L218">        } catch (IOException ioe) {</span>
+<span class="nc" id="L219">            handleIOException(ioe);</span>
+<span class="nc" id="L220">        }</span>
+<span class="nc" id="L221">    }</span>
+
+    /**
+     * Starts a new page.
+     * @throws IOException if an I/O error occurs
+     */
+    protected void startPage() throws IOException {
+<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (this.pagePending) {</span>
+<span class="nc" id="L229">            throw new IllegalStateException(&quot;Close page first before starting another&quot;);</span>
+        }
+        //Start page
+<span class="nc" id="L232">        this.pagecount++;</span>
+
+<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (this.initialTransform == null) {</span>
+            //Save initial transformation matrix
+<span class="nc" id="L236">            this.initialTransform = getTransform();</span>
+<span class="nc" id="L237">            this.initialClip = getClip();</span>
+        } else {
+            //Reset transformation matrix
+<span class="nc" id="L240">            setTransform(this.initialTransform);</span>
+<span class="nc" id="L241">            setClip(this.initialClip);</span>
+        }
+
+<span class="nc" id="L244">        writePageHeader();</span>
+        AffineTransform at;
+<span class="nc bnc" id="L246" title="All 8 branches missed.">        if ((this.viewportWidth != this.width</span>
+                || this.viewportHeight != this.height)
+                &amp;&amp; (this.viewportWidth &gt; 0) &amp;&amp; (this.viewportHeight &gt; 0)) {
+<span class="nc" id="L249">            at = new AffineTransform(this.width / this.viewportWidth, 0,</span>
+                       0, -1 * (this.height / this.viewportHeight),
+                       0, this.height);
+        } else {
+<span class="nc" id="L253">            at = new AffineTransform(1, 0, 0, -1, 0, this.height);</span>
+        }
+        // Do not use concatMatrix, since it alters PSGenerator current state
+        //gen.concatMatrix(at);
+<span class="nc" id="L257">        gen.writeln(gen.formatMatrix(at) + &quot; &quot; + gen.mapCommand(&quot;concat&quot;));</span>
+<span class="nc" id="L258">        gen.writeDSCComment(DSCConstants.END_PAGE_SETUP);</span>
+<span class="nc" id="L259">        this.pagePending = true;</span>
+<span class="nc" id="L260">    }</span>
+
+    /**
+     * The rendering process has finished.
+     * This should be called after the rendering has completed as there is
+     * no other indication it is complete.
+     * This will then write the results to the output stream.
+     * @throws IOException an io exception if there is a problem
+     *         writing to the output stream
+     */
+    public void finish() throws IOException {
+<span class="nc bnc" id="L271" title="All 2 branches missed.">        if (this.pagePending) {</span>
+<span class="nc" id="L272">            closePage();</span>
+        }
+
+        //Finish document
+<span class="nc" id="L276">        gen.writeDSCComment(DSCConstants.TRAILER);</span>
+<span class="nc" id="L277">        gen.writeDSCComment(DSCConstants.PAGES, this.pagecount);</span>
+<span class="nc" id="L278">        gen.writeDSCComment(DSCConstants.EOF);</span>
+<span class="nc" id="L279">        gen.flush();</span>
+<span class="nc" id="L280">    }</span>
+
+    /**
+     * This constructor supports the create method
+     * @param g the PostScript document graphics to make a copy of
+     */
+    public AbstractPSDocumentGraphics2D(AbstractPSDocumentGraphics2D g) {
+<span class="nc" id="L287">        super(g);</span>
+<span class="nc" id="L288">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

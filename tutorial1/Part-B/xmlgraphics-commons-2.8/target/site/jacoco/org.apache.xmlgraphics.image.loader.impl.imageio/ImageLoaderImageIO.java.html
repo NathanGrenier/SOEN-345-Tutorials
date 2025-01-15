@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageLoaderImageIO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl.imageio</a> &gt; <span class="el_source">ImageLoaderImageIO.java</span></div><h1>ImageLoaderImageIO.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageLoaderImageIO.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.impl.imageio;
+
+import java.awt.Color;
+import java.awt.color.ICC_ColorSpace;
+import java.awt.color.ICC_Profile;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.IndexColorModel;
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
+
+import javax.imageio.IIOException;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
+import javax.imageio.ImageReader;
+import javax.imageio.ImageTypeSpecifier;
+import javax.imageio.metadata.IIOMetadata;
+import javax.imageio.metadata.IIOMetadataFormatImpl;
+import javax.imageio.metadata.IIOMetadataNode;
+import javax.imageio.spi.IIOServiceProvider;
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+
+import org.w3c.dom.Element;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.apache.xmlgraphics.image.loader.Image;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.ImageSessionContext;
+import org.apache.xmlgraphics.image.loader.impl.AbstractImageLoader;
+import org.apache.xmlgraphics.image.loader.impl.ImageBuffered;
+import org.apache.xmlgraphics.image.loader.impl.ImageRendered;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+import org.apache.xmlgraphics.io.XmlSourceUtil;
+import org.apache.xmlgraphics.java2d.color.profile.ColorProfileUtil;
+
+/**
+ * An ImageLoader implementation based on ImageIO for loading bitmap images.
+ */
+public class ImageLoaderImageIO extends AbstractImageLoader {
+
+    /** logger */
+<span class="fc" id="L78">    protected static final Log log = LogFactory.getLog(ImageLoaderImageIO.class);</span>
+
+    private ImageFlavor targetFlavor;
+
+    private static final String PNG_METADATA_NODE = &quot;javax_imageio_png_1.0&quot;;
+
+    private static final String JPEG_METADATA_NODE = &quot;javax_imageio_jpeg_image_1.0&quot;;
+
+<span class="fc" id="L86">    private static final Set PROVIDERS_IGNORING_ICC = new HashSet();</span>
+
+    /**
+     * Main constructor.
+     * @param targetFlavor the target flavor
+     */
+<span class="fc" id="L92">    public ImageLoaderImageIO(ImageFlavor targetFlavor) {</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (!(ImageFlavor.BUFFERED_IMAGE.equals(targetFlavor)</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">                || ImageFlavor.RENDERED_IMAGE.equals(targetFlavor))) {</span>
+<span class="fc" id="L95">            throw new IllegalArgumentException(&quot;Unsupported target ImageFlavor: &quot; + targetFlavor);</span>
+        }
+<span class="fc" id="L97">        this.targetFlavor = targetFlavor;</span>
+<span class="fc" id="L98">    }</span>
+
+    /** {@inheritDoc} */
+    public ImageFlavor getTargetFlavor() {
+<span class="fc" id="L102">        return this.targetFlavor;</span>
+    }
+
+    /** {@inheritDoc} */
+    public Image loadImage(ImageInfo info, Map hints, ImageSessionContext session)
+            throws ImageException, IOException {
+<span class="fc" id="L108">        RenderedImage imageData = null;</span>
+<span class="fc" id="L109">        IIOException firstException = null;</span>
+
+<span class="fc" id="L111">        IIOMetadata iiometa = (IIOMetadata)info.getCustomObjects().get(</span>
+                ImageIOUtil.IMAGEIO_METADATA);
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        boolean ignoreMetadata = (iiometa != null);</span>
+<span class="fc" id="L114">        boolean providerIgnoresICC = false;</span>
+
+<span class="fc" id="L116">        Source src = session.needSource(info.getOriginalURI());</span>
+<span class="fc" id="L117">        ImageInputStream imgStream = ImageUtil.needImageInputStream(src);</span>
+        try {
+<span class="fc" id="L119">            Iterator iter = ImageIO.getImageReaders(imgStream);</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">            while (iter.hasNext()) {</span>
+<span class="fc" id="L121">                ImageReader reader = (ImageReader)iter.next();</span>
+                try {
+<span class="fc" id="L123">                    imgStream.mark();</span>
+<span class="fc" id="L124">                    reader.setInput(imgStream, false, ignoreMetadata);</span>
+<span class="fc" id="L125">                    ImageReadParam param = getParam(reader, hints);</span>
+<span class="fc" id="L126">                    final int pageIndex = ImageUtil.needPageIndexFromURI(info.getOriginalURI());</span>
+                    try {
+//                        if (ImageFlavor.BUFFERED_IMAGE.equals(this.targetFlavor)) {
+<span class="fc" id="L129">                            imageData = reader.read(pageIndex, param);</span>
+//                        } else {
+//                            imageData = reader.read(pageIndex, param);
+                            //imageData = reader.readAsRenderedImage(pageIndex, param);
+                            //TODO Reenable the above when proper listeners are implemented
+                            //to react to late pixel population (so the stream can be closed
+                            //properly).
+//                        }
+<span class="fc bfc" id="L137" title="All 2 branches covered.">                        if (iiometa == null) {</span>
+<span class="fc" id="L138">                            iiometa = reader.getImageMetadata(pageIndex);</span>
+                        }
+<span class="fc" id="L140">                        providerIgnoresICC = checkProviderIgnoresICC(reader</span>
+<span class="fc" id="L141">                                .getOriginatingProvider());</span>
+                        break; //Quit early, we have the image
+<span class="nc" id="L143">                    } catch (IndexOutOfBoundsException indexe) {</span>
+<span class="nc" id="L144">                        throw new ImageException(&quot;Page does not exist. Invalid image index: &quot;</span>
+                                + pageIndex);
+<span class="nc" id="L146">                    } catch (IllegalArgumentException iae) {</span>
+                        //Some codecs like com.sun.imageio.plugins.wbmp.WBMPImageReader throw
+                        //IllegalArgumentExceptions when they have trouble parsing the image.
+<span class="nc" id="L149">                        throw new ImageException(&quot;Error loading image using ImageIO codec&quot;, iae);</span>
+<span class="nc" id="L150">                    } catch (IIOException iioe) {</span>
+<span class="nc bnc" id="L151" title="All 2 branches missed.">                        if (firstException == null) {</span>
+<span class="nc" id="L152">                            firstException = iioe;</span>
+                        } else {
+<span class="nc" id="L154">                            log.debug(&quot;non-first error loading image: &quot; + iioe.getMessage());</span>
+                        }
+                    }
+                    try {
+                        //Try fallback for CMYK images
+<span class="nc" id="L159">                        BufferedImage bi = getFallbackBufferedImage(reader, pageIndex, param);</span>
+<span class="nc" id="L160">                        imageData = bi;</span>
+<span class="nc" id="L161">                        firstException = null; //Clear exception after successful fallback attempt</span>
+                        break;
+<span class="nc" id="L163">                    } catch (IIOException iioe) {</span>
+                        //ignore
+                    }
+<span class="nc" id="L166">                    imgStream.reset();</span>
+                } finally {
+<span class="fc" id="L168">                    reader.dispose();</span>
+                }
+<span class="nc" id="L170">            }</span>
+        } finally {
+<span class="fc" id="L172">            XmlSourceUtil.closeQuietly(src);</span>
+            //TODO Some codecs may do late reading.
+        }
+<span class="pc bpc" id="L175" title="1 of 2 branches missed.">        if (firstException != null) {</span>
+<span class="nc" id="L176">            throw new ImageException(&quot;Error while loading image: &quot;</span>
+<span class="nc" id="L177">                    + firstException.getMessage(), firstException);</span>
+        }
+<span class="pc bpc" id="L179" title="1 of 2 branches missed.">        if (imageData == null) {</span>
+<span class="nc" id="L180">            throw new ImageException(&quot;No ImageIO ImageReader found .&quot;);</span>
+        }
+
+<span class="fc" id="L183">        ColorModel cm = imageData.getColorModel();</span>
+
+<span class="fc" id="L185">        Color transparentColor = null;</span>
+<span class="fc bfc" id="L186" title="All 2 branches covered.">        if (cm instanceof IndexColorModel) {</span>
+            //transparent color will be extracted later from the image
+        } else {
+<span class="pc bpc" id="L189" title="2 of 4 branches missed.">            if (providerIgnoresICC &amp;&amp; cm instanceof ComponentColorModel) {</span>
+                // Apply ICC Profile to Image by creating a new image with a new
+                // color model.
+<span class="fc" id="L192">                ICC_Profile iccProf = tryToExctractICCProfile(iiometa);</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">                if (iccProf != null) {</span>
+<span class="fc" id="L194">                    ColorModel cm2 = new ComponentColorModel(</span>
+<span class="fc" id="L195">                            new ICC_ColorSpace(iccProf), cm.hasAlpha(), cm</span>
+<span class="fc" id="L196">                                    .isAlphaPremultiplied(), cm</span>
+<span class="fc" id="L197">                                    .getTransparency(), cm.getTransferType());</span>
+<span class="fc" id="L198">                    WritableRaster wr = Raster.createWritableRaster(imageData</span>
+<span class="fc" id="L199">                            .getSampleModel(), null);</span>
+<span class="fc" id="L200">                    imageData.copyData(wr);</span>
+                    try {
+<span class="fc" id="L202">                        BufferedImage bi = new BufferedImage(cm2, wr, cm2</span>
+<span class="fc" id="L203">                                .isAlphaPremultiplied(), null);</span>
+<span class="fc" id="L204">                        imageData = bi;</span>
+<span class="fc" id="L205">                        cm = cm2;</span>
+<span class="fc" id="L206">                    } catch (IllegalArgumentException iae) {</span>
+<span class="fc" id="L207">                        String msg = &quot;Image &quot; + info.getOriginalURI()</span>
+                                + &quot; has an incompatible color profile.&quot;
+                                + &quot; The color profile will be ignored.&quot;
+                                + &quot;\nColor model of loaded bitmap: &quot; + cm
+                                + &quot;\nColor model of color profile: &quot; + cm2;
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">                        if (info.getCustomObjects().get(&quot;warningincustomobject&quot;) != null) {</span>
+<span class="nc" id="L213">                            info.getCustomObjects().put(&quot;warning&quot;, msg);</span>
+                        } else {
+<span class="fc" id="L215">                            log.warn(msg);</span>
+                        }
+<span class="fc" id="L217">                    }</span>
+                }
+            }
+
+            // ImageIOUtil.dumpMetadataToSystemOut(iiometa);
+            // Retrieve the transparent color from the metadata
+<span class="pc bpc" id="L223" title="2 of 4 branches missed.">            if (iiometa != null &amp;&amp; iiometa.isStandardMetadataFormatSupported()) {</span>
+<span class="fc" id="L224">                Element metanode = (Element)iiometa.getAsTree(</span>
+                        IIOMetadataFormatImpl.standardMetadataFormatName);
+<span class="fc" id="L226">                Element dim = ImageIOUtil.getChild(metanode, &quot;Transparency&quot;);</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">                if (dim != null) {</span>
+                    Element child;
+<span class="fc" id="L229">                    child = ImageIOUtil.getChild(dim, &quot;TransparentColor&quot;);</span>
+<span class="pc bpc" id="L230" title="1 of 2 branches missed.">                    if (child != null) {</span>
+<span class="nc" id="L231">                        String value = child.getAttribute(&quot;value&quot;);</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">                        if (value.length() == 0) {</span>
+                            //ignore
+<span class="nc bnc" id="L234" title="All 2 branches missed.">                        } else if (cm.getNumColorComponents() == 1) {</span>
+<span class="nc" id="L235">                            int gray = Integer.parseInt(value);</span>
+<span class="nc" id="L236">                            transparentColor = new Color(gray, gray, gray);</span>
+<span class="nc" id="L237">                        } else {</span>
+<span class="nc" id="L238">                            StringTokenizer st = new StringTokenizer(value);</span>
+<span class="nc" id="L239">                            transparentColor = new Color(</span>
+<span class="nc" id="L240">                                    Integer.parseInt(st.nextToken()),</span>
+<span class="nc" id="L241">                                    Integer.parseInt(st.nextToken()),</span>
+<span class="nc" id="L242">                                    Integer.parseInt(st.nextToken()));</span>
+                        }
+                    }
+                }
+            }
+        }
+
+<span class="fc bfc" id="L249" title="All 2 branches covered.">        if (ImageFlavor.BUFFERED_IMAGE.equals(this.targetFlavor)) {</span>
+<span class="fc" id="L250">            return new ImageBuffered(info, (BufferedImage)imageData, transparentColor);</span>
+        } else {
+<span class="fc" id="L252">            return new ImageRendered(info, imageData, transparentColor);</span>
+        }
+    }
+
+    private ImageReadParam getParam(ImageReader reader, Map hints) throws IOException {
+<span class="pc bpc" id="L257" title="1 of 4 branches missed.">        if (hints != null &amp;&amp; Boolean.TRUE.equals(hints.get(&quot;CMYK&quot;))) {</span>
+<span class="nc" id="L258">            Iterator&lt;ImageTypeSpecifier&gt; types = reader.getImageTypes(0);</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">            while (types.hasNext()) {</span>
+<span class="nc" id="L260">                ImageTypeSpecifier type = types.next();</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">                if (type.getNumComponents() == 4) {</span>
+<span class="nc" id="L262">                    ImageReadParam param = new ImageReadParam();</span>
+<span class="nc" id="L263">                    param.setDestinationType(type);</span>
+<span class="nc" id="L264">                    return param;</span>
+                }
+<span class="nc" id="L266">            }</span>
+        }
+<span class="fc" id="L268">        return reader.getDefaultReadParam();</span>
+    }
+
+    /**
+     * Checks if the provider ignores the ICC color profile. This method will
+     * assume providers work correctly, and return false if the provider is
+     * unknown. This ensures backward-compatibility.
+     *
+     * @param provider
+     *            the ImageIO Provider
+     * @return true if we know the provider to be broken and ignore ICC
+     *         profiles.
+     */
+    private boolean checkProviderIgnoresICC(IIOServiceProvider provider) {
+        // TODO: This information could be cached.
+<span class="fc" id="L283">        StringBuffer b = new StringBuffer(provider.getDescription(Locale.ENGLISH));</span>
+<span class="fc" id="L284">        b.append('/').append(provider.getVendorName());</span>
+<span class="fc" id="L285">        b.append('/').append(provider.getVersion());</span>
+<span class="pc bpc" id="L286" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L287">            log.debug(&quot;Image Provider: &quot; + b.toString());</span>
+        }
+<span class="fc" id="L289">        return ImageLoaderImageIO.PROVIDERS_IGNORING_ICC.contains(b.toString());</span>
+    }
+
+    /**
+     * Extract ICC Profile from ImageIO Metadata. This method currently only
+     * supports PNG and JPEG metadata.
+     *
+     * @param iiometa
+     *            The ImageIO Metadata
+     * @return an ICC Profile or null.
+     */
+    private ICC_Profile tryToExctractICCProfile(IIOMetadata iiometa) {
+<span class="fc" id="L301">        ICC_Profile iccProf = null;</span>
+<span class="fc" id="L302">        String[] supportedFormats = iiometa.getMetadataFormatNames();</span>
+<span class="fc bfc" id="L303" title="All 2 branches covered.">        for (String format : supportedFormats) {</span>
+<span class="fc" id="L304">            Element root = (Element) iiometa.getAsTree(format);</span>
+<span class="fc bfc" id="L305" title="All 2 branches covered.">            if (PNG_METADATA_NODE.equals(format)) {</span>
+<span class="fc" id="L306">                iccProf = this</span>
+<span class="fc" id="L307">                        .tryToExctractICCProfileFromPNGMetadataNode(root);</span>
+<span class="fc bfc" id="L308" title="All 2 branches covered.">            } else if (JPEG_METADATA_NODE.equals(format)) {</span>
+<span class="fc" id="L309">                iccProf = this.tryToExctractICCProfileFromJPEGMetadataNode(root);</span>
+            }
+        }
+<span class="fc" id="L312">        return iccProf;</span>
+    }
+
+    private ICC_Profile tryToExctractICCProfileFromPNGMetadataNode(
+            Element pngNode) {
+<span class="fc" id="L317">        ICC_Profile iccProf = null;</span>
+<span class="fc" id="L318">        Element iccpNode = ImageIOUtil.getChild(pngNode, &quot;iCCP&quot;);</span>
+<span class="fc bfc" id="L319" title="All 2 branches covered.">        if (iccpNode instanceof IIOMetadataNode) {</span>
+<span class="fc" id="L320">            IIOMetadataNode imn = (IIOMetadataNode) iccpNode;</span>
+<span class="fc" id="L321">            byte[] prof = (byte[]) imn.getUserObject();</span>
+<span class="fc" id="L322">            String comp = imn.getAttribute(&quot;compressionMethod&quot;);</span>
+<span class="pc bpc" id="L323" title="1 of 2 branches missed.">            if (&quot;deflate&quot;.equalsIgnoreCase(comp)) {</span>
+<span class="fc" id="L324">                Inflater decompresser = new Inflater();</span>
+<span class="fc" id="L325">                decompresser.setInput(prof);</span>
+<span class="fc" id="L326">                byte[] result = new byte[100];</span>
+<span class="fc" id="L327">                ByteArrayOutputStream bos = new ByteArrayOutputStream();</span>
+<span class="fc" id="L328">                boolean failed = false;</span>
+<span class="fc bfc" id="L329" title="All 4 branches covered.">                while (!decompresser.finished() &amp;&amp; !failed) {</span>
+                    try {
+<span class="fc" id="L331">                        int resultLength = decompresser.inflate(result);</span>
+<span class="fc" id="L332">                        bos.write(result, 0, resultLength);</span>
+<span class="fc bfc" id="L333" title="All 2 branches covered.">                        if (resultLength == 0) {</span>
+                            // this means more data or an external dictionary is
+                            // needed. Both of which are not available, so we
+                            // fail.
+<span class="fc" id="L337">                            log.debug(&quot;Failed to deflate ICC Profile&quot;);</span>
+<span class="fc" id="L338">                            failed = true;</span>
+                        }
+<span class="nc" id="L340">                    } catch (DataFormatException e) {</span>
+<span class="nc" id="L341">                        log.debug(&quot;Failed to deflate ICC Profile&quot;, e);</span>
+<span class="nc" id="L342">                        failed = true;</span>
+<span class="pc" id="L343">                    }</span>
+                }
+<span class="fc" id="L345">                decompresser.end();</span>
+                try {
+<span class="fc" id="L347">                    iccProf = ColorProfileUtil.getICC_Profile(bos.toByteArray());</span>
+<span class="nc" id="L348">                } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L349">                    log.debug(&quot;Failed to interpret embedded ICC Profile&quot;, e);</span>
+<span class="nc" id="L350">                    iccProf = null;</span>
+<span class="fc" id="L351">                }</span>
+            }
+        }
+<span class="fc" id="L354">        return iccProf;</span>
+    }
+
+    private ICC_Profile tryToExctractICCProfileFromJPEGMetadataNode(
+            Element jpgNode) {
+<span class="fc" id="L359">        ICC_Profile iccProf = null;</span>
+<span class="fc" id="L360">        Element jfifNode = ImageIOUtil.getChild(jpgNode, &quot;app0JFIF&quot;);</span>
+<span class="pc bpc" id="L361" title="1 of 2 branches missed.">        if (jfifNode != null) {</span>
+<span class="fc" id="L362">            Element app2iccNode = ImageIOUtil.getChild(jfifNode, &quot;app2ICC&quot;);</span>
+<span class="pc bpc" id="L363" title="1 of 2 branches missed.">            if (app2iccNode instanceof IIOMetadataNode) {</span>
+<span class="fc" id="L364">                IIOMetadataNode imn = (IIOMetadataNode) app2iccNode;</span>
+<span class="fc" id="L365">                iccProf = (ICC_Profile) imn.getUserObject();</span>
+            }
+        }
+<span class="fc" id="L368">        return iccProf;</span>
+    }
+
+    private BufferedImage getFallbackBufferedImage(ImageReader reader,
+            int pageIndex, ImageReadParam param) throws IOException {
+        //Work-around found at: http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4799903
+        //There are some additional ideas there if someone wants to go further.
+
+        // Try reading a Raster (no color conversion).
+<span class="nc" id="L377">        Raster raster = reader.readRaster(pageIndex, param);</span>
+
+        // Arbitrarily select a BufferedImage type.
+        int imageType;
+<span class="nc" id="L381">        int numBands = raster.getNumBands();</span>
+<span class="nc bnc" id="L382" title="All 4 branches missed.">        switch(numBands) {</span>
+        case 1:
+<span class="nc" id="L384">            imageType = BufferedImage.TYPE_BYTE_GRAY;</span>
+<span class="nc" id="L385">            break;</span>
+        case 3:
+<span class="nc" id="L387">            imageType = BufferedImage.TYPE_3BYTE_BGR;</span>
+<span class="nc" id="L388">            break;</span>
+        case 4:
+<span class="nc" id="L390">            imageType = BufferedImage.TYPE_4BYTE_ABGR;</span>
+<span class="nc" id="L391">            break;</span>
+        default:
+<span class="nc" id="L393">            throw new UnsupportedOperationException(&quot;Unsupported band count: &quot; + numBands);</span>
+        }
+
+        // Create a BufferedImage.
+<span class="nc" id="L397">        BufferedImage bi = new BufferedImage(raster.getWidth(),</span>
+<span class="nc" id="L398">                                  raster.getHeight(),</span>
+                                  imageType);
+
+        // Set the image data.
+<span class="nc" id="L402">        bi.getRaster().setRect(raster);</span>
+<span class="nc" id="L403">        return bi;</span>
+    }
+
+    static {
+        // TODO: This list could be kept in a resource file.
+<span class="fc" id="L408">        PROVIDERS_IGNORING_ICC</span>
+<span class="fc" id="L409">                .add(&quot;Standard PNG image reader/Sun Microsystems, Inc./1.0&quot;);</span>
+<span class="fc" id="L410">        PROVIDERS_IGNORING_ICC</span>
+<span class="fc" id="L411">                .add(&quot;Standard PNG image reader/Oracle Corporation/1.0&quot;);</span>
+<span class="fc" id="L412">        PROVIDERS_IGNORING_ICC</span>
+<span class="fc" id="L413">                .add(&quot;Standard JPEG Image Reader/Sun Microsystems, Inc./0.5&quot;);</span>
+<span class="fc" id="L414">        PROVIDERS_IGNORING_ICC</span>
+<span class="fc" id="L415">                .add(&quot;Standard JPEG Image Reader/Oracle Corporation/0.5&quot;);</span>
+<span class="fc" id="L416">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

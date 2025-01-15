@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSTilingPattern.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.ps</a> &gt; <span class="el_source">PSTilingPattern.java</span></div><h1>PSTilingPattern.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSTilingPattern.java 1809627 2017-09-25 13:42:08Z ssteiner $ */
+
+package org.apache.xmlgraphics.java2d.ps;
+
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.TexturePaint;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.util.List;
+
+/**
+ * This class is implementation of PostScript tiling pattern. It allows to make a pattern
+ * with defined PaintProc or texture.
+ *
+ * Originally authored by Jiri Kunhart.
+ */
+public class PSTilingPattern {
+
+    /**
+     * A code identifying the pattern type that this dictionary describes;
+     * must be 1 for a tiling pattern
+     */
+    public static final int PATTERN_TYPE_TILING = 1;
+
+    /** PostScript constant for a shading pattern (unsupported) */
+    public static final int PATTERN_TYPE_SHADING = 2;
+
+    /** the pattern type of this pattern */
+<span class="fc" id="L49">    protected int patternType = PATTERN_TYPE_TILING;</span>
+    //TODO To be moved to a super class once shading patterns are implemented.
+
+    /**
+     * The name of the pattern (for example: &quot;Pattern1&quot; )
+     */
+    protected String patternName;
+
+    /**
+     * The XUID is an extended unique ID -- an array of integers that provides for
+     * distributed, hierarchical management of the space of unique ID numbers
+     * (optional)
+     */
+    protected List xUID;
+
+    /**
+     * A PostScript procedure for painting the pattern cell
+     */
+    protected StringBuffer paintProc;
+
+    /**
+     * An array of four numbers in the pattern coordinate system, giving
+     * the coordinates of the left, bottom, right, and top edges, respectively, of the
+     * pattern cell's bounding box
+     */
+    protected Rectangle2D bBox;
+
+    /**
+     * The desired horizontal spacing between pattern cells, measured in
+     * the pattern coordinate system
+     */
+    protected double xStep;
+
+    /**
+     * The desired vertical spacing between pattern cells, measured in
+     * the pattern coordinate system
+     */
+    protected double yStep;
+
+    /**
+     * A code that determines how the color of the pattern cell is to be
+     * specified: 1 for colored pattern, 2 for uncolored pattern
+     */
+<span class="fc" id="L92">    protected int paintType = 2;</span>
+
+    /**
+     * A code that controls adjustments to the spacing of tiles relative to
+     * the device pixel grid:
+     * 1 for constant spacing,
+     * 2 for no distortion
+     * 3 for constant spacing and faster tiling.
+     */
+<span class="fc" id="L101">    protected int tilingType = 1;</span>
+
+    /**
+     *  A texture is used for filling shapes
+     */
+    protected TexturePaint texture;
+
+    /**
+     * Constructor for the creation of pattern with defined PaintProc
+     *
+     * @param patternName the name of the pattern (for example: &quot;Pattern1&quot; ), if
+     * the name is null, the pattern should be stored in PSPatternStorage, where the pattern
+     * gets a name (the pattern without name cannot be use in PS file)
+     * @param paintProc a postscript procedure for painting the pattern cell
+     * @param bBox a pattern cell's bounding box
+     * @param xStep the desired horizontal spacing between pattern cells
+     * @param yStep the desired vertical spacing between pattern cells
+     * @param paintType 1 for colored pattern, 2 for uncolored pattern
+     * @param tilingType adjustments to the spacing of tiles relative to
+     * the device pixel grid (1,2 or 3)
+     * @param xUID an extended unique ID (optional)
+     */
+    public PSTilingPattern(String patternName, StringBuffer paintProc, Rectangle bBox,
+                           double xStep, double yStep,
+<span class="fc" id="L125">                           int paintType, int tilingType, List xUID) {</span>
+
+        // check the parameters
+<span class="fc" id="L128">        this.patternName = patternName;</span>
+<span class="fc" id="L129">        this.paintProc = paintProc;</span>
+<span class="fc" id="L130">        setBoundingBox(bBox);</span>
+<span class="fc" id="L131">        setXStep(xStep);</span>
+<span class="fc" id="L132">        setYStep(yStep);</span>
+<span class="fc" id="L133">        setPaintType(paintType);</span>
+<span class="fc" id="L134">        setTilingType(tilingType);</span>
+<span class="fc" id="L135">        this.xUID = xUID;</span>
+<span class="fc" id="L136">    }</span>
+
+    /**
+     * Constructor for the creation of pattern with defined texture
+     *
+     * @param patternName the name of the pattern (for example: &quot;Pattern1&quot; ), if
+     * the name is null, the pattern should be stored in PSPatternStorage, where the pattern
+     * gets a name (a pattern without name cannot be use in PS file)
+     * @param texture a texture is used for filling a shape
+     * @param xStep the desired horizontal spacing between pattern cells
+     * @param yStep yStep the desired vertical spacing between pattern cells
+     * @param tilingType adjustments to the spacing of tiles relative to
+     * the device pixel grid (1,2 or 3)
+     * @param xUID xUID an extended unique ID (optional)
+     */
+    public PSTilingPattern(String patternName, TexturePaint texture, double xStep, double yStep,
+                           int tilingType, List xUID) {
+
+<span class="fc" id="L154">        this(patternName, null, new Rectangle(), 1, 1, 1, tilingType, xUID);</span>
+
+<span class="fc" id="L156">        this.texture = texture;</span>
+
+<span class="fc" id="L158">        Rectangle2D anchor = texture.getAnchorRect();</span>
+<span class="fc" id="L159">        bBox = new Rectangle2D.Double(</span>
+<span class="fc" id="L160">                anchor.getX(), anchor.getY(),</span>
+<span class="fc" id="L161">                anchor.getX() + anchor.getWidth(), anchor.getY() + anchor.getHeight());</span>
+
+        // xStep and yStep may be either positive or negative, but not zero =&gt; if it is zero,
+        // we set xStep and yStep in this way that the pattern will be without spaces
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">        this.xStep = (xStep == 0) ? anchor.getWidth() : xStep;</span>
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">        this.yStep = (yStep == 0) ? anchor.getHeight() : yStep;</span>
+<span class="fc" id="L167">    }</span>
+
+    /**
+     * Gets the name of the pattern
+     *
+     * @return String representing the name of the pattern.
+     */
+    public String getName() {
+<span class="fc" id="L175">        return (this.patternName);</span>
+    }
+
+    /**
+     * Sets the name of the pattern.
+     * @param name the name of the pattern. Can be anything without spaces (for example &quot;Pattern1&quot;).
+     */
+    public void setName(String name) {
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        if (name == null) {</span>
+<span class="nc" id="L184">            throw new NullPointerException(&quot;Parameter patternName must not be null&quot;);</span>
+        }
+<span class="nc bnc" id="L186" title="All 2 branches missed.">        if (name.length() == 0) {</span>
+<span class="nc" id="L187">            throw new IllegalArgumentException(&quot;Parameter patternName must not be empty&quot;);</span>
+        }
+<span class="nc bnc" id="L189" title="All 2 branches missed.">        if (name.indexOf(&quot; &quot;) &gt;= 0) {</span>
+<span class="nc" id="L190">            throw new IllegalArgumentException(</span>
+                    &quot;Pattern name must not contain any spaces&quot;);
+        }
+<span class="nc" id="L193">        this.patternName = name;</span>
+<span class="nc" id="L194">    }</span>
+
+    /**
+     * Returns the bounding box.
+     *
+     * @return a pattern cell's bounding box
+     */
+    public Rectangle2D getBoundingBox() {
+<span class="nc" id="L202">        return (this.bBox);</span>
+    }
+
+    /**
+     * Sets the bounding box.
+     *
+     * @param bBox a pattern cell's bounding box
+     */
+    public void setBoundingBox(Rectangle2D bBox) {
+<span class="pc bpc" id="L211" title="1 of 2 branches missed.">        if (bBox == null) {</span>
+<span class="nc" id="L212">            throw new NullPointerException(&quot;Parameter bBox must not be null&quot;);</span>
+        }
+<span class="fc" id="L214">        this.bBox = bBox;</span>
+<span class="fc" id="L215">    }</span>
+
+    /**
+     * Gets the postscript procedure PaintProc
+     *
+     * @return the postscript procedure PaintProc
+     */
+    public StringBuffer getPaintProc() {
+<span class="nc" id="L223">        return (this.paintProc);</span>
+    }
+
+    /**
+     * Sets the postscript procedure PaintProc
+     *
+     * @param paintProc the postscript procedure PaintProc
+     */
+    public void setPaintProc(StringBuffer paintProc) {
+<span class="nc" id="L232">        this.paintProc = paintProc;</span>
+<span class="nc" id="L233">    }</span>
+
+    /**
+     * Gets the horizontal spacing between pattern cells
+     *
+     * @return the horizontal spacing between pattern cells
+     */
+    public double getXStep() {
+<span class="nc" id="L241">        return (this.xStep);</span>
+    }
+
+    /**
+     * Sets the horizontal spacing between pattern cells
+     *
+     * @param xStep the horizontal spacing between pattern cells
+     */
+    public void setXStep(double xStep) {
+<span class="pc bpc" id="L250" title="1 of 2 branches missed.">        if (xStep == 0) {</span>
+<span class="nc" id="L251">            throw new IllegalArgumentException(&quot;Parameter xStep must not be 0&quot;);</span>
+        }
+<span class="fc" id="L253">        this.xStep = xStep;</span>
+<span class="fc" id="L254">    }</span>
+
+    /**
+     * Gets the vertical spacing between pattern cells
+     *
+     * @return the vertical spacing between pattern cells
+     */
+    public double getYStep() {
+<span class="nc" id="L262">        return (this.yStep);</span>
+    }
+
+    /**
+     * Sets the vertical spacing between pattern cells
+     *
+     * @param yStep the vertical spacing between pattern cells
+     */
+    public void setYStep(double yStep) {
+<span class="pc bpc" id="L271" title="1 of 2 branches missed.">        if (yStep == 0) {</span>
+<span class="nc" id="L272">            throw new IllegalArgumentException(&quot;Parameter yStep must not be 0&quot;);</span>
+        }
+<span class="fc" id="L274">        this.yStep = yStep;</span>
+<span class="fc" id="L275">    }</span>
+
+    /**
+     * Gets the code that determines how the color of the pattern cell is to be
+     * specified: 1 for colored pattern, 2 for uncolored pattern
+     *
+     * @return the paint type
+     */
+    public int getPaintType() {
+<span class="nc" id="L284">        return (this.paintType);</span>
+    }
+
+    /**
+     * Sets the code that determines how the color of the pattern cell is to be
+     * specified: 1 for colored pattern, 2 for uncolored pattern
+     *
+     * @param paintType the paint type
+     */
+    public void setPaintType(int paintType) {
+<span class="pc bpc" id="L294" title="3 of 4 branches missed.">        if ((paintType != 1) &amp;&amp; (paintType != 2)) {</span>
+<span class="nc" id="L295">            throw new IllegalArgumentException(&quot;Parameter paintType must not be &quot;</span>
+                    + paintType + &quot; (only 1 or 2)&quot;);
+        }
+<span class="fc" id="L298">        this.paintType = paintType;</span>
+<span class="fc" id="L299">    }</span>
+
+    /**
+     * Gets a code that controls adjustments to the spacing of tiles relative to
+     * the device pixel grid: 1 for constant spacing, 2 for no distortion
+     * 3 for constant spacing and faster tiling
+     *
+     * @return the tiling type
+     */
+    public int getTilingType() {
+<span class="nc" id="L309">        return (this.tilingType);</span>
+    }
+
+    /**
+     * Sets a code that controls adjustments to the spacing of tiles relative to
+     * the device pixel grid: 1 for constant spacing, 2 for no distortion
+     * 3 for constant spacing and faster tiling
+     *
+     * @param tilingType the tiling type
+     */
+    public void setTilingType(int tilingType) {
+<span class="pc bpc" id="L320" title="2 of 4 branches missed.">        if (!((tilingType &lt;= 3) &amp;&amp; (tilingType &gt;= 1))) {</span>
+<span class="nc" id="L321">            throw new IllegalArgumentException(&quot;Parameter tilingType must not be &quot;</span>
+                    + tilingType + &quot; (only 1, 2 or 3)&quot;);
+        }
+<span class="fc" id="L324">        this.tilingType = tilingType;</span>
+<span class="fc" id="L325">    }</span>
+
+    /**
+     * Gets a texture which is used for filling shapes
+     *
+     * @return the texture
+     */
+    public TexturePaint getTexturePaint() {
+<span class="nc" id="L333">        return (this.texture);</span>
+    }
+
+    /**
+     * Sets a texture which is used for filling shapes
+     *
+     * @param texturePaint the texture
+     */
+    public void setTexturePaint(TexturePaint texturePaint) {
+<span class="nc" id="L342">        this.texture = texturePaint;</span>
+<span class="nc" id="L343">    }</span>
+
+    /**
+     * Gets an extended unique ID that uniquely identifies the pattern
+     *
+     * @return xUID the unique ID
+     */
+    public List getXUID() {
+<span class="nc" id="L351">        return (this.xUID);</span>
+    }
+
+    /**
+     * Sets an extended unique ID that uniquely identifies the pattern
+     *
+     * @param xUID the unique ID
+     */
+    public void setXUID(List xUID) {
+<span class="nc" id="L360">        this.xUID = xUID;</span>
+<span class="nc" id="L361">    }</span>
+
+    /**
+     * Generates postscript code for a pattern
+     *
+     * @return The string which contains postscript code of pattern definition
+     */
+    public String toString(boolean acrobatDownsample) {
+<span class="fc" id="L369">        StringBuffer sb = new StringBuffer(&quot;&lt;&lt;\n&quot;);</span>
+<span class="fc" id="L370">        sb.append(&quot;/PatternType &quot; + this.patternType + &quot;\n&quot;);</span>
+<span class="fc" id="L371">        sb.append(&quot;/PaintType &quot; + paintType + &quot;\n&quot;);</span>
+<span class="fc" id="L372">        sb.append(&quot;/TilingType &quot; + tilingType + &quot;\n&quot;);</span>
+<span class="fc" id="L373">        sb.append(&quot;/XStep &quot; + xStep + &quot;\n&quot;);</span>
+<span class="fc" id="L374">        sb.append(&quot;/YStep &quot; + yStep + &quot;\n&quot;);</span>
+<span class="fc" id="L375">        sb.append(&quot;/BBox &quot; + &quot;[&quot; + bBox.getX() + &quot; &quot; + bBox.getY() + &quot; &quot;</span>
+<span class="fc" id="L376">                        + bBox.getWidth() + &quot; &quot; + bBox.getHeight() + &quot;]&quot; + &quot;\n&quot;);</span>
+<span class="fc" id="L377">        sb.append(&quot;/PaintProc\n&quot; + &quot;{\n&quot;);</span>
+
+        // the PaintProc procedure is expected to consume its dictionary operand !
+<span class="pc bpc" id="L380" title="3 of 4 branches missed.">        if ((paintProc == null) || (paintProc.indexOf(&quot;pop&quot;) != 0)) {</span>
+<span class="fc" id="L381">            sb.append(&quot;pop\n&quot;);</span>
+        }
+
+<span class="pc bpc" id="L384" title="1 of 2 branches missed.">        if (texture != null) {</span>
+<span class="fc" id="L385">            int width = texture.getImage().getWidth();</span>
+<span class="fc" id="L386">            int height = texture.getImage().getHeight();</span>
+
+<span class="fc" id="L388">            Rectangle2D anchor = texture.getAnchorRect();</span>
+<span class="pc bpc" id="L389" title="2 of 4 branches missed.">            if (anchor.getX() != 0 || anchor.getY() != 0) {</span>
+<span class="nc" id="L390">                sb.append(anchor.getX() + &quot; &quot; + anchor.getY() + &quot; translate\n&quot;);</span>
+            }
+<span class="fc" id="L392">            double scaleX = anchor.getWidth() / width;</span>
+<span class="fc" id="L393">            double scaleY = anchor.getHeight() / height;</span>
+<span class="pc bpc" id="L394" title="3 of 4 branches missed.">            if (scaleX != 1 || scaleY != 1) {</span>
+<span class="fc" id="L395">                sb.append(scaleX + &quot; &quot; + scaleY + &quot; scale\n&quot;);</span>
+            }
+
+            // define color image: width height bits/comp matrix
+            //                        datasrc0 datasrcncomp-1 multi ncomp colorimage
+            // width height bits/comp matrix
+<span class="fc" id="L401">            int bits = 8;</span>
+<span class="fc bfc" id="L402" title="All 2 branches covered.">            if (acrobatDownsample) {</span>
+<span class="fc" id="L403">                bits = 4;</span>
+            }
+<span class="fc" id="L405">            sb.append(width).append(&quot; &quot;).append(height).append(&quot; &quot;).append(bits).append(&quot; &quot;).append(&quot;matrix\n&quot;);</span>
+<span class="fc" id="L406">            int [] argb = new int[width * height];                  // datasrc0 datasrcncomp-1</span>
+<span class="fc" id="L407">            getAsRGB().getRGB(0, 0, width, height, argb, 0, width);</span>
+
+<span class="fc" id="L409">            writeImage(sb, argb, width, bits);</span>
+
+<span class="fc" id="L411">            sb.append(&quot; false 3 colorimage&quot;);                   //  multi ncomp colorimage</span>
+<span class="fc" id="L412">        } else {</span>
+<span class="nc" id="L413">            sb.append(paintProc);</span>
+        }
+<span class="fc" id="L415">        sb.append(&quot;\n} bind \n&quot;);  // the end of PaintProc</span>
+<span class="fc" id="L416">        sb.append(&quot;&gt;&gt;\n&quot;);</span>
+
+        // create pattern instance from prototype
+<span class="fc" id="L419">        sb.append(&quot;matrix\n&quot;);</span>
+<span class="fc" id="L420">        sb.append(&quot;makepattern\n&quot;);</span>
+
+        // save pattern to current dictionary
+<span class="fc" id="L423">        sb.append(&quot;/&quot; + patternName + &quot; exch def\n&quot;);</span>
+
+<span class="fc" id="L425">        return sb.toString();</span>
+    }
+
+    private void writeImage(StringBuffer sb, int[] argb, int width, int bits) {
+<span class="fc" id="L429">        int count = 0;</span>
+<span class="fc" id="L430">        sb.append(&quot;{&lt;&quot;);</span>
+<span class="fc bfc" id="L431" title="All 2 branches covered.">        for (int i = 0; i &lt; argb.length; i++) {</span>
+<span class="pc bpc" id="L432" title="3 of 4 branches missed.">            if ((i % width == 0) || (count &gt; 249)) {</span>
+<span class="fc" id="L433">                sb.append('\n');</span>
+<span class="fc" id="L434">                count = 0;  // line should not be longer than 255 characters</span>
+            }
+<span class="fc bfc" id="L436" title="All 2 branches covered.">            if (bits == 4) {</span>
+<span class="fc" id="L437">                Color c = new Color(argb[i]);</span>
+<span class="fc" id="L438">                int v = c.getRed() / 16;</span>
+<span class="fc" id="L439">                String s = Integer.toHexString(v);</span>
+<span class="fc" id="L440">                sb.append(s);</span>
+
+<span class="fc" id="L442">                v = c.getGreen() / 16;</span>
+<span class="fc" id="L443">                s = Integer.toHexString(v);</span>
+<span class="fc" id="L444">                sb.append(s);</span>
+
+<span class="fc" id="L446">                v = c.getBlue() / 16;</span>
+<span class="fc" id="L447">                s = Integer.toHexString(v);</span>
+<span class="fc" id="L448">                sb.append(s);</span>
+
+<span class="fc" id="L450">                count += 3;</span>
+<span class="fc" id="L451">            } else {</span>
+                // delete alpha canal and write to output
+<span class="fc" id="L453">                StringBuffer sRGB = new StringBuffer(Integer.toHexString(argb[i] &amp; 0x00ffffff));</span>
+<span class="pc bpc" id="L454" title="1 of 2 branches missed.">                if (sRGB.length() != 6) {</span>
+<span class="nc" id="L455">                    sRGB.insert(0, &quot;000000&quot;);   // zero padding</span>
+<span class="nc" id="L456">                    sRGB = new StringBuffer(sRGB.substring(sRGB.length() - 6));</span>
+                }
+<span class="fc" id="L458">                sb.append(sRGB);</span>
+<span class="fc" id="L459">                count += 6;</span>
+            }
+        }
+<span class="fc" id="L462">        sb.append(&quot;\n&gt;}&quot;);</span>
+<span class="fc" id="L463">    }</span>
+
+    private BufferedImage getAsRGB() {
+<span class="fc" id="L466">        BufferedImage img = texture.getImage();</span>
+<span class="pc bpc" id="L467" title="1 of 2 branches missed.">        if (img.getType() != BufferedImage.TYPE_INT_RGB) {</span>
+<span class="fc" id="L468">            BufferedImage buf = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);</span>
+<span class="fc" id="L469">            Graphics2D g = buf.createGraphics();</span>
+<span class="fc" id="L470">            g.setComposite(AlphaComposite.SrcOver);</span>
+<span class="fc" id="L471">            g.setBackground(Color.white);</span>
+<span class="fc" id="L472">            g.fillRect(0, 0, img.getWidth(), img.getHeight());</span>
+<span class="fc" id="L473">            g.drawImage(img, 0, 0, null);</span>
+<span class="fc" id="L474">            g.dispose();</span>
+<span class="fc" id="L475">            return buf;</span>
+        }
+<span class="nc" id="L477">        return img;</span>
+    }
+
+    /** {@inheritDoc} */
+    public int hashCode() {
+<span class="nc" id="L482">        return</span>
+            0
+            ^ patternType
+<span class="nc bnc" id="L485" title="All 2 branches missed.">            ^ ((xUID != null) ? xUID.hashCode() : 0)</span>
+<span class="nc bnc" id="L486" title="All 2 branches missed.">            ^ ((paintProc != null) ? paintProc.hashCode() : 0)</span>
+<span class="nc bnc" id="L487" title="All 2 branches missed.">            ^ ((bBox != null) ? bBox.hashCode() : 0)</span>
+<span class="nc" id="L488">            ^ Double.valueOf(xStep).hashCode()</span>
+<span class="nc" id="L489">            ^ Double.valueOf(yStep).hashCode()</span>
+            ^ paintType
+            ^ tilingType
+<span class="nc bnc" id="L492" title="All 2 branches missed.">            ^ ((texture != null) ? texture.hashCode() : 0);</span>
+    }
+
+    /**
+     * Compares two patterns data (except their names).
+     * {@inheritDoc}
+     */
+    public boolean equals(Object pattern) {
+<span class="nc bnc" id="L500" title="All 2 branches missed.">        if (pattern == null) {</span>
+<span class="nc" id="L501">            return false;</span>
+        }
+<span class="nc bnc" id="L503" title="All 2 branches missed.">        if (!(pattern instanceof PSTilingPattern)) {</span>
+<span class="nc" id="L504">            return false;</span>
+        }
+<span class="nc bnc" id="L506" title="All 2 branches missed.">        if (this == pattern) {</span>
+<span class="nc" id="L507">            return true;</span>
+        }
+
+<span class="nc" id="L510">        PSTilingPattern patternObj = (PSTilingPattern) pattern;</span>
+<span class="nc bnc" id="L511" title="All 2 branches missed.">        if (this.patternType != patternObj.patternType) {</span>
+<span class="nc" id="L512">            return false;</span>
+        }
+
+<span class="nc" id="L515">        TexturePaint patternTexture = patternObj.getTexturePaint();</span>
+
+<span class="nc bnc" id="L517" title="All 8 branches missed.">        if (((patternTexture == null) &amp;&amp; (texture != null))</span>
+             || ((patternTexture != null) &amp;&amp; (texture == null))) {
+<span class="nc" id="L519">            return false;</span>
+        }
+
+<span class="nc bnc" id="L522" title="All 4 branches missed.">        if ((patternTexture != null) &amp;&amp; (texture != null)) {</span>
+            // compare textures data
+<span class="nc" id="L524">            int width = texture.getImage().getWidth();</span>
+<span class="nc" id="L525">            int height = texture.getImage().getHeight();</span>
+
+<span class="nc" id="L527">            int widthPattern = patternTexture.getImage().getWidth();</span>
+<span class="nc" id="L528">            int heightPattern = patternTexture.getImage().getHeight();</span>
+
+<span class="nc bnc" id="L530" title="All 2 branches missed.">            if (width != widthPattern) {</span>
+<span class="nc" id="L531">                return false;</span>
+            }
+<span class="nc bnc" id="L533" title="All 2 branches missed.">            if (height != heightPattern) {</span>
+<span class="nc" id="L534">                return false;</span>
+            }
+<span class="nc" id="L536">            int [] rgbData = new int[width * height];</span>
+<span class="nc" id="L537">            int [] rgbDataPattern = new int[widthPattern * heightPattern];</span>
+
+<span class="nc" id="L539">            texture.getImage().getRGB(0, 0, width, height, rgbData, 0, width);</span>
+<span class="nc" id="L540">            patternTexture.getImage().getRGB(0, 0, widthPattern, heightPattern,</span>
+                    rgbDataPattern, 0, widthPattern);
+
+<span class="nc bnc" id="L543" title="All 2 branches missed.">            for (int i = 0; i &lt; rgbData.length; i++) {</span>
+<span class="nc bnc" id="L544" title="All 2 branches missed.">                if (rgbData[i] != rgbDataPattern[i]) {</span>
+<span class="nc" id="L545">                    return false;</span>
+                }
+            }
+<span class="nc" id="L548">        } else {</span>
+            // compare PaintProc
+<span class="nc bnc" id="L550" title="All 2 branches missed.">            if (!paintProc.toString().equals(patternObj.getPaintProc().toString())) {</span>
+<span class="nc" id="L551">                return false;</span>
+            }
+        }
+
+        // compare other parameters
+<span class="nc bnc" id="L556" title="All 2 branches missed.">        if (xStep != patternObj.getXStep()) {</span>
+<span class="nc" id="L557">            return false;</span>
+        }
+<span class="nc bnc" id="L559" title="All 2 branches missed.">        if (yStep != patternObj.getYStep()) {</span>
+<span class="nc" id="L560">            return false;</span>
+        }
+<span class="nc bnc" id="L562" title="All 2 branches missed.">        if (paintType != patternObj.getPaintType()) {</span>
+<span class="nc" id="L563">            return false;</span>
+        }
+<span class="nc bnc" id="L565" title="All 2 branches missed.">        if (tilingType != patternObj.getTilingType()) {</span>
+<span class="nc" id="L566">            return false;</span>
+        }
+<span class="nc bnc" id="L568" title="All 2 branches missed.">        if (!bBox.equals(patternObj.getBoundingBox())) {</span>
+<span class="nc" id="L569">            return false;</span>
+        }
+<span class="nc bnc" id="L571" title="All 4 branches missed.">        if ((xUID != null) &amp;&amp; (patternObj.getXUID() != null)) {</span>
+<span class="nc bnc" id="L572" title="All 2 branches missed.">            if (!xUID.equals(patternObj.getXUID())) {</span>
+<span class="nc" id="L573">                return false;</span>
+            }
+        }
+<span class="nc" id="L576">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

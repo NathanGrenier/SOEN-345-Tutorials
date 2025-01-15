@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NamedColorProfileParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color.profile</a> &gt; <span class="el_source">NamedColorProfileParser.java</span></div><h1>NamedColorProfileParser.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: NamedColorProfileParser.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.java2d.color.profile;
+
+import java.awt.color.ColorSpace;
+import java.awt.color.ICC_Profile;
+import java.io.ByteArrayInputStream;
+import java.io.DataInput;
+import java.io.DataInputStream;
+import java.io.IOException;
+
+import org.apache.xmlgraphics.java2d.color.CIELabColorSpace;
+import org.apache.xmlgraphics.java2d.color.ColorSpaces;
+import org.apache.xmlgraphics.java2d.color.NamedColorSpace;
+import org.apache.xmlgraphics.java2d.color.RenderingIntent;
+
+/**
+ * This class is a parser for ICC named color profiles. It uses Java's {@link ICC_Profile} class
+ * for parsing the basic structure but adds functionality to parse certain profile tags.
+ */
+<span class="fc" id="L38">public class NamedColorProfileParser {</span>
+
+    private static final int MLUC = 0x6D6C7563; //'mluc'
+    private static final int NCL2 = 0x6E636C32; //'ncl2'
+
+    /**
+     * Indicates whether the profile is a named color profile.
+     * @param profile the color profile
+     * @return true if the profile is a named color profile, false otherwise
+     */
+    public static boolean isNamedColorProfile(ICC_Profile profile) {
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        return profile.getProfileClass() == ICC_Profile.CLASS_NAMEDCOLOR;</span>
+    }
+
+    /**
+     * Parses a named color profile (NCP).
+     * @param profile the profile to analyze
+     * @param profileName Optional profile name associated with this color profile
+     * @param profileURI Optional profile URI associated with this color profile
+     * @return an object representing the parsed NCP
+     * @throws IOException if an I/O error occurs
+     */
+    public NamedColorProfile parseProfile(ICC_Profile profile,
+            String profileName, String profileURI) throws IOException {
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (!isNamedColorProfile(profile)) {</span>
+<span class="nc" id="L63">            throw new IllegalArgumentException(&quot;Given profile is not a named color profile (NCP)&quot;);</span>
+        }
+<span class="fc" id="L65">        String profileDescription = getProfileDescription(profile);</span>
+<span class="fc" id="L66">        String copyright = getCopyright(profile);</span>
+<span class="fc" id="L67">        RenderingIntent intent = getRenderingIntent(profile);</span>
+<span class="fc" id="L68">        NamedColorSpace[] ncs = readNamedColors(profile, profileName, profileURI);</span>
+<span class="fc" id="L69">        return new NamedColorProfile(profileDescription, copyright, ncs, intent);</span>
+    }
+
+    /**
+     * Parses a named color profile (NCP).
+     * @param profile the profile to analyze
+     * @return an object representing the parsed NCP
+     * @throws IOException if an I/O error occurs
+     */
+    public NamedColorProfile parseProfile(ICC_Profile profile) throws IOException {
+<span class="fc" id="L79">        return parseProfile(profile, null, null);</span>
+    }
+
+    private String getProfileDescription(ICC_Profile profile) throws IOException {
+<span class="fc" id="L83">        byte[] tag = profile.getData(ICC_Profile.icSigProfileDescriptionTag);</span>
+<span class="fc" id="L84">        return readSimpleString(tag);</span>
+    }
+
+    private String getCopyright(ICC_Profile profile) throws IOException {
+<span class="fc" id="L88">        byte[] tag = profile.getData(ICC_Profile.icSigCopyrightTag);</span>
+<span class="fc" id="L89">        return readSimpleString(tag);</span>
+    }
+
+    private RenderingIntent getRenderingIntent(ICC_Profile profile) throws IOException {
+<span class="fc" id="L93">        byte[] hdr = profile.getData(ICC_Profile.icSigHead);</span>
+<span class="fc" id="L94">        int value = hdr[ICC_Profile.icHdrRenderingIntent];</span>
+<span class="fc" id="L95">        return RenderingIntent.fromICCValue(value);</span>
+    }
+
+    private NamedColorSpace[] readNamedColors(ICC_Profile profile,
+            String profileName, String profileURI) throws IOException {
+<span class="fc" id="L100">        byte[] tag = profile.getData(ICC_Profile.icSigNamedColor2Tag);</span>
+<span class="fc" id="L101">        DataInput din = new DataInputStream(new ByteArrayInputStream(tag));</span>
+<span class="fc" id="L102">        int sig = din.readInt();</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">        if (sig != NCL2) {</span>
+<span class="nc" id="L104">            throw new UnsupportedOperationException(&quot;Unsupported structure type: &quot;</span>
+<span class="nc" id="L105">                    + toSignatureString(sig) + &quot;. Expected &quot; + toSignatureString(NCL2));</span>
+        }
+<span class="fc" id="L107">        din.skipBytes(8);</span>
+<span class="fc" id="L108">        int numColors = din.readInt();</span>
+<span class="fc" id="L109">        NamedColorSpace[] result = new NamedColorSpace[numColors];</span>
+<span class="fc" id="L110">        int numDeviceCoord = din.readInt();</span>
+<span class="fc" id="L111">        String prefix = readAscii(din, 32);</span>
+<span class="fc" id="L112">        String suffix = readAscii(din, 32);</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        for (int i = 0; i &lt; numColors; i++) {</span>
+<span class="fc" id="L114">            String name = prefix + readAscii(din, 32) + suffix;</span>
+<span class="fc" id="L115">            int[] pcs = readUInt16Array(din, 3);</span>
+<span class="fc" id="L116">            float[] colorvalue = new float[3];</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            for (int j = 0; j &lt; pcs.length; j++) {</span>
+<span class="fc" id="L118">                colorvalue[j] = ((float)pcs[j]) / 0x8000;</span>
+            }
+
+            //device coordinates are ignored for now
+<span class="fc" id="L122">            /*int[] deviceCoord =*/ readUInt16Array(din, numDeviceCoord);</span>
+
+<span class="pc bpc" id="L124" title="2 of 3 branches missed.">            switch (profile.getPCSType()) {</span>
+            case ColorSpace.TYPE_XYZ:
+<span class="fc" id="L126">                result[i] = new NamedColorSpace(name, colorvalue, profileName, profileURI);</span>
+<span class="fc" id="L127">                break;</span>
+            case ColorSpace.TYPE_Lab:
+                //Not sure if this always D50 here,
+                //but the illuminant in the header is fixed to D50.
+<span class="nc" id="L131">                CIELabColorSpace labCS = ColorSpaces.getCIELabColorSpaceD50();</span>
+<span class="nc" id="L132">                result[i] = new NamedColorSpace(name, labCS.toColor(colorvalue, 1.0f),</span>
+                        profileName, profileURI);
+<span class="nc" id="L134">                break;</span>
+            default:
+<span class="nc" id="L136">                throw new UnsupportedOperationException(</span>
+<span class="nc" id="L137">                        &quot;PCS type is not supported: &quot; + profile.getPCSType());</span>
+            }
+        }
+<span class="fc" id="L140">        return result;</span>
+    }
+
+    private int[] readUInt16Array(DataInput din, int count) throws IOException {
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        if (count == 0) {</span>
+<span class="fc" id="L145">            return new int[0];</span>
+        }
+<span class="fc" id="L147">        int[] result = new int[count];</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="fc" id="L149">            int v = din.readUnsignedShort();</span>
+<span class="fc" id="L150">            result[i] = v;</span>
+        }
+<span class="fc" id="L152">        return result;</span>
+    }
+
+    private String readAscii(DataInput in, int maxLength) throws IOException {
+<span class="fc" id="L156">        byte[] data = new byte[maxLength];</span>
+<span class="fc" id="L157">        in.readFully(data);</span>
+<span class="fc" id="L158">        String result = new String(data, &quot;US-ASCII&quot;);</span>
+<span class="fc" id="L159">        int idx = result.indexOf('\0');</span>
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">        if (idx &gt;= 0) {</span>
+<span class="fc" id="L161">            result = result.substring(0, idx);</span>
+        }
+<span class="fc" id="L163">        return result;</span>
+    }
+
+    private String readSimpleString(byte[] tag) throws IOException {
+<span class="fc" id="L167">        DataInput din = new DataInputStream(new ByteArrayInputStream(tag));</span>
+<span class="fc" id="L168">        int sig = din.readInt();</span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">        if (sig == MLUC) {</span>
+<span class="fc" id="L170">            return readMLUC(din);</span>
+        } else {
+<span class="nc" id="L172">            return null; //Unsupported tag structure type</span>
+        }
+    }
+
+    private String readMLUC(DataInput din) throws IOException {
+<span class="fc" id="L177">        din.skipBytes(16);</span>
+<span class="fc" id="L178">        int firstLength = din.readInt();</span>
+<span class="fc" id="L179">        int firstOffset = din.readInt();</span>
+<span class="fc" id="L180">        int offset = 28;</span>
+<span class="fc" id="L181">        din.skipBytes(firstOffset - offset);</span>
+<span class="fc" id="L182">        byte[] utf16 = new byte[firstLength];</span>
+<span class="fc" id="L183">        din.readFully(utf16);</span>
+<span class="fc" id="L184">        return new String(utf16, &quot;UTF-16BE&quot;);</span>
+    }
+
+    private String toSignatureString(int sig) {
+<span class="nc" id="L188">        StringBuffer sb = new StringBuffer();</span>
+<span class="nc" id="L189">        sb.append((char)(sig &gt;&gt; 24 &amp; 0xFF));</span>
+<span class="nc" id="L190">        sb.append((char)(sig &gt;&gt; 16 &amp; 0xFF));</span>
+<span class="nc" id="L191">        sb.append((char)(sig &gt;&gt; 8 &amp; 0xFF));</span>
+<span class="nc" id="L192">        sb.append((char)(sig &amp; 0xFF));</span>
+<span class="nc" id="L193">        return sb.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

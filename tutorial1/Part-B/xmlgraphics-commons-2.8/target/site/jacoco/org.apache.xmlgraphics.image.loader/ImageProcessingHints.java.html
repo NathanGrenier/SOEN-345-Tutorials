@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageProcessingHints.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader</a> &gt; <span class="el_source">ImageProcessingHints.java</span></div><h1>ImageProcessingHints.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageProcessingHints.java 924666 2010-03-18 08:26:30Z jeremias $ */
+
+package org.apache.xmlgraphics.image.loader;
+
+/**
+ * This interface defines some standard hints to be used for image processing in this package.
+ * They are provided for convenience. You can define your own hints as you like.
+ * Generally, consumers should not rely on the presence of any hint!
+ */
+public interface ImageProcessingHints {
+
+    /** Used to send a hint about the source resolution for pixel to unit conversions. */
+<span class="fc" id="L30">    Object SOURCE_RESOLUTION = &quot;SOURCE_RESOLUTION&quot;; //Value: Number (unit dpi)</span>
+    /** Used to send a hint about the target resolution (of the final output format). */
+<span class="fc" id="L32">    Object TARGET_RESOLUTION = &quot;TARGET_RESOLUTION&quot;; //Value: Number (unit dpi)</span>
+
+    /**
+     * Used to pass in the {@link ImageSessionContext}. A consumer can use this to load embedded
+     * images over the same mechanism as the main image (ex. JPEG images referenced in an
+     * SVG image).
+     * @since 1.4
+     */
+<span class="fc" id="L40">    Object IMAGE_SESSION_CONTEXT = &quot;IMAGE_SESSION_CONTEXT&quot;; //Value: ImageSessionContext instance</span>
+
+    /**
+     * Used to pass in the {@link ImageManager}. A consumer can use this to load embedded
+     * images over the same mechanism as the main image (ex. JPEG images referenced in an
+     * SVG image).
+     * @since 1.4
+     */
+<span class="fc" id="L48">    Object IMAGE_MANAGER = &quot;IMAGE_MANAGER&quot;; //Value: ImageManager instance</span>
+
+    /** Used to tell the image loader to ignore any color profile in the image. */
+<span class="fc" id="L51">    Object IGNORE_COLOR_PROFILE = &quot;IGNORE_COLOR_PROFILE&quot;; //Value: Boolean</span>
+
+    /** Used to tell a bitmap producer to generate a certain type of bitmap. */
+<span class="fc" id="L54">    Object BITMAP_TYPE_INTENT = &quot;BITMAP_TYPE_INTENT&quot;;</span>
+
+    /**
+     * Used with BITMAP_TYPE_INTENT to indicate that the generated bitmap should be a
+     * grayscale image.
+     */
+    String BITMAP_TYPE_INTENT_GRAY = &quot;gray&quot;;
+
+    /**
+     * Used with BITMAP_TYPE_INTENT to indicate that the generated bitmap should be a
+     * 1 bit black and white image.
+     */
+    String BITMAP_TYPE_INTENT_MONO = &quot;mono&quot;;
+
+    /**
+     * Used to indicate how existing transparency information (for example, an alpha channel)
+     * shall be treated. */
+<span class="fc" id="L71">    Object TRANSPARENCY_INTENT = &quot;TRANSPARENCY_INTENT&quot;;</span>
+
+    /**
+     * Used with TRANSPARENCY_INTENT to indicate that any transparency information shall be
+     * preserved (the default).
+     */
+    String TRANSPARENCY_INTENT_PRESERVE = &quot;preserve&quot;;
+
+    /**
+     * Used with TRANSPARENCY_INTENT to indicate that any transparency information shall be
+     * ignored.
+     */
+    String TRANSPARENCY_INTENT_IGNORE = &quot;ignore&quot;;
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

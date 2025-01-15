@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TIFFImageWriter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.writer.internal</a> &gt; <span class="el_source">TIFFImageWriter.java</span></div><h1>TIFFImageWriter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: TIFFImageWriter.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.writer.internal;
+
+import java.awt.image.RenderedImage;
+import java.io.IOException;
+import java.io.OutputStream;
+
+import org.apache.xmlgraphics.image.codec.tiff.CompressionValue;
+import org.apache.xmlgraphics.image.codec.tiff.TIFFEncodeParam;
+import org.apache.xmlgraphics.image.codec.tiff.TIFFField;
+import org.apache.xmlgraphics.image.codec.tiff.TIFFImageDecoder;
+import org.apache.xmlgraphics.image.codec.tiff.TIFFImageEncoder;
+import org.apache.xmlgraphics.image.writer.AbstractImageWriter;
+import org.apache.xmlgraphics.image.writer.ImageWriterParams;
+import org.apache.xmlgraphics.image.writer.MultiImageWriter;
+import org.apache.xmlgraphics.image.writer.ResolutionUnit;
+
+/**
+ * ImageWriter implementation that uses the internal TIFF codec to
+ * write TIFF files.
+ *
+ * @version $Id: TIFFImageWriter.java 1681108 2015-05-22 13:26:12Z ssteiner $
+ */
+<span class="fc" id="L42">public class TIFFImageWriter extends AbstractImageWriter {</span>
+
+    /** {@inheritDoc} */
+    public void writeImage(RenderedImage image, OutputStream out)
+            throws IOException {
+<span class="nc" id="L47">        writeImage(image, out, null);</span>
+<span class="nc" id="L48">    }</span>
+
+    /** {@inheritDoc} */
+    public void writeImage(RenderedImage image, OutputStream out,
+            ImageWriterParams params) throws IOException {
+<span class="nc" id="L53">        TIFFEncodeParam encodeParams = createTIFFEncodeParams(params);</span>
+<span class="nc" id="L54">        TIFFImageEncoder encoder = new TIFFImageEncoder(out, encodeParams);</span>
+<span class="nc" id="L55">        encoder.encode(image);</span>
+<span class="nc" id="L56">    }</span>
+
+    private TIFFEncodeParam createTIFFEncodeParams(ImageWriterParams params) {
+<span class="nc" id="L59">        TIFFEncodeParam encodeParams = new TIFFEncodeParam();</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (params == null) {</span>
+<span class="nc" id="L61">            encodeParams.setCompression(CompressionValue.NONE);</span>
+        } else {
+<span class="nc" id="L63">            encodeParams.setCompression(CompressionValue.getValue(params.getCompressionMethod()));</span>
+
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if (params.getResolution() != null) {</span>
+                int numPixX;
+                int numPixY;
+                int denom;
+
+<span class="nc bnc" id="L70" title="All 2 branches missed.">                if (ResolutionUnit.INCH == params.getResolutionUnit()) {</span>
+<span class="nc" id="L71">                    numPixX = params.getXResolution();</span>
+<span class="nc" id="L72">                    numPixY = params.getYResolution();</span>
+<span class="nc" id="L73">                    denom = 1;</span>
+                } else {
+                    // Set target resolution
+<span class="nc" id="L76">                    float pixXSzMM = 25.4f / params.getXResolution().floatValue();</span>
+<span class="nc" id="L77">                    float pixYSzMM = 25.4f / params.getYResolution().floatValue();</span>
+                    // num Pixs in 100 Meters
+<span class="nc" id="L79">                    numPixX = (int)(((1000 * 100) / pixXSzMM) + 0.5);</span>
+<span class="nc" id="L80">                    numPixY = (int)(((1000 * 100) / pixYSzMM) + 0.5);</span>
+<span class="nc" id="L81">                    denom = 100 * 100;  // Centimeters per 100 Meters;</span>
+                }
+
+<span class="nc" id="L84">                long [] xRational = {numPixX, denom};</span>
+<span class="nc" id="L85">                long [] yRational = {numPixY, denom};</span>
+<span class="nc" id="L86">                TIFFField [] fields = {</span>
+                    new TIFFField(TIFFImageDecoder.TIFF_RESOLUTION_UNIT,
+                                  TIFFField.TIFF_SHORT, 1,
+<span class="nc" id="L89">                                  new char[] {(char)params.getResolutionUnit().getValue()}),</span>
+                    new TIFFField(TIFFImageDecoder.TIFF_X_RESOLUTION,
+                                  TIFFField.TIFF_RATIONAL, 1,
+                                  new long[][] {xRational}),
+                    new TIFFField(TIFFImageDecoder.TIFF_Y_RESOLUTION,
+                                  TIFFField.TIFF_RATIONAL, 1,
+                                  new long[][] {yRational})
+                        };
+<span class="nc" id="L97">                encodeParams.setExtraFields(fields);</span>
+            }
+        }
+<span class="nc" id="L100">        return encodeParams;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String getMIMEType() {
+<span class="fc" id="L105">        return &quot;image/tiff&quot;;</span>
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public MultiImageWriter createMultiImageWriter(OutputStream out) throws IOException {
+<span class="nc" id="L111">        return new TIFFMultiImageWriter(out);</span>
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public boolean supportsMultiImageWriter() {
+<span class="nc" id="L117">        return true;</span>
+    }
+
+    private class TIFFMultiImageWriter implements MultiImageWriter {
+
+        private OutputStream out;
+        private TIFFEncodeParam encodeParams;
+        private TIFFImageEncoder encoder;
+        private Object context;
+
+<span class="nc" id="L127">        public TIFFMultiImageWriter(OutputStream out) throws IOException {</span>
+<span class="nc" id="L128">            this.out = out;</span>
+<span class="nc" id="L129">        }</span>
+
+        public void writeImage(RenderedImage image, ImageWriterParams params) throws IOException {
+<span class="nc bnc" id="L132" title="All 2 branches missed.">            if (encoder == null) {</span>
+<span class="nc" id="L133">                encodeParams = createTIFFEncodeParams(params);</span>
+<span class="nc" id="L134">                encoder = new TIFFImageEncoder(out, encodeParams);</span>
+            }
+<span class="nc" id="L136">            context = encoder.encodeMultiple(context, image);</span>
+<span class="nc" id="L137">        }</span>
+
+        public void close() throws IOException {
+<span class="nc bnc" id="L140" title="All 2 branches missed.">            if (encoder != null) {</span>
+<span class="nc" id="L141">                encoder.finishMultiple(context);</span>
+            }
+<span class="nc" id="L143">            encoder = null;</span>
+<span class="nc" id="L144">            encodeParams = null;</span>
+<span class="nc" id="L145">            out.flush();</span>
+<span class="nc" id="L146">        }</span>
+
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

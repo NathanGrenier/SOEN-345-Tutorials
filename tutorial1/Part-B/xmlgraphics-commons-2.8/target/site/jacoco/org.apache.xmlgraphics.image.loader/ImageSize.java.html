@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageSize.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader</a> &gt; <span class="el_source">ImageSize.java</span></div><h1>ImageSize.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageSize.java 696968 2008-09-19 07:52:04Z jeremias $ */
+
+package org.apache.xmlgraphics.image.loader;
+
+import java.awt.Dimension;
+import java.awt.geom.Dimension2D;
+
+import org.apache.xmlgraphics.java2d.Dimension2DDouble;
+import org.apache.xmlgraphics.util.UnitConv;
+
+/**
+ * Encapsulates the size of an image.
+ */
+public class ImageSize {
+
+    private int widthPx;
+    private int heightPx;
+
+    private int widthMpt;
+    private int heightMpt;
+    private int baselinePositionFromBottomMpt;
+
+    private double dpiHorizontal;
+    private double dpiVertical;
+
+
+    /**
+     * Constructor.
+     * @param widthPx the width of the image in pixels
+     * @param heightPx the height of the image in pixels
+     * @param dpiHorizontal the horizontal resolution in dots per inch
+     * @param dpiVertical the vertical resolution in dots per inch
+     */
+<span class="fc" id="L51">    public ImageSize(int widthPx, int heightPx, double dpiHorizontal, double dpiVertical) {</span>
+<span class="fc" id="L52">        setSizeInPixels(widthPx, heightPx);</span>
+<span class="fc" id="L53">        setResolution(dpiHorizontal, dpiVertical);</span>
+<span class="fc" id="L54">    }</span>
+
+    /**
+     * Constructor.
+     * @param widthPx the width of the image in pixels
+     * @param heightPx the height of the image in pixels
+     * @param dpi the resolution in dots per inch
+     */
+    public ImageSize(int widthPx, int heightPx, double dpi) {
+<span class="fc" id="L63">        this(widthPx, heightPx, dpi, dpi);</span>
+<span class="fc" id="L64">    }</span>
+
+    /**
+     * Default Constructor.
+     */
+<span class="fc" id="L69">    public ImageSize() {</span>
+        //nop
+<span class="fc" id="L71">    }</span>
+
+    /**
+     * Sets the image's size in pixels.
+     * @param width the width in pixels
+     * @param height the height in pixels
+     */
+    public void setSizeInPixels(int width, int height) {
+<span class="fc" id="L79">        this.widthPx = width;</span>
+<span class="fc" id="L80">        this.heightPx = height;</span>
+<span class="fc" id="L81">    }</span>
+
+    /**
+     * Sets the image's size in millipoints.
+     * @param width the width in millipoints
+     * @param height the height in millipoints
+     */
+    public void setSizeInMillipoints(int width, int height) {
+<span class="fc" id="L89">        this.widthMpt = width;</span>
+<span class="fc" id="L90">        this.heightMpt = height;</span>
+<span class="fc" id="L91">    }</span>
+
+    /**
+     * Sets the image's resolution for interpreting the pixel size.
+     * @param horizontal the horizontal resolution in dpi
+     * @param vertical the vertical resolution in dpi
+     */
+    public void setResolution(double horizontal, double vertical) {
+<span class="fc" id="L99">        this.dpiHorizontal = horizontal;</span>
+<span class="fc" id="L100">        this.dpiVertical = vertical;</span>
+<span class="fc" id="L101">    }</span>
+
+    /**
+     * Sets the image's resolution for interpreting the pixel size.
+     * @param resolution the resolution in dpi
+     */
+    public void setResolution(double resolution) {
+<span class="fc" id="L108">        setResolution(resolution, resolution);</span>
+<span class="fc" id="L109">    }</span>
+
+    /**
+     * Sets the vertical position of the baseline of the image relative to the bottom of the image.
+     * The default is 0mpt (i.e. the image is bottom-aligned). This is used for MathML images, for
+     * example, which have a baseline. Using the value the images can be properly aligned with
+     * other text. Most other image don't have an implicit baseline.
+     * @param distance the distance from the bottom of the image in millipoints
+     */
+    public void setBaselinePositionFromBottom(int distance) {
+<span class="nc" id="L119">        this.baselinePositionFromBottomMpt = distance;</span>
+<span class="nc" id="L120">    }</span>
+
+    /**
+     * Returns the vertical position of the baseline of the image relative to the bottom of the
+     * image. The default is 0mpt (i.e. the image is bottom-aligned). This is used for MathML
+     * images, for example, which have a baseline. Using the value the images can be properly
+     * aligned with other text. Most other image don't have an implicit baseline.
+     * @return the distance from the bottom of the image in millipoints
+     */
+    public int getBaselinePositionFromBottom() {
+<span class="nc" id="L130">        return this.baselinePositionFromBottomMpt;</span>
+    }
+
+    /**
+     * Returns the image's width in pixels.
+     * @return the width in pixels
+     */
+    public int getWidthPx() {
+<span class="fc" id="L138">        return widthPx;</span>
+    }
+
+    /**
+     * Returns the image's height in pixels.
+     * @return the height in pixels
+     */
+    public int getHeightPx() {
+<span class="fc" id="L146">        return heightPx;</span>
+    }
+
+    /**
+     * Returns the image's width in millipoints.
+     * @return the width in millipoints
+     */
+    public int getWidthMpt() {
+<span class="fc" id="L154">        return widthMpt;</span>
+    }
+
+    /**
+     * Returns the image's height in millipoints.
+     * @return the height in millipoints
+     */
+    public int getHeightMpt() {
+<span class="fc" id="L162">        return heightMpt;</span>
+    }
+
+    /**
+     * Returns the image's horizontal resolution in dpi (dots per inch).
+     * @return the horizontal resolution in dpi
+     */
+    public double getDpiHorizontal() {
+<span class="fc" id="L170">        return dpiHorizontal;</span>
+    }
+
+    /**
+     * Returns the image's vertical resolution in dpi (dots per inch).
+     * @return the vertical resolution in dpi
+     */
+    public double getDpiVertical() {
+<span class="fc" id="L178">        return dpiVertical;</span>
+    }
+
+    /**
+     * Returns the size in millipoints as a Dimension object.
+     * @return the size in millipoints
+     */
+    public Dimension getDimensionMpt() {
+<span class="nc" id="L186">        return new Dimension(getWidthMpt(), getHeightMpt());</span>
+    }
+
+    /**
+     * Returns the size in points as a Dimension2D object.
+     * @return the size in points
+     */
+    public Dimension2D getDimensionPt() {
+<span class="nc" id="L194">        return new Dimension2DDouble(getWidthMpt() / 1000.0, getHeightMpt() / 1000.0);</span>
+    }
+
+    /**
+     * Returns the size in pixels as a Dimension object.
+     * @return the size in pixels
+     */
+    public Dimension getDimensionPx() {
+<span class="nc" id="L202">        return new Dimension(getWidthPx(), getHeightPx());</span>
+    }
+
+    private void checkResolutionAvailable() {
+<span class="pc bpc" id="L206" title="2 of 4 branches missed.">        if (this.dpiHorizontal == 0 || this.dpiVertical == 0) {</span>
+<span class="nc" id="L207">            throw new IllegalStateException(&quot;The resolution must be set&quot;);</span>
+        }
+<span class="fc" id="L209">    }</span>
+
+    /**
+     * Calculates the size in millipoints based on the size in pixels and the resolution.
+     */
+    public void calcSizeFromPixels() {
+<span class="fc" id="L215">        checkResolutionAvailable();</span>
+<span class="fc" id="L216">        this.widthMpt = (int)Math.round(UnitConv.in2mpt(this.widthPx / this.dpiHorizontal));</span>
+<span class="fc" id="L217">        this.heightMpt = (int)Math.round(UnitConv.in2mpt(this.heightPx / this.dpiVertical));</span>
+<span class="fc" id="L218">    }</span>
+
+    /**
+     * Calculates the size in pixels based on the size in millipoints and the resolution.
+     */
+    public void calcPixelsFromSize() {
+<span class="fc" id="L224">        checkResolutionAvailable();</span>
+<span class="fc" id="L225">        this.widthPx = (int)Math.round(UnitConv.mpt2in(this.widthMpt * this.dpiHorizontal));</span>
+<span class="fc" id="L226">        this.heightPx = (int)Math.round(UnitConv.mpt2in(this.heightMpt * this.dpiVertical));</span>
+<span class="fc" id="L227">    }</span>
+
+    /** {@inheritDoc} */
+    public String toString() {
+<span class="nc" id="L231">        StringBuffer sb = new StringBuffer();</span>
+<span class="nc" id="L232">        sb.append(&quot;Size: &quot;);</span>
+<span class="nc" id="L233">        sb.append(getWidthMpt()).append('x').append(getHeightMpt()).append(&quot; mpt&quot;);</span>
+<span class="nc" id="L234">        sb.append(&quot; (&quot;);</span>
+<span class="nc" id="L235">        sb.append(getWidthPx()).append('x').append(getHeightPx()).append(&quot; px&quot;);</span>
+<span class="nc" id="L236">        sb.append(&quot; at &quot;).append(getDpiHorizontal()).append('x').append(getDpiVertical());</span>
+<span class="nc" id="L237">        sb.append(&quot; dpi&quot;);</span>
+<span class="nc" id="L238">        sb.append(&quot;)&quot;);</span>
+<span class="nc" id="L239">        return sb.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

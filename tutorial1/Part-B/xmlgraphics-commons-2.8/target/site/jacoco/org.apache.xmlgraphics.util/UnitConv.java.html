@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnitConv.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util</a> &gt; <span class="el_source">UnitConv.java</span></div><h1>UnitConv.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: UnitConv.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.util;
+
+import java.awt.geom.AffineTransform;
+import java.util.Locale;
+
+/**
+ * Utility class for unit conversions.
+ */
+public final class UnitConv {
+
+    private UnitConv() {
+    }
+
+    /** conversion factory from millimeters to inches. */
+    public static final float IN2MM = 25.4f;
+
+    /** conversion factory from centimeters to inches. */
+    public static final float IN2CM = 2.54f;
+
+    /** conversion factory from inches to points. */
+    public static final int IN2PT = 72;
+
+    /** Describes the unit pica. */
+    public static final String PICA = &quot;pc&quot;;
+
+    /** Describes the unit point. */
+    public static final String POINT = &quot;pt&quot;;
+
+    /** Describes the unit millimeter. */
+    public static final String MM = &quot;mm&quot;;
+
+    /** Describes the unit centimeter. */
+    public static final String CM = &quot;cm&quot;;
+
+    /** Describes the unit inch. */
+    public static final String INCH = &quot;in&quot;;
+
+    /** Describes the unit millipoint. */
+    public static final String MPT = &quot;mpt&quot;;
+
+        /** Describes the unit pixel. */
+    public static final String PX = &quot;px&quot;;
+
+    /**
+     * Converts millimeters (mm) to points (pt)
+     * @param mm the value in mm
+     * @return the value in pt
+     */
+    public static double mm2pt(double mm) {
+<span class="fc" id="L69">        return mm * IN2PT / IN2MM;</span>
+    }
+
+    /**
+     * Converts millimeters (mm) to millipoints (mpt)
+     * @param mm the value in mm
+     * @return the value in mpt
+     */
+    public static double mm2mpt(double mm) {
+<span class="fc" id="L78">        return mm * 1000 * IN2PT / IN2MM;</span>
+    }
+
+    /**
+     * Converts points (pt) to millimeters (mm)
+     * @param pt the value in pt
+     * @return the value in mm
+     */
+    public static double pt2mm(double pt) {
+<span class="fc" id="L87">        return pt * IN2MM / IN2PT;</span>
+    }
+
+    /**
+     * Converts millimeters (mm) to inches (in)
+     * @param mm the value in mm
+     * @return the value in inches
+     */
+    public static double mm2in(double mm) {
+<span class="fc" id="L96">        return mm / IN2MM;</span>
+    }
+
+    /**
+     * Converts inches (in) to millimeters (mm)
+     * @param in the value in inches
+     * @return the value in mm
+     */
+    public static double in2mm(double in) {
+<span class="fc" id="L105">        return in * IN2MM;</span>
+    }
+
+    /**
+     * Converts inches (in) to millipoints (mpt)
+     * @param in the value in inches
+     * @return the value in mpt
+     */
+    public static double in2mpt(double in) {
+<span class="fc" id="L114">        return in * IN2PT * 1000;</span>
+    }
+
+    /**
+     * Converts inches (in) to points (pt)
+     * @param in the value in inches
+     * @return the value in pt
+     */
+    public static double in2pt(double in) {
+<span class="nc" id="L123">        return in * IN2PT;</span>
+    }
+
+    /**
+     * Converts millipoints (mpt) to inches (in)
+     * @param mpt the value in mpt
+     * @return the value in inches
+     */
+    public static double mpt2in(double mpt) {
+<span class="fc" id="L132">        return mpt / IN2PT / 1000;</span>
+    }
+
+    /**
+     * Converts millimeters (mm) to pixels (px)
+     * @param mm the value in mm
+     * @param resolution the resolution in dpi (dots per inch)
+     * @return the value in pixels
+     */
+    public static double mm2px(double mm, int resolution) {
+<span class="fc" id="L142">        return mm2in(mm) * resolution;</span>
+    }
+
+    /**
+     * Converts millipoints (mpt) to pixels (px)
+     * @param mpt the value in mpt
+     * @param resolution the resolution in dpi (dots per inch)
+     * @return the value in pixels
+     */
+    public static double mpt2px(double mpt, int resolution) {
+<span class="fc" id="L152">        return mpt2in(mpt) * resolution;</span>
+    }
+
+    /**
+     * Converts a millipoint-based transformation matrix to points.
+     * @param at a millipoint-based transformation matrix
+     * @return a point-based transformation matrix
+     */
+    public static AffineTransform mptToPt(AffineTransform at) {
+<span class="nc" id="L161">        double[] matrix = new double[6];</span>
+<span class="nc" id="L162">        at.getMatrix(matrix);</span>
+        //Convert to points
+<span class="nc" id="L164">        matrix[4] = matrix[4] / 1000;</span>
+<span class="nc" id="L165">        matrix[5] = matrix[5] / 1000;</span>
+<span class="nc" id="L166">        return new AffineTransform(matrix);</span>
+    }
+
+    /**
+     * Converts a point-based transformation matrix to millipoints.
+     * @param at a point-based transformation matrix
+     * @return a millipoint-based transformation matrix
+     */
+    public static AffineTransform ptToMpt(AffineTransform at) {
+<span class="nc" id="L175">        double[] matrix = new double[6];</span>
+<span class="nc" id="L176">        at.getMatrix(matrix);</span>
+        //Convert to millipoints
+<span class="nc" id="L178">        matrix[4] = matrix[4] * 1000;</span>
+<span class="nc" id="L179">        matrix[5] = matrix[5] * 1000;</span>
+<span class="nc" id="L180">        return new AffineTransform(matrix);</span>
+    }
+
+    /**
+     * Convert the given unit length to a dimensionless integer representing
+     * a whole number of base units (milli-points).
+     *
+     * @param value input unit value
+     * @return int millipoints
+     */
+    public static int convert(String value) {
+<span class="nc" id="L191">        double retValue = 0;</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">        if (value != null) {</span>
+<span class="nc bnc" id="L193" title="All 2 branches missed.">            if (value.toLowerCase(Locale.getDefault()).indexOf(PX) &gt;= 0) {</span>
+<span class="nc" id="L194">                retValue = Double.parseDouble(value.substring(0, value.length() - 2));</span>
+<span class="nc" id="L195">                retValue *= 1000;</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">            } else if (value.toLowerCase(Locale.getDefault()).indexOf(INCH) &gt;= 0) {</span>
+<span class="nc" id="L197">                retValue = Double.parseDouble(value.substring(0, value.length() - 2));</span>
+<span class="nc" id="L198">                retValue *= 72000;</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">            } else if (value.toLowerCase(Locale.getDefault()).indexOf(CM) &gt;= 0) {</span>
+<span class="nc" id="L200">                retValue = Double.parseDouble(value.substring(0, value.length() - 2));</span>
+<span class="nc" id="L201">                retValue *= 28346.4567;</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">            } else if (value.toLowerCase(Locale.getDefault()).indexOf(MM) &gt;= 0) {</span>
+<span class="nc" id="L203">                retValue = Double.parseDouble(value.substring(0, value.length() - 2));</span>
+<span class="nc" id="L204">                retValue *= 2834.64567;</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">            } else if (value.toLowerCase(Locale.getDefault()).indexOf(MPT) &gt;= 0) {</span>
+<span class="nc" id="L206">                retValue = Double.parseDouble(value.substring(0, value.length() - 3));</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            } else if (value.toLowerCase(Locale.getDefault()).indexOf(POINT) &gt;= 0) {</span>
+<span class="nc" id="L208">                retValue = Double.parseDouble(value.substring(0, value.length() - 2));</span>
+<span class="nc" id="L209">                retValue *= 1000;</span>
+<span class="nc bnc" id="L210" title="All 2 branches missed.">            } else if (value.toLowerCase(Locale.getDefault()).indexOf(PICA) &gt;= 0) {</span>
+<span class="nc" id="L211">                retValue = Double.parseDouble(value.substring(0, value.length() - 2));</span>
+<span class="nc" id="L212">                retValue *= 12000;</span>
+            }
+        }
+<span class="nc" id="L215">        return (int)retValue;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EPSDocumentGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.ps</a> &gt; <span class="el_source">EPSDocumentGraphics2D.java</span></div><h1>EPSDocumentGraphics2D.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: EPSDocumentGraphics2D.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.java2d.ps;
+
+import java.io.IOException;
+
+import org.apache.xmlgraphics.ps.DSCConstants;
+
+/**
+ * This class is a wrapper for the &lt;tt&gt;AbstractPSDocumentGraphics2D&lt;/tt&gt; that
+ * is used to create EPS (Encapsulated PostScript) files instead of PS file.
+ *
+ * @version $Id: EPSDocumentGraphics2D.java 1732018 2016-02-24 04:51:06Z gadams $
+ * @see org.apache.xmlgraphics.java2d.ps.PSGraphics2D
+ * @see org.apache.xmlgraphics.java2d.ps.AbstractPSDocumentGraphics2D
+ */
+public class EPSDocumentGraphics2D extends AbstractPSDocumentGraphics2D {
+
+    /**
+     * Create a new EPSDocumentGraphics2D.
+     * This is used to create a new EPS document, the height,
+     * width and output stream can be setup later.
+     * For use by the transcoder which needs font information
+     * for the bridge before the document size is known.
+     * The resulting document is written to the stream after rendering.
+     *
+     * @param textAsShapes set this to true so that text will be rendered
+     * using curves and not the font.
+     */
+    public EPSDocumentGraphics2D(boolean textAsShapes) {
+<span class="nc" id="L48">        super(textAsShapes);</span>
+<span class="nc" id="L49">    }</span>
+
+    /** {@inheritDoc} */
+    protected void writeFileHeader() throws IOException {
+<span class="nc" id="L53">        final Long pagewidth = (long) this.width;</span>
+<span class="nc" id="L54">        final Long pageheight = (long) this.height;</span>
+
+        //PostScript Header
+<span class="nc" id="L57">        gen.writeln(DSCConstants.PS_ADOBE_30 + &quot; &quot; + DSCConstants.EPSF_30);</span>
+<span class="nc" id="L58">        gen.writeDSCComment(DSCConstants.CREATOR,</span>
+                    new String[] {&quot;Apache XML Graphics Commons&quot;
+                        + &quot;: EPS Generator for Java2D&quot;});
+<span class="nc" id="L61">        gen.writeDSCComment(DSCConstants.CREATION_DATE,</span>
+                    new Object[] {new java.util.Date()});
+<span class="nc" id="L63">        gen.writeDSCComment(DSCConstants.PAGES, DSCConstants.ATEND);</span>
+<span class="nc" id="L64">        gen.writeDSCComment(DSCConstants.BBOX, new Object[]</span>
+                {ZERO, ZERO, pagewidth, pageheight});
+<span class="nc" id="L66">        gen.writeDSCComment(DSCConstants.LANGUAGE_LEVEL, gen.getPSLevel());</span>
+<span class="nc" id="L67">        gen.writeDSCComment(DSCConstants.END_COMMENTS);</span>
+
+        //Prolog
+<span class="nc" id="L70">        gen.writeDSCComment(DSCConstants.BEGIN_PROLOG);</span>
+<span class="nc" id="L71">        writeProcSets();</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (customTextHandler instanceof PSTextHandler) {</span>
+<span class="nc" id="L73">            ((PSTextHandler)customTextHandler).writeSetup();</span>
+        }
+<span class="nc" id="L75">        gen.writeDSCComment(DSCConstants.END_PROLOG);</span>
+<span class="nc" id="L76">    }</span>
+
+    /** {@inheritDoc} */
+    protected void writePageHeader() throws IOException {
+<span class="nc" id="L80">        Integer pageNumber = this.pagecount;</span>
+<span class="nc" id="L81">        gen.writeDSCComment(DSCConstants.PAGE, new Object[]</span>
+<span class="nc" id="L82">                {pageNumber.toString(), pageNumber});</span>
+<span class="nc" id="L83">        gen.writeDSCComment(DSCConstants.PAGE_BBOX, new Object[]</span>
+<span class="nc" id="L84">                {ZERO, ZERO, width, height});</span>
+<span class="nc" id="L85">        gen.writeDSCComment(DSCConstants.BEGIN_PAGE_SETUP);</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (customTextHandler instanceof PSTextHandler) {</span>
+<span class="nc" id="L87">            ((PSTextHandler)customTextHandler).writePageSetup();</span>
+        }
+<span class="nc" id="L89">    }</span>
+
+    /** {@inheritDoc} */
+    protected void writePageTrailer() throws IOException {
+        //nop, no DSC PageTrailer needed
+<span class="nc" id="L94">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

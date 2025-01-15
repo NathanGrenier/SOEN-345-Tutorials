@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DeviceCMYKColorSpace.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color</a> &gt; <span class="el_source">DeviceCMYKColorSpace.java</span></div><h1>DeviceCMYKColorSpace.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DeviceCMYKColorSpace.java 1400596 2012-10-21 08:49:02Z gadams $ */
+
+package org.apache.xmlgraphics.java2d.color;
+
+import java.awt.Color;
+
+/**
+ * This class represents an uncalibrated CMYK color space.
+ */
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">public class DeviceCMYKColorSpace extends AbstractDeviceSpecificColorSpace</span>
+            implements ColorSpaceOrigin {
+
+    private static final long serialVersionUID = 2925508946083542974L;
+
+    /** The name for the uncalibrated CMYK pseudo-profile */
+    public static final String PSEUDO_PROFILE_NAME = &quot;#CMYK&quot;;
+
+    /**
+     * Constructs an uncalibrated CMYK ColorSpace object with
+     * {@link java.awt.color.ColorSpace#TYPE_CMYK} and 4 components.
+     * @see java.awt.color.ColorSpace#ColorSpace(int, int)
+     */
+    public DeviceCMYKColorSpace() {
+<span class="fc" id="L41">        super(TYPE_CMYK, 4);</span>
+<span class="fc" id="L42">    }</span>
+
+    /**
+     * Returns an instance of an uncalibrated CMYK color space.
+     * @return CMYKColorSpace the requested color space object
+     * @deprecated Use {@link ColorSpaces#getDeviceCMYKColorSpace()} instead.
+     */
+    @Deprecated
+    public static DeviceCMYKColorSpace getInstance() {
+<span class="nc" id="L51">        return ColorSpaces.getDeviceCMYKColorSpace();</span>
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public float[] toRGB(float[] colorvalue) {
+<span class="fc" id="L57">        return new float [] {</span>
+            (1 - colorvalue[0]) * (1 - colorvalue[3]),
+            (1 - colorvalue[1]) * (1 - colorvalue[3]),
+            (1 - colorvalue[2]) * (1 - colorvalue[3])};
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public float[] fromRGB(float[] rgbvalue) {
+<span class="pc bpc" id="L66" title="2 of 4 branches missed.">        assert rgbvalue.length == 3;</span>
+        //Note: this is an arbitrary conversion, not a color-managed one!
+<span class="fc" id="L68">        float r = rgbvalue[0];</span>
+<span class="fc" id="L69">        float g = rgbvalue[1];</span>
+<span class="fc" id="L70">        float b = rgbvalue[2];</span>
+<span class="pc bpc" id="L71" title="2 of 4 branches missed.">        if (r == g &amp;&amp; r == b) {</span>
+<span class="fc" id="L72">            return new float[] {0, 0, 0, 1 - r};</span>
+        } else {
+<span class="nc" id="L74">            float c = 1 - r;</span>
+<span class="nc" id="L75">            float m = 1 - g;</span>
+<span class="nc" id="L76">            float y = 1 - b;</span>
+<span class="nc" id="L77">            float k = Math.min(c, Math.min(m, y));</span>
+<span class="nc" id="L78">            return new float[] {c, m, y, k};</span>
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public float[] toCIEXYZ(float[] colorvalue) {
+<span class="nc" id="L85">        throw new UnsupportedOperationException(&quot;NYI&quot;);</span>
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public float[] fromCIEXYZ(float[] colorvalue) {
+<span class="nc" id="L91">        throw new UnsupportedOperationException(&quot;NYI&quot;);</span>
+    }
+
+    /**
+     * Creates a color instance representing a device-specific CMYK color. An sRGB value
+     * is calculated from the CMYK colors but it may not correctly represent the given CMYK
+     * values.
+     * @param cmykComponents the CMYK components
+     * @return the device-specific color
+     */
+    public static Color createCMYKColor(float[] cmykComponents) {
+<span class="fc" id="L102">        DeviceCMYKColorSpace cmykCs = ColorSpaces.getDeviceCMYKColorSpace();</span>
+<span class="fc" id="L103">        Color cmykColor = new ColorWithAlternatives(cmykCs, cmykComponents, 1.0f, null);</span>
+<span class="fc" id="L104">        return cmykColor;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String getProfileName() {
+<span class="fc" id="L109">        return PSEUDO_PROFILE_NAME;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String getProfileURI() {
+<span class="fc" id="L114">        return null; //No URI</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageXMLDOM.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">ImageXMLDOM.java</span></div><h1>ImageXMLDOM.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageXMLDOM.java 682720 2008-08-05 14:22:29Z jeremias $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import org.w3c.dom.Document;
+
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.XMLNamespaceEnabledImageFlavor;
+
+/**
+ * This class is an implementation of the Image interface exposing an XML DOM (W3C).
+ */
+public class ImageXMLDOM extends AbstractImage {
+
+    private ImageFlavor flavor;
+    private Document doc;
+    private String rootNamespace;
+
+    /**
+     * Main constructor.
+     * @param info the image info object
+     * @param doc the W3C DOM document
+     * @param rootNamespace the root XML namespace of the XML document in the DOM
+     */
+    public ImageXMLDOM(ImageInfo info, Document doc, String rootNamespace) {
+<span class="nc" id="L44">        super(info);</span>
+<span class="nc" id="L45">        this.doc = doc;</span>
+<span class="nc" id="L46">        this.rootNamespace = rootNamespace;</span>
+<span class="nc" id="L47">        this.flavor = new XMLNamespaceEnabledImageFlavor(ImageFlavor.XML_DOM, rootNamespace);</span>
+<span class="nc" id="L48">    }</span>
+
+    /**
+     * Main constructor.
+     * @param info the image info object
+     * @param doc the W3C DOM document
+     * @param flavor the image flavor
+     */
+    public ImageXMLDOM(ImageInfo info, Document doc, XMLNamespaceEnabledImageFlavor flavor) {
+<span class="nc" id="L57">        super(info);</span>
+<span class="nc" id="L58">        this.doc = doc;</span>
+<span class="nc" id="L59">        this.rootNamespace = flavor.getNamespace();</span>
+<span class="nc" id="L60">        this.flavor = flavor;</span>
+<span class="nc" id="L61">    }</span>
+
+    /** {@inheritDoc} */
+    public ImageFlavor getFlavor() {
+<span class="nc" id="L65">        return this.flavor;</span>
+    }
+
+    /** {@inheritDoc} */
+    public boolean isCacheable() {
+<span class="nc" id="L70">        return true;</span>
+    }
+
+    /**
+     * Returns the contained W3C DOM document.
+     * @return the DOM
+     */
+    public Document getDocument() {
+<span class="nc" id="L78">        return this.doc;</span>
+    }
+
+    /**
+     * Returns the root XML namespace of the XML document.
+     * @return the root namespace
+     */
+    public String getRootNamespace() {
+<span class="nc" id="L86">        return this.rootNamespace;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

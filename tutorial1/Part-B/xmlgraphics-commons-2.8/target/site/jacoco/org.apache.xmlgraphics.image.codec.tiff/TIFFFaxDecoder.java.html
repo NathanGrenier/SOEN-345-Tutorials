@@ -1,0 +1,1482 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TIFFFaxDecoder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.tiff</a> &gt; <span class="el_source">TIFFFaxDecoder.java</span></div><h1>TIFFFaxDecoder.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: TIFFFaxDecoder.java 1902007 2022-06-17 09:51:56Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.codec.tiff;
+
+import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
+
+// CSOFF: InnerAssignment
+// CSOFF: MultipleVariableDeclarations
+// CSOFF: OperatorWrap
+// CSOFF: WhitespaceAround
+
+class TIFFFaxDecoder {
+
+    private int bitPointer;
+    private int bytePointer;
+    private byte[] data;
+    private int w;
+    private int fillOrder;
+
+    // Data structures needed to store changing elements for the previous
+    // and the current scanline
+    private int changingElemSize;
+    private int[] prevChangingElems;
+    private int[] currChangingElems;
+
+    // Element at which to start search in getNextChangingElement
+    private int lastChangingElement;
+
+<span class="nc" id="L46">    private int compression = 2;</span>
+
+    // Variables set by T4Options
+//    private int uncompressedMode = 0;
+    private int fillBits;
+    private int oneD;
+
+<span class="nc" id="L53">    static int[] table1 = {</span>
+        0x00, // 0 bits are left in first byte - SHOULD NOT HAPPEN
+        0x01, // 1 bits are left in first byte
+        0x03, // 2 bits are left in first byte
+        0x07, // 3 bits are left in first byte
+        0x0f, // 4 bits are left in first byte
+        0x1f, // 5 bits are left in first byte
+        0x3f, // 6 bits are left in first byte
+        0x7f, // 7 bits are left in first byte
+        0xff  // 8 bits are left in first byte
+    };
+
+<span class="nc" id="L65">    static int[] table2 = {</span>
+        0x00, // 0
+        0x80, // 1
+        0xc0, // 2
+        0xe0, // 3
+        0xf0, // 4
+        0xf8, // 5
+        0xfc, // 6
+        0xfe, // 7
+        0xff  // 8
+    };
+
+    // Table to be used when fillOrder = 2, for flipping bytes.
+<span class="nc" id="L78">    static byte[] flipTable = {</span>
+         0,  -128,    64,   -64,    32,   -96,    96,   -32,
+        16,  -112,    80,   -48,    48,   -80,   112,   -16,
+         8,  -120,    72,   -56,    40,   -88,   104,   -24,
+        24,  -104,    88,   -40,    56,   -72,   120,    -8,
+         4,  -124,    68,   -60,    36,   -92,   100,   -28,
+        20,  -108,    84,   -44,    52,   -76,   116,   -12,
+        12,  -116,    76,   -52,    44,   -84,   108,   -20,
+        28,  -100,    92,   -36,    60,   -68,   124,    -4,
+         2,  -126,    66,   -62,    34,   -94,    98,   -30,
+        18,  -110,    82,   -46,    50,   -78,   114,   -14,
+        10,  -118,    74,   -54,    42,   -86,   106,   -22,
+        26,  -102,    90,   -38,    58,   -70,   122,    -6,
+         6,  -122,    70,   -58,    38,   -90,   102,   -26,
+        22,  -106,    86,   -42,    54,   -74,   118,   -10,
+        14,  -114,    78,   -50,    46,   -82,   110,   -18,
+        30,   -98,    94,   -34,    62,   -66,   126,    -2,
+         1,  -127,    65,   -63,    33,   -95,    97,   -31,
+        17,  -111,    81,   -47,    49,   -79,   113,   -15,
+         9,  -119,    73,   -55,    41,   -87,   105,   -23,
+        25,  -103,    89,   -39,    57,   -71,   121,    -7,
+         5,  -123,    69,   -59,    37,   -91,   101,   -27,
+        21,  -107,    85,   -43,    53,   -75,   117,   -11,
+        13,  -115,    77,   -51,    45,   -83,   109,   -19,
+        29,   -99,    93,   -35,    61,   -67,   125,    -3,
+         3,  -125,    67,   -61,    35,   -93,    99,   -29,
+        19,  -109,    83,   -45,    51,   -77,   115,   -13,
+        11,  -117,    75,   -53,    43,   -85,   107,   -21,
+        27,  -101,    91,   -37,    59,   -69,   123,    -5,
+         7,  -121,    71,   -57,    39,   -89,   103,   -25,
+        23,  -105,    87,   -41,    55,   -73,   119,    -9,
+        15,  -113,    79,   -49,    47,   -81,   111,   -17,
+        31,   -97,    95,   -33,    63,   -65,   127,    -1,
+    };
+
+    // The main 10 bit white runs lookup table
+<span class="nc" id="L114">    static short[] white = {</span>
+        // 0 - 7
+        6430,   6400,   6400,   6400,   3225,   3225,   3225,   3225,
+        // 8 - 15
+        944,    944,    944,    944,    976,    976,    976,    976,
+        // 16 - 23
+        1456,   1456,   1456,   1456,   1488,   1488,   1488,   1488,
+        // 24 - 31
+        718,    718,    718,    718,    718,    718,    718,    718,
+        // 32 - 39
+        750,    750,    750,    750,    750,    750,    750,    750,
+        // 40 - 47
+        1520,   1520,   1520,   1520,   1552,   1552,   1552,   1552,
+        // 48 - 55
+        428,    428,    428,    428,    428,    428,    428,    428,
+        // 56 - 63
+        428,    428,    428,    428,    428,    428,    428,    428,
+        // 64 - 71
+        654,    654,    654,    654,    654,    654,    654,    654,
+        // 72 - 79
+        1072,   1072,   1072,   1072,   1104,   1104,   1104,   1104,
+        // 80 - 87
+        1136,   1136,   1136,   1136,   1168,   1168,   1168,   1168,
+        // 88 - 95
+        1200,   1200,   1200,   1200,   1232,   1232,   1232,   1232,
+        // 96 - 103
+        622,    622,    622,    622,    622,    622,    622,    622,
+        // 104 - 111
+        1008,   1008,   1008,   1008,   1040,   1040,   1040,   1040,
+        // 112 - 119
+        44,     44,     44,     44,     44,     44,     44,     44,
+        // 120 - 127
+        44,     44,     44,     44,     44,     44,     44,     44,
+        // 128 - 135
+        396,    396,    396,    396,    396,    396,    396,    396,
+        // 136 - 143
+        396,    396,    396,    396,    396,    396,    396,    396,
+        // 144 - 151
+        1712,   1712,   1712,   1712,   1744,   1744,   1744,   1744,
+        // 152 - 159
+        846,    846,    846,    846,    846,    846,    846,    846,
+        // 160 - 167
+        1264,   1264,   1264,   1264,   1296,   1296,   1296,   1296,
+        // 168 - 175
+        1328,   1328,   1328,   1328,   1360,   1360,   1360,   1360,
+        // 176 - 183
+        1392,   1392,   1392,   1392,   1424,   1424,   1424,   1424,
+        // 184 - 191
+        686,    686,    686,    686,    686,    686,    686,    686,
+        // 192 - 199
+        910,    910,    910,    910,    910,    910,    910,    910,
+        // 200 - 207
+        1968,   1968,   1968,   1968,   2000,   2000,   2000,   2000,
+        // 208 - 215
+        2032,   2032,   2032,   2032,     16,     16,     16,     16,
+        // 216 - 223
+        10257,  10257,  10257,  10257,  12305,  12305,  12305,  12305,
+        // 224 - 231
+        330,    330,    330,    330,    330,    330,    330,    330,
+        // 232 - 239
+        330,    330,    330,    330,    330,    330,    330,    330,
+        // 240 - 247
+        330,    330,    330,    330,    330,    330,    330,    330,
+        // 248 - 255
+        330,    330,    330,    330,    330,    330,    330,    330,
+        // 256 - 263
+        362,    362,    362,    362,    362,    362,    362,    362,
+        // 264 - 271
+        362,    362,    362,    362,    362,    362,    362,    362,
+        // 272 - 279
+        362,    362,    362,    362,    362,    362,    362,    362,
+        // 280 - 287
+        362,    362,    362,    362,    362,    362,    362,    362,
+        // 288 - 295
+        878,    878,    878,    878,    878,    878,    878,    878,
+        // 296 - 303
+        1904,   1904,   1904,   1904,   1936,   1936,   1936,   1936,
+        // 304 - 311
+        -18413, -18413, -16365, -16365, -14317, -14317, -10221, -10221,
+        // 312 - 319
+        590,    590,    590,    590,    590,    590,    590,    590,
+        // 320 - 327
+        782,    782,    782,    782,    782,    782,    782,    782,
+        // 328 - 335
+        1584,   1584,   1584,   1584,   1616,   1616,   1616,   1616,
+        // 336 - 343
+        1648,   1648,   1648,   1648,   1680,   1680,   1680,   1680,
+        // 344 - 351
+        814,    814,    814,    814,    814,    814,    814,    814,
+        // 352 - 359
+        1776,   1776,   1776,   1776,   1808,   1808,   1808,   1808,
+        // 360 - 367
+        1840,   1840,   1840,   1840,   1872,   1872,   1872,   1872,
+        // 368 - 375
+        6157,   6157,   6157,   6157,   6157,   6157,   6157,   6157,
+        // 376 - 383
+        6157,   6157,   6157,   6157,   6157,   6157,   6157,   6157,
+        // 384 - 391
+        -12275, -12275, -12275, -12275, -12275, -12275, -12275, -12275,
+        // 392 - 399
+        -12275, -12275, -12275, -12275, -12275, -12275, -12275, -12275,
+        // 400 - 407
+        14353,  14353,  14353,  14353,  16401,  16401,  16401,  16401,
+        // 408 - 415
+        22547,  22547,  24595,  24595,  20497,  20497,  20497,  20497,
+        // 416 - 423
+        18449,  18449,  18449,  18449,  26643,  26643,  28691,  28691,
+        // 424 - 431
+        30739,  30739, -32749, -32749, -30701, -30701, -28653, -28653,
+        // 432 - 439
+        -26605, -26605, -24557, -24557, -22509, -22509, -20461, -20461,
+        // 440 - 447
+        8207,   8207,   8207,   8207,   8207,   8207,   8207,   8207,
+        // 448 - 455
+        72,     72,     72,     72,     72,     72,     72,     72,
+        // 456 - 463
+        72,     72,     72,     72,     72,     72,     72,     72,
+        // 464 - 471
+        72,     72,     72,     72,     72,     72,     72,     72,
+        // 472 - 479
+        72,     72,     72,     72,     72,     72,     72,     72,
+        // 480 - 487
+        72,     72,     72,     72,     72,     72,     72,     72,
+        // 488 - 495
+        72,     72,     72,     72,     72,     72,     72,     72,
+        // 496 - 503
+        72,     72,     72,     72,     72,     72,     72,     72,
+        // 504 - 511
+        72,     72,     72,     72,     72,     72,     72,     72,
+        // 512 - 519
+        104,    104,    104,    104,    104,    104,    104,    104,
+        // 520 - 527
+        104,    104,    104,    104,    104,    104,    104,    104,
+        // 528 - 535
+        104,    104,    104,    104,    104,    104,    104,    104,
+        // 536 - 543
+        104,    104,    104,    104,    104,    104,    104,    104,
+        // 544 - 551
+        104,    104,    104,    104,    104,    104,    104,    104,
+        // 552 - 559
+        104,    104,    104,    104,    104,    104,    104,    104,
+        // 560 - 567
+        104,    104,    104,    104,    104,    104,    104,    104,
+        // 568 - 575
+        104,    104,    104,    104,    104,    104,    104,    104,
+        // 576 - 583
+        4107,   4107,   4107,   4107,   4107,   4107,   4107,   4107,
+        // 584 - 591
+        4107,   4107,   4107,   4107,   4107,   4107,   4107,   4107,
+        // 592 - 599
+        4107,   4107,   4107,   4107,   4107,   4107,   4107,   4107,
+        // 600 - 607
+        4107,   4107,   4107,   4107,   4107,   4107,   4107,   4107,
+        // 608 - 615
+        266,    266,    266,    266,    266,    266,    266,    266,
+        // 616 - 623
+        266,    266,    266,    266,    266,    266,    266,    266,
+        // 624 - 631
+        266,    266,    266,    266,    266,    266,    266,    266,
+        // 632 - 639
+        266,    266,    266,    266,    266,    266,    266,    266,
+        // 640 - 647
+        298,    298,    298,    298,    298,    298,    298,    298,
+        // 648 - 655
+        298,    298,    298,    298,    298,    298,    298,    298,
+        // 656 - 663
+        298,    298,    298,    298,    298,    298,    298,    298,
+        // 664 - 671
+        298,    298,    298,    298,    298,    298,    298,    298,
+        // 672 - 679
+        524,    524,    524,    524,    524,    524,    524,    524,
+        // 680 - 687
+        524,    524,    524,    524,    524,    524,    524,    524,
+        // 688 - 695
+        556,    556,    556,    556,    556,    556,    556,    556,
+        // 696 - 703
+        556,    556,    556,    556,    556,    556,    556,    556,
+        // 704 - 711
+        136,    136,    136,    136,    136,    136,    136,    136,
+        // 712 - 719
+        136,    136,    136,    136,    136,    136,    136,    136,
+        // 720 - 727
+        136,    136,    136,    136,    136,    136,    136,    136,
+        // 728 - 735
+        136,    136,    136,    136,    136,    136,    136,    136,
+        // 736 - 743
+        136,    136,    136,    136,    136,    136,    136,    136,
+        // 744 - 751
+        136,    136,    136,    136,    136,    136,    136,    136,
+        // 752 - 759
+        136,    136,    136,    136,    136,    136,    136,    136,
+        // 760 - 767
+        136,    136,    136,    136,    136,    136,    136,    136,
+        // 768 - 775
+        168,    168,    168,    168,    168,    168,    168,    168,
+        // 776 - 783
+        168,    168,    168,    168,    168,    168,    168,    168,
+        // 784 - 791
+        168,    168,    168,    168,    168,    168,    168,    168,
+        // 792 - 799
+        168,    168,    168,    168,    168,    168,    168,    168,
+        // 800 - 807
+        168,    168,    168,    168,    168,    168,    168,    168,
+        // 808 - 815
+        168,    168,    168,    168,    168,    168,    168,    168,
+        // 816 - 823
+        168,    168,    168,    168,    168,    168,    168,    168,
+        // 824 - 831
+        168,    168,    168,    168,    168,    168,    168,    168,
+        // 832 - 839
+        460,    460,    460,    460,    460,    460,    460,    460,
+        // 840 - 847
+        460,    460,    460,    460,    460,    460,    460,    460,
+        // 848 - 855
+        492,    492,    492,    492,    492,    492,    492,    492,
+        // 856 - 863
+        492,    492,    492,    492,    492,    492,    492,    492,
+        // 864 - 871
+        2059,   2059,   2059,   2059,   2059,   2059,   2059,   2059,
+        // 872 - 879
+        2059,   2059,   2059,   2059,   2059,   2059,   2059,   2059,
+        // 880 - 887
+        2059,   2059,   2059,   2059,   2059,   2059,   2059,   2059,
+        // 888 - 895
+        2059,   2059,   2059,   2059,   2059,   2059,   2059,   2059,
+        // 896 - 903
+        200,    200,    200,    200,    200,    200,    200,    200,
+        // 904 - 911
+        200,    200,    200,    200,    200,    200,    200,    200,
+        // 912 - 919
+        200,    200,    200,    200,    200,    200,    200,    200,
+        // 920 - 927
+        200,    200,    200,    200,    200,    200,    200,    200,
+        // 928 - 935
+        200,    200,    200,    200,    200,    200,    200,    200,
+        // 936 - 943
+        200,    200,    200,    200,    200,    200,    200,    200,
+        // 944 - 951
+        200,    200,    200,    200,    200,    200,    200,    200,
+        // 952 - 959
+        200,    200,    200,    200,    200,    200,    200,    200,
+        // 960 - 967
+        232,    232,    232,    232,    232,    232,    232,    232,
+        // 968 - 975
+        232,    232,    232,    232,    232,    232,    232,    232,
+        // 976 - 983
+        232,    232,    232,    232,    232,    232,    232,    232,
+        // 984 - 991
+        232,    232,    232,    232,    232,    232,    232,    232,
+        // 992 - 999
+        232,    232,    232,    232,    232,    232,    232,    232,
+        // 1000 - 1007
+        232,    232,    232,    232,    232,    232,    232,    232,
+        // 1008 - 1015
+        232,    232,    232,    232,    232,    232,    232,    232,
+        // 1016 - 1023
+        232,    232,    232,    232,    232,    232,    232,    232,
+    };
+
+    // Additional make up codes for both White and Black runs
+<span class="nc" id="L374">    static short[] additionalMakeup = {</span>
+        28679,  28679,  31752,  (short)32777,
+        (short)33801,  (short)34825,  (short)35849,  (short)36873,
+        (short)29703,  (short)29703,  (short)30727,  (short)30727,
+        (short)37897,  (short)38921,  (short)39945,  (short)40969
+    };
+
+    // Initial black run look up table, uses the first 4 bits of a code
+<span class="nc" id="L382">    static short[] initBlack = {</span>
+        // 0 - 7
+        3226,  6412,    200,    168,    38,     38,    134,    134,
+        // 8 - 15
+        100,    100,    100,    100,    68,     68,     68,     68
+    };
+
+    //
+<span class="nc" id="L390">    static short[] twoBitBlack = {292, 260, 226, 226};   // 0 - 3</span>
+
+    // Main black run table, using the last 9 bits of possible 13 bit code
+<span class="nc" id="L393">    static short[] black = {</span>
+        // 0 - 7
+        62,     62,     30,     30,     0,      0,      0,      0,
+        // 8 - 15
+        0,      0,      0,      0,      0,      0,      0,      0,
+        // 16 - 23
+        0,      0,      0,      0,      0,      0,      0,      0,
+        // 24 - 31
+        0,      0,      0,      0,      0,      0,      0,      0,
+        // 32 - 39
+        3225,   3225,   3225,   3225,   3225,   3225,   3225,   3225,
+        // 40 - 47
+        3225,   3225,   3225,   3225,   3225,   3225,   3225,   3225,
+        // 48 - 55
+        3225,   3225,   3225,   3225,   3225,   3225,   3225,   3225,
+        // 56 - 63
+        3225,   3225,   3225,   3225,   3225,   3225,   3225,   3225,
+        // 64 - 71
+        588,    588,    588,    588,    588,    588,    588,    588,
+        // 72 - 79
+        1680,   1680,  20499,  22547,  24595,  26643,   1776,   1776,
+        // 80 - 87
+        1808,   1808, -24557, -22509, -20461, -18413,   1904,   1904,
+        // 88 - 95
+        1936,   1936, -16365, -14317,    782,    782,    782,    782,
+        // 96 - 103
+        814,    814,    814,    814, -12269, -10221,  10257,  10257,
+        // 104 - 111
+        12305,  12305,  14353,  14353,  16403,  18451,   1712,   1712,
+        // 112 - 119
+        1744,   1744,  28691,  30739, -32749, -30701, -28653, -26605,
+        // 120 - 127
+        2061,   2061,   2061,   2061,   2061,   2061,   2061,   2061,
+        // 128 - 135
+        424,    424,    424,    424,    424,    424,    424,    424,
+        // 136 - 143
+        424,    424,    424,    424,    424,    424,    424,    424,
+        // 144 - 151
+        424,    424,    424,    424,    424,    424,    424,    424,
+        // 152 - 159
+        424,    424,    424,    424,    424,    424,    424,    424,
+        // 160 - 167
+        750,    750,    750,    750,   1616,   1616,   1648,   1648,
+        // 168 - 175
+        1424,   1424,   1456,   1456,   1488,   1488,   1520,   1520,
+        // 176 - 183
+        1840,   1840,   1872,   1872,   1968,   1968,   8209,   8209,
+        // 184 - 191
+        524,    524,    524,    524,    524,    524,    524,    524,
+        // 192 - 199
+        556,    556,    556,    556,    556,    556,    556,    556,
+        // 200 - 207
+        1552,   1552,   1584,   1584,   2000,   2000,   2032,   2032,
+        // 208 - 215
+        976,    976,   1008,   1008,   1040,   1040,   1072,   1072,
+        // 216 - 223
+        1296,   1296,   1328,   1328,    718,    718,    718,    718,
+        // 224 - 231
+        456,    456,    456,    456,    456,    456,    456,    456,
+        // 232 - 239
+        456,    456,    456,    456,    456,    456,    456,    456,
+        // 240 - 247
+        456,    456,    456,    456,    456,    456,    456,    456,
+        // 248 - 255
+        456,    456,    456,    456,    456,    456,    456,    456,
+        // 256 - 263
+        326,    326,    326,    326,    326,    326,    326,    326,
+        // 264 - 271
+        326,    326,    326,    326,    326,    326,    326,    326,
+        // 272 - 279
+        326,    326,    326,    326,    326,    326,    326,    326,
+        // 280 - 287
+        326,    326,    326,    326,    326,    326,    326,    326,
+        // 288 - 295
+        326,    326,    326,    326,    326,    326,    326,    326,
+        // 296 - 303
+        326,    326,    326,    326,    326,    326,    326,    326,
+        // 304 - 311
+        326,    326,    326,    326,    326,    326,    326,    326,
+        // 312 - 319
+        326,    326,    326,    326,    326,    326,    326,    326,
+        // 320 - 327
+        358,    358,    358,    358,    358,    358,    358,    358,
+        // 328 - 335
+        358,    358,    358,    358,    358,    358,    358,    358,
+        // 336 - 343
+        358,    358,    358,    358,    358,    358,    358,    358,
+        // 344 - 351
+        358,    358,    358,    358,    358,    358,    358,    358,
+        // 352 - 359
+        358,    358,    358,    358,    358,    358,    358,    358,
+        // 360 - 367
+        358,    358,    358,    358,    358,    358,    358,    358,
+        // 368 - 375
+        358,    358,    358,    358,    358,    358,    358,    358,
+        // 376 - 383
+        358,    358,    358,    358,    358,    358,    358,    358,
+        // 384 - 391
+        490,    490,    490,    490,    490,    490,    490,    490,
+        // 392 - 399
+        490,    490,    490,    490,    490,    490,    490,    490,
+        // 400 - 407
+        4113,   4113,   6161,   6161,    848,    848,    880,    880,
+        // 408 - 415
+        912,    912,    944,    944,    622,    622,    622,    622,
+        // 416 - 423
+        654,    654,    654,    654,   1104,   1104,   1136,   1136,
+        // 424 - 431
+        1168,   1168,   1200,   1200,   1232,   1232,   1264,   1264,
+        // 432 - 439
+        686,    686,    686,    686,   1360,   1360,   1392,   1392,
+        // 440 - 447
+        12,     12,     12,     12,     12,     12,     12,     12,
+        // 448 - 455
+        390,    390,    390,    390,    390,    390,    390,    390,
+        // 456 - 463
+        390,    390,    390,    390,    390,    390,    390,    390,
+        // 464 - 471
+        390,    390,    390,    390,    390,    390,    390,    390,
+        // 472 - 479
+        390,    390,    390,    390,    390,    390,    390,    390,
+        // 480 - 487
+        390,    390,    390,    390,    390,    390,    390,    390,
+        // 488 - 495
+        390,    390,    390,    390,    390,    390,    390,    390,
+        // 496 - 503
+        390,    390,    390,    390,    390,    390,    390,    390,
+        // 504 - 511
+        390,    390,    390,    390,    390,    390,    390,    390,
+    };
+
+<span class="nc" id="L524">    static byte[] twoDCodes = {</span>
+        // 0 - 7
+        80,     88,     23,     71,     30,     30,     62,     62,
+        // 8 - 15
+        4,      4,      4,      4,      4,      4,      4,      4,
+        // 16 - 23
+        11,     11,     11,     11,     11,     11,     11,     11,
+        // 24 - 31
+        11,     11,     11,     11,     11,     11,     11,     11,
+        // 32 - 39
+        35,     35,     35,     35,     35,     35,     35,     35,
+        // 40 - 47
+        35,     35,     35,     35,     35,     35,     35,     35,
+        // 48 - 55
+        51,     51,     51,     51,     51,     51,     51,     51,
+        // 56 - 63
+        51,     51,     51,     51,     51,     51,     51,     51,
+        // 64 - 71
+        41,     41,     41,     41,     41,     41,     41,     41,
+        // 72 - 79
+        41,     41,     41,     41,     41,     41,     41,     41,
+        // 80 - 87
+        41,     41,     41,     41,     41,     41,     41,     41,
+        // 88 - 95
+        41,     41,     41,     41,     41,     41,     41,     41,
+        // 96 - 103
+        41,     41,     41,     41,     41,     41,     41,     41,
+        // 104 - 111
+        41,     41,     41,     41,     41,     41,     41,     41,
+        // 112 - 119
+        41,     41,     41,     41,     41,     41,     41,     41,
+        // 120 - 127
+        41,     41,     41,     41,     41,     41,     41,     41,
+    };
+
+    /**
+     * @param fillOrder   The fill order of the compressed data bytes.
+     * @param w The width of the image in pixels
+     * @param h The height of the image in pixels
+     */
+<span class="nc" id="L564">    public TIFFFaxDecoder(int fillOrder, int w, int h) {</span>
+<span class="nc" id="L565">        this.fillOrder = fillOrder;</span>
+<span class="nc" id="L566">        this.w = w;</span>
+//        this.h = h;
+
+<span class="nc" id="L569">        this.bitPointer = 0;</span>
+<span class="nc" id="L570">        this.bytePointer = 0;</span>
+<span class="nc" id="L571">        this.prevChangingElems = new int[w];</span>
+<span class="nc" id="L572">        this.currChangingElems = new int[w];</span>
+<span class="nc" id="L573">    }</span>
+
+    // One-dimensional decoding methods
+
+    public void decode1D(byte[] buffer, byte[] compData,
+                         int startX, int height) {
+<span class="nc" id="L579">        this.data = compData;</span>
+
+<span class="nc" id="L581">        int lineOffset = 0;</span>
+<span class="nc" id="L582">        int scanlineStride = (w + 7) / 8;</span>
+
+<span class="nc" id="L584">        bitPointer = 0;</span>
+<span class="nc" id="L585">        bytePointer = 0;</span>
+
+<span class="nc bnc" id="L587" title="All 2 branches missed.">        for (int i = 0; i &lt; height; i++) {</span>
+<span class="nc" id="L588">            decodeNextScanline(buffer, lineOffset, startX);</span>
+<span class="nc" id="L589">            lineOffset += scanlineStride;</span>
+        }
+<span class="nc" id="L591">    }</span>
+
+    public void decodeNextScanline(byte[] buffer,
+                                   int lineOffset, int bitOffset) {
+<span class="nc" id="L595">        int bits = 0;</span>
+<span class="nc" id="L596">        int code = 0;</span>
+<span class="nc" id="L597">        int isT = 0;</span>
+        int current;
+        int entry;
+        int twoBits;
+<span class="nc" id="L601">        boolean isWhite = true;</span>
+
+        // Initialize starting of the changing elements array
+<span class="nc" id="L604">        changingElemSize = 0;</span>
+
+        // While scanline not complete
+<span class="nc bnc" id="L607" title="All 2 branches missed.">        while (bitOffset &lt; w) {</span>
+<span class="nc bnc" id="L608" title="All 2 branches missed.">            while (isWhite) {</span>
+                // White run
+<span class="nc" id="L610">                current = nextNBits(10);</span>
+<span class="nc" id="L611">                entry = white[current];</span>
+
+                // Get the 3 fields from the entry
+<span class="nc" id="L614">                isT = entry &amp; 0x0001;</span>
+<span class="nc" id="L615">                bits = (entry &gt;&gt;&gt; 1) &amp; 0x0f;</span>
+
+<span class="nc bnc" id="L617" title="All 2 branches missed.">                if (bits == 12) {          // Additional Make up code</span>
+                    // Get the next 2 bits
+<span class="nc" id="L619">                    twoBits = nextLesserThan8Bits(2);</span>
+                    // Consolidate the 2 new bits and last 2 bits into 4 bits
+<span class="nc" id="L621">                    current = ((current &lt;&lt; 2) &amp; 0x000c) | twoBits;</span>
+<span class="nc" id="L622">                    entry = additionalMakeup[current];</span>
+<span class="nc" id="L623">                    bits = (entry &gt;&gt;&gt; 1) &amp; 0x07;     // 3 bits 0000 0111</span>
+<span class="nc" id="L624">                    code  = (entry &gt;&gt;&gt; 4) &amp; 0x0fff;  // 12 bits</span>
+<span class="nc" id="L625">                    bitOffset += code; // Skip white run</span>
+
+<span class="nc" id="L627">                    updatePointer(4 - bits);</span>
+<span class="nc bnc" id="L628" title="All 2 branches missed.">                } else if (bits == 0) {     // ERROR</span>
+<span class="nc" id="L629">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder0&quot;));</span>
+<span class="nc bnc" id="L630" title="All 2 branches missed.">                } else if (bits == 15) {    // EOL</span>
+<span class="nc" id="L631">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder1&quot;));</span>
+                } else {
+                    // 11 bits - 0000 0111 1111 1111 = 0x07ff
+<span class="nc" id="L634">                    code = (entry &gt;&gt;&gt; 5) &amp; 0x07ff;</span>
+<span class="nc" id="L635">                    bitOffset += code;</span>
+
+<span class="nc" id="L637">                    updatePointer(10 - bits);</span>
+<span class="nc bnc" id="L638" title="All 2 branches missed.">                    if (isT == 0) {</span>
+<span class="nc" id="L639">                        isWhite = false;</span>
+<span class="nc" id="L640">                        currChangingElems[changingElemSize++] = bitOffset;</span>
+                    }
+                }
+            }
+
+            // Check whether this run completed one width, if so
+            // advance to next byte boundary for compression = 2.
+<span class="nc bnc" id="L647" title="All 2 branches missed.">            if (bitOffset == w) {</span>
+<span class="nc bnc" id="L648" title="All 2 branches missed.">                if (compression == 2) {</span>
+<span class="nc" id="L649">                    advancePointer();</span>
+                }
+                break;
+            }
+
+<span class="nc bnc" id="L654" title="All 2 branches missed.">            while (!isWhite) {</span>
+                // Black run
+<span class="nc" id="L656">                current = nextLesserThan8Bits(4);</span>
+<span class="nc" id="L657">                entry = initBlack[current];</span>
+
+                // Get the 3 fields from the entry
+<span class="nc" id="L660">                isT = entry &amp; 0x0001;</span>
+<span class="nc" id="L661">                bits = (entry &gt;&gt;&gt; 1) &amp; 0x000f;</span>
+<span class="nc" id="L662">                code = (entry &gt;&gt;&gt; 5) &amp; 0x07ff;</span>
+
+<span class="nc bnc" id="L664" title="All 2 branches missed.">                if (code == 100) {</span>
+<span class="nc" id="L665">                    current = nextNBits(9);</span>
+<span class="nc" id="L666">                    entry = black[current];</span>
+
+                    // Get the 3 fields from the entry
+<span class="nc" id="L669">                    isT = entry &amp; 0x0001;</span>
+<span class="nc" id="L670">                    bits = (entry &gt;&gt;&gt; 1) &amp; 0x000f;</span>
+<span class="nc" id="L671">                    code = (entry &gt;&gt;&gt; 5) &amp; 0x07ff;</span>
+
+<span class="nc bnc" id="L673" title="All 2 branches missed.">                    if (bits == 12) {</span>
+                        // Additional makeup codes
+<span class="nc" id="L675">                        updatePointer(5);</span>
+<span class="nc" id="L676">                        current = nextLesserThan8Bits(4);</span>
+<span class="nc" id="L677">                        entry = additionalMakeup[current];</span>
+<span class="nc" id="L678">                        bits = (entry &gt;&gt;&gt; 1) &amp; 0x07;     // 3 bits 0000 0111</span>
+<span class="nc" id="L679">                        code  = (entry &gt;&gt;&gt; 4) &amp; 0x0fff;  // 12 bits</span>
+
+<span class="nc" id="L681">                        setToBlack(buffer, lineOffset, bitOffset, code);</span>
+<span class="nc" id="L682">                        bitOffset += code;</span>
+
+<span class="nc" id="L684">                        updatePointer(4 - bits);</span>
+<span class="nc bnc" id="L685" title="All 2 branches missed.">                    } else if (bits == 15) {</span>
+                        // EOL code
+<span class="nc" id="L687">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder2&quot;));</span>
+                    } else {
+<span class="nc" id="L689">                        setToBlack(buffer, lineOffset, bitOffset, code);</span>
+<span class="nc" id="L690">                        bitOffset += code;</span>
+
+<span class="nc" id="L692">                        updatePointer(9 - bits);</span>
+<span class="nc bnc" id="L693" title="All 2 branches missed.">                        if (isT == 0) {</span>
+<span class="nc" id="L694">                            isWhite = true;</span>
+<span class="nc" id="L695">                            currChangingElems[changingElemSize++] = bitOffset;</span>
+                        }
+                    }
+<span class="nc bnc" id="L698" title="All 2 branches missed.">                } else if (code == 200) {</span>
+                    // Is a Terminating code
+<span class="nc" id="L700">                    current = nextLesserThan8Bits(2);</span>
+<span class="nc" id="L701">                    entry = twoBitBlack[current];</span>
+<span class="nc" id="L702">                    code = (entry &gt;&gt;&gt; 5) &amp; 0x07ff;</span>
+<span class="nc" id="L703">                    bits = (entry &gt;&gt;&gt; 1) &amp; 0x0f;</span>
+
+<span class="nc" id="L705">                    setToBlack(buffer, lineOffset, bitOffset, code);</span>
+<span class="nc" id="L706">                    bitOffset += code;</span>
+
+<span class="nc" id="L708">                    updatePointer(2 - bits);</span>
+<span class="nc" id="L709">                    isWhite = true;</span>
+<span class="nc" id="L710">                    currChangingElems[changingElemSize++] = bitOffset;</span>
+                } else {
+                    // Is a Terminating code
+<span class="nc" id="L713">                    setToBlack(buffer, lineOffset, bitOffset, code);</span>
+<span class="nc" id="L714">                    bitOffset += code;</span>
+
+<span class="nc" id="L716">                    updatePointer(4 - bits);</span>
+<span class="nc" id="L717">                    isWhite = true;</span>
+<span class="nc" id="L718">                    currChangingElems[changingElemSize++] = bitOffset;</span>
+                }
+            }
+
+            // Check whether this run completed one width
+<span class="nc bnc" id="L723" title="All 2 branches missed.">            if (bitOffset == w) {</span>
+<span class="nc bnc" id="L724" title="All 2 branches missed.">                if (compression == 2) {</span>
+<span class="nc" id="L725">                    advancePointer();</span>
+                }
+                break;
+            }
+        }
+
+<span class="nc" id="L731">        currChangingElems[changingElemSize++] = bitOffset;</span>
+<span class="nc" id="L732">    }</span>
+
+    // Two-dimensional decoding methods
+
+    public void decode2D(byte[] buffer,
+                         byte[] compData,
+                         int startX,
+                         int height,
+                         long tiffT4Options) {
+<span class="nc" id="L741">        this.data = compData;</span>
+<span class="nc" id="L742">        compression = 3;</span>
+
+<span class="nc" id="L744">        bitPointer = 0;</span>
+<span class="nc" id="L745">        bytePointer = 0;</span>
+
+<span class="nc" id="L747">        int scanlineStride = (w + 7) / 8;</span>
+
+        int a0;
+        int a1;
+        int b1;
+        int b2;
+<span class="nc" id="L753">        int[] b = new int[2];</span>
+        int entry;
+        int code;
+        int bits;
+        boolean isWhite;
+<span class="nc" id="L758">        int currIndex = 0;</span>
+        int[] temp;
+
+        // fillBits - dealt with this in readEOL
+        // 1D/2D encoding - dealt with this in readEOL
+
+        // uncompressedMode - haven't dealt with this yet.
+
+
+<span class="nc" id="L767">        oneD = (int)(tiffT4Options &amp; 0x01);</span>
+//        uncompressedMode = (int)((tiffT4Options &amp; 0x02) &gt;&gt; 1);
+<span class="nc" id="L769">        fillBits = (int)((tiffT4Options &amp; 0x04) &gt;&gt; 2);</span>
+
+        // The data must start with an EOL code
+<span class="nc bnc" id="L772" title="All 2 branches missed.">        if (readEOL() != 1) {</span>
+<span class="nc" id="L773">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder3&quot;));</span>
+        }
+
+<span class="nc" id="L776">        int lineOffset = 0;</span>
+        int bitOffset;
+
+        // Then the 1D encoded scanline data will occur, changing elements
+        // array gets set.
+<span class="nc" id="L781">        decodeNextScanline(buffer, lineOffset, startX);</span>
+<span class="nc" id="L782">        lineOffset += scanlineStride;</span>
+
+<span class="nc bnc" id="L784" title="All 2 branches missed.">        for (int lines = 1; lines &lt; height; lines++) {</span>
+
+            // Every line must begin with an EOL followed by a bit which
+            // indicates whether the following scanline is 1D or 2D encoded.
+<span class="nc bnc" id="L788" title="All 2 branches missed.">            if (readEOL() == 0) {</span>
+                // 2D encoded scanline follows
+
+                // Initialize previous scanlines changing elements, and
+                // initialize current scanline's changing elements array
+<span class="nc" id="L793">                temp = prevChangingElems;</span>
+<span class="nc" id="L794">                prevChangingElems = currChangingElems;</span>
+<span class="nc" id="L795">                currChangingElems = temp;</span>
+<span class="nc" id="L796">                currIndex = 0;</span>
+
+                // a0 has to be set just before the start of this scanline.
+<span class="nc" id="L799">                a0 = -1;</span>
+<span class="nc" id="L800">                isWhite = true;</span>
+<span class="nc" id="L801">                bitOffset = startX;</span>
+
+<span class="nc" id="L803">                lastChangingElement = 0;</span>
+
+<span class="nc bnc" id="L805" title="All 2 branches missed.">                while (bitOffset &lt; w) {</span>
+                    // Get the next changing element
+<span class="nc" id="L807">                    getNextChangingElement(a0, isWhite, b);</span>
+
+<span class="nc" id="L809">                    b1 = b[0];</span>
+<span class="nc" id="L810">                    b2 = b[1];</span>
+
+                    // Get the next seven bits
+<span class="nc" id="L813">                    entry = nextLesserThan8Bits(7);</span>
+
+                    // Run these through the 2DCodes table
+<span class="nc" id="L816">                    entry = twoDCodes[entry] &amp; 0xff;</span>
+
+                    // Get the code and the number of bits used up
+<span class="nc" id="L819">                    code = (entry &amp; 0x78) &gt;&gt;&gt; 3;</span>
+<span class="nc" id="L820">                    bits = entry &amp; 0x07;</span>
+
+<span class="nc bnc" id="L822" title="All 2 branches missed.">                    if (code == 0) {</span>
+<span class="nc bnc" id="L823" title="All 2 branches missed.">                        if (!isWhite) {</span>
+<span class="nc" id="L824">                            setToBlack(buffer, lineOffset, bitOffset,</span>
+                                       b2 - bitOffset);
+                        }
+<span class="nc" id="L827">                        bitOffset = a0 = b2;</span>
+
+                        // Set pointer to consume the correct number of bits.
+<span class="nc" id="L830">                        updatePointer(7 - bits);</span>
+<span class="nc bnc" id="L831" title="All 2 branches missed.">                    } else if (code == 1) {</span>
+                        // Horizontal
+<span class="nc" id="L833">                        updatePointer(7 - bits);</span>
+
+                        // identify the next 2 codes.
+                        int number;
+<span class="nc bnc" id="L837" title="All 2 branches missed.">                        if (isWhite) {</span>
+<span class="nc" id="L838">                            number = decodeWhiteCodeWord();</span>
+<span class="nc" id="L839">                            bitOffset += number;</span>
+<span class="nc" id="L840">                            currChangingElems[currIndex++] = bitOffset;</span>
+
+<span class="nc" id="L842">                            number = decodeBlackCodeWord();</span>
+<span class="nc" id="L843">                            setToBlack(buffer, lineOffset, bitOffset, number);</span>
+<span class="nc" id="L844">                            bitOffset += number;</span>
+<span class="nc" id="L845">                            currChangingElems[currIndex++] = bitOffset;</span>
+                        } else {
+<span class="nc" id="L847">                            number = decodeBlackCodeWord();</span>
+<span class="nc" id="L848">                            setToBlack(buffer, lineOffset, bitOffset, number);</span>
+<span class="nc" id="L849">                            bitOffset += number;</span>
+<span class="nc" id="L850">                            currChangingElems[currIndex++] = bitOffset;</span>
+
+<span class="nc" id="L852">                            number = decodeWhiteCodeWord();</span>
+<span class="nc" id="L853">                            bitOffset += number;</span>
+<span class="nc" id="L854">                            currChangingElems[currIndex++] = bitOffset;</span>
+                        }
+
+<span class="nc" id="L857">                        a0 = bitOffset;</span>
+<span class="nc bnc" id="L858" title="All 2 branches missed.">                    } else if (code &lt;= 8) {</span>
+                        // Vertical
+<span class="nc" id="L860">                        a1 = b1 + (code - 5);</span>
+
+<span class="nc" id="L862">                        currChangingElems[currIndex++] = a1;</span>
+
+                        // We write the current color till a1 - 1 pos,
+                        // since a1 is where the next color starts
+<span class="nc bnc" id="L866" title="All 2 branches missed.">                        if (!isWhite) {</span>
+<span class="nc" id="L867">                            setToBlack(buffer, lineOffset, bitOffset,</span>
+                                       a1 - bitOffset);
+                        }
+<span class="nc" id="L870">                        bitOffset = a0 = a1;</span>
+<span class="nc bnc" id="L871" title="All 2 branches missed.">                        isWhite = !isWhite;</span>
+
+<span class="nc" id="L873">                        updatePointer(7 - bits);</span>
+                    } else {
+<span class="nc" id="L875">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder4&quot;));</span>
+                    }
+                }
+
+                // Add the changing element beyond the current scanline for the
+                // other color too
+<span class="nc" id="L881">                currChangingElems[currIndex++] = bitOffset;</span>
+<span class="nc" id="L882">                changingElemSize = currIndex;</span>
+            } else {
+                // 1D encoded scanline follows
+<span class="nc" id="L885">                decodeNextScanline(buffer, lineOffset, startX);</span>
+            }
+
+<span class="nc" id="L888">            lineOffset += scanlineStride;</span>
+        }
+<span class="nc" id="L890">    }</span>
+
+    public synchronized void decodeT6(byte[] buffer,
+                                      byte[] compData,
+                                      int startX,
+                                      int height,
+                                      long tiffT6Options) {
+<span class="nc" id="L897">        this.data = compData;</span>
+<span class="nc" id="L898">        compression = 4;</span>
+
+<span class="nc" id="L900">        bitPointer = 0;</span>
+<span class="nc" id="L901">        bytePointer = 0;</span>
+
+<span class="nc" id="L903">        int scanlineStride = (w + 7) / 8;</span>
+
+        int a0;
+        int a1;
+        int b1;
+        int b2;
+        int entry;
+        int code;
+        int bits;
+        boolean isWhite;
+        int currIndex;
+        int[] temp;
+
+        // Return values from getNextChangingElement
+<span class="nc" id="L917">        int[] b = new int[2];</span>
+
+        // uncompressedMode - have written some code for this, but this
+        // has not been tested due to lack of test images using this optional
+
+//        uncompressedMode = (int)((tiffT6Options &amp; 0x02) &gt;&gt; 1);
+
+        // Local cached reference
+<span class="nc" id="L925">        int[] cce = currChangingElems;</span>
+
+        // Assume invisible preceding row of all white pixels and insert
+        // both black and white changing elements beyond the end of this
+        // imaginary scanline.
+<span class="nc" id="L930">        changingElemSize = 0;</span>
+<span class="nc" id="L931">        cce[changingElemSize++] = w;</span>
+<span class="nc" id="L932">        cce[changingElemSize++] = w;</span>
+
+<span class="nc" id="L934">        int lineOffset = 0;</span>
+        int bitOffset;
+
+<span class="nc bnc" id="L937" title="All 2 branches missed.">        for (int lines = 0; lines &lt; height; lines++) {</span>
+            // a0 has to be set just before the start of the scanline.
+<span class="nc" id="L939">            a0 = -1;</span>
+<span class="nc" id="L940">            isWhite = true;</span>
+
+            // Assign the changing elements of the previous scanline to
+            // prevChangingElems and start putting this new scanline's
+            // changing elements into the currChangingElems.
+<span class="nc" id="L945">            temp = prevChangingElems;</span>
+<span class="nc" id="L946">            prevChangingElems = currChangingElems;</span>
+<span class="nc" id="L947">            cce = currChangingElems = temp;</span>
+<span class="nc" id="L948">            currIndex = 0;</span>
+
+            // Start decoding the scanline at startX in the raster
+<span class="nc" id="L951">            bitOffset = startX;</span>
+
+            // Reset search start position for getNextChangingElement
+<span class="nc" id="L954">            lastChangingElement = 0;</span>
+
+            // Till one whole scanline is decoded
+<span class="nc bnc" id="L957" title="All 2 branches missed.">            while (bitOffset &lt; w) {</span>
+                // Get the next changing element
+<span class="nc" id="L959">                getNextChangingElement(a0, isWhite, b);</span>
+<span class="nc" id="L960">                b1 = b[0];</span>
+<span class="nc" id="L961">                b2 = b[1];</span>
+
+                // Get the next seven bits
+<span class="nc" id="L964">                entry = nextLesserThan8Bits(7);</span>
+                // Run these through the 2DCodes table
+<span class="nc" id="L966">                entry = twoDCodes[entry] &amp; 0xff;</span>
+
+                // Get the code and the number of bits used up
+<span class="nc" id="L969">                code = (entry &amp; 0x78) &gt;&gt;&gt; 3;</span>
+<span class="nc" id="L970">                bits = entry &amp; 0x07;</span>
+
+<span class="nc bnc" id="L972" title="All 2 branches missed.">                if (code == 0) { // Pass</span>
+                    // We always assume WhiteIsZero format for fax.
+<span class="nc bnc" id="L974" title="All 2 branches missed.">                    if (!isWhite) {</span>
+<span class="nc" id="L975">                        setToBlack(buffer, lineOffset, bitOffset,</span>
+                                   b2 - bitOffset);
+                    }
+<span class="nc" id="L978">                    bitOffset = a0 = b2;</span>
+
+                    // Set pointer to only consume the correct number of bits.
+<span class="nc" id="L981">                    updatePointer(7 - bits);</span>
+<span class="nc bnc" id="L982" title="All 2 branches missed.">                } else if (code == 1) { // Horizontal</span>
+                    // Set pointer to only consume the correct number of bits.
+<span class="nc" id="L984">                    updatePointer(7 - bits);</span>
+
+                    // identify the next 2 alternating color codes.
+                    int number;
+<span class="nc bnc" id="L988" title="All 2 branches missed.">                    if (isWhite) {</span>
+                        // Following are white and black runs
+<span class="nc" id="L990">                        number = decodeWhiteCodeWord();</span>
+<span class="nc" id="L991">                        bitOffset += number;</span>
+<span class="nc" id="L992">                        cce[currIndex++] = bitOffset;</span>
+
+<span class="nc" id="L994">                        number = decodeBlackCodeWord();</span>
+<span class="nc" id="L995">                        setToBlack(buffer, lineOffset, bitOffset, number);</span>
+<span class="nc" id="L996">                        bitOffset += number;</span>
+<span class="nc" id="L997">                        cce[currIndex++] = bitOffset;</span>
+                    } else {
+                        // First a black run and then a white run follows
+<span class="nc" id="L1000">                        number = decodeBlackCodeWord();</span>
+<span class="nc" id="L1001">                        setToBlack(buffer, lineOffset, bitOffset, number);</span>
+<span class="nc" id="L1002">                        bitOffset += number;</span>
+<span class="nc" id="L1003">                        cce[currIndex++] = bitOffset;</span>
+
+<span class="nc" id="L1005">                        number = decodeWhiteCodeWord();</span>
+<span class="nc" id="L1006">                        bitOffset += number;</span>
+<span class="nc" id="L1007">                        cce[currIndex++] = bitOffset;</span>
+                    }
+
+<span class="nc" id="L1010">                    a0 = bitOffset;</span>
+<span class="nc bnc" id="L1011" title="All 2 branches missed.">                } else if (code &lt;= 8) { // Vertical</span>
+<span class="nc" id="L1012">                    a1 = b1 + (code - 5);</span>
+<span class="nc" id="L1013">                    cce[currIndex++] = a1;</span>
+
+                    // We write the current color till a1 - 1 pos,
+                    // since a1 is where the next color starts
+<span class="nc bnc" id="L1017" title="All 2 branches missed.">                    if (!isWhite) {</span>
+<span class="nc" id="L1018">                        setToBlack(buffer, lineOffset, bitOffset,</span>
+                                   a1 - bitOffset);
+                    }
+<span class="nc" id="L1021">                    bitOffset = a0 = a1;</span>
+<span class="nc bnc" id="L1022" title="All 2 branches missed.">                    isWhite = !isWhite;</span>
+
+<span class="nc" id="L1024">                    updatePointer(7 - bits);</span>
+<span class="nc bnc" id="L1025" title="All 2 branches missed.">                } else if (code == 11) {</span>
+<span class="nc bnc" id="L1026" title="All 2 branches missed.">                    if (nextLesserThan8Bits(3) != 7) {</span>
+<span class="nc" id="L1027">                        throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder5&quot;));</span>
+                    }
+
+<span class="nc" id="L1030">                    int zeros = 0;</span>
+<span class="nc" id="L1031">                    boolean exit = false;</span>
+
+<span class="nc bnc" id="L1033" title="All 2 branches missed.">                    while (!exit) {</span>
+<span class="nc bnc" id="L1034" title="All 2 branches missed.">                        while (nextLesserThan8Bits(1) != 1) {</span>
+<span class="nc" id="L1035">                            zeros++;</span>
+                        }
+
+<span class="nc bnc" id="L1038" title="All 2 branches missed.">                        if (zeros &gt; 5) {</span>
+                            // Exit code
+
+                            // Zeros before exit code
+<span class="nc" id="L1042">                            zeros = zeros - 6;</span>
+
+<span class="nc bnc" id="L1044" title="All 4 branches missed.">                            if (!isWhite &amp;&amp; (zeros &gt; 0)) {</span>
+<span class="nc" id="L1045">                                cce[currIndex++] = bitOffset;</span>
+                            }
+
+                            // Zeros before the exit code
+<span class="nc" id="L1049">                            bitOffset += zeros;</span>
+<span class="nc bnc" id="L1050" title="All 2 branches missed.">                            if (zeros &gt; 0) {</span>
+                                // Some zeros have been written
+<span class="nc" id="L1052">                                isWhite = true;</span>
+                            }
+
+                            // Read in the bit which specifies the color of
+                            // the following run
+<span class="nc bnc" id="L1057" title="All 2 branches missed.">                            if (nextLesserThan8Bits(1) == 0) {</span>
+<span class="nc bnc" id="L1058" title="All 2 branches missed.">                                if (!isWhite) {</span>
+<span class="nc" id="L1059">                                    cce[currIndex++] = bitOffset;</span>
+                                }
+<span class="nc" id="L1061">                                isWhite = true;</span>
+                            } else {
+<span class="nc bnc" id="L1063" title="All 2 branches missed.">                                if (isWhite) {</span>
+<span class="nc" id="L1064">                                    cce[currIndex++] = bitOffset;</span>
+                                }
+<span class="nc" id="L1066">                                isWhite = false;</span>
+                            }
+
+<span class="nc" id="L1069">                            exit = true;</span>
+                        }
+
+<span class="nc bnc" id="L1072" title="All 2 branches missed.">                        if (zeros == 5) {</span>
+<span class="nc bnc" id="L1073" title="All 2 branches missed.">                            if (!isWhite) {</span>
+<span class="nc" id="L1074">                                cce[currIndex++] = bitOffset;</span>
+                            }
+<span class="nc" id="L1076">                            bitOffset += zeros;</span>
+
+                            // Last thing written was white
+<span class="nc" id="L1079">                            isWhite = true;</span>
+                        } else {
+<span class="nc" id="L1081">                            bitOffset += zeros;</span>
+
+<span class="nc" id="L1083">                            cce[currIndex++] = bitOffset;</span>
+<span class="nc" id="L1084">                            setToBlack(buffer, lineOffset, bitOffset, 1);</span>
+<span class="nc" id="L1085">                            ++bitOffset;</span>
+
+                            // Last thing written was black
+<span class="nc" id="L1088">                            isWhite = false;</span>
+                        }
+
+                    }
+<span class="nc" id="L1092">                } else {</span>
+<span class="nc" id="L1093">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder5&quot;));</span>
+                }
+            }
+
+            // Add the changing element beyond the current scanline for the
+            // other color too
+<span class="nc" id="L1099">            cce[currIndex++] = bitOffset;</span>
+
+            // Number of changing elements in this scanline.
+<span class="nc" id="L1102">            changingElemSize = currIndex;</span>
+
+<span class="nc" id="L1104">            lineOffset += scanlineStride;</span>
+        }
+<span class="nc" id="L1106">    }</span>
+
+    private void setToBlack(byte[] buffer,
+                            int lineOffset, int bitOffset,
+                            int numBits) {
+<span class="nc" id="L1111">        int bitNum = 8 * lineOffset + bitOffset;</span>
+<span class="nc" id="L1112">        int lastBit = bitNum + numBits;</span>
+
+<span class="nc" id="L1114">        int byteNum = bitNum &gt;&gt; 3;</span>
+
+        // Handle bits in first byte
+<span class="nc" id="L1117">        int shift = bitNum &amp; 0x7;</span>
+<span class="nc bnc" id="L1118" title="All 2 branches missed.">        if (shift &gt; 0) {</span>
+<span class="nc" id="L1119">            int maskVal = 1 &lt;&lt; (7 - shift);</span>
+<span class="nc" id="L1120">            byte val = buffer[byteNum];</span>
+<span class="nc bnc" id="L1121" title="All 4 branches missed.">            while (maskVal &gt; 0 &amp;&amp; bitNum &lt; lastBit) {</span>
+<span class="nc" id="L1122">                val |= maskVal;</span>
+<span class="nc" id="L1123">                maskVal &gt;&gt;= 1;</span>
+<span class="nc" id="L1124">                ++bitNum;</span>
+            }
+<span class="nc" id="L1126">            buffer[byteNum] = val;</span>
+        }
+
+        // Fill in 8 bits at a time
+<span class="nc" id="L1130">        byteNum = bitNum &gt;&gt; 3;</span>
+<span class="nc bnc" id="L1131" title="All 2 branches missed.">        while (bitNum &lt; lastBit - 7) {</span>
+<span class="nc" id="L1132">            buffer[byteNum++] = (byte)255;</span>
+<span class="nc" id="L1133">            bitNum += 8;</span>
+        }
+
+        // Fill in remaining bits
+<span class="nc bnc" id="L1137" title="All 2 branches missed.">        while (bitNum &lt; lastBit) {</span>
+<span class="nc" id="L1138">            byteNum = bitNum &gt;&gt; 3;</span>
+<span class="nc" id="L1139">            buffer[byteNum] |= 1 &lt;&lt; (7 - (bitNum &amp; 0x7));</span>
+<span class="nc" id="L1140">            ++bitNum;</span>
+        }
+<span class="nc" id="L1142">    }</span>
+
+    // Returns run length
+    private int decodeWhiteCodeWord() {
+        int current;
+        int entry;
+        int bits;
+        int isT;
+        int twoBits;
+<span class="nc" id="L1151">        int code = -1;</span>
+<span class="nc" id="L1152">        int runLength = 0;</span>
+<span class="nc" id="L1153">        boolean isWhite = true;</span>
+
+<span class="nc bnc" id="L1155" title="All 2 branches missed.">        while (isWhite) {</span>
+<span class="nc" id="L1156">            current = nextNBits(10);</span>
+<span class="nc" id="L1157">            entry = white[current];</span>
+
+            // Get the 3 fields from the entry
+<span class="nc" id="L1160">            isT = entry &amp; 0x0001;</span>
+<span class="nc" id="L1161">            bits = (entry &gt;&gt;&gt; 1) &amp; 0x0f;</span>
+
+<span class="nc bnc" id="L1163" title="All 2 branches missed.">            if (bits == 12) {           // Additional Make up code</span>
+                // Get the next 2 bits
+<span class="nc" id="L1165">                twoBits = nextLesserThan8Bits(2);</span>
+                // Consolidate the 2 new bits and last 2 bits into 4 bits
+<span class="nc" id="L1167">                current = ((current &lt;&lt; 2) &amp; 0x000c) | twoBits;</span>
+<span class="nc" id="L1168">                entry = additionalMakeup[current];</span>
+<span class="nc" id="L1169">                bits = (entry &gt;&gt;&gt; 1) &amp; 0x07;     // 3 bits 0000 0111</span>
+<span class="nc" id="L1170">                code = (entry &gt;&gt;&gt; 4) &amp; 0x0fff;   // 12 bits</span>
+<span class="nc" id="L1171">                runLength += code;</span>
+<span class="nc" id="L1172">                updatePointer(4 - bits);</span>
+<span class="nc bnc" id="L1173" title="All 2 branches missed.">            } else if (bits == 0) {     // ERROR</span>
+<span class="nc" id="L1174">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder0&quot;));</span>
+<span class="nc bnc" id="L1175" title="All 2 branches missed.">            } else if (bits == 15) {    // EOL</span>
+<span class="nc" id="L1176">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder1&quot;));</span>
+            } else {
+                // 11 bits - 0000 0111 1111 1111 = 0x07ff
+<span class="nc" id="L1179">                code = (entry &gt;&gt;&gt; 5) &amp; 0x07ff;</span>
+<span class="nc" id="L1180">                runLength += code;</span>
+<span class="nc" id="L1181">                updatePointer(10 - bits);</span>
+<span class="nc bnc" id="L1182" title="All 2 branches missed.">                if (isT == 0) {</span>
+<span class="nc" id="L1183">                    isWhite = false;</span>
+                }
+            }
+        }
+
+<span class="nc" id="L1188">        return runLength;</span>
+    }
+
+    // Returns run length
+    private int decodeBlackCodeWord() {
+        int current;
+        int entry;
+        int bits;
+        int isT;
+<span class="nc" id="L1197">        int code = -1;</span>
+<span class="nc" id="L1198">        int runLength = 0;</span>
+<span class="nc" id="L1199">        boolean isWhite = false;</span>
+
+<span class="nc bnc" id="L1201" title="All 2 branches missed.">        while (!isWhite) {</span>
+<span class="nc" id="L1202">            current = nextLesserThan8Bits(4);</span>
+<span class="nc" id="L1203">            entry = initBlack[current];</span>
+
+            // Get the 3 fields from the entry
+//            isT = entry &amp; 0x0001;
+<span class="nc" id="L1207">            bits = (entry &gt;&gt;&gt; 1) &amp; 0x000f;</span>
+<span class="nc" id="L1208">            code = (entry &gt;&gt;&gt; 5) &amp; 0x07ff;</span>
+
+<span class="nc bnc" id="L1210" title="All 2 branches missed.">            if (code == 100) {</span>
+<span class="nc" id="L1211">                current = nextNBits(9);</span>
+<span class="nc" id="L1212">                entry = black[current];</span>
+
+                // Get the 3 fields from the entry
+<span class="nc" id="L1215">                isT = entry &amp; 0x0001;</span>
+<span class="nc" id="L1216">                bits = (entry &gt;&gt;&gt; 1) &amp; 0x000f;</span>
+<span class="nc" id="L1217">                code = (entry &gt;&gt;&gt; 5) &amp; 0x07ff;</span>
+
+<span class="nc bnc" id="L1219" title="All 2 branches missed.">                if (bits == 12) {</span>
+                    // Additional makeup codes
+<span class="nc" id="L1221">                    updatePointer(5);</span>
+<span class="nc" id="L1222">                    current = nextLesserThan8Bits(4);</span>
+<span class="nc" id="L1223">                    entry = additionalMakeup[current];</span>
+<span class="nc" id="L1224">                    bits = (entry &gt;&gt;&gt; 1) &amp; 0x07;     // 3 bits 0000 0111</span>
+<span class="nc" id="L1225">                    code  = (entry &gt;&gt;&gt; 4) &amp; 0x0fff;  // 12 bits</span>
+<span class="nc" id="L1226">                    runLength += code;</span>
+
+<span class="nc" id="L1228">                    updatePointer(4 - bits);</span>
+<span class="nc bnc" id="L1229" title="All 2 branches missed.">                } else if (bits == 15) {</span>
+                    // EOL code
+<span class="nc" id="L1231">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder2&quot;));</span>
+                } else {
+<span class="nc" id="L1233">                    runLength += code;</span>
+<span class="nc" id="L1234">                    updatePointer(9 - bits);</span>
+<span class="nc bnc" id="L1235" title="All 2 branches missed.">                    if (isT == 0) {</span>
+<span class="nc" id="L1236">                        isWhite = true;</span>
+                    }
+                }
+<span class="nc bnc" id="L1239" title="All 2 branches missed.">            } else if (code == 200) {</span>
+                // Is a Terminating code
+<span class="nc" id="L1241">                current = nextLesserThan8Bits(2);</span>
+<span class="nc" id="L1242">                entry = twoBitBlack[current];</span>
+<span class="nc" id="L1243">                code = (entry &gt;&gt;&gt; 5) &amp; 0x07ff;</span>
+<span class="nc" id="L1244">                runLength += code;</span>
+<span class="nc" id="L1245">                bits = (entry &gt;&gt;&gt; 1) &amp; 0x0f;</span>
+<span class="nc" id="L1246">                updatePointer(2 - bits);</span>
+<span class="nc" id="L1247">                isWhite = true;</span>
+            } else {
+                // Is a Terminating code
+<span class="nc" id="L1250">                runLength += code;</span>
+<span class="nc" id="L1251">                updatePointer(4 - bits);</span>
+<span class="nc" id="L1252">                isWhite = true;</span>
+            }
+        }
+
+<span class="nc" id="L1256">        return runLength;</span>
+    }
+
+    private int readEOL() {
+<span class="nc bnc" id="L1260" title="All 2 branches missed.">        if (fillBits == 0) {</span>
+<span class="nc bnc" id="L1261" title="All 2 branches missed.">            if (nextNBits(12) != 1) {</span>
+<span class="nc" id="L1262">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder6&quot;));</span>
+            }
+<span class="nc bnc" id="L1264" title="All 2 branches missed.">        } else if (fillBits == 1) {</span>
+
+            // First EOL code word xxxx 0000 0000 0001 will occur
+            // As many fill bits will be present as required to make
+            // the EOL code of 12 bits end on a byte boundary.
+
+<span class="nc" id="L1270">            int bitsLeft = 8 - bitPointer;</span>
+
+<span class="nc bnc" id="L1272" title="All 2 branches missed.">            if (nextNBits(bitsLeft) != 0) {</span>
+<span class="nc" id="L1273">                throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder8&quot;));</span>
+            }
+
+            // If the number of bitsLeft is less than 8, then to have a 12
+            // bit EOL sequence, two more bytes are certainly going to be
+            // required. The first of them has to be all zeros, so ensure
+            // that.
+<span class="nc bnc" id="L1280" title="All 2 branches missed.">            if (bitsLeft &lt; 4) {</span>
+<span class="nc bnc" id="L1281" title="All 2 branches missed.">                if (nextNBits(8) != 0) {</span>
+<span class="nc" id="L1282">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder8&quot;));</span>
+                }
+            }
+
+            // There might be a random number of fill bytes with 0s, so
+            // loop till the EOL of 0000 0001 is found, as long as all
+            // the bytes preceding it are 0's.
+            int n;
+<span class="nc bnc" id="L1290" title="All 2 branches missed.">            while ((n = nextNBits(8)) != 1) {</span>
+
+                // If not all zeros
+<span class="nc bnc" id="L1293" title="All 2 branches missed.">                if (n != 0) {</span>
+<span class="nc" id="L1294">                    throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder8&quot;));</span>
+                }
+            }
+        }
+
+        // If one dimensional encoding mode, then always return 1
+<span class="nc bnc" id="L1300" title="All 2 branches missed.">        if (oneD == 0) {</span>
+<span class="nc" id="L1301">            return 1;</span>
+        } else {
+            // Otherwise for 2D encoding mode,
+            // The next one bit signifies 1D/2D encoding of next line.
+<span class="nc" id="L1305">            return nextLesserThan8Bits(1);</span>
+        }
+    }
+
+    private void getNextChangingElement(int a0, boolean isWhite, int[] ret) {
+        // Local copies of instance variables
+<span class="nc" id="L1311">        int[] pce = this.prevChangingElems;</span>
+<span class="nc" id="L1312">        int ces = this.changingElemSize;</span>
+
+        // If the previous match was at an odd element, we still
+        // have to search the preceeding element.
+        // int start = lastChangingElement &amp; ~0x1;
+<span class="nc bnc" id="L1317" title="All 2 branches missed.">        int start = lastChangingElement &gt; 0 ? lastChangingElement - 1 : 0;</span>
+<span class="nc bnc" id="L1318" title="All 2 branches missed.">        if (isWhite) {</span>
+<span class="nc" id="L1319">            start &amp;= ~0x1; // Search even numbered elements</span>
+        } else {
+<span class="nc" id="L1321">            start |= 0x1; // Search odd numbered elements</span>
+        }
+
+<span class="nc" id="L1324">        int i = start;</span>
+<span class="nc bnc" id="L1325" title="All 2 branches missed.">        for (; i &lt; ces; i += 2) {</span>
+<span class="nc" id="L1326">            int temp = pce[i];</span>
+<span class="nc bnc" id="L1327" title="All 2 branches missed.">            if (temp &gt; a0) {</span>
+<span class="nc" id="L1328">                lastChangingElement = i;</span>
+<span class="nc" id="L1329">                ret[0] = temp;</span>
+<span class="nc" id="L1330">                break;</span>
+            }
+        }
+
+<span class="nc bnc" id="L1334" title="All 2 branches missed.">        if (i + 1 &lt; ces) {</span>
+<span class="nc" id="L1335">            ret[1] = pce[i + 1];</span>
+        }
+<span class="nc" id="L1337">    }</span>
+
+    private int nextNBits(int bitsToGet) {
+        byte b;
+        byte next;
+        byte next2next;
+<span class="nc" id="L1343">        int l = data.length - 1;</span>
+<span class="nc" id="L1344">        int bp = this.bytePointer;</span>
+
+<span class="nc bnc" id="L1346" title="All 2 branches missed.">        if (fillOrder == 1) {</span>
+<span class="nc" id="L1347">            b = data[bp];</span>
+
+<span class="nc bnc" id="L1349" title="All 2 branches missed.">            if (bp == l) {</span>
+<span class="nc" id="L1350">                next = 0x00;</span>
+<span class="nc" id="L1351">                next2next = 0x00;</span>
+<span class="nc bnc" id="L1352" title="All 2 branches missed.">            } else if ((bp + 1) == l) {</span>
+<span class="nc" id="L1353">                next = data[bp + 1];</span>
+<span class="nc" id="L1354">                next2next = 0x00;</span>
+            } else {
+<span class="nc" id="L1356">                next = data[bp + 1];</span>
+<span class="nc" id="L1357">                next2next = data[bp + 2];</span>
+            }
+<span class="nc bnc" id="L1359" title="All 2 branches missed.">        } else if (fillOrder == 2) {</span>
+<span class="nc" id="L1360">            b = flipTable[data[bp] &amp; 0xff];</span>
+
+<span class="nc bnc" id="L1362" title="All 2 branches missed.">            if (bp == l) {</span>
+<span class="nc" id="L1363">                next = 0x00;</span>
+<span class="nc" id="L1364">                next2next = 0x00;</span>
+<span class="nc bnc" id="L1365" title="All 2 branches missed.">            } else if ((bp + 1) == l) {</span>
+<span class="nc" id="L1366">                next = flipTable[data[bp + 1] &amp; 0xff];</span>
+<span class="nc" id="L1367">                next2next = 0x00;</span>
+            } else {
+<span class="nc" id="L1369">                next = flipTable[data[bp + 1] &amp; 0xff];</span>
+<span class="nc" id="L1370">                next2next = flipTable[data[bp + 2] &amp; 0xff];</span>
+            }
+        } else {
+<span class="nc" id="L1373">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder7&quot;));</span>
+        }
+
+<span class="nc" id="L1376">        int bitsLeft = 8 - bitPointer;</span>
+<span class="nc" id="L1377">        int bitsFromNextByte = bitsToGet - bitsLeft;</span>
+<span class="nc" id="L1378">        int bitsFromNext2NextByte = 0;</span>
+<span class="nc bnc" id="L1379" title="All 2 branches missed.">        if (bitsFromNextByte &gt; 8) {</span>
+<span class="nc" id="L1380">            bitsFromNext2NextByte = bitsFromNextByte - 8;</span>
+<span class="nc" id="L1381">            bitsFromNextByte = 8;</span>
+        }
+
+<span class="nc" id="L1384">        bytePointer++;</span>
+
+<span class="nc" id="L1386">        int i1 = (b &amp; table1[bitsLeft]) &lt;&lt; (bitsToGet - bitsLeft);</span>
+<span class="nc" id="L1387">        int i2 = (next &amp; table2[bitsFromNextByte]) &gt;&gt;&gt; (8 - bitsFromNextByte);</span>
+
+<span class="nc" id="L1389">        int i3 = 0;</span>
+<span class="nc bnc" id="L1390" title="All 2 branches missed.">        if (bitsFromNext2NextByte != 0) {</span>
+<span class="nc" id="L1391">            i2 &lt;&lt;= bitsFromNext2NextByte;</span>
+<span class="nc" id="L1392">            i3 = (next2next &amp; table2[bitsFromNext2NextByte])</span>
+                &gt;&gt;&gt; (8 - bitsFromNext2NextByte);
+<span class="nc" id="L1394">            i2 |= i3;</span>
+<span class="nc" id="L1395">            bytePointer++;</span>
+<span class="nc" id="L1396">            bitPointer = bitsFromNext2NextByte;</span>
+        } else {
+<span class="nc bnc" id="L1398" title="All 2 branches missed.">            if (bitsFromNextByte == 8) {</span>
+<span class="nc" id="L1399">                bitPointer = 0;</span>
+<span class="nc" id="L1400">                bytePointer++;</span>
+            } else {
+<span class="nc" id="L1402">                bitPointer = bitsFromNextByte;</span>
+            }
+        }
+
+<span class="nc" id="L1406">        int i = i1 | i2;</span>
+<span class="nc" id="L1407">        return i;</span>
+    }
+
+    private int nextLesserThan8Bits(int bitsToGet) {
+        byte b;
+        byte next;
+<span class="nc" id="L1413">        int l = data.length - 1;</span>
+<span class="nc" id="L1414">        int bp = this.bytePointer;</span>
+
+<span class="nc bnc" id="L1416" title="All 2 branches missed.">        if (fillOrder == 1) {</span>
+<span class="nc" id="L1417">            b = data[bp];</span>
+<span class="nc bnc" id="L1418" title="All 2 branches missed.">            if (bp == l) {</span>
+<span class="nc" id="L1419">                next = 0x00;</span>
+            } else {
+<span class="nc" id="L1421">                next = data[bp + 1];</span>
+            }
+<span class="nc bnc" id="L1423" title="All 2 branches missed.">        } else if (fillOrder == 2) {</span>
+<span class="nc" id="L1424">            b = flipTable[data[bp] &amp; 0xff];</span>
+<span class="nc bnc" id="L1425" title="All 2 branches missed.">            if (bp == l) {</span>
+<span class="nc" id="L1426">                next = 0x00;</span>
+            } else {
+<span class="nc" id="L1428">                next = flipTable[data[bp + 1] &amp; 0xff];</span>
+            }
+        } else {
+<span class="nc" id="L1431">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFFaxDecoder7&quot;));</span>
+        }
+
+<span class="nc" id="L1434">        int bitsLeft = 8 - bitPointer;</span>
+<span class="nc" id="L1435">        int bitsFromNextByte = bitsToGet - bitsLeft;</span>
+
+<span class="nc" id="L1437">        int shift = bitsLeft - bitsToGet;</span>
+        int i1;
+        int i2;
+<span class="nc bnc" id="L1440" title="All 2 branches missed.">        if (shift &gt;= 0) {</span>
+<span class="nc" id="L1441">            i1 = (b &amp; table1[bitsLeft]) &gt;&gt;&gt; shift;</span>
+<span class="nc" id="L1442">            bitPointer += bitsToGet;</span>
+<span class="nc bnc" id="L1443" title="All 2 branches missed.">            if (bitPointer == 8) {</span>
+<span class="nc" id="L1444">                bitPointer = 0;</span>
+<span class="nc" id="L1445">                bytePointer++;</span>
+            }
+        } else {
+<span class="nc" id="L1448">            i1 = (b &amp; table1[bitsLeft]) &lt;&lt; (-shift);</span>
+<span class="nc" id="L1449">            i2 = (next &amp; table2[bitsFromNextByte]) &gt;&gt;&gt; (8 - bitsFromNextByte);</span>
+
+<span class="nc" id="L1451">            i1 |= i2;</span>
+<span class="nc" id="L1452">            bytePointer++;</span>
+<span class="nc" id="L1453">            bitPointer = bitsFromNextByte;</span>
+        }
+
+<span class="nc" id="L1456">        return i1;</span>
+    }
+
+    // Move pointer backwards by given amount of bits
+    private void updatePointer(int bitsToMoveBack) {
+<span class="nc" id="L1461">        int i = bitPointer - bitsToMoveBack;</span>
+
+<span class="nc bnc" id="L1463" title="All 2 branches missed.">        if (i &lt; 0) {</span>
+<span class="nc" id="L1464">            bytePointer--;</span>
+<span class="nc" id="L1465">            bitPointer = 8 + i;</span>
+        } else {
+<span class="nc" id="L1467">            bitPointer = i;</span>
+        }
+<span class="nc" id="L1469">    }</span>
+
+    // Move to the next byte boundary
+    private boolean advancePointer() {
+<span class="nc bnc" id="L1473" title="All 2 branches missed.">        if (bitPointer != 0) {</span>
+<span class="nc" id="L1474">            bytePointer++;</span>
+<span class="nc" id="L1475">            bitPointer = 0;</span>
+        }
+
+<span class="nc" id="L1478">        return true;</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

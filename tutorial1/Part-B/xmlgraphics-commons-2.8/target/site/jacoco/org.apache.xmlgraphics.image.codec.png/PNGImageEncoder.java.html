@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGImageEncoder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.png</a> &gt; <span class="el_source">PNGImageEncoder.java</span></div><h1>PNGImageEncoder.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PNGImageEncoder.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.codec.png;
+
+import java.awt.Rectangle;
+import java.awt.image.ColorModel;
+import java.awt.image.IndexColorModel;
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.awt.image.SampleModel;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterOutputStream;
+
+import org.apache.xmlgraphics.image.codec.util.ImageEncoderImpl;
+import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
+
+// CSOFF: ConstantName
+// CSOFF: InnerAssignment
+// CSOFF: LocalVariableName
+// CSOFF: MissingSwitchDefault
+// CSOFF: OperatorWrap
+// CSOFF: WhitespaceAround
+
+final class CRC {
+
+    private CRC() {
+    }
+
+<span class="fc" id="L56">    private static int[] crcTable = new int[256];</span>
+
+    static {
+        // Initialize CRC table
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        for (int n = 0; n &lt; 256; n++) {</span>
+<span class="fc" id="L61">            int c = n;</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            for (int k = 0; k &lt; 8; k++) {</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">                if ((c &amp; 1) == 1) {</span>
+<span class="fc" id="L64">                    c = 0xedb88320 ^ (c &gt;&gt;&gt; 1);</span>
+                } else {
+<span class="fc" id="L66">                    c &gt;&gt;&gt;= 1;</span>
+                }
+
+<span class="fc" id="L69">                crcTable[n] = c;</span>
+            }
+        }
+<span class="fc" id="L72">    }</span>
+
+    public static int updateCRC(int crc, byte[] data, int off, int len) {
+<span class="fc" id="L75">        int c = crc;</span>
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        for (int n = 0; n &lt; len; n++) {</span>
+<span class="fc" id="L78">             c = crcTable[(c ^ data[off + n]) &amp; 0xff] ^ (c &gt;&gt;&gt; 8);</span>
+        }
+
+<span class="fc" id="L81">        return c;</span>
+    }
+}
+
+
+class ChunkStream extends OutputStream implements DataOutput {
+
+    private String type;
+    private ByteArrayOutputStream baos;
+    private DataOutputStream dos;
+
+<span class="fc" id="L92">    ChunkStream(String type) throws IOException {</span>
+<span class="fc" id="L93">        this.type = type;</span>
+
+<span class="fc" id="L95">        this.baos = new ByteArrayOutputStream();</span>
+<span class="fc" id="L96">        this.dos = new DataOutputStream(baos);</span>
+<span class="fc" id="L97">    }</span>
+
+    @Override
+    public void write(byte[] b) throws IOException {
+<span class="nc" id="L101">        dos.write(b);</span>
+<span class="nc" id="L102">    }</span>
+
+    @Override
+    public void write(byte[] b, int off, int len) throws IOException {
+<span class="nc" id="L106">        dos.write(b, off, len);</span>
+<span class="nc" id="L107">    }</span>
+
+    @Override
+    public void write(int b) throws IOException {
+<span class="nc" id="L111">        dos.write(b);</span>
+<span class="nc" id="L112">    }</span>
+
+    public void writeBoolean(boolean v) throws IOException {
+<span class="nc" id="L115">        dos.writeBoolean(v);</span>
+<span class="nc" id="L116">    }</span>
+
+    public void writeByte(int v) throws IOException {
+<span class="fc" id="L119">        dos.writeByte(v);</span>
+<span class="fc" id="L120">    }</span>
+
+    public void writeBytes(String s) throws IOException {
+<span class="nc" id="L123">        dos.writeBytes(s);</span>
+<span class="nc" id="L124">    }</span>
+
+    public void writeChar(int v) throws IOException {
+<span class="nc" id="L127">        dos.writeChar(v);</span>
+<span class="nc" id="L128">    }</span>
+
+    public void writeChars(String s) throws IOException {
+<span class="nc" id="L131">        dos.writeChars(s);</span>
+<span class="nc" id="L132">    }</span>
+
+    public void writeDouble(double v) throws IOException {
+<span class="nc" id="L135">        dos.writeDouble(v);</span>
+<span class="nc" id="L136">    }</span>
+
+    public void writeFloat(float v) throws IOException {
+<span class="nc" id="L139">        dos.writeFloat(v);</span>
+<span class="nc" id="L140">    }</span>
+
+    public void writeInt(int v) throws IOException {
+<span class="fc" id="L143">        dos.writeInt(v);</span>
+<span class="fc" id="L144">    }</span>
+
+    public void writeLong(long v) throws IOException {
+<span class="nc" id="L147">        dos.writeLong(v);</span>
+<span class="nc" id="L148">    }</span>
+
+    public void writeShort(int v) throws IOException {
+<span class="nc" id="L151">        dos.writeShort(v);</span>
+<span class="nc" id="L152">    }</span>
+
+    public void writeUTF(String str) throws IOException {
+<span class="nc" id="L155">        dos.writeUTF(str);</span>
+<span class="nc" id="L156">    }</span>
+
+    public void writeToStream(DataOutputStream output) throws IOException {
+<span class="fc" id="L159">        byte[] typeSignature = new byte[4];</span>
+<span class="fc" id="L160">        typeSignature[0] = (byte)type.charAt(0);</span>
+<span class="fc" id="L161">        typeSignature[1] = (byte)type.charAt(1);</span>
+<span class="fc" id="L162">        typeSignature[2] = (byte)type.charAt(2);</span>
+<span class="fc" id="L163">        typeSignature[3] = (byte)type.charAt(3);</span>
+
+<span class="fc" id="L165">        dos.flush();</span>
+<span class="fc" id="L166">        baos.flush();</span>
+
+<span class="fc" id="L168">        byte[] data = baos.toByteArray();</span>
+<span class="fc" id="L169">        int len = data.length;</span>
+
+<span class="fc" id="L171">        output.writeInt(len);</span>
+<span class="fc" id="L172">        output.write(typeSignature);</span>
+<span class="fc" id="L173">        output.write(data, 0, len);</span>
+
+<span class="fc" id="L175">        int crc = 0xffffffff;</span>
+<span class="fc" id="L176">        crc = CRC.updateCRC(crc, typeSignature, 0, 4);</span>
+<span class="fc" id="L177">        crc = CRC.updateCRC(crc, data, 0, len);</span>
+<span class="fc" id="L178">        output.writeInt(crc ^ 0xffffffff);</span>
+<span class="fc" id="L179">    }</span>
+
+    /** {@inheritDoc} */
+    @Override
+    public void close() throws IOException {
+
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">        if (baos != null) {</span>
+<span class="fc" id="L186">            baos.close();</span>
+<span class="fc" id="L187">            baos = null;</span>
+        }
+<span class="pc bpc" id="L189" title="1 of 2 branches missed.">        if (dos != null) {</span>
+<span class="fc" id="L190">            dos.close();</span>
+<span class="fc" id="L191">            dos = null;</span>
+        }
+<span class="fc" id="L193">    }</span>
+}
+
+
+class IDATOutputStream extends FilterOutputStream {
+
+<span class="fc" id="L199">    private static final byte[] TYPE_SIGNATURE</span>
+         = {(byte)'I', (byte)'D', (byte)'A', (byte)'T'};
+
+    private int bytesWritten;
+    private int segmentLength;
+    private byte[] buffer;
+
+    public IDATOutputStream(OutputStream output,
+                            int segmentLength) {
+<span class="fc" id="L208">        super(output);</span>
+<span class="fc" id="L209">        this.segmentLength = segmentLength;</span>
+<span class="fc" id="L210">        this.buffer = new byte[segmentLength];</span>
+<span class="fc" id="L211">    }</span>
+
+    @Override
+    public void close() throws IOException {
+<span class="fc" id="L215">        flush();</span>
+<span class="fc" id="L216">    }</span>
+
+    private void writeInt(int x) throws IOException {
+<span class="fc" id="L219">        out.write(x &gt;&gt; 24);</span>
+<span class="fc" id="L220">        out.write((x &gt;&gt; 16) &amp; 0xff);</span>
+<span class="fc" id="L221">        out.write((x &gt;&gt; 8) &amp; 0xff);</span>
+<span class="fc" id="L222">        out.write(x &amp; 0xff);</span>
+<span class="fc" id="L223">    }</span>
+
+    @Override
+    public void flush() throws IOException {
+<span class="fc bfc" id="L227" title="All 2 branches covered.">        if (bytesWritten == 0) {</span>
+<span class="fc" id="L228">            return;</span>
+        }
+
+        // Length
+<span class="fc" id="L232">        writeInt(bytesWritten);</span>
+        // 'IDAT' signature
+<span class="fc" id="L234">        out.write(TYPE_SIGNATURE);</span>
+        // Data
+<span class="fc" id="L236">        out.write(buffer, 0, bytesWritten);</span>
+
+<span class="fc" id="L238">        int crc = 0xffffffff;</span>
+<span class="fc" id="L239">        crc = CRC.updateCRC(crc, TYPE_SIGNATURE, 0, 4);</span>
+<span class="fc" id="L240">        crc = CRC.updateCRC(crc, buffer, 0, bytesWritten);</span>
+
+        // CRC
+<span class="fc" id="L243">        writeInt(crc ^ 0xffffffff);</span>
+
+        // Reset buffer
+<span class="fc" id="L246">        bytesWritten = 0;</span>
+<span class="fc" id="L247">    }</span>
+
+    @Override
+    public void write(byte[] b) throws IOException {
+<span class="nc" id="L251">        this.write(b, 0, b.length);</span>
+<span class="nc" id="L252">    }</span>
+
+    @Override
+    public void write(byte[] b, int off, int len) throws IOException {
+<span class="fc bfc" id="L256" title="All 2 branches covered.">        while (len &gt; 0) {</span>
+<span class="fc" id="L257">            int bytes = Math.min(segmentLength - bytesWritten, len);</span>
+<span class="fc" id="L258">            System.arraycopy(b, off, buffer, bytesWritten, bytes);</span>
+<span class="fc" id="L259">            off += bytes;</span>
+<span class="fc" id="L260">            len -= bytes;</span>
+<span class="fc" id="L261">            bytesWritten += bytes;</span>
+
+<span class="pc bpc" id="L263" title="1 of 2 branches missed.">            if (bytesWritten == segmentLength) {</span>
+<span class="nc" id="L264">                flush();</span>
+            }
+<span class="fc" id="L266">        }</span>
+<span class="fc" id="L267">    }</span>
+
+    @Override
+    public void write(int b) throws IOException {
+<span class="nc" id="L271">        buffer[bytesWritten++] = (byte)b;</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">        if (bytesWritten == segmentLength) {</span>
+<span class="nc" id="L273">            flush();</span>
+        }
+<span class="nc" id="L275">    }</span>
+}
+
+/**
+ * An ImageEncoder for the PNG file format.
+ *
+ * @since EA4
+ */
+public class PNGImageEncoder extends ImageEncoderImpl {
+
+    private static final int PNG_COLOR_GRAY = 0;
+    private static final int PNG_COLOR_RGB = 2;
+    private static final int PNG_COLOR_PALETTE = 3;
+    private static final int PNG_COLOR_GRAY_ALPHA = 4;
+    private static final int PNG_COLOR_RGB_ALPHA = 6;
+
+<span class="fc" id="L291">    private static final byte[] MAGIC = {</span>
+        (byte)137, (byte) 80, (byte) 78, (byte) 71,
+        (byte) 13, (byte) 10, (byte) 26, (byte) 10
+    };
+
+    private PNGEncodeParam param;
+
+    private RenderedImage image;
+    private int width;
+    private int height;
+    private int bitDepth;
+    private int bitShift;
+    private int numBands;
+    private int colorType;
+
+    private int bpp; // bytes per pixel, rounded up
+
+    private boolean skipAlpha;
+    private boolean compressGray;
+
+    private boolean interlace;
+
+    private byte[] redPalette;
+    private byte[] greenPalette;
+    private byte[] bluePalette;
+    private byte[] alphaPalette;
+
+    private DataOutputStream dataOutput;
+
+    public PNGImageEncoder(OutputStream output,
+                           PNGEncodeParam param) {
+<span class="fc" id="L322">        super(output, param);</span>
+
+<span class="pc bpc" id="L324" title="1 of 2 branches missed.">        if (param != null) {</span>
+<span class="fc" id="L325">            this.param = param;</span>
+        }
+<span class="fc" id="L327">        this.dataOutput = new DataOutputStream(output);</span>
+<span class="fc" id="L328">    }</span>
+
+    private void writeMagic() throws IOException {
+<span class="fc" id="L331">        dataOutput.write(MAGIC);</span>
+<span class="fc" id="L332">    }</span>
+
+    private void writeIHDR() throws IOException {
+<span class="fc" id="L335">        ChunkStream cs = new ChunkStream(&quot;IHDR&quot;);</span>
+        try {
+<span class="fc" id="L337">            cs.writeInt(width);</span>
+<span class="fc" id="L338">            cs.writeInt(height);</span>
+<span class="fc" id="L339">            cs.writeByte((byte)bitDepth);</span>
+<span class="fc" id="L340">            cs.writeByte((byte)colorType);</span>
+<span class="fc" id="L341">            cs.writeByte((byte)0);</span>
+<span class="fc" id="L342">            cs.writeByte((byte)0);</span>
+<span class="pc bpc" id="L343" title="1 of 2 branches missed.">            cs.writeByte(interlace ? (byte)1 : (byte)0);</span>
+
+<span class="fc" id="L345">            cs.writeToStream(dataOutput);</span>
+        } finally {
+<span class="fc" id="L347">            cs.close();</span>
+        }
+<span class="fc" id="L349">    }</span>
+
+    private byte[] prevRow;
+    private byte[] currRow;
+
+    private byte[][] filteredRows;
+
+    private static int clamp(int val, int maxValue) {
+<span class="pc bpc" id="L357" title="1 of 2 branches missed.">        return (val &gt; maxValue) ? maxValue : val;</span>
+    }
+
+    private void encodePass(OutputStream os, Raster ras,
+                            int xOffset,     int yOffset,
+                            int xSkip,       int ySkip)
+        throws IOException {
+<span class="fc" id="L364">        int minX   = ras.getMinX();</span>
+<span class="fc" id="L365">        int minY   = ras.getMinY();</span>
+<span class="fc" id="L366">        int width  = ras.getWidth();</span>
+<span class="fc" id="L367">        int height = ras.getHeight();</span>
+
+<span class="fc" id="L369">        xOffset *= numBands;</span>
+<span class="fc" id="L370">        xSkip   *= numBands;</span>
+
+<span class="fc" id="L372">        int samplesPerByte = 8 / bitDepth;</span>
+
+<span class="fc" id="L374">        int numSamples = width * numBands;</span>
+<span class="fc" id="L375">        int[] samples = new int[numSamples];</span>
+
+<span class="fc" id="L377">        int pixels = (numSamples - xOffset + xSkip - 1) / xSkip;</span>
+<span class="fc" id="L378">        int bytesPerRow = pixels * numBands;</span>
+<span class="pc bpc" id="L379" title="1 of 2 branches missed.">        if (bitDepth &lt; 8) {</span>
+<span class="nc" id="L380">            bytesPerRow = (bytesPerRow + samplesPerByte - 1) / samplesPerByte;</span>
+<span class="pc bpc" id="L381" title="1 of 2 branches missed.">        } else if (bitDepth == 16) {</span>
+<span class="nc" id="L382">            bytesPerRow *= 2;</span>
+        }
+
+<span class="pc bpc" id="L385" title="1 of 2 branches missed.">        if (bytesPerRow == 0) {</span>
+<span class="nc" id="L386">            return;</span>
+        }
+
+<span class="fc" id="L389">        currRow = new byte[bytesPerRow + bpp];</span>
+<span class="fc" id="L390">        prevRow = new byte[bytesPerRow + bpp];</span>
+
+<span class="fc" id="L392">        filteredRows = new byte[5][bytesPerRow + bpp];</span>
+
+<span class="fc" id="L394">        int maxValue = (1 &lt;&lt; bitDepth) - 1;</span>
+
+<span class="fc bfc" id="L396" title="All 2 branches covered.">        for (int row = minY + yOffset; row &lt; minY + height; row += ySkip) {</span>
+<span class="fc" id="L397">            ras.getPixels(minX, row, width, 1, samples);</span>
+
+<span class="pc bpc" id="L399" title="1 of 2 branches missed.">            if (compressGray) {</span>
+<span class="nc" id="L400">                int shift = 8 - bitDepth;</span>
+<span class="nc bnc" id="L401" title="All 2 branches missed.">                for (int i = 0; i &lt; width; i++) {</span>
+<span class="nc" id="L402">                    samples[i] &gt;&gt;= shift;</span>
+                }
+            }
+
+<span class="fc" id="L406">            int count = bpp; // leave first 'bpp' bytes zero</span>
+<span class="fc" id="L407">            int pos = 0;</span>
+<span class="fc" id="L408">            int tmp = 0;</span>
+
+<span class="pc bpc" id="L410" title="3 of 4 branches missed.">            switch (bitDepth) {</span>
+            case 1: case 2: case 4:
+                // Image can only have a single band
+
+<span class="nc" id="L414">                int mask = samplesPerByte - 1;</span>
+<span class="nc bnc" id="L415" title="All 2 branches missed.">                for (int s = xOffset; s &lt; numSamples; s += xSkip) {</span>
+<span class="nc" id="L416">                    int val = clamp(samples[s] &gt;&gt; bitShift, maxValue);</span>
+<span class="nc" id="L417">                    tmp = (tmp &lt;&lt; bitDepth) | val;</span>
+
+<span class="nc bnc" id="L419" title="All 2 branches missed.">                    if (pos++  == mask) {</span>
+<span class="nc" id="L420">                        currRow[count++] = (byte)tmp;</span>
+<span class="nc" id="L421">                        tmp = 0;</span>
+<span class="nc" id="L422">                        pos = 0;</span>
+                    }
+                }
+
+                // Left shift the last byte
+<span class="nc bnc" id="L427" title="All 2 branches missed.">                if (pos != 0) {</span>
+<span class="nc" id="L428">                    tmp &lt;&lt;= (samplesPerByte - pos) * bitDepth;</span>
+<span class="nc" id="L429">                    currRow[count++] = (byte)tmp;</span>
+                }
+                break;
+
+            case 8:
+<span class="fc bfc" id="L434" title="All 2 branches covered.">                for (int s = xOffset; s &lt; numSamples; s += xSkip) {</span>
+<span class="fc bfc" id="L435" title="All 2 branches covered.">                    for (int b = 0; b &lt; numBands; b++) {</span>
+<span class="fc" id="L436">                        currRow[count++] =</span>
+<span class="fc" id="L437">                            (byte)clamp(samples[s + b] &gt;&gt; bitShift, maxValue);</span>
+                    }
+                }
+<span class="fc" id="L440">                break;</span>
+
+            case 16:
+<span class="nc bnc" id="L443" title="All 2 branches missed.">                for (int s = xOffset; s &lt; numSamples; s += xSkip) {</span>
+<span class="nc bnc" id="L444" title="All 2 branches missed.">                    for (int b = 0; b &lt; numBands; b++) {</span>
+<span class="nc" id="L445">                        int val = clamp(samples[s + b] &gt;&gt; bitShift, maxValue);</span>
+<span class="nc" id="L446">                        currRow[count++] = (byte)(val &gt;&gt; 8);</span>
+<span class="nc" id="L447">                        currRow[count++] = (byte)(val &amp; 0xff);</span>
+                    }
+                }
+                break;
+            }
+
+            // Perform filtering
+<span class="fc" id="L454">            int filterType = param.filterRow(currRow, prevRow,</span>
+                                             filteredRows,
+                                             bytesPerRow, bpp);
+
+<span class="fc" id="L458">            os.write(filterType);</span>
+<span class="fc" id="L459">            os.write(filteredRows[filterType], bpp, bytesPerRow);</span>
+
+            // Swap current and previous rows
+<span class="fc" id="L462">            byte[] swap = currRow;</span>
+<span class="fc" id="L463">            currRow = prevRow;</span>
+<span class="fc" id="L464">            prevRow = swap;</span>
+        }
+<span class="fc" id="L466">    }</span>
+
+    private void writeIDAT() throws IOException {
+<span class="fc" id="L469">        IDATOutputStream ios = new IDATOutputStream(dataOutput, 8192);</span>
+<span class="fc" id="L470">        DeflaterOutputStream dos =</span>
+            new DeflaterOutputStream(ios, new Deflater(9));
+
+        // Future work - don't convert entire image to a Raster It
+        // might seem that you could just call image.getData() but
+        // 'BufferedImage.subImage' doesn't appear to set the Width
+        // and height properly of the Child Raster, so the Raster
+        // you get back here appears larger than it should.
+        // This solves that problem by bounding the raster to the
+        // image's bounds...
+<span class="fc" id="L480">        Raster ras = image.getData(new Rectangle(image.getMinX(),</span>
+<span class="fc" id="L481">                                                 image.getMinY(),</span>
+<span class="fc" id="L482">                                                 image.getWidth(),</span>
+<span class="fc" id="L483">                                                 image.getHeight()));</span>
+        // System.out.println(&quot;Image: [&quot; +
+        //                    image.getMinY()  + &quot;, &quot; +
+        //                    image.getMinX()  + &quot;, &quot; +
+        //                    image.getWidth()  + &quot;, &quot; +
+        //                    image.getHeight() + &quot;]&quot;);
+        // System.out.println(&quot;Ras: [&quot; +
+        //                    ras.getMinX()  + &quot;, &quot; +
+        //                    ras.getMinY()  + &quot;, &quot; +
+        //                    ras.getWidth()  + &quot;, &quot; +
+        //                    ras.getHeight() + &quot;]&quot;);
+
+<span class="pc bpc" id="L495" title="1 of 2 branches missed.">        if (skipAlpha) {</span>
+<span class="nc" id="L496">            int numBands = ras.getNumBands() - 1;</span>
+<span class="nc" id="L497">            int[] bandList = new int[numBands];</span>
+<span class="nc bnc" id="L498" title="All 2 branches missed.">            for (int i = 0; i &lt; numBands; i++) {</span>
+<span class="nc" id="L499">                bandList[i] = i;</span>
+            }
+<span class="nc" id="L501">            ras = ras.createChild(0, 0,</span>
+<span class="nc" id="L502">                                  ras.getWidth(), ras.getHeight(),</span>
+                                  0, 0,
+                                  bandList);
+        }
+
+<span class="pc bpc" id="L507" title="1 of 2 branches missed.">        if (interlace) {</span>
+            // Interlacing pass 1
+<span class="nc" id="L509">            encodePass(dos, ras, 0, 0, 8, 8);</span>
+            // Interlacing pass 2
+<span class="nc" id="L511">            encodePass(dos, ras, 4, 0, 8, 8);</span>
+            // Interlacing pass 3
+<span class="nc" id="L513">            encodePass(dos, ras, 0, 4, 4, 8);</span>
+            // Interlacing pass 4
+<span class="nc" id="L515">            encodePass(dos, ras, 2, 0, 4, 4);</span>
+            // Interlacing pass 5
+<span class="nc" id="L517">            encodePass(dos, ras, 0, 2, 2, 4);</span>
+            // Interlacing pass 6
+<span class="nc" id="L519">            encodePass(dos, ras, 1, 0, 2, 2);</span>
+            // Interlacing pass 7
+<span class="nc" id="L521">            encodePass(dos, ras, 0, 1, 1, 2);</span>
+        } else {
+<span class="fc" id="L523">            encodePass(dos, ras, 0, 0, 1, 1);</span>
+        }
+
+<span class="fc" id="L526">        dos.finish();</span>
+<span class="fc" id="L527">        dos.close();</span>
+<span class="fc" id="L528">        ios.flush();</span>
+<span class="fc" id="L529">        ios.close();</span>
+<span class="fc" id="L530">    }</span>
+
+    private void writeIEND() throws IOException {
+<span class="fc" id="L533">        ChunkStream cs = new ChunkStream(&quot;IEND&quot;);</span>
+        try {
+<span class="fc" id="L535">            cs.writeToStream(dataOutput);</span>
+        } finally {
+<span class="fc" id="L537">            cs.close();</span>
+        }
+<span class="fc" id="L539">    }</span>
+
+<span class="fc" id="L541">    private static final float[] SRGB_CHROMA = {</span>
+        0.31270F, 0.329F, 0.64F, 0.33F, 0.3F, 0.6F, 0.15F, 0.06F
+    };
+
+    private void writeCHRM() throws IOException {
+<span class="pc bpc" id="L546" title="2 of 4 branches missed.">        if (param.isChromaticitySet() || param.isSRGBIntentSet()) {</span>
+<span class="nc" id="L547">            ChunkStream cs = new ChunkStream(&quot;cHRM&quot;);</span>
+            try {
+                float[] chroma;
+<span class="nc bnc" id="L550" title="All 2 branches missed.">                if (!param.isSRGBIntentSet()) {</span>
+<span class="nc" id="L551">                    chroma = param.getChromaticity();</span>
+                } else {
+<span class="nc" id="L553">                    chroma = SRGB_CHROMA; // SRGB chromaticities</span>
+                }
+
+<span class="nc bnc" id="L556" title="All 2 branches missed.">                for (int i = 0; i &lt; 8; i++) {</span>
+<span class="nc" id="L557">                    cs.writeInt((int)(chroma[i] * 100000));</span>
+                }
+<span class="nc" id="L559">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L561">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L564">    }</span>
+
+    private void writeGAMA() throws IOException {
+<span class="pc bpc" id="L567" title="2 of 4 branches missed.">        if (param.isGammaSet() || param.isSRGBIntentSet()) {</span>
+<span class="nc" id="L568">            ChunkStream cs = new ChunkStream(&quot;gAMA&quot;);</span>
+            try {
+                float gamma;
+<span class="nc bnc" id="L571" title="All 2 branches missed.">                if (!param.isSRGBIntentSet()) {</span>
+<span class="nc" id="L572">                    gamma = param.getGamma();</span>
+                } else {
+<span class="nc" id="L574">                    gamma = 1.0F / 2.2F; // SRGB gamma</span>
+                }
+                // TD should include the .5 but causes regard to say
+                // everything is different.
+<span class="nc" id="L578">                cs.writeInt((int)(gamma * 100000/*+0.5*/));</span>
+<span class="nc" id="L579">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L581">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L584">    }</span>
+
+    private void writeICCP() throws IOException {
+<span class="pc bpc" id="L587" title="1 of 2 branches missed.">        if (param.isICCProfileDataSet()) {</span>
+<span class="nc" id="L588">            ChunkStream cs = new ChunkStream(&quot;iCCP&quot;);</span>
+            try {
+<span class="nc" id="L590">                byte[] iccProfileData = param.getICCProfileData();</span>
+<span class="nc" id="L591">                cs.write(iccProfileData);</span>
+<span class="nc" id="L592">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L594">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L597">    }</span>
+
+    private void writeSBIT() throws IOException {
+<span class="pc bpc" id="L600" title="1 of 2 branches missed.">        if (param.isSignificantBitsSet()) {</span>
+<span class="nc" id="L601">            ChunkStream cs = new ChunkStream(&quot;sBIT&quot;);</span>
+            try {
+<span class="nc" id="L603">                int[] significantBits = param.getSignificantBits();</span>
+<span class="nc bnc" id="L604" title="All 2 branches missed.">                for (int significantBit : significantBits) {</span>
+<span class="nc" id="L605">                    cs.writeByte(significantBit);</span>
+                }
+<span class="nc" id="L607">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L609">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L612">    }</span>
+
+    private void writeSRGB() throws IOException {
+<span class="pc bpc" id="L615" title="1 of 2 branches missed.">        if (param.isSRGBIntentSet()) {</span>
+<span class="nc" id="L616">            ChunkStream cs = new ChunkStream(&quot;sRGB&quot;);</span>
+            try {
+<span class="nc" id="L618">                int intent = param.getSRGBIntent();</span>
+<span class="nc" id="L619">                cs.write(intent);</span>
+<span class="nc" id="L620">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L622">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L625">    }</span>
+
+    private void writePLTE() throws IOException {
+<span class="pc bpc" id="L628" title="1 of 2 branches missed.">        if (redPalette == null) {</span>
+<span class="fc" id="L629">            return;</span>
+        }
+
+<span class="nc" id="L632">        ChunkStream cs = new ChunkStream(&quot;PLTE&quot;);</span>
+        try {
+<span class="nc bnc" id="L634" title="All 2 branches missed.">            for (int i = 0; i &lt; redPalette.length; i++) {</span>
+<span class="nc" id="L635">                cs.writeByte(redPalette[i]);</span>
+<span class="nc" id="L636">                cs.writeByte(greenPalette[i]);</span>
+<span class="nc" id="L637">                cs.writeByte(bluePalette[i]);</span>
+            }
+
+<span class="nc" id="L640">            cs.writeToStream(dataOutput);</span>
+        } finally {
+<span class="nc" id="L642">            cs.close();</span>
+        }
+<span class="nc" id="L644">    }</span>
+
+    private void writeBKGD() throws IOException {
+<span class="pc bpc" id="L647" title="1 of 2 branches missed.">        if (param.isBackgroundSet()) {</span>
+<span class="nc" id="L648">            ChunkStream cs = new ChunkStream(&quot;bKGD&quot;);</span>
+            try {
+<span class="nc bnc" id="L650" title="All 4 branches missed.">                switch (colorType) {</span>
+                case PNG_COLOR_GRAY:
+                case PNG_COLOR_GRAY_ALPHA:
+<span class="nc" id="L653">                    int gray = ((PNGEncodeParam.Gray)param).getBackgroundGray();</span>
+<span class="nc" id="L654">                    cs.writeShort(gray);</span>
+<span class="nc" id="L655">                    break;</span>
+
+                case PNG_COLOR_PALETTE:
+<span class="nc" id="L658">                    int index =</span>
+<span class="nc" id="L659">                       ((PNGEncodeParam.Palette)param).getBackgroundPaletteIndex();</span>
+<span class="nc" id="L660">                    cs.writeByte(index);</span>
+<span class="nc" id="L661">                    break;</span>
+
+                case PNG_COLOR_RGB:
+                case PNG_COLOR_RGB_ALPHA:
+<span class="nc" id="L665">                    int[] rgb = ((PNGEncodeParam.RGB)param).getBackgroundRGB();</span>
+<span class="nc" id="L666">                    cs.writeShort(rgb[0]);</span>
+<span class="nc" id="L667">                    cs.writeShort(rgb[1]);</span>
+<span class="nc" id="L668">                    cs.writeShort(rgb[2]);</span>
+                    break;
+                }
+
+<span class="nc" id="L672">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L674">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L677">    }</span>
+
+    private void writeHIST() throws IOException {
+<span class="pc bpc" id="L680" title="1 of 2 branches missed.">        if (param.isPaletteHistogramSet()) {</span>
+<span class="nc" id="L681">            ChunkStream cs = new ChunkStream(&quot;hIST&quot;);</span>
+            try {
+<span class="nc" id="L683">                int[] hist = param.getPaletteHistogram();</span>
+<span class="nc bnc" id="L684" title="All 2 branches missed.">                for (int aHist : hist) {</span>
+<span class="nc" id="L685">                    cs.writeShort(aHist);</span>
+                }
+
+<span class="nc" id="L688">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L690">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L693">    }</span>
+
+    private void writeTRNS() throws IOException {
+<span class="pc bpc" id="L696" title="5 of 6 branches missed.">        if (param.isTransparencySet()</span>
+            &amp;&amp; (colorType != PNG_COLOR_GRAY_ALPHA)
+            &amp;&amp; (colorType != PNG_COLOR_RGB_ALPHA)) {
+<span class="nc" id="L699">            ChunkStream cs = new ChunkStream(&quot;tRNS&quot;);</span>
+            try {
+<span class="nc bnc" id="L701" title="All 2 branches missed.">                if (param instanceof PNGEncodeParam.Palette) {</span>
+<span class="nc" id="L702">                    byte[] t =</span>
+<span class="nc" id="L703">                        ((PNGEncodeParam.Palette)param).getPaletteTransparency();</span>
+<span class="nc bnc" id="L704" title="All 2 branches missed.">                    for (byte aT : t) {</span>
+<span class="nc" id="L705">                        cs.writeByte(aT);</span>
+                    }
+<span class="nc bnc" id="L707" title="All 2 branches missed.">                } else if (param instanceof PNGEncodeParam.Gray) {</span>
+<span class="nc" id="L708">                    int t = ((PNGEncodeParam.Gray)param).getTransparentGray();</span>
+<span class="nc" id="L709">                    cs.writeShort(t);</span>
+<span class="nc bnc" id="L710" title="All 2 branches missed.">                } else if (param instanceof PNGEncodeParam.RGB) {</span>
+<span class="nc" id="L711">                    int[] t = ((PNGEncodeParam.RGB)param).getTransparentRGB();</span>
+<span class="nc" id="L712">                    cs.writeShort(t[0]);</span>
+<span class="nc" id="L713">                    cs.writeShort(t[1]);</span>
+<span class="nc" id="L714">                    cs.writeShort(t[2]);</span>
+                }
+
+<span class="nc" id="L717">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L719">                cs.close();</span>
+            }
+<span class="pc bpc" id="L721" title="1 of 2 branches missed.">        } else if (colorType == PNG_COLOR_PALETTE) {</span>
+<span class="nc" id="L722">            int lastEntry = Math.min(255, alphaPalette.length - 1);</span>
+            int nonOpaque;
+<span class="nc bnc" id="L724" title="All 2 branches missed.">            for (nonOpaque = lastEntry; nonOpaque &gt;= 0; nonOpaque--) {</span>
+<span class="nc bnc" id="L725" title="All 2 branches missed.">                if (alphaPalette[nonOpaque] != (byte)255) {</span>
+<span class="nc" id="L726">                    break;</span>
+                }
+            }
+
+<span class="nc bnc" id="L730" title="All 2 branches missed.">            if (nonOpaque &gt;= 0) {</span>
+<span class="nc" id="L731">                ChunkStream cs = new ChunkStream(&quot;tRNS&quot;);</span>
+                try {
+<span class="nc bnc" id="L733" title="All 2 branches missed.">                    for (int i = 0; i &lt;= nonOpaque; i++) {</span>
+<span class="nc" id="L734">                        cs.writeByte(alphaPalette[i]);</span>
+                    }
+<span class="nc" id="L736">                    cs.writeToStream(dataOutput);</span>
+                } finally {
+<span class="nc" id="L738">                    cs.close();</span>
+                }
+            }
+        }
+<span class="fc" id="L742">    }</span>
+
+    private void writePHYS() throws IOException {
+<span class="pc bpc" id="L745" title="1 of 2 branches missed.">        if (param.isPhysicalDimensionSet()) {</span>
+<span class="nc" id="L746">            ChunkStream cs = new ChunkStream(&quot;pHYs&quot;);</span>
+            try {
+<span class="nc" id="L748">                int[] dims = param.getPhysicalDimension();</span>
+<span class="nc" id="L749">                cs.writeInt(dims[0]);</span>
+<span class="nc" id="L750">                cs.writeInt(dims[1]);</span>
+<span class="nc" id="L751">                cs.writeByte((byte)dims[2]);</span>
+
+<span class="nc" id="L753">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L755">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L758">    }</span>
+
+    private void writeSPLT() throws IOException {
+<span class="pc bpc" id="L761" title="1 of 2 branches missed.">        if (param.isSuggestedPaletteSet()) {</span>
+<span class="nc" id="L762">            ChunkStream cs = new ChunkStream(&quot;sPLT&quot;);</span>
+            try {
+<span class="nc" id="L764">                System.out.println(&quot;sPLT not supported yet.&quot;);</span>
+
+<span class="nc" id="L766">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L768">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L771">    }</span>
+
+    private void writeTIME() throws IOException {
+<span class="pc bpc" id="L774" title="1 of 2 branches missed.">        if (param.isModificationTimeSet()) {</span>
+<span class="nc" id="L775">            ChunkStream cs = new ChunkStream(&quot;tIME&quot;);</span>
+            try {
+<span class="nc" id="L777">                Date date = param.getModificationTime();</span>
+<span class="nc" id="L778">                TimeZone gmt = TimeZone.getTimeZone(&quot;GMT&quot;);</span>
+
+<span class="nc" id="L780">                GregorianCalendar cal = new GregorianCalendar(gmt);</span>
+<span class="nc" id="L781">                cal.setTime(date);</span>
+
+<span class="nc" id="L783">                int year = cal.get(Calendar.YEAR);</span>
+<span class="nc" id="L784">                int month = cal.get(Calendar.MONTH);</span>
+<span class="nc" id="L785">                int day = cal.get(Calendar.DAY_OF_MONTH);</span>
+<span class="nc" id="L786">                int hour = cal.get(Calendar.HOUR_OF_DAY);</span>
+<span class="nc" id="L787">                int minute = cal.get(Calendar.MINUTE);</span>
+<span class="nc" id="L788">                int second = cal.get(Calendar.SECOND);</span>
+
+<span class="nc" id="L790">                cs.writeShort(year);</span>
+<span class="nc" id="L791">                cs.writeByte(month + 1);</span>
+<span class="nc" id="L792">                cs.writeByte(day);</span>
+<span class="nc" id="L793">                cs.writeByte(hour);</span>
+<span class="nc" id="L794">                cs.writeByte(minute);</span>
+<span class="nc" id="L795">                cs.writeByte(second);</span>
+
+<span class="nc" id="L797">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L799">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L802">    }</span>
+
+    private void writeTEXT() throws IOException {
+<span class="pc bpc" id="L805" title="1 of 2 branches missed.">        if (param.isTextSet()) {</span>
+<span class="nc" id="L806">            String[] text = param.getText();</span>
+
+<span class="nc bnc" id="L808" title="All 2 branches missed.">            for (int i = 0; i &lt; text.length / 2; i++) {</span>
+<span class="nc" id="L809">                byte[] keyword = text[2 * i].getBytes(&quot;UTF-8&quot;);</span>
+<span class="nc" id="L810">                byte[] value = text[2 * i + 1].getBytes(&quot;UTF-8&quot;);</span>
+
+<span class="nc" id="L812">                ChunkStream cs = new ChunkStream(&quot;tEXt&quot;);</span>
+                try {
+<span class="nc" id="L814">                    cs.write(keyword, 0, Math.min(keyword.length, 79));</span>
+<span class="nc" id="L815">                    cs.write(0);</span>
+<span class="nc" id="L816">                    cs.write(value);</span>
+
+<span class="nc" id="L818">                    cs.writeToStream(dataOutput);</span>
+                } finally {
+<span class="nc" id="L820">                    cs.close();</span>
+                }
+            }
+        }
+<span class="fc" id="L824">    }</span>
+
+    private void writeZTXT() throws IOException {
+<span class="pc bpc" id="L827" title="1 of 2 branches missed.">        if (param.isCompressedTextSet()) {</span>
+<span class="nc" id="L828">            String[] text = param.getCompressedText();</span>
+
+<span class="nc bnc" id="L830" title="All 2 branches missed.">            for (int i = 0; i &lt; text.length / 2; i++) {</span>
+<span class="nc" id="L831">                byte[] keyword = text[2 * i].getBytes(&quot;UTF-8&quot;);</span>
+<span class="nc" id="L832">                byte[] value = text[2 * i + 1].getBytes(&quot;UTF-8&quot;);</span>
+
+<span class="nc" id="L834">                ChunkStream cs = new ChunkStream(&quot;zTXt&quot;);</span>
+                try {
+<span class="nc" id="L836">                    cs.write(keyword, 0, Math.min(keyword.length, 79));</span>
+<span class="nc" id="L837">                    cs.write(0);</span>
+<span class="nc" id="L838">                    cs.write(0);</span>
+
+<span class="nc" id="L840">                    DeflaterOutputStream dos = new DeflaterOutputStream(cs);</span>
+                    try {
+<span class="nc" id="L842">                        dos.write(value);</span>
+<span class="nc" id="L843">                        dos.finish();</span>
+                    } finally {
+<span class="nc" id="L845">                        dos.close();</span>
+                    }
+
+<span class="nc" id="L848">                    cs.writeToStream(dataOutput);</span>
+                } finally {
+<span class="nc" id="L850">                    cs.close();</span>
+                }
+            }
+        }
+<span class="fc" id="L854">    }</span>
+
+    private void writePrivateChunks() throws IOException {
+<span class="fc" id="L857">        int numChunks = param.getNumPrivateChunks();</span>
+<span class="pc bpc" id="L858" title="1 of 2 branches missed.">        for (int i = 0; i &lt; numChunks; i++) {</span>
+<span class="nc" id="L859">            String type = param.getPrivateChunkType(i);</span>
+<span class="nc" id="L860">            byte[] data = param.getPrivateChunkData(i);</span>
+
+<span class="nc" id="L862">            ChunkStream cs = new ChunkStream(type);</span>
+            try {
+<span class="nc" id="L864">                cs.write(data);</span>
+<span class="nc" id="L865">                cs.writeToStream(dataOutput);</span>
+            } finally {
+<span class="nc" id="L867">                cs.close();</span>
+            }
+        }
+<span class="fc" id="L870">    }</span>
+
+    /**
+     * Analyzes a set of palettes and determines if it can be expressed
+     * as a standard set of gray values, with zero or one values being
+     * fully transparent and the rest being fully opaque.  If it
+     * is possible to express the data thusly, the method returns
+     * a suitable instance of PNGEncodeParam.Gray; otherwise it
+     * returns null.
+     */
+    private PNGEncodeParam.Gray createGrayParam(byte[] redPalette,
+                                                byte[] greenPalette,
+                                                byte[] bluePalette,
+                                                byte[] alphaPalette) {
+<span class="nc" id="L884">        PNGEncodeParam.Gray param = new PNGEncodeParam.Gray();</span>
+<span class="nc" id="L885">        int numTransparent = 0;</span>
+
+<span class="nc" id="L887">        int grayFactor = 255 / ((1 &lt;&lt; bitDepth) - 1);</span>
+<span class="nc" id="L888">        int entries = 1 &lt;&lt; bitDepth;</span>
+<span class="nc bnc" id="L889" title="All 2 branches missed.">        for (int i = 0; i &lt; entries; i++) {</span>
+<span class="nc" id="L890">            byte red = redPalette[i];</span>
+<span class="nc bnc" id="L891" title="All 6 branches missed.">            if ((red != i * grayFactor)</span>
+                || (red != greenPalette[i])
+                || (red != bluePalette[i])) {
+<span class="nc" id="L894">                return null;</span>
+            }
+
+            // All alphas must be 255 except at most 1 can be 0
+<span class="nc" id="L898">            byte alpha = alphaPalette[i];</span>
+<span class="nc bnc" id="L899" title="All 2 branches missed.">            if (alpha == (byte)0) {</span>
+<span class="nc" id="L900">                param.setTransparentGray(i);</span>
+
+<span class="nc" id="L902">                ++numTransparent;</span>
+<span class="nc bnc" id="L903" title="All 2 branches missed.">                if (numTransparent &gt; 1) {</span>
+<span class="nc" id="L904">                    return null;</span>
+                }
+<span class="nc bnc" id="L906" title="All 2 branches missed.">            } else if (alpha != (byte)255) {</span>
+<span class="nc" id="L907">                return null;</span>
+            }
+        }
+
+<span class="nc" id="L911">        return param;</span>
+    }
+
+    /**
+     * This method encodes a &lt;code&gt;RenderedImage&lt;/code&gt; into PNG.
+     * The stream into which the PNG is dumped is not closed at
+     * the end of the operation, this should be done if needed
+     * by the caller of this method.
+     */
+    @Override
+    public void encode(RenderedImage im) throws IOException {
+<span class="fc" id="L922">        this.image = im;</span>
+<span class="fc" id="L923">        this.width = image.getWidth();</span>
+<span class="fc" id="L924">        this.height = image.getHeight();</span>
+
+<span class="fc" id="L926">        SampleModel sampleModel = image.getSampleModel();</span>
+
+<span class="fc" id="L928">        int[] sampleSize = sampleModel.getSampleSize();</span>
+
+        // Set bitDepth to a sentinel value
+<span class="fc" id="L931">        this.bitDepth = -1;</span>
+<span class="fc" id="L932">        this.bitShift = 0;</span>
+
+        // Allow user to override the bit depth of gray images
+<span class="pc bpc" id="L935" title="1 of 2 branches missed.">        if (param instanceof PNGEncodeParam.Gray) {</span>
+<span class="nc" id="L936">            PNGEncodeParam.Gray paramg = (PNGEncodeParam.Gray)param;</span>
+<span class="nc bnc" id="L937" title="All 2 branches missed.">            if (paramg.isBitDepthSet()) {</span>
+<span class="nc" id="L938">                this.bitDepth = paramg.getBitDepth();</span>
+            }
+
+<span class="nc bnc" id="L941" title="All 2 branches missed.">            if (paramg.isBitShiftSet()) {</span>
+<span class="nc" id="L942">                this.bitShift = paramg.getBitShift();</span>
+            }
+        }
+
+        // Get bit depth from image if not set in param
+<span class="pc bpc" id="L947" title="1 of 2 branches missed.">        if (this.bitDepth == -1) {</span>
+            // Get bit depth from channel 0 of the image
+
+<span class="fc" id="L950">            this.bitDepth = sampleSize[0];</span>
+            // Ensure all channels have the same bit depth
+<span class="fc bfc" id="L952" title="All 2 branches covered.">            for (int i = 1; i &lt; sampleSize.length; i++) {</span>
+<span class="pc bpc" id="L953" title="1 of 2 branches missed.">                if (sampleSize[i] != bitDepth) {</span>
+<span class="nc" id="L954">                    throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder0&quot;));</span>
+                }
+            }
+
+            // Round bit depth up to a power of 2
+<span class="pc bpc" id="L959" title="2 of 4 branches missed.">            if (bitDepth &gt; 2 &amp;&amp; bitDepth &lt; 4) {</span>
+<span class="nc" id="L960">                bitDepth = 4;</span>
+<span class="pc bpc" id="L961" title="2 of 4 branches missed.">            } else if (bitDepth &gt; 4 &amp;&amp; bitDepth &lt; 8) {</span>
+<span class="nc" id="L962">                bitDepth = 8;</span>
+<span class="pc bpc" id="L963" title="3 of 4 branches missed.">            } else if (bitDepth &gt; 8 &amp;&amp; bitDepth &lt; 16) {</span>
+<span class="nc" id="L964">                bitDepth = 16;</span>
+<span class="pc bpc" id="L965" title="1 of 2 branches missed.">            } else if (bitDepth &gt; 16) {</span>
+<span class="nc" id="L966">                throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder1&quot;));</span>
+            }
+        }
+
+<span class="fc" id="L970">        this.numBands = sampleModel.getNumBands();</span>
+<span class="pc bpc" id="L971" title="1 of 2 branches missed.">        this.bpp = numBands * ((bitDepth == 16) ? 2 : 1);</span>
+
+<span class="fc" id="L973">        ColorModel colorModel = image.getColorModel();</span>
+<span class="pc bpc" id="L974" title="1 of 2 branches missed.">        if (colorModel instanceof IndexColorModel) {</span>
+<span class="nc bnc" id="L975" title="All 4 branches missed.">            if (bitDepth &lt; 1 || bitDepth &gt; 8) {</span>
+<span class="nc" id="L976">                throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder2&quot;));</span>
+            }
+<span class="nc bnc" id="L978" title="All 2 branches missed.">            if (sampleModel.getNumBands() != 1) {</span>
+<span class="nc" id="L979">                throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder3&quot;));</span>
+            }
+
+<span class="nc" id="L982">            IndexColorModel icm = (IndexColorModel)colorModel;</span>
+<span class="nc" id="L983">            int size = icm.getMapSize();</span>
+
+<span class="nc" id="L985">            redPalette = new byte[size];</span>
+<span class="nc" id="L986">            greenPalette = new byte[size];</span>
+<span class="nc" id="L987">            bluePalette = new byte[size];</span>
+<span class="nc" id="L988">            alphaPalette = new byte[size];</span>
+
+<span class="nc" id="L990">            icm.getReds(redPalette);</span>
+<span class="nc" id="L991">            icm.getGreens(greenPalette);</span>
+<span class="nc" id="L992">            icm.getBlues(bluePalette);</span>
+<span class="nc" id="L993">            icm.getAlphas(alphaPalette);</span>
+
+<span class="nc" id="L995">            this.bpp = 1;</span>
+
+<span class="nc bnc" id="L997" title="All 2 branches missed.">            if (param == null) {</span>
+<span class="nc" id="L998">                param = createGrayParam(redPalette,</span>
+                                        greenPalette,
+                                        bluePalette,
+                                        alphaPalette);
+            }
+
+            // If param is still null, it can't be expressed as gray
+<span class="nc bnc" id="L1005" title="All 2 branches missed.">            if (param == null) {</span>
+<span class="nc" id="L1006">                param = new PNGEncodeParam.Palette();</span>
+            }
+
+<span class="nc bnc" id="L1009" title="All 2 branches missed.">            if (param instanceof PNGEncodeParam.Palette) {</span>
+                // If palette not set in param, create one from the ColorModel.
+<span class="nc" id="L1011">                PNGEncodeParam.Palette parami = (PNGEncodeParam.Palette)param;</span>
+<span class="nc bnc" id="L1012" title="All 2 branches missed.">                if (parami.isPaletteSet()) {</span>
+<span class="nc" id="L1013">                    int[] palette = parami.getPalette();</span>
+<span class="nc" id="L1014">                    size = palette.length / 3;</span>
+
+<span class="nc" id="L1016">                    int index = 0;</span>
+<span class="nc bnc" id="L1017" title="All 2 branches missed.">                    for (int i = 0; i &lt; size; i++) {</span>
+<span class="nc" id="L1018">                        redPalette[i] = (byte)palette[index++];</span>
+<span class="nc" id="L1019">                        greenPalette[i] = (byte)palette[index++];</span>
+<span class="nc" id="L1020">                        bluePalette[i] = (byte)palette[index++];</span>
+<span class="nc" id="L1021">                        alphaPalette[i] = (byte)255;</span>
+                    }
+                }
+<span class="nc" id="L1024">                this.colorType = PNG_COLOR_PALETTE;</span>
+<span class="nc bnc" id="L1025" title="All 2 branches missed.">            } else if (param instanceof PNGEncodeParam.Gray) {</span>
+<span class="nc" id="L1026">                redPalette = greenPalette = bluePalette = alphaPalette = null;</span>
+<span class="nc" id="L1027">                this.colorType = PNG_COLOR_GRAY;</span>
+            } else {
+<span class="nc" id="L1029">                throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder4&quot;));</span>
+            }
+<span class="pc bpc" id="L1031" title="1 of 2 branches missed.">        } else if (numBands == 1) {</span>
+<span class="nc bnc" id="L1032" title="All 2 branches missed.">            if (param == null) {</span>
+<span class="nc" id="L1033">                param = new PNGEncodeParam.Gray();</span>
+            }
+<span class="nc" id="L1035">            this.colorType = PNG_COLOR_GRAY;</span>
+<span class="pc bpc" id="L1036" title="1 of 2 branches missed.">        } else if (numBands == 2) {</span>
+<span class="nc bnc" id="L1037" title="All 2 branches missed.">            if (param == null) {</span>
+<span class="nc" id="L1038">                param = new PNGEncodeParam.Gray();</span>
+            }
+
+<span class="nc bnc" id="L1041" title="All 2 branches missed.">            if (param.isTransparencySet()) {</span>
+<span class="nc" id="L1042">                skipAlpha = true;</span>
+<span class="nc" id="L1043">                numBands = 1;</span>
+<span class="nc bnc" id="L1044" title="All 4 branches missed.">                if ((sampleSize[0] == 8) &amp;&amp; (bitDepth &lt; 8)) {</span>
+<span class="nc" id="L1045">                    compressGray = true;</span>
+                }
+<span class="nc bnc" id="L1047" title="All 2 branches missed.">                bpp = (bitDepth == 16) ? 2 : 1;</span>
+<span class="nc" id="L1048">                this.colorType = PNG_COLOR_GRAY;</span>
+            } else {
+<span class="nc bnc" id="L1050" title="All 2 branches missed.">                if (this.bitDepth &lt; 8) {</span>
+<span class="nc" id="L1051">                    this.bitDepth = 8;</span>
+                }
+<span class="nc" id="L1053">                this.colorType = PNG_COLOR_GRAY_ALPHA;</span>
+            }
+<span class="pc bpc" id="L1055" title="1 of 2 branches missed.">        } else if (numBands == 3) {</span>
+<span class="nc bnc" id="L1056" title="All 2 branches missed.">            if (param == null) {</span>
+<span class="nc" id="L1057">                param = new PNGEncodeParam.RGB();</span>
+            }
+<span class="nc" id="L1059">            this.colorType = PNG_COLOR_RGB;</span>
+<span class="pc bpc" id="L1060" title="1 of 2 branches missed.">        } else if (numBands == 4) {</span>
+<span class="pc bpc" id="L1061" title="1 of 2 branches missed.">            if (param == null) {</span>
+<span class="nc" id="L1062">                param = new PNGEncodeParam.RGB();</span>
+            }
+<span class="pc bpc" id="L1064" title="1 of 2 branches missed.">            if (param.isTransparencySet()) {</span>
+<span class="nc" id="L1065">                skipAlpha = true;</span>
+<span class="nc" id="L1066">                numBands = 3;</span>
+<span class="nc bnc" id="L1067" title="All 2 branches missed.">                bpp = (bitDepth == 16) ? 6 : 3;</span>
+<span class="nc" id="L1068">                this.colorType = PNG_COLOR_RGB;</span>
+            } else {
+<span class="fc" id="L1070">                this.colorType = PNG_COLOR_RGB_ALPHA;</span>
+            }
+        }
+
+<span class="fc" id="L1074">        interlace = param.getInterlacing();</span>
+
+<span class="fc" id="L1076">        writeMagic();</span>
+
+<span class="fc" id="L1078">        writeIHDR();</span>
+
+<span class="fc" id="L1080">        writeCHRM();</span>
+<span class="fc" id="L1081">        writeGAMA();</span>
+<span class="fc" id="L1082">        writeICCP();</span>
+<span class="fc" id="L1083">        writeSBIT();</span>
+<span class="fc" id="L1084">        writeSRGB();</span>
+
+<span class="fc" id="L1086">        writePLTE();</span>
+
+<span class="fc" id="L1088">        writeHIST();</span>
+<span class="fc" id="L1089">        writeTRNS();</span>
+<span class="fc" id="L1090">        writeBKGD();</span>
+
+<span class="fc" id="L1092">        writePHYS();</span>
+<span class="fc" id="L1093">        writeSPLT();</span>
+<span class="fc" id="L1094">        writeTIME();</span>
+<span class="fc" id="L1095">        writeTEXT();</span>
+<span class="fc" id="L1096">        writeZTXT();</span>
+
+<span class="fc" id="L1098">        writePrivateChunks();</span>
+
+<span class="fc" id="L1100">        writeIDAT();</span>
+
+<span class="fc" id="L1102">        writeIEND();</span>
+
+<span class="fc" id="L1104">        dataOutput.flush();</span>
+<span class="fc" id="L1105">        dataOutput.close();</span>
+<span class="fc" id="L1106">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

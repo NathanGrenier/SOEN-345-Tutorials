@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.util</a> &gt; <span class="el_source">ImageUtil.java</span></div><h1>ImageUtil.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageUtil.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.util;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Map;
+import java.util.zip.GZIPInputStream;
+
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+
+import org.apache.xmlgraphics.image.loader.ImageProcessingHints;
+import org.apache.xmlgraphics.image.loader.ImageSessionContext;
+import org.apache.xmlgraphics.image.loader.ImageSource;
+import org.apache.xmlgraphics.io.XmlSourceUtil;
+
+/**
+ * Helper and convenience methods for working with the image package.
+ */
+public final class ImageUtil {
+
+    private ImageUtil() {
+    }
+
+    /**
+     * Returns the InputStream of a Source object.
+     * @param src the Source object
+     * @return the InputStream (or null if there's not InputStream available)
+     * @deprecated Please use {@link XmlSourceUtil#getInputStream(Source)} instead.
+     */
+    @Deprecated
+    public static InputStream getInputStream(Source src) {
+<span class="nc" id="L57">        return XmlSourceUtil.getInputStream(src);</span>
+    }
+
+    /**
+     * Returns the ImageInputStream of a Source object.
+     * @param src the Source object
+     * @return the ImageInputStream (or null if there's not ImageInputStream available)
+     */
+    public static ImageInputStream getImageInputStream(Source src) {
+<span class="fc bfc" id="L66" title="All 2 branches covered.">        if (src instanceof ImageSource) {</span>
+<span class="fc" id="L67">            return ((ImageSource) src).getImageInputStream();</span>
+        } else {
+<span class="fc" id="L69">            return null;</span>
+        }
+    }
+
+    /**
+     * Returns the InputStream of a Source object. This method throws an IllegalArgumentException
+     * if there's no InputStream instance available from the Source object.
+     * @param src the Source object
+     * @return the InputStream
+     * @deprecated use {@link XmlSourceUtil#needInputStream(Source)} instead
+     */
+    @Deprecated
+    public static InputStream needInputStream(Source src) {
+<span class="nc" id="L82">        return XmlSourceUtil.needInputStream(src);</span>
+    }
+
+    /**
+     * Returns the ImageInputStream of a Source object. This method throws an
+     * IllegalArgumentException if there's no ImageInputStream instance available from the
+     * Source object.
+     * @param src the Source object
+     * @return the ImageInputStream
+     */
+    public static ImageInputStream needImageInputStream(Source src) {
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (src instanceof ImageSource) {</span>
+<span class="fc" id="L94">            ImageSource isrc = (ImageSource) src;</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">            if (isrc.getImageInputStream() == null) {</span>
+<span class="nc" id="L96">                throw new IllegalArgumentException(</span>
+                        &quot;ImageInputStream is null/cleared on ImageSource&quot;);
+            }
+<span class="fc" id="L99">            return isrc.getImageInputStream();</span>
+        } else {
+<span class="nc" id="L101">            throw new IllegalArgumentException(&quot;Source must be an ImageSource&quot;);</span>
+        }
+    }
+
+    /**
+     * Indicates whether the Source object has an InputStream instance.
+     * @param src the Source object
+     * @return true if an InputStream is available
+     */
+    public static boolean hasInputStream(Source src) {
+<span class="pc bpc" id="L111" title="2 of 4 branches missed.">        return XmlSourceUtil.hasInputStream(src) || hasImageInputStream(src);</span>
+    }
+
+    /**
+     * Indicates whether the Source object has a Reader instance.
+     * @param src the Source object
+     * @return true if an Reader is available
+     * @deprecated use {@link XmlSourceUtil#hasReader(Source)} instead
+     */
+    @Deprecated
+    public static boolean hasReader(Source src) {
+<span class="nc" id="L122">        return XmlSourceUtil.hasReader(src);</span>
+    }
+
+    /**
+     * Indicates whether the Source object has an ImageInputStream instance.
+     * @param src the Source object
+     * @return true if an ImageInputStream is available
+     */
+    public static boolean hasImageInputStream(Source src) {
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        return getImageInputStream(src) != null;</span>
+    }
+
+    /**
+     * Removes any references to InputStreams or Readers from the given Source to prohibit
+     * accidental/unwanted use by a component further downstream.
+     * @param src the Source object
+     * @deprecated use {@link XmlSourceUtil#removeStreams(Source)} instead
+     */
+    @Deprecated
+    public static void removeStreams(Source src) {
+<span class="nc" id="L142">        XmlSourceUtil.removeStreams(src);</span>
+<span class="nc" id="L143">    }</span>
+
+    /**
+     * Closes the InputStreams or ImageInputStreams of Source objects. Any exception occurring
+     * while closing the stream is ignored.
+     * @param src the Source object
+     * @deprecated use {@link XmlSourceUtil#closeQuietly(Source)} instead
+     */
+    @Deprecated
+    public static void closeQuietly(Source src) {
+<span class="nc" id="L153">        XmlSourceUtil.closeQuietly(src);</span>
+<span class="nc" id="L154">    }</span>
+
+    /**
+     * Decorates an ImageInputStream so the flush*() methods are ignored and have no effect.
+     * The decoration is implemented using a dynamic proxy.
+     * @param in the ImageInputStream
+     * @return the decorated ImageInputStream
+     */
+    public static ImageInputStream ignoreFlushing(final ImageInputStream in) {
+<span class="fc" id="L163">        return (ImageInputStream) Proxy.newProxyInstance(in.getClass().getClassLoader(),</span>
+                new Class[] {ImageInputStream.class},
+<span class="fc" id="L165">                new InvocationHandler() {</span>
+                    public Object invoke(Object proxy, Method method, Object[] args)
+                            throws Throwable {
+<span class="fc" id="L168">                        String methodName = method.getName();</span>
+                        //Ignore calls to flush*()
+<span class="fc bfc" id="L170" title="All 2 branches covered.">                        if (!methodName.startsWith(&quot;flush&quot;)) {</span>
+                            try {
+<span class="fc" id="L172">                                return method.invoke(in, args);</span>
+<span class="nc" id="L173">                            } catch (InvocationTargetException ite) {</span>
+<span class="nc" id="L174">                                throw ite.getCause();</span>
+                            }
+                        } else {
+<span class="fc" id="L177">                            return null;</span>
+                        }
+                    }
+                });
+    }
+
+    /**
+     * GZIP header magic number bytes, like found in a gzipped
+     * files, which are encoded in Intel format (i.&amp;#x2e;e&amp;#x2e; little indian).
+     */
+<span class="fc" id="L187">    private static final byte[] GZIP_MAGIC = {(byte) 0x1f, (byte) 0x8b};</span>
+
+    /**
+     * Indicates whether an InputStream is GZIP compressed. The InputStream must support
+     * mark()/reset().
+     * @param in the InputStream (must return true on markSupported())
+     * @return true if the InputStream is GZIP compressed
+     * @throws IOException in case of an I/O error
+     */
+    public static boolean isGZIPCompressed(InputStream in) throws IOException {
+<span class="pc bpc" id="L197" title="1 of 2 branches missed.">        if (!in.markSupported()) {</span>
+<span class="nc" id="L198">            throw new IllegalArgumentException(&quot;InputStream must support mark()!&quot;);</span>
+        }
+<span class="fc" id="L200">        byte[] data = new byte[2];</span>
+<span class="fc" id="L201">        in.mark(2);</span>
+<span class="fc" id="L202">        in.read(data);</span>
+<span class="fc" id="L203">        in.reset();</span>
+<span class="pc bpc" id="L204" title="3 of 4 branches missed.">        return ((data[0] == GZIP_MAGIC[0]) &amp;&amp; (data[1] == GZIP_MAGIC[1]));</span>
+    }
+
+    /**
+     * Decorates an InputStream with a BufferedInputStream if it doesn't support mark()/reset().
+     * @param in the InputStream
+     * @return the decorated InputStream
+     */
+    public static InputStream decorateMarkSupported(InputStream in) {
+<span class="fc bfc" id="L213" title="All 2 branches covered.">        if (in.markSupported()) {</span>
+<span class="fc" id="L214">            return in;</span>
+        } else {
+<span class="fc" id="L216">            return new java.io.BufferedInputStream(in);</span>
+        }
+    }
+
+    /**
+     * Automatically decorates an InputStream so it is buffered. Furthermore, it makes sure
+     * it is decorated with a GZIPInputStream if the stream is GZIP compressed.
+     * @param in the InputStream
+     * @return the decorated InputStream
+     * @throws IOException in case of an I/O error
+     */
+    public static InputStream autoDecorateInputStream(InputStream in) throws IOException {
+<span class="fc" id="L228">        in = decorateMarkSupported(in);</span>
+<span class="pc bpc" id="L229" title="1 of 2 branches missed.">        if (isGZIPCompressed(in)) {</span>
+<span class="nc" id="L230">            return new GZIPInputStream(in);</span>
+        }
+<span class="fc" id="L232">        return in;</span>
+    }
+
+    /**
+     * Creates a new hint Map with values from the FOUserAgent.
+     * @param session the session context
+     * @return a Map of hints
+     */
+    public static Map getDefaultHints(ImageSessionContext session) {
+<span class="fc" id="L241">        java.util.Map hints = new java.util.HashMap();</span>
+<span class="fc" id="L242">        hints.put(ImageProcessingHints.SOURCE_RESOLUTION,</span>
+<span class="fc" id="L243">                session.getParentContext().getSourceResolution());</span>
+<span class="fc" id="L244">        hints.put(ImageProcessingHints.TARGET_RESOLUTION,</span>
+<span class="fc" id="L245">                session.getTargetResolution());</span>
+<span class="fc" id="L246">        hints.put(ImageProcessingHints.IMAGE_SESSION_CONTEXT, session);</span>
+<span class="fc" id="L247">        return hints;</span>
+    }
+
+    private static final String PAGE_INDICATOR = &quot;page=&quot;;
+
+    /**
+     * Extracts page index information from a URI. The expected pattern is &quot;page=x&quot; where x is
+     * a non-negative integer number. The page index must be specified as part of the URI fragment
+     * and is 1-based, i.e. the first page is 1 but the the method returns a zero-based page
+     * index.
+     * An example: &lt;code&gt;http://www.foo.bar/images/scan1.tif#page=4&lt;/code&gt; (The method will return
+     * 3.)
+     * &lt;p&gt;
+     * If no page index information is found in the URI or if the URI cannot be parsed, the
+     * method returns null.
+     * @param uri the URI that should be inspected
+     * @return the page index (0 is the first page) or null if there's no page index information
+     *         in the URI
+     */
+    public static Integer getPageIndexFromURI(String uri) {
+<span class="fc bfc" id="L267" title="All 2 branches covered.">        if (uri.indexOf('#') &lt; 0) {</span>
+<span class="fc" id="L268">            return null;</span>
+        }
+        try {
+<span class="fc" id="L271">            URI u = new URI(uri);</span>
+<span class="fc" id="L272">            String fragment = u.getFragment();</span>
+<span class="pc bpc" id="L273" title="1 of 2 branches missed.">            if (fragment != null) {</span>
+<span class="fc" id="L274">                int pos = fragment.indexOf(PAGE_INDICATOR);</span>
+<span class="pc bpc" id="L275" title="1 of 2 branches missed.">                if (pos &gt;= 0) {</span>
+<span class="fc" id="L276">                    pos += PAGE_INDICATOR.length();</span>
+<span class="fc" id="L277">                    StringBuffer sb = new StringBuffer();</span>
+<span class="fc bfc" id="L278" title="All 2 branches covered.">                    while (pos &lt; fragment.length()) {</span>
+<span class="fc" id="L279">                        char c = fragment.charAt(pos);</span>
+<span class="fc bfc" id="L280" title="All 4 branches covered.">                        if (c &gt;= '0' &amp;&amp; c &lt;= '9') {</span>
+<span class="fc" id="L281">                            sb.append(c);</span>
+                        } else {
+                            break;
+                        }
+<span class="fc" id="L285">                        pos++;</span>
+<span class="fc" id="L286">                    }</span>
+<span class="fc bfc" id="L287" title="All 2 branches covered.">                    if (sb.length() &gt; 0) {</span>
+<span class="fc" id="L288">                        int pageIndex = Integer.parseInt(sb.toString()) - 1;</span>
+<span class="fc" id="L289">                        pageIndex = Math.max(0, pageIndex);</span>
+<span class="fc" id="L290">                        return pageIndex;</span>
+                    }
+                }
+            }
+<span class="fc" id="L294">        } catch (URISyntaxException e) {</span>
+<span class="fc" id="L295">            throw new IllegalArgumentException(&quot;URI is invalid: &quot;</span>
+<span class="fc" id="L296">                    + e.getLocalizedMessage());</span>
+<span class="fc" id="L297">        }</span>
+<span class="fc" id="L298">        return null;</span>
+    }
+
+    /**
+     * Extracts page index information from a URI. The expected pattern is &quot;page=x&quot; where x is
+     * a non-negative integer number. The page index must be specified as part of the URI fragment
+     * and is 1-based, i.e. the first page is 1 but the the method returns a zero-based page
+     * index.
+     * An example: &lt;code&gt;http://www.foo.bar/images/scan1.tif#page=4&lt;/code&gt; (The method will return
+     * 3.)
+     * &lt;p&gt;
+     * If no page index information is found in the URI, the
+     * method just returns 0 which indicates the first page.
+     * @param uri the URI that should be inspected
+     * @return the page index (0 is the first page)
+     */
+    public static int needPageIndexFromURI(String uri) {
+<span class="fc" id="L315">        Integer res = getPageIndexFromURI(uri);</span>
+<span class="fc bfc" id="L316" title="All 2 branches covered.">        if (res != null) {</span>
+<span class="fc" id="L317">            return res;</span>
+        } else {
+<span class="fc" id="L319">            return 0;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

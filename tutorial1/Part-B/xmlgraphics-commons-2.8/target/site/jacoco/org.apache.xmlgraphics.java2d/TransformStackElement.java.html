@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransformStackElement.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">TransformStackElement.java</span></div><h1>TransformStackElement.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: TransformStackElement.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.java2d;
+
+import java.awt.geom.AffineTransform;
+
+// CSOFF: EmptyBlock
+// CSOFF: NoWhitespaceAfter
+// CSOFF: OperatorWrap
+// CSOFF: WhitespaceAround
+
+/**
+ * Contains a description of an elementary transform stack element,
+ * such as a rotate or translate. A transform stack element has a
+ * type and a value, which is an array of double values.&lt;br&gt;
+ *
+ * @version $Id: TransformStackElement.java 1732018 2016-02-24 04:51:06Z gadams $
+ *
+ * Originally authored by Vincent Hardy and Paul Evenblij.
+ */
+public abstract class TransformStackElement implements Cloneable {
+
+    /**
+     * Transform type
+     */
+    private TransformType type;
+
+    /**
+     * Value
+     */
+    private double[] transformParameters;
+
+    /**
+     * @param type transform type
+     * @param transformParameters parameters for transform
+     */
+    protected TransformStackElement(TransformType type,
+<span class="fc" id="L55">                                    double[] transformParameters) {</span>
+<span class="fc" id="L56">        this.type = type;</span>
+<span class="fc" id="L57">        this.transformParameters = transformParameters;</span>
+<span class="fc" id="L58">    }</span>
+
+    /**
+     * @return an object which is a deep copy of this one
+     */
+    public Object clone() {
+<span class="nc" id="L64">        TransformStackElement newElement = null;</span>
+
+        // start with a shallow copy to get our implementations right
+        try {
+<span class="nc" id="L68">            newElement = (TransformStackElement) super.clone();</span>
+<span class="nc" id="L69">        } catch (java.lang.CloneNotSupportedException ex) {</span>
+<span class="nc" id="L70">            throw new AssertionError();</span>
+<span class="nc" id="L71">        }</span>
+
+        // now deep copy the parameter array
+<span class="nc" id="L74">        double[] transformParameters = new double[this.transformParameters.length];</span>
+<span class="nc" id="L75">        System.arraycopy(this.transformParameters, 0, transformParameters, 0, transformParameters.length);</span>
+<span class="nc" id="L76">        newElement.transformParameters = transformParameters;</span>
+<span class="nc" id="L77">        return newElement;</span>
+    }
+
+    /*
+     * Factory methods
+     */
+
+    public static TransformStackElement createTranslateElement(double tx,
+                                                               double ty) {
+<span class="nc" id="L86">        return new TransformStackElement(TransformType.TRANSLATE,</span>
+<span class="nc" id="L87">                                         new double[]{ tx, ty }) {</span>
+                boolean isIdentity(double[] parameters) {
+<span class="nc bnc" id="L89" title="All 4 branches missed.">                    return parameters[0] == 0 &amp;&amp; parameters[1] == 0;</span>
+                }
+            };
+    }
+
+    public static TransformStackElement createRotateElement(double theta) {
+<span class="nc" id="L95">        return new TransformStackElement(TransformType.ROTATE,</span>
+<span class="nc" id="L96">                                         new double[]{ theta }) {</span>
+                boolean isIdentity(double[] parameters) {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                    return Math.cos(parameters[0]) == 1;</span>
+                }
+            };
+    }
+
+    public static TransformStackElement createScaleElement(double scaleX,
+                                                           double scaleY) {
+<span class="nc" id="L105">        return new TransformStackElement(TransformType.SCALE,</span>
+<span class="nc" id="L106">                                         new double[]{ scaleX, scaleY }) {</span>
+                boolean isIdentity(double[] parameters) {
+<span class="nc bnc" id="L108" title="All 4 branches missed.">                    return parameters[0] == 1 &amp;&amp; parameters[1] == 1;</span>
+                }
+            };
+    }
+
+    public static TransformStackElement createShearElement(double shearX,
+                                                           double shearY) {
+<span class="nc" id="L115">        return new TransformStackElement(TransformType.SHEAR,</span>
+<span class="nc" id="L116">                                         new double[]{ shearX, shearY }) {</span>
+                boolean isIdentity(double[] parameters) {
+<span class="nc bnc" id="L118" title="All 4 branches missed.">                    return parameters[0] == 0 &amp;&amp; parameters[1] == 0;</span>
+                }
+            };
+    }
+
+    public static TransformStackElement createGeneralTransformElement(
+        AffineTransform txf) {
+<span class="fc" id="L125">        double[] matrix = new double[6];</span>
+<span class="fc" id="L126">        txf.getMatrix(matrix);</span>
+<span class="fc" id="L127">        return new TransformStackElement(TransformType.GENERAL, matrix) {</span>
+                boolean isIdentity(double[] m) {
+<span class="nc bnc" id="L129" title="All 12 branches missed.">                    return (m[0] == 1 &amp;&amp; m[2] == 0 &amp;&amp; m[4] == 0</span>
+                            &amp;&amp; m[1] == 0 &amp;&amp; m[3] == 1 &amp;&amp; m[5] == 0);
+                }
+            };
+    }
+
+    /**
+     * Implementation should determine if the parameter list represents
+     * an identity transform, for the instance transform type.
+     */
+    abstract boolean isIdentity(double[] parameters);
+
+    /**
+     * @return true iff this transform is the identity transform
+     */
+    public boolean isIdentity() {
+<span class="nc" id="L145">        return isIdentity(transformParameters);</span>
+    }
+
+    /**
+     * @return array of values containing this transform element's parameters
+     */
+    public double[] getTransformParameters() {
+<span class="nc" id="L152">        return transformParameters;</span>
+    }
+
+    /**
+     * @return this transform type
+     */
+    public TransformType getType() {
+<span class="nc" id="L159">        return type;</span>
+    }
+
+    /*
+     * Concatenation utility. Requests this transform stack element
+     * to concatenate with the input stack element. Only elements
+     * of the same types are concatenated. For example, if this
+     * element represents a translation, it will concatenate with
+     * another translation, but not with any other kind of
+     * stack element.
+     * @param stackElement element to be concatenated with this one.
+     * @return true if the input stackElement was concatenated with
+     *         this one. False otherwise.
+     */
+    public boolean concatenate(TransformStackElement stackElement) {
+<span class="nc" id="L174">        boolean canConcatenate = false;</span>
+
+<span class="nc bnc" id="L176" title="All 2 branches missed.">        if (type.toInt() == stackElement.type.toInt()) {</span>
+<span class="nc" id="L177">            canConcatenate = true;</span>
+<span class="nc bnc" id="L178" title="All 5 branches missed.">            switch(type.toInt()) {</span>
+            case TransformType.TRANSFORM_TRANSLATE:
+<span class="nc" id="L180">                transformParameters[0] += stackElement.transformParameters[0];</span>
+<span class="nc" id="L181">                transformParameters[1] += stackElement.transformParameters[1];</span>
+<span class="nc" id="L182">                break;</span>
+            case TransformType.TRANSFORM_ROTATE:
+<span class="nc" id="L184">                transformParameters[0] += stackElement.transformParameters[0];</span>
+<span class="nc" id="L185">                break;</span>
+            case TransformType.TRANSFORM_SCALE:
+<span class="nc" id="L187">                transformParameters[0] *= stackElement.transformParameters[0];</span>
+<span class="nc" id="L188">                transformParameters[1] *= stackElement.transformParameters[1];</span>
+<span class="nc" id="L189">                break;</span>
+            case TransformType.TRANSFORM_GENERAL:
+<span class="nc" id="L191">                transformParameters</span>
+<span class="nc" id="L192">                    = matrixMultiply(transformParameters,</span>
+                                     stackElement.transformParameters);
+<span class="nc" id="L194">                break;</span>
+            default:
+<span class="nc" id="L196">                canConcatenate = false;</span>
+            }
+        }
+
+<span class="nc" id="L200">        return canConcatenate;</span>
+    }
+
+    /**
+     *  Multiplies two 2x3 matrices of double precision values
+     */
+    private double[] matrixMultiply(double[] matrix1, double[] matrix2) {
+<span class="nc" id="L207">        double[] product = new double[6];</span>
+<span class="nc" id="L208">        AffineTransform transform1 = new AffineTransform(matrix1);</span>
+<span class="nc" id="L209">        transform1.concatenate(new AffineTransform(matrix2));</span>
+<span class="nc" id="L210">        transform1.getMatrix(product);</span>
+<span class="nc" id="L211">        return product;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

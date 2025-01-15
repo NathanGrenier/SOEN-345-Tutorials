@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultEdgeDirectory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.dijkstra</a> &gt; <span class="el_source">DefaultEdgeDirectory.java</span></div><h1>DefaultEdgeDirectory.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DefaultEdgeDirectory.java 750418 2009-03-05 11:03:54Z vhennebert $ */
+
+package org.apache.xmlgraphics.util.dijkstra;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
+
+/**
+ * Default implementation of an edge directory for the {@link DijkstraAlgorithm}.
+ */
+<span class="fc" id="L29">public class DefaultEdgeDirectory implements EdgeDirectory {</span>
+
+    /** The directory of edges */
+<span class="fc" id="L32">    private Map edges = new java.util.HashMap();</span>
+    //Map&lt;Vertex,Map&lt;Vertex,Edge&gt;&gt;
+
+    /**
+     * Adds a new edge between two vertices.
+     * @param edge the new edge
+     */
+    public void addEdge(Edge edge) {
+<span class="fc" id="L40">        Map directEdges = (Map)edges.get(edge.getStart());</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (directEdges == null) {</span>
+<span class="fc" id="L42">            directEdges = new java.util.HashMap();</span>
+<span class="fc" id="L43">            edges.put(edge.getStart(), directEdges);</span>
+        }
+<span class="fc" id="L45">        directEdges.put(edge.getEnd(), edge);</span>
+<span class="fc" id="L46">    }</span>
+
+    /** {@inheritDoc} */
+    public int getPenalty(Vertex start, Vertex end) {
+<span class="fc" id="L50">        Map edgeMap = (Map)edges.get(start);</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (edgeMap != null) {</span>
+<span class="fc" id="L52">            Edge route = (Edge)edgeMap.get(end);</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">            if (route != null) {</span>
+<span class="fc" id="L54">                int penalty = route.getPenalty();</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">                if (penalty &lt; 0) {</span>
+<span class="nc" id="L56">                    throw new IllegalStateException(&quot;Penalty must not be negative&quot;);</span>
+                }
+<span class="fc" id="L58">                return penalty;</span>
+            }
+        }
+<span class="nc" id="L61">        return 0;</span>
+    }
+
+    /** {@inheritDoc} */
+    public Iterator getDestinations(Vertex origin) {
+<span class="fc" id="L66">        Map directRoutes = (Map)edges.get(origin);</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (directRoutes != null) {</span>
+<span class="fc" id="L68">            Iterator iter = directRoutes.keySet().iterator();</span>
+<span class="fc" id="L69">            return iter;</span>
+        }
+<span class="fc" id="L71">        return Collections.EMPTY_LIST.iterator();</span>
+    }
+
+    /**
+     * Returns an iterator over all edges with the given origin.
+     * @param origin the origin
+     * @return an iterator over Edge instances
+     */
+    public Iterator getEdges(Vertex origin) {
+<span class="fc" id="L80">        Map directRoutes = (Map)edges.get(origin);</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (directRoutes != null) {</span>
+<span class="fc" id="L82">            Iterator iter = directRoutes.values().iterator();</span>
+<span class="fc" id="L83">            return iter;</span>
+        }
+<span class="nc" id="L85">        return Collections.EMPTY_LIST.iterator();</span>
+    }
+
+    /**
+     * Returns the best edge (the edge with the lowest penalty) between two given vertices.
+     * @param start the start vertex
+     * @param end the end vertex
+     * @return the best vertex or null if none is found
+     */
+    public Edge getBestEdge(Vertex start, Vertex end) {
+<span class="fc" id="L95">        Edge best = null;</span>
+<span class="fc" id="L96">        Iterator iter = getEdges(start);</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        while (iter.hasNext()) {</span>
+<span class="fc" id="L98">            Edge edge = (Edge)iter.next();</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">            if (edge.getEnd().equals(end)) {</span>
+<span class="pc bpc" id="L100" title="3 of 4 branches missed.">                if (best == null || edge.getPenalty() &lt; best.getPenalty()) {</span>
+<span class="fc" id="L101">                    best = edge;</span>
+                }
+            }
+<span class="fc" id="L104">        }</span>
+<span class="fc" id="L105">        return best;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

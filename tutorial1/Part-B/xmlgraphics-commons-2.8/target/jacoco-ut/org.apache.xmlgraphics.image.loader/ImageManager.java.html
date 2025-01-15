@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader</a> &gt; <span class="el_source">ImageManager.java</span></div><h1>ImageManager.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageManager.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
+
+import javax.xml.transform.Source;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.apache.xmlgraphics.image.loader.cache.ImageCache;
+import org.apache.xmlgraphics.image.loader.pipeline.ImageProviderPipeline;
+import org.apache.xmlgraphics.image.loader.pipeline.PipelineFactory;
+import org.apache.xmlgraphics.image.loader.spi.ImageImplRegistry;
+import org.apache.xmlgraphics.image.loader.spi.ImagePreloader;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+import org.apache.xmlgraphics.image.loader.util.Penalty;
+import org.apache.xmlgraphics.io.XmlSourceUtil;
+
+/**
+ * ImageManager is the central starting point for image access.
+ */
+public class ImageManager {
+
+    /** logger */
+<span class="fc" id="L46">    protected static final Log log = LogFactory.getLog(ImageManager.class);</span>
+
+    /** Holds all registered interface implementations for the image package */
+    private ImageImplRegistry registry;
+
+    /** Provides session-independent information */
+    private ImageContext imageContext;
+
+    /** The image cache for this instance */
+<span class="fc" id="L55">    private ImageCache cache = new ImageCache();</span>
+
+<span class="fc" id="L57">    private PipelineFactory pipelineFactory = new PipelineFactory(this);</span>
+
+    /**
+     * Main constructor.
+     * @param context the session-independent context information
+     */
+    public ImageManager(ImageContext context) {
+<span class="nc" id="L64">        this(ImageImplRegistry.getDefaultInstance(), context);</span>
+<span class="nc" id="L65">    }</span>
+
+    /**
+     * Constructor for testing purposes.
+     * @param registry the implementation registry with all plug-ins
+     * @param context the session-independent context information
+     */
+<span class="fc" id="L72">    public ImageManager(ImageImplRegistry registry, ImageContext context) {</span>
+<span class="fc" id="L73">        this.registry = registry;</span>
+<span class="fc" id="L74">        this.imageContext = context;</span>
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Returns the ImageImplRegistry in use by the ImageManager.
+     * @return the ImageImplRegistry
+     */
+    public ImageImplRegistry getRegistry() {
+<span class="fc" id="L82">        return this.registry;</span>
+    }
+
+    /**
+     * Returns the ImageContext in use by the ImageManager.
+     * @return the ImageContext
+     */
+    public ImageContext getImageContext() {
+<span class="nc" id="L90">        return this.imageContext;</span>
+    }
+
+    /**
+     * Returns the ImageCache in use by the ImageManager.
+     * @return the ImageCache
+     */
+    public ImageCache getCache() {
+<span class="fc" id="L98">        return this.cache;</span>
+    }
+
+    /**
+     * Returns the PipelineFactory in use by the ImageManager.
+     * @return the PipelineFactory
+     */
+    public PipelineFactory getPipelineFactory() {
+<span class="fc" id="L106">        return this.pipelineFactory;</span>
+    }
+
+    /**
+     * Returns an ImageInfo object containing its intrinsic size for a given URI. The ImageInfo
+     * is retrieved from an image cache if it has been requested before.
+     * @param uri the URI of the image
+     * @param session the session context through which to resolve the URI if the image is not in
+     *                the cache
+     * @return the ImageInfo object created from the image
+     * @throws ImageException If no suitable ImagePreloader can be found to load the image or
+     *          if an error occurred while preloading the image.
+     * @throws IOException If an I/O error occurs while preloading the image
+     */
+    public ImageInfo getImageInfo(String uri, ImageSessionContext session)
+                throws ImageException, IOException {
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (getCache() != null) {</span>
+<span class="fc" id="L123">            return getCache().needImageInfo(uri, session, this);</span>
+        } else {
+<span class="nc" id="L125">            return preloadImage(uri, session);</span>
+        }
+    }
+
+    /**
+     * Preloads an image, i.e. the format of the image is identified and some basic information
+     * (MIME type, intrinsic size and possibly other values) are loaded and returned as an
+     * ImageInfo object. Note that the image is not fully loaded normally. Only with certain formats
+     * the image is already fully loaded and references added to the ImageInfo's custom objects
+     * (see {@link ImageInfo#getOriginalImage()}).
+     * &lt;p&gt;
+     * The reason for the preloading: Apache FOP, for example, only needs the image's intrinsic
+     * size during layout. Only when the document is rendered to the final format does FOP need
+     * to load the full image. Like this a lot of memory can be saved.
+     * @param uri the original URI of the image
+     * @param session the session context through which to resolve the URI
+     * @return the ImageInfo object created from the image
+     * @throws ImageException If no suitable ImagePreloader can be found to load the image or
+     *          if an error occurred while preloading the image.
+     * @throws IOException If an I/O error occurs while preloading the image
+     */
+    public ImageInfo preloadImage(String uri, ImageSessionContext session)
+            throws ImageException, IOException {
+<span class="fc" id="L148">        Source src = session.needSource(uri);</span>
+<span class="fc" id="L149">        ImageInfo info = preloadImage(uri, src);</span>
+<span class="fc" id="L150">        session.returnSource(uri, src);</span>
+<span class="fc" id="L151">        return info;</span>
+    }
+
+    /**
+     * Preloads an image, i.e. the format of the image is identified and some basic information
+     * (MIME type, intrinsic size and possibly other values) are loaded and returned as an
+     * ImageInfo object. Note that the image is not fully loaded normally. Only with certain formats
+     * the image is already fully loaded and references added to the ImageInfo's custom objects
+     * (see {@link ImageInfo#getOriginalImage()}).
+     * &lt;p&gt;
+     * The reason for the preloading: Apache FOP, for example, only needs the image's intrinsic
+     * size during layout. Only when the document is rendered to the final format does FOP need
+     * to load the full image. Like this a lot of memory can be saved.
+     * @param uri the original URI of the image
+     * @param src the Source object to load the image from
+     * @return the ImageInfo object created from the image
+     * @throws ImageException If no suitable ImagePreloader can be found to load the image or
+     *          if an error occurred while preloading the image.
+     * @throws IOException If an I/O error occurs while preloading the image
+     */
+    public ImageInfo preloadImage(String uri, Source src)
+            throws ImageException, IOException {
+<span class="fc" id="L173">        Iterator iter = registry.getPreloaderIterator();</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">        while (iter.hasNext()) {</span>
+<span class="fc" id="L175">            ImagePreloader preloader = (ImagePreloader) iter.next();</span>
+<span class="fc" id="L176">            ImageInfo info = preloader.preloadImage(uri, src, imageContext);</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">            if (info != null) {</span>
+<span class="fc" id="L178">                return info;</span>
+            }
+<span class="fc" id="L180">        }</span>
+<span class="nc" id="L181">        throw new ImageException(&quot;The file format is not supported. No ImagePreloader found for &quot;</span>
+                + uri);
+    }
+
+    private Map prepareHints(Map hints, ImageSessionContext sessionContext) {
+<span class="fc" id="L186">        Map newHints = new java.util.HashMap();</span>
+<span class="fc bfc" id="L187" title="All 2 branches covered.">        if (hints != null) {</span>
+<span class="fc" id="L188">            newHints.putAll(hints); //Copy in case an unmodifiable map is passed in</span>
+        }
+<span class="pc bpc" id="L190" title="1 of 4 branches missed.">        if (!newHints.containsKey(ImageProcessingHints.IMAGE_SESSION_CONTEXT)</span>
+                &amp;&amp; sessionContext != null) {
+<span class="nc" id="L192">            newHints.put(ImageProcessingHints.IMAGE_SESSION_CONTEXT, sessionContext);</span>
+
+        }
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">        if (!newHints.containsKey(ImageProcessingHints.IMAGE_MANAGER)) {</span>
+<span class="fc" id="L196">            newHints.put(ImageProcessingHints.IMAGE_MANAGER, this);</span>
+        }
+<span class="fc" id="L198">        return newHints;</span>
+    }
+
+    /**
+     * Loads an image. The caller can indicate what kind of image flavor is requested. When this
+     * method is called the code looks for a suitable ImageLoader and, if necessary, builds
+     * a conversion pipeline so it can return the image in exactly the form the caller needs.
+     * &lt;p&gt;
+     * Optionally, it is possible to pass in Map of hints. These hints may be used by ImageLoaders
+     * and ImageConverters to act on the image. See {@link ImageProcessingHints} for common hints
+     * used by the bundled implementations. You can, of course, define your own hints.
+     * @param info the ImageInfo instance for the image (obtained by
+     *                  {@link #getImageInfo(String, ImageSessionContext)})
+     * @param flavor the requested image flavor.
+     * @param hints a Map of hints to any of the background components or null
+     * @param session the session context
+     * @return the fully loaded image
+     * @throws ImageException If no suitable loader/converter combination is available to fulfill
+     *                  the request or if an error occurred while loading the image.
+     * @throws IOException If an I/O error occurs
+     */
+    public Image getImage(ImageInfo info, ImageFlavor flavor, Map hints,
+                ImageSessionContext session)
+            throws ImageException, IOException {
+<span class="fc" id="L222">        hints = prepareHints(hints, session);</span>
+
+<span class="fc" id="L224">        Image img = null;</span>
+<span class="fc" id="L225">        ImageProviderPipeline pipeline = getPipelineFactory().newImageConverterPipeline(</span>
+                info, flavor);
+<span class="pc bpc" id="L227" title="1 of 2 branches missed.">        if (pipeline != null) {</span>
+<span class="fc" id="L228">            img = pipeline.execute(info, hints, session);</span>
+        }
+<span class="pc bpc" id="L230" title="1 of 2 branches missed.">        if (img == null) {</span>
+<span class="nc" id="L231">            throw new ImageException(</span>
+                    &quot;Cannot load image (no suitable loader/converter combination available) for &quot;
+                        + info);
+        }
+<span class="fc" id="L235">        XmlSourceUtil.closeQuietly(session.getSource(info.getOriginalURI()));</span>
+<span class="fc" id="L236">        return img;</span>
+    }
+
+    /**
+     * Loads an image. The caller can indicate what kind of image flavors are requested. When this
+     * method is called the code looks for a suitable ImageLoader and, if necessary, builds
+     * a conversion pipeline so it can return the image in exactly the form the caller needs.
+     * The array of image flavors is ordered, so the first image flavor is given highest priority.
+     * &lt;p&gt;
+     * Optionally, it is possible to pass in Map of hints. These hints may be used by ImageLoaders
+     * and ImageConverters to act on the image. See {@link ImageProcessingHints} for common hints
+     * used by the bundled implementations. You can, of course, define your own hints.
+     * @param info the ImageInfo instance for the image (obtained by
+     *                  {@link #getImageInfo(String, ImageSessionContext)})
+     * @param flavors the requested image flavors (in preferred order).
+     * @param hints a Map of hints to any of the background components or null
+     * @param session the session context
+     * @return the fully loaded image
+     * @throws ImageException If no suitable loader/converter combination is available to fulfill
+     *                  the request or if an error occurred while loading the image.
+     * @throws IOException If an I/O error occurs
+     */
+    public Image getImage(ImageInfo info, ImageFlavor[] flavors, Map hints,
+                        ImageSessionContext session)
+                throws ImageException, IOException {
+<span class="fc" id="L261">        hints = prepareHints(hints, session);</span>
+
+<span class="fc" id="L263">        Image img = null;</span>
+<span class="fc" id="L264">        ImageProviderPipeline[] candidates = getPipelineFactory().determineCandidatePipelines(</span>
+                info, flavors);
+<span class="fc" id="L266">        ImageProviderPipeline pipeline = choosePipeline(candidates);</span>
+
+<span class="pc bpc" id="L268" title="1 of 2 branches missed.">        if (pipeline != null) {</span>
+<span class="fc" id="L269">            img = pipeline.execute(info, hints, session);</span>
+        }
+<span class="pc bpc" id="L271" title="1 of 2 branches missed.">        if (img == null) {</span>
+<span class="nc" id="L272">            throw new ImageException(</span>
+                    &quot;Cannot load image (no suitable loader/converter combination available) for &quot;
+                            + info);
+        }
+<span class="fc" id="L276">        XmlSourceUtil.closeQuietly(session.getSource(info.getOriginalURI()));</span>
+<span class="fc" id="L277">        return img;</span>
+    }
+
+    /**
+     * Loads an image with no hints. See
+     * {@link #getImage(ImageInfo, ImageFlavor, Map, ImageSessionContext)} for more
+     * information.
+     * @param info the ImageInfo instance for the image (obtained by
+     *                  {@link #getImageInfo(String, ImageSessionContext)})
+     * @param flavor the requested image flavor.
+     * @param session the session context
+     * @return the fully loaded image
+     * @throws ImageException If no suitable loader/converter combination is available to fulfill
+     *                  the request or if an error occurred while loading the image.
+     * @throws IOException If an I/O error occurs
+     */
+    public Image getImage(ImageInfo info, ImageFlavor flavor, ImageSessionContext session)
+            throws ImageException, IOException {
+<span class="fc" id="L295">        return getImage(info, flavor, ImageUtil.getDefaultHints(session), session);</span>
+    }
+
+    /**
+     * Loads an image with no hints. See
+     * {@link #getImage(ImageInfo, ImageFlavor[], Map, ImageSessionContext)} for more
+     * information.
+     * @param info the ImageInfo instance for the image (obtained by
+     *                  {@link #getImageInfo(String, ImageSessionContext)})
+     * @param flavors the requested image flavors (in preferred order).
+     * @param session the session context
+     * @return the fully loaded image
+     * @throws ImageException If no suitable loader/converter combination is available to fulfill
+     *                  the request or if an error occurred while loading the image.
+     * @throws IOException If an I/O error occurs
+     */
+    public Image getImage(ImageInfo info, ImageFlavor[] flavors, ImageSessionContext session)
+            throws ImageException, IOException {
+<span class="fc" id="L313">        return getImage(info, flavors, ImageUtil.getDefaultHints(session), session);</span>
+    }
+
+    /**
+     * Closes the resources associated to the given image. This method should be
+     * used only when none of the {@code getImage} methods is called by the
+     * client application.
+     *
+     * @param uri the URI of the image
+     * @param session the session context that was used to resolve the URI
+     */
+    public void closeImage(String uri, ImageSessionContext session) {
+<span class="nc" id="L325">        XmlSourceUtil.closeQuietly(session.getSource(uri));</span>
+<span class="nc" id="L326">    }</span>
+
+    /**
+     * Converts an image. The caller can indicate what kind of image flavors are requested. When
+     * this method is called the code looks for a suitable combination of ImageConverters so it
+     * can return the image in exactly the form the caller needs.
+     * The array of image flavors is ordered, so the first image flavor is given highest priority.
+     * &lt;p&gt;
+     * Optionally, it is possible to pass in Map of hints. These hints may be used by
+     * ImageConverters to act on the image. See {@link ImageProcessingHints} for common hints
+     * used by the bundled implementations. You can, of course, define your own hints.
+     * @param image the image to convert
+     * @param flavors the requested image flavors (in preferred order).
+     * @param hints a Map of hints to any of the background components or null
+     * @return the fully loaded image
+     * @throws ImageException If no suitable loader/converter combination is available to fulfill
+     *                  the request or if an error occurred while loading the image.
+     * @throws IOException If an I/O error occurs
+     */
+    public Image convertImage(Image image, ImageFlavor[] flavors, Map hints)
+                throws ImageException, IOException {
+<span class="fc" id="L347">        hints = prepareHints(hints, null);</span>
+<span class="fc" id="L348">        ImageInfo info = image.getInfo();</span>
+
+<span class="fc" id="L350">        Image img = null;</span>
+<span class="fc bfc" id="L351" title="All 2 branches covered.">        for (ImageFlavor flavor : flavors) {</span>
+<span class="pc bpc" id="L352" title="1 of 2 branches missed.">            if (image.getFlavor().equals(flavor)) {</span>
+                //Shortcut (the image is already in one of the requested formats)
+<span class="nc" id="L354">                return image;</span>
+            }
+        }
+<span class="fc" id="L357">        ImageProviderPipeline[] candidates = getPipelineFactory().determineCandidatePipelines(</span>
+                image, flavors);
+<span class="fc" id="L359">        ImageProviderPipeline pipeline = choosePipeline(candidates);</span>
+
+<span class="pc bpc" id="L361" title="1 of 2 branches missed.">        if (pipeline != null) {</span>
+<span class="fc" id="L362">            img = pipeline.execute(info, image, hints, null);</span>
+        }
+<span class="pc bpc" id="L364" title="1 of 2 branches missed.">        if (img == null) {</span>
+<span class="nc" id="L365">            throw new ImageException(</span>
+                    &quot;Cannot convert image &quot; + image
+                    + &quot; (no suitable converter combination available)&quot;);
+        }
+<span class="fc" id="L369">        return img;</span>
+    }
+
+    /**
+     * Converts an image with no hints. See
+     * {@link #convertImage(Image, ImageFlavor[], Map)} for more
+     * information.
+     * @param image the image to convert
+     * @param flavors the requested image flavors (in preferred order).
+     * @return the fully loaded image
+     * @throws ImageException If no suitable loader/converter combination is available to fulfill
+     *                  the request or if an error occurred while loading the image.
+     * @throws IOException If an I/O error occurs
+     */
+    public Image convertImage(Image image, ImageFlavor[] flavors)
+                throws ImageException, IOException {
+<span class="fc" id="L385">        return convertImage(image, flavors, null);</span>
+    }
+
+    /**
+     * Chooses the best {@link ImageProviderPipeline} from a set of candidates.
+     * @param candidates the candidates
+     * @return the best pipeline
+     */
+    public ImageProviderPipeline choosePipeline(ImageProviderPipeline[] candidates) {
+<span class="fc" id="L394">        ImageProviderPipeline pipeline = null;</span>
+<span class="fc" id="L395">        int minPenalty = Integer.MAX_VALUE;</span>
+<span class="fc" id="L396">        int count = candidates.length;</span>
+<span class="pc bpc" id="L397" title="1 of 2 branches missed.">        if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L398">            log.trace(&quot;Candidate Pipelines:&quot;);</span>
+<span class="nc bnc" id="L399" title="All 2 branches missed.">            for (int i = 0; i &lt; count; i++) {</span>
+<span class="nc bnc" id="L400" title="All 2 branches missed.">                if (candidates[i] == null) {</span>
+<span class="nc" id="L401">                    continue;</span>
+                }
+<span class="nc" id="L403">                log.trace(&quot;  &quot; + i + &quot;: &quot;</span>
+<span class="nc" id="L404">                        + candidates[i].getConversionPenalty(getRegistry()) + &quot; for &quot; + candidates[i]);</span>
+            }
+        }
+<span class="fc bfc" id="L407" title="All 2 branches covered.">        for (int i = count - 1; i &gt;= 0; i--) {</span>
+<span class="pc bpc" id="L408" title="1 of 2 branches missed.">            if (candidates[i] == null) {</span>
+<span class="nc" id="L409">                continue;</span>
+            }
+<span class="fc" id="L411">            Penalty penalty = candidates[i].getConversionPenalty(getRegistry());</span>
+<span class="pc bpc" id="L412" title="1 of 2 branches missed.">            if (penalty.isInfinitePenalty()) {</span>
+<span class="nc" id="L413">                continue; //Exclude candidate on infinite penalty</span>
+            }
+<span class="fc bfc" id="L415" title="All 2 branches covered.">            if (penalty.getValue() &lt;= minPenalty) {</span>
+<span class="fc" id="L416">                pipeline = candidates[i];</span>
+<span class="fc" id="L417">                minPenalty = penalty.getValue();</span>
+            }
+        }
+<span class="pc bpc" id="L420" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L421">            log.debug(&quot;Chosen pipeline: &quot; + pipeline);</span>
+        }
+<span class="fc" id="L423">        return pipeline;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

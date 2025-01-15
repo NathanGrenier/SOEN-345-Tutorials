@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageInputStreamAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.util</a> &gt; <span class="el_source">ImageInputStreamAdapter.java</span></div><h1>ImageInputStreamAdapter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageInputStreamAdapter.java 750418 2009-03-05 11:03:54Z vhennebert $ */
+
+package org.apache.xmlgraphics.image.loader.util;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.stream.ImageInputStream;
+
+/**
+ * Decorates an ImageInputStream with an InputStream interface. The methods &lt;code&gt;mark()&lt;/code&gt;
+ * and &lt;code&gt;reset()&lt;/code&gt; are fully supported. The method &lt;code&gt;available()&lt;/code&gt; will
+ * always return 0.
+ */
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">public class ImageInputStreamAdapter extends InputStream {</span>
+
+    private ImageInputStream iin;
+
+    private long lastMarkPosition;
+
+    /**
+     * Creates a new ImageInputStreamAdapter.
+     * @param iin the underlying ImageInputStream
+     */
+<span class="fc" id="L42">    public ImageInputStreamAdapter(ImageInputStream iin) {</span>
+<span class="pc bpc" id="L43" title="2 of 4 branches missed.">        assert iin != null : &quot;InputStream is null&quot;;</span>
+<span class="fc" id="L44">        this.iin = iin;</span>
+<span class="fc" id="L45">    }</span>
+
+    /** {@inheritDoc} */
+    public int read(byte[] b, int off, int len) throws IOException {
+<span class="fc" id="L49">        return iin.read(b, off, len);</span>
+    }
+
+    /** {@inheritDoc} */
+    public int read(byte[] b) throws IOException {
+<span class="fc" id="L54">        return iin.read(b);</span>
+    }
+
+    /** {@inheritDoc} */
+    public int read() throws IOException {
+<span class="nc" id="L59">        return iin.read();</span>
+    }
+
+    /** {@inheritDoc} */
+    public long skip(long n) throws IOException {
+<span class="fc" id="L64">        return iin.skipBytes(n);</span>
+    }
+
+    /** {@inheritDoc} */
+    public void close() throws IOException {
+<span class="fc" id="L69">        iin.close();</span>
+<span class="fc" id="L70">        iin = null;</span>
+<span class="fc" id="L71">    }</span>
+
+    /** {@inheritDoc} */
+    public synchronized void mark(int readlimit) {
+        //Parameter readlimit is ignored
+        try {
+            //Cannot use mark()/reset() since they are nestable, and InputStream's are not
+<span class="nc" id="L78">            this.lastMarkPosition = iin.getStreamPosition();</span>
+<span class="nc" id="L79">        } catch (IOException ioe) {</span>
+<span class="nc" id="L80">            throw new RuntimeException(</span>
+                    &quot;Unexpected IOException in ImageInputStream.getStreamPosition()&quot;, ioe);
+<span class="nc" id="L82">        }</span>
+<span class="nc" id="L83">    }</span>
+
+    /** {@inheritDoc} */
+    public boolean markSupported() {
+<span class="fc" id="L87">        return true;</span>
+    }
+
+    /** {@inheritDoc} */
+    public synchronized void reset() throws IOException {
+<span class="nc" id="L92">        iin.seek(this.lastMarkPosition);</span>
+<span class="nc" id="L93">    }</span>
+
+    /** {@inheritDoc} */
+    public int available() throws IOException {
+<span class="fc" id="L97">        return 0;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

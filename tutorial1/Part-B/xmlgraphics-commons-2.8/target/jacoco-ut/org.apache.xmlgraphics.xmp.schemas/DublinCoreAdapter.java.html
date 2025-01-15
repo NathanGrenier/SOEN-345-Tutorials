@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DublinCoreAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp.schemas</a> &gt; <span class="el_source">DublinCoreAdapter.java</span></div><h1>DublinCoreAdapter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DublinCoreAdapter.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.xmp.schemas;
+
+import java.util.Date;
+
+import org.apache.xmlgraphics.xmp.Metadata;
+import org.apache.xmlgraphics.xmp.XMPSchemaAdapter;
+import org.apache.xmlgraphics.xmp.XMPSchemaRegistry;
+
+/**
+ * Schema adapter implementation for the Dublin Core schema.
+ * &lt;p&gt;
+ * Note: In Adobe's XMP specification dc:subject is defined as &quot;bag Text&quot;, but in PDF/A-1 it is
+ * defined as &quot;Text&quot;. Here it is implemented as &quot;bag Text&quot;.
+ */
+public class DublinCoreAdapter extends XMPSchemaAdapter {
+
+    private static final String CONTRIBUTOR = &quot;contributor&quot;;
+    private static final String COVERAGE = &quot;coverage&quot;;
+    private static final String CREATOR = &quot;creator&quot;;
+    private static final String DATE = &quot;date&quot;;
+    private static final String DESCRIPTION = &quot;description&quot;;
+    private static final String FORMAT = &quot;format&quot;;
+    private static final String IDENTIFIER = &quot;identifier&quot;;
+    private static final String LANGUAGE = &quot;language&quot;;
+    private static final String PUBLISHER = &quot;publisher&quot;;
+    private static final String RELATION = &quot;relation&quot;;
+    private static final String RIGHTS = &quot;rights&quot;;
+    private static final String SOURCE = &quot;source&quot;;
+    private static final String SUBJECT = &quot;subject&quot;;
+    private static final String TITLE = &quot;title&quot;;
+    private static final String TYPE = &quot;type&quot;;
+
+    /**
+     * Constructs a new adapter for Dublin Core around the given metadata object.
+     * @param meta the underlying metadata
+     */
+    public DublinCoreAdapter(Metadata meta) {
+<span class="fc" id="L57">        super(meta, XMPSchemaRegistry.getInstance().getSchema(DublinCoreSchema.NAMESPACE));</span>
+<span class="fc" id="L58">    }</span>
+
+    /**
+     * Adds a new entry to the list of contributors (other than the authors).
+     * @param value the new value
+     */
+    public void addContributor(String value) {
+<span class="fc" id="L65">        addStringToBag(CONTRIBUTOR, value);</span>
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * Removes an entry from the list of contributors.
+     * @param value the value to be removed
+     * @return the removed entry
+     */
+    public boolean removeContributor(String value) {
+<span class="fc" id="L74">        return removeStringFromArray(CONTRIBUTOR, value);</span>
+    }
+
+    /**
+     * Returns an array of all contributors.
+     * @return a String array of all contributors (or null if not set)
+     */
+    public String[] getContributors() {
+<span class="fc" id="L82">        return getStringArray(CONTRIBUTOR);</span>
+    }
+
+    /**
+     * Sets the extent or scope of the resource.
+     * @param value the new value.
+     */
+    public void setCoverage(String value) {
+<span class="nc" id="L90">        setValue(COVERAGE, value);</span>
+<span class="nc" id="L91">    }</span>
+
+    /**
+     * Returns the extent or scope of the resource.
+     * @return the property value (or null if not set)
+     */
+    public String getCoverage() {
+<span class="nc" id="L98">        return getValue(COVERAGE);</span>
+    }
+
+    /**
+     * Adds a new entry to the list of creators (authors of the resource).
+     * @param value the new value
+     */
+    public void addCreator(String value) {
+<span class="nc" id="L106">        addStringToSeq(CREATOR, value);</span>
+<span class="nc" id="L107">    }</span>
+
+    /**
+     * Removes an entry from the list of creators (authors of the resource).
+     * @param value the value to be removed
+     * @return the removed entry
+     */
+    public boolean removeCreator(String value) {
+<span class="nc" id="L115">        return removeStringFromArray(CREATOR, value);</span>
+    }
+
+    /**
+     * Returns an array of all creators.
+     * @return a String array of all creators (or null if not set)
+     */
+    public String[] getCreators() {
+<span class="fc" id="L123">        return getStringArray(CREATOR);</span>
+    }
+
+    /**
+     * Adds a new entry to the list of dates indicating points in time something interesting
+     * happened to the resource.
+     * @param value the date value
+     */
+    public void addDate(Date value) {
+<span class="fc" id="L132">        addDateToSeq(DATE, value);</span>
+<span class="fc" id="L133">    }</span>
+
+    /**
+     * Returns a list of dates indicating point in time something interesting happened to the
+     * resource.
+     * @return the list of dates or null if no dates are set
+     */
+    public Date[] getDates() {
+<span class="fc" id="L141">        return getDateArray(DATE);</span>
+    }
+
+    /**
+     * Returns a latest date indicating point in time something interesting happened to the
+     * resource.
+     * @return the last date or null
+     */
+    public Date getDate() {
+<span class="fc" id="L150">        Date[] dates = getDates();</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if (dates != null) {</span>
+<span class="fc" id="L152">            Date latest = null;</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">            for (Date date : dates) {</span>
+<span class="pc bpc" id="L154" title="1 of 4 branches missed.">                if (latest == null || date.getTime() &gt; latest.getTime()) {</span>
+<span class="fc" id="L155">                    latest = date;</span>
+                }
+            }
+<span class="fc" id="L158">            return latest;</span>
+        } else {
+<span class="nc" id="L160">            return null;</span>
+        }
+
+    }
+
+    /**
+     * Sets the description of the content of the resource.
+     * @param lang the language of the value (&quot;x-default&quot; or null for the default language)
+     * @param value the new value
+     */
+    public void setDescription(String lang, String value) {
+<span class="nc" id="L171">        setLangAlt(DESCRIPTION, lang, value);</span>
+<span class="nc" id="L172">    }</span>
+
+    /**
+     * Returns the description of the content of the resource (in the default language).
+     * @return the description of the content of the resource (or null if not set)
+     */
+    public String getDescription() {
+<span class="nc" id="L179">        return getDescription(null);</span>
+    }
+
+    /**
+     * Returns the description of the content of the resource in a language-dependant way.
+     * @param lang the language (&quot;x-default&quot; or null for the default language)
+     * @return the language-dependent value (or null if not set)
+     */
+    public String getDescription(String lang) {
+<span class="nc" id="L188">        return getLangAlt(lang, DESCRIPTION);</span>
+    }
+
+    /**
+     * Sets the file format used when saving the resource. Tools and
+     * applications should set this property to the save format of the
+     * data. It may include appropriate qualifiers.
+     * @param value a MIME type
+     */
+    public void setFormat(String value) {
+<span class="fc" id="L198">        setValue(FORMAT, value);</span>
+<span class="fc" id="L199">    }</span>
+
+    /**
+     * Returns the file format used when saving this resource.
+     * @return the MIME type of the file format (or null if not set)
+     */
+    public String getFormat() {
+<span class="fc" id="L206">        return getValue(FORMAT);</span>
+    }
+
+    /**
+     * Sets the unique identifier of the resource.
+     * @param value the new value
+     */
+    public void setIdentifier(String value) {
+<span class="nc" id="L214">        setValue(IDENTIFIER, value);</span>
+<span class="nc" id="L215">    }</span>
+
+    /**
+     * Returns the unique identifier of the resource.
+     * @return the unique identifier (or null if not set)
+     */
+    public String getIdentifier() {
+<span class="nc" id="L222">        return getValue(IDENTIFIER);</span>
+    }
+
+    /**
+     * Adds a new entry to the list of languages (RFC 3066).
+     * @param value the new value
+     */
+    public void addLanguage(String value) {
+<span class="nc" id="L230">        addStringToBag(LANGUAGE, value);</span>
+<span class="nc" id="L231">    }</span>
+
+    /**
+     * Returns an array of languages.
+     * @return a String array of all languages (or null if not set)
+     */
+    public String[] getLanguages() {
+<span class="nc" id="L238">        return getStringArray(LANGUAGE);</span>
+    }
+
+    /**
+     * Adds a new entry to the list of publishers.
+     * @param value the new value
+     */
+    public void addPublisher(String value) {
+<span class="nc" id="L246">        addStringToBag(PUBLISHER, value);</span>
+<span class="nc" id="L247">    }</span>
+
+    /**
+     * Returns an array of publishers.
+     * @return a String array of all publishers (or null if not set)
+     */
+    public String[] getPublisher() {
+<span class="nc" id="L254">        return getStringArray(PUBLISHER);</span>
+    }
+
+    /**
+     * Adds a new entry to the list of relationships to other documents.
+     * @param value the new value
+     */
+    public void addRelation(String value) {
+<span class="nc" id="L262">        addStringToBag(RELATION, value);</span>
+<span class="nc" id="L263">    }</span>
+
+    /**
+     * Returns an array of all relationship to other documents.
+     * @return a String array of all relationships (or null if none are set)
+     */
+    public String[] getRelations() {
+<span class="nc" id="L270">        return getStringArray(RELATION);</span>
+    }
+
+    /**
+     * Sets the informal rights statement.
+     * @param lang the language of the value (&quot;x-default&quot; or null for the default language)
+     * @param value the new value
+     */
+    public void setRights(String lang, String value) {
+<span class="nc" id="L279">        setLangAlt(RIGHTS, lang, value);</span>
+<span class="nc" id="L280">    }</span>
+
+    /**
+     * Returns the informal rights statement.
+     * @return the informal right statement (or null if not set)
+     */
+    public String getRights() {
+<span class="nc" id="L287">        return getRights(null);</span>
+    }
+
+    /**
+     * Returns the informal rights statement in a language-dependant way.
+     * @param lang the language (&quot;x-default&quot; or null for the default language)
+     * @return the language-dependent value (or null if not set)
+     */
+    public String getRights(String lang) {
+<span class="nc" id="L296">        return getLangAlt(lang, RIGHTS);</span>
+    }
+
+    /**
+     * Sets the unique identifier of the work from which this resource was derived.
+     * @param value the new value
+     */
+    public void setSource(String value) {
+<span class="nc" id="L304">        setValue(SOURCE, value);</span>
+<span class="nc" id="L305">    }</span>
+
+    /**
+     * Returns unique identifier of the work from which this resource was derived.
+     * @return the source (or null if not set)
+     */
+    public String getSource() {
+<span class="nc" id="L312">        return getValue(SOURCE);</span>
+    }
+
+    /**
+     * Adds a new entry to the list of subjects (descriptive phrases or keywords that
+     * specify the topic of the content of the resource).
+     * @param value the new value
+     */
+    public void addSubject(String value) {
+<span class="nc" id="L321">        addStringToBag(SUBJECT, value);</span>
+<span class="nc" id="L322">    }</span>
+
+    /**
+     * Returns an array of all subjects.
+     * @return a String array of all subjects
+     */
+    public String[] getSubjects() {
+<span class="nc" id="L329">        return getStringArray(SUBJECT);</span>
+    }
+
+    /**
+     * Sets the title of the resource (in the default language).
+     * @param value the new value
+     */
+    public void setTitle(String value) {
+<span class="fc" id="L337">        setTitle(null, value);</span>
+<span class="fc" id="L338">    }</span>
+
+    /**
+     * Sets the title of the resource.
+     * @param lang the language of the value (&quot;x-default&quot; or null for the default language)
+     * @param value the new value
+     */
+    public void setTitle(String lang, String value) {
+<span class="fc" id="L346">        setLangAlt(TITLE, lang, value);</span>
+<span class="fc" id="L347">    }</span>
+
+    /**
+     * Returns the title of the resource (in the default language).
+     * @return the title of the resource (in the default language)
+     */
+    public String getTitle() {
+<span class="fc" id="L354">        return getTitle(null);</span>
+    }
+
+    /**
+     * Returns the title of the resource in a language-dependant way.
+     * @param lang the language (&quot;x-default&quot; or null for the default language)
+     * @return the language-dependent value (or null if not set)
+     */
+    public String getTitle(String lang) {
+<span class="fc" id="L363">        return getLangAlt(lang, TITLE);</span>
+    }
+
+    /**
+     * Removes a title of the resource.
+     * @param lang the language variant to be removed
+     * @return the previously set value or null if this language variant wasn't set
+     */
+    public String removeTitle(String lang) {
+<span class="fc" id="L372">        return removeLangAlt(lang, TITLE);</span>
+    }
+
+    /**
+     * Adds a new entry to the list of document types (for example: novel, poem or working paper).
+     * @param value the new value
+     */
+    public void addType(String value) {
+<span class="nc" id="L380">        addStringToBag(TYPE, value);</span>
+<span class="nc" id="L381">    }</span>
+
+    /**
+     * Returns an array of all document types.
+     * @return a String array of all document types (or null if not set)
+     */
+    public String[] getTypes() {
+<span class="nc" id="L388">        return getStringArray(TYPE);</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

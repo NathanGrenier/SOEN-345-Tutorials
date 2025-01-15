@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageIOTIFFImageWriter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.writer.imageio</a> &gt; <span class="el_source">ImageIOTIFFImageWriter.java</span></div><h1>ImageIOTIFFImageWriter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageIOTIFFImageWriter.java 1833700 2018-06-18 10:08:45Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.writer.imageio;
+
+import java.awt.image.RenderedImage;
+import java.util.Arrays;
+import java.util.Set;
+
+import javax.imageio.ImageWriteParam;
+import javax.imageio.metadata.IIOInvalidTreeException;
+import javax.imageio.metadata.IIOMetadata;
+import javax.imageio.metadata.IIOMetadataNode;
+
+import org.w3c.dom.Node;
+
+import org.apache.xmlgraphics.image.codec.tiff.TIFFImageDecoder;
+import org.apache.xmlgraphics.image.writer.Endianness;
+import org.apache.xmlgraphics.image.writer.ImageWriterParams;
+import org.apache.xmlgraphics.image.writer.ResolutionUnit;
+
+// CSOFF: MultipleVariableDeclarations
+
+/**
+ * ImageWriter that encodes TIFF images using Image I/O.
+ *
+ * @version $Id: ImageIOTIFFImageWriter.java 1833700 2018-06-18 10:08:45Z ssteiner $
+ */
+public class ImageIOTIFFImageWriter extends ImageIOImageWriter {
+
+    private static final String SUN_TIFF_NATIVE_FORMAT
+            = &quot;com_sun_media_imageio_plugins_tiff_image_1.0&quot;;
+    private static final String JAVA_TIFF_NATIVE_FORMAT
+            = &quot;javax_imageio_tiff_image_1.0&quot;;
+    private static final String SUN_TIFF_NATIVE_STREAM_FORMAT
+            = &quot;com_sun_media_imageio_plugins_tiff_stream_1.0&quot;;
+    private static final String JAVA_TIFF_NATIVE_STREAM_FORMAT
+            = &quot;javax_imageio_tiff_stream_1.0&quot;;
+
+    /**
+     * Main constructor.
+     */
+    public ImageIOTIFFImageWriter() {
+<span class="fc" id="L60">        super(&quot;image/tiff&quot;);</span>
+<span class="fc" id="L61">    }</span>
+
+    /** {@inheritDoc} */
+    @Override
+    protected IIOMetadata updateMetadata(RenderedImage image, IIOMetadata meta,
+            ImageWriterParams params) {
+<span class="fc" id="L67">        meta = super.updateMetadata(image, meta, params);</span>
+        //We set the resolution manually using the native format since it appears that
+        //it doesn't work properly through the standard metadata. Haven't figured out why
+        //that happens.
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (params.getResolution() != null) {</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">            if (SUN_TIFF_NATIVE_FORMAT.equals(meta.getNativeMetadataFormatName())</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">                    || JAVA_TIFF_NATIVE_FORMAT.equals(meta.getNativeMetadataFormatName())) {</span>
+<span class="fc" id="L74">                IIOMetadataNode root = new IIOMetadataNode(meta.getNativeMetadataFormatName());</span>
+<span class="fc" id="L75">                IIOMetadataNode ifd = getChildNode(root, &quot;TIFFIFD&quot;);</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">                if (ifd == null) {</span>
+<span class="fc" id="L77">                    ifd = new IIOMetadataNode(&quot;TIFFIFD&quot;);</span>
+<span class="fc" id="L78">                    root.appendChild(ifd);</span>
+                }
+<span class="fc" id="L80">                ifd.appendChild(createResolutionUnitField(params));</span>
+<span class="fc" id="L81">                ifd.appendChild(createResolutionField(TIFFImageDecoder.TIFF_X_RESOLUTION,</span>
+<span class="fc" id="L82">                        &quot;XResolution&quot;, params.getXResolution(), params.getResolutionUnit()));</span>
+<span class="fc" id="L83">                ifd.appendChild(createResolutionField(TIFFImageDecoder.TIFF_Y_RESOLUTION,</span>
+<span class="fc" id="L84">                        &quot;YResolution&quot;, params.getYResolution(), params.getResolutionUnit()));</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">                int rows = params.isSingleStrip() ? image.getHeight() : params.getRowsPerStrip();</span>
+<span class="fc" id="L86">                ifd.appendChild(createShortMetadataNode(TIFFImageDecoder.TIFF_ROWS_PER_STRIP,</span>
+<span class="fc" id="L87">                        &quot;RowsPerStrip&quot;, Integer.toString(rows)));</span>
+
+                try {
+<span class="fc" id="L90">                    meta.mergeTree(meta.getNativeMetadataFormatName(), root);</span>
+<span class="nc" id="L91">                } catch (IIOInvalidTreeException e) {</span>
+<span class="nc" id="L92">                    throw new RuntimeException(&quot;Cannot update image metadata: &quot;</span>
+<span class="nc" id="L93">                                + e.getMessage(), e);</span>
+<span class="fc" id="L94">                }</span>
+            }
+        }
+<span class="fc" id="L97">        return meta;</span>
+    }
+
+    //number of pixels in 100 Meters
+    private static final String DENOMINATOR_CENTIMETER = &quot;/&quot; + (100 * 100);
+    private static final String DENOMINATOR_INCH = &quot;/&quot; + 1;
+
+    private IIOMetadataNode createResolutionField(int number, String name,
+            Integer resolution, ResolutionUnit unit) {
+
+        String value;
+
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if (unit == ResolutionUnit.INCH) {</span>
+
+<span class="fc" id="L111">            value = resolution + DENOMINATOR_INCH;</span>
+
+        } else {
+
+<span class="nc" id="L115">            float pixSzMM = 25.4f / resolution.floatValue();</span>
+<span class="nc" id="L116">            int numPix = (int)(((1000 * 100) / pixSzMM) + 0.5);</span>
+<span class="nc" id="L117">            value = numPix + DENOMINATOR_CENTIMETER;</span>
+
+        }
+
+<span class="fc" id="L121">        return createRationalMetadataNode(number, name, value);</span>
+    }
+
+    /**
+     * Generate a TIFFField for resolution unit based on the parameters.
+     * @param params
+     * @return the new metadata node
+     */
+    private IIOMetadataNode createResolutionUnitField(ImageWriterParams params) {
+<span class="fc" id="L130">        return createShortMetadataNode(TIFFImageDecoder.TIFF_RESOLUTION_UNIT, &quot;ResolutionUnit&quot;,</span>
+<span class="fc" id="L131">                Integer.toString(params.getResolutionUnit().getValue()),</span>
+<span class="fc" id="L132">                params.getResolutionUnit().getDescription());</span>
+    }
+
+    /**
+     * Utility to create a TIFFShort metadata child node of a TIFFShorts node for TIFF metadata.
+     *
+     * @param number value of the number attribute of the TIFField
+     * @param name value of the name attribute of the TIFFField
+     * @param value value of the value attribute of the TIFFShort
+     * @return the new metadata node
+     */
+    public static final IIOMetadataNode createShortMetadataNode(int number,
+            String name, String value) {
+
+<span class="fc" id="L146">        return createShortMetadataNode(number, name, value, null);</span>
+    }
+
+    /**
+     * Utility to create a TIFFShort metadata child node of a TIFFShorts node for TIFF metadata.
+     *
+     * @param number value of the number attribute of the TIFField
+     * @param name value of the name attribute of the TIFFField
+     * @param value value of the value attribute of the TIFFShort
+     * @param description value of the description attribute of the TIFFShort, ignored if null
+     * @return the new metadata node
+     */
+    public static final IIOMetadataNode createShortMetadataNode(int number, String name,
+            String value, String description) {
+
+<span class="fc" id="L161">        IIOMetadataNode field = createMetadataField(number, name);</span>
+        IIOMetadataNode arrayNode;
+        IIOMetadataNode valueNode;
+<span class="fc" id="L164">        arrayNode = new IIOMetadataNode(&quot;TIFFShorts&quot;);</span>
+<span class="fc" id="L165">        field.appendChild(arrayNode);</span>
+<span class="fc" id="L166">        valueNode = new IIOMetadataNode(&quot;TIFFShort&quot;);</span>
+<span class="fc" id="L167">        valueNode.setAttribute(&quot;value&quot;, value);</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        if (description != null) {</span>
+<span class="fc" id="L169">            valueNode.setAttribute(&quot;description&quot;, description);</span>
+        }
+<span class="fc" id="L171">        arrayNode.appendChild(valueNode);</span>
+
+<span class="fc" id="L173">        return field;</span>
+    }
+
+    /**
+     * Utility to create a TIFFRational metadata child node of a TIFFRationals node for
+     * TIFF metadata.
+     *
+     * @param number value of the number attribute of the TIFField
+     * @param name value of the name attribute of the TIFFField
+     * @param value value of the value attribute of the TIFFRational
+     * @return the new metadata node
+     */
+    public static final IIOMetadataNode createRationalMetadataNode(int number,
+            String name, String value) {
+
+<span class="fc" id="L188">        IIOMetadataNode field = createMetadataField(number, name);</span>
+        IIOMetadataNode arrayNode;
+        IIOMetadataNode valueNode;
+<span class="fc" id="L191">        arrayNode = new IIOMetadataNode(&quot;TIFFRationals&quot;);</span>
+<span class="fc" id="L192">        field.appendChild(arrayNode);</span>
+<span class="fc" id="L193">        valueNode = new IIOMetadataNode(&quot;TIFFRational&quot;);</span>
+<span class="fc" id="L194">        valueNode.setAttribute(&quot;value&quot;, value);</span>
+<span class="fc" id="L195">        arrayNode.appendChild(valueNode);</span>
+
+<span class="fc" id="L197">        return field;</span>
+    }
+
+    /**
+     * Utility function to create a base TIFFField node for TIFF metadata.
+     *
+     * @param number value of the number attribute of the TIFField
+     * @param name value of the name attribute of the TIFFField
+     * @return the new metadata node
+     */
+    public static final IIOMetadataNode createMetadataField(int number, String name) {
+
+<span class="fc" id="L209">        IIOMetadataNode field = new IIOMetadataNode(&quot;TIFFField&quot;);</span>
+<span class="fc" id="L210">        field.setAttribute(&quot;number&quot;, Integer.toString(number));</span>
+<span class="fc" id="L211">        field.setAttribute(&quot;name&quot;, name);</span>
+<span class="fc" id="L212">        return field;</span>
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    protected IIOMetadata createStreamMetadata(javax.imageio.ImageWriter writer,
+            ImageWriteParam writeParam, ImageWriterParams params) {
+<span class="nc bnc" id="L219" title="All 2 branches missed.">        Endianness endian = (params != null ? params.getEndianness() : Endianness.DEFAULT);</span>
+<span class="nc bnc" id="L220" title="All 4 branches missed.">        if (endian == Endianness.DEFAULT || endian == null) {</span>
+<span class="nc" id="L221">            return super.createStreamMetadata(writer, writeParam, params);</span>
+        }
+
+        //Try changing the Byte Order
+<span class="nc" id="L225">        IIOMetadata streamMetadata = writer.getDefaultStreamMetadata(writeParam);</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">        if (streamMetadata != null) {</span>
+<span class="nc" id="L227">            Set&lt;String&gt; names = new java.util.HashSet&lt;String&gt;(</span>
+<span class="nc" id="L228">                    Arrays.asList(streamMetadata.getMetadataFormatNames()));</span>
+<span class="nc" id="L229">            setFromTree(names, streamMetadata, endian, SUN_TIFF_NATIVE_STREAM_FORMAT);</span>
+<span class="nc" id="L230">            setFromTree(names, streamMetadata, endian, JAVA_TIFF_NATIVE_STREAM_FORMAT);</span>
+        }
+<span class="nc" id="L232">        return streamMetadata;</span>
+    }
+
+    private void setFromTree(Set&lt;String&gt; names, IIOMetadata streamMetadata, Endianness endian, String format) {
+<span class="nc bnc" id="L236" title="All 2 branches missed.">        if (names.contains(format)) {</span>
+<span class="nc" id="L237">            Node root = streamMetadata.getAsTree(format);</span>
+<span class="nc" id="L238">            root.getFirstChild().getAttributes().item(0).setNodeValue(endian.toString());</span>
+            try {
+<span class="nc" id="L240">                streamMetadata.setFromTree(format, root);</span>
+<span class="nc" id="L241">            } catch (IIOInvalidTreeException e) {</span>
+                //This should not happen since we check if the format is supported.
+<span class="nc" id="L243">                throw new IllegalStateException(</span>
+<span class="nc" id="L244">                        &quot;Could not replace TIFF stream metadata: &quot; + e.getMessage(), e);</span>
+<span class="nc" id="L245">            }</span>
+        }
+<span class="nc" id="L247">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

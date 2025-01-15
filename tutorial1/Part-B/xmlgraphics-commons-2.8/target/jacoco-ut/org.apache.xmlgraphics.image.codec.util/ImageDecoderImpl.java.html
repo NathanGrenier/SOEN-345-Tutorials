@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageDecoderImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.util</a> &gt; <span class="el_source">ImageDecoderImpl.java</span></div><h1>ImageDecoderImpl.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageDecoderImpl.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.util;
+
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * A partial implementation of the &lt;code&gt;ImageDecoder&lt;/code&gt; interface
+ * useful for subclassing.
+ *
+ */
+public abstract class ImageDecoderImpl implements ImageDecoder {
+
+    /**
+     * The &lt;code&gt;SeekableStream&lt;/code&gt; associcted with this
+     * &lt;code&gt;ImageEncoder&lt;/code&gt;.
+     */
+    protected SeekableStream input;
+
+    /**
+     * The &lt;code&gt;ImageDecodeParam&lt;/code&gt; object associated with this
+     * &lt;code&gt;ImageEncoder&lt;/code&gt;.
+     */
+    protected ImageDecodeParam param;
+
+    /**
+     * Constructs an &lt;code&gt;ImageDecoderImpl&lt;/code&gt; with a given
+     * &lt;code&gt;SeekableStream&lt;/code&gt; and &lt;code&gt;ImageDecodeParam&lt;/code&gt;
+     * instance.
+     */
+    public ImageDecoderImpl(SeekableStream input,
+<span class="nc" id="L52">                            ImageDecodeParam param) {</span>
+<span class="nc" id="L53">        this.input = input;</span>
+<span class="nc" id="L54">        this.param = param;</span>
+<span class="nc" id="L55">    }</span>
+
+    /**
+     * Constructs an &lt;code&gt;ImageDecoderImpl&lt;/code&gt; with a given
+     * &lt;code&gt;InputStream&lt;/code&gt; and &lt;code&gt;ImageDecodeParam&lt;/code&gt;
+     * instance.  The &lt;code&gt;input&lt;/code&gt; parameter will be used to
+     * construct a &lt;code&gt;ForwardSeekableStream&lt;/code&gt;; if the ability
+     * to seek backwards is required, the caller should construct
+     * an instance of &lt;code&gt;SeekableStream&lt;/code&gt; and
+     * make use of the other contructor.
+     */
+    public ImageDecoderImpl(InputStream input,
+<span class="fc" id="L67">                            ImageDecodeParam param) {</span>
+<span class="fc" id="L68">        this.input = new ForwardSeekableStream(input);</span>
+<span class="fc" id="L69">        this.param = param;</span>
+<span class="fc" id="L70">    }</span>
+
+    /**
+     * Returns the current parameters as an instance of the
+     * &lt;code&gt;ImageDecodeParam&lt;/code&gt; interface.  Concrete
+     * implementations of this interface will return corresponding
+     * concrete implementations of the &lt;code&gt;ImageDecodeParam&lt;/code&gt;
+     * interface.  For example, a &lt;code&gt;JPEGImageDecoder&lt;/code&gt; will
+     * return an instance of &lt;code&gt;JPEGDecodeParam&lt;/code&gt;.
+     */
+    public ImageDecodeParam getParam() {
+<span class="nc" id="L81">        return param;</span>
+    }
+
+    /**
+     * Sets the current parameters to an instance of the
+     * &lt;code&gt;ImageDecodeParam&lt;/code&gt; interface.  Concrete
+     * implementations of &lt;code&gt;ImageDecoder&lt;/code&gt; may throw a
+     * &lt;code&gt;RuntimeException&lt;/code&gt; if the &lt;code&gt;param&lt;/code&gt;
+     * argument is not an instance of the appropriate subclass or
+     * subinterface.  For example, a &lt;code&gt;JPEGImageDecoder&lt;/code&gt;
+     * will expect &lt;code&gt;param&lt;/code&gt; to be an instance of
+     * &lt;code&gt;JPEGDecodeParam&lt;/code&gt;.
+     */
+    public void setParam(ImageDecodeParam param) {
+<span class="nc" id="L95">        this.param = param;</span>
+<span class="nc" id="L96">    }</span>
+
+    /**
+     * Returns the &lt;code&gt;SeekableStream&lt;/code&gt; associated with
+     * this &lt;code&gt;ImageDecoder&lt;/code&gt;.
+     */
+    public SeekableStream getInputStream() {
+<span class="nc" id="L103">        return input;</span>
+    }
+
+    /**
+     * Returns the number of pages present in the current stream.
+     * By default, the return value is 1.  Subclasses that deal with
+     * multi-page formats should override this method.
+     */
+    public int getNumPages() throws IOException {
+<span class="nc" id="L112">        return 1;</span>
+    }
+
+    /**
+     * Returns a &lt;code&gt;Raster&lt;/code&gt; that contains the decoded
+     * contents of the &lt;code&gt;SeekableStream&lt;/code&gt; associated
+     * with this &lt;code&gt;ImageDecoder&lt;/code&gt;.  Only
+     * the first page of a multi-page image is decoded.
+     */
+    public Raster decodeAsRaster() throws IOException {
+<span class="nc" id="L122">        return decodeAsRaster(0);</span>
+    }
+
+    /**
+     * Returns a &lt;code&gt;Raster&lt;/code&gt; that contains the decoded
+     * contents of the &lt;code&gt;SeekableStream&lt;/code&gt; associated
+     * with this &lt;code&gt;ImageDecoder&lt;/code&gt;.
+     * The given page of a multi-page image is decoded.  If
+     * the page does not exist, an IOException will be thrown.
+     * Page numbering begins at zero.
+     *
+     * @param page The page to be decoded.
+     */
+    public Raster decodeAsRaster(int page) throws IOException {
+<span class="nc" id="L136">        RenderedImage im = decodeAsRenderedImage(page);</span>
+<span class="nc" id="L137">        return im.getData();</span>
+    }
+
+    /**
+     * Returns a &lt;code&gt;RenderedImage&lt;/code&gt; that contains the decoded
+     * contents of the &lt;code&gt;SeekableStream&lt;/code&gt; associated
+     * with this &lt;code&gt;ImageDecoder&lt;/code&gt;.  Only
+     * the first page of a multi-page image is decoded.
+     */
+    public RenderedImage decodeAsRenderedImage() throws IOException {
+<span class="fc" id="L147">        return decodeAsRenderedImage(0);</span>
+    }
+
+    /**
+     * Returns a &lt;code&gt;RenderedImage&lt;/code&gt; that contains the decoded
+     * contents of the &lt;code&gt;SeekableStream&lt;/code&gt; associated
+     * with this &lt;code&gt;ImageDecoder&lt;/code&gt;.
+     * The given page of a multi-page image is decoded.  If
+     * the page does not exist, an IOException will be thrown.
+     * Page numbering begins at zero.
+     *
+     * @param page The page to be decoded.
+     */
+    public abstract RenderedImage decodeAsRenderedImage(int page)
+        throws IOException;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

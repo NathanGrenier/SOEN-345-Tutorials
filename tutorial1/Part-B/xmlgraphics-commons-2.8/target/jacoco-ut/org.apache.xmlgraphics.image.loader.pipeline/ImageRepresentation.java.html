@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageRepresentation.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.pipeline</a> &gt; <span class="el_source">ImageRepresentation.java</span></div><h1>ImageRepresentation.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageRepresentation.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.pipeline;
+
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.util.dijkstra.Vertex;
+
+/**
+ * This class represents a combination of MIME type and an image flavor.
+ * It is used in conjunction with Dijkstra's algorithm to find and construct a
+ * conversion pipeline for images.
+ */
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">public class ImageRepresentation implements Vertex {</span>
+
+    private ImageFlavor flavor;
+
+    /**
+     * Main constructor
+     * @param flavor the image flavor
+     */
+<span class="fc" id="L38">    public ImageRepresentation(ImageFlavor flavor) {</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">        if (flavor == null) {</span>
+<span class="nc" id="L40">            throw new NullPointerException(&quot;flavor must not be null&quot;);</span>
+        }
+<span class="fc" id="L42">        this.flavor = flavor;</span>
+<span class="fc" id="L43">    }</span>
+
+    /**
+     * Returns the image flavor.
+     * @return the image flavor
+     */
+    public ImageFlavor getFlavor() {
+<span class="fc" id="L50">        return flavor;</span>
+    }
+
+    /** {@inheritDoc} */
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L55" title="2 of 4 branches missed.">        assert obj != null;</span>
+<span class="fc" id="L56">        return toString().equals(obj.toString());</span>
+    }
+
+    /** {@inheritDoc} */
+    public int hashCode() {
+<span class="fc" id="L61">        return getFlavor().hashCode();</span>
+    }
+
+    /** {@inheritDoc} */
+    public int compareTo(Object obj) {
+<span class="fc" id="L66">        return toString().compareTo(((ImageRepresentation)obj).toString());</span>
+    }
+
+    /** {@inheritDoc} */
+    public String toString() {
+<span class="fc" id="L71">        return getFlavor().toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

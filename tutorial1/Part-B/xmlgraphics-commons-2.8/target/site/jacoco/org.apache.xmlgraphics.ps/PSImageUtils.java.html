@@ -1,0 +1,848 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSImageUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSImageUtils.java</span></div><h1>PSImageUtils.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSImageUtils.java 1903802 2022-09-01 09:35:58Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.color.ColorSpace;
+import java.awt.geom.Dimension2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.ColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.IndexColorModel;
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Arrays;
+
+import org.apache.commons.io.IOUtils;
+
+import org.apache.xmlgraphics.util.io.ASCII85OutputStream;
+import org.apache.xmlgraphics.util.io.Finalizable;
+import org.apache.xmlgraphics.util.io.FlateEncodeOutputStream;
+import org.apache.xmlgraphics.util.io.RunLengthEncodeOutputStream;
+
+// CSOFF: HideUtilityClassConstructor
+
+/**
+ * Utility code for rendering images in PostScript.
+ */
+public class PSImageUtils {
+
+<span class="nc" id="L52">    public PSImageUtils() {</span>
+<span class="nc" id="L53">    }</span>
+
+    /**
+     * Writes a bitmap image to the PostScript stream.
+     * @param img the bitmap image as a byte array
+     * @param imgDim the dimensions of the image
+     * @param imgDescription the name of the image
+     * @param targetRect the target rectangle to place the image in
+     * @param isJPEG true if &quot;img&quot; contains a DCT-encoded images, false if &quot;img&quot; contains the
+     *               decoded bitmap
+     * @param colorSpace the color space of the image
+     * @param gen the PostScript generator
+     * @throws IOException In case of an I/O exception
+     * @deprecated Please use the variant with the more versatile ImageEncoder as parameter
+     */
+    public static void writeImage(final byte[] img,
+            Dimension imgDim, String imgDescription,
+            Rectangle2D targetRect,
+            final boolean isJPEG, ColorSpace colorSpace,
+            PSGenerator gen) throws IOException {
+<span class="nc" id="L73">        ImageEncoder encoder = new ImageEncoder() {</span>
+            public void writeTo(OutputStream out) throws IOException {
+<span class="nc" id="L75">                out.write(img);</span>
+<span class="nc" id="L76">            }</span>
+
+            public String getImplicitFilter() {
+<span class="nc bnc" id="L79" title="All 2 branches missed.">                if (isJPEG) {</span>
+<span class="nc" id="L80">                    return &quot;&lt;&lt; &gt;&gt; /DCTDecode&quot;;</span>
+                } else {
+<span class="nc" id="L82">                    return null;</span>
+                }
+            }
+        };
+<span class="nc" id="L86">        writeImage(encoder, imgDim, imgDescription, targetRect, colorSpace, 8, false, gen);</span>
+<span class="nc" id="L87">    }</span>
+
+    /**
+     * Writes a bitmap image to the PostScript stream.
+     * @param encoder the image encoder
+     * @param imgDim the dimensions of the image
+     * @param imgDescription the name of the image
+     * @param targetRect the target rectangle to place the image in
+     * @param colorSpace the color space of the image
+     * @param bitsPerComponent the number of bits per component
+     * @param invertImage true if the image shall be inverted
+     * @param gen the PostScript generator
+     * @throws IOException In case of an I/O exception
+     */
+    public static void writeImage(ImageEncoder encoder,
+            Dimension imgDim, String imgDescription,
+            Rectangle2D targetRect,
+            ColorSpace colorSpace, int bitsPerComponent, boolean invertImage,
+            PSGenerator gen) throws IOException {
+<span class="nc" id="L106">        gen.saveGraphicsState();</span>
+<span class="nc" id="L107">        translateAndScale(gen, null, targetRect);</span>
+
+<span class="nc" id="L109">        gen.commentln(&quot;%AXGBeginBitmap: &quot; + imgDescription);</span>
+
+<span class="nc" id="L111">        gen.writeln(&quot;{{&quot;);</span>
+        // Template: (RawData is used for the EOF signal only)
+        // gen.write(&quot;/RawData currentfile &lt;first filter&gt; filter def&quot;);
+        // gen.write(&quot;/Data RawData &lt;second filter&gt; &lt;third filter&gt; [...] def&quot;);
+<span class="nc" id="L115">        String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        if (implicitFilter != null) {</span>
+<span class="nc" id="L117">            gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L118">            gen.writeln(&quot;/Data RawData &quot; + implicitFilter + &quot; filter def&quot;);</span>
+        } else {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
+<span class="nc" id="L121">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L122">                gen.writeln(&quot;/Data RawData /FlateDecode filter def&quot;);</span>
+            } else {
+<span class="nc" id="L124">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L125">                gen.writeln(&quot;/Data RawData /RunLengthDecode filter def&quot;);</span>
+            }
+        }
+<span class="nc" id="L128">        PSDictionary imageDict = new PSDictionary();</span>
+<span class="nc" id="L129">        imageDict.put(&quot;/DataSource&quot;, &quot;Data&quot;);</span>
+<span class="nc" id="L130">        imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(bitsPerComponent));</span>
+<span class="nc" id="L131">        writeImageCommand(imageDict, imgDim, colorSpace, invertImage, gen);</span>
+        /* the following two lines could be enabled if something still goes wrong
+         * gen.write(&quot;Data closefile&quot;);
+         * gen.write(&quot;RawData flushfile&quot;);
+         */
+<span class="nc" id="L136">        gen.writeln(&quot;} stopped {handleerror} if&quot;);</span>
+<span class="nc" id="L137">        gen.writeln(&quot;  RawData flushfile&quot;);</span>
+<span class="nc" id="L138">        gen.writeln(&quot;} exec&quot;);</span>
+
+<span class="nc" id="L140">        compressAndWriteBitmap(encoder, gen);</span>
+
+<span class="nc" id="L142">        gen.newLine();</span>
+<span class="nc" id="L143">        gen.commentln(&quot;%AXGEndBitmap&quot;);</span>
+<span class="nc" id="L144">        gen.restoreGraphicsState();</span>
+<span class="nc" id="L145">    }</span>
+
+    public static void writeImage(ImageEncoder encoder, Dimension imgDim, String imgDescription,
+                                  Rectangle2D targetRect, ColorModel colorModel, PSGenerator gen) throws IOException {
+<span class="nc" id="L149">        writeImage(encoder, imgDim, imgDescription, targetRect, colorModel, gen, null, false);</span>
+<span class="nc" id="L150">    }</span>
+
+    /**
+     * Writes a bitmap image to the PostScript stream.
+     * @param encoder the image encoder
+     * @param imgDim the dimensions of the image
+     * @param imgDescription the name of the image
+     * @param targetRect the target rectangle to place the image in
+     * @param colorModel the color model of the image
+     * @param gen the PostScript generator
+     * @throws IOException In case of an I/O exception
+     */
+    public static void writeImage(ImageEncoder encoder, Dimension imgDim, String imgDescription,
+            Rectangle2D targetRect, ColorModel colorModel, PSGenerator gen, RenderedImage ri, boolean maskBitmap)
+            throws IOException {
+
+<span class="fc" id="L166">        gen.saveGraphicsState();</span>
+<span class="fc" id="L167">        translateAndScale(gen, null, targetRect);</span>
+<span class="fc" id="L168">        gen.commentln(&quot;%AXGBeginBitmap: &quot; + imgDescription);</span>
+<span class="fc" id="L169">        gen.writeln(&quot;{{&quot;);</span>
+
+<span class="fc" id="L171">        String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (implicitFilter != null) {</span>
+<span class="nc" id="L173">            gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L174">            gen.writeln(&quot;/Data RawData &quot; + implicitFilter + &quot; filter def&quot;);</span>
+        } else {
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
+<span class="fc" id="L177">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="fc" id="L178">                gen.writeln(&quot;/Data RawData /FlateDecode filter def&quot;);</span>
+            } else {
+<span class="nc" id="L180">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L181">                gen.writeln(&quot;/Data RawData /RunLengthDecode filter def&quot;);</span>
+            }
+        }
+
+<span class="fc" id="L185">        PSDictionary imageDict = new PSDictionary();</span>
+<span class="fc" id="L186">        imageDict.put(&quot;/DataSource&quot;, &quot;Data&quot;);</span>
+
+<span class="fc" id="L188">        populateImageDictionary(imgDim, colorModel, imageDict);</span>
+
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">        if (ri != null) {</span>
+<span class="fc" id="L191">            DataBuffer buffer = ri.getData().getDataBuffer();</span>
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">            if (!(buffer instanceof DataBufferByte)) {</span>
+<span class="fc" id="L193">                imageDict.put(&quot;/BitsPerComponent&quot;, 8);</span>
+            }
+        }
+<span class="fc" id="L196">        writeImageCommand(imageDict, colorModel, gen, maskBitmap);</span>
+
+        /*
+         * the following two lines could be enabled if something still goes wrong
+         * gen.write(&quot;Data closefile&quot;);
+         * gen.write(&quot;RawData flushfile&quot;);
+         */
+<span class="fc" id="L203">        gen.writeln(&quot;} stopped {handleerror} if&quot;);</span>
+<span class="fc" id="L204">        gen.writeln(&quot;  RawData flushfile&quot;);</span>
+<span class="fc" id="L205">        gen.writeln(&quot;} exec&quot;);</span>
+
+<span class="fc" id="L207">        compressAndWriteBitmap(encoder, gen);</span>
+
+<span class="fc" id="L209">        gen.newLine();</span>
+<span class="fc" id="L210">        gen.commentln(&quot;%AXGEndBitmap&quot;);</span>
+<span class="fc" id="L211">        gen.restoreGraphicsState();</span>
+<span class="fc" id="L212">    }</span>
+
+    /**
+     * Writes a bitmap image to the PostScript stream.
+     * @param encoder the image encoder
+     * @param imgDim the dimensions of the image
+     * @param imgDescription the name of the image
+     * @param targetRect the target rectangle to place the image in
+     * @param colorModel the color model of the image
+     * @param gen the PostScript generator
+     * @throws IOException In case of an I/O exception
+     */
+    public static void writeImage(ImageEncoder encoder, Dimension imgDim, String imgDescription,
+            Rectangle2D targetRect, ColorModel colorModel, PSGenerator gen, RenderedImage ri,
+            Color maskColor)
+            throws IOException {
+
+<span class="nc" id="L229">        gen.saveGraphicsState();</span>
+<span class="nc" id="L230">        translateAndScale(gen, null, targetRect);</span>
+<span class="nc" id="L231">        gen.commentln(&quot;%AXGBeginBitmap: &quot; + imgDescription);</span>
+<span class="nc" id="L232">        gen.writeln(&quot;{{&quot;);</span>
+
+<span class="nc" id="L234">        String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">        if (implicitFilter != null) {</span>
+<span class="nc" id="L236">            gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L237">            gen.writeln(&quot;/Data RawData &quot; + implicitFilter + &quot; filter def&quot;);</span>
+        } else {
+<span class="nc bnc" id="L239" title="All 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
+<span class="nc" id="L240">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L241">                gen.writeln(&quot;/Data RawData /FlateDecode filter def&quot;);</span>
+            } else {
+<span class="nc" id="L243">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L244">                gen.writeln(&quot;/Data RawData /RunLengthDecode filter def&quot;);</span>
+            }
+        }
+
+<span class="nc" id="L248">        PSDictionary imageDict = new PSDictionary();</span>
+<span class="nc" id="L249">        imageDict.put(&quot;/DataSource&quot;, &quot;Data&quot;);</span>
+
+<span class="nc" id="L251">        populateImageDictionary(imgDim, colorModel, imageDict, maskColor);</span>
+
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        if (ri != null) {</span>
+<span class="nc" id="L254">            DataBuffer buffer = ri.getData().getDataBuffer();</span>
+<span class="nc bnc" id="L255" title="All 2 branches missed.">            if (!(buffer instanceof DataBufferByte)) {</span>
+<span class="nc" id="L256">                imageDict.put(&quot;/BitsPerComponent&quot;, 8);</span>
+            }
+        }
+<span class="nc" id="L259">        writeImageCommand(imageDict, colorModel, gen, false);</span>
+
+        /*
+         * the following two lines could be enabled if something still goes wrong
+         * gen.write(&quot;Data closefile&quot;);
+         * gen.write(&quot;RawData flushfile&quot;);
+         */
+<span class="nc" id="L266">        gen.writeln(&quot;} stopped {handleerror} if&quot;);</span>
+<span class="nc" id="L267">        gen.writeln(&quot;  RawData flushfile&quot;);</span>
+<span class="nc" id="L268">        gen.writeln(&quot;} exec&quot;);</span>
+
+<span class="nc" id="L270">        compressAndWriteBitmap(encoder, gen);</span>
+
+<span class="nc" id="L272">        gen.newLine();</span>
+<span class="nc" id="L273">        gen.commentln(&quot;%AXGEndBitmap&quot;);</span>
+<span class="nc" id="L274">        gen.restoreGraphicsState();</span>
+<span class="nc" id="L275">    }</span>
+
+    private static ColorModel populateImageDictionary(Dimension imgDim, ColorModel colorModel,
+            PSDictionary imageDict) {
+<span class="fc" id="L279">        imageDict.put(&quot;/ImageType&quot;, &quot;1&quot;);</span>
+<span class="fc" id="L280">        colorModel = writeImageDictionary(imgDim, imageDict, colorModel);</span>
+<span class="fc" id="L281">        return colorModel;</span>
+    }
+
+    private static ColorModel populateImageDictionary(Dimension imgDim, ColorModel colorModel,
+            PSDictionary imageDict, Color maskColor) {
+<span class="nc" id="L286">        imageDict.put(&quot;/ImageType&quot;, &quot;4&quot;);</span>
+
+<span class="nc" id="L288">        colorModel = writeImageDictionary(imgDim, imageDict, colorModel);</span>
+<span class="nc" id="L289">        imageDict.put(&quot;/MaskColor&quot;, String.format(&quot;[ %d %d %d ]&quot;, maskColor.getRed(),</span>
+<span class="nc" id="L290">                maskColor.getGreen(), maskColor.getBlue()));</span>
+<span class="nc" id="L291">        return colorModel;</span>
+    }
+
+    private static ColorModel writeImageDictionary(Dimension imgDim, PSDictionary imageDict,
+            ColorModel colorModel) {
+<span class="fc" id="L296">        String w = Integer.toString(imgDim.width);</span>
+<span class="fc" id="L297">        String h = Integer.toString(imgDim.height);</span>
+<span class="fc" id="L298">        imageDict.put(&quot;/Width&quot;, w);</span>
+<span class="fc" id="L299">        imageDict.put(&quot;/Height&quot;, h);</span>
+
+<span class="fc" id="L301">        boolean invertColors = false;</span>
+<span class="fc" id="L302">        String decodeArray = getDecodeArray(colorModel.getNumColorComponents(), invertColors);</span>
+<span class="fc" id="L303">        int bitsPerComp = colorModel.getComponentSize(0);</span>
+
+        // Setup scanning for left-to-right and top-to-bottom
+<span class="fc" id="L306">        imageDict.put(&quot;/ImageMatrix&quot;, &quot;[&quot; + w + &quot; 0 0 &quot; + h + &quot; 0 0]&quot;);</span>
+
+<span class="pc bpc" id="L308" title="1 of 2 branches missed.">        if ((colorModel instanceof IndexColorModel)) {</span>
+<span class="nc" id="L309">            IndexColorModel indexColorModel = (IndexColorModel) colorModel;</span>
+<span class="nc" id="L310">            int c = indexColorModel.getMapSize();</span>
+<span class="nc" id="L311">            int hival = c - 1;</span>
+<span class="nc bnc" id="L312" title="All 2 branches missed.">            if (hival &gt; 4095) {</span>
+<span class="nc" id="L313">                throw new UnsupportedOperationException(&quot;hival must not go beyond 4095&quot;);</span>
+            }
+<span class="nc" id="L315">            bitsPerComp = indexColorModel.getPixelSize();</span>
+<span class="nc" id="L316">            int ceiling = ((int) Math.pow(2, bitsPerComp)) - 1;</span>
+<span class="nc" id="L317">            decodeArray = &quot;[0 &quot; + ceiling + &quot;]&quot;;</span>
+        }
+<span class="fc" id="L319">        imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(bitsPerComp));</span>
+<span class="fc" id="L320">        imageDict.put(&quot;/Decode&quot;, decodeArray);</span>
+<span class="fc" id="L321">        return colorModel;</span>
+    }
+
+    private static String getDecodeArray(int numComponents, boolean invertColors) {
+        String decodeArray;
+<span class="fc" id="L326">        StringBuffer sb = new StringBuffer(&quot;[&quot;);</span>
+<span class="fc bfc" id="L327" title="All 2 branches covered.">        for (int i = 0; i &lt; numComponents; i++) {</span>
+<span class="fc bfc" id="L328" title="All 2 branches covered.">            if (i &gt; 0) {</span>
+<span class="fc" id="L329">                sb.append(&quot; &quot;);</span>
+            }
+<span class="pc bpc" id="L331" title="1 of 2 branches missed.">            if (invertColors) {</span>
+<span class="nc" id="L332">                sb.append(&quot;1 0&quot;);</span>
+            } else {
+<span class="fc" id="L334">                sb.append(&quot;0 1&quot;);</span>
+            }
+        }
+<span class="fc" id="L337">        sb.append(&quot;]&quot;);</span>
+<span class="fc" id="L338">        decodeArray = sb.toString();</span>
+<span class="fc" id="L339">        return decodeArray;</span>
+    }
+
+    private static void prepareColorspace(PSGenerator gen, ColorSpace colorSpace)
+            throws IOException {
+<span class="fc" id="L344">        gen.writeln(getColorSpaceName(colorSpace) + &quot; setcolorspace&quot;);</span>
+<span class="fc" id="L345">    }</span>
+
+    private static void prepareColorSpace(PSGenerator gen, ColorModel cm) throws IOException {
+        //Prepare color space
+<span class="pc bpc" id="L349" title="1 of 2 branches missed.">        if ((cm instanceof IndexColorModel)) {</span>
+<span class="nc" id="L350">            ColorSpace cs = cm.getColorSpace();</span>
+<span class="nc" id="L351">            IndexColorModel im = (IndexColorModel)cm;</span>
+            boolean isDeviceGray;
+<span class="nc" id="L353">            int c = im.getMapSize();</span>
+<span class="nc" id="L354">            int[] palette = new int[c];</span>
+<span class="nc" id="L355">            im.getRGBs(palette);</span>
+<span class="nc" id="L356">            byte[] reds = new byte[c];</span>
+<span class="nc" id="L357">            byte[] greens = new byte[c];</span>
+<span class="nc" id="L358">            byte[] blues = new byte[c];</span>
+<span class="nc" id="L359">            im.getReds(reds);</span>
+<span class="nc" id="L360">            im.getGreens(greens);</span>
+<span class="nc" id="L361">            im.getBlues(blues);</span>
+<span class="nc" id="L362">            int hival = c - 1;</span>
+<span class="nc bnc" id="L363" title="All 2 branches missed.">            if (hival &gt; 4095) {</span>
+<span class="nc" id="L364">                throw new UnsupportedOperationException(&quot;hival must not go beyond 4095&quot;);</span>
+            }
+<span class="nc bnc" id="L366" title="All 4 branches missed.">            isDeviceGray = Arrays.equals(reds, blues) &amp;&amp; Arrays.equals(blues, greens);</span>
+<span class="nc bnc" id="L367" title="All 2 branches missed.">            if (isDeviceGray) {</span>
+<span class="nc" id="L368">                gen.write(&quot;[/Indexed &quot; + &quot;/DeviceGray&quot;);</span>
+            } else {
+<span class="nc" id="L370">                gen.write(&quot;[/Indexed &quot; + getColorSpaceName(cs));</span>
+            }
+<span class="nc" id="L372">            gen.writeln(&quot; &quot; + Integer.toString(hival));</span>
+<span class="nc" id="L373">            gen.write(&quot;  &lt;&quot;);</span>
+<span class="nc bnc" id="L374" title="All 2 branches missed.">            if (isDeviceGray) {</span>
+<span class="nc" id="L375">                gen.write(toHexString(blues));</span>
+            } else {
+<span class="nc bnc" id="L377" title="All 2 branches missed.">                for (int i = 0; i &lt; c; i++) {</span>
+<span class="nc bnc" id="L378" title="All 2 branches missed.">                    if (i &gt; 0) {</span>
+<span class="nc bnc" id="L379" title="All 2 branches missed.">                        if ((i % 8) == 0) {</span>
+<span class="nc" id="L380">                            gen.newLine();</span>
+<span class="nc" id="L381">                            gen.write(&quot;   &quot;);</span>
+                        } else {
+<span class="nc" id="L383">                            gen.write(&quot; &quot;);</span>
+                        }
+                    }
+<span class="nc" id="L386">                    gen.write(rgb2Hex(palette[i]));</span>
+                }
+            }
+<span class="nc" id="L389">            gen.writeln(&quot;&gt;&quot;);</span>
+<span class="nc" id="L390">            gen.writeln(&quot;] setcolorspace&quot;);</span>
+<span class="nc" id="L391">        } else {</span>
+<span class="fc" id="L392">            gen.writeln(getColorSpaceName(cm.getColorSpace()) + &quot; setcolorspace&quot;);</span>
+        }
+<span class="fc" id="L394">    }</span>
+
+    static String toHexString(byte[] color) {
+<span class="nc" id="L397">        char[] hexChars = new char[color.length * 2];</span>
+        int x;
+<span class="nc bnc" id="L399" title="All 2 branches missed.">        for (int i = 0; i &lt; color.length; i++) {</span>
+<span class="nc" id="L400">            x = color[i] &amp; 0xFF;</span>
+<span class="nc" id="L401">            hexChars[i * 2] = HEX[x &gt;&gt;&gt; 4];</span>
+<span class="nc" id="L402">            hexChars[i * 2 + 1] = HEX[x &amp; 0x0F];</span>
+        }
+<span class="nc" id="L404">        return new String(hexChars);</span>
+    }
+
+    static void writeImageCommand(RenderedImage img,
+            PSDictionary imageDict, PSGenerator gen) throws IOException {
+<span class="fc" id="L409">        ImageEncodingHelper helper = new ImageEncodingHelper(img, true);</span>
+<span class="fc" id="L410">        ColorModel cm = helper.getEncodedColorModel();</span>
+<span class="fc" id="L411">        Dimension imgDim = new Dimension(img.getWidth(), img.getHeight());</span>
+
+<span class="fc" id="L413">        populateImageDictionary(imgDim, cm, imageDict);</span>
+<span class="fc" id="L414">        writeImageCommand(imageDict, cm, gen, false);</span>
+<span class="fc" id="L415">    }</span>
+
+    static void writeImageCommand(PSDictionary imageDict, ColorModel cm, PSGenerator gen, boolean maskBitmap)
+                throws IOException {
+<span class="fc bfc" id="L419" title="All 2 branches covered.">        if (!maskBitmap) {</span>
+<span class="fc" id="L420">            prepareColorSpace(gen, cm);</span>
+        }
+<span class="fc" id="L422">        gen.write(imageDict.toString());</span>
+<span class="fc bfc" id="L423" title="All 2 branches covered.">        if (maskBitmap) {</span>
+<span class="fc" id="L424">            gen.writeln(&quot; imagemask&quot;);</span>
+        } else {
+<span class="fc" id="L426">            gen.writeln(&quot; image&quot;);</span>
+        }
+<span class="fc" id="L428">    }</span>
+
+    static void writeImageCommand(PSDictionary imageDict,
+            Dimension imgDim, ColorSpace colorSpace, boolean invertImage,
+            PSGenerator gen) throws IOException {
+<span class="fc" id="L433">        imageDict.put(&quot;/ImageType&quot;, &quot;1&quot;);</span>
+<span class="fc" id="L434">        imageDict.put(&quot;/Width&quot;, Integer.toString(imgDim.width));</span>
+<span class="fc" id="L435">        imageDict.put(&quot;/Height&quot;, Integer.toString(imgDim.height));</span>
+<span class="fc" id="L436">        String decodeArray = getDecodeArray(colorSpace.getNumComponents(), invertImage);</span>
+<span class="fc" id="L437">        imageDict.put(&quot;/Decode&quot;, decodeArray);</span>
+        // Setup scanning for left-to-right and top-to-bottom
+<span class="fc" id="L439">        imageDict.put(&quot;/ImageMatrix&quot;, &quot;[&quot; + imgDim.width + &quot; 0 0 &quot; + imgDim.height + &quot; 0 0]&quot;);</span>
+
+<span class="fc" id="L441">        prepareColorspace(gen, colorSpace);</span>
+<span class="fc" id="L442">        gen.write(imageDict.toString());</span>
+<span class="fc" id="L443">        gen.writeln(&quot; image&quot;);</span>
+<span class="fc" id="L444">    }</span>
+
+<span class="fc" id="L446">    private static final char[] HEX = {</span>
+            '0', '1', '2', '3', '4', '5', '6', '7',
+            '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+        };
+
+    private static String rgb2Hex(int rgb) {
+<span class="nc" id="L452">        StringBuffer sb = new StringBuffer();</span>
+<span class="nc bnc" id="L453" title="All 2 branches missed.">        for (int i = 5; i &gt;= 0; i--) {</span>
+<span class="nc" id="L454">            int shift = i * 4;</span>
+<span class="nc" id="L455">            int n = (rgb &amp; (15 &lt;&lt; shift)) &gt;&gt; shift;</span>
+<span class="nc" id="L456">            sb.append(HEX[n % 16]);</span>
+        }
+<span class="nc" id="L458">        return sb.toString();</span>
+    }
+
+    /**
+     * Renders a bitmap image to PostScript.
+     * @param img image to render
+     * @param x x position
+     * @param y y position
+     * @param w width
+     * @param h height
+     * @param gen PS generator
+     * @throws IOException In case of an I/O problem while rendering the image
+     */
+    public static void renderBitmapImage(RenderedImage img,
+                float x, float y, float w, float h, PSGenerator gen, Color mask, boolean maskBitmap)
+                    throws IOException {
+<span class="fc" id="L474">        Rectangle2D targetRect = new Rectangle2D.Double(x, y, w, h);</span>
+<span class="fc" id="L475">        ImageEncoder encoder = ImageEncodingHelper.createRenderedImageEncoder(img);</span>
+<span class="fc" id="L476">        Dimension imgDim = new Dimension(img.getWidth(), img.getHeight());</span>
+<span class="fc" id="L477">        String imgDescription = img.getClass().getName();</span>
+<span class="fc" id="L478">        ImageEncodingHelper helper = new ImageEncodingHelper(img);</span>
+<span class="fc" id="L479">        ColorModel cm = helper.getEncodedColorModel();</span>
+
+<span class="pc bpc" id="L481" title="1 of 2 branches missed.">        if (mask == null) {</span>
+<span class="fc" id="L482">            writeImage(encoder, imgDim, imgDescription, targetRect, cm, gen, img, maskBitmap);</span>
+        } else {
+<span class="nc" id="L484">            writeImage(encoder, imgDim, imgDescription, targetRect, cm, gen, img, mask);</span>
+        }
+<span class="fc" id="L486">    }</span>
+
+    /**
+     * Writes a bitmap image as a PostScript form enclosed by DSC resource wrappers to the
+     * PostScript file.
+     * @param img the raw bitmap data
+     * @param imgDim the dimensions of the image
+     * @param formName the name of the PostScript form to use
+     * @param imageDescription a description of the image added as a DSC Title comment
+     * @param isJPEG true if &quot;img&quot; contains a DCT-encoded images, false if &quot;img&quot; contains the
+     *               decoded bitmap
+     * @param colorSpace the color space of the image
+     * @param gen the PostScript generator
+     * @return a PSResource representing the form for resource tracking
+     * @throws IOException In case of an I/O exception
+     * @deprecated Please use {@link FormGenerator}
+     */
+    public static PSResource writeReusableImage(final byte[] img,
+            Dimension imgDim, String formName, String imageDescription,
+            final boolean isJPEG, ColorSpace colorSpace,
+            PSGenerator gen) throws IOException {
+<span class="nc" id="L507">        ImageEncoder encoder = new ImageEncoder() {</span>
+            public void writeTo(OutputStream out) throws IOException {
+<span class="nc" id="L509">                out.write(img);</span>
+<span class="nc" id="L510">            }</span>
+            public String getImplicitFilter() {
+<span class="nc bnc" id="L512" title="All 2 branches missed.">                if (isJPEG) {</span>
+<span class="nc" id="L513">                    return &quot;&lt;&lt; &gt;&gt; /DCTDecode&quot;;</span>
+                } else {
+<span class="nc" id="L515">                    return null;</span>
+                }
+            }
+        };
+<span class="nc" id="L519">        return writeReusableImage(encoder, imgDim, formName,</span>
+                imageDescription, colorSpace, false, gen);
+    }
+
+    /**
+     * Writes a bitmap image as a PostScript form enclosed by DSC resource wrappers to the
+     * PostScript file.
+     * @param encoder the ImageEncoder that will provide the raw bitmap data
+     * @param imgDim the dimensions of the image
+     * @param formName the name of the PostScript form to use
+     * @param imageDescription a description of the image added as a DSC Title comment
+     * @param colorSpace the color space of the image
+     * @param invertImage true if the image shall be inverted
+     * @param gen the PostScript generator
+     * @return a PSResource representing the form for resource tracking
+     * @throws IOException In case of an I/O exception
+     * @deprecated Please use {@link FormGenerator}
+     */
+    protected static PSResource writeReusableImage(ImageEncoder encoder,
+            Dimension imgDim,
+            String formName, String imageDescription,
+            ColorSpace colorSpace, boolean invertImage,
+            PSGenerator gen) throws IOException {
+<span class="nc bnc" id="L542" title="All 2 branches missed.">        if (gen.getPSLevel() &lt; 2) {</span>
+<span class="nc" id="L543">            throw new UnsupportedOperationException(</span>
+                    &quot;Reusable images requires at least Level 2 PostScript&quot;);
+        }
+<span class="nc" id="L546">        String dataName = formName + &quot;:Data&quot;;</span>
+<span class="nc" id="L547">        gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE, formName);</span>
+<span class="nc bnc" id="L548" title="All 2 branches missed.">        if (imageDescription != null) {</span>
+<span class="nc" id="L549">            gen.writeDSCComment(DSCConstants.TITLE, imageDescription);</span>
+        }
+
+        String additionalFilters;
+<span class="nc" id="L553">        String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="nc bnc" id="L554" title="All 2 branches missed.">        if (implicitFilter != null) {</span>
+<span class="nc" id="L555">            additionalFilters = &quot;/ASCII85Decode filter &quot; + implicitFilter + &quot; filter&quot;;</span>
+        } else {
+<span class="nc bnc" id="L557" title="All 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
+<span class="nc" id="L558">                additionalFilters = &quot;/ASCII85Decode filter /FlateDecode filter&quot;;</span>
+            } else {
+<span class="nc" id="L560">                additionalFilters = &quot;/ASCII85Decode filter /RunLengthDecode filter&quot;;</span>
+            }
+        }
+
+<span class="nc" id="L564">        gen.writeln(&quot;/&quot; + formName);</span>
+<span class="nc" id="L565">        gen.writeln(&quot;&lt;&lt; /FormType 1&quot;);</span>
+<span class="nc" id="L566">        gen.writeln(&quot;  /BBox [0 0 &quot; + imgDim.width + &quot; &quot; + imgDim.height + &quot;]&quot;);</span>
+<span class="nc" id="L567">        gen.writeln(&quot;  /Matrix [1 0 0 1 0 0]&quot;);</span>
+<span class="nc" id="L568">        gen.writeln(&quot;  /PaintProc {&quot;);</span>
+<span class="nc" id="L569">        gen.writeln(&quot;    pop&quot;);</span>
+<span class="nc" id="L570">        gen.writeln(&quot;    gsave&quot;);</span>
+<span class="nc bnc" id="L571" title="All 2 branches missed.">        if (gen.getPSLevel() == 2) {</span>
+<span class="nc" id="L572">            gen.writeln(&quot;    userdict /i 0 put&quot;); //rewind image data</span>
+        } else {
+<span class="nc" id="L574">            gen.writeln(&quot;    &quot; + dataName + &quot; 0 setfileposition&quot;); //rewind image data</span>
+        }
+        String dataSource;
+<span class="nc bnc" id="L577" title="All 2 branches missed.">        if (gen.getPSLevel() == 2) {</span>
+<span class="nc" id="L578">            dataSource = &quot;{ &quot; + dataName + &quot; i get /i i 1 add store } bind&quot;;</span>
+        } else {
+<span class="nc" id="L580">            dataSource = dataName;</span>
+        }
+<span class="nc" id="L582">        PSDictionary imageDict = new PSDictionary();</span>
+<span class="nc" id="L583">        imageDict.put(&quot;/DataSource&quot;, dataSource);</span>
+<span class="nc" id="L584">        imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(8));</span>
+<span class="nc" id="L585">        writeImageCommand(imageDict, imgDim, colorSpace, invertImage, gen);</span>
+<span class="nc" id="L586">        gen.writeln(&quot;    grestore&quot;);</span>
+<span class="nc" id="L587">        gen.writeln(&quot;  } bind&quot;);</span>
+<span class="nc" id="L588">        gen.writeln(&quot;&gt;&gt; def&quot;);</span>
+<span class="nc" id="L589">        gen.writeln(&quot;/&quot; + dataName + &quot; currentfile&quot;);</span>
+<span class="nc" id="L590">        gen.writeln(additionalFilters);</span>
+<span class="nc bnc" id="L591" title="All 2 branches missed.">        if (gen.getPSLevel() == 2) {</span>
+            //Creates a data array from the inline file
+<span class="nc" id="L593">            gen.writeln(&quot;{ /temp exch def [&quot;</span>
+                    + &quot; { temp 16384 string readstring not {exit } if } loop ] } exec&quot;);
+        } else {
+<span class="nc" id="L596">            gen.writeln(&quot;/ReusableStreamDecode filter&quot;);</span>
+        }
+<span class="nc" id="L598">        compressAndWriteBitmap(encoder, gen);</span>
+<span class="nc" id="L599">        gen.writeln(&quot;def&quot;);</span>
+<span class="nc" id="L600">        gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
+<span class="nc" id="L601">        PSResource res = new PSResource(PSResource.TYPE_FORM, formName);</span>
+<span class="nc" id="L602">        gen.getResourceTracker().registerSuppliedResource(res);</span>
+<span class="nc" id="L603">        return res;</span>
+    }
+
+    /**
+     * Paints a reusable image (previously added as a PostScript form).
+     * @param formName the name of the PostScript form implementing the image
+     * @param targetRect the target rectangle to place the image in
+     * @param gen the PostScript generator
+     * @throws IOException In case of an I/O exception
+     * @deprecated Please use {@link #paintForm(PSResource, Dimension2D, Rectangle2D, PSGenerator)}
+     *          instead.
+     */
+    public static void paintReusableImage(
+            String formName,
+            Rectangle2D targetRect,
+            PSGenerator gen) throws IOException {
+<span class="nc" id="L619">        PSResource form = new PSResource(PSResource.TYPE_FORM, formName);</span>
+<span class="nc" id="L620">        paintForm(form, null, targetRect, gen);</span>
+<span class="nc" id="L621">    }</span>
+
+    /**
+     * Paints a reusable image (previously added as a PostScript form).
+     * @param form the PostScript form resource implementing the image
+     * @param targetRect the target rectangle to place the image in
+     * @param gen the PostScript generator
+     * @throws IOException In case of an I/O exception
+     * @deprecated Please use {@link #paintForm(PSResource, Dimension2D, Rectangle2D, PSGenerator)}
+     *          instead.
+     */
+    public static void paintForm(
+            PSResource form,
+            Rectangle2D targetRect,
+            PSGenerator gen) throws IOException {
+<span class="nc" id="L636">        paintForm(form, null, targetRect, gen);</span>
+<span class="nc" id="L637">    }</span>
+
+    /**
+     * Paints a reusable image (previously added as a PostScript form).
+     * @param form the PostScript form resource implementing the image
+     * @param formDimensions the original dimensions of the form
+     * @param targetRect the target rectangle to place the image in
+     * @param gen the PostScript generator
+     * @throws IOException In case of an I/O exception
+     */
+    public static void paintForm(
+            PSResource form,
+            Dimension2D formDimensions,
+            Rectangle2D targetRect,
+            PSGenerator gen) throws IOException {
+<span class="nc" id="L652">        gen.saveGraphicsState();</span>
+<span class="nc" id="L653">        translateAndScale(gen, formDimensions, targetRect);</span>
+<span class="nc" id="L654">        gen.writeln(form.getName() + &quot; execform&quot;);</span>
+
+<span class="nc" id="L656">        gen.getResourceTracker().notifyResourceUsageOnPage(form);</span>
+<span class="nc" id="L657">        gen.restoreGraphicsState();</span>
+<span class="nc" id="L658">    }</span>
+
+    private static String getColorSpaceName(ColorSpace colorSpace) {
+<span class="pc bpc" id="L661" title="1 of 2 branches missed.">        if (colorSpace.getType() == ColorSpace.TYPE_CMYK) {</span>
+<span class="nc" id="L662">            return &quot;/DeviceCMYK&quot;;</span>
+<span class="fc bfc" id="L663" title="All 2 branches covered.">        } else if (colorSpace.getType() == ColorSpace.TYPE_GRAY) {</span>
+<span class="fc" id="L664">            return &quot;/DeviceGray&quot;;</span>
+        } else {
+<span class="fc" id="L666">            return &quot;/DeviceRGB&quot;;</span>
+        }
+    }
+
+    static void compressAndWriteBitmap(ImageEncoder encoder, PSGenerator gen)
+                throws IOException {
+<span class="fc" id="L672">        OutputStream out = gen.getOutputStream();</span>
+<span class="fc" id="L673">        out = new ASCII85OutputStream(out);</span>
+<span class="fc" id="L674">        String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="pc bpc" id="L675" title="1 of 2 branches missed.">        if (implicitFilter != null) {</span>
+            //nop
+        } else {
+<span class="pc bpc" id="L678" title="1 of 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
+<span class="fc" id="L679">                out = new FlateEncodeOutputStream(out);</span>
+            } else {
+<span class="nc" id="L681">                out = new RunLengthEncodeOutputStream(out);</span>
+            }
+        }
+<span class="fc" id="L684">        encoder.writeTo(out);</span>
+<span class="pc bpc" id="L685" title="1 of 2 branches missed.">        if (out instanceof Finalizable) {</span>
+<span class="fc" id="L686">            ((Finalizable)out).finalizeStream();</span>
+        } else {
+<span class="nc" id="L688">            out.flush();</span>
+        }
+<span class="fc" id="L690">        gen.newLine(); //Just to be sure</span>
+<span class="fc" id="L691">    }</span>
+
+    /**
+     * Generates commands to modify the current transformation matrix so an image fits
+     * into a given rectangle.
+     * @param gen the PostScript generator
+     * @param imageDimensions the image's dimensions
+     * @param targetRect the target rectangle
+     * @throws IOException if an I/O error occurs
+     */
+    public static void translateAndScale(PSGenerator gen,
+            Dimension2D imageDimensions, Rectangle2D targetRect)
+                throws IOException {
+<span class="fc" id="L704">        gen.writeln(gen.formatDouble(targetRect.getX()) + &quot; &quot;</span>
+<span class="fc" id="L705">                + gen.formatDouble(targetRect.getY()) + &quot; translate&quot;);</span>
+<span class="pc bpc" id="L706" title="1 of 2 branches missed.">        if (imageDimensions == null) {</span>
+<span class="fc" id="L707">            imageDimensions = new Dimension(1, 1);</span>
+        }
+<span class="fc" id="L709">        double sx = targetRect.getWidth() / imageDimensions.getWidth();</span>
+<span class="fc" id="L710">        double sy = targetRect.getHeight() / imageDimensions.getHeight();</span>
+<span class="pc bpc" id="L711" title="2 of 4 branches missed.">        if (sx != 1 || sy != 1) {</span>
+<span class="nc" id="L712">            gen.writeln(gen.formatDouble(sx) + &quot; &quot;</span>
+<span class="nc" id="L713">                    + gen.formatDouble(sy) + &quot; scale&quot;);</span>
+        }
+<span class="fc" id="L715">    }</span>
+
+    /**
+     * Extracts a packed RGB integer array of a RenderedImage.
+     * @param img the image
+     * @param startX the starting X coordinate
+     * @param startY the starting Y coordinate
+     * @param w the width of the cropped image
+     * @param h the height of the cropped image
+     * @param rgbArray the prepared integer array to write to
+     * @param offset offset in the target array
+     * @param scansize width of a row in the target array
+     * @return the populated integer array previously passed in as rgbArray parameter
+     */
+    public static int[] getRGB(RenderedImage img,
+                int startX, int startY,
+                int w, int h,
+                int[] rgbArray, int offset, int scansize) {
+<span class="nc" id="L733">        Raster raster = img.getData();</span>
+<span class="nc" id="L734">        int yoff = offset;</span>
+        int off;
+        Object data;
+<span class="nc" id="L737">        int nbands = raster.getNumBands();</span>
+<span class="nc" id="L738">        int dataType = raster.getDataBuffer().getDataType();</span>
+<span class="nc bnc" id="L739" title="All 6 branches missed.">        switch (dataType) {</span>
+        case DataBuffer.TYPE_BYTE:
+<span class="nc" id="L741">            data = new byte[nbands];</span>
+<span class="nc" id="L742">            break;</span>
+        case DataBuffer.TYPE_USHORT:
+<span class="nc" id="L744">            data = new short[nbands];</span>
+<span class="nc" id="L745">            break;</span>
+        case DataBuffer.TYPE_INT:
+<span class="nc" id="L747">            data = new int[nbands];</span>
+<span class="nc" id="L748">            break;</span>
+        case DataBuffer.TYPE_FLOAT:
+<span class="nc" id="L750">            data = new float[nbands];</span>
+<span class="nc" id="L751">            break;</span>
+        case DataBuffer.TYPE_DOUBLE:
+<span class="nc" id="L753">            data = new double[nbands];</span>
+<span class="nc" id="L754">            break;</span>
+        default:
+<span class="nc" id="L756">            throw new IllegalArgumentException(&quot;Unknown data buffer type: &quot;</span>
+                                               + dataType);
+        }
+
+<span class="nc bnc" id="L760" title="All 2 branches missed.">        if (rgbArray == null) {</span>
+<span class="nc" id="L761">            rgbArray = new int[offset + h * scansize];</span>
+        }
+
+<span class="nc" id="L764">        ColorModel colorModel = img.getColorModel();</span>
+<span class="nc bnc" id="L765" title="All 2 branches missed.">        for (int y = startY; y &lt; startY + h; y++, yoff += scansize) {</span>
+<span class="nc" id="L766">            off = yoff;</span>
+<span class="nc bnc" id="L767" title="All 2 branches missed.">            for (int x = startX; x &lt; startX + w; x++) {</span>
+<span class="nc" id="L768">                rgbArray[off++] = colorModel.getRGB(raster.getDataElements(x, y, data));</span>
+            }
+        }
+
+<span class="nc" id="L772">        return rgbArray;</span>
+    }
+
+    /**
+     * Places an EPS file in the PostScript stream.
+     * @param rawEPS byte array containing the raw EPS data
+     * @param name name for the EPS document
+     * @param x x-coordinate of viewport in points
+     * @param y y-coordinate of viewport in points
+     * @param w width of viewport in points
+     * @param h height of viewport in points
+     * @param bboxx x-coordinate of EPS bounding box in points
+     * @param bboxy y-coordinate of EPS bounding box in points
+     * @param bboxw width of EPS bounding box in points
+     * @param bboxh height of EPS bounding box in points
+     * @param gen the PS generator
+     * @throws IOException in case an I/O error happens during output
+     * @deprecated Please use the variant with the InputStream as parameter
+     */
+    public static void renderEPS(byte[] rawEPS, String name,
+                    float x, float y, float w, float h,
+                    float bboxx, float bboxy, float bboxw, float bboxh,
+                    PSGenerator gen) throws IOException {
+<span class="nc" id="L795">       renderEPS(new java.io.ByteArrayInputStream(rawEPS), name,</span>
+               new Rectangle2D.Float(x, y, w, h),
+               new Rectangle2D.Float(bboxx, bboxy, bboxw, bboxh),
+               gen);
+<span class="nc" id="L799">    }</span>
+
+    /**
+     * Places an EPS file in the PostScript stream.
+     * @param in the InputStream that contains the EPS stream
+     * @param name name for the EPS document
+     * @param viewport the viewport in points in which to place the EPS
+     * @param bbox the EPS bounding box in points
+     * @param gen the PS generator
+     * @throws IOException in case an I/O error happens during output
+     */
+    public static void renderEPS(InputStream in, String name,
+            Rectangle2D viewport, Rectangle2D bbox,
+                    PSGenerator gen) throws IOException {
+<span class="nc" id="L813">        gen.getResourceTracker().notifyResourceUsageOnPage(PSProcSets.EPS_PROCSET);</span>
+<span class="nc" id="L814">        gen.writeln(&quot;%AXGBeginEPS: &quot; + name);</span>
+<span class="nc" id="L815">        gen.writeln(&quot;BeginEPSF&quot;);</span>
+
+<span class="nc" id="L817">        gen.writeln(gen.formatDouble(viewport.getX())</span>
+<span class="nc" id="L818">                + &quot; &quot; + gen.formatDouble(viewport.getY()) + &quot; translate&quot;);</span>
+<span class="nc" id="L819">        gen.writeln(&quot;0 &quot; + gen.formatDouble(viewport.getHeight()) + &quot; translate&quot;);</span>
+<span class="nc" id="L820">        gen.writeln(&quot;1 -1 scale&quot;);</span>
+<span class="nc" id="L821">        double sx = viewport.getWidth() / bbox.getWidth();</span>
+<span class="nc" id="L822">        double sy = viewport.getHeight() / bbox.getHeight();</span>
+<span class="nc bnc" id="L823" title="All 4 branches missed.">        if (sx != 1 || sy != 1) {</span>
+<span class="nc" id="L824">            gen.writeln(gen.formatDouble(sx) + &quot; &quot; + gen.formatDouble(sy) + &quot; scale&quot;);</span>
+        }
+<span class="nc bnc" id="L826" title="All 4 branches missed.">        if (bbox.getX() != 0 || bbox.getY() != 0) {</span>
+<span class="nc" id="L827">            gen.writeln(gen.formatDouble(-bbox.getX())</span>
+<span class="nc" id="L828">                    + &quot; &quot; + gen.formatDouble(-bbox.getY()) + &quot; translate&quot;);</span>
+        }
+<span class="nc" id="L830">        gen.writeln(gen.formatDouble(bbox.getX())</span>
+<span class="nc" id="L831">                + &quot; &quot; + gen.formatDouble(bbox.getY())</span>
+<span class="nc" id="L832">                + &quot; &quot; + gen.formatDouble(bbox.getWidth())</span>
+<span class="nc" id="L833">                + &quot; &quot; + gen.formatDouble(bbox.getHeight()) + &quot; re clip&quot;);</span>
+<span class="nc" id="L834">        gen.writeln(&quot;newpath&quot;);</span>
+
+<span class="nc" id="L836">        PSResource res = new PSResource(PSResource.TYPE_FILE, name);</span>
+<span class="nc" id="L837">        gen.getResourceTracker().registerSuppliedResource(res);</span>
+<span class="nc" id="L838">        gen.getResourceTracker().notifyResourceUsageOnPage(res);</span>
+<span class="nc" id="L839">        gen.writeDSCComment(DSCConstants.BEGIN_DOCUMENT, res.getName());</span>
+<span class="nc" id="L840">        IOUtils.copy(in, gen.getOutputStream());</span>
+<span class="nc" id="L841">        gen.newLine();</span>
+<span class="nc" id="L842">        gen.writeDSCComment(DSCConstants.END_DOCUMENT);</span>
+<span class="nc" id="L843">        gen.writeln(&quot;EndEPSF&quot;);</span>
+<span class="nc" id="L844">        gen.writeln(&quot;%AXGEndEPS&quot;);</span>
+<span class="nc" id="L845">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

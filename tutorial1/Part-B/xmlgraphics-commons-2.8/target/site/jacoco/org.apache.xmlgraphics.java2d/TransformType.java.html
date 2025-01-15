@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransformType.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">TransformType.java</span></div><h1>TransformType.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: TransformType.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.java2d;
+
+// CSOFF: WhitespaceAround
+
+/**
+ * Enumeration for transformation types.
+ *
+ * @version $Id: TransformType.java 1732018 2016-02-24 04:51:06Z gadams $
+ * Originally authored by Vincent Hardy.
+ */
+public final class TransformType {
+    /*
+     * Transform type constants
+     */
+    public static final int TRANSFORM_TRANSLATE = 0;
+    public static final int TRANSFORM_ROTATE = 1;
+    public static final int TRANSFORM_SCALE = 2;
+    public static final int TRANSFORM_SHEAR = 3;
+    public static final int TRANSFORM_GENERAL = 4;
+
+    /**
+     * Strings describing the elementary transforms
+     */
+    public static final String TRANSLATE_STRING = &quot;translate&quot;;
+    public static final String ROTATE_STRING = &quot;rotate&quot;;
+    public static final String SCALE_STRING = &quot;scale&quot;;
+    public static final String SHEAR_STRING = &quot;shear&quot;;
+    public static final String GENERAL_STRING = &quot;general&quot;;
+
+    /**
+     * TransformType values
+     */
+<span class="fc" id="L52">    public static final TransformType TRANSLATE = new TransformType(TRANSFORM_TRANSLATE, TRANSLATE_STRING);</span>
+<span class="fc" id="L53">    public static final TransformType ROTATE = new TransformType(TRANSFORM_ROTATE, ROTATE_STRING);</span>
+<span class="fc" id="L54">    public static final TransformType SCALE = new TransformType(TRANSFORM_SCALE, SCALE_STRING);</span>
+<span class="fc" id="L55">    public static final TransformType SHEAR = new TransformType(TRANSFORM_SHEAR, SHEAR_STRING);</span>
+<span class="fc" id="L56">    public static final TransformType GENERAL = new TransformType(TRANSFORM_GENERAL, GENERAL_STRING);</span>
+
+    private String desc;
+    private int val;
+
+    /**
+     * Constructor is private so that no instances other than
+     * the ones in the enumeration can be created.
+     * @see #readResolve
+     */
+<span class="fc" id="L66">    private TransformType(int val, String desc) {</span>
+<span class="fc" id="L67">        this.desc = desc;</span>
+<span class="fc" id="L68">        this.val = val;</span>
+<span class="fc" id="L69">    }</span>
+
+    /**
+     * @return description
+     */
+    public String toString() {
+<span class="nc" id="L75">        return desc;</span>
+    }
+
+    /**
+     * Convenience for enumeration switching.
+     * That is,
+     * &lt;pre&gt;
+     *   switch(transformType.toInt()){
+     *       case TransformType.TRANSFORM_TRANSLATE:
+     *        ....
+     *       case TransformType.TRANSFORM_ROTATE:
+     * &lt;/pre&gt;
+     */
+    public int toInt() {
+<span class="nc" id="L89">        return val;</span>
+    }
+
+    /**
+     *  This is called by the serialization code before it returns an unserialized
+     * object. To provide for unicity of instances, the instance that was read
+     * is replaced by its static equivalent
+     */
+    public Object readResolve() {
+<span class="nc bnc" id="L98" title="All 6 branches missed.">        switch(val) {</span>
+        case TRANSFORM_TRANSLATE:
+<span class="nc" id="L100">            return TransformType.TRANSLATE;</span>
+        case TRANSFORM_ROTATE:
+<span class="nc" id="L102">            return TransformType.ROTATE;</span>
+        case TRANSFORM_SCALE:
+<span class="nc" id="L104">            return TransformType.SCALE;</span>
+        case TRANSFORM_SHEAR:
+<span class="nc" id="L106">            return TransformType.SHEAR;</span>
+        case TRANSFORM_GENERAL:
+<span class="nc" id="L108">            return TransformType.GENERAL;</span>
+        default:
+<span class="nc" id="L110">            throw new RuntimeException(&quot;Unknown TransformType value&quot;);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

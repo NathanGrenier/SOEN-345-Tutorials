@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageLoaderPNG.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">ImageLoaderPNG.java</span></div><h1>ImageLoaderPNG.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageLoaderPNG.java 1732019 2016-02-24 05:01:10Z gadams $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.awt.image.RenderedImage;
+import java.io.IOException;
+import java.util.Map;
+
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+
+import org.apache.xmlgraphics.image.codec.png.PNGDecodeParam;
+import org.apache.xmlgraphics.image.codec.png.PNGImageDecoder;
+import org.apache.xmlgraphics.image.codec.util.ImageInputStreamSeekableStreamAdapter;
+import org.apache.xmlgraphics.image.codec.util.SeekableStream;
+import org.apache.xmlgraphics.image.loader.Image;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.ImageSessionContext;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+
+public class ImageLoaderPNG extends AbstractImageLoader {
+
+<span class="fc" id="L42">    public ImageLoaderPNG() {</span>
+        //
+<span class="fc" id="L44">    }</span>
+
+    /** {@inheritDoc} */
+    public Image loadImage(ImageInfo info, Map hints, ImageSessionContext session) throws ImageException,
+            IOException {
+
+<span class="fc" id="L50">        Source src = session.needSource(info.getOriginalURI());</span>
+<span class="fc" id="L51">        ImageInputStream imgStream = ImageUtil.needImageInputStream(src);</span>
+
+<span class="fc" id="L53">        SeekableStream seekStream = new ImageInputStreamSeekableStreamAdapter(imgStream);</span>
+
+<span class="fc" id="L55">        PNGImageDecoder decoder = new PNGImageDecoder(seekStream, new PNGDecodeParam());</span>
+<span class="fc" id="L56">        RenderedImage image = decoder.decodeAsRenderedImage();</span>
+
+        // need transparency here?
+<span class="fc" id="L59">        return new ImageRendered(info, image, null);</span>
+    }
+
+    /** {@inheritDoc} */
+    public ImageFlavor getTargetFlavor() {
+<span class="fc" id="L64">        return ImageFlavor.RENDERED_IMAGE;</span>
+    }
+
+    /** {@inheritDoc} */
+    public int getUsagePenalty() {
+        // since this image loader does not provide any benefits over the default sun.imageio one we add
+        // some penalty to it so that it is not chosen by default; instead users need to give it a negative
+        // penalty in fop.xconf so that it is used; this image loader is mostly for testing purposes for now.
+<span class="fc" id="L72">        return 1000;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

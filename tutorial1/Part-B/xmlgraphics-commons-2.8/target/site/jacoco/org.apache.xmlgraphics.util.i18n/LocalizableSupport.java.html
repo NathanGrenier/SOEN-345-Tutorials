@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LocalizableSupport.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.i18n</a> &gt; <span class="el_source">LocalizableSupport.java</span></div><h1>LocalizableSupport.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: LocalizableSupport.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.util.i18n;
+
+import java.text.MessageFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+// CSOFF: InnerAssignment
+
+/**
+ * This class provides a default implementation of the Localizable interface.
+ * You can use it as a base class or as a member field and delegates various
+ * work to it.&lt;p&gt;
+ * For example, to implement Localizable, the following code can be used:
+ * &lt;pre&gt;
+ *  package mypackage;
+ *  ...
+ *  public class MyClass implements Localizable {
+ *      // This code fragment requires a file named
+ *      // 'mypackage/resources/Messages.properties', or a
+ *      // 'mypackage.resources.Messages' class which extends
+ *      // java.util.ResourceBundle, accessible using the current
+ *      // classpath.
+ *      LocalizableSupport localizableSupport =
+ *          new LocalizableSupport(&quot;mypackage.resources.Messages&quot;);
+ *
+ *      public void setLocale(Locale l) {
+ *          localizableSupport.setLocale(l);
+ *      }
+ *      public Local getLocale() {
+ *          return localizableSupport.getLocale();
+ *      }
+ *      public String formatMessage(String key, Object[] args) {
+ *          return localizableSupport.formatMessage(key, args);
+ *      }
+ *  }
+ * &lt;/pre&gt;
+ * The algorithm for the Locale lookup in a LocalizableSupport object is:
+ * &lt;ul&gt;
+ *   &lt;li&gt;
+ *     if a Locale has been set by a call to setLocale(), use this Locale,
+ *     else,
+ *   &lt;/li&gt;
+ *   &lt;li&gt;
+ *     if a Locale has been set by a call to the setDefaultLocale() method
+ *     of a LocalizableSupport object in the current LocaleGroup, use this
+ *     Locale, else,
+ *   &lt;/li&gt;
+ *   &lt;li&gt;
+ *     use the object returned by Locale.getDefault() (and set by
+ *     Locale.setDefault()).
+ *   &lt;/li&gt;
+ * &lt;/ul&gt;
+ * This offers the possibility to have a different Locale for each object,
+ * a Locale for a group of object and/or a Locale for the JVM instance.
+ * &lt;p&gt;
+ * Note: if no group is specified a LocalizableSupport object belongs to a
+ * default group common to each instance of LocalizableSupport.
+ *
+ * @version $Id: LocalizableSupport.java 1732018 2016-02-24 04:51:06Z gadams $
+ *
+ * Originally authored by Stephane Hillion.
+ */
+public class LocalizableSupport implements Localizable {
+    /**
+     * The locale group to which this object belongs.
+     */
+<span class="fc" id="L86">    protected LocaleGroup localeGroup = LocaleGroup.DEFAULT;</span>
+
+    /**
+     * The resource bundle classname.
+     */
+    protected String bundleName;
+
+    /**
+     * The classloader to use to create the resource bundle.
+     */
+    protected ClassLoader classLoader;
+
+    /**
+     * The current locale.
+     */
+    protected Locale locale;
+
+    /**
+     * The locale in use.
+     */
+    protected Locale usedLocale;
+
+    /**
+     * The resources
+     */
+    protected ResourceBundle resourceBundle;
+
+    /**
+     * Same as LocalizableSupport(s, null).
+     */
+    public LocalizableSupport(String s) {
+<span class="nc" id="L117">        this(s, null);</span>
+<span class="nc" id="L118">    }</span>
+
+    /**
+     * Creates a new Localizable object.
+     * The resource bundle class name is required allows the use of custom
+     * classes of resource bundles.
+     * @param s  must be the name of the class to use to get the appropriate
+     *           resource bundle given the current locale.
+     * @param cl is the classloader used to create the resource bundle,
+     *           or null.
+     * @see java.util.ResourceBundle
+     */
+<span class="fc" id="L130">    public LocalizableSupport(String s, ClassLoader cl) {</span>
+<span class="fc" id="L131">        bundleName = s;</span>
+<span class="fc" id="L132">        classLoader = cl;</span>
+<span class="fc" id="L133">    }</span>
+
+    /**
+     * Implements {@link org.apache.xmlgraphics.util.i18n.Localizable#setLocale(Locale)}.
+     */
+    public void setLocale(Locale l) {
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (locale != l) {</span>
+<span class="nc" id="L140">            locale = l;</span>
+<span class="nc" id="L141">            resourceBundle = null;</span>
+        }
+<span class="nc" id="L143">    }</span>
+
+    /**
+     * Implements {@link org.apache.xmlgraphics.util.i18n.Localizable#getLocale()}.
+     */
+    public Locale getLocale() {
+<span class="nc" id="L149">        return locale;</span>
+    }
+
+    /**
+     * Implements {@link
+     * org.apache.xmlgraphics.util.i18n.ExtendedLocalizable#setLocaleGroup(LocaleGroup)}.
+     */
+    public void setLocaleGroup(LocaleGroup lg) {
+<span class="nc" id="L157">        localeGroup = lg;</span>
+<span class="nc" id="L158">    }</span>
+
+    /**
+     * Implements {@link
+     * org.apache.xmlgraphics.util.i18n.ExtendedLocalizable#getLocaleGroup()}.
+     */
+    public LocaleGroup getLocaleGroup() {
+<span class="nc" id="L165">        return localeGroup;</span>
+    }
+
+    /**
+     * Implements {@link
+     * org.apache.xmlgraphics.util.i18n.ExtendedLocalizable#setDefaultLocale(Locale)}.
+     * Later invocations of the instance methods will lead to update the
+     * resource bundle used.
+     */
+    public void setDefaultLocale(Locale l) {
+<span class="nc" id="L175">        localeGroup.setLocale(l);</span>
+<span class="nc" id="L176">    }</span>
+
+    /**
+     * Implements {@link
+     * org.apache.xmlgraphics.util.i18n.ExtendedLocalizable#getDefaultLocale()}.
+     */
+    public Locale getDefaultLocale() {
+<span class="nc" id="L183">        return localeGroup.getLocale();</span>
+    }
+
+    /**
+     * Implements {@link
+     * org.apache.xmlgraphics.util.i18n.Localizable#formatMessage(String,Object[])}.
+     */
+    public String formatMessage(String key, Object[] args) {
+<span class="fc" id="L191">        getResourceBundle();</span>
+<span class="fc" id="L192">        return MessageFormat.format(resourceBundle.getString(key), args);</span>
+    }
+
+    /**
+     * Implements {@link
+     * org.apache.xmlgraphics.util.i18n.ExtendedLocalizable#getResourceBundle()}.
+     */
+    public ResourceBundle getResourceBundle() {
+        Locale l;
+
+<span class="fc bfc" id="L202" title="All 2 branches covered.">        if (resourceBundle == null) {</span>
+<span class="pc bpc" id="L203" title="1 of 2 branches missed.">            if (locale == null) {</span>
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">                if ((l = localeGroup.getLocale()) == null) {</span>
+<span class="fc" id="L205">                    usedLocale = Locale.getDefault();</span>
+                } else {
+<span class="nc" id="L207">                    usedLocale = l;</span>
+                }
+            } else {
+<span class="nc" id="L210">                usedLocale = locale;</span>
+            }
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">            if (classLoader == null) {</span>
+<span class="nc" id="L213">                resourceBundle = ResourceBundle.getBundle(bundleName,</span>
+                                                          usedLocale);
+            } else {
+<span class="fc" id="L216">                resourceBundle = ResourceBundle.getBundle(bundleName,</span>
+                                                          usedLocale,
+                                                          classLoader);
+            }
+<span class="pc bpc" id="L220" title="1 of 2 branches missed.">        } else if (locale == null) {</span>
+            // Check for group Locale and JVM default locale changes.
+<span class="pc bpc" id="L222" title="1 of 2 branches missed.">            if ((l = localeGroup.getLocale()) == null) {</span>
+<span class="pc bpc" id="L223" title="1 of 2 branches missed.">                if (usedLocale != (l = Locale.getDefault())) {</span>
+<span class="nc" id="L224">                    usedLocale = l;</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">                    if (classLoader == null) {</span>
+<span class="nc" id="L226">                        resourceBundle = ResourceBundle.getBundle(bundleName,</span>
+                                                                  usedLocale);
+                    } else {
+<span class="nc" id="L229">                        resourceBundle = ResourceBundle.getBundle(bundleName,</span>
+                                                                  usedLocale,
+                                                                  classLoader);
+                    }
+                }
+<span class="nc bnc" id="L234" title="All 2 branches missed.">            } else if (usedLocale != l) {</span>
+<span class="nc" id="L235">                usedLocale = l;</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">                if (classLoader == null) {</span>
+<span class="nc" id="L237">                    resourceBundle = ResourceBundle.getBundle(bundleName,</span>
+                                                              usedLocale);
+                } else {
+<span class="nc" id="L240">                    resourceBundle = ResourceBundle.getBundle(bundleName,</span>
+                                                              usedLocale,
+                                                              classLoader);
+                }
+            }
+        }
+
+<span class="fc" id="L247">        return resourceBundle;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

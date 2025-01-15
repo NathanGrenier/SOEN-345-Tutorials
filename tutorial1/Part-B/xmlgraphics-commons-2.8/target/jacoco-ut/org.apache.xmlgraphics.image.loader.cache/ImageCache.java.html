@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageCache.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.cache</a> &gt; <span class="el_source">ImageCache.java</span></div><h1>ImageCache.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageCache.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.cache;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import javax.xml.transform.Source;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.apache.xmlgraphics.image.loader.Image;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.ImageManager;
+import org.apache.xmlgraphics.image.loader.ImageSessionContext;
+import org.apache.xmlgraphics.image.loader.util.SoftMapCache;
+
+
+/**
+ * This class provides a cache for images. The main key into the images is the original URI the
+ * image was accessed with.
+ * &lt;p&gt;
+ * Don't use one ImageCache instance in the context of multiple base URIs because relative URIs
+ * would not work correctly anymore.
+ * &lt;p&gt;
+ * By default, the URIs of inaccessible images are remembered but these entries are discarded
+ * after 60 seconds (which causes a retry next time the same URI is requested). This allows
+ * to counteract performance loss when accessing invalid or temporarily unavailable images
+ * over slow connections.
+ */
+public class ImageCache {
+
+    /** logger */
+<span class="fc" id="L58">    protected static final Log log = LogFactory.getLog(ImageCache.class);</span>
+
+    //Handling of invalid URIs
+<span class="fc" id="L61">    private Map invalidURIs = Collections.synchronizedMap(new java.util.HashMap());</span>
+    private ExpirationPolicy invalidURIExpirationPolicy;
+
+    //Actual image cache
+<span class="fc" id="L65">    private SoftMapCache imageInfos = new SoftMapCache(true);</span>
+<span class="fc" id="L66">    private SoftMapCache images = new SoftMapCache(true);</span>
+
+    private ImageCacheListener cacheListener;
+    private TimeStampProvider timeStampProvider;
+    private long lastHouseKeeping;
+
+    /**
+     * Default constructor with default settings.
+     */
+    public ImageCache() {
+<span class="fc" id="L76">        this(new TimeStampProvider(), new DefaultExpirationPolicy());</span>
+<span class="fc" id="L77">    }</span>
+
+    /**
+     * Constructor for customized behaviour and testing.
+     * @param timeStampProvider the time stamp provider to use
+     * @param invalidURIExpirationPolicy the expiration policy for invalid URIs
+     */
+    public ImageCache(TimeStampProvider timeStampProvider,
+<span class="fc" id="L85">            ExpirationPolicy invalidURIExpirationPolicy) {</span>
+<span class="fc" id="L86">        this.timeStampProvider = timeStampProvider;</span>
+<span class="fc" id="L87">        this.invalidURIExpirationPolicy = invalidURIExpirationPolicy;</span>
+<span class="fc" id="L88">        this.lastHouseKeeping = this.timeStampProvider.getTimeStamp();</span>
+<span class="fc" id="L89">    }</span>
+
+    /**
+     * Sets an ImageCacheListener instance so the events in the image cache can be observed.
+     * @param listener the listener instance
+     */
+    public void setCacheListener(ImageCacheListener listener) {
+<span class="fc" id="L96">        this.cacheListener = listener;</span>
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * Returns an ImageInfo instance for a given URI.
+     * @param uri the image's URI
+     * @param session the session context
+     * @param manager the ImageManager handling the images
+     * @return the ImageInfo instance
+     * @throws ImageException if an error occurs while parsing image data
+     * @throws IOException if an I/O error occurs while loading image data
+     */
+    public ImageInfo needImageInfo(String uri, ImageSessionContext session, ImageManager manager)
+            throws ImageException, IOException {
+        //Fetch unique version of the URI and use it for synchronization so we have some sort of
+        //&quot;row-level&quot; locking instead of &quot;table-level&quot; locking (to use a database analogy).
+        //The fine locking strategy is necessary since preloading an image is a potentially long
+        //operation.
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if (isInvalidURI(uri)) {</span>
+<span class="fc" id="L115">            throw new FileNotFoundException(&quot;Image not found: &quot; + uri);</span>
+        }
+<span class="fc" id="L117">        String lockURI = uri.intern();</span>
+<span class="fc" id="L118">        synchronized (lockURI) {</span>
+<span class="fc" id="L119">            ImageInfo info = getImageInfo(uri);</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">            if (info == null) {</span>
+                try {
+<span class="fc" id="L122">                    Source src = session.needSource(uri);</span>
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">                    if (src == null) {</span>
+<span class="nc" id="L124">                        registerInvalidURI(uri);</span>
+<span class="nc" id="L125">                        throw new FileNotFoundException(&quot;Image not found: &quot; + uri);</span>
+                    }
+<span class="fc" id="L127">                    info = manager.preloadImage(uri, src);</span>
+<span class="fc" id="L128">                    session.returnSource(uri, src);</span>
+<span class="fc" id="L129">                } catch (IOException ioe) {</span>
+<span class="fc" id="L130">                    registerInvalidURI(uri);</span>
+<span class="fc" id="L131">                    throw ioe;</span>
+<span class="nc" id="L132">                } catch (ImageException e) {</span>
+<span class="nc" id="L133">                    registerInvalidURI(uri);</span>
+<span class="nc" id="L134">                    throw e;</span>
+<span class="fc" id="L135">                }</span>
+<span class="pc bpc" id="L136" title="3 of 4 branches missed.">                if (info.getOriginalImage() == null || info.getOriginalImage().isCacheable()) {</span>
+<span class="fc" id="L137">                    putImageInfo(info);</span>
+                }
+            }
+<span class="fc" id="L140">            return info;</span>
+        }
+    }
+
+    /**
+     * Indicates whether a URI has previously been identified as an invalid URI.
+     * @param uri the image's URI
+     * @return true if the URI is invalid
+     */
+    public boolean isInvalidURI(String uri) {
+<span class="fc" id="L150">        boolean expired = removeInvalidURIIfExpired(uri);</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">        if (expired) {</span>
+<span class="fc" id="L152">            return false;</span>
+        } else {
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">            if (cacheListener != null) {</span>
+<span class="fc" id="L155">                cacheListener.invalidHit(uri);</span>
+            }
+<span class="fc" id="L157">            return true;</span>
+        }
+    }
+
+    private boolean removeInvalidURIIfExpired(String uri) {
+<span class="fc" id="L162">        Long timestamp = (Long) invalidURIs.get(uri);</span>
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        boolean expired = (timestamp == null)</span>
+<span class="fc bfc" id="L164" title="All 2 branches covered.">                || this.invalidURIExpirationPolicy.isExpired(</span>
+<span class="fc" id="L165">                        this.timeStampProvider, timestamp);</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (expired) {</span>
+<span class="fc" id="L167">            this.invalidURIs.remove(uri);</span>
+        }
+<span class="fc" id="L169">        return expired;</span>
+    }
+
+    /**
+     * Returns an ImageInfo instance from the cache or null if none is found.
+     * @param uri the image's URI
+     * @return the ImageInfo instance or null if the requested information is not in the cache
+     */
+    protected ImageInfo getImageInfo(String uri) {
+<span class="fc" id="L178">        ImageInfo info = (ImageInfo)imageInfos.get(uri);</span>
+<span class="pc bpc" id="L179" title="1 of 2 branches missed.">        if (cacheListener != null) {</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">            if (info != null) {</span>
+<span class="fc" id="L181">                cacheListener.cacheHitImageInfo(uri);</span>
+            } else {
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">                if (!isInvalidURI(uri)) {</span>
+<span class="fc" id="L184">                    cacheListener.cacheMissImageInfo(uri);</span>
+                }
+            }
+        }
+<span class="fc" id="L188">        return info;</span>
+    }
+
+    /**
+     * Registers an ImageInfo instance with the cache.
+     * @param info the ImageInfo instance
+     */
+    protected void putImageInfo(ImageInfo info) {
+        //An already existing ImageInfo is replaced.
+<span class="fc" id="L197">        imageInfos.put(info.getOriginalURI(), info);</span>
+<span class="fc" id="L198">    }</span>
+
+    private static final long ONE_HOUR = 60 * 60 * 1000;
+
+    /**
+     * Registers a URI as invalid so getImageInfo can indicate that quickly with no I/O access.
+     * @param uri the URI of the invalid image
+     */
+    void registerInvalidURI(String uri) {
+<span class="fc" id="L207">        invalidURIs.put(uri, timeStampProvider.getTimeStamp());</span>
+
+<span class="fc" id="L209">        considerHouseKeeping();</span>
+<span class="fc" id="L210">    }</span>
+
+    /**
+     * Returns an image from the cache or null if it wasn't found.
+     * @param info the ImageInfo instance representing the image
+     * @param flavor the requested ImageFlavor for the image
+     * @return the requested image or null if the image is not in the cache
+     */
+    public Image getImage(ImageInfo info, ImageFlavor flavor) {
+<span class="fc" id="L219">        return getImage(info.getOriginalURI(), flavor);</span>
+    }
+
+    /**
+     * Returns an image from the cache or null if it wasn't found.
+     * @param uri the image's URI
+     * @param flavor the requested ImageFlavor for the image
+     * @return the requested image or null if the image is not in the cache
+     */
+    public Image getImage(String uri, ImageFlavor flavor) {
+<span class="pc bpc" id="L229" title="1 of 4 branches missed.">        if (uri == null || &quot;&quot;.equals(uri)) {</span>
+<span class="fc" id="L230">            return null;</span>
+        }
+<span class="fc" id="L232">        ImageKey key = new ImageKey(uri, flavor);</span>
+<span class="fc" id="L233">        Image img = (Image)images.get(key);</span>
+<span class="pc bpc" id="L234" title="1 of 2 branches missed.">        if (cacheListener != null) {</span>
+<span class="fc bfc" id="L235" title="All 2 branches covered.">            if (img != null) {</span>
+<span class="fc" id="L236">                cacheListener.cacheHitImage(key);</span>
+            } else {
+<span class="fc" id="L238">                cacheListener.cacheMissImage(key);</span>
+            }
+        }
+<span class="fc" id="L241">        return img;</span>
+    }
+
+    /**
+     * Registers an image with the cache.
+     * @param img the image
+     */
+    public void putImage(Image img) {
+<span class="fc" id="L249">        String originalURI = img.getInfo().getOriginalURI();</span>
+<span class="pc bpc" id="L250" title="1 of 4 branches missed.">        if (originalURI == null || &quot;&quot;.equals(originalURI)) {</span>
+<span class="fc" id="L251">            return; //Don't cache if there's no URI</span>
+        }
+        //An already existing Image is replaced.
+<span class="pc bpc" id="L254" title="1 of 2 branches missed.">        if (!img.isCacheable()) {</span>
+<span class="nc" id="L255">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L256">                    &quot;Image is not cacheable! (Flavor: &quot; + img.getFlavor() + &quot;)&quot;);</span>
+        }
+<span class="fc" id="L258">        ImageKey key = new ImageKey(originalURI, img.getFlavor());</span>
+<span class="fc" id="L259">        images.put(key, img);</span>
+<span class="fc" id="L260">    }</span>
+
+    /**
+     * Clears the image cache (all ImageInfo and Image objects).
+     */
+    public void clearCache() {
+<span class="fc" id="L266">        invalidURIs.clear();</span>
+<span class="fc" id="L267">        imageInfos.clear();</span>
+<span class="fc" id="L268">        images.clear();</span>
+<span class="fc" id="L269">        doHouseKeeping();</span>
+<span class="fc" id="L270">    }</span>
+
+    private void considerHouseKeeping() {
+<span class="fc" id="L273">        long ts = timeStampProvider.getTimeStamp();</span>
+<span class="pc bpc" id="L274" title="1 of 2 branches missed.">        if (this.lastHouseKeeping + ONE_HOUR &gt; ts) {</span>
+            //Housekeeping is only triggered through registration of an invalid URI at the moment.
+            //Depending on the environment this could be triggered next to never.
+            //Doing this check for every image access could be relatively costly.
+            //The only alternative is a cleanup thread which is rather heavy-weight.
+<span class="fc" id="L279">            this.lastHouseKeeping = ts;</span>
+<span class="fc" id="L280">            doHouseKeeping();</span>
+        }
+<span class="fc" id="L282">    }</span>
+
+    /**
+     * Triggers some house-keeping, i.e. removes stale entries.
+     */
+    public void doHouseKeeping() {
+<span class="fc" id="L288">        imageInfos.doHouseKeeping();</span>
+<span class="fc" id="L289">        images.doHouseKeeping();</span>
+<span class="fc" id="L290">        doInvalidURIHouseKeeping();</span>
+<span class="fc" id="L291">    }</span>
+
+    private void doInvalidURIHouseKeeping() {
+<span class="fc" id="L294">        final Set currentEntries = new HashSet(this.invalidURIs.keySet());</span>
+<span class="fc bfc" id="L295" title="All 2 branches covered.">        for (Object currentEntry : currentEntries) {</span>
+<span class="fc" id="L296">            final String key = (String) currentEntry;</span>
+<span class="fc" id="L297">            removeInvalidURIIfExpired(key);</span>
+<span class="fc" id="L298">        }</span>
+<span class="fc" id="L299">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

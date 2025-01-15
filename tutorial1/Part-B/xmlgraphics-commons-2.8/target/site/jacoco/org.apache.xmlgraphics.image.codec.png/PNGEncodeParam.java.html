@@ -1,0 +1,1532 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGEncodeParam.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.png</a> &gt; <span class="el_source">PNGEncodeParam.java</span></div><h1>PNGEncodeParam.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PNGEncodeParam.java 1902007 2022-06-17 09:51:56Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.codec.png;
+
+import java.awt.image.ColorModel;
+import java.awt.image.IndexColorModel;
+import java.awt.image.RenderedImage;
+import java.awt.image.SampleModel;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.xmlgraphics.image.codec.util.ImageEncodeParam;
+import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
+
+// CSOFF: MemberName
+// CSOFF: MultipleVariableDeclarations
+// CSOFF: NeedBraces
+// CSOFF: OperatorWrap
+// CSOFF: ParameterName
+// CSOFF: WhitespaceAround
+
+/**
+ * An instance of &lt;code&gt;ImageEncodeParam&lt;/code&gt; for encoding images in
+ * the PNG format.
+ *
+ * &lt;p&gt;&lt;b&gt; This class is not a committed part of the JAI API.  It may
+ * be removed or changed in future releases of JAI.&lt;/b&gt;
+ */
+<span class="fc" id="L47">public abstract class PNGEncodeParam implements ImageEncodeParam {</span>
+    private static final long serialVersionUID = -7851509538552141263L;
+
+    /** Constant for use with the sRGB chunk. */
+    public static final int INTENT_PERCEPTUAL = 0;
+
+    /** Constant for use with the sRGB chunk. */
+    public static final int INTENT_RELATIVE = 1;
+
+    /** Constant for use with the sRGB chunk. */
+    public static final int INTENT_SATURATION = 2;
+
+    /** Constant for use with the sRGB chunk. */
+    public static final int INTENT_ABSOLUTE = 3;
+
+    /** Constant for use in filtering. */
+    public static final int PNG_FILTER_NONE = 0;
+
+    /** Constant for use in filtering. */
+    public static final int PNG_FILTER_SUB = 1;
+
+    /** Constant for use in filtering. */
+    public static final int PNG_FILTER_UP = 2;
+
+    /** Constant for use in filtering. */
+    public static final int PNG_FILTER_AVERAGE = 3;
+
+    /** Constant for use in filtering. */
+    public static final int PNG_FILTER_PAETH = 4;
+
+
+    /**
+     * Returns an instance of &lt;code&gt;PNGEncodeParam.Palette&lt;/code&gt;,
+     * &lt;code&gt;PNGEncodeParam.Gray&lt;/code&gt;, or
+     * &lt;code&gt;PNGEncodeParam.RGB&lt;/code&gt; appropriate for encoding
+     * the given image.
+     *
+     * &lt;p&gt; If the image has an &lt;code&gt;IndexColorModel&lt;/code&gt;, an
+     * instance of &lt;code&gt;PNGEncodeParam.Palette&lt;/code&gt; is returned.
+     * Otherwise, if the image has 1 or 2 bands an instance of
+     * &lt;code&gt;PNGEncodeParam.Gray&lt;/code&gt; is returned.  In all other
+     * cases an instance of &lt;code&gt;PNGEncodeParam.RGB&lt;/code&gt; is
+     * returned.
+     *
+     * &lt;p&gt; Note that this method does not provide any guarantee that
+     * the given image will be successfully encoded by the PNG
+     * encoder, as it only performs a very superficial analysis of
+     * the image structure.
+     */
+    public static PNGEncodeParam getDefaultEncodeParam(RenderedImage im) {
+<span class="fc" id="L97">        ColorModel colorModel = im.getColorModel();</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (colorModel instanceof IndexColorModel) {</span>
+<span class="nc" id="L99">            return new PNGEncodeParam.Palette();</span>
+        }
+
+<span class="fc" id="L102">        SampleModel sampleModel = im.getSampleModel();</span>
+<span class="fc" id="L103">        int numBands = sampleModel.getNumBands();</span>
+
+<span class="pc bpc" id="L105" title="2 of 4 branches missed.">        if (numBands == 1 || numBands == 2) {</span>
+<span class="nc" id="L106">            return new PNGEncodeParam.Gray();</span>
+        } else {
+<span class="fc" id="L108">            return new PNGEncodeParam.RGB();</span>
+        }
+    }
+
+    public static class Palette extends PNGEncodeParam {
+
+        private static final long serialVersionUID = -5181545170427733891L;
+
+        /** Constructs an instance of &lt;code&gt;PNGEncodeParam.Palette&lt;/code&gt;. */
+<span class="nc" id="L117">        public Palette() { }</span>
+
+        // bKGD chunk
+
+        private boolean backgroundSet;
+
+        /**
+         * Suppresses the 'bKGD' chunk from being output.
+         */
+        public void unsetBackground() {
+<span class="nc" id="L127">            backgroundSet = false;</span>
+<span class="nc" id="L128">        }</span>
+
+        /**
+         * Returns true if a 'bKGD' chunk will be output.
+         */
+        public boolean isBackgroundSet() {
+<span class="nc" id="L134">            return backgroundSet;</span>
+        }
+
+        /**
+         * Sets the desired bit depth for a palette image.  The bit
+         * depth must be one of 1, 2, 4, or 8, or else an
+         * &lt;code&gt;IllegalArgumentException&lt;/code&gt; will be thrown.
+         */
+        public void setBitDepth(int bitDepth) {
+<span class="nc bnc" id="L143" title="All 8 branches missed.">            if (bitDepth != 1 &amp;&amp; bitDepth != 2 &amp;&amp; bitDepth != 4</span>
+                &amp;&amp; bitDepth != 8) {
+<span class="nc" id="L145">                throw new IllegalArgumentException(PropertyUtil.getString(&quot;PNGEncodeParam2&quot;));</span>
+            }
+<span class="nc" id="L147">            this.bitDepth = bitDepth;</span>
+<span class="nc" id="L148">            bitDepthSet = true;</span>
+<span class="nc" id="L149">        }</span>
+
+        // PLTE chunk
+
+        private int[] palette;
+        private boolean paletteSet;
+
+        /**
+         * Sets the RGB palette of the image to be encoded.
+         * The &lt;code&gt;rgb&lt;/code&gt; parameter contains alternating
+         * R, G, B values for each color index used in the image.
+         * The number of elements must be a multiple of 3 between
+         * 3 and 3*256.
+         *
+         * &lt;p&gt; The 'PLTE' chunk will encode this information.
+         *
+         * @param rgb An array of &lt;code&gt;int&lt;/code&gt;s.
+         */
+        public void setPalette(int[] rgb) {
+<span class="nc bnc" id="L168" title="All 4 branches missed.">            if (rgb.length &lt; 1 * 3 || rgb.length &gt; 256 * 3) {</span>
+<span class="nc" id="L169">                throw new</span>
+<span class="nc" id="L170">                  IllegalArgumentException(PropertyUtil.getString(&quot;PNGEncodeParam0&quot;));</span>
+            }
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            if ((rgb.length % 3) != 0) {</span>
+<span class="nc" id="L173">                throw new</span>
+<span class="nc" id="L174">                   IllegalArgumentException(PropertyUtil.getString(&quot;PNGEncodeParam1&quot;));</span>
+            }
+
+<span class="nc" id="L177">            palette = rgb.clone();</span>
+<span class="nc" id="L178">            paletteSet = true;</span>
+<span class="nc" id="L179">        }</span>
+
+        /**
+         * Returns the current RGB palette.
+         *
+         * &lt;p&gt; If the palette has not previously been set, or has been
+         * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+         *
+         * @throws IllegalStateException if the palette is not set.
+         *
+         * @return An array of &lt;code&gt;int&lt;/code&gt;s.
+         */
+        public int[] getPalette() {
+<span class="nc bnc" id="L192" title="All 2 branches missed.">            if (!paletteSet) {</span>
+<span class="nc" id="L193">                throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam3&quot;));</span>
+            }
+<span class="nc" id="L195">            return palette.clone();</span>
+        }
+
+        /**
+         * Suppresses the 'PLTE' chunk from being output.
+         */
+        public void unsetPalette() {
+<span class="nc" id="L202">            palette = null;</span>
+<span class="nc" id="L203">            paletteSet = false;</span>
+<span class="nc" id="L204">        }</span>
+
+        /**
+         * Returns true if a 'PLTE' chunk will be output.
+         */
+        public boolean isPaletteSet() {
+<span class="nc" id="L210">            return paletteSet;</span>
+        }
+
+        // bKGD chunk
+
+        private int backgroundPaletteIndex;
+
+        /**
+         * Sets the palette index of the suggested background color.
+         *
+         * &lt;p&gt; The 'bKGD' chunk will encode this information.
+         */
+        public void setBackgroundPaletteIndex(int index) {
+<span class="nc" id="L223">            backgroundPaletteIndex = index;</span>
+<span class="nc" id="L224">            backgroundSet = true;</span>
+<span class="nc" id="L225">        }</span>
+
+        /**
+         * Returns the palette index of the suggested background color.
+         *
+         * &lt;p&gt; If the background palette index has not previously been
+         * set, or has been unset, an
+         * &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+         *
+         * @throws IllegalStateException if the palette index is not set.
+         */
+        public int getBackgroundPaletteIndex() {
+<span class="nc bnc" id="L237" title="All 2 branches missed.">            if (!backgroundSet) {</span>
+<span class="nc" id="L238">                throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam4&quot;));</span>
+            }
+<span class="nc" id="L240">            return backgroundPaletteIndex;</span>
+        }
+
+        // tRNS chunk
+
+        private int[] transparency;
+
+        /**
+         * Sets the alpha values associated with each palette entry.
+         * The &lt;code&gt;alpha&lt;/code&gt; parameter should have as many entries
+         * as there are RGB triples in the palette.
+         *
+         * &lt;p&gt; The 'tRNS' chunk will encode this information.
+         */
+        public void setPaletteTransparency(byte[] alpha) {
+<span class="nc" id="L255">            transparency = new int[alpha.length];</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">            for (int i = 0; i &lt; alpha.length; i++) {</span>
+<span class="nc" id="L257">                transparency[i] = alpha[i] &amp; 0xff;</span>
+            }
+<span class="nc" id="L259">            transparencySet = true;</span>
+<span class="nc" id="L260">        }</span>
+
+        /**
+         * Returns the alpha values associated with each palette entry.
+         *
+         * &lt;p&gt; If the palette transparency has not previously been
+         * set, or has been unset, an
+         * &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+         *
+         * @throws IllegalStateException if the palette transparency is
+         *        not set.
+         */
+        public byte[] getPaletteTransparency() {
+<span class="nc bnc" id="L273" title="All 2 branches missed.">            if (!transparencySet) {</span>
+<span class="nc" id="L274">                throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam5&quot;));</span>
+            }
+<span class="nc" id="L276">            byte[] alpha = new byte[transparency.length];</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">            for (int i = 0; i &lt; alpha.length; i++) {</span>
+<span class="nc" id="L278">                alpha[i] = (byte)transparency[i];</span>
+            }
+<span class="nc" id="L280">            return alpha;</span>
+        }
+    }
+
+    public static class Gray extends PNGEncodeParam {
+
+        private static final long serialVersionUID = -2055439792025795274L;
+
+        /** Constructs an instance of &lt;code&gt;PNGEncodeParam.Gray&lt;/code&gt;. */
+<span class="nc" id="L289">        public Gray() { }</span>
+
+        // bKGD chunk
+
+        private boolean backgroundSet;
+
+        /**
+         * Suppresses the 'bKGD' chunk from being output.
+         */
+        public void unsetBackground() {
+<span class="nc" id="L299">            backgroundSet = false;</span>
+<span class="nc" id="L300">        }</span>
+
+        /**
+         * Returns true if a 'bKGD' chunk will be output.
+         */
+        public boolean isBackgroundSet() {
+<span class="nc" id="L306">            return backgroundSet;</span>
+        }
+
+        /**
+         * Sets the desired bit depth for a grayscale image.  The bit
+         * depth must be one of 1, 2, 4, 8, or 16.
+         *
+         * &lt;p&gt; When encoding a source image of a greater bit depth,
+         * pixel values will be clamped to the smaller range after
+         * shifting by the value given by &lt;code&gt;getBitShift()&lt;/code&gt;.
+         * When encoding a source image of a smaller bit depth, pixel
+         * values will be shifted and left-filled with zeroes.
+         */
+        public void setBitDepth(int bitDepth) {
+<span class="nc bnc" id="L320" title="All 10 branches missed.">            if (bitDepth != 1 &amp;&amp; bitDepth != 2 &amp;&amp; bitDepth != 4</span>
+                &amp;&amp; bitDepth != 8 &amp;&amp; bitDepth != 16) {
+<span class="nc" id="L322">                throw new IllegalArgumentException(PropertyUtil.getString(&quot;PNGEncodeParam2&quot;));</span>
+            }
+<span class="nc" id="L324">            this.bitDepth = bitDepth;</span>
+<span class="nc" id="L325">            bitDepthSet = true;</span>
+<span class="nc" id="L326">        }</span>
+
+        // bKGD chunk
+
+        private int backgroundPaletteGray;
+
+        /**
+         * Sets the suggested gray level of the background.
+         *
+         * &lt;p&gt; The 'bKGD' chunk will encode this information.
+         */
+        public void setBackgroundGray(int gray) {
+<span class="nc" id="L338">            backgroundPaletteGray = gray;</span>
+<span class="nc" id="L339">            backgroundSet = true;</span>
+<span class="nc" id="L340">        }</span>
+
+        /**
+         * Returns the suggested gray level of the background.
+         *
+         * &lt;p&gt; If the background gray level has not previously been
+         * set, or has been unset, an
+         * &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+         *
+         * @throws IllegalStateException if the background gray level
+         *        is not set.
+         */
+        public int getBackgroundGray() {
+<span class="nc bnc" id="L353" title="All 2 branches missed.">            if (!backgroundSet) {</span>
+<span class="nc" id="L354">                throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam6&quot;));</span>
+            }
+<span class="nc" id="L356">            return backgroundPaletteGray;</span>
+        }
+
+        // tRNS chunk
+
+        private int[] transparency;
+
+        /**
+         * Sets the gray value to be used to denote transparency.
+         *
+         * &lt;p&gt; Setting this attribute will cause the alpha channel
+         * of the input image to be ignored.
+         *
+         * &lt;p&gt; The 'tRNS' chunk will encode this information.
+         */
+        public void setTransparentGray(int transparentGray) {
+<span class="nc" id="L372">            transparency = new int[1];</span>
+<span class="nc" id="L373">            transparency[0] = transparentGray;</span>
+<span class="nc" id="L374">            transparencySet = true;</span>
+<span class="nc" id="L375">        }</span>
+
+        /**
+         * Returns the gray value to be used to denote transparency.
+         *
+         * &lt;p&gt; If the transparent gray value has not previously been
+         * set, or has been unset, an
+         * &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+         *
+         * @throws IllegalStateException if the transparent gray value
+         *        is not set.
+         */
+        public int getTransparentGray() {
+<span class="nc bnc" id="L388" title="All 2 branches missed.">            if (!transparencySet) {</span>
+<span class="nc" id="L389">                throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam7&quot;));</span>
+            }
+<span class="nc" id="L391">            int gray = transparency[0];</span>
+<span class="nc" id="L392">            return gray;</span>
+        }
+
+        private int bitShift;
+        private boolean bitShiftSet;
+
+        /**
+         * Sets the desired bit shift for a grayscale image.
+         * Pixels in the source image will be shifted right by
+         * the given amount prior to being clamped to the maximum
+         * value given by the encoded image's bit depth.
+         */
+        public void setBitShift(int bitShift) {
+<span class="nc bnc" id="L405" title="All 2 branches missed.">            if (bitShift &lt; 0) {</span>
+<span class="nc" id="L406">                throw new IllegalArgumentException(PropertyUtil.getString(&quot;PNGEncodeParam25&quot;));</span>
+            }
+<span class="nc" id="L408">            this.bitShift = bitShift;</span>
+<span class="nc" id="L409">            bitShiftSet = true;</span>
+<span class="nc" id="L410">        }</span>
+
+        /**
+         * Returns the desired bit shift for a grayscale image.
+         *
+         * &lt;p&gt; If the bit shift has not previously been set, or has been
+         * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+         *
+         * @throws IllegalStateException if the bit shift is not set.
+         */
+        public int getBitShift() {
+<span class="nc bnc" id="L421" title="All 2 branches missed.">            if (!bitShiftSet) {</span>
+<span class="nc" id="L422">                throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam8&quot;));</span>
+            }
+<span class="nc" id="L424">            return bitShift;</span>
+        }
+
+        /**
+         * Suppresses the setting of the bit shift of a grayscale image.
+         * Pixels in the source image will not be shifted prior to encoding.
+         */
+        public void unsetBitShift() {
+<span class="nc" id="L432">            bitShiftSet = false;</span>
+<span class="nc" id="L433">        }</span>
+
+        /**
+         * Returns true if the bit shift has been set.
+         */
+        public boolean isBitShiftSet() {
+<span class="nc" id="L439">            return bitShiftSet;</span>
+        }
+
+        /**
+         * Returns true if the bit depth has been set.
+         */
+        public boolean isBitDepthSet() {
+<span class="nc" id="L446">            return bitDepthSet;</span>
+        }
+    }
+
+    public static class RGB extends PNGEncodeParam {
+
+        private static final long serialVersionUID = -8918762026006670891L;
+
+        /** Constructs an instance of &lt;code&gt;PNGEncodeParam.RGB&lt;/code&gt;. */
+<span class="fc" id="L455">        public RGB() { }</span>
+
+        // bKGD chunk
+
+        private boolean backgroundSet;
+
+        /**
+         * Suppresses the 'bKGD' chunk from being output.
+         */
+        public void unsetBackground() {
+<span class="nc" id="L465">            backgroundSet = false;</span>
+<span class="nc" id="L466">        }</span>
+
+        /**
+         * Returns true if a 'bKGD' chunk will be output.
+         */
+        public boolean isBackgroundSet() {
+<span class="fc" id="L472">            return backgroundSet;</span>
+        }
+
+        /**
+         * Sets the desired bit depth for an RGB image.  The bit
+         * depth must be 8 or 16.
+         */
+        public void setBitDepth(int bitDepth) {
+<span class="nc bnc" id="L480" title="All 4 branches missed.">            if (bitDepth != 8 &amp;&amp; bitDepth != 16) {</span>
+<span class="nc" id="L481">                throw new IllegalArgumentException(PropertyUtil.getString(&quot;PNGEncodeParam26&quot;));</span>
+            }
+<span class="nc" id="L483">            this.bitDepth = bitDepth;</span>
+<span class="nc" id="L484">            bitDepthSet = true;</span>
+<span class="nc" id="L485">        }</span>
+
+        // bKGD chunk
+
+        private int[] backgroundRGB;
+
+        /**
+         * Sets the RGB value of the suggested background color.
+         * The &lt;code&gt;rgb&lt;/code&gt; parameter should have 3 entries.
+         *
+         * &lt;p&gt; The 'bKGD' chunk will encode this information.
+         */
+        public void setBackgroundRGB(int[] rgb) {
+<span class="nc bnc" id="L498" title="All 2 branches missed.">            if (rgb.length != 3) {</span>
+<span class="nc" id="L499">                throw new IllegalArgumentException(PropertyUtil.getString(&quot;PNGEncodeParam27&quot;));</span>
+            }
+<span class="nc" id="L501">            backgroundRGB = rgb;</span>
+<span class="nc" id="L502">            backgroundSet = true;</span>
+<span class="nc" id="L503">        }</span>
+
+        /**
+         * Returns the RGB value of the suggested background color.
+         *
+         * &lt;p&gt; If the background color has not previously been set, or has been
+         * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+         *
+         * @throws IllegalStateException if the background color is not set.
+         */
+        public int[] getBackgroundRGB() {
+<span class="nc bnc" id="L514" title="All 2 branches missed.">            if (!backgroundSet) {</span>
+<span class="nc" id="L515">                throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam9&quot;));</span>
+            }
+<span class="nc" id="L517">            return backgroundRGB;</span>
+        }
+
+        // tRNS chunk
+
+        private int[] transparency;
+
+        /**
+         * Sets the RGB value to be used to denote transparency.
+         *
+         * &lt;p&gt; Setting this attribute will cause the alpha channel
+         * of the input image to be ignored.
+         *
+         * &lt;p&gt; The 'tRNS' chunk will encode this information.
+         */
+        public void setTransparentRGB(int[] transparentRGB) {
+<span class="nc" id="L533">            transparency = transparentRGB.clone();</span>
+<span class="nc" id="L534">            transparencySet = true;</span>
+<span class="nc" id="L535">        }</span>
+
+        /**
+         * Returns the RGB value to be used to denote transparency.
+         *
+         * &lt;p&gt; If the transparent color has not previously been set,
+         * or has been unset, an &lt;code&gt;IllegalStateException&lt;/code&gt;
+         * will be thrown.
+         *
+         * @throws IllegalStateException if the transparent color is not set.
+         */
+        public int[] getTransparentRGB() {
+<span class="nc bnc" id="L547" title="All 2 branches missed.">            if (!transparencySet) {</span>
+<span class="nc" id="L548">                throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam10&quot;));</span>
+            }
+<span class="nc" id="L550">            return transparency.clone();</span>
+        }
+    }
+
+    protected int bitDepth;
+    protected boolean bitDepthSet;
+
+    /**
+     * Sets the desired bit depth of an image.
+     */
+    public abstract void setBitDepth(int bitDepth);
+
+    /**
+     * Returns the desired bit depth for a grayscale image.
+     *
+     * &lt;p&gt; If the bit depth has not previously been set, or has been
+     * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the bit depth is not set.
+     */
+    public int getBitDepth() {
+<span class="nc bnc" id="L571" title="All 2 branches missed.">        if (!bitDepthSet) {</span>
+<span class="nc" id="L572">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam11&quot;));</span>
+        }
+<span class="nc" id="L574">        return bitDepth;</span>
+    }
+
+    /**
+     * Suppresses the setting of the bit depth of a grayscale image.
+     * The depth of the encoded image will be inferred from the source
+     * image bit depth, rounded up to the next power of 2 between 1
+     * and 16.
+     */
+    public void unsetBitDepth() {
+<span class="nc" id="L584">        bitDepthSet = false;</span>
+<span class="nc" id="L585">    }</span>
+
+    private boolean useInterlacing;
+
+    /**
+     * Turns Adam7 interlacing on or off.
+     */
+    public void setInterlacing(boolean useInterlacing) {
+<span class="nc" id="L593">        this.useInterlacing = useInterlacing;</span>
+<span class="nc" id="L594">    }</span>
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if Adam7 interlacing will be used.
+     */
+    public boolean getInterlacing() {
+<span class="fc" id="L600">        return useInterlacing;</span>
+    }
+
+    // bKGD chunk - delegate to subclasses
+
+    // In JAI 1.0, 'backgroundSet' was private.  The JDK 1.2 compiler
+    // was lenient and incorrectly allowed this variable to be
+    // accessed from the subclasses.  The JDK 1.3 compiler correctly
+    // flags this as a use of a non-static variable in a static
+    // context.  Changing 'backgroundSet' to protected would have
+    // solved the problem, but would have introduced a visible API
+    // change.  Thus we are forced to adopt the solution of placing a
+    // separate private variable in each subclass and providing
+    // separate implementations of 'unsetBackground' and
+    // 'isBackgroundSet' in each concrete subclass.
+
+    /**
+     * Suppresses the 'bKGD' chunk from being output.
+     * For API compatibility with JAI 1.0, the superclass
+     * defines this method to throw a &lt;code&gt;RuntimeException&lt;/code&gt;;
+     * accordingly, subclasses must provide their own implementations.
+     */
+    public void unsetBackground() {
+<span class="nc" id="L623">        throw new RuntimeException(PropertyUtil.getString(&quot;PNGEncodeParam23&quot;));</span>
+    }
+
+    /**
+     * Returns true if a 'bKGD' chunk will be output.
+     * For API compatibility with JAI 1.0, the superclass
+     * defines this method to throw a &lt;code&gt;RuntimeException&lt;/code&gt;;
+     * accordingly, subclasses must provide their own implementations.
+     */
+    public boolean isBackgroundSet() {
+<span class="nc" id="L633">        throw new RuntimeException(PropertyUtil.getString(&quot;PNGEncodeParam24&quot;));</span>
+    }
+
+    // cHRM chunk
+
+    private float[] chromaticity;
+    private boolean chromaticitySet;
+
+    /**
+     * Sets the white point and primary chromaticities in CIE (x, y)
+     * space.
+     *
+     * &lt;p&gt; The &lt;code&gt;chromaticity&lt;/code&gt; parameter should be a
+     * &lt;code&gt;float&lt;/code&gt; array of length 8 containing the white point
+     * X and Y, red X and Y, green X and Y, and blue X and Y values in
+     * order.
+     *
+     * &lt;p&gt; The 'cHRM' chunk will encode this information.
+     */
+    public void setChromaticity(float[] chromaticity) {
+<span class="nc bnc" id="L653" title="All 2 branches missed.">        if (chromaticity.length != 8) {</span>
+<span class="nc" id="L654">            throw new IllegalArgumentException(PropertyUtil.getString(&quot;PNGEncodeParam28&quot;));</span>
+        }
+<span class="nc" id="L656">        this.chromaticity = chromaticity.clone();</span>
+<span class="nc" id="L657">        chromaticitySet = true;</span>
+<span class="nc" id="L658">    }</span>
+
+    /**
+     * A convenience method that calls the array version.
+     */
+    public void setChromaticity(float whitePointX, float whitePointY,
+                                float redX, float redY,
+                                float greenX, float greenY,
+                                float blueX, float blueY) {
+<span class="nc" id="L667">        float[] chroma = new float[8];</span>
+<span class="nc" id="L668">        chroma[0] = whitePointX;</span>
+<span class="nc" id="L669">        chroma[1] = whitePointY;</span>
+<span class="nc" id="L670">        chroma[2] = redX;</span>
+<span class="nc" id="L671">        chroma[3] = redY;</span>
+<span class="nc" id="L672">        chroma[4] = greenX;</span>
+<span class="nc" id="L673">        chroma[5] = greenY;</span>
+<span class="nc" id="L674">        chroma[6] = blueX;</span>
+<span class="nc" id="L675">        chroma[7] = blueY;</span>
+<span class="nc" id="L676">        setChromaticity(chroma);</span>
+<span class="nc" id="L677">    }</span>
+
+    /**
+     * Returns the white point and primary chromaticities in
+     * CIE (x, y) space.
+     *
+     * &lt;p&gt; See the documentation for the &lt;code&gt;setChromaticity&lt;/code&gt;
+     * method for the format of the returned data.
+     *
+     * &lt;p&gt; If the chromaticity has not previously been set, or has been
+     * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the chromaticity is not set.
+     */
+    public float[] getChromaticity() {
+<span class="nc bnc" id="L692" title="All 2 branches missed.">        if (!chromaticitySet) {</span>
+<span class="nc" id="L693">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam12&quot;));</span>
+        }
+<span class="nc" id="L695">        return chromaticity.clone();</span>
+    }
+
+    /**
+     * Suppresses the 'cHRM' chunk from being output.
+     */
+    public void unsetChromaticity() {
+<span class="nc" id="L702">        chromaticity = null;</span>
+<span class="nc" id="L703">        chromaticitySet = false;</span>
+<span class="nc" id="L704">    }</span>
+
+    /**
+     * Returns true if a 'cHRM' chunk will be output.
+     */
+    public boolean isChromaticitySet() {
+<span class="fc" id="L710">        return chromaticitySet;</span>
+    }
+
+    // gAMA chunk
+
+    private float gamma;
+    private boolean gammaSet;
+
+    /**
+     * Sets the file gamma value for the image.
+     *
+     * &lt;p&gt; The 'gAMA' chunk will encode this information.
+     */
+    public void setGamma(float gamma) {
+<span class="nc" id="L724">        this.gamma = gamma;</span>
+<span class="nc" id="L725">        gammaSet = true;</span>
+<span class="nc" id="L726">    }</span>
+
+    /**
+     * Returns the file gamma value for the image.
+     *
+     * &lt;p&gt; If the file gamma has not previously been set, or has been
+     * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the gamma is not set.
+     */
+    public float getGamma() {
+<span class="nc bnc" id="L737" title="All 2 branches missed.">        if (!gammaSet) {</span>
+<span class="nc" id="L738">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam13&quot;));</span>
+        }
+<span class="nc" id="L740">        return gamma;</span>
+    }
+
+    /**
+     * Suppresses the 'gAMA' chunk from being output.
+     */
+    public void unsetGamma() {
+<span class="nc" id="L747">        gammaSet = false;</span>
+<span class="nc" id="L748">    }</span>
+
+    /**
+     * Returns true if a 'gAMA' chunk will be output.
+     */
+    public boolean isGammaSet() {
+<span class="fc" id="L754">        return gammaSet;</span>
+    }
+
+    // hIST chunk
+
+    private int[] paletteHistogram;
+    private boolean paletteHistogramSet;
+
+    /**
+     * Sets the palette histogram to be stored with this image.
+     * The histogram consists of an array of integers, one per
+     * palette entry.
+     *
+     * &lt;p&gt; The 'hIST' chunk will encode this information.
+     */
+    public void setPaletteHistogram(int[] paletteHistogram) {
+<span class="nc" id="L770">        this.paletteHistogram = paletteHistogram.clone();</span>
+<span class="nc" id="L771">        paletteHistogramSet = true;</span>
+<span class="nc" id="L772">    }</span>
+
+    /**
+     * Returns the palette histogram to be stored with this image.
+     *
+     * &lt;p&gt; If the histogram has not previously been set, or has been
+     * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the histogram is not set.
+     */
+    public int[] getPaletteHistogram() {
+<span class="nc bnc" id="L783" title="All 2 branches missed.">        if (!paletteHistogramSet) {</span>
+<span class="nc" id="L784">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam14&quot;));</span>
+        }
+<span class="nc" id="L786">        return paletteHistogram;</span>
+    }
+
+    /**
+     * Suppresses the 'hIST' chunk from being output.
+     */
+    public void unsetPaletteHistogram() {
+<span class="nc" id="L793">        paletteHistogram = null;</span>
+<span class="nc" id="L794">        paletteHistogramSet = false;</span>
+<span class="nc" id="L795">    }</span>
+
+    /**
+     * Returns true if a 'hIST' chunk will be output.
+     */
+    public boolean isPaletteHistogramSet() {
+<span class="fc" id="L801">        return paletteHistogramSet;</span>
+    }
+
+    // iCCP chunk
+
+    private byte[] iccProfileData;
+    private boolean iccProfileDataSet;
+
+    /**
+     * Sets the ICC profile data to be stored with this image.
+     * The profile is represented in raw binary form.
+     *
+     * &lt;p&gt; The 'iCCP' chunk will encode this information.
+     */
+    public void setICCProfileData(byte[] iccProfileData) {
+<span class="nc" id="L816">        this.iccProfileData = iccProfileData.clone();</span>
+<span class="nc" id="L817">        iccProfileDataSet = true;</span>
+<span class="nc" id="L818">    }</span>
+
+    /**
+     * Returns the ICC profile data to be stored with this image.
+     *
+     * &lt;p&gt; If the ICC profile has not previously been set, or has been
+     * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the ICC profile is not set.
+     */
+    public byte[] getICCProfileData() {
+<span class="nc bnc" id="L829" title="All 2 branches missed.">        if (!iccProfileDataSet) {</span>
+<span class="nc" id="L830">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam15&quot;));</span>
+        }
+<span class="nc" id="L832">        return iccProfileData.clone();</span>
+    }
+
+    /**
+     * Suppresses the 'iCCP' chunk from being output.
+     */
+    public void unsetICCProfileData() {
+<span class="nc" id="L839">        iccProfileData = null;</span>
+<span class="nc" id="L840">        iccProfileDataSet = false;</span>
+<span class="nc" id="L841">    }</span>
+
+    /**
+     * Returns true if a 'iCCP' chunk will be output.
+     */
+    public boolean isICCProfileDataSet() {
+<span class="fc" id="L847">        return iccProfileDataSet;</span>
+    }
+
+    // pHYS chunk
+
+    private int[] physicalDimension;
+    private boolean physicalDimensionSet;
+
+    /**
+     * Sets the physical dimension information to be stored with this
+     * image.  The physicalDimension parameter should be a 3-entry
+     * array containing the number of pixels per unit in the X
+     * direction, the number of pixels per unit in the Y direction,
+     * and the unit specifier (0 = unknown, 1 = meters).
+     *
+     * &lt;p&gt; The 'pHYS' chunk will encode this information.
+     */
+    public void setPhysicalDimension(int[] physicalDimension) {
+<span class="nc" id="L865">        this.physicalDimension = physicalDimension.clone();</span>
+<span class="nc" id="L866">        physicalDimensionSet = true;</span>
+<span class="nc" id="L867">    }</span>
+
+    /**
+     * A convenience method that calls the array version.
+     */
+    public void setPhysicalDimension(int xPixelsPerUnit,
+                                     int yPixelsPerUnit,
+                                     int unitSpecifier) {
+<span class="nc" id="L875">        int[] pd = new int[3];</span>
+<span class="nc" id="L876">        pd[0] = xPixelsPerUnit;</span>
+<span class="nc" id="L877">        pd[1] = yPixelsPerUnit;</span>
+<span class="nc" id="L878">        pd[2] = unitSpecifier;</span>
+
+<span class="nc" id="L880">        setPhysicalDimension(pd);</span>
+<span class="nc" id="L881">    }</span>
+
+    /**
+     * Returns the physical dimension information to be stored
+     * with this image.
+     *
+     * &lt;p&gt; If the physical dimension information has not previously
+     * been set, or has been unset, an
+     * &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the physical dimension information
+     *        is not set.
+     */
+    public int[] getPhysicalDimension() {
+<span class="nc bnc" id="L895" title="All 2 branches missed.">        if (!physicalDimensionSet) {</span>
+<span class="nc" id="L896">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam16&quot;));</span>
+        }
+<span class="nc" id="L898">        return physicalDimension.clone();</span>
+    }
+
+    /**
+     * Suppresses the 'pHYS' chunk from being output.
+     */
+    public void unsetPhysicalDimension() {
+<span class="nc" id="L905">        physicalDimension = null;</span>
+<span class="nc" id="L906">        physicalDimensionSet = false;</span>
+<span class="nc" id="L907">    }</span>
+
+    /**
+     * Returns true if a 'pHYS' chunk will be output.
+     */
+    public boolean isPhysicalDimensionSet() {
+<span class="fc" id="L913">        return physicalDimensionSet;</span>
+    }
+
+    // sPLT chunk
+
+    private PNGSuggestedPaletteEntry[] suggestedPalette;
+    private boolean suggestedPaletteSet;
+
+    /**
+     * Sets the suggested palette information to be stored with this
+     * image.  The information is passed to this method as an array of
+     * &lt;code&gt;PNGSuggestedPaletteEntry&lt;/code&gt; objects.
+     *
+     * &lt;p&gt; The 'sPLT' chunk will encode this information.
+     */
+    public void setSuggestedPalette(PNGSuggestedPaletteEntry[] palette) {
+<span class="nc" id="L929">        suggestedPalette = palette.clone();</span>
+<span class="nc" id="L930">        suggestedPaletteSet = true;</span>
+<span class="nc" id="L931">    }</span>
+
+    /**
+     * Returns the suggested palette information to be stored with this
+     * image.
+     *
+     * &lt;p&gt; If the suggested palette information has not previously
+     * been set, or has been unset, an
+     * &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the suggested palette
+     *        information is not set.
+     */
+    public PNGSuggestedPaletteEntry[] getSuggestedPalette() {
+<span class="nc bnc" id="L945" title="All 2 branches missed.">        if (!suggestedPaletteSet) {</span>
+<span class="nc" id="L946">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam17&quot;));</span>
+        }
+<span class="nc" id="L948">        return suggestedPalette.clone();</span>
+    }
+
+    /**
+     * Suppresses the 'sPLT' chunk from being output.
+     */
+    public void unsetSuggestedPalette() {
+<span class="nc" id="L955">        suggestedPalette = null;</span>
+<span class="nc" id="L956">        suggestedPaletteSet = false;</span>
+<span class="nc" id="L957">    }</span>
+
+    /**
+     * Returns true if a 'sPLT' chunk will be output.
+     */
+    public boolean isSuggestedPaletteSet() {
+<span class="fc" id="L963">        return suggestedPaletteSet;</span>
+    }
+
+    // sBIT chunk
+
+    private int[] significantBits;
+    private boolean significantBitsSet;
+
+    /**
+     * Sets the number of significant bits for each band of the image.
+     *
+     * &lt;p&gt; The number of entries in the &lt;code&gt;significantBits&lt;/code&gt;
+     * array must be equal to the number of output bands in the image:
+     * 1 for a gray image, 2 for gray+alpha, 3 for index or truecolor,
+     * and 4 for truecolor+alpha.
+     *
+     * &lt;p&gt; The 'sBIT' chunk will encode this information.
+     */
+    public void setSignificantBits(int[] significantBits) {
+<span class="nc" id="L982">        this.significantBits = significantBits.clone();</span>
+<span class="nc" id="L983">        significantBitsSet = true;</span>
+<span class="nc" id="L984">    }</span>
+
+    /**
+     * Returns the number of significant bits for each band of the image.
+     *
+     * &lt;p&gt; If the significant bits values have not previously been
+     * set, or have been unset, an &lt;code&gt;IllegalStateException&lt;/code&gt;
+     * will be thrown.
+     *
+     * @throws IllegalStateException if the significant bits values are
+     *        not set.
+     */
+    public int[] getSignificantBits() {
+<span class="nc bnc" id="L997" title="All 2 branches missed.">        if (!significantBitsSet) {</span>
+<span class="nc" id="L998">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam18&quot;));</span>
+        }
+<span class="nc" id="L1000">        return significantBits.clone();</span>
+    }
+
+    /**
+     * Suppresses the 'sBIT' chunk from being output.
+     */
+    public void unsetSignificantBits() {
+<span class="nc" id="L1007">        significantBits = null;</span>
+<span class="nc" id="L1008">        significantBitsSet = false;</span>
+<span class="nc" id="L1009">    }</span>
+
+    /**
+     * Returns true if an 'sBIT' chunk will be output.
+     */
+    public boolean isSignificantBitsSet() {
+<span class="fc" id="L1015">        return significantBitsSet;</span>
+    }
+
+    // sRGB chunk
+
+    private int srgbIntent;
+    private boolean srgbIntentSet;
+
+    /**
+     * Sets the sRGB rendering intent to be stored with this image.
+     * The legal values are 0 = Perceptual, 1 = Relative Colorimetric,
+     * 2 = Saturation, and 3 = Absolute Colorimetric.  Refer to the
+     * PNG specification for information on these values.
+     *
+     * &lt;p&gt; The 'sRGB' chunk will encode this information.
+     */
+    public void setSRGBIntent(int srgbIntent) {
+<span class="nc" id="L1032">        this.srgbIntent = srgbIntent;</span>
+<span class="nc" id="L1033">        srgbIntentSet = true;</span>
+<span class="nc" id="L1034">    }</span>
+
+    /**
+     * Returns the sRGB rendering intent to be stored with this image.
+     *
+     * &lt;p&gt; If the sRGB intent has not previously been set, or has been
+     * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the sRGB intent is not set.
+     */
+    public int getSRGBIntent() {
+<span class="nc bnc" id="L1045" title="All 2 branches missed.">        if (!srgbIntentSet) {</span>
+<span class="nc" id="L1046">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam19&quot;));</span>
+        }
+<span class="nc" id="L1048">        return srgbIntent;</span>
+    }
+
+    /**
+     * Suppresses the 'sRGB' chunk from being output.
+     */
+    public void unsetSRGBIntent() {
+<span class="nc" id="L1055">        srgbIntentSet = false;</span>
+<span class="nc" id="L1056">    }</span>
+
+    /**
+     * Returns true if an 'sRGB' chunk will be output.
+     */
+    public boolean isSRGBIntentSet() {
+<span class="fc" id="L1062">        return srgbIntentSet;</span>
+    }
+
+    // tEXt chunk
+
+    private String[] text;
+    private boolean textSet;
+
+    /**
+     * Sets the textual data to be stored in uncompressed form with this
+     * image.  The data is passed to this method as an array of
+     * &lt;code&gt;String&lt;/code&gt;s.
+     *
+     * &lt;p&gt; The 'tEXt' chunk will encode this information.
+     */
+    public void setText(String[] text) {
+<span class="nc" id="L1078">        this.text = text;</span>
+<span class="nc" id="L1079">        textSet = true;</span>
+<span class="nc" id="L1080">    }</span>
+
+    /**
+     * Returns the text strings to be stored in uncompressed form with this
+     * image as an array of &lt;code&gt;String&lt;/code&gt;s.
+     *
+     * &lt;p&gt; If the text strings have not previously been set, or have been
+     * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the text strings are not set.
+     */
+    public String[] getText() {
+<span class="nc bnc" id="L1092" title="All 2 branches missed.">        if (!textSet) {</span>
+<span class="nc" id="L1093">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam20&quot;));</span>
+        }
+<span class="nc" id="L1095">        return text;</span>
+    }
+
+    /**
+     * Suppresses the 'tEXt' chunk from being output.
+     */
+    public void unsetText() {
+<span class="nc" id="L1102">        text = null;</span>
+<span class="nc" id="L1103">        textSet = false;</span>
+<span class="nc" id="L1104">    }</span>
+
+    /**
+     * Returns true if a 'tEXt' chunk will be output.
+     */
+    public boolean isTextSet() {
+<span class="fc" id="L1110">        return textSet;</span>
+    }
+
+    // tIME chunk
+
+    private Date modificationTime;
+    private boolean modificationTimeSet;
+
+    /**
+     * Sets the modification time, as a &lt;code&gt;Date&lt;/code&gt;, to be
+     * stored with this image.  The internal storage format will use
+     * UTC regardless of how the &lt;code&gt;modificationTime&lt;/code&gt;
+     * parameter was created.
+     *
+     * &lt;p&gt; The 'tIME' chunk will encode this information.
+     */
+    public void setModificationTime(Date modificationTime) {
+<span class="nc" id="L1127">        this.modificationTime = modificationTime;</span>
+<span class="nc" id="L1128">        modificationTimeSet = true;</span>
+<span class="nc" id="L1129">    }</span>
+
+    /**
+     * Returns the modification time to be stored with this image.
+     *
+     * &lt;p&gt; If the bit depth has not previously been set, or has been
+     * unset, an &lt;code&gt;IllegalStateException&lt;/code&gt; will be thrown.
+     *
+     * @throws IllegalStateException if the bit depth is not set.
+     */
+    public Date getModificationTime() {
+<span class="nc bnc" id="L1140" title="All 2 branches missed.">        if (!modificationTimeSet) {</span>
+<span class="nc" id="L1141">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam21&quot;));</span>
+        }
+<span class="nc" id="L1143">        return modificationTime;</span>
+    }
+
+    /**
+     * Suppresses the 'tIME' chunk from being output.
+     */
+    public void unsetModificationTime() {
+<span class="nc" id="L1150">        modificationTime = null;</span>
+<span class="nc" id="L1151">        modificationTimeSet = false;</span>
+<span class="nc" id="L1152">    }</span>
+
+    /**
+     * Returns true if a 'tIME' chunk will be output.
+     */
+    public boolean isModificationTimeSet() {
+<span class="fc" id="L1158">        return modificationTimeSet;</span>
+    }
+
+    // tRNS chunk
+
+    boolean transparencySet;
+
+    /**
+     * Suppresses the 'tRNS' chunk from being output.
+     */
+    public void unsetTransparency() {
+<span class="nc" id="L1169">        transparencySet = false;</span>
+<span class="nc" id="L1170">    }</span>
+
+    /**
+     * Returns true if a 'tRNS' chunk will be output.
+     */
+    public boolean isTransparencySet() {
+<span class="fc" id="L1176">        return transparencySet;</span>
+    }
+
+    // zTXT chunk
+
+    private String[] zText;
+    private boolean zTextSet;
+
+    /**
+     * Sets the text strings to be stored in compressed form with this
+     * image.  The data is passed to this method as an array of
+     * &lt;code&gt;String&lt;/code&gt;s.
+     *
+     * &lt;p&gt; The 'zTXt' chunk will encode this information.
+     */
+    public void setCompressedText(String[] text) {
+<span class="nc" id="L1192">        this.zText = text;</span>
+<span class="nc" id="L1193">        zTextSet = true;</span>
+<span class="nc" id="L1194">    }</span>
+
+    /**
+     * Returns the text strings to be stored in compressed form with
+     * this image as an array of &lt;code&gt;String&lt;/code&gt;s.
+     *
+     * &lt;p&gt; If the compressed text strings have not previously been
+     * set, or have been unset, an &lt;code&gt;IllegalStateException&lt;/code&gt;
+     * will be thrown.
+     *
+     * @throws IllegalStateException if the compressed text strings are
+     *        not set.
+     */
+    public String[] getCompressedText() {
+<span class="nc bnc" id="L1208" title="All 2 branches missed.">        if (!zTextSet) {</span>
+<span class="nc" id="L1209">            throw new IllegalStateException(PropertyUtil.getString(&quot;PNGEncodeParam22&quot;));</span>
+        }
+<span class="nc" id="L1211">        return zText;</span>
+    }
+
+    /**
+     * Suppresses the 'zTXt' chunk from being output.
+     */
+    public void unsetCompressedText() {
+<span class="nc" id="L1218">        zText = null;</span>
+<span class="nc" id="L1219">        zTextSet = false;</span>
+<span class="nc" id="L1220">    }</span>
+
+    /**
+     * Returns true if a 'zTXT' chunk will be output.
+     */
+    public boolean isCompressedTextSet() {
+<span class="fc" id="L1226">        return zTextSet;</span>
+    }
+
+    // Other chunk types
+
+<span class="fc" id="L1231">    List chunkType = new ArrayList();</span>
+<span class="fc" id="L1232">    List chunkData = new ArrayList();</span>
+
+    /**
+     * Adds a private chunk, in binary form, to the list of chunks to
+     * be stored with this image.
+     *
+     * @param type a 4-character String giving the chunk type name.
+     * @param data an array of &lt;code&gt;byte&lt;/code&gt;s containing the
+     *        chunk data.
+     */
+    public synchronized void addPrivateChunk(String type, byte[] data) {
+<span class="nc" id="L1243">        chunkType.add(type);</span>
+<span class="nc" id="L1244">        chunkData.add(data.clone());</span>
+<span class="nc" id="L1245">    }</span>
+
+    /**
+     * Returns the number of private chunks to be written to the
+     * output file.
+     */
+    public synchronized int getNumPrivateChunks() {
+<span class="fc" id="L1252">        return chunkType.size();</span>
+    }
+
+    /**
+     * Returns the type of the private chunk at a given index, as a
+     * 4-character &lt;code&gt;String&lt;/code&gt;.  The index must be smaller
+     * than the return value of &lt;code&gt;getNumPrivateChunks&lt;/code&gt;.
+     */
+    public synchronized String getPrivateChunkType(int index) {
+<span class="nc" id="L1261">        return (String)chunkType.get(index);</span>
+    }
+
+    /**
+     * Returns the data associated of the private chunk at a given
+     * index, as an array of &lt;code&gt;byte&lt;/code&gt;s.  The index must be
+     * smaller than the return value of
+     * &lt;code&gt;getNumPrivateChunks&lt;/code&gt;.
+     */
+    public synchronized byte[] getPrivateChunkData(int index) {
+<span class="nc" id="L1271">        return (byte[])chunkData.get(index);</span>
+    }
+
+    /**
+     * Remove all private chunks associated with this parameter instance
+     * whose 'safe-to-copy' bit is not set.  This may be advisable when
+     * transcoding PNG images.
+     */
+    public synchronized void removeUnsafeToCopyPrivateChunks() {
+<span class="nc" id="L1280">        List newChunkType = new ArrayList();</span>
+<span class="nc" id="L1281">        List newChunkData = new ArrayList();</span>
+
+<span class="nc" id="L1283">        int len = getNumPrivateChunks();</span>
+<span class="nc bnc" id="L1284" title="All 2 branches missed.">        for (int i = 0; i &lt; len; i++) {</span>
+<span class="nc" id="L1285">            String type = getPrivateChunkType(i);</span>
+<span class="nc" id="L1286">            char lastChar = type.charAt(3);</span>
+<span class="nc bnc" id="L1287" title="All 4 branches missed.">            if (lastChar &gt;= 'a' &amp;&amp; lastChar &lt;= 'z') {</span>
+<span class="nc" id="L1288">                newChunkType.add(type);</span>
+<span class="nc" id="L1289">                newChunkData.add(getPrivateChunkData(i));</span>
+            }
+        }
+
+<span class="nc" id="L1293">        chunkType = newChunkType;</span>
+<span class="nc" id="L1294">        chunkData = newChunkData;</span>
+<span class="nc" id="L1295">    }</span>
+
+    /**
+     * Remove all private chunks associated with this parameter instance.
+     */
+    public synchronized void removeAllPrivateChunks() {
+<span class="nc" id="L1301">        chunkType = new ArrayList();</span>
+<span class="nc" id="L1302">        chunkData = new ArrayList();</span>
+<span class="nc" id="L1303">    }</span>
+
+    /**
+     * An abs() function for use by the Paeth predictor.
+     */
+    private static int abs(int x) {
+<span class="fc bfc" id="L1309" title="All 2 branches covered.">        return (x &lt; 0) ? -x : x;</span>
+    }
+
+    /**
+     * The Paeth predictor routine used in PNG encoding.  This routine
+     * is included as a convenience to subclasses that override the
+     * &lt;code&gt;filterRow&lt;/code&gt; method.
+     */
+    public static int paethPredictor(int a, int b, int c) {
+<span class="fc" id="L1318">        int p = a + b - c;</span>
+<span class="fc" id="L1319">        int pa = abs(p - a);</span>
+<span class="fc" id="L1320">        int pb = abs(p - b);</span>
+<span class="fc" id="L1321">        int pc = abs(p - c);</span>
+
+<span class="pc bpc" id="L1323" title="2 of 4 branches missed.">        if ((pa &lt;= pb) &amp;&amp; (pa &lt;= pc)) {</span>
+<span class="fc" id="L1324">            return a;</span>
+<span class="nc bnc" id="L1325" title="All 2 branches missed.">        } else if (pb &lt;= pc) {</span>
+<span class="nc" id="L1326">            return b;</span>
+        } else {
+<span class="nc" id="L1328">            return c;</span>
+        }
+    }
+
+    /**
+     * Performs filtering on a row of an image.  This method may be
+     * overridden in order to provide a custom algorithm for choosing
+     * the filter type for a given row.
+     *
+     * &lt;p&gt; The method is supplied with the current and previous rows
+     * of the image.  For the first row of the image, or of an
+     * interlacing pass, the previous row array will be filled with
+     * zeros as required by the PNG specification.
+     *
+     * &lt;p&gt; The method is also supplied with five scratch arrays.
+     * These arrays may be used within the method for any purpose.
+     * At method exit, the array at the index given by the return
+     * value of the method should contain the filtered data.  The
+     * return value will also be used as the filter type.
+     *
+     * &lt;p&gt; The default implementation of the method performs a trial
+     * encoding with each of the filter types, and computes the sum of
+     * absolute values of the differences between the raw bytes of the
+     * current row and the predicted values.  The index of the filter
+     * producing the smallest result is returned.
+     *
+     * &lt;p&gt; As an example, to perform only 'sub' filtering, this method
+     * could be implemented (non-optimally) as follows:
+     *
+     * &lt;pre&gt;
+     * for (int i = bytesPerPixel; i &amp;lt; bytesPerRow + bytesPerPixel; i++) {
+     *     int curr = currRow[i] &amp;amp; 0xff;
+     *     int left = currRow[i - bytesPerPixel] &amp;amp; 0xff;
+     *     scratchRow[PNG_FILTER_SUB][i] = (byte)(curr - left);
+     * }
+     * return PNG_FILTER_SUB;
+     * &lt;/pre&gt;
+     *
+     * @param currRow The current row as an array of &lt;code&gt;byte&lt;/code&gt;s
+     *        of length at least &lt;code&gt;bytesPerRow + bytesPerPixel&lt;/code&gt;.
+     *        The pixel data starts at index &lt;code&gt;bytesPerPixel&lt;/code&gt;;
+     *        the initial &lt;code&gt;bytesPerPixel&lt;/code&gt; bytes are zero.
+     * @param prevRow The current row as an array of &lt;code&gt;byte&lt;/code&gt;s
+     *        The pixel data starts at index &lt;code&gt;bytesPerPixel&lt;/code&gt;;
+     *        the initial &lt;code&gt;bytesPerPixel&lt;/code&gt; bytes are zero.
+     * @param scratchRows An array of 5 &lt;code&gt;byte&lt;/code&gt; arrays of
+     *        length at least &lt;code&gt;bytesPerRow +
+     *        bytesPerPixel&lt;/code&gt;, useable to hold temporary results.
+     *        The filtered row will be returned as one of the entries
+     *        of this array.  The returned filtered data should start
+     *        at index &lt;code&gt;bytesPerPixel&lt;/code&gt;; The initial
+     *        &lt;code&gt;bytesPerPixel&lt;/code&gt; bytes are not used.
+     * @param bytesPerRow The number of bytes in the image row.
+     *        This value will always be greater than 0.
+     * @param bytesPerPixel The number of bytes representing a single
+     *        pixel, rounded up to an integer.  This is the 'bpp' parameter
+     *        described in the PNG specification.
+     *
+     * @return The filter type to be used.  The entry of
+     *         &lt;code&gt;scratchRows[]&lt;/code&gt; at this index holds the
+     *         filtered data.  */
+    public int filterRow(byte[] currRow,
+                         byte[] prevRow,
+                         byte[][] scratchRows,
+                         int bytesPerRow,
+                         int bytesPerPixel) {
+
+<span class="fc" id="L1395">        int [] badness = {0, 0, 0, 0, 0};</span>
+        int curr;
+        int left;
+        int up;
+        int upleft;
+        int diff;
+        int pa;
+        int pb;
+        int pc;
+<span class="fc bfc" id="L1404" title="All 2 branches covered.">        for (int i = bytesPerPixel; i &lt; bytesPerRow + bytesPerPixel; i++) {</span>
+<span class="fc" id="L1405">            curr   = currRow[i] &amp; 0xff;</span>
+<span class="fc" id="L1406">            left   = currRow[i - bytesPerPixel] &amp; 0xff;</span>
+<span class="fc" id="L1407">            up     = prevRow[i] &amp; 0xff;</span>
+<span class="fc" id="L1408">            upleft = prevRow[i - bytesPerPixel] &amp; 0xff;</span>
+
+            // no filter
+<span class="fc" id="L1411">            badness[0] += curr;</span>
+
+            // sub filter
+<span class="fc" id="L1414">            diff = curr - left;</span>
+<span class="fc" id="L1415">            scratchRows[1][i]  = (byte)diff;</span>
+<span class="fc bfc" id="L1416" title="All 2 branches covered.">            badness    [1]    +=   (diff &gt; 0) ? diff : -diff;</span>
+
+            // up filter
+<span class="fc" id="L1419">            diff = curr - up;</span>
+<span class="fc" id="L1420">            scratchRows[2][i]  = (byte)diff;</span>
+<span class="pc bpc" id="L1421" title="1 of 2 branches missed.">            badness    [2]    +=   (diff &gt;= 0) ? diff : -diff;</span>
+
+            // average filter
+<span class="fc" id="L1424">            diff = curr - ((left + up) &gt;&gt; 1);</span>
+<span class="fc" id="L1425">            scratchRows[3][i]  = (byte)diff;</span>
+<span class="pc bpc" id="L1426" title="1 of 2 branches missed.">            badness    [3]    +=   (diff &gt;= 0) ? diff : -diff;</span>
+
+            // paeth filter
+
+            // Original code much simplier but doesn't take full
+            // advantage of relationship between pa/b/c and
+            // information gleaned in abs operations.
+            /// pa = up  -upleft;
+            /// pb = left-upleft;
+            /// pc = pa+pb;
+            /// pa = abs(pa);
+            /// pb = abs(pb);
+            /// pc = abs(pc);
+            /// if ((pa &lt;= pb) &amp;&amp; (pa &lt;= pc))
+            ///   diff = curr-left;
+            /// else if (pb &lt;= pc)
+            ///   diff = curr-up;
+            /// else
+            ///   diff = curr-upleft;
+
+<span class="fc" id="L1446">            pa = up  - upleft;</span>
+<span class="fc" id="L1447">            pb = left - upleft;</span>
+<span class="pc bpc" id="L1448" title="1 of 2 branches missed.">            if (pa &lt; 0) {</span>
+<span class="nc bnc" id="L1449" title="All 2 branches missed.">              if (pb &lt; 0) {</span>
+                // both pa &amp; pb neg so pc is always greater than or
+                // equal to pa or pb;
+<span class="nc bnc" id="L1452" title="All 2 branches missed.">                if (pa &gt;= pb) { // since pa &amp; pb neg check sense is reversed.</span>
+<span class="nc" id="L1453">                  diff = curr - left;</span>
+                } else {
+<span class="nc" id="L1455">                  diff = curr - up;</span>
+                }
+              } else {
+                // pa neg pb pos so we must compute pc...
+<span class="nc" id="L1459">                pc = pa + pb;</span>
+<span class="nc" id="L1460">                pa = -pa;</span>
+<span class="nc bnc" id="L1461" title="All 2 branches missed.">                if (pa &lt;= pb) { // pc is positive and less than pb</span>
+<span class="nc bnc" id="L1462" title="All 2 branches missed.">                  if (pa &lt;= pc) {</span>
+<span class="nc" id="L1463">                    diff = curr - left;</span>
+                  } else {
+<span class="nc" id="L1465">                    diff = curr - upleft;</span>
+                  }
+                } else {
+                  // pc is negative and less than or equal to pa,
+                  // but since pa is greater than pb this isn't an issue...
+<span class="nc bnc" id="L1470" title="All 2 branches missed.">                  if (pb &lt;= -pc) {</span>
+<span class="nc" id="L1471">                    diff = curr - up;</span>
+                  } else {
+<span class="nc" id="L1473">                    diff = curr - upleft;</span>
+                  }
+                }
+              }
+            } else {
+<span class="pc bpc" id="L1478" title="1 of 2 branches missed.">              if (pb &lt; 0) {</span>
+<span class="nc" id="L1479">                pb = -pb; // make it positive...</span>
+<span class="nc bnc" id="L1480" title="All 2 branches missed.">                if (pa &lt;= pb) {</span>
+                  // pc would be negative and less than or equal to pb
+<span class="nc" id="L1482">                  pc = pb - pa;</span>
+<span class="nc bnc" id="L1483" title="All 2 branches missed.">                  if (pa &lt;= pc) {</span>
+<span class="nc" id="L1484">                    diff = curr - left;</span>
+<span class="nc bnc" id="L1485" title="All 2 branches missed.">                  } else if (pb == pc) {</span>
+                    // if pa is zero then pc==pb otherwise
+                    // pc must be less than pb.
+<span class="nc" id="L1488">                    diff = curr - up;</span>
+                  } else {
+<span class="nc" id="L1490">                    diff = curr - upleft;</span>
+                  }
+                } else {
+                  // pc would be positive and less than pa.
+<span class="nc" id="L1494">                  pc = pa - pb;</span>
+<span class="nc bnc" id="L1495" title="All 2 branches missed.">                  if (pb &lt;= pc) {</span>
+<span class="nc" id="L1496">                    diff = curr - up;</span>
+                  } else {
+<span class="nc" id="L1498">                    diff = curr - upleft;</span>
+                  }
+                }
+              } else {
+                // both pos so pa+pb is always greater than pa/pb
+<span class="fc bfc" id="L1503" title="All 2 branches covered.">                if (pa &lt;= pb) {</span>
+<span class="fc" id="L1504">                  diff = curr - left;</span>
+                } else {
+<span class="fc" id="L1506">                  diff = curr - up;</span>
+                }
+              }
+            }
+<span class="fc" id="L1510">            scratchRows[4][i]  = (byte)diff;</span>
+<span class="pc bpc" id="L1511" title="1 of 2 branches missed.">            badness    [4]    +=   (diff &gt;= 0) ? diff : -diff;</span>
+        }
+<span class="fc" id="L1513">        int filterType = 0;</span>
+<span class="fc" id="L1514">        int minBadness = badness[0];</span>
+
+<span class="fc bfc" id="L1516" title="All 2 branches covered.">        for (int i = 1; i &lt; 5; i++) {</span>
+<span class="fc bfc" id="L1517" title="All 2 branches covered.">            if (badness[i] &lt; minBadness) {</span>
+<span class="fc" id="L1518">                minBadness = badness[i];</span>
+<span class="fc" id="L1519">                filterType = i;</span>
+            }
+        }
+
+<span class="pc bpc" id="L1523" title="1 of 2 branches missed.">        if (filterType == 0) {</span>
+<span class="nc" id="L1524">            System.arraycopy(currRow, bytesPerPixel,</span>
+                             scratchRows[0], bytesPerPixel,
+                             bytesPerRow);
+        }
+
+<span class="fc" id="L1529">        return filterType;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

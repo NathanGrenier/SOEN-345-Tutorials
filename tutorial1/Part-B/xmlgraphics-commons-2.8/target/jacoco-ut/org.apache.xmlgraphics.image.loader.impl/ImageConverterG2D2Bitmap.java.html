@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageConverterG2D2Bitmap.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">ImageConverterG2D2Bitmap.java</span></div><h1>ImageConverterG2D2Bitmap.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageConverterG2D2Bitmap.java 1754511 2016-07-29 13:09:37Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.Transparency;
+import java.awt.color.ColorSpace;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.PixelInterleavedSampleModel;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
+import java.util.Map;
+
+import org.apache.xmlgraphics.image.GraphicsConstants;
+import org.apache.xmlgraphics.image.loader.Image;
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageProcessingHints;
+import org.apache.xmlgraphics.image.loader.ImageSize;
+import org.apache.xmlgraphics.java2d.color.DeviceCMYKColorSpace;
+import org.apache.xmlgraphics.util.UnitConv;
+
+/**
+ * This ImageConverter converts Graphics2D images to a BufferedImage.
+ */
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">public class ImageConverterG2D2Bitmap extends AbstractImageConverter {</span>
+
+    /** {@inheritDoc} */
+    public Image convert(Image src, Map hints) {
+<span class="fc" id="L53">        checkSourceFlavor(src);</span>
+<span class="pc bpc" id="L54" title="2 of 4 branches missed.">        assert src instanceof ImageGraphics2D;</span>
+<span class="fc" id="L55">        ImageGraphics2D g2dImage = (ImageGraphics2D)src;</span>
+
+<span class="fc" id="L57">        Object formatIntent = hints.get(ImageProcessingHints.BITMAP_TYPE_INTENT);</span>
+<span class="fc" id="L58">        int bitsPerPixel = 24;</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if (ImageProcessingHints.BITMAP_TYPE_INTENT_GRAY.equals(formatIntent)) {</span>
+<span class="nc" id="L60">            bitsPerPixel = 8;</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        } else if (ImageProcessingHints.BITMAP_TYPE_INTENT_MONO.equals(formatIntent)) {</span>
+<span class="nc" id="L62">            bitsPerPixel = 1;</span>
+        }
+
+<span class="fc" id="L65">        Object transparencyIntent = hints.get(ImageProcessingHints.TRANSPARENCY_INTENT);</span>
+<span class="fc" id="L66">        boolean withAlpha = true;</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (ImageProcessingHints.TRANSPARENCY_INTENT_IGNORE.equals(transparencyIntent)) {</span>
+<span class="fc" id="L68">            withAlpha = false;</span>
+        }
+
+<span class="fc" id="L71">        int resolution = GraphicsConstants.DEFAULT_SAMPLE_DPI;</span>
+<span class="fc" id="L72">        Number res = (Number)hints.get(ImageProcessingHints.TARGET_RESOLUTION);</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (res != null) {</span>
+<span class="nc" id="L74">            resolution = res.intValue();</span>
+        }
+<span class="fc" id="L76">        boolean cmyk = Boolean.TRUE.equals(hints.get(&quot;CMYK&quot;));</span>
+
+<span class="fc" id="L78">        BufferedImage bi = paintToBufferedImage(g2dImage, bitsPerPixel, withAlpha, resolution, cmyk);</span>
+
+<span class="fc" id="L80">        ImageBuffered bufImage = new ImageBuffered(src.getInfo(), bi, null);</span>
+<span class="fc" id="L81">        return bufImage;</span>
+    }
+
+    /**
+     * Paints a Graphics2D image on a BufferedImage and returns this bitmap.
+     * @param g2dImage the Graphics2D image
+     * @param bitsPerPixel the desired number of bits per pixel (supported: 1, 8, 24)
+     * @param withAlpha true if the generated image should have an alpha channel
+     * @param resolution the requested bitmap resolution
+     * @return the newly created BufferedImage
+     */
+    protected BufferedImage paintToBufferedImage(ImageGraphics2D g2dImage,
+            int bitsPerPixel, boolean withAlpha, int resolution, boolean cmyk) {
+<span class="fc" id="L94">        ImageSize size = g2dImage.getSize();</span>
+
+<span class="fc" id="L96">        RenderingHints additionalHints = null;</span>
+<span class="fc" id="L97">        int bmw = (int)Math.ceil(UnitConv.mpt2px(size.getWidthMpt(), resolution));</span>
+<span class="fc" id="L98">        int bmh = (int)Math.ceil(UnitConv.mpt2px(size.getHeightMpt(), resolution));</span>
+        BufferedImage bi;
+<span class="pc bpc" id="L100" title="2 of 3 branches missed.">        switch (bitsPerPixel) {</span>
+        case 1:
+<span class="nc" id="L102">            bi = new BufferedImage(bmw, bmh, BufferedImage.TYPE_BYTE_BINARY);</span>
+<span class="nc" id="L103">            withAlpha = false;</span>
+            //withAlpha is ignored in this case
+<span class="nc" id="L105">            additionalHints = new RenderingHints(null);</span>
+            //The following usually has no effect but some class libraries might support it
+<span class="nc" id="L107">            additionalHints.put(RenderingHints.KEY_DITHERING,</span>
+                    RenderingHints.VALUE_DITHER_ENABLE);
+<span class="nc" id="L109">            break;</span>
+        case 8:
+<span class="nc bnc" id="L111" title="All 2 branches missed.">            if (withAlpha) {</span>
+<span class="nc" id="L112">                bi = createGrayBufferedImageWithAlpha(bmw, bmh);</span>
+            } else {
+<span class="nc" id="L114">                bi = new BufferedImage(bmw, bmh, BufferedImage.TYPE_BYTE_GRAY);</span>
+            }
+<span class="nc" id="L116">            break;</span>
+        default:
+<span class="fc bfc" id="L118" title="All 2 branches covered.">            if (withAlpha) {</span>
+<span class="fc" id="L119">                bi = new BufferedImage(bmw, bmh, BufferedImage.TYPE_INT_ARGB);</span>
+            } else {
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">                if (cmyk) {</span>
+<span class="fc" id="L122">                    ComponentColorModel ccm = new ComponentColorModel(</span>
+                            new DeviceCMYKColorSpace(), false, false, 1, DataBuffer.TYPE_BYTE);
+<span class="fc" id="L124">                    int[] bands = {0, 1, 2, 3};</span>
+<span class="fc" id="L125">                    PixelInterleavedSampleModel sm = new PixelInterleavedSampleModel(</span>
+                            DataBuffer.TYPE_BYTE, bmw, bmh, 4, bmw * 4, bands);
+<span class="fc" id="L127">                    WritableRaster raster = WritableRaster.createWritableRaster(sm, new Point(0, 0));</span>
+<span class="fc" id="L128">                    bi = new BufferedImage(ccm, raster, false, null);</span>
+<span class="fc" id="L129">                } else {</span>
+<span class="nc" id="L130">                    bi = new BufferedImage(bmw, bmh, BufferedImage.TYPE_INT_RGB);</span>
+                }
+            }
+        }
+
+<span class="fc" id="L135">        Graphics2D g2d = bi.createGraphics();</span>
+        try {
+<span class="fc" id="L137">            g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,</span>
+                    RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+<span class="fc" id="L139">            setRenderingHintsForBufferedImage(g2d);</span>
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">            if (additionalHints != null) {</span>
+<span class="nc" id="L141">                g2d.addRenderingHints(additionalHints);</span>
+            }
+
+<span class="fc" id="L144">            g2d.setBackground(Color.white);</span>
+<span class="fc" id="L145">            g2d.setColor(Color.black);</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">            if (!withAlpha) {</span>
+<span class="fc" id="L147">                g2d.clearRect(0, 0, bmw, bmh);</span>
+            }
+            /* debug code
+            int off = 2;
+            g2d.drawLine(off, 0, off, bmh);
+            g2d.drawLine(bmw - off, 0, bmw - off, bmh);
+            g2d.drawLine(0, off, bmw, off);
+            g2d.drawLine(0, bmh - off, bmw, bmh - off);
+            */
+<span class="fc" id="L156">            double sx = (double)bmw / size.getWidthMpt();</span>
+<span class="fc" id="L157">            double sy = (double)bmh / size.getHeightMpt();</span>
+<span class="fc" id="L158">            g2d.scale(sx, sy);</span>
+
+            //Paint the image on the BufferedImage
+<span class="fc" id="L161">            Rectangle2D area = new Rectangle2D.Double(</span>
+<span class="fc" id="L162">                    0.0, 0.0, size.getWidthMpt(), size.getHeightMpt());</span>
+<span class="fc" id="L163">            g2dImage.getGraphics2DImagePainter().paint(g2d, area);</span>
+        } finally {
+<span class="fc" id="L165">            g2d.dispose();</span>
+        }
+<span class="fc" id="L167">        return bi;</span>
+    }
+
+    private static BufferedImage createGrayBufferedImageWithAlpha(int width, int height) {
+        BufferedImage bi;
+<span class="nc" id="L172">        boolean alphaPremultiplied = true;</span>
+<span class="nc" id="L173">        int bands = 2;</span>
+<span class="nc" id="L174">        int[] bits = new int[bands];</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        for (int i = 0; i &lt; bands; i++) {</span>
+<span class="nc" id="L176">            bits[i] = 8;</span>
+        }
+<span class="nc" id="L178">        ColorModel cm = new ComponentColorModel(</span>
+<span class="nc" id="L179">                ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                bits,
+                true, alphaPremultiplied,
+                Transparency.TRANSLUCENT,
+                DataBuffer.TYPE_BYTE);
+<span class="nc" id="L184">        WritableRaster wr = Raster.createInterleavedRaster(</span>
+                DataBuffer.TYPE_BYTE,
+                width, height, bands,
+                new Point(0, 0));
+<span class="nc" id="L188">        bi = new BufferedImage(cm, wr, alphaPremultiplied, null);</span>
+<span class="nc" id="L189">        return bi;</span>
+    }
+
+    /**
+     * Sets rendering hints on the Graphics2D created for painting to a BufferedImage. Subclasses
+     * can modify the settings to customize the behaviour.
+     * @param g2d the Graphics2D instance
+     */
+    protected void setRenderingHintsForBufferedImage(Graphics2D g2d) {
+<span class="fc" id="L198">        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,</span>
+            RenderingHints.VALUE_ANTIALIAS_OFF);
+<span class="fc" id="L200">        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,</span>
+            RenderingHints.VALUE_TEXT_ANTIALIAS_OFF);
+<span class="fc" id="L202">    }</span>
+
+    /** {@inheritDoc} */
+    public ImageFlavor getSourceFlavor() {
+<span class="fc" id="L206">        return ImageFlavor.GRAPHICS2D;</span>
+    }
+
+    /** {@inheritDoc} */
+    public ImageFlavor getTargetFlavor() {
+<span class="fc" id="L211">        return ImageFlavor.BUFFERED_IMAGE;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

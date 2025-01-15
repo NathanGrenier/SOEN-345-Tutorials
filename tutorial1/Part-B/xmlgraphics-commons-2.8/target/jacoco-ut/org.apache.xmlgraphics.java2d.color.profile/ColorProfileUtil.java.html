@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ColorProfileUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color.profile</a> &gt; <span class="el_source">ColorProfileUtil.java</span></div><h1>ColorProfileUtil.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ColorProfileUtil.java 1400525 2012-10-20 22:03:56Z lbernardo $ */
+
+package org.apache.xmlgraphics.java2d.color.profile;
+
+import java.awt.color.ColorSpace;
+import java.awt.color.ICC_Profile;
+import java.awt.color.ICC_ProfileRGB;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+
+// CSOFF: MethodName
+
+/**
+ * Helper methods for handling color profiles.
+ */
+public final class ColorProfileUtil {
+
+    private ColorProfileUtil() {
+    }
+
+    /**
+     * Returns the profile description of an ICC profile
+     * @param profile the profile
+     * @return the description
+     */
+    public static String getICCProfileDescription(ICC_Profile profile) {
+<span class="nc" id="L46">        byte[] data = profile.getData(ICC_Profile.icSigProfileDescriptionTag);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (data == null) {</span>
+<span class="nc" id="L48">            return null;</span>
+        } else {
+            //Info on the data format: http://www.color.org/ICC-1_1998-09.PDF
+<span class="nc" id="L51">            int length = (data[8] &lt;&lt; 3 * 8) | (data[9] &lt;&lt; 2 * 8) | (data[10] &lt;&lt; 8) | data[11];</span>
+<span class="nc" id="L52">            length--; //Remove trailing NUL character</span>
+            try {
+<span class="nc" id="L54">                return new String(data, 12, length, &quot;US-ASCII&quot;);</span>
+<span class="nc" id="L55">            } catch (UnsupportedEncodingException e) {</span>
+<span class="nc" id="L56">                throw new UnsupportedOperationException(&quot;Incompatible VM&quot;);</span>
+            }
+        }
+    }
+
+    /**
+     * Indicates whether a given color profile is identical to the default sRGB profile
+     * provided by the Java class library.
+     * @param profile the color profile to check
+     * @return true if it is the default sRGB profile
+     */
+    public static boolean isDefaultsRGB(ICC_Profile profile) {
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (!(profile instanceof ICC_ProfileRGB)) {</span>
+<span class="nc" id="L69">          return false;</span>
+        }
+        // not sure what the best way to compare two profiles is, but comparing instances is not the right way
+<span class="fc" id="L72">        ICC_Profile sRGBProfile = ICC_Profile.getInstance(ColorSpace.CS_sRGB);</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (profile.getProfileClass() != sRGBProfile.getProfileClass()) {</span>
+<span class="nc" id="L74">          return false;</span>
+        }
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (profile.getMajorVersion() != sRGBProfile.getMajorVersion()) {</span>
+<span class="nc" id="L77">          return false;</span>
+        }
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (profile.getMinorVersion() != sRGBProfile.getMinorVersion()) {</span>
+<span class="nc" id="L80">          return false;</span>
+        }
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        if (!Arrays.equals(profile.getData(), sRGBProfile.getData())) {</span>
+<span class="nc" id="L83">          return false;</span>
+        }
+<span class="fc" id="L85">        return true;</span>
+    }
+
+    /**
+     * Proxy method for {@link ICC_Profile#getInstance(byte[])}
+     * that properly synchronizes the call to avoid a potential race condition.
+     * @param data    the specified ICC Profile data
+     * @return  an {@link ICC_Profile} instance corresponding to the data in the
+     *          specified byte array
+     */
+    public static ICC_Profile getICC_Profile(byte[] data) {
+<span class="fc" id="L96">        synchronized (ICC_Profile.class) {</span>
+<span class="fc" id="L97">            return ICC_Profile.getInstance(data);</span>
+        }
+    }
+
+    /**
+     * Proxy method for {@link ICC_Profile#getInstance(int)}
+     * that properly synchronizes the call to avoid a potential race condition.
+     * @param colorSpace    the type of color space to create a profile for. The specified type is
+     *                      one of the color space constants defined in the {@link ColorSpace}
+     *                      class.
+     * @return  an {@link ICC_Profile} instance corresponding to the specified {@code ColorSpace}
+     * @throws IllegalArgumentException if {@code colorSpace} is not one of the predefined types
+     */
+    public static ICC_Profile getICC_Profile(int colorSpace) {
+<span class="nc" id="L111">        synchronized (ICC_Profile.class) {</span>
+<span class="nc" id="L112">            return ICC_Profile.getInstance(colorSpace);</span>
+        }
+    }
+
+    /**
+     * Proxy method for {@link ICC_Profile#getInstance(java.io.InputStream)}
+     * that properly synchronizes the call to avoid a potential race condition.
+     * @param in    the input stream from which to read the profile data
+     * @return  an {@link ICC_Profile} instance corresponding to the data in the
+     *          specified {@link InputStream}
+     * @throws IOException  if an I/O error occurs while reading the stream
+     * @throws IllegalArgumentException if the stream does not contain valid ICC Profile data
+     */
+    public static ICC_Profile getICC_Profile(InputStream in) throws IOException {
+<span class="nc" id="L126">        synchronized (ICC_Profile.class) {</span>
+<span class="nc" id="L127">            return ICC_Profile.getInstance(in);</span>
+        }
+    }
+
+    /**
+     * Proxy method for {@link ICC_Profile#getInstance(java.lang.String)}
+     * that properly synchronizes the call to avoid a potential race condition.
+     * @param fileName    the name of the file that contains the profile data
+     * @return  an {@link ICC_Profile} instance corresponding to the data in the specified file
+     * @throws IOException  if the file cannot be opened, or an I/O error occurs while reading
+     *          the stream
+     * @throws IllegalArgumentException if the stream does not contain valid ICC Profile data
+     * @throws SecurityException if a security manager is installed and it does not permit read
+     *          access to the given file.
+     */
+    public static ICC_Profile getICC_Profile(String fileName) throws IOException {
+<span class="nc" id="L143">        synchronized (ICC_Profile.class) {</span>
+<span class="nc" id="L144">            return ICC_Profile.getInstance(fileName);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SeekableStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.util</a> &gt; <span class="el_source">SeekableStream.java</span></div><h1>SeekableStream.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: SeekableStream.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.util;
+
+import java.io.DataInput;
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * An abstract subclass of &lt;code&gt;java.io.InputStream&lt;/code&gt; that allows seeking
+ * within the input, similar to the &lt;code&gt;RandomAccessFile&lt;/code&gt; class.
+ * Additionally, the &lt;code&gt;DataInput&lt;/code&gt; interface is supported and extended
+ * to include support for little-endian representations of fundamental data
+ * types.
+ *
+ * &lt;p&gt; In addition to the familiar methods from &lt;code&gt;InputStream&lt;/code&gt;, the
+ * methods &lt;code&gt;getFilePointer()&lt;/code&gt;, &lt;code&gt;seek()&lt;/code&gt;, are defined as in
+ * the &lt;code&gt;RandomAccessFile&lt;/code&gt; class.  The &lt;code&gt;canSeekBackwards()&lt;/code&gt;
+ * method will return &lt;code&gt;true&lt;/code&gt; if it is permissible to seek to a
+ * position earlier in the stream than the current value of
+ * &lt;code&gt;getFilePointer()&lt;/code&gt;.  Some subclasses of
+ * &lt;code&gt;SeekableStream&lt;/code&gt; guarantee the ability to seek backwards while
+ * others may not offer this feature in the interest of providing greater
+ * efficiency for those users who do not require it.
+ *
+ * &lt;p&gt; The &lt;code&gt;DataInput&lt;/code&gt; interface is supported as well.  This included
+ * the &lt;code&gt;skipBytes()&lt;/code&gt; and &lt;code&gt;readFully()&lt;/code&gt; methods and a
+ * variety of &lt;code&gt;read&lt;/code&gt; methods for various data types.
+ *
+ * &lt;p&gt; Three classes are provided for the purpose of adapting a standard
+ * &lt;code&gt;InputStream&lt;/code&gt; to the &lt;code&gt;SeekableStream&lt;/code&gt; interface.
+ * &lt;code&gt;ForwardSeekableStream&lt;/code&gt; does not allows seeking backwards, but is
+ * inexpensive to use.  &lt;code&gt;FileCacheSeekableStream&lt;/code&gt; maintains a copy of
+ * all of the data read from the input in a temporary file; this file will be
+ * discarded automatically when the &lt;code&gt;FileSeekableStream&lt;/code&gt; is
+ * finalized, or when the JVM exits normally.
+ * &lt;code&gt;FileCacheSeekableStream&lt;/code&gt; is intended to be reasonably efficient
+ * apart from the unavoidable use of disk space.  In circumstances where the
+ * creation of a temporary file is not possible,
+ * &lt;code&gt;MemoryCacheSeekableStream&lt;/code&gt; may be used.
+ * &lt;code&gt;MemoryCacheSeekableStream&lt;/code&gt; creates a potentially large in-memory
+ * buffer to store the stream data and so should be avoided when possible.
+ *
+ * &lt;p&gt; The &lt;code&gt;FileSeekableStream&lt;/code&gt; class wraps a &lt;code&gt;File&lt;/code&gt; or
+ * &lt;code&gt;RandomAccessFile&lt;/code&gt;. It forwards requests to the real underlying
+ * file.  It performs a limited amount of caching in order to avoid excessive
+ * I/O costs.
+ *
+ * &lt;p&gt; The &lt;code&gt;SegmentedSeekableStream&lt;/code&gt; class performs a different sort
+ * of function.  It creates a &lt;code&gt;SeekableStream&lt;/code&gt; from another
+ * &lt;code&gt;SeekableStream&lt;/code&gt; by selecting a series of portions or &quot;segments&quot;.
+ * Each segment starts at a specified location within the source
+ * &lt;code&gt;SeekableStream&lt;/code&gt; and extends for a specified number of bytes.  The
+ * &lt;code&gt;StreamSegmentMapper&lt;/code&gt; interface and &lt;code&gt;StreamSegment&lt;/code&gt;
+ * class may be used to compute the segment positions dynamically.
+ *
+ * &lt;p&gt; A convenience methods, &lt;code&gt;wrapInputStream&lt;/code&gt; is provided to
+ * construct a suitable &lt;code&gt;SeekableStream&lt;/code&gt; instance whose data is
+ * supplied by a given &lt;code&gt;InputStream&lt;/code&gt;.  The caller, by means of the
+ * &lt;code&gt;canSeekBackwards&lt;/code&gt; parameter, determines whether support for
+ * seeking backwards is required.
+ *
+ */
+<span class="fc" id="L83">public abstract class SeekableStream extends InputStream implements DataInput {</span>
+
+    /**
+     * Returns a &lt;code&gt;SeekableStream&lt;/code&gt; that will read from a
+     * given &lt;code&gt;InputStream&lt;/code&gt;, optionally including support
+     * for seeking backwards.  This is a convenience method that
+     * avoids the need to instantiate specific subclasses of
+     * &lt;code&gt;SeekableStream&lt;/code&gt; depending on the current security
+     * model.
+     *
+     * @param is An &lt;code&gt;InputStream&lt;/code&gt;.
+     * @param canSeekBackwards &lt;code&gt;true&lt;/code&gt; if the ability to seek
+     *        backwards in the output is required.
+     * @return An instance of &lt;code&gt;SeekableStream&lt;/code&gt;.
+     */
+    public static SeekableStream wrapInputStream(InputStream is,
+                                                 boolean canSeekBackwards) {
+<span class="nc" id="L100">        SeekableStream stream = null;</span>
+
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (canSeekBackwards) {</span>
+            try {
+<span class="nc" id="L104">                stream = new FileCacheSeekableStream(is);</span>
+<span class="nc" id="L105">            } catch (Exception e) {</span>
+<span class="nc" id="L106">                stream = new MemoryCacheSeekableStream(is);</span>
+<span class="nc" id="L107">            }</span>
+        } else {
+<span class="nc" id="L109">            stream = new ForwardSeekableStream(is);</span>
+        }
+<span class="nc" id="L111">        return stream;</span>
+    }
+
+    // Methods from InputStream
+
+    /**
+     * Reads the next byte of data from the input stream. The value byte is
+     * returned as an &lt;code&gt;int&lt;/code&gt; in the range &lt;code&gt;0&lt;/code&gt; to
+     * &lt;code&gt;255&lt;/code&gt;. If no byte is available because the end of the stream
+     * has been reached, the value &lt;code&gt;-1&lt;/code&gt; is returned. This method
+     * blocks until input data is available, the end of the stream is detected,
+     * or an exception is thrown.
+     *
+     * &lt;p&gt; A subclass must provide an implementation of this method.
+     *
+     * @return     the next byte of data, or &lt;code&gt;-1&lt;/code&gt; if the end of the
+     *             stream is reached.
+     * @exception  IOException  if an I/O error occurs.
+     */
+    public abstract int read() throws IOException;
+
+    /**
+     * Reads up to &lt;code&gt;len&lt;/code&gt; bytes of data from the input stream into
+     * an array of bytes.  An attempt is made to read as many as
+     * &lt;code&gt;len&lt;/code&gt; bytes, but a smaller number may be read, possibly
+     * zero. The number of bytes actually read is returned as an integer.
+     *
+     * &lt;p&gt; This method blocks until input data is available, end of stream is
+     * detected, or an exception is thrown.
+     *
+     * &lt;p&gt; If &lt;code&gt;b&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, a
+     * &lt;code&gt;NullPointerException&lt;/code&gt; is thrown.
+     *
+     * &lt;p&gt; If &lt;code&gt;off&lt;/code&gt; is negative, or &lt;code&gt;len&lt;/code&gt; is negative, or
+     * &lt;code&gt;off+len&lt;/code&gt; is greater than the length of the array
+     * &lt;code&gt;b&lt;/code&gt;, then an &lt;code&gt;IndexOutOfBoundsException&lt;/code&gt; is
+     * thrown.
+     *
+     * &lt;p&gt; If &lt;code&gt;len&lt;/code&gt; is zero, then no bytes are read and
+     * &lt;code&gt;0&lt;/code&gt; is returned; otherwise, there is an attempt to read at
+     * least one byte. If no byte is available because the stream is at end of
+     * stream, the value &lt;code&gt;-1&lt;/code&gt; is returned; otherwise, at least one
+     * byte is read and stored into &lt;code&gt;b&lt;/code&gt;.
+     *
+     * &lt;p&gt; The first byte read is stored into element &lt;code&gt;b[off]&lt;/code&gt;, the
+     * next one into &lt;code&gt;b[off+1]&lt;/code&gt;, and so on. The number of bytes read
+     * is, at most, equal to &lt;code&gt;len&lt;/code&gt;. Let &lt;i&gt;k&lt;/i&gt; be the number of
+     * bytes actually read; these bytes will be stored in elements
+     * &lt;code&gt;b[off]&lt;/code&gt; through &lt;code&gt;b[off+&lt;/code&gt;&lt;i&gt;k&lt;/i&gt;&lt;code&gt;-1]&lt;/code&gt;,
+     * leaving elements &lt;code&gt;b[off+&lt;/code&gt;&lt;i&gt;k&lt;/i&gt;&lt;code&gt;]&lt;/code&gt; through
+     * &lt;code&gt;b[off+len-1]&lt;/code&gt; unaffected.
+     *
+     * &lt;p&gt; In every case, elements &lt;code&gt;b[0]&lt;/code&gt; through
+     * &lt;code&gt;b[off]&lt;/code&gt; and elements &lt;code&gt;b[off+len]&lt;/code&gt; through
+     * &lt;code&gt;b[b.length-1]&lt;/code&gt; are unaffected.
+     *
+     * &lt;p&gt; If the first byte cannot be read for any reason other than end of
+     * stream, then an &lt;code&gt;IOException&lt;/code&gt; is thrown. In particular, an
+     * &lt;code&gt;IOException&lt;/code&gt; is thrown if the input stream has been closed.
+     *
+     * &lt;p&gt; A subclass must provide an implementation of this method.
+     *
+     * @param      b     the buffer into which the data is read.
+     * @param      off   the start offset in array &lt;code&gt;b&lt;/code&gt;
+     *                   at which the data is written.
+     * @param      len   the maximum number of bytes to read.
+     * @return     the total number of bytes read into the buffer, or
+     *             &lt;code&gt;-1&lt;/code&gt; if there is no more data because the end of
+     *             the stream has been reached.
+     * @exception  IOException  if an I/O error occurs.
+     */
+    public abstract int read(byte[] b, int off, int len) throws IOException;
+
+    // Implemented in InputStream:
+    //
+    // public int read(byte[] b) throws IOException {
+    // public long skip(long n) throws IOException
+    // public int available) throws IOException
+    // public void close() throws IOException;
+
+    /** Marked position, shared by {@link ForwardSeekableStream} */
+<span class="fc" id="L192">    protected long markPos = -1L;</span>
+
+    /**
+     * Marks the current file position for later return using
+     * the &lt;code&gt;reset()&lt;/code&gt; method.
+     */
+    public synchronized void mark(int readLimit) {
+        try {
+<span class="fc" id="L200">            markPos = getFilePointer();</span>
+<span class="nc" id="L201">        } catch (IOException e) {</span>
+<span class="nc" id="L202">            markPos = -1L;</span>
+<span class="fc" id="L203">        }</span>
+<span class="fc" id="L204">    }</span>
+
+    /**
+     * Returns the file position to its position at the time of
+     * the immediately previous call to the &lt;code&gt;mark()&lt;/code&gt;
+     * method.
+     */
+    public synchronized void reset() throws IOException {
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">        if (markPos != -1) {</span>
+<span class="fc" id="L213">            seek(markPos);</span>
+        }
+<span class="fc" id="L215">    }</span>
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if marking is supported.
+     * Marking is automatically supported for &lt;code&gt;SeekableStream&lt;/code&gt;
+     * subclasses that support seeking backeards.  Subclasses that do
+     * not support seeking backwards but do support marking must override
+     * this method.
+     */
+    public boolean markSupported() {
+<span class="fc" id="L225">        return canSeekBackwards();</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if this object supports calls to
+     * &lt;code&gt;seek(pos)&lt;/code&gt; with an offset &lt;code&gt;pos&lt;/code&gt; smaller
+     * than the current offset, as returned by &lt;code&gt;getFilePointer&lt;/code&gt;.
+     */
+    public boolean canSeekBackwards() {
+<span class="nc" id="L234">        return false;</span>
+    }
+
+    /**
+     * Returns the current offset in this stream.
+     *
+     * @return     the offset from the beginning of the stream, in bytes,
+     *             at which the next read occurs.
+     * @exception  IOException  if an I/O error occurs.
+     */
+    public abstract long getFilePointer() throws IOException;
+
+    /**
+     * Sets the offset, measured from the beginning of this
+     * stream, at which the next read occurs.
+     *
+     * &lt;p&gt; If &lt;code&gt;canSeekBackwards()&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;,
+     * then setting &lt;code&gt;pos&lt;/code&gt; to an offset smaller than
+     * the current value of &lt;code&gt;getFilePointer()&lt;/code&gt; will have
+     * no effect.
+     *
+     * @param      pos   the offset position, measured in bytes from the
+     *                   beginning of the stream, at which to set the stream
+     *                   pointer.
+     * @exception  IOException  if &lt;code&gt;pos&lt;/code&gt; is less than
+     *                          &lt;code&gt;0&lt;/code&gt; or if an I/O error occurs.
+     */
+    public abstract void seek(long pos) throws IOException;
+
+    // Methods from RandomAccessFile
+
+    /**
+     * Reads &lt;code&gt;b.length&lt;/code&gt; bytes from this stream into the byte
+     * array, starting at the current stream pointer. This method reads
+     * repeatedly from the stream until the requested number of bytes are
+     * read. This method blocks until the requested number of bytes are
+     * read, the end of the stream is detected, or an exception is thrown.
+     *
+     * @param      b   the buffer into which the data is read.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               all the bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final void readFully(byte[] b) throws IOException {
+<span class="fc" id="L278">        readFully(b, 0, b.length);</span>
+<span class="fc" id="L279">    }</span>
+
+    /**
+     * Reads exactly &lt;code&gt;len&lt;/code&gt; bytes from this stream into the byte
+     * array, starting at the current stream pointer. This method reads
+     * repeatedly from the stream until the requested number of bytes are
+     * read. This method blocks until the requested number of bytes are
+     * read, the end of the stream is detected, or an exception is thrown.
+     *
+     * @param      b     the buffer into which the data is read.
+     * @param      off   the start offset of the data.
+     * @param      len   the number of bytes to read.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               all the bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final void readFully(byte[] b, int off, int len)
+        throws IOException {
+<span class="fc" id="L297">        int n = 0;</span>
+        do {
+<span class="fc" id="L299">            int count = this.read(b, off + n, len - n);</span>
+<span class="pc bpc" id="L300" title="1 of 2 branches missed.">            if (count &lt; 0) {</span>
+<span class="nc" id="L301">                throw new EOFException();</span>
+            }
+<span class="fc" id="L303">            n += count;</span>
+<span class="pc bpc" id="L304" title="1 of 2 branches missed.">        } while (n &lt; len);</span>
+<span class="fc" id="L305">    }</span>
+
+    // Methods from DataInput, plus little-endian versions
+
+    /**
+     * Attempts to skip over &lt;code&gt;n&lt;/code&gt; bytes of input discarding the
+     * skipped bytes.
+     * &lt;p&gt;
+     *
+     * This method may skip over some smaller number of bytes, possibly zero.
+     * This may result from any of a number of conditions; reaching end of
+     * stream before &lt;code&gt;n&lt;/code&gt; bytes have been skipped is only one
+     * possibility. This method never throws an &lt;code&gt;EOFException&lt;/code&gt;.
+     * The actual number of bytes skipped is returned.  If &lt;code&gt;n&lt;/code&gt;
+     * is negative, no bytes are skipped.
+     *
+     * @param      n   the number of bytes to be skipped.
+     * @return     the actual number of bytes skipped.
+     * @exception  IOException  if an I/O error occurs.
+     */
+    public int skipBytes(int n) throws IOException {
+<span class="nc bnc" id="L326" title="All 2 branches missed.">        if (n &lt;= 0) {</span>
+<span class="nc" id="L327">            return 0;</span>
+        }
+<span class="nc" id="L329">        return (int)skip(n);</span>
+    }
+
+    /**
+     * Reads a &lt;code&gt;boolean&lt;/code&gt; from this stream. This method reads a
+     * single byte from the stream, starting at the current stream pointer.
+     * A value of &lt;code&gt;0&lt;/code&gt; represents
+     * &lt;code&gt;false&lt;/code&gt;. Any other value represents &lt;code&gt;true&lt;/code&gt;.
+     * This method blocks until the byte is read, the end of the stream
+     * is detected, or an exception is thrown.
+     *
+     * @return     the &lt;code&gt;boolean&lt;/code&gt; value read.
+     * @exception  EOFException  if this stream has reached the end.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final boolean readBoolean() throws IOException {
+<span class="nc" id="L345">        int ch = this.read();</span>
+<span class="nc bnc" id="L346" title="All 2 branches missed.">        if (ch &lt; 0) {</span>
+<span class="nc" id="L347">            throw new EOFException();</span>
+        }
+<span class="nc bnc" id="L349" title="All 2 branches missed.">        return (ch != 0);</span>
+    }
+
+    /**
+     * Reads a signed eight-bit value from this stream. This method reads a
+     * byte from the stream, starting from the current stream pointer.
+     * If the byte read is &lt;code&gt;b&lt;/code&gt;, where
+     * &lt;code&gt;0&amp;nbsp;&amp;lt;=&amp;nbsp;b&amp;nbsp;&amp;lt;=&amp;nbsp;255&lt;/code&gt;,
+     * then the result is:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (byte)(b)
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the byte is read, the end of the stream
+     * is detected, or an exception is thrown.
+     *
+     * @return     the next byte of this stream as a signed eight-bit
+     *             &lt;code&gt;byte&lt;/code&gt;.
+     * @exception  EOFException  if this stream has reached the end.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final byte readByte() throws IOException {
+<span class="nc" id="L371">        int ch = this.read();</span>
+<span class="nc bnc" id="L372" title="All 2 branches missed.">        if (ch &lt; 0) {</span>
+<span class="nc" id="L373">            throw new EOFException();</span>
+        }
+<span class="nc" id="L375">        return (byte)(ch);</span>
+    }
+
+    /**
+     * Reads an unsigned eight-bit number from this stream. This method reads
+     * a byte from this stream, starting at the current stream pointer,
+     * and returns that byte.
+     * &lt;p&gt;
+     * This method blocks until the byte is read, the end of the stream
+     * is detected, or an exception is thrown.
+     *
+     * @return     the next byte of this stream, interpreted as an unsigned
+     *             eight-bit number.
+     * @exception  EOFException  if this stream has reached the end.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final int readUnsignedByte() throws IOException {
+<span class="nc" id="L392">        int ch = this.read();</span>
+<span class="nc bnc" id="L393" title="All 2 branches missed.">        if (ch &lt; 0) {</span>
+<span class="nc" id="L394">            throw new EOFException();</span>
+        }
+<span class="nc" id="L396">        return ch;</span>
+    }
+
+    /**
+     * Reads a signed 16-bit number from this stream.
+     * The method reads two
+     * bytes from this stream, starting at the current stream pointer.
+     * If the two bytes read, in order, are
+     * &lt;code&gt;b1&lt;/code&gt; and &lt;code&gt;b2&lt;/code&gt;, where each of the two values is
+     * between &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;255&lt;/code&gt;, inclusive, then the
+     * result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (short)((b1 &amp;lt;&amp;lt; 8) | b2)
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the two bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next two bytes of this stream, interpreted as a signed
+     *             16-bit number.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               two bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final short readShort() throws IOException {
+<span class="nc" id="L421">        int ch1 = this.read();</span>
+<span class="nc" id="L422">        int ch2 = this.read();</span>
+<span class="nc bnc" id="L423" title="All 2 branches missed.">        if ((ch1 | ch2) &lt; 0) {</span>
+<span class="nc" id="L424">            throw new EOFException();</span>
+        }
+<span class="nc" id="L426">        return (short)((ch1 &lt;&lt; 8) + (ch2 &lt;&lt; 0));</span>
+    }
+
+    /**
+     * Reads a signed 16-bit number from this stream in little-endian order.
+     * The method reads two
+     * bytes from this stream, starting at the current stream pointer.
+     * If the two bytes read, in order, are
+     * &lt;code&gt;b1&lt;/code&gt; and &lt;code&gt;b2&lt;/code&gt;, where each of the two values is
+     * between &lt;code&gt;0&lt;/code&gt; and &lt;code&gt;255&lt;/code&gt;, inclusive, then the
+     * result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (short)((b2 &amp;lt;&amp;lt; 8) | b1)
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the two bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next two bytes of this stream, interpreted as a signed
+     *             16-bit number.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               two bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final short readShortLE() throws IOException {
+<span class="nc" id="L451">        int ch1 = this.read();</span>
+<span class="nc" id="L452">        int ch2 = this.read();</span>
+<span class="nc bnc" id="L453" title="All 2 branches missed.">        if ((ch1 | ch2) &lt; 0) {</span>
+<span class="nc" id="L454">            throw new EOFException();</span>
+        }
+<span class="nc" id="L456">        return (short)((ch2 &lt;&lt; 8) + (ch1 &lt;&lt; 0));</span>
+    }
+
+    /**
+     * Reads an unsigned 16-bit number from this stream. This method reads
+     * two bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are
+     * &lt;code&gt;b1&lt;/code&gt; and &lt;code&gt;b2&lt;/code&gt;, where
+     * &lt;code&gt;0&amp;nbsp;&amp;lt;=&amp;nbsp;b1, b2&amp;nbsp;&amp;lt;=&amp;nbsp;255&lt;/code&gt;,
+     * then the result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (b1 &amp;lt;&amp;lt; 8) | b2
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the two bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next two bytes of this stream, interpreted as an
+     *             unsigned 16-bit integer.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *             two bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final int readUnsignedShort() throws IOException {
+<span class="fc" id="L480">        int ch1 = this.read();</span>
+<span class="fc" id="L481">        int ch2 = this.read();</span>
+<span class="pc bpc" id="L482" title="1 of 2 branches missed.">        if ((ch1 | ch2) &lt; 0) {</span>
+<span class="nc" id="L483">            throw new EOFException();</span>
+        }
+<span class="fc" id="L485">        return (ch1 &lt;&lt; 8) + (ch2 &lt;&lt; 0);</span>
+    }
+
+    /**
+     * Reads an unsigned 16-bit number from this stream in little-endian order.
+     * This method reads
+     * two bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are
+     * &lt;code&gt;b1&lt;/code&gt; and &lt;code&gt;b2&lt;/code&gt;, where
+     * &lt;code&gt;0&amp;nbsp;&amp;lt;=&amp;nbsp;b1, b2&amp;nbsp;&amp;lt;=&amp;nbsp;255&lt;/code&gt;,
+     * then the result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (b2 &amp;lt;&amp;lt; 8) | b1
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the two bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next two bytes of this stream, interpreted as an
+     *             unsigned 16-bit integer.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               two bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final int readUnsignedShortLE() throws IOException {
+<span class="fc" id="L510">        int ch1 = this.read();</span>
+<span class="fc" id="L511">        int ch2 = this.read();</span>
+<span class="pc bpc" id="L512" title="1 of 2 branches missed.">        if ((ch1 | ch2) &lt; 0) {</span>
+<span class="nc" id="L513">            throw new EOFException();</span>
+        }
+<span class="fc" id="L515">        return (ch2 &lt;&lt; 8) + (ch1 &lt;&lt; 0);</span>
+    }
+
+    /**
+     * Reads a Unicode character from this stream. This method reads two
+     * bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are
+     * &lt;code&gt;b1&lt;/code&gt; and &lt;code&gt;b2&lt;/code&gt;, where
+     * &lt;code&gt;0&amp;nbsp;&amp;lt;=&amp;nbsp;b1,&amp;nbsp;b2&amp;nbsp;&amp;lt;=&amp;nbsp;255&lt;/code&gt;,
+     * then the result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (char)((b1 &amp;lt;&amp;lt; 8) | b2)
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the two bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next two bytes of this stream as a Unicode character.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               two bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final char readChar() throws IOException {
+<span class="nc" id="L538">        int ch1 = this.read();</span>
+<span class="nc" id="L539">        int ch2 = this.read();</span>
+<span class="nc bnc" id="L540" title="All 2 branches missed.">        if ((ch1 | ch2) &lt; 0) {</span>
+<span class="nc" id="L541">            throw new EOFException();</span>
+        }
+<span class="nc" id="L543">        return (char)((ch1 &lt;&lt; 8) + (ch2 &lt;&lt; 0));</span>
+    }
+
+    /**
+     * Reads a Unicode character from this stream in little-endian order.
+     * This method reads two
+     * bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are
+     * &lt;code&gt;b1&lt;/code&gt; and &lt;code&gt;b2&lt;/code&gt;, where
+     * &lt;code&gt;0&amp;nbsp;&amp;lt;=&amp;nbsp;b1,&amp;nbsp;b2&amp;nbsp;&amp;lt;=&amp;nbsp;255&lt;/code&gt;,
+     * then the result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (char)((b2 &amp;lt;&amp;lt; 8) | b1)
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the two bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next two bytes of this stream as a Unicode character.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               two bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final char readCharLE() throws IOException {
+<span class="nc" id="L567">        int ch1 = this.read();</span>
+<span class="nc" id="L568">        int ch2 = this.read();</span>
+<span class="nc bnc" id="L569" title="All 2 branches missed.">        if ((ch1 | ch2) &lt; 0) {</span>
+<span class="nc" id="L570">            throw new EOFException();</span>
+        }
+<span class="nc" id="L572">        return (char)((ch2 &lt;&lt; 8) + (ch1 &lt;&lt; 0));</span>
+    }
+
+    /**
+     * Reads a signed 32-bit integer from this stream. This method reads 4
+     * bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are &lt;code&gt;b1&lt;/code&gt;,
+     * &lt;code&gt;b2&lt;/code&gt;, &lt;code&gt;b3&lt;/code&gt;, and &lt;code&gt;b4&lt;/code&gt;, where
+     * &lt;code&gt;0&amp;nbsp;&amp;lt;=&amp;nbsp;b1, b2, b3, b4&amp;nbsp;&amp;lt;=&amp;nbsp;255&lt;/code&gt;,
+     * then the result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (b1 &amp;lt;&amp;lt; 24) | (b2 &amp;lt;&amp;lt; 16) + (b3 &amp;lt;&amp;lt; 8) + b4
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the four bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next four bytes of this stream, interpreted as an
+     *             &lt;code&gt;int&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               four bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final int readInt() throws IOException {
+<span class="nc" id="L596">        int ch1 = this.read();</span>
+<span class="nc" id="L597">        int ch2 = this.read();</span>
+<span class="nc" id="L598">        int ch3 = this.read();</span>
+<span class="nc" id="L599">        int ch4 = this.read();</span>
+<span class="nc bnc" id="L600" title="All 2 branches missed.">        if ((ch1 | ch2 | ch3 | ch4) &lt; 0) {</span>
+<span class="nc" id="L601">            throw new EOFException();</span>
+        }
+<span class="nc" id="L603">        return ((ch1 &lt;&lt; 24) + (ch2 &lt;&lt; 16) + (ch3 &lt;&lt; 8) + (ch4 &lt;&lt; 0));</span>
+    }
+
+    /**
+     * Reads a signed 32-bit integer from this stream in little-endian order.
+     * This method reads 4
+     * bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are &lt;code&gt;b1&lt;/code&gt;,
+     * &lt;code&gt;b2&lt;/code&gt;, &lt;code&gt;b3&lt;/code&gt;, and &lt;code&gt;b4&lt;/code&gt;, where
+     * &lt;code&gt;0&amp;nbsp;&amp;lt;=&amp;nbsp;b1, b2, b3, b4&amp;nbsp;&amp;lt;=&amp;nbsp;255&lt;/code&gt;,
+     * then the result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (b4 &amp;lt;&amp;lt; 24) | (b3 &amp;lt;&amp;lt; 16) + (b2 &amp;lt;&amp;lt; 8) + b1
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the four bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next four bytes of this stream, interpreted as an
+     *             &lt;code&gt;int&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               four bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final int readIntLE() throws IOException {
+<span class="nc" id="L628">        int ch1 = this.read();</span>
+<span class="nc" id="L629">        int ch2 = this.read();</span>
+<span class="nc" id="L630">        int ch3 = this.read();</span>
+<span class="nc" id="L631">        int ch4 = this.read();</span>
+<span class="nc bnc" id="L632" title="All 2 branches missed.">        if ((ch1 | ch2 | ch3 | ch4) &lt; 0) {</span>
+<span class="nc" id="L633">            throw new EOFException();</span>
+        }
+<span class="nc" id="L635">        return ((ch4 &lt;&lt; 24) + (ch3 &lt;&lt; 16) + (ch2 &lt;&lt; 8) + (ch1 &lt;&lt; 0));</span>
+    }
+
+    /**
+     * Reads an unsigned 32-bit integer from this stream. This method reads 4
+     * bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are &lt;code&gt;b1&lt;/code&gt;,
+     * &lt;code&gt;b2&lt;/code&gt;, &lt;code&gt;b3&lt;/code&gt;, and &lt;code&gt;b4&lt;/code&gt;, where
+     * &lt;code&gt;0&amp;nbsp;&amp;lt;=&amp;nbsp;b1, b2, b3, b4&amp;nbsp;&amp;lt;=&amp;nbsp;255&lt;/code&gt;,
+     * then the result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (b1 &amp;lt;&amp;lt; 24) | (b2 &amp;lt;&amp;lt; 16) + (b3 &amp;lt;&amp;lt; 8) + b4
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the four bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next four bytes of this stream, interpreted as a
+     *             &lt;code&gt;long&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               four bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final long readUnsignedInt() throws IOException {
+<span class="fc" id="L659">        long ch1 = this.read();</span>
+<span class="fc" id="L660">        long ch2 = this.read();</span>
+<span class="fc" id="L661">        long ch3 = this.read();</span>
+<span class="fc" id="L662">        long ch4 = this.read();</span>
+<span class="pc bpc" id="L663" title="1 of 2 branches missed.">        if ((ch1 | ch2 | ch3 | ch4) &lt; 0) {</span>
+<span class="nc" id="L664">            throw new EOFException();</span>
+        }
+<span class="fc" id="L666">        return ((ch1 &lt;&lt; 24) + (ch2 &lt;&lt; 16) + (ch3 &lt;&lt; 8) + (ch4 &lt;&lt; 0));</span>
+    }
+
+<span class="fc" id="L669">    private byte[] ruileBuf = new byte[4];</span>
+
+    /**
+     * Reads an unsigned 32-bit integer from this stream in little-endian
+     * order.  This method reads 4
+     * bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are &lt;code&gt;b1&lt;/code&gt;,
+     * &lt;code&gt;b2&lt;/code&gt;, &lt;code&gt;b3&lt;/code&gt;, and &lt;code&gt;b4&lt;/code&gt;, where
+     * &lt;code&gt;0&amp;nbsp;&amp;lt;=&amp;nbsp;b1, b2, b3, b4&amp;nbsp;&amp;lt;=&amp;nbsp;255&lt;/code&gt;,
+     * then the result is equal to:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     (b4 &amp;lt;&amp;lt; 24) | (b3 &amp;lt;&amp;lt; 16) + (b2 &amp;lt;&amp;lt; 8) + b1
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the four bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next four bytes of this stream, interpreted as a
+     *             &lt;code&gt;long&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               four bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final long readUnsignedIntLE() throws IOException {
+<span class="fc" id="L693">        this.readFully(ruileBuf);</span>
+<span class="fc" id="L694">        long ch1 = (ruileBuf[0] &amp; 0xff);</span>
+<span class="fc" id="L695">        long ch2 = (ruileBuf[1] &amp; 0xff);</span>
+<span class="fc" id="L696">        long ch3 = (ruileBuf[2] &amp; 0xff);</span>
+<span class="fc" id="L697">        long ch4 = (ruileBuf[3] &amp; 0xff);</span>
+
+<span class="fc" id="L699">        return ((ch4 &lt;&lt; 24) + (ch3 &lt;&lt; 16) + (ch2 &lt;&lt; 8) + (ch1 &lt;&lt; 0));</span>
+    }
+
+    /**
+     * Reads a signed 64-bit integer from this stream. This method reads eight
+     * bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are
+     * &lt;code&gt;b1&lt;/code&gt;, &lt;code&gt;b2&lt;/code&gt;, &lt;code&gt;b3&lt;/code&gt;,
+     * &lt;code&gt;b4&lt;/code&gt;, &lt;code&gt;b5&lt;/code&gt;, &lt;code&gt;b6&lt;/code&gt;,
+     * &lt;code&gt;b7&lt;/code&gt;, and &lt;code&gt;b8,&lt;/code&gt; where:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     0 &amp;lt;= b1, b2, b3, b4, b5, b6, b7, b8 &amp;lt;=255,
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * then the result is equal to:
+     * &lt;p&gt;&lt;blockquote&gt;&lt;pre&gt;
+     *     ((long)b1 &amp;lt;&amp;lt; 56) + ((long)b2 &amp;lt;&amp;lt; 48)
+     *     + ((long)b3 &amp;lt;&amp;lt; 40) + ((long)b4 &amp;lt;&amp;lt; 32)
+     *     + ((long)b5 &amp;lt;&amp;lt; 24) + ((long)b6 &amp;lt;&amp;lt; 16)
+     *     + ((long)b7 &amp;lt;&amp;lt; 8) + b8
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the eight bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next eight bytes of this stream, interpreted as a
+     *             &lt;code&gt;long&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               eight bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final long readLong() throws IOException {
+<span class="nc" id="L731">        return ((long)(readInt()) &lt;&lt; 32) + (readInt() &amp; 0xFFFFFFFFL);</span>
+    }
+
+    /**
+     * Reads a signed 64-bit integer from this stream in little-endian
+     * order. This method reads eight
+     * bytes from the stream, starting at the current stream pointer.
+     * If the bytes read, in order, are
+     * &lt;code&gt;b1&lt;/code&gt;, &lt;code&gt;b2&lt;/code&gt;, &lt;code&gt;b3&lt;/code&gt;,
+     * &lt;code&gt;b4&lt;/code&gt;, &lt;code&gt;b5&lt;/code&gt;, &lt;code&gt;b6&lt;/code&gt;,
+     * &lt;code&gt;b7&lt;/code&gt;, and &lt;code&gt;b8,&lt;/code&gt; where:
+     * &lt;blockquote&gt;&lt;pre&gt;
+     *     0 &amp;lt;= b1, b2, b3, b4, b5, b6, b7, b8 &amp;lt;=255,
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * then the result is equal to:
+     * &lt;p&gt;&lt;blockquote&gt;&lt;pre&gt;
+     *     ((long)b1 &amp;lt;&amp;lt; 56) + ((long)b2 &amp;lt;&amp;lt; 48)
+     *     + ((long)b3 &amp;lt;&amp;lt; 40) + ((long)b4 &amp;lt;&amp;lt; 32)
+     *     + ((long)b5 &amp;lt;&amp;lt; 24) + ((long)b6 &amp;lt;&amp;lt; 16)
+     *     + ((long)b7 &amp;lt;&amp;lt; 8) + b8
+     * &lt;/pre&gt;&lt;/blockquote&gt;
+     * &lt;p&gt;
+     * This method blocks until the eight bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next eight bytes of this stream, interpreted as a
+     *             &lt;code&gt;long&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *               eight bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final long readLongLE() throws IOException {
+<span class="nc" id="L764">        int i1 = readIntLE();</span>
+<span class="nc" id="L765">        int i2 = readIntLE();</span>
+<span class="nc" id="L766">        return ((long)i2 &lt;&lt; 32) + (i1 &amp; 0xFFFFFFFFL);</span>
+    }
+
+    /**
+     * Reads a &lt;code&gt;float&lt;/code&gt; from this stream. This method reads an
+     * &lt;code&gt;int&lt;/code&gt; value, starting at the current stream pointer,
+     * as if by the &lt;code&gt;readInt&lt;/code&gt; method
+     * and then converts that &lt;code&gt;int&lt;/code&gt; to a &lt;code&gt;float&lt;/code&gt;
+     * using the &lt;code&gt;intBitsToFloat&lt;/code&gt; method in class
+     * &lt;code&gt;Float&lt;/code&gt;.
+     * &lt;p&gt;
+     * This method blocks until the four bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next four bytes of this stream, interpreted as a
+     *             &lt;code&gt;float&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *             four bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final float readFloat() throws IOException {
+<span class="nc" id="L787">        return Float.intBitsToFloat(readInt());</span>
+    }
+
+    /**
+     * Reads a &lt;code&gt;float&lt;/code&gt; from this stream in little-endian order.
+     * This method reads an
+     * &lt;code&gt;int&lt;/code&gt; value, starting at the current stream pointer,
+     * as if by the &lt;code&gt;readInt&lt;/code&gt; method
+     * and then converts that &lt;code&gt;int&lt;/code&gt; to a &lt;code&gt;float&lt;/code&gt;
+     * using the &lt;code&gt;intBitsToFloat&lt;/code&gt; method in class
+     * &lt;code&gt;Float&lt;/code&gt;.
+     * &lt;p&gt;
+     * This method blocks until the four bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next four bytes of this stream, interpreted as a
+     *             &lt;code&gt;float&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *             four bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final float readFloatLE() throws IOException {
+<span class="nc" id="L809">        return Float.intBitsToFloat(readIntLE());</span>
+    }
+
+    /**
+     * Reads a &lt;code&gt;double&lt;/code&gt; from this stream. This method reads a
+     * &lt;code&gt;long&lt;/code&gt; value, starting at the current stream pointer,
+     * as if by the &lt;code&gt;readLong&lt;/code&gt; method
+     * and then converts that &lt;code&gt;long&lt;/code&gt; to a &lt;code&gt;double&lt;/code&gt;
+     * using the &lt;code&gt;longBitsToDouble&lt;/code&gt; method in
+     * class &lt;code&gt;Double&lt;/code&gt;.
+     * &lt;p&gt;
+     * This method blocks until the eight bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next eight bytes of this stream, interpreted as a
+     *             &lt;code&gt;double&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *             eight bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final double readDouble() throws IOException {
+<span class="nc" id="L830">        return Double.longBitsToDouble(readLong());</span>
+    }
+
+    /**
+     * Reads a &lt;code&gt;double&lt;/code&gt; from this stream in little-endian order.
+     * This method reads a
+     * &lt;code&gt;long&lt;/code&gt; value, starting at the current stream pointer,
+     * as if by the &lt;code&gt;readLong&lt;/code&gt; method
+     * and then converts that &lt;code&gt;long&lt;/code&gt; to a &lt;code&gt;double&lt;/code&gt;
+     * using the &lt;code&gt;longBitsToDouble&lt;/code&gt; method in
+     * class &lt;code&gt;Double&lt;/code&gt;.
+     * &lt;p&gt;
+     * This method blocks until the eight bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     the next eight bytes of this stream, interpreted as a
+     *             &lt;code&gt;double&lt;/code&gt;.
+     * @exception  EOFException  if this stream reaches the end before reading
+     *             eight bytes.
+     * @exception  IOException   if an I/O error occurs.
+     */
+    public final double readDoubleLE() throws IOException {
+<span class="nc" id="L852">        return Double.longBitsToDouble(readLongLE());</span>
+    }
+
+    /**
+     * Reads the next line of text from this stream.  This method successively
+     * reads bytes from the stream, starting at the current stream pointer,
+     * until it reaches a line terminator or the end
+     * of the stream.  Each byte is converted into a character by taking the
+     * byte's value for the lower eight bits of the character and setting the
+     * high eight bits of the character to zero.  This method does not,
+     * therefore, support the full Unicode character set.
+     *
+     * &lt;p&gt; A line of text is terminated by a carriage-return character
+     * (&lt;code&gt;'&amp;#92;r'&lt;/code&gt;), a newline character (&lt;code&gt;'&amp;#92;n'&lt;/code&gt;), a
+     * carriage-return character immediately followed by a newline character,
+     * or the end of the stream.  Line-terminating characters are discarded and
+     * are not included as part of the string returned.
+     *
+     * &lt;p&gt; This method blocks until a newline character is read, a carriage
+     * return and the byte following it are read (to see if it is a newline),
+     * the end of the stream is reached, or an exception is thrown.
+     *
+     * @return     the next line of text from this stream, or null if end
+     *             of stream is encountered before even one byte is read.
+     * @exception  IOException  if an I/O error occurs.
+     */
+    public final String readLine() throws IOException {
+<span class="nc" id="L879">        StringBuffer input = new StringBuffer();</span>
+<span class="nc" id="L880">        int c = -1;</span>
+<span class="nc" id="L881">        boolean eol = false;</span>
+
+<span class="nc bnc" id="L883" title="All 2 branches missed.">        while (!eol) {</span>
+<span class="nc" id="L884">            c = read();</span>
+<span class="nc bnc" id="L885" title="All 3 branches missed.">            switch (c) {</span>
+            case -1:
+            case '\n':
+<span class="nc" id="L888">                eol = true;</span>
+<span class="nc" id="L889">                break;</span>
+            case '\r':
+<span class="nc" id="L891">                eol = true;</span>
+<span class="nc" id="L892">                long cur = getFilePointer();</span>
+<span class="nc bnc" id="L893" title="All 2 branches missed.">                if ((read()) != '\n') {</span>
+<span class="nc" id="L894">                    seek(cur);</span>
+                }
+                break;
+            default:
+<span class="nc" id="L898">                input.append((char)c);</span>
+<span class="nc" id="L899">                break;</span>
+            }
+        }
+
+<span class="nc bnc" id="L903" title="All 4 branches missed.">        if ((c == -1) &amp;&amp; (input.length() == 0)) {</span>
+<span class="nc" id="L904">            return null;</span>
+        }
+<span class="nc" id="L906">        return input.toString();</span>
+    }
+
+    /**
+     * Reads in a string from this stream. The string has been encoded
+     * using a modified UTF-8 format.
+     * &lt;p&gt;
+     * The first two bytes are read, starting from the current stream
+     * pointer, as if by
+     * &lt;code&gt;readUnsignedShort&lt;/code&gt;. This value gives the number of
+     * following bytes that are in the encoded string, not
+     * the length of the resulting string. The following bytes are then
+     * interpreted as bytes encoding characters in the UTF-8 format
+     * and are converted into characters.
+     * &lt;p&gt;
+     * This method blocks until all the bytes are read, the end of the
+     * stream is detected, or an exception is thrown.
+     *
+     * @return     a Unicode string.
+     * @exception  EOFException            if this stream reaches the end before
+     *               reading all the bytes.
+     * @exception  IOException             if an I/O error occurs.
+     * @exception  java.io.UTFDataFormatException  if the bytes do not represent
+     *               valid UTF-8 encoding of a Unicode string.
+     */
+    public final String readUTF() throws IOException {
+<span class="nc" id="L932">        return DataInputStream.readUTF(this);</span>
+    }
+
+    /**
+     * Releases any system resources associated with this stream
+     * by calling the &lt;code&gt;close()&lt;/code&gt; method.
+     */
+    protected void finalize() throws Throwable {
+<span class="fc" id="L940">        super.finalize();</span>
+<span class="fc" id="L941">        close();</span>
+<span class="fc" id="L942">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

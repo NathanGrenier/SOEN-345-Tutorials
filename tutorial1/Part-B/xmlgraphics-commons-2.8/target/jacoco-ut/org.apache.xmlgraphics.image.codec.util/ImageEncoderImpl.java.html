@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageEncoderImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.util</a> &gt; <span class="el_source">ImageEncoderImpl.java</span></div><h1>ImageEncoderImpl.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageEncoderImpl.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.util;
+
+import java.awt.image.ColorModel;
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.io.IOException;
+import java.io.OutputStream;
+
+/**
+ * A partial implementation of the ImageEncoder interface useful for
+ * subclassing.
+ *
+ * &lt;p&gt;&lt;b&gt; This class is not a committed part of the JAI API.  It may
+ * be removed or changed in future releases of JAI.&lt;/b&gt;
+ */
+public abstract class ImageEncoderImpl implements ImageEncoder {
+
+    /** The OutputStream associcted with this ImageEncoder. */
+    protected OutputStream output;
+
+    /** The ImageEncodeParam object associcted with this ImageEncoder. */
+    protected ImageEncodeParam param;
+
+    /**
+     * Constructs an ImageEncoderImpl with a given OutputStream
+     * and ImageEncoderParam instance.
+     */
+    public ImageEncoderImpl(OutputStream output,
+<span class="fc" id="L48">                            ImageEncodeParam param) {</span>
+<span class="fc" id="L49">        this.output = output;</span>
+<span class="fc" id="L50">        this.param = param;</span>
+<span class="fc" id="L51">    }</span>
+
+    /**
+     * Returns the current parameters as an instance of the
+     * ImageEncodeParam interface.  Concrete implementations of this
+     * interface will return corresponding concrete implementations of
+     * the ImageEncodeParam interface.  For example, a JPEGImageEncoder
+     * will return an instance of JPEGEncodeParam.
+     */
+    public ImageEncodeParam getParam() {
+<span class="nc" id="L61">        return param;</span>
+    }
+
+    /**
+     * Sets the current parameters to an instance of the
+     * ImageEncodeParam interface.  Concrete implementations
+     * of ImageEncoder may throw a RuntimeException if the
+     * params argument is not an instance of the appropriate
+     * subclass or subinterface.  For example, a JPEGImageEncoder
+     * will expect param to be an instance of JPEGEncodeParam.
+     */
+    public void setParam(ImageEncodeParam param) {
+<span class="nc" id="L73">        this.param = param;</span>
+<span class="nc" id="L74">    }</span>
+
+    /** Returns the OutputStream associated with this ImageEncoder. */
+    public OutputStream getOutputStream() {
+<span class="nc" id="L78">        return output;</span>
+    }
+
+    /**
+     * Encodes a Raster with a given ColorModel and writes the output
+     * to the OutputStream associated with this ImageEncoder.
+     */
+    public void encode(Raster ras, ColorModel cm) throws IOException {
+<span class="nc" id="L86">        RenderedImage im = new SingleTileRenderedImage(ras, cm);</span>
+<span class="nc" id="L87">        encode(im);</span>
+<span class="nc" id="L88">    }</span>
+
+    /**
+     * Encodes a RenderedImage and writes the output to the
+     * OutputStream associated with this ImageEncoder.
+     */
+    public abstract void encode(RenderedImage im) throws IOException;
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

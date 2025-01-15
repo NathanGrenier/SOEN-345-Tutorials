@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RunLengthEncodeOutputStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.io</a> &gt; <span class="el_source">RunLengthEncodeOutputStream.java</span></div><h1>RunLengthEncodeOutputStream.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: RunLengthEncodeOutputStream.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.util.io;
+
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+
+/**
+ * This class applies a RunLengthEncode filter to the stream.
+ *
+ * @version  $Id: RunLengthEncodeOutputStream.java 1804124 2017-08-04 14:13:54Z ssteiner $
+ *
+ * Originally authored by Stephen Wolke.
+ */
+public class RunLengthEncodeOutputStream extends FilterOutputStream
+            implements Finalizable {
+
+    private static final int MAX_SEQUENCE_COUNT    = 127;
+    private static final int END_OF_DATA           = 128;
+    private static final int BYTE_MAX              = 256;
+
+    private static final int NOT_IDENTIFY_SEQUENCE = 0;
+    private static final int START_SEQUENCE        = 1;
+    private static final int IN_SEQUENCE           = 2;
+    private static final int NOT_IN_SEQUENCE       = 3;
+
+    private int runCount;
+<span class="nc" id="L47">    private int isSequence = NOT_IDENTIFY_SEQUENCE;</span>
+<span class="nc" id="L48">    private byte[] runBuffer = new byte[MAX_SEQUENCE_COUNT + 1];</span>
+
+
+    /** @see java.io.FilterOutputStream **/
+    public RunLengthEncodeOutputStream(OutputStream out) {
+<span class="nc" id="L53">        super(out);</span>
+<span class="nc" id="L54">    }</span>
+
+
+    /** @see java.io.FilterOutputStream **/
+    public void write(byte b)
+        throws java.io.IOException {
+<span class="nc" id="L60">        runBuffer[runCount] = b;</span>
+
+<span class="nc bnc" id="L62" title="All 5 branches missed.">        switch (runCount) {</span>
+        case 0:
+<span class="nc" id="L64">            runCount = 0;</span>
+<span class="nc" id="L65">            isSequence = NOT_IDENTIFY_SEQUENCE;</span>
+<span class="nc" id="L66">            runCount++;</span>
+<span class="nc" id="L67">            break;</span>
+        case 1:
+<span class="nc bnc" id="L69" title="All 2 branches missed.">            if (runBuffer[runCount] != runBuffer[runCount - 1]) {</span>
+<span class="nc" id="L70">                isSequence = NOT_IN_SEQUENCE;</span>
+            }
+<span class="nc" id="L72">            runCount++;</span>
+<span class="nc" id="L73">            break;</span>
+        case 2:
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (runBuffer[runCount] != runBuffer[runCount - 1]) {</span>
+<span class="nc" id="L76">                isSequence = NOT_IN_SEQUENCE;</span>
+            } else {
+<span class="nc bnc" id="L78" title="All 2 branches missed.">                if (isSequence == NOT_IN_SEQUENCE) {</span>
+<span class="nc" id="L79">                    isSequence = START_SEQUENCE;</span>
+                } else {
+<span class="nc" id="L81">                    isSequence = IN_SEQUENCE;</span>
+                }
+            }
+<span class="nc" id="L84">            runCount++;</span>
+<span class="nc" id="L85">            break;</span>
+        case MAX_SEQUENCE_COUNT:
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            if (isSequence == IN_SEQUENCE) {</span>
+<span class="nc" id="L88">                out.write(BYTE_MAX - (MAX_SEQUENCE_COUNT - 1));</span>
+<span class="nc" id="L89">                out.write(runBuffer[runCount - 1]);</span>
+<span class="nc" id="L90">                runBuffer[0] = runBuffer[runCount];</span>
+<span class="nc" id="L91">                runCount = 1;</span>
+            } else {
+<span class="nc" id="L93">                out.write(MAX_SEQUENCE_COUNT);</span>
+<span class="nc" id="L94">                out.write(runBuffer, 0, runCount + 1);</span>
+<span class="nc" id="L95">                runCount = 0;</span>
+            }
+<span class="nc" id="L97">            isSequence = NOT_IDENTIFY_SEQUENCE;</span>
+<span class="nc" id="L98">            break;</span>
+        default:
+<span class="nc bnc" id="L100" title="All 3 branches missed.">            switch (isSequence) {</span>
+            case NOT_IN_SEQUENCE:
+<span class="nc bnc" id="L102" title="All 2 branches missed.">                if (runBuffer[runCount] == runBuffer[runCount - 1]) {</span>
+<span class="nc" id="L103">                    isSequence = START_SEQUENCE;</span>
+                }
+<span class="nc" id="L105">                runCount++;</span>
+<span class="nc" id="L106">                break;</span>
+            case START_SEQUENCE:
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                if (runBuffer[runCount] == runBuffer[runCount - 1]) {</span>
+<span class="nc" id="L109">                    out.write(runCount - 3);</span>
+<span class="nc" id="L110">                    out.write(runBuffer, 0, runCount - 2);</span>
+<span class="nc" id="L111">                    runBuffer[0] = runBuffer[runCount];</span>
+<span class="nc" id="L112">                    runBuffer[1] = runBuffer[runCount];</span>
+<span class="nc" id="L113">                    runBuffer[2] = runBuffer[runCount];</span>
+<span class="nc" id="L114">                    runCount = 3;</span>
+<span class="nc" id="L115">                    isSequence = IN_SEQUENCE;</span>
+<span class="nc" id="L116">                    break;</span>
+                } else {
+<span class="nc" id="L118">                    isSequence = NOT_IN_SEQUENCE;</span>
+<span class="nc" id="L119">                    runCount++;</span>
+<span class="nc" id="L120">                    break;</span>
+                }
+            case IN_SEQUENCE:
+            default:
+<span class="nc bnc" id="L124" title="All 2 branches missed.">                if (runBuffer[runCount] != runBuffer[runCount - 1]) {</span>
+<span class="nc" id="L125">                    out.write(BYTE_MAX - (runCount - 1));</span>
+<span class="nc" id="L126">                    out.write(runBuffer[runCount - 1]);</span>
+<span class="nc" id="L127">                    runBuffer[0] = runBuffer[runCount];</span>
+<span class="nc" id="L128">                    runCount = 1;</span>
+<span class="nc" id="L129">                    isSequence = NOT_IDENTIFY_SEQUENCE;</span>
+<span class="nc" id="L130">                    break;</span>
+                }
+<span class="nc" id="L132">                runCount++;</span>
+                break;
+            }
+        }
+<span class="nc" id="L136">    }</span>
+
+
+    /** @see java.io.FilterOutputStream **/
+    public void write(byte[] b)
+        throws IOException {
+
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        for (byte aB : b) {</span>
+<span class="nc" id="L144">            this.write(aB);</span>
+        }
+<span class="nc" id="L146">    }</span>
+
+
+    /** @see java.io.FilterOutputStream **/
+    public void write(byte[] b, int off, int len)
+        throws IOException {
+
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        for (int i = 0; i &lt; len; i++) {</span>
+<span class="nc" id="L154">            this.write(b[off + i]);</span>
+        }
+<span class="nc" id="L156">    }</span>
+
+
+    /** @see Finalizable **/
+    public void finalizeStream()
+        throws IOException {
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        switch (isSequence) {</span>
+        case IN_SEQUENCE:
+<span class="nc" id="L164">            out.write(BYTE_MAX - (runCount - 1));</span>
+<span class="nc" id="L165">            out.write(runBuffer[runCount - 1]);</span>
+<span class="nc" id="L166">            break;</span>
+        default:
+<span class="nc" id="L168">            out.write(runCount - 1);</span>
+<span class="nc" id="L169">            out.write(runBuffer, 0, runCount);</span>
+        }
+
+<span class="nc" id="L172">        out.write(END_OF_DATA);</span>
+
+<span class="nc" id="L174">        flush();</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (out instanceof Finalizable) {</span>
+<span class="nc" id="L176">            ((Finalizable) out).finalizeStream();</span>
+        }
+<span class="nc" id="L178">    }</span>
+
+
+    /** @see java.io.FilterOutputStream **/
+    public void close()
+        throws IOException {
+<span class="nc" id="L184">        finalizeStream();</span>
+<span class="nc" id="L185">        super.close();</span>
+<span class="nc" id="L186">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

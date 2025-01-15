@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RefinedImageFlavor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader</a> &gt; <span class="el_source">RefinedImageFlavor.java</span></div><h1>RefinedImageFlavor.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: RefinedImageFlavor.java 734638 2009-01-15 09:19:32Z jeremias $ */
+
+package org.apache.xmlgraphics.image.loader;
+
+/**
+ * Special image flavor subclass which enables the refinement to specific (sub-)flavors but
+ * maintaining compatibility to a parent (i.e. more general) flavor.
+ */
+public abstract class RefinedImageFlavor extends ImageFlavor {
+
+    private ImageFlavor parentFlavor;
+
+    /**
+     * Constructs a new image flavor.
+     * @param parentFlavor the parent image flavor
+     */
+    protected RefinedImageFlavor(ImageFlavor parentFlavor) {
+<span class="nc" id="L35">        this(parentFlavor.getName(), parentFlavor);</span>
+<span class="nc" id="L36">    }</span>
+
+    /**
+     * Constructs a new image flavor.
+     * @param parentFlavor the parent image flavor
+     * @param name the name of the flavor (must be unique)
+     */
+    protected RefinedImageFlavor(String name, ImageFlavor parentFlavor) {
+<span class="fc" id="L44">        super(name);</span>
+<span class="fc" id="L45">        this.parentFlavor = parentFlavor;</span>
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Returns the associated parent image flavor.
+     * @return the parent image flavor
+     */
+    public ImageFlavor getParentFlavor() {
+<span class="fc" id="L53">        return this.parentFlavor;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String getMimeType() {
+<span class="fc" id="L58">        return this.parentFlavor.getMimeType();</span>
+    }
+
+    /** {@inheritDoc} */
+    public String getNamespace() {
+<span class="fc" id="L63">        return this.parentFlavor.getNamespace();</span>
+    }
+
+    /** {@inheritDoc} */
+    public boolean isCompatible(ImageFlavor flavor) {
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        return getParentFlavor().isCompatible(flavor)</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            || super.isCompatible(flavor);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

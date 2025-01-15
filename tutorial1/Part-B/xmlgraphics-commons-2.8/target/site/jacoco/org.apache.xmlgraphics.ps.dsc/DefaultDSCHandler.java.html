@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultDSCHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps.dsc</a> &gt; <span class="el_source">DefaultDSCHandler.java</span></div><h1>DefaultDSCHandler.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DefaultDSCHandler.java 750418 2009-03-05 11:03:54Z vhennebert $ */
+
+package org.apache.xmlgraphics.ps.dsc;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+import org.apache.xmlgraphics.ps.DSCConstants;
+import org.apache.xmlgraphics.ps.PSGenerator;
+import org.apache.xmlgraphics.ps.dsc.events.DSCComment;
+
+/**
+ * Default implementation of a DSCHandler which simply passes through the PostScript content
+ * unchanged. Subclasses can implement different behaviour, for example to filter certain
+ * DSC comments or to insert PostScript code at specific places.
+ */
+public class DefaultDSCHandler implements DSCHandler {
+
+    protected OutputStream out;
+    protected PSGenerator gen;
+
+    /**
+     * Creates a new instance.
+     * @param out OutputStream to pipe all received events to
+     */
+<span class="nc" id="L43">    public DefaultDSCHandler(OutputStream out) {</span>
+<span class="nc" id="L44">        this.out = out;</span>
+<span class="nc" id="L45">        this.gen = new PSGenerator(this.out);</span>
+<span class="nc" id="L46">    }</span>
+
+    /** @see org.apache.xmlgraphics.ps.dsc.DSCHandler#startDocument(java.lang.String) */
+    public void startDocument(String header) throws IOException {
+<span class="nc" id="L50">        gen.writeln(header);</span>
+<span class="nc" id="L51">    }</span>
+
+    /** @see org.apache.xmlgraphics.ps.dsc.DSCHandler#endDocument() */
+    public void endDocument() throws IOException {
+<span class="nc" id="L55">        gen.writeDSCComment(DSCConstants.EOF);</span>
+<span class="nc" id="L56">    }</span>
+
+    /**
+     * @see org.apache.xmlgraphics.ps.dsc.DSCHandler#handleDSCComment(
+     *      org.apache.xmlgraphics.ps.dsc.events.DSCComment)
+     */
+    public void handleDSCComment(DSCComment comment) throws IOException {
+<span class="nc" id="L63">        comment.generate(gen);</span>
+
+<span class="nc" id="L65">    }</span>
+
+    /** @see org.apache.xmlgraphics.ps.dsc.DSCHandler#line(java.lang.String) */
+    public void line(String line) throws IOException {
+<span class="nc" id="L69">        gen.writeln(line);</span>
+<span class="nc" id="L70">    }</span>
+
+    /** @see org.apache.xmlgraphics.ps.dsc.DSCHandler#comment(java.lang.String) */
+    public void comment(String comment) throws IOException {
+<span class="nc" id="L74">        gen.commentln(&quot;%&quot; + comment);</span>
+<span class="nc" id="L75">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

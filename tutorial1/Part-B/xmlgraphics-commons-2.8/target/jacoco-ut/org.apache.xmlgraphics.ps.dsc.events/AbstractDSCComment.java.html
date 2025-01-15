@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractDSCComment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps.dsc.events</a> &gt; <span class="el_source">AbstractDSCComment.java</span></div><h1>AbstractDSCComment.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: AbstractDSCComment.java 1345683 2012-06-03 14:50:33Z gadams $ */
+
+package org.apache.xmlgraphics.ps.dsc.events;
+
+import java.util.List;
+
+/**
+ * Abstract base class for DSC comments.
+ */
+<span class="fc" id="L27">public abstract class AbstractDSCComment extends AbstractEvent implements DSCComment {</span>
+
+    private boolean isWhitespace(char c) {
+<span class="fc bfc" id="L30" title="All 4 branches covered.">        return c == ' ' || c == '\t';</span>
+    }
+
+    private int parseNextParam(String value, int pos, List lst) {
+<span class="fc" id="L34">        int startPos = pos;</span>
+<span class="fc" id="L35">        pos++;</span>
+<span class="fc bfc" id="L36" title="All 4 branches covered.">        while (pos &lt; value.length() &amp;&amp; !isWhitespace(value.charAt(pos))) {</span>
+<span class="fc" id="L37">            pos++;</span>
+        }
+<span class="fc" id="L39">        String param = value.substring(startPos, pos);</span>
+<span class="fc" id="L40">        lst.add(param);</span>
+<span class="fc" id="L41">        return pos;</span>
+    }
+
+    private int parseNextParentheseString(String value, int pos, List lst) {
+<span class="fc" id="L45">        int nestLevel = 1;</span>
+<span class="fc" id="L46">        pos++;</span>
+<span class="fc" id="L47">        StringBuffer sb = new StringBuffer();</span>
+<span class="fc bfc" id="L48" title="All 4 branches covered.">        while (pos &lt; value.length() &amp;&amp; nestLevel &gt; 0) {</span>
+<span class="fc" id="L49">            final char c = value.charAt(pos);</span>
+<span class="fc bfc" id="L50" title="All 4 branches covered.">            switch (c) {</span>
+            case '(':
+<span class="fc" id="L52">                nestLevel++;</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">                if (nestLevel &gt; 1) {</span>
+<span class="fc" id="L54">                    sb.append(c);</span>
+                }
+                break;
+            case ')':
+<span class="fc bfc" id="L58" title="All 2 branches covered.">                if (nestLevel &gt; 1) {</span>
+<span class="fc" id="L59">                    sb.append(c);</span>
+                }
+<span class="fc" id="L61">                nestLevel--;</span>
+<span class="fc" id="L62">                break;</span>
+            case '\\':
+<span class="fc" id="L64">                pos++;</span>
+<span class="fc" id="L65">                char cnext = value.charAt(pos);</span>
+<span class="pc bpc" id="L66" title="7 of 9 branches missed.">                switch (cnext) {</span>
+                case '\\':
+<span class="fc" id="L68">                    sb.append(cnext);</span>
+<span class="fc" id="L69">                    break;</span>
+                case 'n':
+<span class="nc" id="L71">                    sb.append('\n');</span>
+<span class="nc" id="L72">                    break;</span>
+                case 'r':
+<span class="nc" id="L74">                    sb.append('\r');</span>
+<span class="nc" id="L75">                    break;</span>
+                case 't':
+<span class="nc" id="L77">                    sb.append('\t');</span>
+<span class="nc" id="L78">                    break;</span>
+                case 'b':
+<span class="nc" id="L80">                    sb.append('\b');</span>
+<span class="nc" id="L81">                    break;</span>
+                case 'f':
+<span class="nc" id="L83">                    sb.append('\f');</span>
+<span class="nc" id="L84">                    break;</span>
+                case '(':
+<span class="nc" id="L86">                    sb.append('(');</span>
+<span class="nc" id="L87">                    break;</span>
+                case ')':
+<span class="nc" id="L89">                    sb.append(')');</span>
+<span class="nc" id="L90">                    break;</span>
+                default:
+<span class="fc" id="L92">                    int code = Integer.parseInt(value.substring(pos, pos + 3), 8);</span>
+<span class="fc" id="L93">                    sb.append((char)code);</span>
+<span class="fc" id="L94">                    pos += 2;</span>
+                }
+<span class="fc" id="L96">                break;</span>
+            default:
+<span class="fc" id="L98">                sb.append(c);</span>
+            }
+<span class="fc" id="L100">            pos++;</span>
+<span class="fc" id="L101">        }</span>
+<span class="fc" id="L102">        lst.add(sb.toString());</span>
+<span class="fc" id="L103">        pos++;</span>
+<span class="fc" id="L104">        return pos;</span>
+    }
+
+    /**
+     * Splits the params of the DSC comment value in to a List.
+     * @param value the DSC comment value
+     * @return the List of values
+     */
+    protected List splitParams(String value) {
+<span class="fc" id="L113">        List lst = new java.util.ArrayList();</span>
+<span class="fc" id="L114">        int pos = 0;</span>
+<span class="fc" id="L115">        value = value.trim();</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">        while (pos &lt; value.length()) {</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            if (isWhitespace(value.charAt(pos))) {</span>
+<span class="fc" id="L118">                pos++;</span>
+<span class="fc" id="L119">                continue;</span>
+            }
+<span class="fc bfc" id="L121" title="All 2 branches covered.">            if (value.charAt(pos) == '(') {</span>
+<span class="fc" id="L122">                pos = parseNextParentheseString(value, pos, lst);</span>
+            } else {
+<span class="fc" id="L124">                pos = parseNextParam(value, pos, lst);</span>
+            }
+        }
+<span class="fc" id="L127">        return lst;</span>
+    }
+
+    /**
+     * @see org.apache.xmlgraphics.ps.dsc.events.DSCComment#isAtend()
+     */
+    public boolean isAtend() {
+<span class="nc" id="L134">        return false;</span>
+    }
+
+    /**
+     * @see org.apache.xmlgraphics.ps.dsc.events.AbstractEvent#asDSCComment()
+     */
+    public DSCComment asDSCComment() {
+<span class="fc" id="L141">        return this;</span>
+    }
+
+    /**
+     * @see org.apache.xmlgraphics.ps.dsc.events.AbstractEvent#isDSCComment()
+     */
+    public boolean isDSCComment() {
+<span class="fc" id="L148">        return true;</span>
+    }
+
+    /**
+     * @see org.apache.xmlgraphics.ps.dsc.events.DSCEvent#getEventType()
+     */
+    public int getEventType() {
+<span class="fc" id="L155">        return DSC_COMMENT;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
