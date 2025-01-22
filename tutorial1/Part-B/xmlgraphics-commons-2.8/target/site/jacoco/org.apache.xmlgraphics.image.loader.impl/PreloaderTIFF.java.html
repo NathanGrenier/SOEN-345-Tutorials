@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreloaderTIFF.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">PreloaderTIFF.java</span></div><h1>PreloaderTIFF.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreloaderTIFF.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">PreloaderTIFF.java</span></div><h1>PreloaderTIFF.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -48,7 +48,7 @@ import org.apache.xmlgraphics.util.UnitConv;
  * Note: The implementation relies on the TIFF codec code in Apache XML Graphics Commons for
  * access to the TIFF directory.
  */
-<span class="fc" id="L51">public class PreloaderTIFF extends AbstractImagePreloader {</span>
+<span class="pc bpc" id="L51" title="3 of 4 branches missed.">public class PreloaderTIFF extends AbstractImagePreloader {public static class __CLR4_5_28ye8yem68iyhfw{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,11728,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
 <span class="fc" id="L53">    private static Log log = LogFactory.getLog(PreloaderTIFF.class);</span>
 
@@ -57,145 +57,145 @@ import org.apache.xmlgraphics.util.UnitConv;
     /** {@inheritDoc}
      * @throws ImageException */
     public ImageInfo preloadImage(String uri, Source src, ImageContext context)
-            throws IOException, ImageException {
-<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (!ImageUtil.hasImageInputStream(src)) {</span>
-<span class="nc" id="L62">            return null;</span>
+<span class="fc" id="L60">            throws IOException, ImageException {try{__CLR4_5_28ye8yem68iyhfw.R.inc(11606);</span>
+<span class="pc bpc" id="L61" title="7 of 10 branches missed.">        __CLR4_5_28ye8yem68iyhfw.R.inc(11607);if ((((!ImageUtil.hasImageInputStream(src))&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11608)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11609)==0&amp;false))) {{</span>
+<span class="nc" id="L62">            __CLR4_5_28ye8yem68iyhfw.R.inc(11610);return null;</span>
         }
-<span class="fc" id="L64">        ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
-<span class="fc" id="L65">        byte[] header = getHeader(in, TIFF_SIG_LENGTH);</span>
-<span class="fc" id="L66">        boolean supported = false;</span>
+<span class="fc" id="L64">        }__CLR4_5_28ye8yem68iyhfw.R.inc(11611);ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
+<span class="fc" id="L65">        __CLR4_5_28ye8yem68iyhfw.R.inc(11612);byte[] header = getHeader(in, TIFF_SIG_LENGTH);</span>
+<span class="fc" id="L66">        __CLR4_5_28ye8yem68iyhfw.R.inc(11613);boolean supported = false;</span>
 
         // first 2 bytes = II (little endian encoding)
-<span class="pc bpc" id="L69" title="1 of 4 branches missed.">        if (header[0] == (byte) 0x49 &amp;&amp; header[1] == (byte) 0x49) {</span>
+<span class="pc bpc" id="L69" title="5 of 12 branches missed.">        __CLR4_5_28ye8yem68iyhfw.R.inc(11614);if ((((header[0] == (byte) 0x49 &amp;&amp; header[1] == (byte) 0x49)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11615)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11616)==0&amp;false))) {{</span>
 
             // look for '42' in byte 3 and '0' in byte 4
-<span class="pc bpc" id="L72" title="2 of 4 branches missed.">            if (header[2] == 42 &amp;&amp; header[3] == 0) {</span>
-<span class="fc" id="L73">                supported = true;</span>
+<span class="pc bpc" id="L72" title="8 of 12 branches missed.">            __CLR4_5_28ye8yem68iyhfw.R.inc(11617);if ((((header[2] == 42 &amp;&amp; header[3] == 0)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11618)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11619)==0&amp;false))) {{</span>
+<span class="fc" id="L73">                __CLR4_5_28ye8yem68iyhfw.R.inc(11620);supported = true;</span>
             }
-        }
+        }}
 
         // first 2 bytes == MM (big endian encoding)
-<span class="pc bpc" id="L78" title="1 of 4 branches missed.">        if (header[0] == (byte) 0x4D &amp;&amp; header[1] == (byte) 0x4D) {</span>
+<span class="pc bpc" id="L78" title="5 of 12 branches missed.">        }__CLR4_5_28ye8yem68iyhfw.R.inc(11621);if ((((header[0] == (byte) 0x4D &amp;&amp; header[1] == (byte) 0x4D)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11622)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11623)==0&amp;false))) {{</span>
 
             // look for '42' in byte 4 and '0' in byte 3
-<span class="pc bpc" id="L81" title="2 of 4 branches missed.">            if (header[2] == 0 &amp;&amp; header[3] == 42) {</span>
-<span class="fc" id="L82">                supported = true;</span>
+<span class="pc bpc" id="L81" title="8 of 12 branches missed.">            __CLR4_5_28ye8yem68iyhfw.R.inc(11624);if ((((header[2] == 0 &amp;&amp; header[3] == 42)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11625)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11626)==0&amp;false))) {{</span>
+<span class="fc" id="L82">                __CLR4_5_28ye8yem68iyhfw.R.inc(11627);supported = true;</span>
             }
-        }
+        }}
 
-<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (supported) {</span>
-<span class="fc" id="L87">            ImageInfo info = createImageInfo(uri, in, context);</span>
-<span class="fc" id="L88">            return info;</span>
-        } else {
-<span class="fc" id="L90">            return null;</span>
+<span class="pc bpc" id="L86" title="4 of 10 branches missed.">        }__CLR4_5_28ye8yem68iyhfw.R.inc(11628);if ((((supported)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11629)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11630)==0&amp;false))) {{</span>
+<span class="fc" id="L87">            __CLR4_5_28ye8yem68iyhfw.R.inc(11631);ImageInfo info = createImageInfo(uri, in, context);</span>
+<span class="fc" id="L88">            __CLR4_5_28ye8yem68iyhfw.R.inc(11632);return info;</span>
+        } }else {{
+<span class="fc" id="L90">            __CLR4_5_28ye8yem68iyhfw.R.inc(11633);return null;</span>
         }
-    }
+<span class="fc" id="L92">    }}finally{__CLR4_5_28ye8yem68iyhfw.R.flushNeeded();}}</span>
 
     private ImageInfo createImageInfo(String uri, ImageInputStream in, ImageContext context)
-                throws IOException, ImageException {
-<span class="fc" id="L96">        ImageInfo info = null;</span>
-<span class="fc" id="L97">        in.mark();</span>
-        try {
-<span class="fc" id="L99">            int pageIndex = ImageUtil.needPageIndexFromURI(uri);</span>
+<span class="fc" id="L95">                throws IOException, ImageException {try{__CLR4_5_28ye8yem68iyhfw.R.inc(11634);</span>
+<span class="fc" id="L96">        __CLR4_5_28ye8yem68iyhfw.R.inc(11635);ImageInfo info = null;</span>
+<span class="fc" id="L97">        __CLR4_5_28ye8yem68iyhfw.R.inc(11636);in.mark();</span>
+<span class="fc" id="L98">        __CLR4_5_28ye8yem68iyhfw.R.inc(11637);try {</span>
+<span class="fc" id="L99">            __CLR4_5_28ye8yem68iyhfw.R.inc(11638);int pageIndex = ImageUtil.needPageIndexFromURI(uri);</span>
 
-<span class="fc" id="L101">            SeekableStream seekable = new SeekableStreamAdapter(in);</span>
-            TIFFDirectory dir;
-            try {
-<span class="fc" id="L104">                dir = new TIFFDirectory(seekable, pageIndex);</span>
+<span class="fc" id="L101">            __CLR4_5_28ye8yem68iyhfw.R.inc(11639);SeekableStream seekable = new SeekableStreamAdapter(in);</span>
+<span class="fc" id="L102">            __CLR4_5_28ye8yem68iyhfw.R.inc(11640);TIFFDirectory dir;</span>
+<span class="fc" id="L103">            __CLR4_5_28ye8yem68iyhfw.R.inc(11641);try {</span>
+<span class="fc" id="L104">                __CLR4_5_28ye8yem68iyhfw.R.inc(11642);dir = new TIFFDirectory(seekable, pageIndex);</span>
 <span class="nc" id="L105">            } catch (IllegalArgumentException iae) {</span>
-<span class="nc" id="L106">                String errorMessage = MessageFormat.format(</span>
+<span class="nc" id="L106">                __CLR4_5_28ye8yem68iyhfw.R.inc(11643);String errorMessage = MessageFormat.format(</span>
 <span class="nc" id="L107">                        &quot;Subimage {0} does not exist.&quot;, new Object[] {pageIndex});</span>
-<span class="nc" id="L108">                throw new SubImageNotFoundException(errorMessage);</span>
+<span class="nc" id="L108">                __CLR4_5_28ye8yem68iyhfw.R.inc(11644);throw new SubImageNotFoundException(errorMessage);</span>
 <span class="fc" id="L109">            }</span>
-<span class="fc" id="L110">            int width = (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_IMAGE_WIDTH);</span>
-<span class="fc" id="L111">            int height = (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_IMAGE_LENGTH);</span>
-<span class="fc" id="L112">            ImageSize size = new ImageSize();</span>
-<span class="fc" id="L113">            size.setSizeInPixels(width, height);</span>
-<span class="fc" id="L114">            int unit = 2; //inch is default</span>
-<span class="fc bfc" id="L115" title="All 2 branches covered.">            if (dir.isTagPresent(TIFFImageDecoder.TIFF_RESOLUTION_UNIT)) {</span>
-<span class="fc" id="L116">                unit = (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_RESOLUTION_UNIT);</span>
+<span class="fc" id="L110">            __CLR4_5_28ye8yem68iyhfw.R.inc(11645);int width = (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_IMAGE_WIDTH);</span>
+<span class="fc" id="L111">            __CLR4_5_28ye8yem68iyhfw.R.inc(11646);int height = (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_IMAGE_LENGTH);</span>
+<span class="fc" id="L112">            __CLR4_5_28ye8yem68iyhfw.R.inc(11647);ImageSize size = new ImageSize();</span>
+<span class="fc" id="L113">            __CLR4_5_28ye8yem68iyhfw.R.inc(11648);size.setSizeInPixels(width, height);</span>
+<span class="fc" id="L114">            __CLR4_5_28ye8yem68iyhfw.R.inc(11649);int unit = 2; //inch is default</span>
+<span class="pc bpc" id="L115" title="4 of 10 branches missed.">            __CLR4_5_28ye8yem68iyhfw.R.inc(11650);if ((((dir.isTagPresent(TIFFImageDecoder.TIFF_RESOLUTION_UNIT))&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11651)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11652)==0&amp;false))) {{</span>
+<span class="fc" id="L116">                __CLR4_5_28ye8yem68iyhfw.R.inc(11653);unit = (int)dir.getFieldAsLong(TIFFImageDecoder.TIFF_RESOLUTION_UNIT);</span>
             }
-<span class="pc bpc" id="L118" title="3 of 4 branches missed.">            if (unit == 2 || unit == 3) {</span>
-                float xRes;
-                float yRes;
-<span class="fc" id="L121">                TIFFField fldx = dir.getField(TIFFImageDecoder.TIFF_X_RESOLUTION);</span>
-<span class="fc" id="L122">                TIFFField fldy = dir.getField(TIFFImageDecoder.TIFF_Y_RESOLUTION);</span>
-<span class="pc bpc" id="L123" title="1 of 4 branches missed.">                if (fldx == null || fldy == null) {</span>
-<span class="fc" id="L124">                    unit = 2;</span>
-<span class="fc" id="L125">                    xRes = context.getSourceResolution();</span>
-<span class="fc" id="L126">                    yRes = xRes;</span>
-                } else {
-<span class="fc" id="L128">                    xRes = fldx.getAsFloat(0);</span>
-<span class="fc" id="L129">                    yRes = fldy.getAsFloat(0);</span>
+<span class="pc bpc" id="L118" title="9 of 12 branches missed.">            }__CLR4_5_28ye8yem68iyhfw.R.inc(11654);if ((((unit == 2 || unit == 3)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11655)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11656)==0&amp;false))) {{</span>
+<span class="fc" id="L119">                __CLR4_5_28ye8yem68iyhfw.R.inc(11657);float xRes;</span>
+<span class="fc" id="L120">                __CLR4_5_28ye8yem68iyhfw.R.inc(11658);float yRes;</span>
+<span class="fc" id="L121">                __CLR4_5_28ye8yem68iyhfw.R.inc(11659);TIFFField fldx = dir.getField(TIFFImageDecoder.TIFF_X_RESOLUTION);</span>
+<span class="fc" id="L122">                __CLR4_5_28ye8yem68iyhfw.R.inc(11660);TIFFField fldy = dir.getField(TIFFImageDecoder.TIFF_Y_RESOLUTION);</span>
+<span class="pc bpc" id="L123" title="5 of 12 branches missed.">                __CLR4_5_28ye8yem68iyhfw.R.inc(11661);if ((((fldx == null || fldy == null)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11662)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11663)==0&amp;false))) {{</span>
+<span class="fc" id="L124">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11664);unit = 2;</span>
+<span class="fc" id="L125">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11665);xRes = context.getSourceResolution();</span>
+<span class="fc" id="L126">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11666);yRes = xRes;</span>
+                } }else {{
+<span class="fc" id="L128">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11667);xRes = fldx.getAsFloat(0);</span>
+<span class="fc" id="L129">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11668);yRes = fldy.getAsFloat(0);</span>
                 }
-<span class="pc bpc" id="L131" title="2 of 4 branches missed.">                if (xRes == 0 || yRes == 0) {</span>
+<span class="pc bpc" id="L131" title="8 of 12 branches missed.">                }__CLR4_5_28ye8yem68iyhfw.R.inc(11669);if ((((xRes == 0 || yRes == 0)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11670)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11671)==0&amp;false))) {{</span>
                     //Some TIFFs may report 0 here which would lead to problems
-<span class="nc" id="L133">                    size.setResolution(context.getSourceResolution());</span>
-<span class="pc bpc" id="L134" title="1 of 2 branches missed.">                } else if (unit == 2) {</span>
-<span class="fc" id="L135">                    size.setResolution(xRes, yRes); //Inch</span>
-                } else {
-<span class="nc" id="L137">                    size.setResolution(</span>
+<span class="nc" id="L133">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11672);size.setResolution(context.getSourceResolution());</span>
+<span class="pc bpc" id="L134" title="7 of 10 branches missed.">                } }else {__CLR4_5_28ye8yem68iyhfw.R.inc(11673);if ((((unit == 2)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11674)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11675)==0&amp;false))) {{</span>
+<span class="fc" id="L135">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11676);size.setResolution(xRes, yRes); //Inch</span>
+                } }else {{
+<span class="nc" id="L137">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11677);size.setResolution(</span>
 <span class="nc" id="L138">                            UnitConv.in2mm(xRes) / 10,</span>
 <span class="nc" id="L139">                            UnitConv.in2mm(yRes) / 10); //Centimeters</span>
                 }
-<span class="fc" id="L141">            } else {</span>
-<span class="nc" id="L142">                size.setResolution(context.getSourceResolution());</span>
+<span class="fc" id="L141">            }}} }else {{</span>
+<span class="nc" id="L142">                __CLR4_5_28ye8yem68iyhfw.R.inc(11678);size.setResolution(context.getSourceResolution());</span>
             }
-<span class="fc" id="L144">            size.calcSizeFromPixels();</span>
-<span class="pc bpc" id="L145" title="1 of 2 branches missed.">            if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L146">                log.trace(&quot;TIFF image detected: &quot; + size);</span>
+<span class="fc" id="L144">            }__CLR4_5_28ye8yem68iyhfw.R.inc(11679);size.calcSizeFromPixels();</span>
+<span class="pc bpc" id="L145" title="7 of 10 branches missed.">            __CLR4_5_28ye8yem68iyhfw.R.inc(11680);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11681)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11682)==0&amp;false))) {{</span>
+<span class="nc" id="L146">                __CLR4_5_28ye8yem68iyhfw.R.inc(11683);log.trace(&quot;TIFF image detected: &quot; + size);</span>
             }
 
-<span class="fc" id="L149">            info = new ImageInfo(uri, MimeConstants.MIME_TIFF);</span>
-<span class="fc" id="L150">            info.setSize(size);</span>
+<span class="fc" id="L149">            }__CLR4_5_28ye8yem68iyhfw.R.inc(11684);info = new ImageInfo(uri, MimeConstants.MIME_TIFF);</span>
+<span class="fc" id="L150">            __CLR4_5_28ye8yem68iyhfw.R.inc(11685);info.setSize(size);</span>
 
-            TIFFField fld;
+<span class="fc" id="L152">            __CLR4_5_28ye8yem68iyhfw.R.inc(11686);TIFFField fld;</span>
 
-<span class="fc" id="L154">            fld = dir.getField(TIFFImageDecoder.TIFF_COMPRESSION);</span>
-<span class="pc bpc" id="L155" title="1 of 2 branches missed.">            if (fld != null) {</span>
-<span class="fc" id="L156">                int compression = fld.getAsInt(0);</span>
-<span class="pc bpc" id="L157" title="1 of 2 branches missed.">                if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L158">                    log.trace(&quot;TIFF compression: &quot; + compression);</span>
+<span class="fc" id="L154">            __CLR4_5_28ye8yem68iyhfw.R.inc(11687);fld = dir.getField(TIFFImageDecoder.TIFF_COMPRESSION);</span>
+<span class="pc bpc" id="L155" title="7 of 10 branches missed.">            __CLR4_5_28ye8yem68iyhfw.R.inc(11688);if ((((fld != null)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11689)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11690)==0&amp;false))) {{</span>
+<span class="fc" id="L156">                __CLR4_5_28ye8yem68iyhfw.R.inc(11691);int compression = fld.getAsInt(0);</span>
+<span class="pc bpc" id="L157" title="7 of 10 branches missed.">                __CLR4_5_28ye8yem68iyhfw.R.inc(11692);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11693)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11694)==0&amp;false))) {{</span>
+<span class="nc" id="L158">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11695);log.trace(&quot;TIFF compression: &quot; + compression);</span>
                 }
-<span class="fc" id="L160">                info.getCustomObjects().put(&quot;TIFF_COMPRESSION&quot;, compression);</span>
+<span class="fc" id="L160">                }__CLR4_5_28ye8yem68iyhfw.R.inc(11696);info.getCustomObjects().put(&quot;TIFF_COMPRESSION&quot;, compression);</span>
             }
 
-<span class="fc" id="L163">            fld = dir.getField(TIFFImageDecoder.TIFF_TILE_WIDTH);</span>
-<span class="pc bpc" id="L164" title="1 of 2 branches missed.">            if (fld != null) {</span>
-<span class="nc bnc" id="L165" title="All 2 branches missed.">                if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L166">                    log.trace(&quot;TIFF is tiled&quot;);</span>
+<span class="fc" id="L163">            }__CLR4_5_28ye8yem68iyhfw.R.inc(11697);fld = dir.getField(TIFFImageDecoder.TIFF_TILE_WIDTH);</span>
+<span class="pc bpc" id="L164" title="7 of 10 branches missed.">            __CLR4_5_28ye8yem68iyhfw.R.inc(11698);if ((((fld != null)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11699)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11700)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L165" title="All 10 branches missed.">                __CLR4_5_28ye8yem68iyhfw.R.inc(11701);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11702)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11703)==0&amp;false))) {{</span>
+<span class="nc" id="L166">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11704);log.trace(&quot;TIFF is tiled&quot;);</span>
                 }
-<span class="nc" id="L168">                info.getCustomObjects().put(&quot;TIFF_TILED&quot;, Boolean.TRUE);</span>
+<span class="nc" id="L168">                }__CLR4_5_28ye8yem68iyhfw.R.inc(11705);info.getCustomObjects().put(&quot;TIFF_TILED&quot;, Boolean.TRUE);</span>
             }
 
-            int stripCount;
-<span class="fc" id="L172">            fld = dir.getField(TIFFImageDecoder.TIFF_ROWS_PER_STRIP);</span>
-<span class="pc bpc" id="L173" title="1 of 2 branches missed.">            if (fld == null) {</span>
-<span class="nc" id="L174">                stripCount = 1;</span>
-            } else {
-<span class="fc" id="L176">                stripCount = (int)Math.ceil(size.getHeightPx() / (double)fld.getAsLong(0));</span>
+<span class="fc" id="L171">            }__CLR4_5_28ye8yem68iyhfw.R.inc(11706);int stripCount;</span>
+<span class="fc" id="L172">            __CLR4_5_28ye8yem68iyhfw.R.inc(11707);fld = dir.getField(TIFFImageDecoder.TIFF_ROWS_PER_STRIP);</span>
+<span class="pc bpc" id="L173" title="7 of 10 branches missed.">            __CLR4_5_28ye8yem68iyhfw.R.inc(11708);if ((((fld == null)&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11709)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11710)==0&amp;false))) {{</span>
+<span class="nc" id="L174">                __CLR4_5_28ye8yem68iyhfw.R.inc(11711);stripCount = 1;</span>
+            } }else {{
+<span class="fc" id="L176">                __CLR4_5_28ye8yem68iyhfw.R.inc(11712);stripCount = (int)Math.ceil(size.getHeightPx() / (double)fld.getAsLong(0));</span>
             }
-<span class="pc bpc" id="L178" title="1 of 2 branches missed.">            if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L179">                log.trace(&quot;TIFF has &quot; + stripCount + &quot; strips.&quot;);</span>
+<span class="pc bpc" id="L178" title="7 of 10 branches missed.">            }__CLR4_5_28ye8yem68iyhfw.R.inc(11713);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11714)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11715)==0&amp;false))) {{</span>
+<span class="nc" id="L179">                __CLR4_5_28ye8yem68iyhfw.R.inc(11716);log.trace(&quot;TIFF has &quot; + stripCount + &quot; strips.&quot;);</span>
             }
-<span class="fc" id="L181">            info.getCustomObjects().put(&quot;TIFF_STRIP_COUNT&quot;, stripCount);</span>
+<span class="fc" id="L181">            }__CLR4_5_28ye8yem68iyhfw.R.inc(11717);info.getCustomObjects().put(&quot;TIFF_STRIP_COUNT&quot;, stripCount);</span>
 
-            try {
+<span class="fc" id="L183">            __CLR4_5_28ye8yem68iyhfw.R.inc(11718);try {</span>
                 //Check if there is a next page
-<span class="nc" id="L185">                new TIFFDirectory(seekable, pageIndex + 1);</span>
-<span class="nc" id="L186">                info.getCustomObjects().put(ImageInfo.HAS_MORE_IMAGES, Boolean.TRUE);</span>
-<span class="nc bnc" id="L187" title="All 2 branches missed.">                if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L188">                    log.trace(&quot;TIFF is multi-page.&quot;);</span>
+<span class="nc" id="L185">                __CLR4_5_28ye8yem68iyhfw.R.inc(11719);new TIFFDirectory(seekable, pageIndex + 1);</span>
+<span class="nc" id="L186">                __CLR4_5_28ye8yem68iyhfw.R.inc(11720);info.getCustomObjects().put(ImageInfo.HAS_MORE_IMAGES, Boolean.TRUE);</span>
+<span class="nc bnc" id="L187" title="All 10 branches missed.">                __CLR4_5_28ye8yem68iyhfw.R.inc(11721);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_28ye8yem68iyhfw.R.iget(11722)!=0|true))||(__CLR4_5_28ye8yem68iyhfw.R.iget(11723)==0&amp;false))) {{</span>
+<span class="nc" id="L188">                    __CLR4_5_28ye8yem68iyhfw.R.inc(11724);log.trace(&quot;TIFF is multi-page.&quot;);</span>
                 }
-<span class="fc" id="L190">            } catch (IllegalArgumentException iae) {</span>
-<span class="fc" id="L191">                info.getCustomObjects().put(ImageInfo.HAS_MORE_IMAGES, Boolean.FALSE);</span>
+<span class="fc" id="L190">            }} catch (IllegalArgumentException iae) {</span>
+<span class="fc" id="L191">                __CLR4_5_28ye8yem68iyhfw.R.inc(11725);info.getCustomObjects().put(ImageInfo.HAS_MORE_IMAGES, Boolean.FALSE);</span>
 <span class="nc" id="L192">            }</span>
         } finally {
-<span class="fc" id="L194">            in.reset();</span>
+<span class="fc" id="L194">            __CLR4_5_28ye8yem68iyhfw.R.inc(11726);in.reset();</span>
         }
 
-<span class="fc" id="L197">        return info;</span>
-    }
+<span class="fc" id="L197">        __CLR4_5_28ye8yem68iyhfw.R.inc(11727);return info;</span>
+<span class="fc" id="L198">    }finally{__CLR4_5_28ye8yem68iyhfw.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MemoryCacheSeekableStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.util</a> &gt; <span class="el_source">MemoryCacheSeekableStream.java</span></div><h1>MemoryCacheSeekableStream.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MemoryCacheSeekableStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.util</a> &gt; <span class="el_source">MemoryCacheSeekableStream.java</span></div><h1>MemoryCacheSeekableStream.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -37,7 +37,7 @@ import java.util.List;
  * &lt;p&gt;&lt;b&gt; This class is not a committed part of the JAI API.  It may
  * be removed or changed in future releases of JAI.&lt;/b&gt;
  */
-public final class MemoryCacheSeekableStream extends SeekableStream {
+<span class="pc bpc" id="L40" title="3 of 4 branches missed.">public final class MemoryCacheSeekableStream extends SeekableStream {public static class __CLR4_5_26pi6pim68iygxk{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,8769,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /** The source input stream. */
     private InputStream src;
@@ -71,9 +71,9 @@ public final class MemoryCacheSeekableStream extends SeekableStream {
      * its source data from a regular &lt;code&gt;InputStream&lt;/code&gt;.
      * Seeking backwards is supported by means of an in-memory cache.
      */
-<span class="fc" id="L74">    public MemoryCacheSeekableStream(InputStream src) {</span>
-<span class="fc" id="L75">        this.src = src;</span>
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L74">    public MemoryCacheSeekableStream(InputStream src) {try{__CLR4_5_26pi6pim68iygxk.R.inc(8694);</span>
+<span class="fc" id="L75">        __CLR4_5_26pi6pim68iygxk.R.inc(8695);this.src = src;</span>
+<span class="fc" id="L76">    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}</span>
 
     /**
      * Ensures that at least &lt;code&gt;pos&lt;/code&gt; bytes are cached,
@@ -81,55 +81,55 @@ public final class MemoryCacheSeekableStream extends SeekableStream {
      * is equal to the smaller of &lt;code&gt;pos&lt;/code&gt; and the
      * length of the source stream.
      */
-    private long readUntil(long pos) throws IOException {
+<span class="fc" id="L84">    private long readUntil(long pos) throws IOException {try{__CLR4_5_26pi6pim68iygxk.R.inc(8696);</span>
         // We've already got enough data cached
-<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (pos &lt; length) {</span>
-<span class="nc" id="L87">            return pos;</span>
+<span class="pc bpc" id="L86" title="7 of 10 branches missed.">        __CLR4_5_26pi6pim68iygxk.R.inc(8697);if ((((pos &lt; length)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8698)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8699)==0&amp;false))) {{</span>
+<span class="nc" id="L87">            __CLR4_5_26pi6pim68iygxk.R.inc(8700);return pos;</span>
         }
         // pos &gt;= length but length isn't getting any bigger, so return it
-<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        if (foundEOS) {</span>
-<span class="nc" id="L91">            return length;</span>
+<span class="pc bpc" id="L90" title="7 of 10 branches missed.">        }__CLR4_5_26pi6pim68iygxk.R.inc(8701);if ((((foundEOS)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8702)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8703)==0&amp;false))) {{</span>
+<span class="nc" id="L91">            __CLR4_5_26pi6pim68iygxk.R.inc(8704);return length;</span>
         }
 
-<span class="fc" id="L94">        int sector = (int)(pos &gt;&gt; SECTOR_SHIFT);</span>
+<span class="fc" id="L94">        }__CLR4_5_26pi6pim68iygxk.R.inc(8705);int sector = (int)(pos &gt;&gt; SECTOR_SHIFT);</span>
 
         // First unread sector
-<span class="fc" id="L97">        int startSector = length &gt;&gt; SECTOR_SHIFT;</span>
+<span class="fc" id="L97">        __CLR4_5_26pi6pim68iygxk.R.inc(8706);int startSector = length &gt;&gt; SECTOR_SHIFT;</span>
 
         // Read sectors until the desired sector
-<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (int i = startSector; i &lt;= sector; i++) {</span>
-<span class="fc" id="L101">            byte[] buf = new byte[SECTOR_SIZE];</span>
-<span class="fc" id="L102">            data.add(buf);</span>
+<span class="pc bpc" id="L100" title="4 of 10 branches missed.">        __CLR4_5_26pi6pim68iygxk.R.inc(8707);for (int i = startSector; (((i &lt;= sector)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8708)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8709)==0&amp;false)); i++) {{</span>
+<span class="fc" id="L101">            __CLR4_5_26pi6pim68iygxk.R.inc(8710);byte[] buf = new byte[SECTOR_SIZE];</span>
+<span class="fc" id="L102">            __CLR4_5_26pi6pim68iygxk.R.inc(8711);data.add(buf);</span>
 
             // Read up to SECTOR_SIZE bytes
-<span class="fc" id="L105">            int len = SECTOR_SIZE;</span>
-<span class="fc" id="L106">            int off = 0;</span>
-<span class="fc bfc" id="L107" title="All 2 branches covered.">            while (len &gt; 0) {</span>
-<span class="fc" id="L108">                int nbytes = src.read(buf, off, len);</span>
+<span class="fc" id="L105">            __CLR4_5_26pi6pim68iygxk.R.inc(8712);int len = SECTOR_SIZE;</span>
+<span class="fc" id="L106">            __CLR4_5_26pi6pim68iygxk.R.inc(8713);int off = 0;</span>
+<span class="pc bpc" id="L107" title="4 of 10 branches missed.">            __CLR4_5_26pi6pim68iygxk.R.inc(8714);while ((((len &gt; 0)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8715)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8716)==0&amp;false))) {{</span>
+<span class="fc" id="L108">                __CLR4_5_26pi6pim68iygxk.R.inc(8717);int nbytes = src.read(buf, off, len);</span>
                 // Found the end-of-stream
-<span class="pc bpc" id="L110" title="1 of 2 branches missed.">                if (nbytes == -1) {</span>
-<span class="nc" id="L111">                    foundEOS = true;</span>
-<span class="nc" id="L112">                    return length;</span>
+<span class="pc bpc" id="L110" title="7 of 10 branches missed.">                __CLR4_5_26pi6pim68iygxk.R.inc(8718);if ((((nbytes == -1)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8719)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8720)==0&amp;false))) {{</span>
+<span class="nc" id="L111">                    __CLR4_5_26pi6pim68iygxk.R.inc(8721);foundEOS = true;</span>
+<span class="nc" id="L112">                    __CLR4_5_26pi6pim68iygxk.R.inc(8722);return length;</span>
                 }
-<span class="fc" id="L114">                off += nbytes;</span>
-<span class="fc" id="L115">                len -= nbytes;</span>
+<span class="fc" id="L114">                }__CLR4_5_26pi6pim68iygxk.R.inc(8723);off += nbytes;</span>
+<span class="fc" id="L115">                __CLR4_5_26pi6pim68iygxk.R.inc(8724);len -= nbytes;</span>
 
                 // Record new data length
-<span class="fc" id="L118">                length += nbytes;</span>
+<span class="fc" id="L118">                __CLR4_5_26pi6pim68iygxk.R.inc(8725);length += nbytes;</span>
 <span class="fc" id="L119">            }</span>
-        }
+        }}
 
-<span class="fc" id="L122">        return length;</span>
-    }
+<span class="fc" id="L122">        }__CLR4_5_26pi6pim68iygxk.R.inc(8726);return length;</span>
+<span class="fc" id="L123">    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}</span>
 
     /**
      * Returns &lt;code&gt;true&lt;/code&gt; since all
      * &lt;code&gt;MemoryCacheSeekableStream&lt;/code&gt; instances support seeking
      * backwards.
      */
-    public boolean canSeekBackwards() {
-<span class="fc" id="L131">        return true;</span>
-    }
+<span class="fc" id="L130">    public boolean canSeekBackwards() {try{__CLR4_5_26pi6pim68iygxk.R.inc(8727);</span>
+<span class="fc" id="L131">        __CLR4_5_26pi6pim68iygxk.R.inc(8728);return true;</span>
+<span class="fc" id="L132">    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}</span>
 
     /**
      * Returns the current offset in this file.
@@ -137,9 +137,9 @@ public final class MemoryCacheSeekableStream extends SeekableStream {
      * @return     the offset from the beginning of the file, in bytes,
      *             at which the next read occurs.
      */
-    public long getFilePointer() {
-<span class="nc" id="L141">        return pointer;</span>
-    }
+<span class="nc" id="L140">    public long getFilePointer() {try{__CLR4_5_26pi6pim68iygxk.R.inc(8729);</span>
+<span class="nc" id="L141">        __CLR4_5_26pi6pim68iygxk.R.inc(8730);return pointer;</span>
+<span class="nc" id="L142">    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}</span>
 
     /**
      * Sets the file-pointer offset, measured from the beginning of this
@@ -151,12 +151,12 @@ public final class MemoryCacheSeekableStream extends SeekableStream {
      * @exception  IOException  if &lt;code&gt;pos&lt;/code&gt; is less than
      *                          &lt;code&gt;0&lt;/code&gt; or if an I/O error occurs.
      */
-    public void seek(long pos) throws IOException {
-<span class="nc bnc" id="L155" title="All 2 branches missed.">        if (pos &lt; 0) {</span>
-<span class="nc" id="L156">            throw new IOException(PropertyUtil.getString(&quot;MemoryCacheSeekableStream0&quot;));</span>
+<span class="nc" id="L154">    public void seek(long pos) throws IOException {try{__CLR4_5_26pi6pim68iygxk.R.inc(8731);</span>
+<span class="nc bnc" id="L155" title="All 10 branches missed.">        __CLR4_5_26pi6pim68iygxk.R.inc(8732);if ((((pos &lt; 0)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8733)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8734)==0&amp;false))) {{</span>
+<span class="nc" id="L156">            __CLR4_5_26pi6pim68iygxk.R.inc(8735);throw new IOException(PropertyUtil.getString(&quot;MemoryCacheSeekableStream0&quot;));</span>
         }
-<span class="nc" id="L158">        pointer = pos;</span>
-<span class="nc" id="L159">    }</span>
+<span class="nc" id="L158">        }__CLR4_5_26pi6pim68iygxk.R.inc(8736);pointer = pos;</span>
+<span class="nc" id="L159">    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}</span>
 
     /**
      * Reads the next byte of data from the input stream. The value byte is
@@ -169,17 +169,17 @@ public final class MemoryCacheSeekableStream extends SeekableStream {
      * @return     the next byte of data, or &lt;code&gt;-1&lt;/code&gt; if the end of the
      *             stream is reached.
      */
-    public int read() throws IOException {
-<span class="nc" id="L173">        long next = pointer + 1;</span>
-<span class="nc" id="L174">        long pos = readUntil(next);</span>
-<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (pos &gt;= next) {</span>
-<span class="nc" id="L176">            byte[] buf =</span>
+<span class="nc" id="L172">    public int read() throws IOException {try{__CLR4_5_26pi6pim68iygxk.R.inc(8737);</span>
+<span class="nc" id="L173">        __CLR4_5_26pi6pim68iygxk.R.inc(8738);long next = pointer + 1;</span>
+<span class="nc" id="L174">        __CLR4_5_26pi6pim68iygxk.R.inc(8739);long pos = readUntil(next);</span>
+<span class="nc bnc" id="L175" title="All 10 branches missed.">        __CLR4_5_26pi6pim68iygxk.R.inc(8740);if ((((pos &gt;= next)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8741)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8742)==0&amp;false))) {{</span>
+<span class="nc" id="L176">            __CLR4_5_26pi6pim68iygxk.R.inc(8743);byte[] buf =</span>
 <span class="nc" id="L177">                (byte[])data.get((int)(pointer &gt;&gt; SECTOR_SHIFT));</span>
-<span class="nc" id="L178">            return buf[(int)(pointer++ &amp; SECTOR_MASK)] &amp; 0xff;</span>
-        } else {
-<span class="nc" id="L180">            return -1;</span>
+<span class="nc" id="L178">            __CLR4_5_26pi6pim68iygxk.R.inc(8744);return buf[(int)(pointer++ &amp; SECTOR_MASK)] &amp; 0xff;</span>
+        } }else {{
+<span class="nc" id="L180">            __CLR4_5_26pi6pim68iygxk.R.inc(8745);return -1;</span>
         }
-    }
+<span class="nc" id="L182">    }}finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}</span>
 
     /**
      * Reads up to &lt;code&gt;len&lt;/code&gt; bytes of data from the input stream into
@@ -228,29 +228,29 @@ public final class MemoryCacheSeekableStream extends SeekableStream {
      *             &lt;code&gt;-1&lt;/code&gt; if there is no more data because the end of
      *             the stream has been reached.
      */
-    public int read(byte[] b, int off, int len) throws IOException {
-<span class="pc bpc" id="L232" title="1 of 2 branches missed.">        if (b == null) {</span>
-<span class="nc" id="L233">            throw new NullPointerException();</span>
+<span class="fc" id="L231">    public int read(byte[] b, int off, int len) throws IOException {try{__CLR4_5_26pi6pim68iygxk.R.inc(8746);</span>
+<span class="pc bpc" id="L232" title="7 of 10 branches missed.">        __CLR4_5_26pi6pim68iygxk.R.inc(8747);if ((((b == null)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8748)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8749)==0&amp;false))) {{</span>
+<span class="nc" id="L233">            __CLR4_5_26pi6pim68iygxk.R.inc(8750);throw new NullPointerException();</span>
         }
-<span class="pc bpc" id="L235" title="3 of 6 branches missed.">        if ((off &lt; 0) || (len &lt; 0) || (off + len &gt; b.length)) {</span>
-<span class="nc" id="L236">            throw new IndexOutOfBoundsException();</span>
+<span class="pc bpc" id="L235" title="9 of 14 branches missed.">        }__CLR4_5_26pi6pim68iygxk.R.inc(8751);if (((((off &lt; 0) || (len &lt; 0) || (off + len &gt; b.length))&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8752)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8753)==0&amp;false))) {{</span>
+<span class="nc" id="L236">            __CLR4_5_26pi6pim68iygxk.R.inc(8754);throw new IndexOutOfBoundsException();</span>
         }
-<span class="pc bpc" id="L238" title="1 of 2 branches missed.">        if (len == 0) {</span>
-<span class="nc" id="L239">            return 0;</span>
+<span class="pc bpc" id="L238" title="7 of 10 branches missed.">        }__CLR4_5_26pi6pim68iygxk.R.inc(8755);if ((((len == 0)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8756)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8757)==0&amp;false))) {{</span>
+<span class="nc" id="L239">            __CLR4_5_26pi6pim68iygxk.R.inc(8758);return 0;</span>
         }
 
-<span class="fc" id="L242">        long pos = readUntil(pointer + len);</span>
+<span class="fc" id="L242">        }__CLR4_5_26pi6pim68iygxk.R.inc(8759);long pos = readUntil(pointer + len);</span>
         // End-of-stream
-<span class="pc bpc" id="L244" title="1 of 2 branches missed.">        if (pos &lt;= pointer) {</span>
-<span class="nc" id="L245">            return -1;</span>
+<span class="pc bpc" id="L244" title="7 of 10 branches missed.">        __CLR4_5_26pi6pim68iygxk.R.inc(8760);if ((((pos &lt;= pointer)&amp;&amp;(__CLR4_5_26pi6pim68iygxk.R.iget(8761)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8762)==0&amp;false))) {{</span>
+<span class="nc" id="L245">            __CLR4_5_26pi6pim68iygxk.R.inc(8763);return -1;</span>
         }
 
-<span class="fc" id="L248">        byte[] buf = (byte[])data.get((int)(pointer &gt;&gt; SECTOR_SHIFT));</span>
-<span class="fc" id="L249">        int nbytes = Math.min(len, SECTOR_SIZE - (int)(pointer &amp; SECTOR_MASK));</span>
-<span class="fc" id="L250">        System.arraycopy(buf, (int)(pointer &amp; SECTOR_MASK),</span>
+<span class="fc" id="L248">        }__CLR4_5_26pi6pim68iygxk.R.inc(8764);byte[] buf = (byte[])data.get((int)(pointer &gt;&gt; SECTOR_SHIFT));</span>
+<span class="fc" id="L249">        __CLR4_5_26pi6pim68iygxk.R.inc(8765);int nbytes = Math.min(len, SECTOR_SIZE - (int)(pointer &amp; SECTOR_MASK));</span>
+<span class="fc" id="L250">        __CLR4_5_26pi6pim68iygxk.R.inc(8766);System.arraycopy(buf, (int)(pointer &amp; SECTOR_MASK),</span>
                          b, off, nbytes);
-<span class="fc" id="L252">        pointer += nbytes;</span>
-<span class="fc" id="L253">        return nbytes;</span>
-    }
+<span class="fc" id="L252">        __CLR4_5_26pi6pim68iygxk.R.inc(8767);pointer += nbytes;</span>
+<span class="fc" id="L253">        __CLR4_5_26pi6pim68iygxk.R.inc(8768);return nbytes;</span>
+<span class="fc" id="L254">    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

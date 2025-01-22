@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSGenerator.java</span></div><h1>PSGenerator.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSGenerator.java</span></div><h1>PSGenerator.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -48,7 +48,7 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
  *
  * @version $Id: PSGenerator.java 1809627 2017-09-25 13:42:08Z ssteiner $
  */
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">public class PSGenerator implements PSCommandMap {</span>
+<span class="pc bpc" id="L51" title="4 of 6 branches missed.">@java.lang.SuppressWarnings({&quot;fallthrough&quot;}) public class PSGenerator implements PSCommandMap {public static class __CLR4_5_2db0db0m68iyi2m{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,17603,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /**
      * Default postscript language level
@@ -93,19 +93,19 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * Creates a new instance.
      * @param out the OutputStream to write the generated PostScript code to
      */
-<span class="fc" id="L96">    public PSGenerator(OutputStream out) {</span>
-<span class="fc" id="L97">        this.out = out;</span>
-<span class="fc" id="L98">        resetGraphicsState();</span>
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L96">    public PSGenerator(OutputStream out) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17244);</span>
+<span class="fc" id="L97">        __CLR4_5_2db0db0m68iyi2m.R.inc(17245);this.out = out;</span>
+<span class="fc" id="L98">        __CLR4_5_2db0db0m68iyi2m.R.inc(17246);resetGraphicsState();</span>
+<span class="fc" id="L99">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Indicates whether this instance is in compact mode. See {@link #setCompactMode(boolean)}
      * for details.
      * @return true if compact mode is enabled (the default)
      */
-    public boolean isCompactMode() {
-<span class="fc" id="L107">        return this.compactMode;</span>
-    }
+<span class="fc" id="L106">    public boolean isCompactMode() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17247);</span>
+<span class="fc" id="L107">        __CLR4_5_2db0db0m68iyi2m.R.inc(17248);return this.compactMode;</span>
+<span class="fc" id="L108">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Controls whether this instance shall produce compact PostScript (omitting comments and
@@ -114,66 +114,66 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * false produces more verbose PostScript suitable for debugging.
      * @param value true to enable compact mode, false for verbose mode
      */
-    public void setCompactMode(boolean value) {
-<span class="nc" id="L118">        this.compactMode = value;</span>
-<span class="nc" id="L119">    }</span>
+<span class="nc" id="L117">    public void setCompactMode(boolean value) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17249);</span>
+<span class="nc" id="L118">        __CLR4_5_2db0db0m68iyi2m.R.inc(17250);this.compactMode = value;</span>
+<span class="nc" id="L119">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Indicates whether this instance allows to write comments. See
      * {@link #setCommentsEnabled(boolean)} for details.
      * @return true if comments are enabled (the default)
      */
-    public boolean isCommentsEnabled() {
-<span class="fc" id="L127">        return this.commentsEnabled;</span>
-    }
+<span class="fc" id="L126">    public boolean isCommentsEnabled() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17251);</span>
+<span class="fc" id="L127">        __CLR4_5_2db0db0m68iyi2m.R.inc(17252);return this.commentsEnabled;</span>
+<span class="fc" id="L128">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Controls whether this instance allows to write comments using the {@link #commentln(String)}
      * method.
      * @param value true to enable comments, false to disable them
      */
-    public void setCommentsEnabled(boolean value) {
-<span class="nc" id="L136">        this.commentsEnabled = value;</span>
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L135">    public void setCommentsEnabled(boolean value) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17253);</span>
+<span class="nc" id="L136">        __CLR4_5_2db0db0m68iyi2m.R.inc(17254);this.commentsEnabled = value;</span>
+<span class="nc" id="L137">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
-    private void resetGraphicsState() {
-<span class="pc bpc" id="L140" title="1 of 2 branches missed.">        if (!this.graphicsStateStack.isEmpty()) {</span>
-<span class="nc" id="L141">            throw new IllegalStateException(&quot;Graphics state stack should be empty at this point&quot;);</span>
+<span class="fc" id="L139">    private void resetGraphicsState() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17255);</span>
+<span class="pc bpc" id="L140" title="7 of 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17256);if ((((!this.graphicsStateStack.isEmpty())&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17257)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17258)==0&amp;false))) {{</span>
+<span class="nc" id="L141">            __CLR4_5_2db0db0m68iyi2m.R.inc(17259);throw new IllegalStateException(&quot;Graphics state stack should be empty at this point&quot;);</span>
         }
-<span class="fc" id="L143">        this.currentState = new PSState();</span>
-<span class="fc" id="L144">    }</span>
+<span class="fc" id="L143">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17260);this.currentState = new PSState();</span>
+<span class="fc" id="L144">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Returns the OutputStream the PSGenerator writes to.
      * @return the OutputStream
      */
-    public OutputStream getOutputStream() {
-<span class="fc" id="L151">        return this.out;</span>
-    }
+<span class="fc" id="L150">    public OutputStream getOutputStream() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17261);</span>
+<span class="fc" id="L151">        __CLR4_5_2db0db0m68iyi2m.R.inc(17262);return this.out;</span>
+<span class="fc" id="L152">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Returns the selected PostScript level.
      * @return the PostScript level
      */
-    public int getPSLevel() {
-<span class="fc" id="L159">        return this.psLevel;</span>
-    }
+<span class="fc" id="L158">    public int getPSLevel() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17263);</span>
+<span class="fc" id="L159">        __CLR4_5_2db0db0m68iyi2m.R.inc(17264);return this.psLevel;</span>
+<span class="fc" id="L160">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Sets the PostScript level that is used to generate the current document.
      * @param level the PostScript level (currently 1, 2 and 3 are known)
      */
-    public void setPSLevel(int level) {
-<span class="fc" id="L167">        this.psLevel = level;</span>
-<span class="fc" id="L168">    }</span>
+<span class="fc" id="L166">    public void setPSLevel(int level) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17265);</span>
+<span class="fc" id="L167">        __CLR4_5_2db0db0m68iyi2m.R.inc(17266);this.psLevel = level;</span>
+<span class="fc" id="L168">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
-    public boolean isAcrobatDownsample() {
-<span class="fc" id="L171">        return acrobatDownsample;</span>
-    }
+<span class="fc" id="L170">    public boolean isAcrobatDownsample() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17267);</span>
+<span class="fc" id="L171">        __CLR4_5_2db0db0m68iyi2m.R.inc(17268);return acrobatDownsample;</span>
+<span class="fc" id="L172">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
-    public void setAcrobatDownsample(boolean b) {
-<span class="fc" id="L175">        acrobatDownsample = b;</span>
-<span class="fc" id="L176">    }</span>
+<span class="fc" id="L174">    public void setAcrobatDownsample(boolean b) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17269);</span>
+<span class="fc" id="L175">        __CLR4_5_2db0db0m68iyi2m.R.inc(17270);acrobatDownsample = b;</span>
+<span class="fc" id="L176">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Attempts to resolve the given URI. PSGenerator should be subclasses to provide more
@@ -182,18 +182,18 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @return A {@link javax.xml.transform.Source} object, or null if the URI
      * cannot be resolved.
      */
-    public Source resolveURI(String uri) {
-<span class="nc" id="L186">        return new javax.xml.transform.stream.StreamSource(uri);</span>
-    }
+<span class="nc" id="L185">    public Source resolveURI(String uri) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17271);</span>
+<span class="nc" id="L186">        __CLR4_5_2db0db0m68iyi2m.R.inc(17272);return new javax.xml.transform.stream.StreamSource(uri);</span>
+<span class="nc" id="L187">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Writes a newline character to the OutputStream.
      *
      * @throws IOException In case of an I/O problem
      */
-    public final void newLine() throws IOException {
-<span class="fc" id="L195">        out.write(LF);</span>
-<span class="fc" id="L196">    }</span>
+<span class="fc" id="L194">    public final void newLine() throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17273);</span>
+<span class="fc" id="L195">        __CLR4_5_2db0db0m68iyi2m.R.inc(17274);out.write(LF);</span>
+<span class="fc" id="L196">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Formats a double value for PostScript output.
@@ -201,11 +201,11 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param value value to format
      * @return the formatted value
      */
-    public String formatDouble(double value) {
-<span class="fc" id="L205">        doubleBuffer.setLength(0);</span>
-<span class="fc" id="L206">        DoubleFormatUtil.formatDouble(value, 3, 3, doubleBuffer);</span>
-<span class="fc" id="L207">        return doubleBuffer.toString();</span>
-    }
+<span class="fc" id="L204">    public String formatDouble(double value) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17275);</span>
+<span class="fc" id="L205">        __CLR4_5_2db0db0m68iyi2m.R.inc(17276);doubleBuffer.setLength(0);</span>
+<span class="fc" id="L206">        __CLR4_5_2db0db0m68iyi2m.R.inc(17277);DoubleFormatUtil.formatDouble(value, 3, 3, doubleBuffer);</span>
+<span class="fc" id="L207">        __CLR4_5_2db0db0m68iyi2m.R.inc(17278);return doubleBuffer.toString();</span>
+<span class="fc" id="L208">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Formats a double value for PostScript output (higher resolution).
@@ -213,11 +213,11 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param value value to format
      * @return the formatted value
      */
-    public String formatDouble5(double value) {
-<span class="fc" id="L217">        doubleBuffer.setLength(0);</span>
-<span class="fc" id="L218">        DoubleFormatUtil.formatDouble(value, 5, 5, doubleBuffer);</span>
-<span class="fc" id="L219">        return doubleBuffer.toString();</span>
-    }
+<span class="fc" id="L216">    public String formatDouble5(double value) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17279);</span>
+<span class="fc" id="L217">        __CLR4_5_2db0db0m68iyi2m.R.inc(17280);doubleBuffer.setLength(0);</span>
+<span class="fc" id="L218">        __CLR4_5_2db0db0m68iyi2m.R.inc(17281);DoubleFormatUtil.formatDouble(value, 5, 5, doubleBuffer);</span>
+<span class="fc" id="L219">        __CLR4_5_2db0db0m68iyi2m.R.inc(17282);return doubleBuffer.toString();</span>
+<span class="fc" id="L220">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Writes a PostScript command to the stream.
@@ -225,13 +225,13 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param cmd              The PostScript code to be written.
      * @exception IOException  In case of an I/O problem
      */
-    public void write(String cmd) throws IOException {
+<span class="fc" id="L228">    public void write(String cmd) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17283);</span>
         /* TODO Check disabled until clarification.
         if (cmd.length() &gt; 255) {
             throw new RuntimeException(&quot;PostScript command exceeded limit of 255 characters&quot;);
         } */
-<span class="fc" id="L233">        out.write(cmd.getBytes(&quot;US-ASCII&quot;));</span>
-<span class="fc" id="L234">    }</span>
+<span class="fc" id="L233">        __CLR4_5_2db0db0m68iyi2m.R.inc(17284);out.write(cmd.getBytes(&quot;US-ASCII&quot;));</span>
+<span class="fc" id="L234">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Writes the given number to the stream in decimal format.
@@ -239,9 +239,9 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param n a number
      * @throws IOException in case of an I/O problem
      */
-    public void write(int n) throws IOException {
-<span class="nc" id="L243">        write(Integer.toString(n));</span>
-<span class="nc" id="L244">    }</span>
+<span class="nc" id="L242">    public void write(int n) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17285);</span>
+<span class="nc" id="L243">        __CLR4_5_2db0db0m68iyi2m.R.inc(17286);write(Integer.toString(n));</span>
+<span class="nc" id="L244">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Writes a PostScript command to the stream and ends the line.
@@ -249,10 +249,10 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param cmd              The PostScript code to be written.
      * @exception IOException  In case of an I/O problem
      */
-    public void writeln(String cmd) throws IOException {
-<span class="fc" id="L253">        write(cmd);</span>
-<span class="fc" id="L254">        newLine();</span>
-<span class="fc" id="L255">    }</span>
+<span class="fc" id="L252">    public void writeln(String cmd) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17287);</span>
+<span class="fc" id="L253">        __CLR4_5_2db0db0m68iyi2m.R.inc(17288);write(cmd);</span>
+<span class="fc" id="L254">        __CLR4_5_2db0db0m68iyi2m.R.inc(17289);newLine();</span>
+<span class="fc" id="L255">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Writes a comment to the stream and ends the line. Output of comments can
@@ -261,20 +261,20 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param comment          comment to write
      * @exception IOException  In case of an I/O problem
      */
-    public void commentln(String comment) throws IOException {
-<span class="pc bpc" id="L265" title="1 of 2 branches missed.">        if (isCommentsEnabled()) {</span>
-<span class="fc" id="L266">            writeln(comment);</span>
+<span class="fc" id="L264">    public void commentln(String comment) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17290);</span>
+<span class="pc bpc" id="L265" title="7 of 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17291);if ((((isCommentsEnabled())&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17292)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17293)==0&amp;false))) {{</span>
+<span class="fc" id="L266">            __CLR4_5_2db0db0m68iyi2m.R.inc(17294);writeln(comment);</span>
         }
-<span class="fc" id="L268">    }</span>
+<span class="fc" id="L268">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String mapCommand(String command) {
-<span class="pc bpc" id="L272" title="1 of 2 branches missed.">        if (isCompactMode()) {</span>
-<span class="fc" id="L273">            return this.commandMap.mapCommand(command);</span>
-        } else {
-<span class="nc" id="L275">            return command;</span>
+<span class="fc" id="L271">    public String mapCommand(String command) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17295);</span>
+<span class="pc bpc" id="L272" title="7 of 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17296);if ((((isCompactMode())&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17297)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17298)==0&amp;false))) {{</span>
+<span class="fc" id="L273">            __CLR4_5_2db0db0m68iyi2m.R.inc(17299);return this.commandMap.mapCommand(command);</span>
+        } }else {{
+<span class="nc" id="L275">            __CLR4_5_2db0db0m68iyi2m.R.inc(17300);return command;</span>
         }
-    }
+<span class="fc" id="L277">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Writes encoded data to the PostScript stream.
@@ -282,10 +282,10 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param cmd              The encoded PostScript code to be written.
      * @exception IOException  In case of an I/O problem
      */
-    public void writeByteArr(byte[] cmd) throws IOException {
-<span class="nc" id="L286">        out.write(cmd);</span>
-<span class="nc" id="L287">        newLine();</span>
-<span class="nc" id="L288">    }</span>
+<span class="nc" id="L285">    public void writeByteArr(byte[] cmd) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17301);</span>
+<span class="nc" id="L286">        __CLR4_5_2db0db0m68iyi2m.R.inc(17302);out.write(cmd);</span>
+<span class="nc" id="L287">        __CLR4_5_2db0db0m68iyi2m.R.inc(17303);newLine();</span>
+<span class="nc" id="L288">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
 
     /**
@@ -293,9 +293,9 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      *
      * @exception IOException In case of an I/O problem
      */
-    public void flush() throws IOException {
-<span class="nc" id="L297">        out.flush();</span>
-<span class="nc" id="L298">    }</span>
+<span class="nc" id="L296">    public void flush() throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17304);</span>
+<span class="nc" id="L297">        __CLR4_5_2db0db0m68iyi2m.R.inc(17305);out.flush();</span>
+<span class="nc" id="L298">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Escapes a character conforming to the rules established in the PostScript
@@ -303,48 +303,48 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param c character to escape
      * @param target target StringBuffer to write the escaped character to
      */
-    public static final void escapeChar(char c, StringBuffer target) {
-<span class="pc bpc" id="L307" title="4 of 9 branches missed.">        switch (c) {</span>
-            case '\n':
-<span class="fc" id="L309">                target.append(&quot;\\n&quot;);</span>
-<span class="fc" id="L310">                break;</span>
-            case '\r':
-<span class="nc" id="L312">                target.append(&quot;\\r&quot;);</span>
-<span class="nc" id="L313">                break;</span>
-            case '\t':
-<span class="fc" id="L315">                target.append(&quot;\\t&quot;);</span>
-<span class="fc" id="L316">                break;</span>
-            case '\b':
-<span class="nc" id="L318">                target.append(&quot;\\b&quot;);</span>
-<span class="nc" id="L319">                break;</span>
-            case '\f':
-<span class="nc" id="L321">                target.append(&quot;\\f&quot;);</span>
-<span class="nc" id="L322">                break;</span>
-            case '\\':
-<span class="nc" id="L324">                target.append(&quot;\\\\&quot;);</span>
-<span class="nc" id="L325">                break;</span>
-            case '(':
-<span class="fc" id="L327">                target.append(&quot;\\(&quot;);</span>
-<span class="fc" id="L328">                break;</span>
-            case ')':
-<span class="fc" id="L330">                target.append(&quot;\\)&quot;);</span>
-<span class="fc" id="L331">                break;</span>
-            default:
-<span class="fc bfc" id="L333" title="All 2 branches covered.">                if (c &gt; 255) {</span>
+<span class="fc" id="L306">    public static final void escapeChar(char c, StringBuffer target) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17306);</span>
+<span class="pc bpc" id="L307" title="4 of 9 branches missed.">        boolean __CLB4_5_2_bool0=false;__CLR4_5_2db0db0m68iyi2m.R.inc(17307);switch (c) {</span>
+<span class="pc bpc" id="L308" title="1 of 2 branches missed.">            case '\n':if (!__CLB4_5_2_bool0) {__CLR4_5_2db0db0m68iyi2m.R.inc(17308);__CLB4_5_2_bool0=true;}</span>
+<span class="fc" id="L309">                __CLR4_5_2db0db0m68iyi2m.R.inc(17309);target.append(&quot;\\n&quot;);</span>
+<span class="fc" id="L310">                __CLR4_5_2db0db0m68iyi2m.R.inc(17310);break;</span>
+<span class="nc bnc" id="L311" title="All 2 branches missed.">            case '\r':if (!__CLB4_5_2_bool0) {__CLR4_5_2db0db0m68iyi2m.R.inc(17311);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L312">                __CLR4_5_2db0db0m68iyi2m.R.inc(17312);target.append(&quot;\\r&quot;);</span>
+<span class="nc" id="L313">                __CLR4_5_2db0db0m68iyi2m.R.inc(17313);break;</span>
+<span class="pc bpc" id="L314" title="1 of 2 branches missed.">            case '\t':if (!__CLB4_5_2_bool0) {__CLR4_5_2db0db0m68iyi2m.R.inc(17314);__CLB4_5_2_bool0=true;}</span>
+<span class="fc" id="L315">                __CLR4_5_2db0db0m68iyi2m.R.inc(17315);target.append(&quot;\\t&quot;);</span>
+<span class="fc" id="L316">                __CLR4_5_2db0db0m68iyi2m.R.inc(17316);break;</span>
+<span class="nc bnc" id="L317" title="All 2 branches missed.">            case '\b':if (!__CLB4_5_2_bool0) {__CLR4_5_2db0db0m68iyi2m.R.inc(17317);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L318">                __CLR4_5_2db0db0m68iyi2m.R.inc(17318);target.append(&quot;\\b&quot;);</span>
+<span class="nc" id="L319">                __CLR4_5_2db0db0m68iyi2m.R.inc(17319);break;</span>
+<span class="nc bnc" id="L320" title="All 2 branches missed.">            case '\f':if (!__CLB4_5_2_bool0) {__CLR4_5_2db0db0m68iyi2m.R.inc(17320);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L321">                __CLR4_5_2db0db0m68iyi2m.R.inc(17321);target.append(&quot;\\f&quot;);</span>
+<span class="nc" id="L322">                __CLR4_5_2db0db0m68iyi2m.R.inc(17322);break;</span>
+<span class="nc bnc" id="L323" title="All 2 branches missed.">            case '\\':if (!__CLB4_5_2_bool0) {__CLR4_5_2db0db0m68iyi2m.R.inc(17323);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L324">                __CLR4_5_2db0db0m68iyi2m.R.inc(17324);target.append(&quot;\\\\&quot;);</span>
+<span class="nc" id="L325">                __CLR4_5_2db0db0m68iyi2m.R.inc(17325);break;</span>
+<span class="pc bpc" id="L326" title="1 of 2 branches missed.">            case '(':if (!__CLB4_5_2_bool0) {__CLR4_5_2db0db0m68iyi2m.R.inc(17326);__CLB4_5_2_bool0=true;}</span>
+<span class="fc" id="L327">                __CLR4_5_2db0db0m68iyi2m.R.inc(17327);target.append(&quot;\\(&quot;);</span>
+<span class="fc" id="L328">                __CLR4_5_2db0db0m68iyi2m.R.inc(17328);break;</span>
+<span class="pc bpc" id="L329" title="1 of 2 branches missed.">            case ')':if (!__CLB4_5_2_bool0) {__CLR4_5_2db0db0m68iyi2m.R.inc(17329);__CLB4_5_2_bool0=true;}</span>
+<span class="fc" id="L330">                __CLR4_5_2db0db0m68iyi2m.R.inc(17330);target.append(&quot;\\)&quot;);</span>
+<span class="fc" id="L331">                __CLR4_5_2db0db0m68iyi2m.R.inc(17331);break;</span>
+<span class="pc bpc" id="L332" title="1 of 2 branches missed.">            default:if (!__CLB4_5_2_bool0) {__CLR4_5_2db0db0m68iyi2m.R.inc(17332);__CLB4_5_2_bool0=true;}</span>
+<span class="pc bpc" id="L333" title="4 of 10 branches missed.">                __CLR4_5_2db0db0m68iyi2m.R.inc(17333);if ((((c &gt; 255)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17334)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17335)==0&amp;false))) {{</span>
                     //Ignoring non Latin-1 characters
-<span class="fc" id="L335">                    target.append('?');</span>
-<span class="fc bfc" id="L336" title="All 4 branches covered.">                } else if (c &lt; 32 || c &gt; 127) {</span>
-<span class="fc" id="L337">                    target.append('\\');</span>
+<span class="fc" id="L335">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17336);target.append('?');</span>
+<span class="pc bpc" id="L336" title="4 of 12 branches missed.">                } }else {__CLR4_5_2db0db0m68iyi2m.R.inc(17337);if ((((c &lt; 32 || c &gt; 127)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17338)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17339)==0&amp;false))) {{</span>
+<span class="fc" id="L337">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17340);target.append('\\');</span>
 
-<span class="fc" id="L339">                    target.append((char)('0' + (c &gt;&gt; 6)));</span>
-<span class="fc" id="L340">                    target.append((char)('0' + ((c &gt;&gt; 3) % 8)));</span>
-<span class="fc" id="L341">                    target.append((char)('0' + (c % 8)));</span>
+<span class="fc" id="L339">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17341);target.append((char)('0' + (c &gt;&gt; 6)));</span>
+<span class="fc" id="L340">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17342);target.append((char)('0' + ((c &gt;&gt; 3) % 8)));</span>
+<span class="fc" id="L341">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17343);target.append((char)('0' + (c % 8)));</span>
                     //Integer.toOctalString(i)
-                } else {
-<span class="fc" id="L344">                    target.append(c);</span>
+                } }else {{
+<span class="fc" id="L344">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17344);target.append(c);</span>
                 }
-        }
-<span class="fc" id="L347">    }</span>
+        }}}
+<span class="fc" id="L347">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
 
     /**
@@ -352,18 +352,18 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param text Text to convert
      * @return String The resulting String
      */
-    public static final String convertStringToDSC(String text) {
-<span class="fc" id="L356">        return convertStringToDSC(text, false);</span>
-    }
+<span class="fc" id="L355">    public static final String convertStringToDSC(String text) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17345);</span>
+<span class="fc" id="L356">        __CLR4_5_2db0db0m68iyi2m.R.inc(17346);return convertStringToDSC(text, false);</span>
+<span class="fc" id="L357">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Converts a &amp;lt;real&amp;gt; value for use in DSC comments.
      * @param value the value to convert
      * @return String The resulting String
      */
-    public static final String convertRealToDSC(float value) {
-<span class="nc" id="L365">        return Float.toString(value);</span>
-    }
+<span class="nc" id="L364">    public static final String convertRealToDSC(float value) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17347);</span>
+<span class="nc" id="L365">        __CLR4_5_2db0db0m68iyi2m.R.inc(17348);return Float.toString(value);</span>
+<span class="nc" id="L366">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Converts text by applying escaping rules established in the DSC specs.
@@ -372,30 +372,30 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @return String The resulting String
      */
     public static final String convertStringToDSC(String text,
-                                                  boolean forceParentheses) {
-<span class="pc bpc" id="L376" title="2 of 4 branches missed.">        if ((text == null) || (text.length() == 0)) {</span>
-<span class="nc" id="L377">            return &quot;()&quot;;</span>
-        } else {
-<span class="fc" id="L379">            int initialSize = text.length();</span>
-<span class="fc" id="L380">            initialSize += initialSize / 2;</span>
-<span class="fc" id="L381">            StringBuffer sb = new StringBuffer(initialSize);</span>
-<span class="fc bfc" id="L382" title="All 4 branches covered.">            if ((text.indexOf(' ') &gt;= 0) || forceParentheses) {</span>
-<span class="fc" id="L383">                sb.append('(');</span>
-<span class="fc bfc" id="L384" title="All 2 branches covered.">                for (int i = 0; i &lt; text.length(); i++) {</span>
-<span class="fc" id="L385">                    final char c = text.charAt(i);</span>
-<span class="fc" id="L386">                    escapeChar(c, sb);</span>
+<span class="fc" id="L375">                                                  boolean forceParentheses) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17349);</span>
+<span class="pc bpc" id="L376" title="8 of 12 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17350);if (((((text == null) || (text.length() == 0))&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17351)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17352)==0&amp;false))) {{</span>
+<span class="nc" id="L377">            __CLR4_5_2db0db0m68iyi2m.R.inc(17353);return &quot;()&quot;;</span>
+        } }else {{
+<span class="fc" id="L379">            __CLR4_5_2db0db0m68iyi2m.R.inc(17354);int initialSize = text.length();</span>
+<span class="fc" id="L380">            __CLR4_5_2db0db0m68iyi2m.R.inc(17355);initialSize += initialSize / 2;</span>
+<span class="fc" id="L381">            __CLR4_5_2db0db0m68iyi2m.R.inc(17356);StringBuffer sb = new StringBuffer(initialSize);</span>
+<span class="pc bpc" id="L382" title="4 of 12 branches missed.">            __CLR4_5_2db0db0m68iyi2m.R.inc(17357);if (((((text.indexOf(' ') &gt;= 0) || forceParentheses)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17358)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17359)==0&amp;false))) {{</span>
+<span class="fc" id="L383">                __CLR4_5_2db0db0m68iyi2m.R.inc(17360);sb.append('(');</span>
+<span class="pc bpc" id="L384" title="4 of 10 branches missed.">                __CLR4_5_2db0db0m68iyi2m.R.inc(17361);for (int i = 0; (((i &lt; text.length())&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17362)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17363)==0&amp;false)); i++) {{</span>
+<span class="fc" id="L385">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17364);final char c = text.charAt(i);</span>
+<span class="fc" id="L386">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17365);escapeChar(c, sb);</span>
                 }
-<span class="fc" id="L388">                sb.append(')');</span>
-<span class="fc" id="L389">                return sb.toString();</span>
-            } else {
-<span class="fc bfc" id="L391" title="All 2 branches covered.">                for (int i = 0; i &lt; text.length(); i++) {</span>
-<span class="fc" id="L392">                    final char c = text.charAt(i);</span>
-<span class="fc" id="L393">                    escapeChar(c, sb);</span>
+<span class="fc" id="L388">                }__CLR4_5_2db0db0m68iyi2m.R.inc(17366);sb.append(')');</span>
+<span class="fc" id="L389">                __CLR4_5_2db0db0m68iyi2m.R.inc(17367);return sb.toString();</span>
+            } }else {{
+<span class="pc bpc" id="L391" title="4 of 10 branches missed.">                __CLR4_5_2db0db0m68iyi2m.R.inc(17368);for (int i = 0; (((i &lt; text.length())&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17369)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17370)==0&amp;false)); i++) {{</span>
+<span class="fc" id="L392">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17371);final char c = text.charAt(i);</span>
+<span class="fc" id="L393">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17372);escapeChar(c, sb);</span>
                 }
-<span class="fc" id="L395">                return sb.toString();</span>
+<span class="fc" id="L395">                }__CLR4_5_2db0db0m68iyi2m.R.inc(17373);return sb.toString();</span>
             }
-        }
-    }
+        }}
+<span class="fc" id="L398">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
 
     /**
@@ -404,9 +404,9 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @exception IOException In case of an I/O problem
      * @see org.apache.xmlgraphics.ps.DSCConstants
      */
-    public void writeDSCComment(String name) throws IOException {
-<span class="fc" id="L408">        writeln(&quot;%%&quot; + name);</span>
-<span class="fc" id="L409">    }</span>
+<span class="fc" id="L407">    public void writeDSCComment(String name) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17374);</span>
+<span class="fc" id="L408">        __CLR4_5_2db0db0m68iyi2m.R.inc(17375);writeln(&quot;%%&quot; + name);</span>
+<span class="fc" id="L409">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
 
     /**
@@ -418,9 +418,9 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @exception IOException In case of an I/O problem
      * @see org.apache.xmlgraphics.ps.DSCConstants
      */
-    public void writeDSCComment(String name, Object param) throws IOException {
-<span class="fc" id="L422">        writeDSCComment(name, new Object[] {param});</span>
-<span class="fc" id="L423">    }</span>
+<span class="fc" id="L421">    public void writeDSCComment(String name, Object param) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17376);</span>
+<span class="fc" id="L422">        __CLR4_5_2db0db0m68iyi2m.R.inc(17377);writeDSCComment(name, new Object[] {param});</span>
+<span class="fc" id="L423">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
 
     /**
@@ -433,84 +433,84 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @exception IOException In case of an I/O problem
      * @see org.apache.xmlgraphics.ps.DSCConstants
      */
-    public void writeDSCComment(String name, Object[] params) throws IOException {
-<span class="fc" id="L437">        tempBuffer.setLength(0);</span>
-<span class="fc" id="L438">        tempBuffer.append(&quot;%%&quot;);</span>
-<span class="fc" id="L439">        tempBuffer.append(name);</span>
-<span class="pc bpc" id="L440" title="2 of 4 branches missed.">        if ((params != null) &amp;&amp; (params.length &gt; 0)) {</span>
-<span class="fc" id="L441">            tempBuffer.append(&quot;: &quot;);</span>
-<span class="fc bfc" id="L442" title="All 2 branches covered.">            for (int i = 0; i &lt; params.length; i++) {</span>
-<span class="fc bfc" id="L443" title="All 2 branches covered.">                if (i &gt; 0) {</span>
-<span class="fc" id="L444">                    tempBuffer.append(&quot; &quot;);</span>
+<span class="fc" id="L436">    public void writeDSCComment(String name, Object[] params) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17378);</span>
+<span class="fc" id="L437">        __CLR4_5_2db0db0m68iyi2m.R.inc(17379);tempBuffer.setLength(0);</span>
+<span class="fc" id="L438">        __CLR4_5_2db0db0m68iyi2m.R.inc(17380);tempBuffer.append(&quot;%%&quot;);</span>
+<span class="fc" id="L439">        __CLR4_5_2db0db0m68iyi2m.R.inc(17381);tempBuffer.append(name);</span>
+<span class="pc bpc" id="L440" title="8 of 12 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17382);if (((((params != null) &amp;&amp; (params.length &gt; 0))&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17383)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17384)==0&amp;false))) {{</span>
+<span class="fc" id="L441">            __CLR4_5_2db0db0m68iyi2m.R.inc(17385);tempBuffer.append(&quot;: &quot;);</span>
+<span class="pc bpc" id="L442" title="4 of 10 branches missed.">            __CLR4_5_2db0db0m68iyi2m.R.inc(17386);for (int i = 0; (((i &lt; params.length)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17387)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17388)==0&amp;false)); i++) {{</span>
+<span class="pc bpc" id="L443" title="4 of 10 branches missed.">                __CLR4_5_2db0db0m68iyi2m.R.inc(17389);if ((((i &gt; 0)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17390)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17391)==0&amp;false))) {{</span>
+<span class="fc" id="L444">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17392);tempBuffer.append(&quot; &quot;);</span>
                 }
 
-<span class="pc bpc" id="L447" title="1 of 2 branches missed.">                if (params[i] instanceof String) {</span>
-<span class="fc" id="L448">                    tempBuffer.append(convertStringToDSC((String)params[i]));</span>
-<span class="nc bnc" id="L449" title="All 2 branches missed.">                } else if (params[i] == DSCConstants.ATEND) {</span>
-<span class="nc" id="L450">                    tempBuffer.append(DSCConstants.ATEND);</span>
-<span class="nc bnc" id="L451" title="All 2 branches missed.">                } else if (params[i] instanceof Double) {</span>
-<span class="nc" id="L452">                    tempBuffer.append(formatDouble((Double) params[i]));</span>
-<span class="nc bnc" id="L453" title="All 2 branches missed.">                } else if (params[i] instanceof Number) {</span>
-<span class="nc" id="L454">                    tempBuffer.append(params[i].toString());</span>
-<span class="nc bnc" id="L455" title="All 2 branches missed.">                } else if (params[i] instanceof Date) {</span>
-<span class="nc" id="L456">                    DateFormat datef = new java.text.SimpleDateFormat(&quot;yyyy-MM-dd'T'HH:mm:ss&quot;);</span>
-<span class="nc" id="L457">                    tempBuffer.append(convertStringToDSC(datef.format((Date)params[i])));</span>
-<span class="nc bnc" id="L458" title="All 2 branches missed.">                } else if (params[i] instanceof PSResource) {</span>
-<span class="nc" id="L459">                    tempBuffer.append(((PSResource)params[i]).getResourceSpecification());</span>
-                } else {
-<span class="nc" id="L461">                    throw new IllegalArgumentException(&quot;Unsupported parameter type: &quot;</span>
+<span class="pc bpc" id="L447" title="7 of 10 branches missed.">                }__CLR4_5_2db0db0m68iyi2m.R.inc(17393);if ((((params[i] instanceof String)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17394)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17395)==0&amp;false))) {{</span>
+<span class="fc" id="L448">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17396);tempBuffer.append(convertStringToDSC((String)params[i]));</span>
+<span class="nc bnc" id="L449" title="All 10 branches missed.">                } }else {__CLR4_5_2db0db0m68iyi2m.R.inc(17397);if ((((params[i] == DSCConstants.ATEND)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17398)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17399)==0&amp;false))) {{</span>
+<span class="nc" id="L450">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17400);tempBuffer.append(DSCConstants.ATEND);</span>
+<span class="nc bnc" id="L451" title="All 10 branches missed.">                } }else {__CLR4_5_2db0db0m68iyi2m.R.inc(17401);if ((((params[i] instanceof Double)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17402)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17403)==0&amp;false))) {{</span>
+<span class="nc" id="L452">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17404);tempBuffer.append(formatDouble((Double) params[i]));</span>
+<span class="nc bnc" id="L453" title="All 10 branches missed.">                } }else {__CLR4_5_2db0db0m68iyi2m.R.inc(17405);if ((((params[i] instanceof Number)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17406)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17407)==0&amp;false))) {{</span>
+<span class="nc" id="L454">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17408);tempBuffer.append(params[i].toString());</span>
+<span class="nc bnc" id="L455" title="All 10 branches missed.">                } }else {__CLR4_5_2db0db0m68iyi2m.R.inc(17409);if ((((params[i] instanceof Date)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17410)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17411)==0&amp;false))) {{</span>
+<span class="nc" id="L456">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17412);DateFormat datef = new java.text.SimpleDateFormat(&quot;yyyy-MM-dd'T'HH:mm:ss&quot;);</span>
+<span class="nc" id="L457">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17413);tempBuffer.append(convertStringToDSC(datef.format((Date)params[i])));</span>
+<span class="nc bnc" id="L458" title="All 10 branches missed.">                } }else {__CLR4_5_2db0db0m68iyi2m.R.inc(17414);if ((((params[i] instanceof PSResource)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17415)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17416)==0&amp;false))) {{</span>
+<span class="nc" id="L459">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17417);tempBuffer.append(((PSResource)params[i]).getResourceSpecification());</span>
+                } }else {{
+<span class="nc" id="L461">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17418);throw new IllegalArgumentException(&quot;Unsupported parameter type: &quot;</span>
 <span class="nc" id="L462">                            + params[i].getClass().getName());</span>
                 }
-            }
-        }
-<span class="fc" id="L466">        writeln(tempBuffer.toString());</span>
-<span class="fc" id="L467">    }</span>
+            }}}}}}}
+        }}
+<span class="fc" id="L466">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17419);writeln(tempBuffer.toString());</span>
+<span class="fc" id="L467">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
 
     /**
      * Saves the graphics state of the rendering engine.
      * @exception IOException In case of an I/O problem
      */
-    public void saveGraphicsState() throws IOException {
-<span class="fc" id="L475">        writeln(mapCommand(&quot;gsave&quot;));</span>
+<span class="fc" id="L474">    public void saveGraphicsState() throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17420);</span>
+<span class="fc" id="L475">        __CLR4_5_2db0db0m68iyi2m.R.inc(17421);writeln(mapCommand(&quot;gsave&quot;));</span>
 
-<span class="fc" id="L477">        PSState state = new PSState(this.currentState, false);</span>
-<span class="fc" id="L478">        this.graphicsStateStack.push(this.currentState);</span>
-<span class="fc" id="L479">        this.currentState = state;</span>
-<span class="fc" id="L480">    }</span>
+<span class="fc" id="L477">        __CLR4_5_2db0db0m68iyi2m.R.inc(17422);PSState state = new PSState(this.currentState, false);</span>
+<span class="fc" id="L478">        __CLR4_5_2db0db0m68iyi2m.R.inc(17423);this.graphicsStateStack.push(this.currentState);</span>
+<span class="fc" id="L479">        __CLR4_5_2db0db0m68iyi2m.R.inc(17424);this.currentState = state;</span>
+<span class="fc" id="L480">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Restores the last graphics state of the rendering engine.
      * @return true if the state was restored, false if there's a stack underflow.
      * @exception IOException In case of an I/O problem
      */
-    public boolean restoreGraphicsState() throws IOException {
-<span class="pc bpc" id="L488" title="1 of 2 branches missed.">        if (this.graphicsStateStack.size() &gt; 0) {</span>
-<span class="fc" id="L489">            writeln(mapCommand(&quot;grestore&quot;));</span>
-<span class="fc" id="L490">            this.currentState = this.graphicsStateStack.pop();</span>
-<span class="fc" id="L491">            return true;</span>
-        } else {
-<span class="nc" id="L493">            return false;</span>
+<span class="fc" id="L487">    public boolean restoreGraphicsState() throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17425);</span>
+<span class="pc bpc" id="L488" title="7 of 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17426);if ((((this.graphicsStateStack.size() &gt; 0)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17427)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17428)==0&amp;false))) {{</span>
+<span class="fc" id="L489">            __CLR4_5_2db0db0m68iyi2m.R.inc(17429);writeln(mapCommand(&quot;grestore&quot;));</span>
+<span class="fc" id="L490">            __CLR4_5_2db0db0m68iyi2m.R.inc(17430);this.currentState = this.graphicsStateStack.pop();</span>
+<span class="fc" id="L491">            __CLR4_5_2db0db0m68iyi2m.R.inc(17431);return true;</span>
+        } }else {{
+<span class="nc" id="L493">            __CLR4_5_2db0db0m68iyi2m.R.inc(17432);return false;</span>
         }
-    }
+<span class="fc" id="L495">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
 
     /**
      * Returns the current graphics state.
      * @return the current graphics state
      */
-    public PSState getCurrentState() {
-<span class="fc" id="L503">        return this.currentState;</span>
-    }
+<span class="fc" id="L502">    public PSState getCurrentState() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17433);</span>
+<span class="fc" id="L503">        __CLR4_5_2db0db0m68iyi2m.R.inc(17434);return this.currentState;</span>
+<span class="fc" id="L504">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Issues the &quot;showpage&quot; command and resets the painting state accordingly.
      * @exception IOException In case of an I/O problem
      */
-    public void showPage() throws IOException {
-<span class="nc" id="L511">        writeln(&quot;showpage&quot;);</span>
-<span class="nc" id="L512">        resetGraphicsState();</span>
-<span class="nc" id="L513">    }</span>
+<span class="nc" id="L510">    public void showPage() throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17435);</span>
+<span class="nc" id="L511">        __CLR4_5_2db0db0m68iyi2m.R.inc(17436);writeln(&quot;showpage&quot;);</span>
+<span class="nc" id="L512">        __CLR4_5_2db0db0m68iyi2m.R.inc(17437);resetGraphicsState();</span>
+<span class="nc" id="L513">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Concats the transformation matrix.
@@ -524,60 +524,60 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      */
     public void concatMatrix(double a, double b,
             double c, double d,
-            double e, double f) throws IOException {
-<span class="nc" id="L528">        AffineTransform at = new AffineTransform(a, b, c, d, e, f);</span>
-<span class="nc" id="L529">        concatMatrix(at);</span>
+<span class="nc" id="L527">            double e, double f) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17438);</span>
+<span class="nc" id="L528">        __CLR4_5_2db0db0m68iyi2m.R.inc(17439);AffineTransform at = new AffineTransform(a, b, c, d, e, f);</span>
+<span class="nc" id="L529">        __CLR4_5_2db0db0m68iyi2m.R.inc(17440);concatMatrix(at);</span>
 
-<span class="nc" id="L531">    }</span>
+<span class="nc" id="L531">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Concats the transformations matrix.
      * @param matrix Matrix to use
      * @exception IOException In case of an I/O problem
      */
-    public void concatMatrix(double[] matrix) throws IOException {
-<span class="nc" id="L539">        concatMatrix(matrix[0], matrix[1],</span>
+<span class="nc" id="L538">    public void concatMatrix(double[] matrix) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17441);</span>
+<span class="nc" id="L539">        __CLR4_5_2db0db0m68iyi2m.R.inc(17442);concatMatrix(matrix[0], matrix[1],</span>
                      matrix[2], matrix[3],
                      matrix[4], matrix[5]);
-<span class="nc" id="L542">    }</span>
+<span class="nc" id="L542">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Formats a transformation matrix.
      * @param at the AffineTransform with the matrix
      * @return the formatted transformation matrix (example: &quot;[1 0 0 1 0 0]&quot;)
      */
-    public String formatMatrix(AffineTransform at) {
-<span class="fc" id="L550">        double[] matrix = new double[6];</span>
-<span class="fc" id="L551">        at.getMatrix(matrix);</span>
-<span class="fc" id="L552">        return &quot;[&quot; + formatDouble5(matrix[0]) + &quot; &quot;</span>
+<span class="fc" id="L549">    public String formatMatrix(AffineTransform at) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17443);</span>
+<span class="fc" id="L550">        __CLR4_5_2db0db0m68iyi2m.R.inc(17444);double[] matrix = new double[6];</span>
+<span class="fc" id="L551">        __CLR4_5_2db0db0m68iyi2m.R.inc(17445);at.getMatrix(matrix);</span>
+<span class="fc" id="L552">        __CLR4_5_2db0db0m68iyi2m.R.inc(17446);return &quot;[&quot; + formatDouble5(matrix[0]) + &quot; &quot;</span>
 <span class="fc" id="L553">            + formatDouble5(matrix[1]) + &quot; &quot;</span>
 <span class="fc" id="L554">            + formatDouble5(matrix[2]) + &quot; &quot;</span>
 <span class="fc" id="L555">            + formatDouble5(matrix[3]) + &quot; &quot;</span>
 <span class="fc" id="L556">            + formatDouble5(matrix[4]) + &quot; &quot;</span>
 <span class="fc" id="L557">            + formatDouble5(matrix[5]) + &quot;]&quot;;</span>
-    }
+<span class="fc" id="L558">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Concats the transformations matric.
      * @param at the AffineTransform whose matrix to use
      * @exception IOException In case of an I/O problem
      */
-    public void concatMatrix(AffineTransform at) throws IOException {
-<span class="fc" id="L566">        getCurrentState().concatMatrix(at);</span>
-<span class="fc" id="L567">        writeln(formatMatrix(at) + &quot; &quot; + mapCommand(&quot;concat&quot;));</span>
-<span class="fc" id="L568">    }</span>
+<span class="fc" id="L565">    public void concatMatrix(AffineTransform at) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17447);</span>
+<span class="fc" id="L566">        __CLR4_5_2db0db0m68iyi2m.R.inc(17448);getCurrentState().concatMatrix(at);</span>
+<span class="fc" id="L567">        __CLR4_5_2db0db0m68iyi2m.R.inc(17449);writeln(formatMatrix(at) + &quot; &quot; + mapCommand(&quot;concat&quot;));</span>
+<span class="fc" id="L568">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Formats a Rectangle2D to an array.
      * @param rect the rectangle
      * @return the formatted array
      */
-    public String formatRectangleToArray(Rectangle2D rect) {
-<span class="fc" id="L576">        return &quot;[&quot; + formatDouble(rect.getX()) + &quot; &quot;</span>
+<span class="fc" id="L575">    public String formatRectangleToArray(Rectangle2D rect) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17450);</span>
+<span class="fc" id="L576">        __CLR4_5_2db0db0m68iyi2m.R.inc(17451);return &quot;[&quot; + formatDouble(rect.getX()) + &quot; &quot;</span>
 <span class="fc" id="L577">        + formatDouble(rect.getY()) + &quot; &quot;</span>
 <span class="fc" id="L578">        + formatDouble(rect.getWidth()) + &quot; &quot;</span>
 <span class="fc" id="L579">        + formatDouble(rect.getHeight()) + &quot;]&quot;;</span>
-    }
+<span class="fc" id="L580">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Adds a rectangle to the current path.
@@ -588,71 +588,71 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @exception IOException In case of an I/O problem
      */
     public void defineRect(double x, double y, double w, double h)
-                throws IOException {
-<span class="fc" id="L592">        writeln(formatDouble(x)</span>
+<span class="fc" id="L591">                throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17452);</span>
+<span class="fc" id="L592">        __CLR4_5_2db0db0m68iyi2m.R.inc(17453);writeln(formatDouble(x)</span>
 <span class="fc" id="L593">            + &quot; &quot; + formatDouble(y)</span>
 <span class="fc" id="L594">            + &quot; &quot; + formatDouble(w)</span>
 <span class="fc" id="L595">            + &quot; &quot; + formatDouble(h)</span>
             + &quot; re&quot;);
-<span class="fc" id="L597">    }</span>
+<span class="fc" id="L597">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Establishes the specified line cap style.
      * @param linecap the line cap style (0, 1 or 2) as defined by the setlinecap command.
      * @exception IOException In case of an I/O problem
      */
-    public void useLineCap(int linecap) throws IOException {
-<span class="nc bnc" id="L605" title="All 2 branches missed.">        if (getCurrentState().useLineCap(linecap)) {</span>
-<span class="nc" id="L606">            writeln(linecap + &quot; &quot; + mapCommand(&quot;setlinecap&quot;));</span>
+<span class="nc" id="L604">    public void useLineCap(int linecap) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17454);</span>
+<span class="nc bnc" id="L605" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17455);if ((((getCurrentState().useLineCap(linecap))&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17456)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17457)==0&amp;false))) {{</span>
+<span class="nc" id="L606">            __CLR4_5_2db0db0m68iyi2m.R.inc(17458);writeln(linecap + &quot; &quot; + mapCommand(&quot;setlinecap&quot;));</span>
         }
-<span class="nc" id="L608">    }</span>
+<span class="nc" id="L608">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Establishes the specified line join style.
      * @param linejoin the line join style (0, 1 or 2) as defined by the setlinejoin command.
      * @exception IOException In case of an I/O problem
      */
-    public void useLineJoin(int linejoin) throws IOException {
-<span class="nc bnc" id="L616" title="All 2 branches missed.">        if (getCurrentState().useLineJoin(linejoin)) {</span>
-<span class="nc" id="L617">            writeln(linejoin + &quot; &quot; + mapCommand(&quot;setlinejoin&quot;));</span>
+<span class="nc" id="L615">    public void useLineJoin(int linejoin) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17459);</span>
+<span class="nc bnc" id="L616" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17460);if ((((getCurrentState().useLineJoin(linejoin))&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17461)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17462)==0&amp;false))) {{</span>
+<span class="nc" id="L617">            __CLR4_5_2db0db0m68iyi2m.R.inc(17463);writeln(linejoin + &quot; &quot; + mapCommand(&quot;setlinejoin&quot;));</span>
         }
-<span class="nc" id="L619">    }</span>
+<span class="nc" id="L619">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Establishes the specified miter limit.
      * @param miterlimit the miter limit as defined by the setmiterlimit command.
      * @exception IOException In case of an I/O problem
      */
-    public void useMiterLimit(float miterlimit) throws IOException {
-<span class="nc bnc" id="L627" title="All 2 branches missed.">        if (getCurrentState().useMiterLimit(miterlimit)) {</span>
-<span class="nc" id="L628">            writeln(miterlimit + &quot; &quot; + mapCommand(&quot;setmiterlimit&quot;));</span>
+<span class="nc" id="L626">    public void useMiterLimit(float miterlimit) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17464);</span>
+<span class="nc bnc" id="L627" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17465);if ((((getCurrentState().useMiterLimit(miterlimit))&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17466)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17467)==0&amp;false))) {{</span>
+<span class="nc" id="L628">            __CLR4_5_2db0db0m68iyi2m.R.inc(17468);writeln(miterlimit + &quot; &quot; + mapCommand(&quot;setmiterlimit&quot;));</span>
         }
-<span class="nc" id="L630">    }</span>
+<span class="nc" id="L630">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Establishes the specified line width.
      * @param width the line width as defined by the setlinewidth command.
      * @exception IOException In case of an I/O problem
      */
-    public void useLineWidth(double width) throws IOException {
-<span class="nc bnc" id="L638" title="All 2 branches missed.">        if (getCurrentState().useLineWidth(width)) {</span>
-<span class="nc" id="L639">            writeln(formatDouble(width) + &quot; &quot; + mapCommand(&quot;setlinewidth&quot;));</span>
+<span class="nc" id="L637">    public void useLineWidth(double width) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17469);</span>
+<span class="nc bnc" id="L638" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17470);if ((((getCurrentState().useLineWidth(width))&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17471)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17472)==0&amp;false))) {{</span>
+<span class="nc" id="L639">            __CLR4_5_2db0db0m68iyi2m.R.inc(17473);writeln(formatDouble(width) + &quot; &quot; + mapCommand(&quot;setlinewidth&quot;));</span>
         }
-<span class="nc" id="L641">    }</span>
+<span class="nc" id="L641">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Establishes the specified dash pattern.
      * @param pattern the dash pattern as defined by the setdash command.
      * @exception IOException In case of an I/O problem
      */
-    public void useDash(String pattern) throws IOException {
-<span class="nc bnc" id="L649" title="All 2 branches missed.">        if (pattern == null) {</span>
-<span class="nc" id="L650">            pattern = PSState.DEFAULT_DASH;</span>
+<span class="nc" id="L648">    public void useDash(String pattern) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17474);</span>
+<span class="nc bnc" id="L649" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17475);if ((((pattern == null)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17476)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17477)==0&amp;false))) {{</span>
+<span class="nc" id="L650">            __CLR4_5_2db0db0m68iyi2m.R.inc(17478);pattern = PSState.DEFAULT_DASH;</span>
         }
-<span class="nc bnc" id="L652" title="All 2 branches missed.">        if (getCurrentState().useDash(pattern)) {</span>
-<span class="nc" id="L653">            writeln(pattern + &quot; &quot; + mapCommand(&quot;setdash&quot;));</span>
+<span class="nc bnc" id="L652" title="All 10 branches missed.">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17479);if ((((getCurrentState().useDash(pattern))&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17480)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17481)==0&amp;false))) {{</span>
+<span class="nc" id="L653">            __CLR4_5_2db0db0m68iyi2m.R.inc(17482);writeln(pattern + &quot; &quot; + mapCommand(&quot;setdash&quot;));</span>
         }
-<span class="nc" id="L655">    }</span>
+<span class="nc" id="L655">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Establishes the specified color (RGB).
@@ -661,96 +661,96 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @deprecated use useColor method instead
      */
     @Deprecated
-    public void useRGBColor(Color col) throws IOException {
-<span class="nc" id="L665">        useColor(col);</span>
-<span class="nc" id="L666">    }</span>
+<span class="nc" id="L664">    public void useRGBColor(Color col) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17483);</span>
+<span class="nc" id="L665">        __CLR4_5_2db0db0m68iyi2m.R.inc(17484);useColor(col);</span>
+<span class="nc" id="L666">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Establishes the specified color.
      * @param col the color.
      * @exception IOException In case of an I/O problem
      */
-    public void useColor(Color col) throws IOException {
-<span class="pc bpc" id="L674" title="1 of 2 branches missed.">        if (getCurrentState().useColor(col)) {</span>
-<span class="nc" id="L675">            writeln(convertColorToPS(col));</span>
+<span class="fc" id="L673">    public void useColor(Color col) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17485);</span>
+<span class="pc bpc" id="L674" title="7 of 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17486);if ((((getCurrentState().useColor(col))&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17487)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17488)==0&amp;false))) {{</span>
+<span class="nc" id="L675">            __CLR4_5_2db0db0m68iyi2m.R.inc(17489);writeln(convertColorToPS(col));</span>
         }
-<span class="fc" id="L677">    }</span>
+<span class="fc" id="L677">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
-    private String convertColorToPS(Color color) {
-<span class="nc" id="L680">        StringBuffer codeBuffer = new StringBuffer();</span>
+<span class="nc" id="L679">    private String convertColorToPS(Color color) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17490);</span>
+<span class="nc" id="L680">        __CLR4_5_2db0db0m68iyi2m.R.inc(17491);StringBuffer codeBuffer = new StringBuffer();</span>
 
         //Important: Right now, CMYK colors are treated as device colors (DeviceCMYK) irrespective
         //of any associated color profile. All other colors are converted to sRGB (if necessary)
         //and the resulting RGB components are treated as DeviceRGB colors.
         //If all three RGB components are the same, DeviceGray is used.
 
-<span class="nc" id="L687">        boolean established = false;</span>
-<span class="nc bnc" id="L688" title="All 2 branches missed.">        if (color instanceof ColorWithAlternatives) {</span>
-<span class="nc" id="L689">            ColorWithAlternatives colExt = (ColorWithAlternatives)color;</span>
+<span class="nc" id="L687">        __CLR4_5_2db0db0m68iyi2m.R.inc(17492);boolean established = false;</span>
+<span class="nc bnc" id="L688" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17493);if ((((color instanceof ColorWithAlternatives)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17494)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17495)==0&amp;false))) {{</span>
+<span class="nc" id="L689">            __CLR4_5_2db0db0m68iyi2m.R.inc(17496);ColorWithAlternatives colExt = (ColorWithAlternatives)color;</span>
             //Alternative colors have priority
-<span class="nc" id="L691">            Color[] alt = colExt.getAlternativeColors();</span>
-<span class="nc bnc" id="L692" title="All 2 branches missed.">            for (Color col : alt) {</span>
-<span class="nc" id="L693">                established = establishColorFromColor(codeBuffer, col);</span>
-<span class="nc bnc" id="L694" title="All 2 branches missed.">                if (established) {</span>
-<span class="nc" id="L695">                    break;</span>
+<span class="nc" id="L691">            __CLR4_5_2db0db0m68iyi2m.R.inc(17497);Color[] alt = colExt.getAlternativeColors();</span>
+<span class="nc bnc" id="L692" title="All 2 branches missed.">            __CLR4_5_2db0db0m68iyi2m.R.inc(17498);for (Color col : alt) {{</span>
+<span class="nc" id="L693">                __CLR4_5_2db0db0m68iyi2m.R.inc(17499);established = establishColorFromColor(codeBuffer, col);</span>
+<span class="nc bnc" id="L694" title="All 10 branches missed.">                __CLR4_5_2db0db0m68iyi2m.R.inc(17500);if ((((established)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17501)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17502)==0&amp;false))) {{</span>
+<span class="nc" id="L695">                    __CLR4_5_2db0db0m68iyi2m.R.inc(17503);break;</span>
                 }
-            }
-<span class="nc bnc" id="L698" title="All 4 branches missed.">            if (log.isDebugEnabled() &amp;&amp; alt.length &gt; 0) {</span>
-<span class="nc" id="L699">                log.debug(&quot;None of the alternative colors are supported. Using fallback: &quot;</span>
+            }}
+<span class="nc bnc" id="L698" title="All 12 branches missed.">            }__CLR4_5_2db0db0m68iyi2m.R.inc(17504);if ((((log.isDebugEnabled() &amp;&amp; alt.length &gt; 0)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17505)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17506)==0&amp;false))) {{</span>
+<span class="nc" id="L699">                __CLR4_5_2db0db0m68iyi2m.R.inc(17507);log.debug(&quot;None of the alternative colors are supported. Using fallback: &quot;</span>
                         + color);
             }
-        }
+        }}
 
         //Fallback
-<span class="nc bnc" id="L705" title="All 2 branches missed.">        if (!established) {</span>
-<span class="nc" id="L706">            established = establishColorFromColor(codeBuffer, color);</span>
+<span class="nc bnc" id="L705" title="All 10 branches missed.">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17508);if ((((!established)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17509)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17510)==0&amp;false))) {{</span>
+<span class="nc" id="L706">            __CLR4_5_2db0db0m68iyi2m.R.inc(17511);established = establishColorFromColor(codeBuffer, color);</span>
         }
-<span class="nc bnc" id="L708" title="All 2 branches missed.">        if (!established) {</span>
-<span class="nc" id="L709">            establishFallbackRGB(codeBuffer, color);</span>
+<span class="nc bnc" id="L708" title="All 10 branches missed.">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17512);if ((((!established)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17513)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17514)==0&amp;false))) {{</span>
+<span class="nc" id="L709">            __CLR4_5_2db0db0m68iyi2m.R.inc(17515);establishFallbackRGB(codeBuffer, color);</span>
         }
 
-<span class="nc" id="L712">        return codeBuffer.toString();</span>
-    }
+<span class="nc" id="L712">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17516);return codeBuffer.toString();</span>
+<span class="nc" id="L713">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
-    private boolean establishColorFromColor(StringBuffer codeBuffer, Color color) {
+<span class="nc" id="L715">    private boolean establishColorFromColor(StringBuffer codeBuffer, Color color) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17517);</span>
         //Important: see above note about color handling!
-<span class="nc" id="L717">        float[] comps = color.getColorComponents(null);</span>
-<span class="nc bnc" id="L718" title="All 2 branches missed.">        if (color.getColorSpace().getType() == ColorSpace.TYPE_CMYK) {</span>
+<span class="nc" id="L717">        __CLR4_5_2db0db0m68iyi2m.R.inc(17518);float[] comps = color.getColorComponents(null);</span>
+<span class="nc bnc" id="L718" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17519);if ((((color.getColorSpace().getType() == ColorSpace.TYPE_CMYK)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17520)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17521)==0&amp;false))) {{</span>
             // colorspace is CMYK
-<span class="nc" id="L720">            writeSetColor(codeBuffer, comps, &quot;setcmykcolor&quot;);</span>
-<span class="nc" id="L721">            return true;</span>
+<span class="nc" id="L720">            __CLR4_5_2db0db0m68iyi2m.R.inc(17522);writeSetColor(codeBuffer, comps, &quot;setcmykcolor&quot;);</span>
+<span class="nc" id="L721">            __CLR4_5_2db0db0m68iyi2m.R.inc(17523);return true;</span>
         }
-<span class="nc" id="L723">        return false;</span>
-    }
+<span class="nc" id="L723">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17524);return false;</span>
+<span class="nc" id="L724">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
-    private void writeSetColor(StringBuffer codeBuffer, float[] comps, String command) {
-<span class="nc bnc" id="L727" title="All 2 branches missed.">        for (int i = 0, c = comps.length; i &lt; c; i++) {</span>
-<span class="nc bnc" id="L728" title="All 2 branches missed.">            if (i &gt; 0) {</span>
-<span class="nc" id="L729">                codeBuffer.append(&quot; &quot;);</span>
+<span class="nc" id="L726">    private void writeSetColor(StringBuffer codeBuffer, float[] comps, String command) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17525);</span>
+<span class="nc bnc" id="L727" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17526);for (int i = 0, c = comps.length; (((i &lt; c)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17527)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17528)==0&amp;false)); i++) {{</span>
+<span class="nc bnc" id="L728" title="All 10 branches missed.">            __CLR4_5_2db0db0m68iyi2m.R.inc(17529);if ((((i &gt; 0)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17530)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17531)==0&amp;false))) {{</span>
+<span class="nc" id="L729">                __CLR4_5_2db0db0m68iyi2m.R.inc(17532);codeBuffer.append(&quot; &quot;);</span>
             }
-<span class="nc" id="L731">            codeBuffer.append(formatDouble(comps[i]));</span>
+<span class="nc" id="L731">            }__CLR4_5_2db0db0m68iyi2m.R.inc(17533);codeBuffer.append(formatDouble(comps[i]));</span>
         }
-<span class="nc" id="L733">        codeBuffer.append(&quot; &quot;).append(mapCommand(command));</span>
-<span class="nc" id="L734">    }</span>
+<span class="nc" id="L733">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17534);codeBuffer.append(&quot; &quot;).append(mapCommand(command));</span>
+<span class="nc" id="L734">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
-    private void establishFallbackRGB(StringBuffer codeBuffer, Color color) {
-        float[] comps;
-<span class="nc bnc" id="L738" title="All 2 branches missed.">        if (color.getColorSpace().isCS_sRGB()) {</span>
-<span class="nc" id="L739">            comps = color.getColorComponents(null);</span>
-        } else {
-<span class="nc bnc" id="L741" title="All 2 branches missed.">            if (log.isDebugEnabled()) {</span>
-<span class="nc" id="L742">                log.debug(&quot;Converting color to sRGB as a fallback: &quot; + color);</span>
+<span class="nc" id="L736">    private void establishFallbackRGB(StringBuffer codeBuffer, Color color) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17535);</span>
+<span class="nc" id="L737">        __CLR4_5_2db0db0m68iyi2m.R.inc(17536);float[] comps;</span>
+<span class="nc bnc" id="L738" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17537);if ((((color.getColorSpace().isCS_sRGB())&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17538)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17539)==0&amp;false))) {{</span>
+<span class="nc" id="L739">            __CLR4_5_2db0db0m68iyi2m.R.inc(17540);comps = color.getColorComponents(null);</span>
+        } }else {{
+<span class="nc bnc" id="L741" title="All 10 branches missed.">            __CLR4_5_2db0db0m68iyi2m.R.inc(17541);if ((((log.isDebugEnabled())&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17542)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17543)==0&amp;false))) {{</span>
+<span class="nc" id="L742">                __CLR4_5_2db0db0m68iyi2m.R.inc(17544);log.debug(&quot;Converting color to sRGB as a fallback: &quot; + color);</span>
             }
-<span class="nc" id="L744">            ColorSpace sRGB = ColorSpace.getInstance(ColorSpace.CS_sRGB);</span>
-<span class="nc" id="L745">            comps = color.getColorComponents(sRGB, null);</span>
+<span class="nc" id="L744">            }__CLR4_5_2db0db0m68iyi2m.R.inc(17545);ColorSpace sRGB = ColorSpace.getInstance(ColorSpace.CS_sRGB);</span>
+<span class="nc" id="L745">            __CLR4_5_2db0db0m68iyi2m.R.inc(17546);comps = color.getColorComponents(sRGB, null);</span>
         }
-<span class="nc bnc" id="L747" title="All 4 branches missed.">        assert comps.length == 3;</span>
-<span class="nc" id="L748">        boolean gray = ColorUtil.isGray(color);</span>
-<span class="nc bnc" id="L749" title="All 2 branches missed.">        if (gray) {</span>
-<span class="nc" id="L750">            comps = new float[] {comps[0]};</span>
+<span class="nc bnc" id="L747" title="All 12 branches missed.">        }assert (((comps.length == 3)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17547)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17548)==0&amp;false));</span>
+<span class="nc" id="L748">        __CLR4_5_2db0db0m68iyi2m.R.inc(17549);boolean gray = ColorUtil.isGray(color);</span>
+<span class="nc bnc" id="L749" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17550);if ((((gray)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17551)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17552)==0&amp;false))) {{</span>
+<span class="nc" id="L750">            __CLR4_5_2db0db0m68iyi2m.R.inc(17553);comps = new float[] {comps[0]};</span>
         }
-<span class="nc bnc" id="L752" title="All 2 branches missed.">        writeSetColor(codeBuffer, comps, gray ? &quot;setgray&quot; : &quot;setrgbcolor&quot;);</span>
-<span class="nc" id="L753">    }</span>
+<span class="nc bnc" id="L752" title="All 10 branches missed.">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17554);writeSetColor(codeBuffer, comps, (((gray )&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17555)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17556)==0&amp;false))? &quot;setgray&quot; : &quot;setrgbcolor&quot;);</span>
+<span class="nc" id="L753">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Establishes the specified font and size.
@@ -758,11 +758,11 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @param size size of the font
      * @exception IOException In case of an I/O problem
      */
-    public void useFont(String name, float size) throws IOException {
-<span class="nc bnc" id="L762" title="All 2 branches missed.">        if (getCurrentState().useFont(name, size)) {</span>
-<span class="nc" id="L763">            writeln(name + &quot; &quot; + formatDouble(size) + &quot; F&quot;);</span>
+<span class="nc" id="L761">    public void useFont(String name, float size) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17557);</span>
+<span class="nc bnc" id="L762" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17558);if ((((getCurrentState().useFont(name, size))&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17559)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17560)==0&amp;false))) {{</span>
+<span class="nc" id="L763">            __CLR4_5_2db0db0m68iyi2m.R.inc(17561);writeln(name + &quot; &quot; + formatDouble(size) + &quot; F&quot;);</span>
         }
-<span class="nc" id="L765">    }</span>
+<span class="nc" id="L765">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
 <span class="fc" id="L767">    private ResourceTracker resTracker = new ResourceTracker();</span>
 
@@ -770,17 +770,17 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * Resturns the ResourceTracker instance associated with this PSGenerator.
      * @return the ResourceTracker instance or null if none is assigned
      */
-    public ResourceTracker getResourceTracker() {
-<span class="fc" id="L774">        return this.resTracker;</span>
-    }
+<span class="fc" id="L773">    public ResourceTracker getResourceTracker() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17562);</span>
+<span class="fc" id="L774">        __CLR4_5_2db0db0m68iyi2m.R.inc(17563);return this.resTracker;</span>
+<span class="fc" id="L775">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Sets the ResourceTracker instance to be associated with this PSGenerator.
      * @param resTracker the ResourceTracker instance
      */
-    public void setResourceTracker(ResourceTracker resTracker) {
-<span class="nc" id="L782">        this.resTracker = resTracker;</span>
-<span class="nc" id="L783">    }</span>
+<span class="nc" id="L781">    public void setResourceTracker(ResourceTracker resTracker) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17564);</span>
+<span class="nc" id="L782">        __CLR4_5_2db0db0m68iyi2m.R.inc(17565);this.resTracker = resTracker;</span>
+<span class="nc" id="L783">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Notifies the generator that a new page has been started and that the page resource
@@ -788,9 +788,9 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @deprecated Use the notifyStartNewPage() on ResourceTracker instead.
      */
     @Deprecated
-    public void notifyStartNewPage() {
-<span class="nc" id="L792">        getResourceTracker().notifyStartNewPage();</span>
-<span class="nc" id="L793">    }</span>
+<span class="nc" id="L791">    public void notifyStartNewPage() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17566);</span>
+<span class="nc" id="L792">        __CLR4_5_2db0db0m68iyi2m.R.inc(17567);getResourceTracker().notifyStartNewPage();</span>
+<span class="nc" id="L793">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Notifies the generator about the usage of a resource on the current page.
@@ -799,9 +799,9 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @deprecated Use the notifyResourceUsageOnPage() on ResourceTracker instead
      */
     @Deprecated
-    public void notifyResourceUsage(PSResource res, boolean needed) {
-<span class="nc" id="L803">        getResourceTracker().notifyResourceUsageOnPage(res);</span>
-<span class="nc" id="L804">    }</span>
+<span class="nc" id="L802">    public void notifyResourceUsage(PSResource res, boolean needed) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17568);</span>
+<span class="nc" id="L803">        __CLR4_5_2db0db0m68iyi2m.R.inc(17569);getResourceTracker().notifyResourceUsageOnPage(res);</span>
+<span class="nc" id="L804">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Writes a DSC comment for the accumulated used resources, either at page level or
@@ -812,9 +812,9 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @deprecated Use the writeResources() on ResourceTracker instead.
      */
     @Deprecated
-    public void writeResources(boolean pageLevel) throws IOException {
-<span class="nc" id="L816">        getResourceTracker().writeResources(pageLevel, this);</span>
-<span class="nc" id="L817">    }</span>
+<span class="nc" id="L815">    public void writeResources(boolean pageLevel) throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17570);</span>
+<span class="nc" id="L816">        __CLR4_5_2db0db0m68iyi2m.R.inc(17571);getResourceTracker().writeResources(pageLevel, this);</span>
+<span class="nc" id="L817">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Indicates whether a particular resource is supplied, rather than needed.
@@ -823,9 +823,9 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * @deprecated Use the isResourceSupplied() on ResourceTracker instead.
      */
     @Deprecated
-    public boolean isResourceSupplied(PSResource res) {
-<span class="nc" id="L827">        return getResourceTracker().isResourceSupplied(res);</span>
-    }
+<span class="nc" id="L826">    public boolean isResourceSupplied(PSResource res) {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17572);</span>
+<span class="nc" id="L827">        __CLR4_5_2db0db0m68iyi2m.R.inc(17573);return getResourceTracker().isResourceSupplied(res);</span>
+<span class="nc" id="L828">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Embeds the Identity-H CMap file into the output stream, if that has not
@@ -835,24 +835,24 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      * (which means that a call to this method had already been made earlier)
      * @throws IOException in case of an I/O problem
      */
-    public boolean embedIdentityH() throws IOException {
-<span class="nc bnc" id="L839" title="All 2 branches missed.">        if (identityHEmbedded) {</span>
-<span class="nc" id="L840">            return false;</span>
-        } else {
-<span class="nc" id="L842">            resTracker.registerNeededResource(getProcsetCIDInitResource());</span>
-<span class="nc" id="L843">            writeDSCComment(DSCConstants.BEGIN_DOCUMENT, IDENTITY_H);</span>
-<span class="nc" id="L844">            InputStream cmap = PSGenerator.class.getResourceAsStream(IDENTITY_H);</span>
-            try {
-<span class="nc" id="L846">                IOUtils.copyLarge(cmap, out);</span>
+<span class="nc" id="L838">    public boolean embedIdentityH() throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17574);</span>
+<span class="nc bnc" id="L839" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17575);if ((((identityHEmbedded)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17576)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17577)==0&amp;false))) {{</span>
+<span class="nc" id="L840">            __CLR4_5_2db0db0m68iyi2m.R.inc(17578);return false;</span>
+        } }else {{
+<span class="nc" id="L842">            __CLR4_5_2db0db0m68iyi2m.R.inc(17579);resTracker.registerNeededResource(getProcsetCIDInitResource());</span>
+<span class="nc" id="L843">            __CLR4_5_2db0db0m68iyi2m.R.inc(17580);writeDSCComment(DSCConstants.BEGIN_DOCUMENT, IDENTITY_H);</span>
+<span class="nc" id="L844">            __CLR4_5_2db0db0m68iyi2m.R.inc(17581);InputStream cmap = PSGenerator.class.getResourceAsStream(IDENTITY_H);</span>
+<span class="nc" id="L845">            __CLR4_5_2db0db0m68iyi2m.R.inc(17582);try {</span>
+<span class="nc" id="L846">                __CLR4_5_2db0db0m68iyi2m.R.inc(17583);IOUtils.copyLarge(cmap, out);</span>
             } finally {
-<span class="nc" id="L848">                IOUtils.closeQuietly(cmap);</span>
+<span class="nc" id="L848">                __CLR4_5_2db0db0m68iyi2m.R.inc(17584);IOUtils.closeQuietly(cmap);</span>
             }
-<span class="nc" id="L850">            writeDSCComment(DSCConstants.END_DOCUMENT);</span>
-<span class="nc" id="L851">            resTracker.registerSuppliedResource(getIdentityHCMapResource());</span>
-<span class="nc" id="L852">            identityHEmbedded = true;</span>
-<span class="nc" id="L853">            return true;</span>
+<span class="nc" id="L850">            __CLR4_5_2db0db0m68iyi2m.R.inc(17585);writeDSCComment(DSCConstants.END_DOCUMENT);</span>
+<span class="nc" id="L851">            __CLR4_5_2db0db0m68iyi2m.R.inc(17586);resTracker.registerSuppliedResource(getIdentityHCMapResource());</span>
+<span class="nc" id="L852">            __CLR4_5_2db0db0m68iyi2m.R.inc(17587);identityHEmbedded = true;</span>
+<span class="nc" id="L853">            __CLR4_5_2db0db0m68iyi2m.R.inc(17588);return true;</span>
         }
-    }
+<span class="nc" id="L855">    }}finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Returns the PSResource instance corresponding to the Identity-H CMap
@@ -860,12 +860,12 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      *
      * @return the Identity-H CMap resource.
      */
-    public PSResource getIdentityHCMapResource() {
-<span class="nc bnc" id="L864" title="All 2 branches missed.">        if (identityHCMapResource == null) {</span>
-<span class="nc" id="L865">            identityHCMapResource = new PSResource(PSResource.TYPE_CMAP, IDENTITY_H);</span>
+<span class="nc" id="L863">    public PSResource getIdentityHCMapResource() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17589);</span>
+<span class="nc bnc" id="L864" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17590);if ((((identityHCMapResource == null)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17591)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17592)==0&amp;false))) {{</span>
+<span class="nc" id="L865">            __CLR4_5_2db0db0m68iyi2m.R.inc(17593);identityHCMapResource = new PSResource(PSResource.TYPE_CMAP, IDENTITY_H);</span>
         }
-<span class="nc" id="L867">        return identityHCMapResource;</span>
-    }
+<span class="nc" id="L867">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17594);return identityHCMapResource;</span>
+<span class="nc" id="L868">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Returns the PSResource instance corresponding to the CIDInit ProcSet
@@ -873,12 +873,12 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      *
      * @return the ProcSet CIDInit resource
      */
-    public PSResource getProcsetCIDInitResource() {
-<span class="nc bnc" id="L877" title="All 2 branches missed.">        if (procsetCIDInitResource == null) {</span>
-<span class="nc" id="L878">            procsetCIDInitResource = new PSResource(PSResource.TYPE_PROCSET, &quot;CIDInit&quot;);</span>
+<span class="nc" id="L876">    public PSResource getProcsetCIDInitResource() {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17595);</span>
+<span class="nc bnc" id="L877" title="All 10 branches missed.">        __CLR4_5_2db0db0m68iyi2m.R.inc(17596);if ((((procsetCIDInitResource == null)&amp;&amp;(__CLR4_5_2db0db0m68iyi2m.R.iget(17597)!=0|true))||(__CLR4_5_2db0db0m68iyi2m.R.iget(17598)==0&amp;false))) {{</span>
+<span class="nc" id="L878">            __CLR4_5_2db0db0m68iyi2m.R.inc(17599);procsetCIDInitResource = new PSResource(PSResource.TYPE_PROCSET, &quot;CIDInit&quot;);</span>
         }
-<span class="nc" id="L880">        return procsetCIDInitResource;</span>
-    }
+<span class="nc" id="L880">        }__CLR4_5_2db0db0m68iyi2m.R.inc(17600);return procsetCIDInitResource;</span>
+<span class="nc" id="L881">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
     /**
      * Adds a PostScript DSC comment to the output stream requiring the
@@ -886,9 +886,9 @@ import org.apache.xmlgraphics.util.DoubleFormatUtil;
      *
      * @throws IOException in case of an I/O problem
      */
-    public void includeProcsetCIDInitResource() throws IOException {
-<span class="nc" id="L890">        writeDSCComment(DSCConstants.INCLUDE_RESOURCE, getProcsetCIDInitResource());</span>
-<span class="nc" id="L891">    }</span>
+<span class="nc" id="L889">    public void includeProcsetCIDInitResource() throws IOException {try{__CLR4_5_2db0db0m68iyi2m.R.inc(17601);</span>
+<span class="nc" id="L890">        __CLR4_5_2db0db0m68iyi2m.R.inc(17602);writeDSCComment(DSCConstants.INCLUDE_RESOURCE, getProcsetCIDInitResource());</span>
+<span class="nc" id="L891">    }finally{__CLR4_5_2db0db0m68iyi2m.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

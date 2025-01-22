@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreloaderEPS.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">PreloaderEPS.java</span></div><h1>PreloaderEPS.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreloaderEPS.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">PreloaderEPS.java</span></div><h1>PreloaderEPS.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -43,7 +43,7 @@ import org.apache.xmlgraphics.util.MimeConstants;
 /**
  * Image preloader for EPS images (Encapsulated PostScript).
  */
-<span class="fc" id="L46">public class PreloaderEPS extends AbstractImagePreloader {</span>
+<span class="pc bpc" id="L46" title="3 of 4 branches missed.">@java.lang.SuppressWarnings({&quot;fallthrough&quot;}) public class PreloaderEPS extends AbstractImagePreloader {public static class __CLR4_5_28oi8oim68iyhda{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,11371,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /** Key for binary header object used in custom objects of the ImageInfo class. */
 <span class="fc" id="L49">    public static final Object EPS_BINARY_HEADER = EPSBinaryFileHeader.class;</span>
@@ -52,126 +52,126 @@ import org.apache.xmlgraphics.util.MimeConstants;
 
     /** {@inheritDoc} */
     public ImageInfo preloadImage(String uri, Source src, ImageContext context)
-            throws IOException {
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (!ImageUtil.hasImageInputStream(src)) {</span>
-<span class="nc" id="L57">            return null;</span>
+<span class="fc" id="L55">            throws IOException {try{__CLR4_5_28oi8oim68iyhda.R.inc(11250);</span>
+<span class="pc bpc" id="L56" title="7 of 10 branches missed.">        __CLR4_5_28oi8oim68iyhda.R.inc(11251);if ((((!ImageUtil.hasImageInputStream(src))&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11252)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11253)==0&amp;false))) {{</span>
+<span class="nc" id="L57">            __CLR4_5_28oi8oim68iyhda.R.inc(11254);return null;</span>
         }
-<span class="fc" id="L59">        ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
-<span class="fc" id="L60">        in.mark();</span>
-<span class="fc" id="L61">        ByteOrder originalByteOrder = in.getByteOrder();</span>
-<span class="fc" id="L62">        in.setByteOrder(ByteOrder.LITTLE_ENDIAN);</span>
-<span class="fc" id="L63">        EPSBinaryFileHeader binaryHeader = null;</span>
-        try {
-<span class="fc" id="L65">            long magic = in.readUnsignedInt();</span>
-<span class="fc" id="L66">            magic &amp;= 0xFFFFFFFFL; //Work-around for bug in Java 1.4.2</span>
+<span class="fc" id="L59">        }__CLR4_5_28oi8oim68iyhda.R.inc(11255);ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
+<span class="fc" id="L60">        __CLR4_5_28oi8oim68iyhda.R.inc(11256);in.mark();</span>
+<span class="fc" id="L61">        __CLR4_5_28oi8oim68iyhda.R.inc(11257);ByteOrder originalByteOrder = in.getByteOrder();</span>
+<span class="fc" id="L62">        __CLR4_5_28oi8oim68iyhda.R.inc(11258);in.setByteOrder(ByteOrder.LITTLE_ENDIAN);</span>
+<span class="fc" id="L63">        __CLR4_5_28oi8oim68iyhda.R.inc(11259);EPSBinaryFileHeader binaryHeader = null;</span>
+<span class="fc" id="L64">        __CLR4_5_28oi8oim68iyhda.R.inc(11260);try {</span>
+<span class="fc" id="L65">            __CLR4_5_28oi8oim68iyhda.R.inc(11261);long magic = in.readUnsignedInt();</span>
+<span class="fc" id="L66">            __CLR4_5_28oi8oim68iyhda.R.inc(11262);magic &amp;= 0xFFFFFFFFL; //Work-around for bug in Java 1.4.2</span>
             // Check if binary header
-<span class="fc" id="L68">            boolean supported = false;</span>
-<span class="fc bfc" id="L69" title="All 2 branches covered.">            if (magic == 0xC6D3D0C5L) {</span>
-<span class="fc" id="L70">                supported = true; //binary EPS</span>
+<span class="fc" id="L68">            __CLR4_5_28oi8oim68iyhda.R.inc(11263);boolean supported = false;</span>
+<span class="pc bpc" id="L69" title="4 of 10 branches missed.">            __CLR4_5_28oi8oim68iyhda.R.inc(11264);if ((((magic == 0xC6D3D0C5L)&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11265)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11266)==0&amp;false))) {{</span>
+<span class="fc" id="L70">                __CLR4_5_28oi8oim68iyhda.R.inc(11267);supported = true; //binary EPS</span>
 
-<span class="fc" id="L72">                binaryHeader = readBinaryFileHeader(in);</span>
-<span class="fc" id="L73">                in.reset();</span>
-<span class="fc" id="L74">                in.mark(); //Mark start of file again</span>
-<span class="fc" id="L75">                in.seek(binaryHeader.psStart);</span>
+<span class="fc" id="L72">                __CLR4_5_28oi8oim68iyhda.R.inc(11268);binaryHeader = readBinaryFileHeader(in);</span>
+<span class="fc" id="L73">                __CLR4_5_28oi8oim68iyhda.R.inc(11269);in.reset();</span>
+<span class="fc" id="L74">                __CLR4_5_28oi8oim68iyhda.R.inc(11270);in.mark(); //Mark start of file again</span>
+<span class="fc" id="L75">                __CLR4_5_28oi8oim68iyhda.R.inc(11271);in.seek(binaryHeader.psStart);</span>
 
-<span class="fc bfc" id="L77" title="All 2 branches covered.">            } else if (magic == 0x53502125L) { //&quot;%!PS&quot; in little endian</span>
-<span class="fc" id="L78">                supported = true; //ascii EPS</span>
-<span class="fc" id="L79">                in.reset();</span>
-<span class="fc" id="L80">                in.mark(); //Mark start of file again</span>
-            } else {
-<span class="fc" id="L82">                in.reset();</span>
+<span class="pc bpc" id="L77" title="4 of 10 branches missed.">            } }else {__CLR4_5_28oi8oim68iyhda.R.inc(11272);if ((((magic == 0x53502125L)&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11273)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11274)==0&amp;false))) {{ //&quot;%!PS&quot; in little endian</span>
+<span class="fc" id="L78">                __CLR4_5_28oi8oim68iyhda.R.inc(11275);supported = true; //ascii EPS</span>
+<span class="fc" id="L79">                __CLR4_5_28oi8oim68iyhda.R.inc(11276);in.reset();</span>
+<span class="fc" id="L80">                __CLR4_5_28oi8oim68iyhda.R.inc(11277);in.mark(); //Mark start of file again</span>
+            } }else {{
+<span class="fc" id="L82">                __CLR4_5_28oi8oim68iyhda.R.inc(11278);in.reset();</span>
             }
 
-<span class="fc bfc" id="L85" title="All 2 branches covered.">            if (supported) {</span>
-<span class="fc" id="L86">                ImageInfo info = new ImageInfo(uri, MimeConstants.MIME_EPS);</span>
-<span class="fc" id="L87">                boolean success = determineSize(in, context, info);</span>
-<span class="fc" id="L88">                in.reset(); //Need to go back to start of file</span>
-<span class="pc bpc" id="L89" title="1 of 2 branches missed.">                if (!success) {</span>
+<span class="pc bpc" id="L85" title="4 of 10 branches missed.">            }}__CLR4_5_28oi8oim68iyhda.R.inc(11279);if ((((supported)&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11280)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11281)==0&amp;false))) {{</span>
+<span class="fc" id="L86">                __CLR4_5_28oi8oim68iyhda.R.inc(11282);ImageInfo info = new ImageInfo(uri, MimeConstants.MIME_EPS);</span>
+<span class="fc" id="L87">                __CLR4_5_28oi8oim68iyhda.R.inc(11283);boolean success = determineSize(in, context, info);</span>
+<span class="fc" id="L88">                __CLR4_5_28oi8oim68iyhda.R.inc(11284);in.reset(); //Need to go back to start of file</span>
+<span class="pc bpc" id="L89" title="7 of 10 branches missed.">                __CLR4_5_28oi8oim68iyhda.R.inc(11285);if ((((!success)&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11286)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11287)==0&amp;false))) {{</span>
                     //No BoundingBox found, so probably no EPS
-<span class="nc" id="L91">                    return null;</span>
+<span class="nc" id="L91">                    __CLR4_5_28oi8oim68iyhda.R.inc(11288);return null;</span>
                 }
-<span class="pc bpc" id="L93" title="1 of 2 branches missed.">                if (in.getStreamPosition() != 0) {</span>
-<span class="nc" id="L94">                    throw new IllegalStateException(&quot;Need to be at the start of the file here&quot;);</span>
+<span class="pc bpc" id="L93" title="7 of 10 branches missed.">                }__CLR4_5_28oi8oim68iyhda.R.inc(11289);if ((((in.getStreamPosition() != 0)&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11290)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11291)==0&amp;false))) {{</span>
+<span class="nc" id="L94">                    __CLR4_5_28oi8oim68iyhda.R.inc(11292);throw new IllegalStateException(&quot;Need to be at the start of the file here&quot;);</span>
                 }
-<span class="fc bfc" id="L96" title="All 2 branches covered.">                if (binaryHeader != null) {</span>
-<span class="fc" id="L97">                    info.getCustomObjects().put(EPS_BINARY_HEADER, binaryHeader);</span>
+<span class="pc bpc" id="L96" title="4 of 10 branches missed.">                }__CLR4_5_28oi8oim68iyhda.R.inc(11293);if ((((binaryHeader != null)&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11294)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11295)==0&amp;false))) {{</span>
+<span class="fc" id="L97">                    __CLR4_5_28oi8oim68iyhda.R.inc(11296);info.getCustomObjects().put(EPS_BINARY_HEADER, binaryHeader);</span>
                 }
-<span class="fc" id="L99">                return info;</span>
-            } else {
-<span class="fc" id="L101">                return null;</span>
+<span class="fc" id="L99">                }__CLR4_5_28oi8oim68iyhda.R.inc(11297);return info;</span>
+            } }else {{
+<span class="fc" id="L101">                __CLR4_5_28oi8oim68iyhda.R.inc(11298);return null;</span>
             }
-        } finally {
-<span class="fc" id="L104">            in.setByteOrder(originalByteOrder);</span>
+        }} finally {
+<span class="fc" id="L104">            __CLR4_5_28oi8oim68iyhda.R.inc(11299);in.setByteOrder(originalByteOrder);</span>
         }
-    }
+<span class="fc" id="L106">    }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
-    private EPSBinaryFileHeader readBinaryFileHeader(ImageInputStream in) throws IOException {
-<span class="fc" id="L109">        EPSBinaryFileHeader offsets = new EPSBinaryFileHeader();</span>
-<span class="fc" id="L110">        offsets.psStart = in.readUnsignedInt();</span>
-<span class="fc" id="L111">        offsets.psLength = in.readUnsignedInt();</span>
-<span class="fc" id="L112">        offsets.wmfStart = in.readUnsignedInt();</span>
-<span class="fc" id="L113">        offsets.wmfLength = in.readUnsignedInt();</span>
-<span class="fc" id="L114">        offsets.tiffStart = in.readUnsignedInt();</span>
-<span class="fc" id="L115">        offsets.tiffLength = in.readUnsignedInt();</span>
-<span class="fc" id="L116">        return offsets;</span>
-    }
+<span class="fc" id="L108">    private EPSBinaryFileHeader readBinaryFileHeader(ImageInputStream in) throws IOException {try{__CLR4_5_28oi8oim68iyhda.R.inc(11300);</span>
+<span class="fc" id="L109">        __CLR4_5_28oi8oim68iyhda.R.inc(11301);EPSBinaryFileHeader offsets = new EPSBinaryFileHeader();</span>
+<span class="fc" id="L110">        __CLR4_5_28oi8oim68iyhda.R.inc(11302);offsets.psStart = in.readUnsignedInt();</span>
+<span class="fc" id="L111">        __CLR4_5_28oi8oim68iyhda.R.inc(11303);offsets.psLength = in.readUnsignedInt();</span>
+<span class="fc" id="L112">        __CLR4_5_28oi8oim68iyhda.R.inc(11304);offsets.wmfStart = in.readUnsignedInt();</span>
+<span class="fc" id="L113">        __CLR4_5_28oi8oim68iyhda.R.inc(11305);offsets.wmfLength = in.readUnsignedInt();</span>
+<span class="fc" id="L114">        __CLR4_5_28oi8oim68iyhda.R.inc(11306);offsets.tiffStart = in.readUnsignedInt();</span>
+<span class="fc" id="L115">        __CLR4_5_28oi8oim68iyhda.R.inc(11307);offsets.tiffLength = in.readUnsignedInt();</span>
+<span class="fc" id="L116">        __CLR4_5_28oi8oim68iyhda.R.inc(11308);return offsets;</span>
+<span class="fc" id="L117">    }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
     private boolean determineSize(ImageInputStream in, ImageContext context, ImageInfo info)
-            throws IOException {
+<span class="fc" id="L120">            throws IOException {try{__CLR4_5_28oi8oim68iyhda.R.inc(11309);</span>
 
-<span class="fc" id="L122">        in.mark();</span>
-        try {
-<span class="fc" id="L124">            Rectangle2D bbox = null;</span>
-            DSCParser parser;
-            try {
-<span class="fc" id="L127">                parser = new DSCParser(new ImageInputStreamAdapter(in));</span>
-                outerLoop:
-<span class="pc bpc" id="L129" title="1 of 2 branches missed.">                while (parser.hasNext()) {</span>
-<span class="fc" id="L130">                    DSCEvent event = parser.nextEvent();</span>
-<span class="fc bfc" id="L131" title="All 3 branches covered.">                    switch (event.getEventType()) {</span>
-                    case DSCParserConstants.HEADER_COMMENT:
-                    case DSCParserConstants.COMMENT:
+<span class="fc" id="L122">        __CLR4_5_28oi8oim68iyhda.R.inc(11310);in.mark();</span>
+<span class="fc" id="L123">        __CLR4_5_28oi8oim68iyhda.R.inc(11311);try {</span>
+<span class="fc" id="L124">            __CLR4_5_28oi8oim68iyhda.R.inc(11312);Rectangle2D bbox = null;</span>
+<span class="fc" id="L125">            __CLR4_5_28oi8oim68iyhda.R.inc(11313);DSCParser parser;</span>
+<span class="fc" id="L126">            __CLR4_5_28oi8oim68iyhda.R.inc(11314);try {</span>
+<span class="fc" id="L127">                __CLR4_5_28oi8oim68iyhda.R.inc(11315);parser = new DSCParser(new ImageInputStreamAdapter(in));</span>
+<span class="fc" id="L128">                __CLR4_5_28oi8oim68iyhda.R.inc(11316);outerLoop:</span>
+<span class="pc bpc" id="L129" title="7 of 10 branches missed.">                while ((((parser.hasNext())&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11317)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11318)==0&amp;false))) {{</span>
+<span class="fc" id="L130">                    __CLR4_5_28oi8oim68iyhda.R.inc(11319);DSCEvent event = parser.nextEvent();</span>
+<span class="fc bfc" id="L131" title="All 4 branches covered.">                    boolean __CLB4_5_2_bool0=false;__CLR4_5_28oi8oim68iyhda.R.inc(11320);switch (event.getEventType()) {</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">                    case DSCParserConstants.HEADER_COMMENT:if (!__CLB4_5_2_bool0) {__CLR4_5_28oi8oim68iyhda.R.inc(11321);__CLB4_5_2_bool0=true;}</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">                    case DSCParserConstants.COMMENT:if (!__CLB4_5_2_bool0) {__CLR4_5_28oi8oim68iyhda.R.inc(11322);__CLB4_5_2_bool0=true;}</span>
                         //ignore
-<span class="fc" id="L135">                        break;</span>
-                    case DSCParserConstants.DSC_COMMENT:
-<span class="fc" id="L137">                        DSCComment comment = event.asDSCComment();</span>
-<span class="fc bfc" id="L138" title="All 2 branches covered.">                        if (comment instanceof DSCCommentBoundingBox) {</span>
-<span class="fc" id="L139">                            DSCCommentBoundingBox bboxComment = (DSCCommentBoundingBox)comment;</span>
-<span class="pc bpc" id="L140" title="1 of 4 branches missed.">                            if (DSCConstants.BBOX.equals(bboxComment.getName()) &amp;&amp; bbox == null) {</span>
-<span class="fc" id="L141">                                bbox = (Rectangle2D)bboxComment.getBoundingBox().clone();</span>
+<span class="fc" id="L135">                        __CLR4_5_28oi8oim68iyhda.R.inc(11323);break;</span>
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">                    case DSCParserConstants.DSC_COMMENT:if (!__CLB4_5_2_bool0) {__CLR4_5_28oi8oim68iyhda.R.inc(11324);__CLB4_5_2_bool0=true;}</span>
+<span class="fc" id="L137">                        __CLR4_5_28oi8oim68iyhda.R.inc(11325);DSCComment comment = event.asDSCComment();</span>
+<span class="pc bpc" id="L138" title="4 of 10 branches missed.">                        __CLR4_5_28oi8oim68iyhda.R.inc(11326);if ((((comment instanceof DSCCommentBoundingBox)&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11327)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11328)==0&amp;false))) {{</span>
+<span class="fc" id="L139">                            __CLR4_5_28oi8oim68iyhda.R.inc(11329);DSCCommentBoundingBox bboxComment = (DSCCommentBoundingBox)comment;</span>
+<span class="pc bpc" id="L140" title="5 of 12 branches missed.">                            __CLR4_5_28oi8oim68iyhda.R.inc(11330);if ((((DSCConstants.BBOX.equals(bboxComment.getName()) &amp;&amp; bbox == null)&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11331)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11332)==0&amp;false))) {{</span>
+<span class="fc" id="L141">                                __CLR4_5_28oi8oim68iyhda.R.inc(11333);bbox = (Rectangle2D)bboxComment.getBoundingBox().clone();</span>
                                 //BoundingBox is good but HiRes is better so continue
-<span class="pc bpc" id="L143" title="1 of 2 branches missed.">                            } else if (DSCConstants.HIRES_BBOX.equals(bboxComment.getName())) {</span>
-<span class="fc" id="L144">                                bbox = (Rectangle2D)bboxComment.getBoundingBox().clone();</span>
+<span class="pc bpc" id="L143" title="7 of 10 branches missed.">                            } }else {__CLR4_5_28oi8oim68iyhda.R.inc(11334);if ((((DSCConstants.HIRES_BBOX.equals(bboxComment.getName()))&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11335)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11336)==0&amp;false))) {{</span>
+<span class="fc" id="L144">                                __CLR4_5_28oi8oim68iyhda.R.inc(11337);bbox = (Rectangle2D)bboxComment.getBoundingBox().clone();</span>
                                 //HiRefBBox is great so stop
-<span class="fc" id="L146">                                break outerLoop;</span>
+<span class="fc" id="L146">                                __CLR4_5_28oi8oim68iyhda.R.inc(11338);break outerLoop;</span>
                             }
-<span class="fc" id="L148">                        }</span>
-                        break;
-                    default:
+                        }}}
+<span class="fc" id="L149">                        }__CLR4_5_28oi8oim68iyhda.R.inc(11339);break;</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">                    default:if (!__CLB4_5_2_bool0) {__CLR4_5_28oi8oim68iyhda.R.inc(11340);__CLB4_5_2_bool0=true;}</span>
                         //No more header so stop
-<span class="fc" id="L152">                        break outerLoop;</span>
+<span class="fc" id="L152">                        __CLR4_5_28oi8oim68iyhda.R.inc(11341);break outerLoop;</span>
                     }
 <span class="fc" id="L154">                }</span>
-<span class="pc bpc" id="L155" title="1 of 2 branches missed.">                if (bbox == null) {</span>
-<span class="nc" id="L156">                    return false;</span>
+<span class="pc bpc" id="L155" title="7 of 10 branches missed.">                }__CLR4_5_28oi8oim68iyhda.R.inc(11342);if ((((bbox == null)&amp;&amp;(__CLR4_5_28oi8oim68iyhda.R.iget(11343)!=0|true))||(__CLR4_5_28oi8oim68iyhda.R.iget(11344)==0&amp;false))) {{</span>
+<span class="nc" id="L156">                    __CLR4_5_28oi8oim68iyhda.R.inc(11345);return false;</span>
                 }
-<span class="nc" id="L158">            } catch (DSCException e) {</span>
-<span class="nc" id="L159">                throw new IOException(&quot;Error while parsing EPS file: &quot; + e.getMessage());</span>
+<span class="nc" id="L158">            }} catch (DSCException e) {</span>
+<span class="nc" id="L159">                __CLR4_5_28oi8oim68iyhda.R.inc(11346);throw new IOException(&quot;Error while parsing EPS file: &quot; + e.getMessage());</span>
 <span class="fc" id="L160">            }</span>
 
-<span class="fc" id="L162">            ImageSize size = new ImageSize();</span>
-<span class="fc" id="L163">            size.setSizeInMillipoints(</span>
+<span class="fc" id="L162">            __CLR4_5_28oi8oim68iyhda.R.inc(11347);ImageSize size = new ImageSize();</span>
+<span class="fc" id="L163">            __CLR4_5_28oi8oim68iyhda.R.inc(11348);size.setSizeInMillipoints(</span>
 <span class="fc" id="L164">                    (int)Math.round(bbox.getWidth() * 1000),</span>
 <span class="fc" id="L165">                    (int)Math.round(bbox.getHeight() * 1000));</span>
-<span class="fc" id="L166">            size.setResolution(context.getSourceResolution());</span>
-<span class="fc" id="L167">            size.calcPixelsFromSize();</span>
-<span class="fc" id="L168">            info.setSize(size);</span>
-<span class="fc" id="L169">            info.getCustomObjects().put(EPS_BOUNDING_BOX, bbox);</span>
-<span class="fc" id="L170">            return true;</span>
+<span class="fc" id="L166">            __CLR4_5_28oi8oim68iyhda.R.inc(11349);size.setResolution(context.getSourceResolution());</span>
+<span class="fc" id="L167">            __CLR4_5_28oi8oim68iyhda.R.inc(11350);size.calcPixelsFromSize();</span>
+<span class="fc" id="L168">            __CLR4_5_28oi8oim68iyhda.R.inc(11351);info.setSize(size);</span>
+<span class="fc" id="L169">            __CLR4_5_28oi8oim68iyhda.R.inc(11352);info.getCustomObjects().put(EPS_BOUNDING_BOX, bbox);</span>
+<span class="fc" id="L170">            __CLR4_5_28oi8oim68iyhda.R.inc(11353);return true;</span>
         } finally {
-<span class="fc" id="L172">            in.reset();</span>
+<span class="fc" id="L172">            __CLR4_5_28oi8oim68iyhda.R.inc(11354);in.reset();</span>
         }
-    }
+<span class="fc" id="L174">    }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
     /**
      * Holder class for various pointers to the contents of the EPS file.
@@ -189,65 +189,65 @@ import org.apache.xmlgraphics.util.MimeConstants;
          * Returns the start offset of the PostScript section.
          * @return the start offset
          */
-        public long getPSStart() {
-<span class="fc" id="L193">            return psStart;</span>
-        }
+<span class="fc" id="L192">        public long getPSStart() {try{__CLR4_5_28oi8oim68iyhda.R.inc(11355);</span>
+<span class="fc" id="L193">            __CLR4_5_28oi8oim68iyhda.R.inc(11356);return psStart;</span>
+<span class="fc" id="L194">        }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
         /**
          * Returns the length of the PostScript section.
          * @return the length of the PostScript section (in bytes)
          */
-        public long getPSLength() {
-<span class="fc" id="L201">            return psLength;</span>
-        }
+<span class="fc" id="L200">        public long getPSLength() {try{__CLR4_5_28oi8oim68iyhda.R.inc(11357);</span>
+<span class="fc" id="L201">            __CLR4_5_28oi8oim68iyhda.R.inc(11358);return psLength;</span>
+<span class="fc" id="L202">        }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
         /**
          * Indicates whether the EPS has a WMF preview.
          * @return true if there is a WMF preview
          */
-        public boolean hasWMFPreview() {
-<span class="nc bnc" id="L209" title="All 2 branches missed.">            return (wmfStart != 0);</span>
-        }
+<span class="nc" id="L208">        public boolean hasWMFPreview() {try{__CLR4_5_28oi8oim68iyhda.R.inc(11359);</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">            __CLR4_5_28oi8oim68iyhda.R.inc(11360);return (wmfStart != 0);</span>
+<span class="nc" id="L210">        }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
         /**
          * Returns the start offset of the WMF preview.
          * @return the start offset (or 0 if there's no WMF preview)
          */
-        public long getWMFStart() {
-<span class="nc" id="L217">            return wmfStart;</span>
-        }
+<span class="nc" id="L216">        public long getWMFStart() {try{__CLR4_5_28oi8oim68iyhda.R.inc(11361);</span>
+<span class="nc" id="L217">            __CLR4_5_28oi8oim68iyhda.R.inc(11362);return wmfStart;</span>
+<span class="nc" id="L218">        }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
         /**
          * Returns the length of the WMF preview.
          * @return the length of the WMF preview (in bytes)
          */
-        public long getWMFLength() {
-<span class="nc" id="L225">            return wmfLength;</span>
-        }
+<span class="nc" id="L224">        public long getWMFLength() {try{__CLR4_5_28oi8oim68iyhda.R.inc(11363);</span>
+<span class="nc" id="L225">            __CLR4_5_28oi8oim68iyhda.R.inc(11364);return wmfLength;</span>
+<span class="nc" id="L226">        }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
         /**
          * Indicates whether the EPS has a TIFF preview.
          * @return true if there is a TIFF preview
          */
-        public boolean hasTIFFPreview() {
-<span class="nc bnc" id="L233" title="All 2 branches missed.">            return (tiffStart != 0);</span>
-        }
+<span class="nc" id="L232">        public boolean hasTIFFPreview() {try{__CLR4_5_28oi8oim68iyhda.R.inc(11365);</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">            __CLR4_5_28oi8oim68iyhda.R.inc(11366);return (tiffStart != 0);</span>
+<span class="nc" id="L234">        }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
         /**
          * Returns the start offset of the TIFF preview.
          * @return the start offset (or 0 if there's no TIFF preview)
          */
-        public long getTIFFStart() {
-<span class="nc" id="L241">            return tiffStart;</span>
-        }
+<span class="nc" id="L240">        public long getTIFFStart() {try{__CLR4_5_28oi8oim68iyhda.R.inc(11367);</span>
+<span class="nc" id="L241">            __CLR4_5_28oi8oim68iyhda.R.inc(11368);return tiffStart;</span>
+<span class="nc" id="L242">        }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
         /**
          * Returns the length of the TIFF preview.
          * @return the length of the TIFF preview (in bytes)
          */
-        public long getTIFFLength() {
-<span class="nc" id="L249">            return tiffLength;</span>
-        }
+<span class="nc" id="L248">        public long getTIFFLength() {try{__CLR4_5_28oi8oim68iyhda.R.inc(11369);</span>
+<span class="nc" id="L249">            __CLR4_5_28oi8oim68iyhda.R.inc(11370);return tiffLength;</span>
+<span class="nc" id="L250">        }finally{__CLR4_5_28oi8oim68iyhda.R.flushNeeded();}}</span>
 
     }
 

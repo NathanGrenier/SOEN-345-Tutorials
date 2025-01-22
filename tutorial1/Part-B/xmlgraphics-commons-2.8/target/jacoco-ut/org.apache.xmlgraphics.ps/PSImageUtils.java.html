@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSImageUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSImageUtils.java</span></div><h1>PSImageUtils.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSImageUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSImageUtils.java</span></div><h1>PSImageUtils.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -47,10 +47,10 @@ import org.apache.xmlgraphics.util.io.RunLengthEncodeOutputStream;
 /**
  * Utility code for rendering images in PostScript.
  */
-public class PSImageUtils {
+<span class="pc bpc" id="L50" title="3 of 4 branches missed.">@java.lang.SuppressWarnings({&quot;fallthrough&quot;}) public class PSImageUtils {public static class __CLR4_5_2dkzdkzm68iyi3s{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,18073,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
-<span class="nc" id="L52">    public PSImageUtils() {</span>
-<span class="nc" id="L53">    }</span>
+<span class="nc" id="L52">    public PSImageUtils() {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17603);</span>
+<span class="nc" id="L53">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Writes a bitmap image to the PostScript stream.
@@ -69,22 +69,22 @@ public class PSImageUtils {
             Dimension imgDim, String imgDescription,
             Rectangle2D targetRect,
             final boolean isJPEG, ColorSpace colorSpace,
-            PSGenerator gen) throws IOException {
-<span class="nc" id="L73">        ImageEncoder encoder = new ImageEncoder() {</span>
-            public void writeTo(OutputStream out) throws IOException {
-<span class="nc" id="L75">                out.write(img);</span>
-<span class="nc" id="L76">            }</span>
+<span class="nc" id="L72">            PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17604);</span>
+<span class="nc" id="L73">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17605);ImageEncoder encoder = new ImageEncoder() {</span>
+<span class="nc" id="L74">            public void writeTo(OutputStream out) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17606);</span>
+<span class="nc" id="L75">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17607);out.write(img);</span>
+<span class="nc" id="L76">            }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
-            public String getImplicitFilter() {
-<span class="nc bnc" id="L79" title="All 2 branches missed.">                if (isJPEG) {</span>
-<span class="nc" id="L80">                    return &quot;&lt;&lt; &gt;&gt; /DCTDecode&quot;;</span>
-                } else {
-<span class="nc" id="L82">                    return null;</span>
+<span class="nc" id="L78">            public String getImplicitFilter() {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17608);</span>
+<span class="nc bnc" id="L79" title="All 10 branches missed.">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17609);if ((((isJPEG)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17610)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17611)==0&amp;false))) {{</span>
+<span class="nc" id="L80">                    __CLR4_5_2dkzdkzm68iyi3s.R.inc(17612);return &quot;&lt;&lt; &gt;&gt; /DCTDecode&quot;;</span>
+                } }else {{
+<span class="nc" id="L82">                    __CLR4_5_2dkzdkzm68iyi3s.R.inc(17613);return null;</span>
                 }
-            }
+<span class="nc" id="L84">            }}finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
         };
-<span class="nc" id="L86">        writeImage(encoder, imgDim, imgDescription, targetRect, colorSpace, 8, false, gen);</span>
-<span class="nc" id="L87">    }</span>
+<span class="nc" id="L86">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17614);writeImage(encoder, imgDim, imgDescription, targetRect, colorSpace, 8, false, gen);</span>
+<span class="nc" id="L87">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Writes a bitmap image to the PostScript stream.
@@ -102,52 +102,52 @@ public class PSImageUtils {
             Dimension imgDim, String imgDescription,
             Rectangle2D targetRect,
             ColorSpace colorSpace, int bitsPerComponent, boolean invertImage,
-            PSGenerator gen) throws IOException {
-<span class="nc" id="L106">        gen.saveGraphicsState();</span>
-<span class="nc" id="L107">        translateAndScale(gen, null, targetRect);</span>
+<span class="nc" id="L105">            PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17615);</span>
+<span class="nc" id="L106">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17616);gen.saveGraphicsState();</span>
+<span class="nc" id="L107">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17617);translateAndScale(gen, null, targetRect);</span>
 
-<span class="nc" id="L109">        gen.commentln(&quot;%AXGBeginBitmap: &quot; + imgDescription);</span>
+<span class="nc" id="L109">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17618);gen.commentln(&quot;%AXGBeginBitmap: &quot; + imgDescription);</span>
 
-<span class="nc" id="L111">        gen.writeln(&quot;{{&quot;);</span>
+<span class="nc" id="L111">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17619);gen.writeln(&quot;{{&quot;);</span>
         // Template: (RawData is used for the EOF signal only)
         // gen.write(&quot;/RawData currentfile &lt;first filter&gt; filter def&quot;);
         // gen.write(&quot;/Data RawData &lt;second filter&gt; &lt;third filter&gt; [...] def&quot;);
-<span class="nc" id="L115">        String implicitFilter = encoder.getImplicitFilter();</span>
-<span class="nc bnc" id="L116" title="All 2 branches missed.">        if (implicitFilter != null) {</span>
-<span class="nc" id="L117">            gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
-<span class="nc" id="L118">            gen.writeln(&quot;/Data RawData &quot; + implicitFilter + &quot; filter def&quot;);</span>
-        } else {
-<span class="nc bnc" id="L120" title="All 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
-<span class="nc" id="L121">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
-<span class="nc" id="L122">                gen.writeln(&quot;/Data RawData /FlateDecode filter def&quot;);</span>
-            } else {
-<span class="nc" id="L124">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
-<span class="nc" id="L125">                gen.writeln(&quot;/Data RawData /RunLengthDecode filter def&quot;);</span>
+<span class="nc" id="L115">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17620);String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="nc bnc" id="L116" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17621);if ((((implicitFilter != null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17622)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17623)==0&amp;false))) {{</span>
+<span class="nc" id="L117">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17624);gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L118">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17625);gen.writeln(&quot;/Data RawData &quot; + implicitFilter + &quot; filter def&quot;);</span>
+        } }else {{
+<span class="nc bnc" id="L120" title="All 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17626);if ((((gen.getPSLevel() &gt;= 3)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17627)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17628)==0&amp;false))) {{</span>
+<span class="nc" id="L121">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17629);gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L122">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17630);gen.writeln(&quot;/Data RawData /FlateDecode filter def&quot;);</span>
+            } }else {{
+<span class="nc" id="L124">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17631);gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L125">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17632);gen.writeln(&quot;/Data RawData /RunLengthDecode filter def&quot;);</span>
             }
-        }
-<span class="nc" id="L128">        PSDictionary imageDict = new PSDictionary();</span>
-<span class="nc" id="L129">        imageDict.put(&quot;/DataSource&quot;, &quot;Data&quot;);</span>
-<span class="nc" id="L130">        imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(bitsPerComponent));</span>
-<span class="nc" id="L131">        writeImageCommand(imageDict, imgDim, colorSpace, invertImage, gen);</span>
+        }}
+<span class="nc" id="L128">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17633);PSDictionary imageDict = new PSDictionary();</span>
+<span class="nc" id="L129">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17634);imageDict.put(&quot;/DataSource&quot;, &quot;Data&quot;);</span>
+<span class="nc" id="L130">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17635);imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(bitsPerComponent));</span>
+<span class="nc" id="L131">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17636);writeImageCommand(imageDict, imgDim, colorSpace, invertImage, gen);</span>
         /* the following two lines could be enabled if something still goes wrong
          * gen.write(&quot;Data closefile&quot;);
          * gen.write(&quot;RawData flushfile&quot;);
          */
-<span class="nc" id="L136">        gen.writeln(&quot;} stopped {handleerror} if&quot;);</span>
-<span class="nc" id="L137">        gen.writeln(&quot;  RawData flushfile&quot;);</span>
-<span class="nc" id="L138">        gen.writeln(&quot;} exec&quot;);</span>
+<span class="nc" id="L136">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17637);gen.writeln(&quot;} stopped {handleerror} if&quot;);</span>
+<span class="nc" id="L137">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17638);gen.writeln(&quot;  RawData flushfile&quot;);</span>
+<span class="nc" id="L138">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17639);gen.writeln(&quot;} exec&quot;);</span>
 
-<span class="nc" id="L140">        compressAndWriteBitmap(encoder, gen);</span>
+<span class="nc" id="L140">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17640);compressAndWriteBitmap(encoder, gen);</span>
 
-<span class="nc" id="L142">        gen.newLine();</span>
-<span class="nc" id="L143">        gen.commentln(&quot;%AXGEndBitmap&quot;);</span>
-<span class="nc" id="L144">        gen.restoreGraphicsState();</span>
-<span class="nc" id="L145">    }</span>
+<span class="nc" id="L142">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17641);gen.newLine();</span>
+<span class="nc" id="L143">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17642);gen.commentln(&quot;%AXGEndBitmap&quot;);</span>
+<span class="nc" id="L144">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17643);gen.restoreGraphicsState();</span>
+<span class="nc" id="L145">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     public static void writeImage(ImageEncoder encoder, Dimension imgDim, String imgDescription,
-                                  Rectangle2D targetRect, ColorModel colorModel, PSGenerator gen) throws IOException {
-<span class="nc" id="L149">        writeImage(encoder, imgDim, imgDescription, targetRect, colorModel, gen, null, false);</span>
-<span class="nc" id="L150">    }</span>
+<span class="nc" id="L148">                                  Rectangle2D targetRect, ColorModel colorModel, PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17644);</span>
+<span class="nc" id="L149">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17645);writeImage(encoder, imgDim, imgDescription, targetRect, colorModel, gen, null, false);</span>
+<span class="nc" id="L150">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Writes a bitmap image to the PostScript stream.
@@ -161,55 +161,55 @@ public class PSImageUtils {
      */
     public static void writeImage(ImageEncoder encoder, Dimension imgDim, String imgDescription,
             Rectangle2D targetRect, ColorModel colorModel, PSGenerator gen, RenderedImage ri, boolean maskBitmap)
-            throws IOException {
+<span class="fc" id="L164">            throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17646);</span>
 
-<span class="fc" id="L166">        gen.saveGraphicsState();</span>
-<span class="fc" id="L167">        translateAndScale(gen, null, targetRect);</span>
-<span class="fc" id="L168">        gen.commentln(&quot;%AXGBeginBitmap: &quot; + imgDescription);</span>
-<span class="fc" id="L169">        gen.writeln(&quot;{{&quot;);</span>
+<span class="fc" id="L166">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17647);gen.saveGraphicsState();</span>
+<span class="fc" id="L167">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17648);translateAndScale(gen, null, targetRect);</span>
+<span class="fc" id="L168">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17649);gen.commentln(&quot;%AXGBeginBitmap: &quot; + imgDescription);</span>
+<span class="fc" id="L169">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17650);gen.writeln(&quot;{{&quot;);</span>
 
-<span class="fc" id="L171">        String implicitFilter = encoder.getImplicitFilter();</span>
-<span class="pc bpc" id="L172" title="1 of 2 branches missed.">        if (implicitFilter != null) {</span>
-<span class="nc" id="L173">            gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
-<span class="nc" id="L174">            gen.writeln(&quot;/Data RawData &quot; + implicitFilter + &quot; filter def&quot;);</span>
-        } else {
-<span class="pc bpc" id="L176" title="1 of 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
-<span class="fc" id="L177">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
-<span class="fc" id="L178">                gen.writeln(&quot;/Data RawData /FlateDecode filter def&quot;);</span>
-            } else {
-<span class="nc" id="L180">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
-<span class="nc" id="L181">                gen.writeln(&quot;/Data RawData /RunLengthDecode filter def&quot;);</span>
+<span class="fc" id="L171">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17651);String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="pc bpc" id="L172" title="7 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17652);if ((((implicitFilter != null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17653)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17654)==0&amp;false))) {{</span>
+<span class="nc" id="L173">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17655);gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L174">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17656);gen.writeln(&quot;/Data RawData &quot; + implicitFilter + &quot; filter def&quot;);</span>
+        } }else {{
+<span class="pc bpc" id="L176" title="7 of 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17657);if ((((gen.getPSLevel() &gt;= 3)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17658)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17659)==0&amp;false))) {{</span>
+<span class="fc" id="L177">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17660);gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="fc" id="L178">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17661);gen.writeln(&quot;/Data RawData /FlateDecode filter def&quot;);</span>
+            } }else {{
+<span class="nc" id="L180">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17662);gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L181">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17663);gen.writeln(&quot;/Data RawData /RunLengthDecode filter def&quot;);</span>
             }
-        }
+        }}
 
-<span class="fc" id="L185">        PSDictionary imageDict = new PSDictionary();</span>
-<span class="fc" id="L186">        imageDict.put(&quot;/DataSource&quot;, &quot;Data&quot;);</span>
+<span class="fc" id="L185">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17664);PSDictionary imageDict = new PSDictionary();</span>
+<span class="fc" id="L186">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17665);imageDict.put(&quot;/DataSource&quot;, &quot;Data&quot;);</span>
 
-<span class="fc" id="L188">        populateImageDictionary(imgDim, colorModel, imageDict);</span>
+<span class="fc" id="L188">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17666);populateImageDictionary(imgDim, colorModel, imageDict);</span>
 
-<span class="pc bpc" id="L190" title="1 of 2 branches missed.">        if (ri != null) {</span>
-<span class="fc" id="L191">            DataBuffer buffer = ri.getData().getDataBuffer();</span>
-<span class="pc bpc" id="L192" title="1 of 2 branches missed.">            if (!(buffer instanceof DataBufferByte)) {</span>
-<span class="fc" id="L193">                imageDict.put(&quot;/BitsPerComponent&quot;, 8);</span>
+<span class="pc bpc" id="L190" title="7 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17667);if ((((ri != null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17668)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17669)==0&amp;false))) {{</span>
+<span class="fc" id="L191">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17670);DataBuffer buffer = ri.getData().getDataBuffer();</span>
+<span class="pc bpc" id="L192" title="7 of 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17671);if ((((!(buffer instanceof DataBufferByte))&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17672)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17673)==0&amp;false))) {{</span>
+<span class="fc" id="L193">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17674);imageDict.put(&quot;/BitsPerComponent&quot;, 8);</span>
             }
-        }
-<span class="fc" id="L196">        writeImageCommand(imageDict, colorModel, gen, maskBitmap);</span>
+        }}
+<span class="fc" id="L196">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17675);writeImageCommand(imageDict, colorModel, gen, maskBitmap);</span>
 
         /*
          * the following two lines could be enabled if something still goes wrong
          * gen.write(&quot;Data closefile&quot;);
          * gen.write(&quot;RawData flushfile&quot;);
          */
-<span class="fc" id="L203">        gen.writeln(&quot;} stopped {handleerror} if&quot;);</span>
-<span class="fc" id="L204">        gen.writeln(&quot;  RawData flushfile&quot;);</span>
-<span class="fc" id="L205">        gen.writeln(&quot;} exec&quot;);</span>
+<span class="fc" id="L203">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17676);gen.writeln(&quot;} stopped {handleerror} if&quot;);</span>
+<span class="fc" id="L204">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17677);gen.writeln(&quot;  RawData flushfile&quot;);</span>
+<span class="fc" id="L205">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17678);gen.writeln(&quot;} exec&quot;);</span>
 
-<span class="fc" id="L207">        compressAndWriteBitmap(encoder, gen);</span>
+<span class="fc" id="L207">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17679);compressAndWriteBitmap(encoder, gen);</span>
 
-<span class="fc" id="L209">        gen.newLine();</span>
-<span class="fc" id="L210">        gen.commentln(&quot;%AXGEndBitmap&quot;);</span>
-<span class="fc" id="L211">        gen.restoreGraphicsState();</span>
-<span class="fc" id="L212">    }</span>
+<span class="fc" id="L209">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17680);gen.newLine();</span>
+<span class="fc" id="L210">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17681);gen.commentln(&quot;%AXGEndBitmap&quot;);</span>
+<span class="fc" id="L211">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17682);gen.restoreGraphicsState();</span>
+<span class="fc" id="L212">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Writes a bitmap image to the PostScript stream.
@@ -224,239 +224,239 @@ public class PSImageUtils {
     public static void writeImage(ImageEncoder encoder, Dimension imgDim, String imgDescription,
             Rectangle2D targetRect, ColorModel colorModel, PSGenerator gen, RenderedImage ri,
             Color maskColor)
-            throws IOException {
+<span class="nc" id="L227">            throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17683);</span>
 
-<span class="nc" id="L229">        gen.saveGraphicsState();</span>
-<span class="nc" id="L230">        translateAndScale(gen, null, targetRect);</span>
-<span class="nc" id="L231">        gen.commentln(&quot;%AXGBeginBitmap: &quot; + imgDescription);</span>
-<span class="nc" id="L232">        gen.writeln(&quot;{{&quot;);</span>
+<span class="nc" id="L229">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17684);gen.saveGraphicsState();</span>
+<span class="nc" id="L230">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17685);translateAndScale(gen, null, targetRect);</span>
+<span class="nc" id="L231">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17686);gen.commentln(&quot;%AXGBeginBitmap: &quot; + imgDescription);</span>
+<span class="nc" id="L232">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17687);gen.writeln(&quot;{{&quot;);</span>
 
-<span class="nc" id="L234">        String implicitFilter = encoder.getImplicitFilter();</span>
-<span class="nc bnc" id="L235" title="All 2 branches missed.">        if (implicitFilter != null) {</span>
-<span class="nc" id="L236">            gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
-<span class="nc" id="L237">            gen.writeln(&quot;/Data RawData &quot; + implicitFilter + &quot; filter def&quot;);</span>
-        } else {
-<span class="nc bnc" id="L239" title="All 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
-<span class="nc" id="L240">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
-<span class="nc" id="L241">                gen.writeln(&quot;/Data RawData /FlateDecode filter def&quot;);</span>
-            } else {
-<span class="nc" id="L243">                gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
-<span class="nc" id="L244">                gen.writeln(&quot;/Data RawData /RunLengthDecode filter def&quot;);</span>
+<span class="nc" id="L234">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17688);String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="nc bnc" id="L235" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17689);if ((((implicitFilter != null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17690)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17691)==0&amp;false))) {{</span>
+<span class="nc" id="L236">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17692);gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L237">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17693);gen.writeln(&quot;/Data RawData &quot; + implicitFilter + &quot; filter def&quot;);</span>
+        } }else {{
+<span class="nc bnc" id="L239" title="All 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17694);if ((((gen.getPSLevel() &gt;= 3)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17695)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17696)==0&amp;false))) {{</span>
+<span class="nc" id="L240">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17697);gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L241">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17698);gen.writeln(&quot;/Data RawData /FlateDecode filter def&quot;);</span>
+            } }else {{
+<span class="nc" id="L243">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17699);gen.writeln(&quot;/RawData currentfile /ASCII85Decode filter def&quot;);</span>
+<span class="nc" id="L244">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17700);gen.writeln(&quot;/Data RawData /RunLengthDecode filter def&quot;);</span>
             }
-        }
+        }}
 
-<span class="nc" id="L248">        PSDictionary imageDict = new PSDictionary();</span>
-<span class="nc" id="L249">        imageDict.put(&quot;/DataSource&quot;, &quot;Data&quot;);</span>
+<span class="nc" id="L248">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17701);PSDictionary imageDict = new PSDictionary();</span>
+<span class="nc" id="L249">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17702);imageDict.put(&quot;/DataSource&quot;, &quot;Data&quot;);</span>
 
-<span class="nc" id="L251">        populateImageDictionary(imgDim, colorModel, imageDict, maskColor);</span>
+<span class="nc" id="L251">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17703);populateImageDictionary(imgDim, colorModel, imageDict, maskColor);</span>
 
-<span class="nc bnc" id="L253" title="All 2 branches missed.">        if (ri != null) {</span>
-<span class="nc" id="L254">            DataBuffer buffer = ri.getData().getDataBuffer();</span>
-<span class="nc bnc" id="L255" title="All 2 branches missed.">            if (!(buffer instanceof DataBufferByte)) {</span>
-<span class="nc" id="L256">                imageDict.put(&quot;/BitsPerComponent&quot;, 8);</span>
+<span class="nc bnc" id="L253" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17704);if ((((ri != null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17705)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17706)==0&amp;false))) {{</span>
+<span class="nc" id="L254">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17707);DataBuffer buffer = ri.getData().getDataBuffer();</span>
+<span class="nc bnc" id="L255" title="All 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17708);if ((((!(buffer instanceof DataBufferByte))&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17709)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17710)==0&amp;false))) {{</span>
+<span class="nc" id="L256">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17711);imageDict.put(&quot;/BitsPerComponent&quot;, 8);</span>
             }
-        }
-<span class="nc" id="L259">        writeImageCommand(imageDict, colorModel, gen, false);</span>
+        }}
+<span class="nc" id="L259">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17712);writeImageCommand(imageDict, colorModel, gen, false);</span>
 
         /*
          * the following two lines could be enabled if something still goes wrong
          * gen.write(&quot;Data closefile&quot;);
          * gen.write(&quot;RawData flushfile&quot;);
          */
-<span class="nc" id="L266">        gen.writeln(&quot;} stopped {handleerror} if&quot;);</span>
-<span class="nc" id="L267">        gen.writeln(&quot;  RawData flushfile&quot;);</span>
-<span class="nc" id="L268">        gen.writeln(&quot;} exec&quot;);</span>
+<span class="nc" id="L266">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17713);gen.writeln(&quot;} stopped {handleerror} if&quot;);</span>
+<span class="nc" id="L267">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17714);gen.writeln(&quot;  RawData flushfile&quot;);</span>
+<span class="nc" id="L268">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17715);gen.writeln(&quot;} exec&quot;);</span>
 
-<span class="nc" id="L270">        compressAndWriteBitmap(encoder, gen);</span>
+<span class="nc" id="L270">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17716);compressAndWriteBitmap(encoder, gen);</span>
 
-<span class="nc" id="L272">        gen.newLine();</span>
-<span class="nc" id="L273">        gen.commentln(&quot;%AXGEndBitmap&quot;);</span>
-<span class="nc" id="L274">        gen.restoreGraphicsState();</span>
-<span class="nc" id="L275">    }</span>
-
-    private static ColorModel populateImageDictionary(Dimension imgDim, ColorModel colorModel,
-            PSDictionary imageDict) {
-<span class="fc" id="L279">        imageDict.put(&quot;/ImageType&quot;, &quot;1&quot;);</span>
-<span class="fc" id="L280">        colorModel = writeImageDictionary(imgDim, imageDict, colorModel);</span>
-<span class="fc" id="L281">        return colorModel;</span>
-    }
+<span class="nc" id="L272">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17717);gen.newLine();</span>
+<span class="nc" id="L273">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17718);gen.commentln(&quot;%AXGEndBitmap&quot;);</span>
+<span class="nc" id="L274">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17719);gen.restoreGraphicsState();</span>
+<span class="nc" id="L275">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     private static ColorModel populateImageDictionary(Dimension imgDim, ColorModel colorModel,
-            PSDictionary imageDict, Color maskColor) {
-<span class="nc" id="L286">        imageDict.put(&quot;/ImageType&quot;, &quot;4&quot;);</span>
+<span class="fc" id="L278">            PSDictionary imageDict) {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17720);</span>
+<span class="fc" id="L279">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17721);imageDict.put(&quot;/ImageType&quot;, &quot;1&quot;);</span>
+<span class="fc" id="L280">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17722);colorModel = writeImageDictionary(imgDim, imageDict, colorModel);</span>
+<span class="fc" id="L281">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17723);return colorModel;</span>
+<span class="fc" id="L282">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
-<span class="nc" id="L288">        colorModel = writeImageDictionary(imgDim, imageDict, colorModel);</span>
-<span class="nc" id="L289">        imageDict.put(&quot;/MaskColor&quot;, String.format(&quot;[ %d %d %d ]&quot;, maskColor.getRed(),</span>
+    private static ColorModel populateImageDictionary(Dimension imgDim, ColorModel colorModel,
+<span class="nc" id="L285">            PSDictionary imageDict, Color maskColor) {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17724);</span>
+<span class="nc" id="L286">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17725);imageDict.put(&quot;/ImageType&quot;, &quot;4&quot;);</span>
+
+<span class="nc" id="L288">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17726);colorModel = writeImageDictionary(imgDim, imageDict, colorModel);</span>
+<span class="nc" id="L289">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17727);imageDict.put(&quot;/MaskColor&quot;, String.format(&quot;[ %d %d %d ]&quot;, maskColor.getRed(),</span>
 <span class="nc" id="L290">                maskColor.getGreen(), maskColor.getBlue()));</span>
-<span class="nc" id="L291">        return colorModel;</span>
-    }
+<span class="nc" id="L291">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17728);return colorModel;</span>
+<span class="nc" id="L292">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     private static ColorModel writeImageDictionary(Dimension imgDim, PSDictionary imageDict,
-            ColorModel colorModel) {
-<span class="fc" id="L296">        String w = Integer.toString(imgDim.width);</span>
-<span class="fc" id="L297">        String h = Integer.toString(imgDim.height);</span>
-<span class="fc" id="L298">        imageDict.put(&quot;/Width&quot;, w);</span>
-<span class="fc" id="L299">        imageDict.put(&quot;/Height&quot;, h);</span>
+<span class="fc" id="L295">            ColorModel colorModel) {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17729);</span>
+<span class="fc" id="L296">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17730);String w = Integer.toString(imgDim.width);</span>
+<span class="fc" id="L297">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17731);String h = Integer.toString(imgDim.height);</span>
+<span class="fc" id="L298">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17732);imageDict.put(&quot;/Width&quot;, w);</span>
+<span class="fc" id="L299">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17733);imageDict.put(&quot;/Height&quot;, h);</span>
 
-<span class="fc" id="L301">        boolean invertColors = false;</span>
-<span class="fc" id="L302">        String decodeArray = getDecodeArray(colorModel.getNumColorComponents(), invertColors);</span>
-<span class="fc" id="L303">        int bitsPerComp = colorModel.getComponentSize(0);</span>
+<span class="fc" id="L301">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17734);boolean invertColors = false;</span>
+<span class="fc" id="L302">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17735);String decodeArray = getDecodeArray(colorModel.getNumColorComponents(), invertColors);</span>
+<span class="fc" id="L303">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17736);int bitsPerComp = colorModel.getComponentSize(0);</span>
 
         // Setup scanning for left-to-right and top-to-bottom
-<span class="fc" id="L306">        imageDict.put(&quot;/ImageMatrix&quot;, &quot;[&quot; + w + &quot; 0 0 &quot; + h + &quot; 0 0]&quot;);</span>
+<span class="fc" id="L306">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17737);imageDict.put(&quot;/ImageMatrix&quot;, &quot;[&quot; + w + &quot; 0 0 &quot; + h + &quot; 0 0]&quot;);</span>
 
-<span class="pc bpc" id="L308" title="1 of 2 branches missed.">        if ((colorModel instanceof IndexColorModel)) {</span>
-<span class="nc" id="L309">            IndexColorModel indexColorModel = (IndexColorModel) colorModel;</span>
-<span class="nc" id="L310">            int c = indexColorModel.getMapSize();</span>
-<span class="nc" id="L311">            int hival = c - 1;</span>
-<span class="nc bnc" id="L312" title="All 2 branches missed.">            if (hival &gt; 4095) {</span>
-<span class="nc" id="L313">                throw new UnsupportedOperationException(&quot;hival must not go beyond 4095&quot;);</span>
+<span class="pc bpc" id="L308" title="7 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17738);if (((((colorModel instanceof IndexColorModel))&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17739)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17740)==0&amp;false))) {{</span>
+<span class="nc" id="L309">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17741);IndexColorModel indexColorModel = (IndexColorModel) colorModel;</span>
+<span class="nc" id="L310">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17742);int c = indexColorModel.getMapSize();</span>
+<span class="nc" id="L311">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17743);int hival = c - 1;</span>
+<span class="nc bnc" id="L312" title="All 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17744);if ((((hival &gt; 4095)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17745)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17746)==0&amp;false))) {{</span>
+<span class="nc" id="L313">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17747);throw new UnsupportedOperationException(&quot;hival must not go beyond 4095&quot;);</span>
             }
-<span class="nc" id="L315">            bitsPerComp = indexColorModel.getPixelSize();</span>
-<span class="nc" id="L316">            int ceiling = ((int) Math.pow(2, bitsPerComp)) - 1;</span>
-<span class="nc" id="L317">            decodeArray = &quot;[0 &quot; + ceiling + &quot;]&quot;;</span>
+<span class="nc" id="L315">            }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17748);bitsPerComp = indexColorModel.getPixelSize();</span>
+<span class="nc" id="L316">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17749);int ceiling = ((int) Math.pow(2, bitsPerComp)) - 1;</span>
+<span class="nc" id="L317">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17750);decodeArray = &quot;[0 &quot; + ceiling + &quot;]&quot;;</span>
         }
-<span class="fc" id="L319">        imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(bitsPerComp));</span>
-<span class="fc" id="L320">        imageDict.put(&quot;/Decode&quot;, decodeArray);</span>
-<span class="fc" id="L321">        return colorModel;</span>
-    }
+<span class="fc" id="L319">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17751);imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(bitsPerComp));</span>
+<span class="fc" id="L320">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17752);imageDict.put(&quot;/Decode&quot;, decodeArray);</span>
+<span class="fc" id="L321">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17753);return colorModel;</span>
+<span class="fc" id="L322">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
-    private static String getDecodeArray(int numComponents, boolean invertColors) {
-        String decodeArray;
-<span class="fc" id="L326">        StringBuffer sb = new StringBuffer(&quot;[&quot;);</span>
-<span class="fc bfc" id="L327" title="All 2 branches covered.">        for (int i = 0; i &lt; numComponents; i++) {</span>
-<span class="fc bfc" id="L328" title="All 2 branches covered.">            if (i &gt; 0) {</span>
-<span class="fc" id="L329">                sb.append(&quot; &quot;);</span>
+<span class="fc" id="L324">    private static String getDecodeArray(int numComponents, boolean invertColors) {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17754);</span>
+<span class="fc" id="L325">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17755);String decodeArray;</span>
+<span class="fc" id="L326">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17756);StringBuffer sb = new StringBuffer(&quot;[&quot;);</span>
+<span class="pc bpc" id="L327" title="4 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17757);for (int i = 0; (((i &lt; numComponents)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17758)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17759)==0&amp;false)); i++) {{</span>
+<span class="pc bpc" id="L328" title="4 of 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17760);if ((((i &gt; 0)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17761)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17762)==0&amp;false))) {{</span>
+<span class="fc" id="L329">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17763);sb.append(&quot; &quot;);</span>
             }
-<span class="pc bpc" id="L331" title="1 of 2 branches missed.">            if (invertColors) {</span>
-<span class="nc" id="L332">                sb.append(&quot;1 0&quot;);</span>
-            } else {
-<span class="fc" id="L334">                sb.append(&quot;0 1&quot;);</span>
+<span class="pc bpc" id="L331" title="7 of 10 branches missed.">            }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17764);if ((((invertColors)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17765)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17766)==0&amp;false))) {{</span>
+<span class="nc" id="L332">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17767);sb.append(&quot;1 0&quot;);</span>
+            } }else {{
+<span class="fc" id="L334">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17768);sb.append(&quot;0 1&quot;);</span>
             }
-        }
-<span class="fc" id="L337">        sb.append(&quot;]&quot;);</span>
-<span class="fc" id="L338">        decodeArray = sb.toString();</span>
-<span class="fc" id="L339">        return decodeArray;</span>
-    }
+        }}
+<span class="fc" id="L337">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17769);sb.append(&quot;]&quot;);</span>
+<span class="fc" id="L338">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17770);decodeArray = sb.toString();</span>
+<span class="fc" id="L339">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17771);return decodeArray;</span>
+<span class="fc" id="L340">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     private static void prepareColorspace(PSGenerator gen, ColorSpace colorSpace)
-            throws IOException {
-<span class="fc" id="L344">        gen.writeln(getColorSpaceName(colorSpace) + &quot; setcolorspace&quot;);</span>
-<span class="fc" id="L345">    }</span>
+<span class="fc" id="L343">            throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17772);</span>
+<span class="fc" id="L344">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17773);gen.writeln(getColorSpaceName(colorSpace) + &quot; setcolorspace&quot;);</span>
+<span class="fc" id="L345">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
-    private static void prepareColorSpace(PSGenerator gen, ColorModel cm) throws IOException {
+<span class="fc" id="L347">    private static void prepareColorSpace(PSGenerator gen, ColorModel cm) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17774);</span>
         //Prepare color space
-<span class="pc bpc" id="L349" title="1 of 2 branches missed.">        if ((cm instanceof IndexColorModel)) {</span>
-<span class="nc" id="L350">            ColorSpace cs = cm.getColorSpace();</span>
-<span class="nc" id="L351">            IndexColorModel im = (IndexColorModel)cm;</span>
-            boolean isDeviceGray;
-<span class="nc" id="L353">            int c = im.getMapSize();</span>
-<span class="nc" id="L354">            int[] palette = new int[c];</span>
-<span class="nc" id="L355">            im.getRGBs(palette);</span>
-<span class="nc" id="L356">            byte[] reds = new byte[c];</span>
-<span class="nc" id="L357">            byte[] greens = new byte[c];</span>
-<span class="nc" id="L358">            byte[] blues = new byte[c];</span>
-<span class="nc" id="L359">            im.getReds(reds);</span>
-<span class="nc" id="L360">            im.getGreens(greens);</span>
-<span class="nc" id="L361">            im.getBlues(blues);</span>
-<span class="nc" id="L362">            int hival = c - 1;</span>
-<span class="nc bnc" id="L363" title="All 2 branches missed.">            if (hival &gt; 4095) {</span>
-<span class="nc" id="L364">                throw new UnsupportedOperationException(&quot;hival must not go beyond 4095&quot;);</span>
+<span class="pc bpc" id="L349" title="7 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17775);if (((((cm instanceof IndexColorModel))&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17776)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17777)==0&amp;false))) {{</span>
+<span class="nc" id="L350">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17778);ColorSpace cs = cm.getColorSpace();</span>
+<span class="nc" id="L351">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17779);IndexColorModel im = (IndexColorModel)cm;</span>
+<span class="nc" id="L352">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17780);boolean isDeviceGray;</span>
+<span class="nc" id="L353">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17781);int c = im.getMapSize();</span>
+<span class="nc" id="L354">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17782);int[] palette = new int[c];</span>
+<span class="nc" id="L355">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17783);im.getRGBs(palette);</span>
+<span class="nc" id="L356">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17784);byte[] reds = new byte[c];</span>
+<span class="nc" id="L357">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17785);byte[] greens = new byte[c];</span>
+<span class="nc" id="L358">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17786);byte[] blues = new byte[c];</span>
+<span class="nc" id="L359">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17787);im.getReds(reds);</span>
+<span class="nc" id="L360">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17788);im.getGreens(greens);</span>
+<span class="nc" id="L361">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17789);im.getBlues(blues);</span>
+<span class="nc" id="L362">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17790);int hival = c - 1;</span>
+<span class="nc bnc" id="L363" title="All 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17791);if ((((hival &gt; 4095)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17792)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17793)==0&amp;false))) {{</span>
+<span class="nc" id="L364">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17794);throw new UnsupportedOperationException(&quot;hival must not go beyond 4095&quot;);</span>
             }
-<span class="nc bnc" id="L366" title="All 4 branches missed.">            isDeviceGray = Arrays.equals(reds, blues) &amp;&amp; Arrays.equals(blues, greens);</span>
-<span class="nc bnc" id="L367" title="All 2 branches missed.">            if (isDeviceGray) {</span>
-<span class="nc" id="L368">                gen.write(&quot;[/Indexed &quot; + &quot;/DeviceGray&quot;);</span>
-            } else {
-<span class="nc" id="L370">                gen.write(&quot;[/Indexed &quot; + getColorSpaceName(cs));</span>
+<span class="nc bnc" id="L366" title="All 4 branches missed.">            }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17795);isDeviceGray = Arrays.equals(reds, blues) &amp;&amp; Arrays.equals(blues, greens);</span>
+<span class="nc bnc" id="L367" title="All 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17796);if ((((isDeviceGray)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17797)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17798)==0&amp;false))) {{</span>
+<span class="nc" id="L368">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17799);gen.write(&quot;[/Indexed &quot; + &quot;/DeviceGray&quot;);</span>
+            } }else {{
+<span class="nc" id="L370">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17800);gen.write(&quot;[/Indexed &quot; + getColorSpaceName(cs));</span>
             }
-<span class="nc" id="L372">            gen.writeln(&quot; &quot; + Integer.toString(hival));</span>
-<span class="nc" id="L373">            gen.write(&quot;  &lt;&quot;);</span>
-<span class="nc bnc" id="L374" title="All 2 branches missed.">            if (isDeviceGray) {</span>
-<span class="nc" id="L375">                gen.write(toHexString(blues));</span>
-            } else {
-<span class="nc bnc" id="L377" title="All 2 branches missed.">                for (int i = 0; i &lt; c; i++) {</span>
-<span class="nc bnc" id="L378" title="All 2 branches missed.">                    if (i &gt; 0) {</span>
-<span class="nc bnc" id="L379" title="All 2 branches missed.">                        if ((i % 8) == 0) {</span>
-<span class="nc" id="L380">                            gen.newLine();</span>
-<span class="nc" id="L381">                            gen.write(&quot;   &quot;);</span>
-                        } else {
-<span class="nc" id="L383">                            gen.write(&quot; &quot;);</span>
+<span class="nc" id="L372">            }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17801);gen.writeln(&quot; &quot; + Integer.toString(hival));</span>
+<span class="nc" id="L373">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17802);gen.write(&quot;  &lt;&quot;);</span>
+<span class="nc bnc" id="L374" title="All 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17803);if ((((isDeviceGray)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17804)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17805)==0&amp;false))) {{</span>
+<span class="nc" id="L375">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17806);gen.write(toHexString(blues));</span>
+            } }else {{
+<span class="nc bnc" id="L377" title="All 10 branches missed.">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17807);for (int i = 0; (((i &lt; c)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17808)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17809)==0&amp;false)); i++) {{</span>
+<span class="nc bnc" id="L378" title="All 10 branches missed.">                    __CLR4_5_2dkzdkzm68iyi3s.R.inc(17810);if ((((i &gt; 0)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17811)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17812)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L379" title="All 10 branches missed.">                        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17813);if (((((i % 8) == 0)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17814)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17815)==0&amp;false))) {{</span>
+<span class="nc" id="L380">                            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17816);gen.newLine();</span>
+<span class="nc" id="L381">                            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17817);gen.write(&quot;   &quot;);</span>
+                        } }else {{
+<span class="nc" id="L383">                            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17818);gen.write(&quot; &quot;);</span>
                         }
-                    }
-<span class="nc" id="L386">                    gen.write(rgb2Hex(palette[i]));</span>
+                    }}
+<span class="nc" id="L386">                    }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17819);gen.write(rgb2Hex(palette[i]));</span>
                 }
-            }
-<span class="nc" id="L389">            gen.writeln(&quot;&gt;&quot;);</span>
-<span class="nc" id="L390">            gen.writeln(&quot;] setcolorspace&quot;);</span>
-<span class="nc" id="L391">        } else {</span>
-<span class="fc" id="L392">            gen.writeln(getColorSpaceName(cm.getColorSpace()) + &quot; setcolorspace&quot;);</span>
+            }}
+<span class="nc" id="L389">            }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17820);gen.writeln(&quot;&gt;&quot;);</span>
+<span class="nc" id="L390">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17821);gen.writeln(&quot;] setcolorspace&quot;);</span>
+<span class="nc" id="L391">        } }else {{</span>
+<span class="fc" id="L392">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17822);gen.writeln(getColorSpaceName(cm.getColorSpace()) + &quot; setcolorspace&quot;);</span>
         }
-<span class="fc" id="L394">    }</span>
+<span class="fc" id="L394">    }}finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
-    static String toHexString(byte[] color) {
-<span class="nc" id="L397">        char[] hexChars = new char[color.length * 2];</span>
-        int x;
-<span class="nc bnc" id="L399" title="All 2 branches missed.">        for (int i = 0; i &lt; color.length; i++) {</span>
-<span class="nc" id="L400">            x = color[i] &amp; 0xFF;</span>
-<span class="nc" id="L401">            hexChars[i * 2] = HEX[x &gt;&gt;&gt; 4];</span>
-<span class="nc" id="L402">            hexChars[i * 2 + 1] = HEX[x &amp; 0x0F];</span>
+<span class="nc" id="L396">    static String toHexString(byte[] color) {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17823);</span>
+<span class="nc" id="L397">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17824);char[] hexChars = new char[color.length * 2];</span>
+<span class="nc" id="L398">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17825);int x;</span>
+<span class="nc bnc" id="L399" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17826);for (int i = 0; (((i &lt; color.length)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17827)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17828)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L400">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17829);x = color[i] &amp; 0xFF;</span>
+<span class="nc" id="L401">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17830);hexChars[i * 2] = HEX[x &gt;&gt;&gt; 4];</span>
+<span class="nc" id="L402">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17831);hexChars[i * 2 + 1] = HEX[x &amp; 0x0F];</span>
         }
-<span class="nc" id="L404">        return new String(hexChars);</span>
-    }
+<span class="nc" id="L404">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17832);return new String(hexChars);</span>
+<span class="nc" id="L405">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     static void writeImageCommand(RenderedImage img,
-            PSDictionary imageDict, PSGenerator gen) throws IOException {
-<span class="fc" id="L409">        ImageEncodingHelper helper = new ImageEncodingHelper(img, true);</span>
-<span class="fc" id="L410">        ColorModel cm = helper.getEncodedColorModel();</span>
-<span class="fc" id="L411">        Dimension imgDim = new Dimension(img.getWidth(), img.getHeight());</span>
+<span class="fc" id="L408">            PSDictionary imageDict, PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17833);</span>
+<span class="fc" id="L409">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17834);ImageEncodingHelper helper = new ImageEncodingHelper(img, true);</span>
+<span class="fc" id="L410">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17835);ColorModel cm = helper.getEncodedColorModel();</span>
+<span class="fc" id="L411">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17836);Dimension imgDim = new Dimension(img.getWidth(), img.getHeight());</span>
 
-<span class="fc" id="L413">        populateImageDictionary(imgDim, cm, imageDict);</span>
-<span class="fc" id="L414">        writeImageCommand(imageDict, cm, gen, false);</span>
-<span class="fc" id="L415">    }</span>
+<span class="fc" id="L413">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17837);populateImageDictionary(imgDim, cm, imageDict);</span>
+<span class="fc" id="L414">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17838);writeImageCommand(imageDict, cm, gen, false);</span>
+<span class="fc" id="L415">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     static void writeImageCommand(PSDictionary imageDict, ColorModel cm, PSGenerator gen, boolean maskBitmap)
-                throws IOException {
-<span class="fc bfc" id="L419" title="All 2 branches covered.">        if (!maskBitmap) {</span>
-<span class="fc" id="L420">            prepareColorSpace(gen, cm);</span>
+<span class="fc" id="L418">                throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17839);</span>
+<span class="pc bpc" id="L419" title="4 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17840);if ((((!maskBitmap)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17841)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17842)==0&amp;false))) {{</span>
+<span class="fc" id="L420">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17843);prepareColorSpace(gen, cm);</span>
         }
-<span class="fc" id="L422">        gen.write(imageDict.toString());</span>
-<span class="fc bfc" id="L423" title="All 2 branches covered.">        if (maskBitmap) {</span>
-<span class="fc" id="L424">            gen.writeln(&quot; imagemask&quot;);</span>
-        } else {
-<span class="fc" id="L426">            gen.writeln(&quot; image&quot;);</span>
+<span class="fc" id="L422">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17844);gen.write(imageDict.toString());</span>
+<span class="pc bpc" id="L423" title="4 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17845);if ((((maskBitmap)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17846)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17847)==0&amp;false))) {{</span>
+<span class="fc" id="L424">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17848);gen.writeln(&quot; imagemask&quot;);</span>
+        } }else {{
+<span class="fc" id="L426">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17849);gen.writeln(&quot; image&quot;);</span>
         }
-<span class="fc" id="L428">    }</span>
+<span class="fc" id="L428">    }}finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     static void writeImageCommand(PSDictionary imageDict,
             Dimension imgDim, ColorSpace colorSpace, boolean invertImage,
-            PSGenerator gen) throws IOException {
-<span class="fc" id="L433">        imageDict.put(&quot;/ImageType&quot;, &quot;1&quot;);</span>
-<span class="fc" id="L434">        imageDict.put(&quot;/Width&quot;, Integer.toString(imgDim.width));</span>
-<span class="fc" id="L435">        imageDict.put(&quot;/Height&quot;, Integer.toString(imgDim.height));</span>
-<span class="fc" id="L436">        String decodeArray = getDecodeArray(colorSpace.getNumComponents(), invertImage);</span>
-<span class="fc" id="L437">        imageDict.put(&quot;/Decode&quot;, decodeArray);</span>
+<span class="fc" id="L432">            PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17850);</span>
+<span class="fc" id="L433">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17851);imageDict.put(&quot;/ImageType&quot;, &quot;1&quot;);</span>
+<span class="fc" id="L434">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17852);imageDict.put(&quot;/Width&quot;, Integer.toString(imgDim.width));</span>
+<span class="fc" id="L435">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17853);imageDict.put(&quot;/Height&quot;, Integer.toString(imgDim.height));</span>
+<span class="fc" id="L436">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17854);String decodeArray = getDecodeArray(colorSpace.getNumComponents(), invertImage);</span>
+<span class="fc" id="L437">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17855);imageDict.put(&quot;/Decode&quot;, decodeArray);</span>
         // Setup scanning for left-to-right and top-to-bottom
-<span class="fc" id="L439">        imageDict.put(&quot;/ImageMatrix&quot;, &quot;[&quot; + imgDim.width + &quot; 0 0 &quot; + imgDim.height + &quot; 0 0]&quot;);</span>
+<span class="fc" id="L439">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17856);imageDict.put(&quot;/ImageMatrix&quot;, &quot;[&quot; + imgDim.width + &quot; 0 0 &quot; + imgDim.height + &quot; 0 0]&quot;);</span>
 
-<span class="fc" id="L441">        prepareColorspace(gen, colorSpace);</span>
-<span class="fc" id="L442">        gen.write(imageDict.toString());</span>
-<span class="fc" id="L443">        gen.writeln(&quot; image&quot;);</span>
-<span class="fc" id="L444">    }</span>
+<span class="fc" id="L441">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17857);prepareColorspace(gen, colorSpace);</span>
+<span class="fc" id="L442">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17858);gen.write(imageDict.toString());</span>
+<span class="fc" id="L443">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17859);gen.writeln(&quot; image&quot;);</span>
+<span class="fc" id="L444">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
 <span class="fc" id="L446">    private static final char[] HEX = {</span>
             '0', '1', '2', '3', '4', '5', '6', '7',
             '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
         };
 
-    private static String rgb2Hex(int rgb) {
-<span class="nc" id="L452">        StringBuffer sb = new StringBuffer();</span>
-<span class="nc bnc" id="L453" title="All 2 branches missed.">        for (int i = 5; i &gt;= 0; i--) {</span>
-<span class="nc" id="L454">            int shift = i * 4;</span>
-<span class="nc" id="L455">            int n = (rgb &amp; (15 &lt;&lt; shift)) &gt;&gt; shift;</span>
-<span class="nc" id="L456">            sb.append(HEX[n % 16]);</span>
+<span class="nc" id="L451">    private static String rgb2Hex(int rgb) {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17860);</span>
+<span class="nc" id="L452">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17861);StringBuffer sb = new StringBuffer();</span>
+<span class="nc bnc" id="L453" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17862);for (int i = 5; (((i &gt;= 0)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17863)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17864)==0&amp;false)); i--) {{</span>
+<span class="nc" id="L454">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17865);int shift = i * 4;</span>
+<span class="nc" id="L455">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17866);int n = (rgb &amp; (15 &lt;&lt; shift)) &gt;&gt; shift;</span>
+<span class="nc" id="L456">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17867);sb.append(HEX[n % 16]);</span>
         }
-<span class="nc" id="L458">        return sb.toString();</span>
-    }
+<span class="nc" id="L458">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17868);return sb.toString();</span>
+<span class="nc" id="L459">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Renders a bitmap image to PostScript.
@@ -470,20 +470,20 @@ public class PSImageUtils {
      */
     public static void renderBitmapImage(RenderedImage img,
                 float x, float y, float w, float h, PSGenerator gen, Color mask, boolean maskBitmap)
-                    throws IOException {
-<span class="fc" id="L474">        Rectangle2D targetRect = new Rectangle2D.Double(x, y, w, h);</span>
-<span class="fc" id="L475">        ImageEncoder encoder = ImageEncodingHelper.createRenderedImageEncoder(img);</span>
-<span class="fc" id="L476">        Dimension imgDim = new Dimension(img.getWidth(), img.getHeight());</span>
-<span class="fc" id="L477">        String imgDescription = img.getClass().getName();</span>
-<span class="fc" id="L478">        ImageEncodingHelper helper = new ImageEncodingHelper(img);</span>
-<span class="fc" id="L479">        ColorModel cm = helper.getEncodedColorModel();</span>
+<span class="fc" id="L473">                    throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17869);</span>
+<span class="fc" id="L474">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17870);Rectangle2D targetRect = new Rectangle2D.Double(x, y, w, h);</span>
+<span class="fc" id="L475">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17871);ImageEncoder encoder = ImageEncodingHelper.createRenderedImageEncoder(img);</span>
+<span class="fc" id="L476">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17872);Dimension imgDim = new Dimension(img.getWidth(), img.getHeight());</span>
+<span class="fc" id="L477">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17873);String imgDescription = img.getClass().getName();</span>
+<span class="fc" id="L478">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17874);ImageEncodingHelper helper = new ImageEncodingHelper(img);</span>
+<span class="fc" id="L479">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17875);ColorModel cm = helper.getEncodedColorModel();</span>
 
-<span class="pc bpc" id="L481" title="1 of 2 branches missed.">        if (mask == null) {</span>
-<span class="fc" id="L482">            writeImage(encoder, imgDim, imgDescription, targetRect, cm, gen, img, maskBitmap);</span>
-        } else {
-<span class="nc" id="L484">            writeImage(encoder, imgDim, imgDescription, targetRect, cm, gen, img, mask);</span>
+<span class="pc bpc" id="L481" title="7 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17876);if ((((mask == null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17877)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17878)==0&amp;false))) {{</span>
+<span class="fc" id="L482">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17879);writeImage(encoder, imgDim, imgDescription, targetRect, cm, gen, img, maskBitmap);</span>
+        } }else {{
+<span class="nc" id="L484">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17880);writeImage(encoder, imgDim, imgDescription, targetRect, cm, gen, img, mask);</span>
         }
-<span class="fc" id="L486">    }</span>
+<span class="fc" id="L486">    }}finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Writes a bitmap image as a PostScript form enclosed by DSC resource wrappers to the
@@ -503,22 +503,22 @@ public class PSImageUtils {
     public static PSResource writeReusableImage(final byte[] img,
             Dimension imgDim, String formName, String imageDescription,
             final boolean isJPEG, ColorSpace colorSpace,
-            PSGenerator gen) throws IOException {
-<span class="nc" id="L507">        ImageEncoder encoder = new ImageEncoder() {</span>
-            public void writeTo(OutputStream out) throws IOException {
-<span class="nc" id="L509">                out.write(img);</span>
-<span class="nc" id="L510">            }</span>
-            public String getImplicitFilter() {
-<span class="nc bnc" id="L512" title="All 2 branches missed.">                if (isJPEG) {</span>
-<span class="nc" id="L513">                    return &quot;&lt;&lt; &gt;&gt; /DCTDecode&quot;;</span>
-                } else {
-<span class="nc" id="L515">                    return null;</span>
+<span class="nc" id="L506">            PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17881);</span>
+<span class="nc" id="L507">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17882);ImageEncoder encoder = new ImageEncoder() {</span>
+<span class="nc" id="L508">            public void writeTo(OutputStream out) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17883);</span>
+<span class="nc" id="L509">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17884);out.write(img);</span>
+<span class="nc" id="L510">            }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
+<span class="nc" id="L511">            public String getImplicitFilter() {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17885);</span>
+<span class="nc bnc" id="L512" title="All 10 branches missed.">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17886);if ((((isJPEG)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17887)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17888)==0&amp;false))) {{</span>
+<span class="nc" id="L513">                    __CLR4_5_2dkzdkzm68iyi3s.R.inc(17889);return &quot;&lt;&lt; &gt;&gt; /DCTDecode&quot;;</span>
+                } }else {{
+<span class="nc" id="L515">                    __CLR4_5_2dkzdkzm68iyi3s.R.inc(17890);return null;</span>
                 }
-            }
+<span class="nc" id="L517">            }}finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
         };
-<span class="nc" id="L519">        return writeReusableImage(encoder, imgDim, formName,</span>
+<span class="nc" id="L519">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17891);return writeReusableImage(encoder, imgDim, formName,</span>
                 imageDescription, colorSpace, false, gen);
-    }
+<span class="nc" id="L521">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Writes a bitmap image as a PostScript form enclosed by DSC resource wrappers to the
@@ -538,70 +538,70 @@ public class PSImageUtils {
             Dimension imgDim,
             String formName, String imageDescription,
             ColorSpace colorSpace, boolean invertImage,
-            PSGenerator gen) throws IOException {
-<span class="nc bnc" id="L542" title="All 2 branches missed.">        if (gen.getPSLevel() &lt; 2) {</span>
-<span class="nc" id="L543">            throw new UnsupportedOperationException(</span>
+<span class="nc" id="L541">            PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17892);</span>
+<span class="nc bnc" id="L542" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17893);if ((((gen.getPSLevel() &lt; 2)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17894)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17895)==0&amp;false))) {{</span>
+<span class="nc" id="L543">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17896);throw new UnsupportedOperationException(</span>
                     &quot;Reusable images requires at least Level 2 PostScript&quot;);
         }
-<span class="nc" id="L546">        String dataName = formName + &quot;:Data&quot;;</span>
-<span class="nc" id="L547">        gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE, formName);</span>
-<span class="nc bnc" id="L548" title="All 2 branches missed.">        if (imageDescription != null) {</span>
-<span class="nc" id="L549">            gen.writeDSCComment(DSCConstants.TITLE, imageDescription);</span>
+<span class="nc" id="L546">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17897);String dataName = formName + &quot;:Data&quot;;</span>
+<span class="nc" id="L547">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17898);gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE, formName);</span>
+<span class="nc bnc" id="L548" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17899);if ((((imageDescription != null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17900)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17901)==0&amp;false))) {{</span>
+<span class="nc" id="L549">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17902);gen.writeDSCComment(DSCConstants.TITLE, imageDescription);</span>
         }
 
-        String additionalFilters;
-<span class="nc" id="L553">        String implicitFilter = encoder.getImplicitFilter();</span>
-<span class="nc bnc" id="L554" title="All 2 branches missed.">        if (implicitFilter != null) {</span>
-<span class="nc" id="L555">            additionalFilters = &quot;/ASCII85Decode filter &quot; + implicitFilter + &quot; filter&quot;;</span>
-        } else {
-<span class="nc bnc" id="L557" title="All 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
-<span class="nc" id="L558">                additionalFilters = &quot;/ASCII85Decode filter /FlateDecode filter&quot;;</span>
-            } else {
-<span class="nc" id="L560">                additionalFilters = &quot;/ASCII85Decode filter /RunLengthDecode filter&quot;;</span>
+<span class="nc" id="L552">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17903);String additionalFilters;</span>
+<span class="nc" id="L553">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17904);String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="nc bnc" id="L554" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17905);if ((((implicitFilter != null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17906)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17907)==0&amp;false))) {{</span>
+<span class="nc" id="L555">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17908);additionalFilters = &quot;/ASCII85Decode filter &quot; + implicitFilter + &quot; filter&quot;;</span>
+        } }else {{
+<span class="nc bnc" id="L557" title="All 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17909);if ((((gen.getPSLevel() &gt;= 3)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17910)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17911)==0&amp;false))) {{</span>
+<span class="nc" id="L558">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17912);additionalFilters = &quot;/ASCII85Decode filter /FlateDecode filter&quot;;</span>
+            } }else {{
+<span class="nc" id="L560">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17913);additionalFilters = &quot;/ASCII85Decode filter /RunLengthDecode filter&quot;;</span>
             }
-        }
+        }}
 
-<span class="nc" id="L564">        gen.writeln(&quot;/&quot; + formName);</span>
-<span class="nc" id="L565">        gen.writeln(&quot;&lt;&lt; /FormType 1&quot;);</span>
-<span class="nc" id="L566">        gen.writeln(&quot;  /BBox [0 0 &quot; + imgDim.width + &quot; &quot; + imgDim.height + &quot;]&quot;);</span>
-<span class="nc" id="L567">        gen.writeln(&quot;  /Matrix [1 0 0 1 0 0]&quot;);</span>
-<span class="nc" id="L568">        gen.writeln(&quot;  /PaintProc {&quot;);</span>
-<span class="nc" id="L569">        gen.writeln(&quot;    pop&quot;);</span>
-<span class="nc" id="L570">        gen.writeln(&quot;    gsave&quot;);</span>
-<span class="nc bnc" id="L571" title="All 2 branches missed.">        if (gen.getPSLevel() == 2) {</span>
-<span class="nc" id="L572">            gen.writeln(&quot;    userdict /i 0 put&quot;); //rewind image data</span>
-        } else {
-<span class="nc" id="L574">            gen.writeln(&quot;    &quot; + dataName + &quot; 0 setfileposition&quot;); //rewind image data</span>
+<span class="nc" id="L564">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17914);gen.writeln(&quot;/&quot; + formName);</span>
+<span class="nc" id="L565">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17915);gen.writeln(&quot;&lt;&lt; /FormType 1&quot;);</span>
+<span class="nc" id="L566">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17916);gen.writeln(&quot;  /BBox [0 0 &quot; + imgDim.width + &quot; &quot; + imgDim.height + &quot;]&quot;);</span>
+<span class="nc" id="L567">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17917);gen.writeln(&quot;  /Matrix [1 0 0 1 0 0]&quot;);</span>
+<span class="nc" id="L568">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17918);gen.writeln(&quot;  /PaintProc {&quot;);</span>
+<span class="nc" id="L569">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17919);gen.writeln(&quot;    pop&quot;);</span>
+<span class="nc" id="L570">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17920);gen.writeln(&quot;    gsave&quot;);</span>
+<span class="nc bnc" id="L571" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17921);if ((((gen.getPSLevel() == 2)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17922)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17923)==0&amp;false))) {{</span>
+<span class="nc" id="L572">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17924);gen.writeln(&quot;    userdict /i 0 put&quot;); //rewind image data</span>
+        } }else {{
+<span class="nc" id="L574">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17925);gen.writeln(&quot;    &quot; + dataName + &quot; 0 setfileposition&quot;); //rewind image data</span>
         }
-        String dataSource;
-<span class="nc bnc" id="L577" title="All 2 branches missed.">        if (gen.getPSLevel() == 2) {</span>
-<span class="nc" id="L578">            dataSource = &quot;{ &quot; + dataName + &quot; i get /i i 1 add store } bind&quot;;</span>
-        } else {
-<span class="nc" id="L580">            dataSource = dataName;</span>
+<span class="nc" id="L576">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17926);String dataSource;</span>
+<span class="nc bnc" id="L577" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17927);if ((((gen.getPSLevel() == 2)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17928)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17929)==0&amp;false))) {{</span>
+<span class="nc" id="L578">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17930);dataSource = &quot;{ &quot; + dataName + &quot; i get /i i 1 add store } bind&quot;;</span>
+        } }else {{
+<span class="nc" id="L580">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17931);dataSource = dataName;</span>
         }
-<span class="nc" id="L582">        PSDictionary imageDict = new PSDictionary();</span>
-<span class="nc" id="L583">        imageDict.put(&quot;/DataSource&quot;, dataSource);</span>
-<span class="nc" id="L584">        imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(8));</span>
-<span class="nc" id="L585">        writeImageCommand(imageDict, imgDim, colorSpace, invertImage, gen);</span>
-<span class="nc" id="L586">        gen.writeln(&quot;    grestore&quot;);</span>
-<span class="nc" id="L587">        gen.writeln(&quot;  } bind&quot;);</span>
-<span class="nc" id="L588">        gen.writeln(&quot;&gt;&gt; def&quot;);</span>
-<span class="nc" id="L589">        gen.writeln(&quot;/&quot; + dataName + &quot; currentfile&quot;);</span>
-<span class="nc" id="L590">        gen.writeln(additionalFilters);</span>
-<span class="nc bnc" id="L591" title="All 2 branches missed.">        if (gen.getPSLevel() == 2) {</span>
+<span class="nc" id="L582">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17932);PSDictionary imageDict = new PSDictionary();</span>
+<span class="nc" id="L583">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17933);imageDict.put(&quot;/DataSource&quot;, dataSource);</span>
+<span class="nc" id="L584">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17934);imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(8));</span>
+<span class="nc" id="L585">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17935);writeImageCommand(imageDict, imgDim, colorSpace, invertImage, gen);</span>
+<span class="nc" id="L586">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17936);gen.writeln(&quot;    grestore&quot;);</span>
+<span class="nc" id="L587">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17937);gen.writeln(&quot;  } bind&quot;);</span>
+<span class="nc" id="L588">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17938);gen.writeln(&quot;&gt;&gt; def&quot;);</span>
+<span class="nc" id="L589">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17939);gen.writeln(&quot;/&quot; + dataName + &quot; currentfile&quot;);</span>
+<span class="nc" id="L590">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17940);gen.writeln(additionalFilters);</span>
+<span class="nc bnc" id="L591" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17941);if ((((gen.getPSLevel() == 2)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17942)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17943)==0&amp;false))) {{</span>
             //Creates a data array from the inline file
-<span class="nc" id="L593">            gen.writeln(&quot;{ /temp exch def [&quot;</span>
+<span class="nc" id="L593">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17944);gen.writeln(&quot;{ /temp exch def [&quot;</span>
                     + &quot; { temp 16384 string readstring not {exit } if } loop ] } exec&quot;);
-        } else {
-<span class="nc" id="L596">            gen.writeln(&quot;/ReusableStreamDecode filter&quot;);</span>
+        } }else {{
+<span class="nc" id="L596">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17945);gen.writeln(&quot;/ReusableStreamDecode filter&quot;);</span>
         }
-<span class="nc" id="L598">        compressAndWriteBitmap(encoder, gen);</span>
-<span class="nc" id="L599">        gen.writeln(&quot;def&quot;);</span>
-<span class="nc" id="L600">        gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
-<span class="nc" id="L601">        PSResource res = new PSResource(PSResource.TYPE_FORM, formName);</span>
-<span class="nc" id="L602">        gen.getResourceTracker().registerSuppliedResource(res);</span>
-<span class="nc" id="L603">        return res;</span>
-    }
+<span class="nc" id="L598">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17946);compressAndWriteBitmap(encoder, gen);</span>
+<span class="nc" id="L599">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17947);gen.writeln(&quot;def&quot;);</span>
+<span class="nc" id="L600">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17948);gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
+<span class="nc" id="L601">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17949);PSResource res = new PSResource(PSResource.TYPE_FORM, formName);</span>
+<span class="nc" id="L602">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17950);gen.getResourceTracker().registerSuppliedResource(res);</span>
+<span class="nc" id="L603">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17951);return res;</span>
+<span class="nc" id="L604">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Paints a reusable image (previously added as a PostScript form).
@@ -615,10 +615,10 @@ public class PSImageUtils {
     public static void paintReusableImage(
             String formName,
             Rectangle2D targetRect,
-            PSGenerator gen) throws IOException {
-<span class="nc" id="L619">        PSResource form = new PSResource(PSResource.TYPE_FORM, formName);</span>
-<span class="nc" id="L620">        paintForm(form, null, targetRect, gen);</span>
-<span class="nc" id="L621">    }</span>
+<span class="nc" id="L618">            PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17952);</span>
+<span class="nc" id="L619">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17953);PSResource form = new PSResource(PSResource.TYPE_FORM, formName);</span>
+<span class="nc" id="L620">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17954);paintForm(form, null, targetRect, gen);</span>
+<span class="nc" id="L621">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Paints a reusable image (previously added as a PostScript form).
@@ -632,9 +632,9 @@ public class PSImageUtils {
     public static void paintForm(
             PSResource form,
             Rectangle2D targetRect,
-            PSGenerator gen) throws IOException {
-<span class="nc" id="L636">        paintForm(form, null, targetRect, gen);</span>
-<span class="nc" id="L637">    }</span>
+<span class="nc" id="L635">            PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17955);</span>
+<span class="nc" id="L636">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17956);paintForm(form, null, targetRect, gen);</span>
+<span class="nc" id="L637">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Paints a reusable image (previously added as a PostScript form).
@@ -648,47 +648,47 @@ public class PSImageUtils {
             PSResource form,
             Dimension2D formDimensions,
             Rectangle2D targetRect,
-            PSGenerator gen) throws IOException {
-<span class="nc" id="L652">        gen.saveGraphicsState();</span>
-<span class="nc" id="L653">        translateAndScale(gen, formDimensions, targetRect);</span>
-<span class="nc" id="L654">        gen.writeln(form.getName() + &quot; execform&quot;);</span>
+<span class="nc" id="L651">            PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17957);</span>
+<span class="nc" id="L652">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17958);gen.saveGraphicsState();</span>
+<span class="nc" id="L653">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17959);translateAndScale(gen, formDimensions, targetRect);</span>
+<span class="nc" id="L654">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17960);gen.writeln(form.getName() + &quot; execform&quot;);</span>
 
-<span class="nc" id="L656">        gen.getResourceTracker().notifyResourceUsageOnPage(form);</span>
-<span class="nc" id="L657">        gen.restoreGraphicsState();</span>
-<span class="nc" id="L658">    }</span>
+<span class="nc" id="L656">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17961);gen.getResourceTracker().notifyResourceUsageOnPage(form);</span>
+<span class="nc" id="L657">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17962);gen.restoreGraphicsState();</span>
+<span class="nc" id="L658">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
-    private static String getColorSpaceName(ColorSpace colorSpace) {
-<span class="pc bpc" id="L661" title="1 of 2 branches missed.">        if (colorSpace.getType() == ColorSpace.TYPE_CMYK) {</span>
-<span class="nc" id="L662">            return &quot;/DeviceCMYK&quot;;</span>
-<span class="fc bfc" id="L663" title="All 2 branches covered.">        } else if (colorSpace.getType() == ColorSpace.TYPE_GRAY) {</span>
-<span class="fc" id="L664">            return &quot;/DeviceGray&quot;;</span>
-        } else {
-<span class="fc" id="L666">            return &quot;/DeviceRGB&quot;;</span>
+<span class="fc" id="L660">    private static String getColorSpaceName(ColorSpace colorSpace) {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17963);</span>
+<span class="pc bpc" id="L661" title="7 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17964);if ((((colorSpace.getType() == ColorSpace.TYPE_CMYK)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17965)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17966)==0&amp;false))) {{</span>
+<span class="nc" id="L662">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17967);return &quot;/DeviceCMYK&quot;;</span>
+<span class="pc bpc" id="L663" title="4 of 10 branches missed.">        } }else {__CLR4_5_2dkzdkzm68iyi3s.R.inc(17968);if ((((colorSpace.getType() == ColorSpace.TYPE_GRAY)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17969)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17970)==0&amp;false))) {{</span>
+<span class="fc" id="L664">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17971);return &quot;/DeviceGray&quot;;</span>
+        } }else {{
+<span class="fc" id="L666">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17972);return &quot;/DeviceRGB&quot;;</span>
         }
-    }
+<span class="fc" id="L668">    }}}finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     static void compressAndWriteBitmap(ImageEncoder encoder, PSGenerator gen)
-                throws IOException {
-<span class="fc" id="L672">        OutputStream out = gen.getOutputStream();</span>
-<span class="fc" id="L673">        out = new ASCII85OutputStream(out);</span>
-<span class="fc" id="L674">        String implicitFilter = encoder.getImplicitFilter();</span>
-<span class="pc bpc" id="L675" title="1 of 2 branches missed.">        if (implicitFilter != null) {</span>
+<span class="fc" id="L671">                throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17973);</span>
+<span class="fc" id="L672">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17974);OutputStream out = gen.getOutputStream();</span>
+<span class="fc" id="L673">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17975);out = new ASCII85OutputStream(out);</span>
+<span class="fc" id="L674">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17976);String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="pc bpc" id="L675" title="7 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17977);if ((((implicitFilter != null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17978)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17979)==0&amp;false))) {{</span>
             //nop
-        } else {
-<span class="pc bpc" id="L678" title="1 of 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
-<span class="fc" id="L679">                out = new FlateEncodeOutputStream(out);</span>
-            } else {
-<span class="nc" id="L681">                out = new RunLengthEncodeOutputStream(out);</span>
+        } }else {{
+<span class="pc bpc" id="L678" title="7 of 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17980);if ((((gen.getPSLevel() &gt;= 3)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17981)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17982)==0&amp;false))) {{</span>
+<span class="fc" id="L679">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17983);out = new FlateEncodeOutputStream(out);</span>
+            } }else {{
+<span class="nc" id="L681">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(17984);out = new RunLengthEncodeOutputStream(out);</span>
             }
+        }}
+<span class="fc" id="L684">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17985);encoder.writeTo(out);</span>
+<span class="pc bpc" id="L685" title="7 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17986);if ((((out instanceof Finalizable)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17987)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17988)==0&amp;false))) {{</span>
+<span class="fc" id="L686">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17989);((Finalizable)out).finalizeStream();</span>
+        } }else {{
+<span class="nc" id="L688">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17990);out.flush();</span>
         }
-<span class="fc" id="L684">        encoder.writeTo(out);</span>
-<span class="pc bpc" id="L685" title="1 of 2 branches missed.">        if (out instanceof Finalizable) {</span>
-<span class="fc" id="L686">            ((Finalizable)out).finalizeStream();</span>
-        } else {
-<span class="nc" id="L688">            out.flush();</span>
-        }
-<span class="fc" id="L690">        gen.newLine(); //Just to be sure</span>
-<span class="fc" id="L691">    }</span>
+<span class="fc" id="L690">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17991);gen.newLine(); //Just to be sure</span>
+<span class="fc" id="L691">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Generates commands to modify the current transformation matrix so an image fits
@@ -700,19 +700,19 @@ public class PSImageUtils {
      */
     public static void translateAndScale(PSGenerator gen,
             Dimension2D imageDimensions, Rectangle2D targetRect)
-                throws IOException {
-<span class="fc" id="L704">        gen.writeln(gen.formatDouble(targetRect.getX()) + &quot; &quot;</span>
+<span class="fc" id="L703">                throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(17992);</span>
+<span class="fc" id="L704">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17993);gen.writeln(gen.formatDouble(targetRect.getX()) + &quot; &quot;</span>
 <span class="fc" id="L705">                + gen.formatDouble(targetRect.getY()) + &quot; translate&quot;);</span>
-<span class="pc bpc" id="L706" title="1 of 2 branches missed.">        if (imageDimensions == null) {</span>
-<span class="fc" id="L707">            imageDimensions = new Dimension(1, 1);</span>
+<span class="pc bpc" id="L706" title="7 of 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17994);if ((((imageDimensions == null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17995)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(17996)==0&amp;false))) {{</span>
+<span class="fc" id="L707">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(17997);imageDimensions = new Dimension(1, 1);</span>
         }
-<span class="fc" id="L709">        double sx = targetRect.getWidth() / imageDimensions.getWidth();</span>
-<span class="fc" id="L710">        double sy = targetRect.getHeight() / imageDimensions.getHeight();</span>
-<span class="pc bpc" id="L711" title="2 of 4 branches missed.">        if (sx != 1 || sy != 1) {</span>
-<span class="nc" id="L712">            gen.writeln(gen.formatDouble(sx) + &quot; &quot;</span>
+<span class="fc" id="L709">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(17998);double sx = targetRect.getWidth() / imageDimensions.getWidth();</span>
+<span class="fc" id="L710">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(17999);double sy = targetRect.getHeight() / imageDimensions.getHeight();</span>
+<span class="pc bpc" id="L711" title="8 of 12 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18000);if ((((sx != 1 || sy != 1)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18001)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18002)==0&amp;false))) {{</span>
+<span class="nc" id="L712">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18003);gen.writeln(gen.formatDouble(sx) + &quot; &quot;</span>
 <span class="nc" id="L713">                    + gen.formatDouble(sy) + &quot; scale&quot;);</span>
         }
-<span class="fc" id="L715">    }</span>
+<span class="fc" id="L715">    }}finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Extracts a packed RGB integer array of a RenderedImage.
@@ -729,48 +729,48 @@ public class PSImageUtils {
     public static int[] getRGB(RenderedImage img,
                 int startX, int startY,
                 int w, int h,
-                int[] rgbArray, int offset, int scansize) {
-<span class="nc" id="L733">        Raster raster = img.getData();</span>
-<span class="nc" id="L734">        int yoff = offset;</span>
-        int off;
-        Object data;
-<span class="nc" id="L737">        int nbands = raster.getNumBands();</span>
-<span class="nc" id="L738">        int dataType = raster.getDataBuffer().getDataType();</span>
-<span class="nc bnc" id="L739" title="All 6 branches missed.">        switch (dataType) {</span>
-        case DataBuffer.TYPE_BYTE:
-<span class="nc" id="L741">            data = new byte[nbands];</span>
-<span class="nc" id="L742">            break;</span>
-        case DataBuffer.TYPE_USHORT:
-<span class="nc" id="L744">            data = new short[nbands];</span>
-<span class="nc" id="L745">            break;</span>
-        case DataBuffer.TYPE_INT:
-<span class="nc" id="L747">            data = new int[nbands];</span>
-<span class="nc" id="L748">            break;</span>
-        case DataBuffer.TYPE_FLOAT:
-<span class="nc" id="L750">            data = new float[nbands];</span>
-<span class="nc" id="L751">            break;</span>
-        case DataBuffer.TYPE_DOUBLE:
-<span class="nc" id="L753">            data = new double[nbands];</span>
-<span class="nc" id="L754">            break;</span>
-        default:
-<span class="nc" id="L756">            throw new IllegalArgumentException(&quot;Unknown data buffer type: &quot;</span>
+<span class="nc" id="L732">                int[] rgbArray, int offset, int scansize) {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(18004);</span>
+<span class="nc" id="L733">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18005);Raster raster = img.getData();</span>
+<span class="nc" id="L734">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18006);int yoff = offset;</span>
+<span class="nc" id="L735">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18007);int off;</span>
+<span class="nc" id="L736">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18008);Object data;</span>
+<span class="nc" id="L737">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18009);int nbands = raster.getNumBands();</span>
+<span class="nc" id="L738">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18010);int dataType = raster.getDataBuffer().getDataType();</span>
+<span class="nc bnc" id="L739" title="All 6 branches missed.">        boolean __CLB4_5_2_bool0=false;__CLR4_5_2dkzdkzm68iyi3s.R.inc(18011);switch (dataType) {</span>
+<span class="nc bnc" id="L740" title="All 2 branches missed.">        case DataBuffer.TYPE_BYTE:if (!__CLB4_5_2_bool0) {__CLR4_5_2dkzdkzm68iyi3s.R.inc(18012);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L741">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18013);data = new byte[nbands];</span>
+<span class="nc" id="L742">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18014);break;</span>
+<span class="nc bnc" id="L743" title="All 2 branches missed.">        case DataBuffer.TYPE_USHORT:if (!__CLB4_5_2_bool0) {__CLR4_5_2dkzdkzm68iyi3s.R.inc(18015);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L744">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18016);data = new short[nbands];</span>
+<span class="nc" id="L745">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18017);break;</span>
+<span class="nc bnc" id="L746" title="All 2 branches missed.">        case DataBuffer.TYPE_INT:if (!__CLB4_5_2_bool0) {__CLR4_5_2dkzdkzm68iyi3s.R.inc(18018);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L747">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18019);data = new int[nbands];</span>
+<span class="nc" id="L748">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18020);break;</span>
+<span class="nc bnc" id="L749" title="All 2 branches missed.">        case DataBuffer.TYPE_FLOAT:if (!__CLB4_5_2_bool0) {__CLR4_5_2dkzdkzm68iyi3s.R.inc(18021);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L750">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18022);data = new float[nbands];</span>
+<span class="nc" id="L751">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18023);break;</span>
+<span class="nc bnc" id="L752" title="All 2 branches missed.">        case DataBuffer.TYPE_DOUBLE:if (!__CLB4_5_2_bool0) {__CLR4_5_2dkzdkzm68iyi3s.R.inc(18024);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L753">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18025);data = new double[nbands];</span>
+<span class="nc" id="L754">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18026);break;</span>
+<span class="nc bnc" id="L755" title="All 2 branches missed.">        default:if (!__CLB4_5_2_bool0) {__CLR4_5_2dkzdkzm68iyi3s.R.inc(18027);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L756">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18028);throw new IllegalArgumentException(&quot;Unknown data buffer type: &quot;</span>
                                                + dataType);
         }
 
-<span class="nc bnc" id="L760" title="All 2 branches missed.">        if (rgbArray == null) {</span>
-<span class="nc" id="L761">            rgbArray = new int[offset + h * scansize];</span>
+<span class="nc bnc" id="L760" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18029);if ((((rgbArray == null)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18030)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18031)==0&amp;false))) {{</span>
+<span class="nc" id="L761">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18032);rgbArray = new int[offset + h * scansize];</span>
         }
 
-<span class="nc" id="L764">        ColorModel colorModel = img.getColorModel();</span>
-<span class="nc bnc" id="L765" title="All 2 branches missed.">        for (int y = startY; y &lt; startY + h; y++, yoff += scansize) {</span>
-<span class="nc" id="L766">            off = yoff;</span>
-<span class="nc bnc" id="L767" title="All 2 branches missed.">            for (int x = startX; x &lt; startX + w; x++) {</span>
-<span class="nc" id="L768">                rgbArray[off++] = colorModel.getRGB(raster.getDataElements(x, y, data));</span>
+<span class="nc" id="L764">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(18033);ColorModel colorModel = img.getColorModel();</span>
+<span class="nc bnc" id="L765" title="All 10 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18034);for (int y = startY; (((y &lt; startY + h)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18035)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18036)==0&amp;false)); y++, yoff += scansize) {{</span>
+<span class="nc" id="L766">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18037);off = yoff;</span>
+<span class="nc bnc" id="L767" title="All 10 branches missed.">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18038);for (int x = startX; (((x &lt; startX + w)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18039)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18040)==0&amp;false)); x++) {{</span>
+<span class="nc" id="L768">                __CLR4_5_2dkzdkzm68iyi3s.R.inc(18041);rgbArray[off++] = colorModel.getRGB(raster.getDataElements(x, y, data));</span>
             }
-        }
+        }}
 
-<span class="nc" id="L772">        return rgbArray;</span>
-    }
+<span class="nc" id="L772">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(18042);return rgbArray;</span>
+<span class="nc" id="L773">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Places an EPS file in the PostScript stream.
@@ -791,12 +791,12 @@ public class PSImageUtils {
     public static void renderEPS(byte[] rawEPS, String name,
                     float x, float y, float w, float h,
                     float bboxx, float bboxy, float bboxw, float bboxh,
-                    PSGenerator gen) throws IOException {
-<span class="nc" id="L795">       renderEPS(new java.io.ByteArrayInputStream(rawEPS), name,</span>
+<span class="nc" id="L794">                    PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(18043);</span>
+<span class="nc" id="L795">       __CLR4_5_2dkzdkzm68iyi3s.R.inc(18044);renderEPS(new java.io.ByteArrayInputStream(rawEPS), name,</span>
                new Rectangle2D.Float(x, y, w, h),
                new Rectangle2D.Float(bboxx, bboxy, bboxw, bboxh),
                gen);
-<span class="nc" id="L799">    }</span>
+<span class="nc" id="L799">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
     /**
      * Places an EPS file in the PostScript stream.
@@ -809,40 +809,40 @@ public class PSImageUtils {
      */
     public static void renderEPS(InputStream in, String name,
             Rectangle2D viewport, Rectangle2D bbox,
-                    PSGenerator gen) throws IOException {
-<span class="nc" id="L813">        gen.getResourceTracker().notifyResourceUsageOnPage(PSProcSets.EPS_PROCSET);</span>
-<span class="nc" id="L814">        gen.writeln(&quot;%AXGBeginEPS: &quot; + name);</span>
-<span class="nc" id="L815">        gen.writeln(&quot;BeginEPSF&quot;);</span>
+<span class="nc" id="L812">                    PSGenerator gen) throws IOException {try{__CLR4_5_2dkzdkzm68iyi3s.R.inc(18045);</span>
+<span class="nc" id="L813">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18046);gen.getResourceTracker().notifyResourceUsageOnPage(PSProcSets.EPS_PROCSET);</span>
+<span class="nc" id="L814">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18047);gen.writeln(&quot;%AXGBeginEPS: &quot; + name);</span>
+<span class="nc" id="L815">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18048);gen.writeln(&quot;BeginEPSF&quot;);</span>
 
-<span class="nc" id="L817">        gen.writeln(gen.formatDouble(viewport.getX())</span>
+<span class="nc" id="L817">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18049);gen.writeln(gen.formatDouble(viewport.getX())</span>
 <span class="nc" id="L818">                + &quot; &quot; + gen.formatDouble(viewport.getY()) + &quot; translate&quot;);</span>
-<span class="nc" id="L819">        gen.writeln(&quot;0 &quot; + gen.formatDouble(viewport.getHeight()) + &quot; translate&quot;);</span>
-<span class="nc" id="L820">        gen.writeln(&quot;1 -1 scale&quot;);</span>
-<span class="nc" id="L821">        double sx = viewport.getWidth() / bbox.getWidth();</span>
-<span class="nc" id="L822">        double sy = viewport.getHeight() / bbox.getHeight();</span>
-<span class="nc bnc" id="L823" title="All 4 branches missed.">        if (sx != 1 || sy != 1) {</span>
-<span class="nc" id="L824">            gen.writeln(gen.formatDouble(sx) + &quot; &quot; + gen.formatDouble(sy) + &quot; scale&quot;);</span>
+<span class="nc" id="L819">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18050);gen.writeln(&quot;0 &quot; + gen.formatDouble(viewport.getHeight()) + &quot; translate&quot;);</span>
+<span class="nc" id="L820">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18051);gen.writeln(&quot;1 -1 scale&quot;);</span>
+<span class="nc" id="L821">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18052);double sx = viewport.getWidth() / bbox.getWidth();</span>
+<span class="nc" id="L822">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18053);double sy = viewport.getHeight() / bbox.getHeight();</span>
+<span class="nc bnc" id="L823" title="All 12 branches missed.">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18054);if ((((sx != 1 || sy != 1)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18055)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18056)==0&amp;false))) {{</span>
+<span class="nc" id="L824">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18057);gen.writeln(gen.formatDouble(sx) + &quot; &quot; + gen.formatDouble(sy) + &quot; scale&quot;);</span>
         }
-<span class="nc bnc" id="L826" title="All 4 branches missed.">        if (bbox.getX() != 0 || bbox.getY() != 0) {</span>
-<span class="nc" id="L827">            gen.writeln(gen.formatDouble(-bbox.getX())</span>
+<span class="nc bnc" id="L826" title="All 12 branches missed.">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(18058);if ((((bbox.getX() != 0 || bbox.getY() != 0)&amp;&amp;(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18059)!=0|true))||(__CLR4_5_2dkzdkzm68iyi3s.R.iget(18060)==0&amp;false))) {{</span>
+<span class="nc" id="L827">            __CLR4_5_2dkzdkzm68iyi3s.R.inc(18061);gen.writeln(gen.formatDouble(-bbox.getX())</span>
 <span class="nc" id="L828">                    + &quot; &quot; + gen.formatDouble(-bbox.getY()) + &quot; translate&quot;);</span>
         }
-<span class="nc" id="L830">        gen.writeln(gen.formatDouble(bbox.getX())</span>
+<span class="nc" id="L830">        }__CLR4_5_2dkzdkzm68iyi3s.R.inc(18062);gen.writeln(gen.formatDouble(bbox.getX())</span>
 <span class="nc" id="L831">                + &quot; &quot; + gen.formatDouble(bbox.getY())</span>
 <span class="nc" id="L832">                + &quot; &quot; + gen.formatDouble(bbox.getWidth())</span>
 <span class="nc" id="L833">                + &quot; &quot; + gen.formatDouble(bbox.getHeight()) + &quot; re clip&quot;);</span>
-<span class="nc" id="L834">        gen.writeln(&quot;newpath&quot;);</span>
+<span class="nc" id="L834">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18063);gen.writeln(&quot;newpath&quot;);</span>
 
-<span class="nc" id="L836">        PSResource res = new PSResource(PSResource.TYPE_FILE, name);</span>
-<span class="nc" id="L837">        gen.getResourceTracker().registerSuppliedResource(res);</span>
-<span class="nc" id="L838">        gen.getResourceTracker().notifyResourceUsageOnPage(res);</span>
-<span class="nc" id="L839">        gen.writeDSCComment(DSCConstants.BEGIN_DOCUMENT, res.getName());</span>
-<span class="nc" id="L840">        IOUtils.copy(in, gen.getOutputStream());</span>
-<span class="nc" id="L841">        gen.newLine();</span>
-<span class="nc" id="L842">        gen.writeDSCComment(DSCConstants.END_DOCUMENT);</span>
-<span class="nc" id="L843">        gen.writeln(&quot;EndEPSF&quot;);</span>
-<span class="nc" id="L844">        gen.writeln(&quot;%AXGEndEPS&quot;);</span>
-<span class="nc" id="L845">    }</span>
+<span class="nc" id="L836">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18064);PSResource res = new PSResource(PSResource.TYPE_FILE, name);</span>
+<span class="nc" id="L837">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18065);gen.getResourceTracker().registerSuppliedResource(res);</span>
+<span class="nc" id="L838">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18066);gen.getResourceTracker().notifyResourceUsageOnPage(res);</span>
+<span class="nc" id="L839">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18067);gen.writeDSCComment(DSCConstants.BEGIN_DOCUMENT, res.getName());</span>
+<span class="nc" id="L840">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18068);IOUtils.copy(in, gen.getOutputStream());</span>
+<span class="nc" id="L841">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18069);gen.newLine();</span>
+<span class="nc" id="L842">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18070);gen.writeDSCComment(DSCConstants.END_DOCUMENT);</span>
+<span class="nc" id="L843">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18071);gen.writeln(&quot;EndEPSF&quot;);</span>
+<span class="nc" id="L844">        __CLR4_5_2dkzdkzm68iyi3s.R.inc(18072);gen.writeln(&quot;%AXGEndEPS&quot;);</span>
+<span class="nc" id="L845">    }finally{__CLR4_5_2dkzdkzm68iyi3s.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

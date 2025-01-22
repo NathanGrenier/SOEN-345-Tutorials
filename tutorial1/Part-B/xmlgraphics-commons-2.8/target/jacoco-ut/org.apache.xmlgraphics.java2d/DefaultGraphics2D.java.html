@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">DefaultGraphics2D.java</span></div><h1>DefaultGraphics2D.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">DefaultGraphics2D.java</span></div><h1>DefaultGraphics2D.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -49,20 +49,20 @@ import java.text.AttributedCharacterIterator;
  *
  * Originally authored by Vincent Hardy.
  */
-public class DefaultGraphics2D extends AbstractGraphics2D {
+<span class="nc bnc" id="L52" title="All 4 branches missed.">public class DefaultGraphics2D extends AbstractGraphics2D {public static class __CLR4_5_2barbarm68iyhr9{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,14681,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
     /**
      * Default constructor
      */
     public DefaultGraphics2D(boolean textAsShapes) {
-<span class="nc" id="L57">        super(textAsShapes);</span>
-<span class="nc" id="L58">    }</span>
+<span class="nc" id="L57">        super(textAsShapes);__CLR4_5_2barbarm68iyhr9.R.inc(14644);try{__CLR4_5_2barbarm68iyhr9.R.inc(14643);</span>
+<span class="nc" id="L58">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * This constructor supports the create method
      */
     public DefaultGraphics2D(DefaultGraphics2D g) {
-<span class="nc" id="L64">        super(g);</span>
-<span class="nc" id="L65">    }</span>
+<span class="nc" id="L64">        super(g);__CLR4_5_2barbarm68iyhr9.R.inc(14646);try{__CLR4_5_2barbarm68iyhr9.R.inc(14645);</span>
+<span class="nc" id="L65">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Creates a new &lt;code&gt;Graphics&lt;/code&gt; object that is
@@ -70,9 +70,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @return     a new graphics context that is a copy of
      *             this graphics context.
      */
-    public Graphics create() {
-<span class="nc" id="L74">        return new DefaultGraphics2D(this);</span>
-    }
+<span class="nc" id="L73">    public Graphics create() {try{__CLR4_5_2barbarm68iyhr9.R.inc(14647);</span>
+<span class="nc" id="L74">        __CLR4_5_2barbarm68iyhr9.R.inc(14648);return new DefaultGraphics2D(this);</span>
+<span class="nc" id="L75">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Draws as much of the specified image as is currently available.
@@ -98,10 +98,10 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @see      java.awt.image.ImageObserver
      * @see      java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
      */
-    public boolean drawImage(Image img, int x, int y, ImageObserver observer) {
-<span class="nc" id="L102">        System.err.println(&quot;drawImage&quot;);</span>
-<span class="nc" id="L103">        return true;</span>
-    }
+<span class="nc" id="L101">    public boolean drawImage(Image img, int x, int y, ImageObserver observer) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14649);</span>
+<span class="nc" id="L102">        __CLR4_5_2barbarm68iyhr9.R.inc(14650);System.err.println(&quot;drawImage&quot;);</span>
+<span class="nc" id="L103">        __CLR4_5_2barbarm68iyhr9.R.inc(14651);return true;</span>
+<span class="nc" id="L104">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Draws as much of the specified image as has already been scaled
@@ -138,10 +138,10 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      */
     public boolean drawImage(Image img, int x, int y,
                              int width, int height,
-                             ImageObserver observer) {
-<span class="nc" id="L142">        System.out.println(&quot;drawImage&quot;);</span>
-<span class="nc" id="L143">        return true;</span>
-    }
+<span class="nc" id="L141">                             ImageObserver observer) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14652);</span>
+<span class="nc" id="L142">        __CLR4_5_2barbarm68iyhr9.R.inc(14653);System.out.println(&quot;drawImage&quot;);</span>
+<span class="nc" id="L143">        __CLR4_5_2barbarm68iyhr9.R.inc(14654);return true;</span>
+<span class="nc" id="L144">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Disposes of this graphics context and releases
@@ -170,9 +170,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @see         java.awt.Component#getGraphics
      * @see         java.awt.Graphics#create()
      */
-    public void dispose() {
-<span class="nc" id="L174">        System.out.println(&quot;dispose&quot;);</span>
-<span class="nc" id="L175">    }</span>
+<span class="nc" id="L173">    public void dispose() {try{__CLR4_5_2barbarm68iyhr9.R.inc(14655);</span>
+<span class="nc" id="L174">        __CLR4_5_2barbarm68iyhr9.R.inc(14656);System.out.println(&quot;dispose&quot;);</span>
+<span class="nc" id="L175">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Strokes the outline of a &lt;code&gt;Shape&lt;/code&gt; using the settings of the
@@ -188,9 +188,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @see #setClip(Shape)
      * @see #setComposite(java.awt.Composite)
      */
-    public void draw(Shape s) {
-<span class="nc" id="L192">        System.out.println(&quot;draw(Shape)&quot;);</span>
-<span class="nc" id="L193">    }</span>
+<span class="nc" id="L191">    public void draw(Shape s) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14657);</span>
+<span class="nc" id="L192">        __CLR4_5_2barbarm68iyhr9.R.inc(14658);System.out.println(&quot;draw(Shape)&quot;);</span>
+<span class="nc" id="L193">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Renders a {@link RenderedImage},
@@ -211,9 +211,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @see #setClip(Shape)
      */
     public void drawRenderedImage(RenderedImage img,
-                                  AffineTransform xform) {
-<span class="nc" id="L215">        System.out.println(&quot;drawRenderedImage&quot;);</span>
-<span class="nc" id="L216">    }</span>
+<span class="nc" id="L214">                                  AffineTransform xform) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14659);</span>
+<span class="nc" id="L215">        __CLR4_5_2barbarm68iyhr9.R.inc(14660);System.out.println(&quot;drawRenderedImage&quot;);</span>
+<span class="nc" id="L216">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
 
     /**
@@ -245,9 +245,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @see #drawRenderedImage
      */
      public void drawRenderableImage(RenderableImage img,
-                                     AffineTransform xform) {
-<span class="nc" id="L249">         System.out.println(&quot;drawRenderableImage&quot;);</span>
-<span class="nc" id="L250">     }</span>
+<span class="nc" id="L248">                                     AffineTransform xform) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14661);</span>
+<span class="nc" id="L249">         __CLR4_5_2barbarm68iyhr9.R.inc(14662);System.out.println(&quot;drawRenderableImage&quot;);</span>
+<span class="nc" id="L250">     }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Renders the text specified by the specified &lt;code&gt;String&lt;/code&gt;,
@@ -273,9 +273,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @see #setComposite(java.awt.Composite)
      * @see #setClip(Shape)
      */
-    public void drawString(String s, float x, float y) {
-<span class="nc" id="L277">        System.out.println(&quot;drawString(String)&quot;);</span>
-<span class="nc" id="L278">    }</span>
+<span class="nc" id="L276">    public void drawString(String s, float x, float y) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14663);</span>
+<span class="nc" id="L277">        __CLR4_5_2barbarm68iyhr9.R.inc(14664);System.out.println(&quot;drawString(String)&quot;);</span>
+<span class="nc" id="L278">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Renders the text of the specified iterator, using the
@@ -301,9 +301,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @see #setClip(Shape)
      */
      public void drawString(AttributedCharacterIterator iterator,
-                            float x, float y) {
-<span class="nc" id="L305">         System.err.println(&quot;drawString(AttributedCharacterIterator)&quot;);</span>
-<span class="nc" id="L306">     }</span>
+<span class="nc" id="L304">                            float x, float y) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14665);</span>
+<span class="nc" id="L305">         __CLR4_5_2barbarm68iyhr9.R.inc(14666);System.err.println(&quot;drawString(AttributedCharacterIterator)&quot;);</span>
+<span class="nc" id="L306">     }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
 
 
@@ -319,30 +319,30 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @see #setComposite(java.awt.Composite)
      * @see #setClip(Shape)
      */
-    public void fill(Shape s) {
-<span class="nc" id="L323">        System.err.println(&quot;fill&quot;);</span>
-<span class="nc" id="L324">    }</span>
+<span class="nc" id="L322">    public void fill(Shape s) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14667);</span>
+<span class="nc" id="L323">        __CLR4_5_2barbarm68iyhr9.R.inc(14668);System.err.println(&quot;fill&quot;);</span>
+<span class="nc" id="L324">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Returns the device configuration associated with this
      * &lt;code&gt;Graphics2D&lt;/code&gt;.
      */
-    public GraphicsConfiguration getDeviceConfiguration() {
-<span class="nc" id="L331">        System.out.println(&quot;getDeviceConviguration&quot;);</span>
-<span class="nc" id="L332">        return null;</span>
-    }
+<span class="nc" id="L330">    public GraphicsConfiguration getDeviceConfiguration() {try{__CLR4_5_2barbarm68iyhr9.R.inc(14669);</span>
+<span class="nc" id="L331">        __CLR4_5_2barbarm68iyhr9.R.inc(14670);System.out.println(&quot;getDeviceConviguration&quot;);</span>
+<span class="nc" id="L332">        __CLR4_5_2barbarm68iyhr9.R.inc(14671);return null;</span>
+<span class="nc" id="L333">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Used to create proper font metrics
      */
     private Graphics2D fmg;
 
-    {
-<span class="nc" id="L341">        BufferedImage bi</span>
+<span class="nc" id="L340">    {try{__CLR4_5_2barbarm68iyhr9.R.inc(14672);</span>
+<span class="nc" id="L341">        __CLR4_5_2barbarm68iyhr9.R.inc(14673);BufferedImage bi</span>
             = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 
-<span class="nc" id="L344">        fmg = bi.createGraphics();</span>
-    }
+<span class="nc" id="L344">        __CLR4_5_2barbarm68iyhr9.R.inc(14674);fmg = bi.createGraphics();</span>
+<span class="nc" id="L345">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Gets the font metrics for the specified font.
@@ -352,9 +352,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @see       java.awt.FontMetrics
      * @see       java.awt.Graphics#getFontMetrics()
      */
-    public FontMetrics getFontMetrics(Font f) {
-<span class="nc" id="L356">        return fmg.getFontMetrics(f);</span>
-    }
+<span class="nc" id="L355">    public FontMetrics getFontMetrics(Font f) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14675);</span>
+<span class="nc" id="L356">        __CLR4_5_2barbarm68iyhr9.R.inc(14676);return fmg.getFontMetrics(f);</span>
+<span class="nc" id="L357">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
     /**
      * Sets the paint mode of this graphics context to alternate between
@@ -371,9 +371,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * drawn twice, then all pixels are restored to their original values.
      * @param     c1 the XOR alternation color
      */
-    public void setXORMode(Color c1) {
-<span class="nc" id="L375">        System.out.println(&quot;setXORMode&quot;);</span>
-<span class="nc" id="L376">    }</span>
+<span class="nc" id="L374">    public void setXORMode(Color c1) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14677);</span>
+<span class="nc" id="L375">        __CLR4_5_2barbarm68iyhr9.R.inc(14678);System.out.println(&quot;setXORMode&quot;);</span>
+<span class="nc" id="L376">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
 
     /**
@@ -396,9 +396,9 @@ public class DefaultGraphics2D extends AbstractGraphics2D {
      * @param       dy the vertical distance to copy the pixels.
      */
     public void copyArea(int x, int y, int width, int height,
-                         int dx, int dy) {
-<span class="nc" id="L400">        System.out.println(&quot;copyArea&quot;);</span>
-<span class="nc" id="L401">    }</span>
+<span class="nc" id="L399">                         int dx, int dy) {try{__CLR4_5_2barbarm68iyhr9.R.inc(14679);</span>
+<span class="nc" id="L400">        __CLR4_5_2barbarm68iyhr9.R.inc(14680);System.out.println(&quot;copyArea&quot;);</span>
+<span class="nc" id="L401">    }finally{__CLR4_5_2barbarm68iyhr9.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageWriterRegistry.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.writer</a> &gt; <span class="el_source">ImageWriterRegistry.java</span></div><h1>ImageWriterRegistry.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageWriterRegistry.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.writer</a> &gt; <span class="el_source">ImageWriterRegistry.java</span></div><h1>ImageWriterRegistry.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -32,7 +32,7 @@ import org.apache.xmlgraphics.util.Service;
 /**
  * Registry for {@link ImageWriter} implementations.
  */
-public final class ImageWriterRegistry {
+<span class="pc bpc" id="L35" title="3 of 4 branches missed.">public final class ImageWriterRegistry {public static class __CLR4_5_2an7an7m68iyhn3{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,13880,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private static volatile ImageWriterRegistry instance;
 
@@ -44,25 +44,25 @@ public final class ImageWriterRegistry {
      * Default constructor. The default preferred order for the image writers is loaded from the
      * resources.
      */
-<span class="fc" id="L47">    public ImageWriterRegistry() {</span>
-<span class="fc" id="L48">        Properties props = new Properties();</span>
-<span class="fc" id="L49">        InputStream in = getClass().getResourceAsStream(&quot;default-preferred-order.properties&quot;);</span>
-<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        if (in != null) {</span>
-            try {
-                try {
-<span class="fc" id="L53">                    props.load(in);</span>
+<span class="fc" id="L47">    public ImageWriterRegistry() {try{__CLR4_5_2an7an7m68iyhn3.R.inc(13795);</span>
+<span class="fc" id="L48">        __CLR4_5_2an7an7m68iyhn3.R.inc(13796);Properties props = new Properties();</span>
+<span class="fc" id="L49">        __CLR4_5_2an7an7m68iyhn3.R.inc(13797);InputStream in = getClass().getResourceAsStream(&quot;default-preferred-order.properties&quot;);</span>
+<span class="pc bpc" id="L50" title="7 of 10 branches missed.">        __CLR4_5_2an7an7m68iyhn3.R.inc(13798);if ((((in != null)&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13799)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13800)==0&amp;false))) {{</span>
+<span class="fc" id="L51">            __CLR4_5_2an7an7m68iyhn3.R.inc(13801);try {</span>
+<span class="fc" id="L52">                __CLR4_5_2an7an7m68iyhn3.R.inc(13802);try {</span>
+<span class="fc" id="L53">                    __CLR4_5_2an7an7m68iyhn3.R.inc(13803);props.load(in);</span>
                 } finally {
-<span class="fc" id="L55">                    in.close();</span>
+<span class="fc" id="L55">                    __CLR4_5_2an7an7m68iyhn3.R.inc(13804);in.close();</span>
                 }
 <span class="nc" id="L57">            } catch (IOException ioe) {</span>
-<span class="nc" id="L58">                throw new RuntimeException(</span>
+<span class="nc" id="L58">                __CLR4_5_2an7an7m68iyhn3.R.inc(13805);throw new RuntimeException(</span>
                         &quot;Could not load default preferred order due to I/O error: &quot;
 <span class="nc" id="L60">                            + ioe.getMessage());</span>
 <span class="fc" id="L61">            }</span>
         }
-<span class="fc" id="L63">        setPreferredOrder(props);</span>
-<span class="fc" id="L64">        setup();</span>
-<span class="fc" id="L65">    }</span>
+<span class="fc" id="L63">        }__CLR4_5_2an7an7m68iyhn3.R.inc(13806);setPreferredOrder(props);</span>
+<span class="fc" id="L64">        __CLR4_5_2an7an7m68iyhn3.R.inc(13807);setup();</span>
+<span class="fc" id="L65">    }finally{__CLR4_5_2an7an7m68iyhn3.R.flushNeeded();}}</span>
 
     /**
      * Special constructor. The preferred order for the image writers can be specified as a
@@ -71,49 +71,49 @@ public final class ImageWriterRegistry {
      * priority.
      * @param preferredOrder the map of order properties used to order the plug-ins
      */
-<span class="nc" id="L74">    public ImageWriterRegistry(Properties preferredOrder) {</span>
-<span class="nc" id="L75">        setPreferredOrder(preferredOrder);</span>
-<span class="nc" id="L76">        setup();</span>
-<span class="nc" id="L77">    }</span>
+<span class="nc" id="L74">    public ImageWriterRegistry(Properties preferredOrder) {try{__CLR4_5_2an7an7m68iyhn3.R.inc(13808);</span>
+<span class="nc" id="L75">        __CLR4_5_2an7an7m68iyhn3.R.inc(13809);setPreferredOrder(preferredOrder);</span>
+<span class="nc" id="L76">        __CLR4_5_2an7an7m68iyhn3.R.inc(13810);setup();</span>
+<span class="nc" id="L77">    }finally{__CLR4_5_2an7an7m68iyhn3.R.flushNeeded();}}</span>
 
-    private void setPreferredOrder(Properties preferredOrder) {
-<span class="fc" id="L80">        Map&lt;String, Integer&gt; order = new java.util.HashMap&lt;String, Integer&gt;();</span>
-<span class="fc bfc" id="L81" title="All 2 branches covered.">        for (Map.Entry&lt;Object, Object&gt; entry : preferredOrder.entrySet()) {</span>
-<span class="fc" id="L82">            order.put(entry.getKey().toString(),</span>
+<span class="fc" id="L79">    private void setPreferredOrder(Properties preferredOrder) {try{__CLR4_5_2an7an7m68iyhn3.R.inc(13811);</span>
+<span class="fc" id="L80">        __CLR4_5_2an7an7m68iyhn3.R.inc(13812);Map&lt;String, Integer&gt; order = new java.util.HashMap&lt;String, Integer&gt;();</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        __CLR4_5_2an7an7m68iyhn3.R.inc(13813);for (Map.Entry&lt;Object, Object&gt; entry : preferredOrder.entrySet()) {{</span>
+<span class="fc" id="L82">            __CLR4_5_2an7an7m68iyhn3.R.inc(13814);order.put(entry.getKey().toString(),</span>
 <span class="fc" id="L83">                    Integer.parseInt(entry.getValue().toString()));</span>
-<span class="fc" id="L84">        }</span>
-<span class="fc" id="L85">        this.preferredOrder = order;</span>
-<span class="fc" id="L86">    }</span>
+        }
+<span class="fc" id="L85">        }__CLR4_5_2an7an7m68iyhn3.R.inc(13815);this.preferredOrder = order;</span>
+<span class="fc" id="L86">    }finally{__CLR4_5_2an7an7m68iyhn3.R.flushNeeded();}}</span>
 
     /** @return a singleton instance of the ImageWriterRegistry. */
-    public static ImageWriterRegistry getInstance() {
-<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (instance == null) {</span>
-<span class="fc" id="L91">            instance = new ImageWriterRegistry();</span>
+<span class="fc" id="L89">    public static ImageWriterRegistry getInstance() {try{__CLR4_5_2an7an7m68iyhn3.R.inc(13816);</span>
+<span class="pc bpc" id="L90" title="4 of 10 branches missed.">        __CLR4_5_2an7an7m68iyhn3.R.inc(13817);if ((((instance == null)&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13818)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13819)==0&amp;false))) {{</span>
+<span class="fc" id="L91">            __CLR4_5_2an7an7m68iyhn3.R.inc(13820);instance = new ImageWriterRegistry();</span>
         }
-<span class="fc" id="L93">        return instance;</span>
-    }
+<span class="fc" id="L93">        }__CLR4_5_2an7an7m68iyhn3.R.inc(13821);return instance;</span>
+<span class="fc" id="L94">    }finally{__CLR4_5_2an7an7m68iyhn3.R.flushNeeded();}}</span>
 
-    private void setup() {
-<span class="fc" id="L97">        Iterator iter = Service.providers(ImageWriter.class);</span>
-<span class="fc bfc" id="L98" title="All 2 branches covered.">        while (iter.hasNext()) {</span>
-<span class="fc" id="L99">            ImageWriter writer = (ImageWriter)iter.next();</span>
-<span class="fc" id="L100">            register(writer);</span>
+<span class="fc" id="L96">    private void setup() {try{__CLR4_5_2an7an7m68iyhn3.R.inc(13822);</span>
+<span class="fc" id="L97">        __CLR4_5_2an7an7m68iyhn3.R.inc(13823);Iterator iter = Service.providers(ImageWriter.class);</span>
+<span class="pc bpc" id="L98" title="4 of 10 branches missed.">        __CLR4_5_2an7an7m68iyhn3.R.inc(13824);while ((((iter.hasNext())&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13825)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13826)==0&amp;false))) {{</span>
+<span class="fc" id="L99">            __CLR4_5_2an7an7m68iyhn3.R.inc(13827);ImageWriter writer = (ImageWriter)iter.next();</span>
+<span class="fc" id="L100">            __CLR4_5_2an7an7m68iyhn3.R.inc(13828);register(writer);</span>
 <span class="fc" id="L101">        }</span>
-<span class="fc" id="L102">    }</span>
+<span class="fc" id="L102">    }}finally{__CLR4_5_2an7an7m68iyhn3.R.flushNeeded();}}</span>
 
-    private int getPriority(ImageWriter writer) {
-<span class="fc" id="L105">        String key = writer.getClass().getName();</span>
-<span class="fc" id="L106">        Integer value = preferredOrder.get(key);</span>
-<span class="fc bfc" id="L107" title="All 2 branches covered.">        while (value == null) {</span>
-<span class="fc" id="L108">            int pos = key.lastIndexOf(&quot;.&quot;);</span>
-<span class="fc bfc" id="L109" title="All 2 branches covered.">            if (pos &lt; 0) {</span>
-<span class="fc" id="L110">                break;</span>
+<span class="fc" id="L104">    private int getPriority(ImageWriter writer) {try{__CLR4_5_2an7an7m68iyhn3.R.inc(13829);</span>
+<span class="fc" id="L105">        __CLR4_5_2an7an7m68iyhn3.R.inc(13830);String key = writer.getClass().getName();</span>
+<span class="fc" id="L106">        __CLR4_5_2an7an7m68iyhn3.R.inc(13831);Integer value = preferredOrder.get(key);</span>
+<span class="pc bpc" id="L107" title="4 of 10 branches missed.">        __CLR4_5_2an7an7m68iyhn3.R.inc(13832);while ((((value == null)&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13833)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13834)==0&amp;false))) {{</span>
+<span class="fc" id="L108">            __CLR4_5_2an7an7m68iyhn3.R.inc(13835);int pos = key.lastIndexOf(&quot;.&quot;);</span>
+<span class="pc bpc" id="L109" title="4 of 10 branches missed.">            __CLR4_5_2an7an7m68iyhn3.R.inc(13836);if ((((pos &lt; 0)&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13837)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13838)==0&amp;false))) {{</span>
+<span class="fc" id="L110">                __CLR4_5_2an7an7m68iyhn3.R.inc(13839);break;</span>
             }
-<span class="fc" id="L112">            key = key.substring(0, pos);</span>
-<span class="fc" id="L113">            value = preferredOrder.get(key);</span>
+<span class="fc" id="L112">            }__CLR4_5_2an7an7m68iyhn3.R.inc(13840);key = key.substring(0, pos);</span>
+<span class="fc" id="L113">            __CLR4_5_2an7an7m68iyhn3.R.inc(13841);value = preferredOrder.get(key);</span>
 <span class="fc" id="L114">        }</span>
-<span class="fc bfc" id="L115" title="All 2 branches covered.">        return (value != null) ? value : 0;</span>
-    }
+<span class="pc bpc" id="L115" title="4 of 10 branches missed.">        }__CLR4_5_2an7an7m68iyhn3.R.inc(13842);return ((((value != null) )&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13843)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13844)==0&amp;false))? value : 0;</span>
+<span class="fc" id="L116">    }finally{__CLR4_5_2an7an7m68iyhn3.R.flushNeeded();}}</span>
 
     /**
      * Registers a new ImageWriter implementation with the associated priority in the registry.
@@ -122,38 +122,38 @@ public final class ImageWriterRegistry {
      * @param priority the priority of the writer in the registry.
      * @see #register(ImageWriter)
      */
-    public void register(ImageWriter writer, int priority) {
+<span class="fc" id="L125">    public void register(ImageWriter writer, int priority) {try{__CLR4_5_2an7an7m68iyhn3.R.inc(13845);</span>
 
-<span class="fc" id="L127">        String key = writer.getClass().getName();</span>
+<span class="fc" id="L127">        __CLR4_5_2an7an7m68iyhn3.R.inc(13846);String key = writer.getClass().getName();</span>
         // Register the priority to preferredOrder; overwrite original priority if exists
-<span class="fc" id="L129">        preferredOrder.put(key, priority);</span>
+<span class="fc" id="L129">        __CLR4_5_2an7an7m68iyhn3.R.inc(13847);preferredOrder.put(key, priority);</span>
 
-<span class="fc" id="L131">        register(writer);</span>
-<span class="fc" id="L132">    }</span>
+<span class="fc" id="L131">        __CLR4_5_2an7an7m68iyhn3.R.inc(13848);register(writer);</span>
+<span class="fc" id="L132">    }finally{__CLR4_5_2an7an7m68iyhn3.R.flushNeeded();}}</span>
 
     /**
      * Registers a new ImageWriter implementation in the registry. If an ImageWriter for the same
      * target MIME type has already been registered, it is placed in an array based on priority.
      * @param writer the ImageWriter instance to register.
      */
-    public synchronized void register(ImageWriter writer) {
-<span class="fc" id="L140">        List&lt;ImageWriter&gt; entries = imageWriterMap.get(writer.getMIMEType());</span>
-<span class="fc bfc" id="L141" title="All 2 branches covered.">        if (entries == null) {</span>
-<span class="fc" id="L142">            entries = new java.util.ArrayList&lt;ImageWriter&gt;();</span>
-<span class="fc" id="L143">            imageWriterMap.put(writer.getMIMEType(), entries);</span>
+<span class="fc" id="L139">    public synchronized void register(ImageWriter writer) {try{__CLR4_5_2an7an7m68iyhn3.R.inc(13849);</span>
+<span class="fc" id="L140">        __CLR4_5_2an7an7m68iyhn3.R.inc(13850);List&lt;ImageWriter&gt; entries = imageWriterMap.get(writer.getMIMEType());</span>
+<span class="pc bpc" id="L141" title="4 of 10 branches missed.">        __CLR4_5_2an7an7m68iyhn3.R.inc(13851);if ((((entries == null)&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13852)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13853)==0&amp;false))) {{</span>
+<span class="fc" id="L142">            __CLR4_5_2an7an7m68iyhn3.R.inc(13854);entries = new java.util.ArrayList&lt;ImageWriter&gt;();</span>
+<span class="fc" id="L143">            __CLR4_5_2an7an7m68iyhn3.R.inc(13855);imageWriterMap.put(writer.getMIMEType(), entries);</span>
         }
 
-<span class="fc" id="L146">        int priority = getPriority(writer);</span>
-<span class="fc" id="L147">        ListIterator&lt;ImageWriter&gt; li = entries.listIterator();</span>
-<span class="fc bfc" id="L148" title="All 2 branches covered.">        while (li.hasNext()) {</span>
-<span class="fc" id="L149">            ImageWriter w = li.next();</span>
-<span class="pc bpc" id="L150" title="1 of 2 branches missed.">            if (getPriority(w) &lt; priority) {</span>
-<span class="fc" id="L151">                li.previous();</span>
-<span class="fc" id="L152">                break;</span>
+<span class="fc" id="L146">        }__CLR4_5_2an7an7m68iyhn3.R.inc(13856);int priority = getPriority(writer);</span>
+<span class="fc" id="L147">        __CLR4_5_2an7an7m68iyhn3.R.inc(13857);ListIterator&lt;ImageWriter&gt; li = entries.listIterator();</span>
+<span class="pc bpc" id="L148" title="4 of 10 branches missed.">        __CLR4_5_2an7an7m68iyhn3.R.inc(13858);while ((((li.hasNext())&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13859)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13860)==0&amp;false))) {{</span>
+<span class="fc" id="L149">            __CLR4_5_2an7an7m68iyhn3.R.inc(13861);ImageWriter w = li.next();</span>
+<span class="pc bpc" id="L150" title="7 of 10 branches missed.">            __CLR4_5_2an7an7m68iyhn3.R.inc(13862);if ((((getPriority(w) &lt; priority)&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13863)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13864)==0&amp;false))) {{</span>
+<span class="fc" id="L151">                __CLR4_5_2an7an7m68iyhn3.R.inc(13865);li.previous();</span>
+<span class="fc" id="L152">                __CLR4_5_2an7an7m68iyhn3.R.inc(13866);break;</span>
             }
-<span class="nc" id="L154">        }</span>
-<span class="fc" id="L155">        li.add(writer);</span>
-<span class="fc" id="L156">    }</span>
+<span class="nc" id="L154">        }}</span>
+<span class="fc" id="L155">        }__CLR4_5_2an7an7m68iyhn3.R.inc(13867);li.add(writer);</span>
+<span class="fc" id="L156">    }finally{__CLR4_5_2an7an7m68iyhn3.R.flushNeeded();}}</span>
 
     /**
      * Returns an ImageWriter that can be used to encode an image to the requested MIME type.
@@ -161,18 +161,18 @@ public final class ImageWriterRegistry {
      * @return a functional ImageWriter instance handling the desired output format or
      *         null if none can be found.
      */
-    public synchronized ImageWriter getWriterFor(String mime) {
-<span class="fc" id="L165">        List&lt;ImageWriter&gt; entries = imageWriterMap.get(mime);</span>
-<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (entries == null) {</span>
-<span class="fc" id="L167">            return null;</span>
+<span class="fc" id="L164">    public synchronized ImageWriter getWriterFor(String mime) {try{__CLR4_5_2an7an7m68iyhn3.R.inc(13868);</span>
+<span class="fc" id="L165">        __CLR4_5_2an7an7m68iyhn3.R.inc(13869);List&lt;ImageWriter&gt; entries = imageWriterMap.get(mime);</span>
+<span class="pc bpc" id="L166" title="4 of 10 branches missed.">        __CLR4_5_2an7an7m68iyhn3.R.inc(13870);if ((((entries == null)&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13871)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13872)==0&amp;false))) {{</span>
+<span class="fc" id="L167">            __CLR4_5_2an7an7m68iyhn3.R.inc(13873);return null;</span>
         }
-<span class="pc bpc" id="L169" title="1 of 2 branches missed.">        for (ImageWriter writer : entries) {</span>
-<span class="pc bpc" id="L170" title="1 of 2 branches missed.">            if (writer.isFunctional()) {</span>
-<span class="fc" id="L171">                return writer;</span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">        }__CLR4_5_2an7an7m68iyhn3.R.inc(13874);for (ImageWriter writer : entries) {{</span>
+<span class="pc bpc" id="L170" title="7 of 10 branches missed.">            __CLR4_5_2an7an7m68iyhn3.R.inc(13875);if ((((writer.isFunctional())&amp;&amp;(__CLR4_5_2an7an7m68iyhn3.R.iget(13876)!=0|true))||(__CLR4_5_2an7an7m68iyhn3.R.iget(13877)==0&amp;false))) {{</span>
+<span class="fc" id="L171">                __CLR4_5_2an7an7m68iyhn3.R.inc(13878);return writer;</span>
             }
-<span class="nc" id="L173">        }</span>
-<span class="nc" id="L174">        return null;</span>
-    }
+        }}
+<span class="nc" id="L174">        }__CLR4_5_2an7an7m68iyhn3.R.inc(13879);return null;</span>
+<span class="fc" id="L175">    }finally{__CLR4_5_2an7an7m68iyhn3.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

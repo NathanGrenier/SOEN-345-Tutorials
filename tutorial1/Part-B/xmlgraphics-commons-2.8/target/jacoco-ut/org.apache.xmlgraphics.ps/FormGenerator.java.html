@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FormGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">FormGenerator.java</span></div><h1>FormGenerator.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FormGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">FormGenerator.java</span></div><h1>FormGenerator.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * Abstract helper class for generating PostScript forms.
  */
-public abstract class FormGenerator {
+<span class="pc bpc" id="L30" title="3 of 4 branches missed.">public abstract class FormGenerator {public static class __CLR4_5_2crxcrxm68iyhz0{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,16599,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private String formName;
     private String title;
@@ -39,35 +39,35 @@ public abstract class FormGenerator {
      * @param title the form's title or null
      * @param dimensions the form's dimensions
      */
-<span class="fc" id="L42">    public FormGenerator(String formName, String title, Dimension2D dimensions) {</span>
-<span class="fc" id="L43">        this.formName = formName;</span>
-<span class="fc" id="L44">        this.title = title;</span>
-<span class="fc" id="L45">        this.dimensions = dimensions;</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L42">    public FormGenerator(String formName, String title, Dimension2D dimensions) {try{__CLR4_5_2crxcrxm68iyhz0.R.inc(16557);</span>
+<span class="fc" id="L43">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16558);this.formName = formName;</span>
+<span class="fc" id="L44">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16559);this.title = title;</span>
+<span class="fc" id="L45">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16560);this.dimensions = dimensions;</span>
+<span class="fc" id="L46">    }finally{__CLR4_5_2crxcrxm68iyhz0.R.flushNeeded();}}</span>
 
     /**
      * Returns the form's name.
      * @return the form's name
      */
-    public String getFormName() {
-<span class="fc" id="L53">        return this.formName;</span>
-    }
+<span class="fc" id="L52">    public String getFormName() {try{__CLR4_5_2crxcrxm68iyhz0.R.inc(16561);</span>
+<span class="fc" id="L53">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16562);return this.formName;</span>
+<span class="fc" id="L54">    }finally{__CLR4_5_2crxcrxm68iyhz0.R.flushNeeded();}}</span>
 
     /**
      * Returns the form's title.
      * @return the form's title or null if there's no title
      */
-    public String getTitle() {
-<span class="nc" id="L61">        return this.title;</span>
-    }
+<span class="nc" id="L60">    public String getTitle() {try{__CLR4_5_2crxcrxm68iyhz0.R.inc(16563);</span>
+<span class="nc" id="L61">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16564);return this.title;</span>
+<span class="nc" id="L62">    }finally{__CLR4_5_2crxcrxm68iyhz0.R.flushNeeded();}}</span>
 
     /**
      * returns the form's dimensions.
      * @return the form's dimensions
      */
-    public Dimension2D getDimensions() {
-<span class="fc" id="L69">        return this.dimensions;</span>
-    }
+<span class="fc" id="L68">    public Dimension2D getDimensions() {try{__CLR4_5_2crxcrxm68iyhz0.R.inc(16565);</span>
+<span class="fc" id="L69">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16566);return this.dimensions;</span>
+<span class="fc" id="L70">    }finally{__CLR4_5_2crxcrxm68iyhz0.R.flushNeeded();}}</span>
 
     /**
      * Generates the PostScript code for the PaintProc of the form.
@@ -82,25 +82,25 @@ public abstract class FormGenerator {
      * @param gen the PostScript generator
      * @throws IOException if an I/O error occurs
      */
-    protected void generateAdditionalDataStream(PSGenerator gen) throws IOException {
+<span class="nc" id="L85">    protected void generateAdditionalDataStream(PSGenerator gen) throws IOException {try{__CLR4_5_2crxcrxm68iyhz0.R.inc(16567);</span>
         //nop
-<span class="nc" id="L87">    }</span>
+<span class="nc" id="L87">    }finally{__CLR4_5_2crxcrxm68iyhz0.R.flushNeeded();}}</span>
 
     /**
      * Returns the matrix for use in the form.
      * @return the matrix
      */
-    protected AffineTransform getMatrix() {
-<span class="fc" id="L94">        return new AffineTransform();</span>
-    }
+<span class="fc" id="L93">    protected AffineTransform getMatrix() {try{__CLR4_5_2crxcrxm68iyhz0.R.inc(16568);</span>
+<span class="fc" id="L94">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16569);return new AffineTransform();</span>
+<span class="fc" id="L95">    }finally{__CLR4_5_2crxcrxm68iyhz0.R.flushNeeded();}}</span>
 
     /**
      * Returns the form's bounding box.
      * @return the form's bounding box
      */
-    protected Rectangle2D getBBox() {
-<span class="fc" id="L102">        return new Rectangle2D.Double(0, 0, dimensions.getWidth(), dimensions.getHeight());</span>
-    }
+<span class="fc" id="L101">    protected Rectangle2D getBBox() {try{__CLR4_5_2crxcrxm68iyhz0.R.inc(16570);</span>
+<span class="fc" id="L102">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16571);return new Rectangle2D.Double(0, 0, dimensions.getWidth(), dimensions.getHeight());</span>
+<span class="fc" id="L103">    }finally{__CLR4_5_2crxcrxm68iyhz0.R.flushNeeded();}}</span>
 
     /**
      * Generates the PostScript form.
@@ -108,35 +108,35 @@ public abstract class FormGenerator {
      * @return a PSResource instance representing the form
      * @throws IOException if an I/O error occurs
      */
-    public PSResource generate(PSGenerator gen) throws IOException {
-<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (gen.getPSLevel() &lt; 2) {</span>
-<span class="nc" id="L113">            throw new UnsupportedOperationException(</span>
+<span class="fc" id="L111">    public PSResource generate(PSGenerator gen) throws IOException {try{__CLR4_5_2crxcrxm68iyhz0.R.inc(16572);</span>
+<span class="pc bpc" id="L112" title="7 of 10 branches missed.">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16573);if ((((gen.getPSLevel() &lt; 2)&amp;&amp;(__CLR4_5_2crxcrxm68iyhz0.R.iget(16574)!=0|true))||(__CLR4_5_2crxcrxm68iyhz0.R.iget(16575)==0&amp;false))) {{</span>
+<span class="nc" id="L113">            __CLR4_5_2crxcrxm68iyhz0.R.inc(16576);throw new UnsupportedOperationException(</span>
                     &quot;Forms require at least Level 2 PostScript&quot;);
         }
-<span class="fc" id="L116">        gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE,</span>
+<span class="fc" id="L116">        }__CLR4_5_2crxcrxm68iyhz0.R.inc(16577);gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE,</span>
 <span class="fc" id="L117">                new Object[] {PSResource.TYPE_FORM, getFormName()});</span>
-<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        if (title != null) {</span>
-<span class="fc" id="L119">            gen.writeDSCComment(DSCConstants.TITLE, title);</span>
+<span class="pc bpc" id="L118" title="7 of 10 branches missed.">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16578);if ((((title != null)&amp;&amp;(__CLR4_5_2crxcrxm68iyhz0.R.iget(16579)!=0|true))||(__CLR4_5_2crxcrxm68iyhz0.R.iget(16580)==0&amp;false))) {{</span>
+<span class="fc" id="L119">            __CLR4_5_2crxcrxm68iyhz0.R.inc(16581);gen.writeDSCComment(DSCConstants.TITLE, title);</span>
         }
-<span class="fc" id="L121">        gen.writeln(&quot;/&quot; + formName);</span>
-<span class="fc" id="L122">        gen.writeln(&quot;&lt;&lt; /FormType 1&quot;);</span>
-<span class="fc" id="L123">        gen.writeln(&quot;  /BBox &quot; + gen.formatRectangleToArray(getBBox()));</span>
-<span class="fc" id="L124">        gen.writeln(&quot;  /Matrix &quot; + gen.formatMatrix(getMatrix()));</span>
-<span class="fc" id="L125">        gen.writeln(&quot;  /PaintProc {&quot;);</span>
-<span class="fc" id="L126">        gen.writeln(&quot;    pop&quot;);</span>
-<span class="fc" id="L127">        gen.writeln(&quot;    gsave&quot;);</span>
-<span class="fc" id="L128">        generatePaintProc(gen);</span>
-<span class="fc" id="L129">        gen.writeln(&quot;    grestore&quot;);</span>
-<span class="fc" id="L130">        gen.writeln(&quot;  } bind&quot;);</span>
-<span class="fc" id="L131">        gen.writeln(&quot;&gt;&gt; def&quot;);</span>
-<span class="fc" id="L132">        PSResource res = new PSResource(PSResource.TYPE_FORM, formName);</span>
-        try {
-<span class="fc" id="L134">            generateAdditionalDataStream(gen);</span>
+<span class="fc" id="L121">        }__CLR4_5_2crxcrxm68iyhz0.R.inc(16582);gen.writeln(&quot;/&quot; + formName);</span>
+<span class="fc" id="L122">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16583);gen.writeln(&quot;&lt;&lt; /FormType 1&quot;);</span>
+<span class="fc" id="L123">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16584);gen.writeln(&quot;  /BBox &quot; + gen.formatRectangleToArray(getBBox()));</span>
+<span class="fc" id="L124">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16585);gen.writeln(&quot;  /Matrix &quot; + gen.formatMatrix(getMatrix()));</span>
+<span class="fc" id="L125">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16586);gen.writeln(&quot;  /PaintProc {&quot;);</span>
+<span class="fc" id="L126">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16587);gen.writeln(&quot;    pop&quot;);</span>
+<span class="fc" id="L127">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16588);gen.writeln(&quot;    gsave&quot;);</span>
+<span class="fc" id="L128">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16589);generatePaintProc(gen);</span>
+<span class="fc" id="L129">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16590);gen.writeln(&quot;    grestore&quot;);</span>
+<span class="fc" id="L130">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16591);gen.writeln(&quot;  } bind&quot;);</span>
+<span class="fc" id="L131">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16592);gen.writeln(&quot;&gt;&gt; def&quot;);</span>
+<span class="fc" id="L132">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16593);PSResource res = new PSResource(PSResource.TYPE_FORM, formName);</span>
+<span class="fc" id="L133">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16594);try {</span>
+<span class="fc" id="L134">            __CLR4_5_2crxcrxm68iyhz0.R.inc(16595);generateAdditionalDataStream(gen);</span>
         } finally {
-<span class="fc" id="L136">            gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
-<span class="fc" id="L137">            gen.getResourceTracker().registerSuppliedResource(res);</span>
+<span class="fc" id="L136">            __CLR4_5_2crxcrxm68iyhz0.R.inc(16596);gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
+<span class="fc" id="L137">            __CLR4_5_2crxcrxm68iyhz0.R.inc(16597);gen.getResourceTracker().registerSuppliedResource(res);</span>
         }
-<span class="fc" id="L139">        return res;</span>
-    }
+<span class="fc" id="L139">        __CLR4_5_2crxcrxm68iyhz0.R.inc(16598);return res;</span>
+<span class="fc" id="L140">    }finally{__CLR4_5_2crxcrxm68iyhz0.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

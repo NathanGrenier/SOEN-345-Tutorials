@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TIFFEncodeParam.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.tiff</a> &gt; <span class="el_source">TIFFEncodeParam.java</span></div><h1>TIFFEncodeParam.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TIFFEncodeParam.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.tiff</a> &gt; <span class="el_source">TIFFEncodeParam.java</span></div><h1>TIFFEncodeParam.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -43,7 +43,7 @@ import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
  * be removed or changed in future releases of JAI.&lt;/b&gt;
  *
  */
-public class TIFFEncodeParam implements ImageEncodeParam {
+<span class="pc bpc" id="L46" title="3 of 4 branches missed.">@java.lang.SuppressWarnings({&quot;fallthrough&quot;}) public class TIFFEncodeParam implements ImageEncodeParam {public static class __CLR4_5_247x47xm68iygem{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,5516,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private static final long serialVersionUID = 2471949735040024055L;
 <span class="fc" id="L49">    private CompressionValue compression = CompressionValue.NONE;</span>
@@ -64,14 +64,14 @@ public class TIFFEncodeParam implements ImageEncodeParam {
      * Constructs a TIFFEncodeParam object with default values for
      * all parameters.
      */
-<span class="fc" id="L67">    public TIFFEncodeParam() {</span>
+<span class="fc" id="L67">    public TIFFEncodeParam() {try{__CLR4_5_247x47xm68iygem.R.inc(5469);</span>
         //nop
-<span class="fc" id="L69">    }</span>
+<span class="fc" id="L69">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /** Returns the value of the compression parameter. */
-    public CompressionValue getCompression() {
-<span class="fc" id="L73">        return compression;</span>
-    }
+<span class="fc" id="L72">    public CompressionValue getCompression() {try{__CLR4_5_247x47xm68iygem.R.inc(5470);</span>
+<span class="fc" id="L73">        __CLR4_5_247x47xm68iygem.R.inc(5471);return compression;</span>
+<span class="fc" id="L74">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Specifies the type of compression to be used.  The compression type
@@ -90,27 +90,27 @@ public class TIFFEncodeParam implements ImageEncodeParam {
      *
      * @param compression    The compression type.
      */
-    public void setCompression(CompressionValue compression) {
+<span class="nc" id="L93">    public void setCompression(CompressionValue compression) {try{__CLR4_5_247x47xm68iygem.R.inc(5472);</span>
 
-<span class="nc bnc" id="L95" title="All 2 branches missed.">        switch(compression) {</span>
-        case NONE:
-        case PACKBITS:
-        case DEFLATE:
+<span class="nc bnc" id="L95" title="All 4 branches missed.">        boolean __CLB4_5_2_bool0=false;__CLR4_5_247x47xm68iygem.R.inc(5473);switch(compression) {</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        case NONE:if (!__CLB4_5_2_bool0) {__CLR4_5_247x47xm68iygem.R.inc(5474);__CLB4_5_2_bool0=true;}</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        case PACKBITS:if (!__CLB4_5_2_bool0) {__CLR4_5_247x47xm68iygem.R.inc(5475);__CLB4_5_2_bool0=true;}</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        case DEFLATE:if (!__CLB4_5_2_bool0) {__CLR4_5_247x47xm68iygem.R.inc(5476);__CLB4_5_2_bool0=true;}</span>
             // Do nothing.
-<span class="nc" id="L100">            break;</span>
-        default:
-<span class="nc" id="L102">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFEncodeParam0&quot;));</span>
+<span class="nc" id="L100">            __CLR4_5_247x47xm68iygem.R.inc(5477);break;</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        default:if (!__CLB4_5_2_bool0) {__CLR4_5_247x47xm68iygem.R.inc(5478);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L102">            __CLR4_5_247x47xm68iygem.R.inc(5479);throw new RuntimeException(PropertyUtil.getString(&quot;TIFFEncodeParam0&quot;));</span>
         }
 
-<span class="nc" id="L105">        this.compression = compression;</span>
-<span class="nc" id="L106">    }</span>
+<span class="nc" id="L105">        __CLR4_5_247x47xm68iygem.R.inc(5480);this.compression = compression;</span>
+<span class="nc" id="L106">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Returns the value of the writeTiled parameter.
      */
-    public boolean getWriteTiled() {
-<span class="fc" id="L112">        return writeTiled;</span>
-    }
+<span class="fc" id="L111">    public boolean getWriteTiled() {try{__CLR4_5_247x47xm68iygem.R.inc(5481);</span>
+<span class="fc" id="L112">        __CLR4_5_247x47xm68iygem.R.inc(5482);return writeTiled;</span>
+<span class="fc" id="L113">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * If set, the data will be written out in tiled format, instead of
@@ -119,9 +119,9 @@ public class TIFFEncodeParam implements ImageEncodeParam {
      * @param writeTiled     Specifies whether the image data should be
      *                       wriiten out in tiled format.
      */
-    public void setWriteTiled(boolean writeTiled) {
-<span class="nc" id="L123">        this.writeTiled = writeTiled;</span>
-<span class="nc" id="L124">    }</span>
+<span class="nc" id="L122">    public void setWriteTiled(boolean writeTiled) {try{__CLR4_5_247x47xm68iygem.R.inc(5483);</span>
+<span class="nc" id="L123">        __CLR4_5_247x47xm68iygem.R.inc(5484);this.writeTiled = writeTiled;</span>
+<span class="nc" id="L124">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Sets the dimensions of the tiles to be written.  If either
@@ -140,24 +140,24 @@ public class TIFFEncodeParam implements ImageEncodeParam {
      * @param tileWidth The tile width; ignored if strips are used.
      * @param tileHeight The tile height or number of rows per strip.
      */
-    public void setTileSize(int tileWidth, int tileHeight) {
-<span class="nc" id="L144">        this.tileWidth = tileWidth;</span>
-<span class="nc" id="L145">        this.tileHeight = tileHeight;</span>
-<span class="nc" id="L146">    }</span>
+<span class="nc" id="L143">    public void setTileSize(int tileWidth, int tileHeight) {try{__CLR4_5_247x47xm68iygem.R.inc(5485);</span>
+<span class="nc" id="L144">        __CLR4_5_247x47xm68iygem.R.inc(5486);this.tileWidth = tileWidth;</span>
+<span class="nc" id="L145">        __CLR4_5_247x47xm68iygem.R.inc(5487);this.tileHeight = tileHeight;</span>
+<span class="nc" id="L146">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Retrieves the tile width set via &lt;code&gt;setTileSize()&lt;/code&gt;.
      */
-    public int getTileWidth() {
-<span class="nc" id="L152">        return tileWidth;</span>
-    }
+<span class="nc" id="L151">    public int getTileWidth() {try{__CLR4_5_247x47xm68iygem.R.inc(5488);</span>
+<span class="nc" id="L152">        __CLR4_5_247x47xm68iygem.R.inc(5489);return tileWidth;</span>
+<span class="nc" id="L153">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Retrieves the tile height set via &lt;code&gt;setTileSize()&lt;/code&gt;.
      */
-    public int getTileHeight() {
-<span class="fc" id="L159">        return tileHeight;</span>
-    }
+<span class="fc" id="L158">    public int getTileHeight() {try{__CLR4_5_247x47xm68iygem.R.inc(5490);</span>
+<span class="fc" id="L159">        __CLR4_5_247x47xm68iygem.R.inc(5491);return tileHeight;</span>
+<span class="fc" id="L160">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Sets an &lt;code&gt;Iterator&lt;/code&gt; of additional images to be written
@@ -176,18 +176,18 @@ public class TIFFEncodeParam implements ImageEncodeParam {
      * image &lt;code&gt;Iterator&lt;/code&gt; set on any &lt;code&gt;TIFFEncodeParam&lt;/code&gt;
      * of an additional image will in all cases be ignored.
      */
-    public synchronized void setExtraImages(Iterator extraImages) {
-<span class="nc" id="L180">        this.extraImages = extraImages;</span>
-<span class="nc" id="L181">    }</span>
+<span class="nc" id="L179">    public synchronized void setExtraImages(Iterator extraImages) {try{__CLR4_5_247x47xm68iygem.R.inc(5492);</span>
+<span class="nc" id="L180">        __CLR4_5_247x47xm68iygem.R.inc(5493);this.extraImages = extraImages;</span>
+<span class="nc" id="L181">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Returns the additional image &lt;code&gt;Iterator&lt;/code&gt; specified via
      * &lt;code&gt;setExtraImages()&lt;/code&gt; or &lt;code&gt;null&lt;/code&gt; if none was
      * supplied or if a &lt;code&gt;null&lt;/code&gt; value was supplied.
      */
-    public synchronized Iterator getExtraImages() {
-<span class="fc" id="L189">        return extraImages;</span>
-    }
+<span class="fc" id="L188">    public synchronized Iterator getExtraImages() {try{__CLR4_5_247x47xm68iygem.R.inc(5494);</span>
+<span class="fc" id="L189">        __CLR4_5_247x47xm68iygem.R.inc(5495);return extraImages;</span>
+<span class="fc" id="L190">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Sets the compression level for DEFLATE-compressed data which should
@@ -196,36 +196,36 @@ public class TIFFEncodeParam implements ImageEncodeParam {
      * The default setting is &lt;code&gt;Deflater.DEFAULT_COMPRESSION&lt;/code&gt;.  This
      * setting is ignored if the compression type is not DEFLATE.
      */
-    public void setDeflateLevel(int deflateLevel) {
-<span class="nc bnc" id="L200" title="All 2 branches missed.">        if (deflateLevel != Deflater.DEFAULT_COMPRESSION) {</span>
-<span class="nc" id="L201">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFEncodeParam1&quot;));</span>
+<span class="nc" id="L199">    public void setDeflateLevel(int deflateLevel) {try{__CLR4_5_247x47xm68iygem.R.inc(5496);</span>
+<span class="nc bnc" id="L200" title="All 10 branches missed.">        __CLR4_5_247x47xm68iygem.R.inc(5497);if ((((deflateLevel != Deflater.DEFAULT_COMPRESSION)&amp;&amp;(__CLR4_5_247x47xm68iygem.R.iget(5498)!=0|true))||(__CLR4_5_247x47xm68iygem.R.iget(5499)==0&amp;false))) {{</span>
+<span class="nc" id="L201">            __CLR4_5_247x47xm68iygem.R.inc(5500);throw new RuntimeException(PropertyUtil.getString(&quot;TIFFEncodeParam1&quot;));</span>
         }
 
-<span class="nc" id="L204">        this.deflateLevel = deflateLevel;</span>
-<span class="nc" id="L205">    }</span>
+<span class="nc" id="L204">        }__CLR4_5_247x47xm68iygem.R.inc(5501);this.deflateLevel = deflateLevel;</span>
+<span class="nc" id="L205">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Gets the compression level for DEFLATE compression.
      */
-    public int getDeflateLevel() {
-<span class="nc" id="L211">        return deflateLevel;</span>
-    }
+<span class="nc" id="L210">    public int getDeflateLevel() {try{__CLR4_5_247x47xm68iygem.R.inc(5502);</span>
+<span class="nc" id="L211">        __CLR4_5_247x47xm68iygem.R.inc(5503);return deflateLevel;</span>
+<span class="nc" id="L212">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Sets flag indicating whether to convert RGB data to YCbCr when the
      * compression type is JPEG.  The default value is &lt;code&gt;true&lt;/code&gt;.
      * This flag is ignored if the compression type is not JPEG.
      */
-    public void setJPEGCompressRGBToYCbCr(boolean convertJPEGRGBToYCbCr) {
-<span class="nc" id="L220">        this.convertJPEGRGBToYCbCr = convertJPEGRGBToYCbCr;</span>
-<span class="nc" id="L221">    }</span>
+<span class="nc" id="L219">    public void setJPEGCompressRGBToYCbCr(boolean convertJPEGRGBToYCbCr) {try{__CLR4_5_247x47xm68iygem.R.inc(5504);</span>
+<span class="nc" id="L220">        __CLR4_5_247x47xm68iygem.R.inc(5505);this.convertJPEGRGBToYCbCr = convertJPEGRGBToYCbCr;</span>
+<span class="nc" id="L221">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Whether RGB data will be converted to YCbCr when using JPEG compression.
      */
-    public boolean getJPEGCompressRGBToYCbCr() {
-<span class="nc" id="L227">        return convertJPEGRGBToYCbCr;</span>
-    }
+<span class="nc" id="L226">    public boolean getJPEGCompressRGBToYCbCr() {try{__CLR4_5_247x47xm68iygem.R.inc(5506);</span>
+<span class="nc" id="L227">        __CLR4_5_247x47xm68iygem.R.inc(5507);return convertJPEGRGBToYCbCr;</span>
+<span class="nc" id="L228">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Sets an array of extra fields to be written to the TIFF Image File
@@ -237,18 +237,18 @@ public class TIFFEncodeParam implements ImageEncodeParam {
      * @param extraFields An array of extra fields; the parameter is
      * copied by reference.
      */
-    public void setExtraFields(TIFFField[] extraFields) {
-<span class="nc" id="L241">        this.extraFields = extraFields;</span>
-<span class="nc" id="L242">    }</span>
+<span class="nc" id="L240">    public void setExtraFields(TIFFField[] extraFields) {try{__CLR4_5_247x47xm68iygem.R.inc(5508);</span>
+<span class="nc" id="L241">        __CLR4_5_247x47xm68iygem.R.inc(5509);this.extraFields = extraFields;</span>
+<span class="nc" id="L242">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 
     /**
      * Returns the value set by &lt;code&gt;setExtraFields()&lt;/code&gt;.
      */
-    public TIFFField[] getExtraFields() {
-<span class="pc bpc" id="L248" title="1 of 2 branches missed.">        if (extraFields == null) {</span>
-<span class="fc" id="L249">            return new TIFFField[0];</span>
+<span class="fc" id="L247">    public TIFFField[] getExtraFields() {try{__CLR4_5_247x47xm68iygem.R.inc(5510);</span>
+<span class="pc bpc" id="L248" title="7 of 10 branches missed.">        __CLR4_5_247x47xm68iygem.R.inc(5511);if ((((extraFields == null)&amp;&amp;(__CLR4_5_247x47xm68iygem.R.iget(5512)!=0|true))||(__CLR4_5_247x47xm68iygem.R.iget(5513)==0&amp;false))) {{</span>
+<span class="fc" id="L249">            __CLR4_5_247x47xm68iygem.R.inc(5514);return new TIFFField[0];</span>
         }
-<span class="nc" id="L251">        return extraFields;</span>
-    }
+<span class="nc" id="L251">        }__CLR4_5_247x47xm68iygem.R.inc(5515);return extraFields;</span>
+<span class="fc" id="L252">    }finally{__CLR4_5_247x47xm68iygem.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractPSDocumentGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.ps</a> &gt; <span class="el_source">AbstractPSDocumentGraphics2D.java</span></div><h1>AbstractPSDocumentGraphics2D.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractPSDocumentGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.ps</a> &gt; <span class="el_source">AbstractPSDocumentGraphics2D.java</span></div><h1>AbstractPSDocumentGraphics2D.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -39,7 +39,7 @@ import org.apache.xmlgraphics.ps.PSProcSets;
  *
  * Originally authored by Keiron Liddle.
  */
-public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
+<span class="nc bnc" id="L42" title="All 4 branches missed.">public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {public static class __CLR4_5_2c5xc5xm68iyhvw{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,15837,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
 <span class="nc" id="L44">    protected static final Integer ZERO = 0;</span>
 
@@ -68,8 +68,8 @@ public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
      * using curves and not the font.
      */
     AbstractPSDocumentGraphics2D(boolean textAsShapes) {
-<span class="nc" id="L71">        super(textAsShapes);</span>
-<span class="nc" id="L72">    }</span>
+<span class="nc" id="L71">        super(textAsShapes);__CLR4_5_2c5xc5xm68iyhvw.R.inc(15766);try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15765);</span>
+<span class="nc" id="L72">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * Setup the document.
@@ -79,17 +79,17 @@ public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
      * @throws IOException an io exception if there is a problem
      *         writing to the output stream
      */
-    public void setupDocument(OutputStream stream, int width, int height) throws IOException {
-<span class="nc" id="L83">        this.width = width;</span>
-<span class="nc" id="L84">        this.height = height;</span>
-<span class="nc" id="L85">        this.pagecount = 0;</span>
-<span class="nc" id="L86">        this.pagePending = false;</span>
+<span class="nc" id="L82">    public void setupDocument(OutputStream stream, int width, int height) throws IOException {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15767);</span>
+<span class="nc" id="L83">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15768);this.width = width;</span>
+<span class="nc" id="L84">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15769);this.height = height;</span>
+<span class="nc" id="L85">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15770);this.pagecount = 0;</span>
+<span class="nc" id="L86">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15771);this.pagePending = false;</span>
 
         //Setup for PostScript generation
-<span class="nc" id="L89">        setPSGenerator(new PSGenerator(stream));</span>
+<span class="nc" id="L89">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15772);setPSGenerator(new PSGenerator(stream));</span>
 
-<span class="nc" id="L91">        writeFileHeader();</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L91">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15773);writeFileHeader();</span>
+<span class="nc" id="L92">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * Writes the file header.
@@ -113,9 +113,9 @@ public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
      */
     public AbstractPSDocumentGraphics2D(boolean textAsShapes, OutputStream stream,
                                  int width, int height) throws IOException {
-<span class="nc" id="L116">        this(textAsShapes);</span>
-<span class="nc" id="L117">        setupDocument(stream, width, height);</span>
-<span class="nc" id="L118">    }</span>
+<span class="nc" id="L116">        this(textAsShapes);__CLR4_5_2c5xc5xm68iyhvw.R.inc(15775);try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15774);</span>
+<span class="nc" id="L117">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15776);setupDocument(stream, width, height);</span>
+<span class="nc" id="L118">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * Set the dimensions of the document that will be drawn.
@@ -127,14 +127,14 @@ public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
      * @param h the height of the page
      * @throws IOException in case of an I/O problem
      */
-    public void setViewportDimension(float w, float h) throws IOException {
-<span class="nc" id="L131">        this.viewportWidth = w;</span>
-<span class="nc" id="L132">        this.viewportHeight = h;</span>
+<span class="nc" id="L130">    public void setViewportDimension(float w, float h) throws IOException {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15777);</span>
+<span class="nc" id="L131">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15778);this.viewportWidth = w;</span>
+<span class="nc" id="L132">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15779);this.viewportHeight = h;</span>
         /*
         if (w != this.width || h != this.height) {
             gen.concatMatrix(width / w, 0, 0, height / h, 0, 0);
         }*/
-<span class="nc" id="L137">    }</span>
+<span class="nc" id="L137">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * Set the background of the PostScript document.
@@ -142,7 +142,7 @@ public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
      * Rather than leaving it as the default white.
      * @param col the background colour to fill
      */
-    public void setBackgroundColor(Color col) {
+<span class="nc" id="L145">    public void setBackgroundColor(Color col) {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15780);</span>
         /**(todo) Implement this */
         /*
         Color c = col;
@@ -155,36 +155,36 @@ public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
         currentStream.write(&quot;f\n&quot;);
         currentStream.write(&quot;Q\n&quot;);
         */
-<span class="nc" id="L158">    }</span>
+<span class="nc" id="L158">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * Returns the number of pages generated so far.
      * @return the number of pages
      */
-    public int getPageCount() {
-<span class="nc" id="L165">        return this.pagecount;</span>
-    }
+<span class="nc" id="L164">    public int getPageCount() {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15781);</span>
+<span class="nc" id="L165">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15782);return this.pagecount;</span>
+<span class="nc" id="L166">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * Closes the current page and prepares to start a new one.
      * @throws IOException if an I/O error occurs
      */
-    public void nextPage() throws IOException {
-<span class="nc" id="L173">        closePage();</span>
-<span class="nc" id="L174">    }</span>
+<span class="nc" id="L172">    public void nextPage() throws IOException {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15783);</span>
+<span class="nc" id="L173">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15784);closePage();</span>
+<span class="nc" id="L174">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * Closes the current page.
      * @throws IOException if an I/O error occurs
      */
-    protected void closePage() throws IOException {
-<span class="nc bnc" id="L181" title="All 2 branches missed.">        if (!this.pagePending) {</span>
-<span class="nc" id="L182">            return; //ignore</span>
+<span class="nc" id="L180">    protected void closePage() throws IOException {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15785);</span>
+<span class="nc bnc" id="L181" title="All 10 branches missed.">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15786);if ((((!this.pagePending)&amp;&amp;(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15787)!=0|true))||(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15788)==0&amp;false))) {{</span>
+<span class="nc" id="L182">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15789);return; //ignore</span>
         }
         //Finish page
-<span class="nc" id="L185">        writePageTrailer();</span>
-<span class="nc" id="L186">        this.pagePending = false;</span>
-<span class="nc" id="L187">    }</span>
+<span class="nc" id="L185">        }__CLR4_5_2c5xc5xm68iyhvw.R.inc(15790);writePageTrailer();</span>
+<span class="nc" id="L186">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15791);this.pagePending = false;</span>
+<span class="nc" id="L187">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * Writes the page header for a page.
@@ -203,61 +203,61 @@ public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
      * own ProcSets if so desired.
      * @throws IOException In case an I/O error occurs
      */
-    protected void writeProcSets() throws IOException {
-<span class="nc" id="L207">        PSProcSets.writeStdProcSet(gen);</span>
-<span class="nc" id="L208">        PSProcSets.writeEPSProcSet(gen);</span>
-<span class="nc" id="L209">    }</span>
+<span class="nc" id="L206">    protected void writeProcSets() throws IOException {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15792);</span>
+<span class="nc" id="L207">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15793);PSProcSets.writeStdProcSet(gen);</span>
+<span class="nc" id="L208">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15794);PSProcSets.writeEPSProcSet(gen);</span>
+<span class="nc" id="L209">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public void preparePainting() {
-<span class="nc bnc" id="L213" title="All 2 branches missed.">        if (this.pagePending) {</span>
-<span class="nc" id="L214">            return;</span>
+<span class="nc" id="L212">    public void preparePainting() {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15795);</span>
+<span class="nc bnc" id="L213" title="All 10 branches missed.">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15796);if ((((this.pagePending)&amp;&amp;(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15797)!=0|true))||(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15798)==0&amp;false))) {{</span>
+<span class="nc" id="L214">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15799);return;</span>
         }
-        try {
-<span class="nc" id="L217">            startPage();</span>
+<span class="nc" id="L216">        }__CLR4_5_2c5xc5xm68iyhvw.R.inc(15800);try {</span>
+<span class="nc" id="L217">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15801);startPage();</span>
 <span class="nc" id="L218">        } catch (IOException ioe) {</span>
-<span class="nc" id="L219">            handleIOException(ioe);</span>
+<span class="nc" id="L219">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15802);handleIOException(ioe);</span>
 <span class="nc" id="L220">        }</span>
-<span class="nc" id="L221">    }</span>
+<span class="nc" id="L221">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * Starts a new page.
      * @throws IOException if an I/O error occurs
      */
-    protected void startPage() throws IOException {
-<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (this.pagePending) {</span>
-<span class="nc" id="L229">            throw new IllegalStateException(&quot;Close page first before starting another&quot;);</span>
+<span class="nc" id="L227">    protected void startPage() throws IOException {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15803);</span>
+<span class="nc bnc" id="L228" title="All 10 branches missed.">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15804);if ((((this.pagePending)&amp;&amp;(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15805)!=0|true))||(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15806)==0&amp;false))) {{</span>
+<span class="nc" id="L229">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15807);throw new IllegalStateException(&quot;Close page first before starting another&quot;);</span>
         }
         //Start page
-<span class="nc" id="L232">        this.pagecount++;</span>
+<span class="nc" id="L232">        }__CLR4_5_2c5xc5xm68iyhvw.R.inc(15808);this.pagecount++;</span>
 
-<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (this.initialTransform == null) {</span>
+<span class="nc bnc" id="L234" title="All 10 branches missed.">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15809);if ((((this.initialTransform == null)&amp;&amp;(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15810)!=0|true))||(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15811)==0&amp;false))) {{</span>
             //Save initial transformation matrix
-<span class="nc" id="L236">            this.initialTransform = getTransform();</span>
-<span class="nc" id="L237">            this.initialClip = getClip();</span>
-        } else {
+<span class="nc" id="L236">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15812);this.initialTransform = getTransform();</span>
+<span class="nc" id="L237">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15813);this.initialClip = getClip();</span>
+        } }else {{
             //Reset transformation matrix
-<span class="nc" id="L240">            setTransform(this.initialTransform);</span>
-<span class="nc" id="L241">            setClip(this.initialClip);</span>
+<span class="nc" id="L240">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15814);setTransform(this.initialTransform);</span>
+<span class="nc" id="L241">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15815);setClip(this.initialClip);</span>
         }
 
-<span class="nc" id="L244">        writePageHeader();</span>
-        AffineTransform at;
-<span class="nc bnc" id="L246" title="All 8 branches missed.">        if ((this.viewportWidth != this.width</span>
+<span class="nc" id="L244">        }__CLR4_5_2c5xc5xm68iyhvw.R.inc(15816);writePageHeader();</span>
+<span class="nc" id="L245">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15817);AffineTransform at;</span>
+<span class="nc bnc" id="L246" title="All 8 branches missed.">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15818);if (((((this.viewportWidth != this.width</span>
                 || this.viewportHeight != this.height)
-                &amp;&amp; (this.viewportWidth &gt; 0) &amp;&amp; (this.viewportHeight &gt; 0)) {
-<span class="nc" id="L249">            at = new AffineTransform(this.width / this.viewportWidth, 0,</span>
+<span class="nc bnc" id="L248" title="All 8 branches missed.">                &amp;&amp; (this.viewportWidth &gt; 0) &amp;&amp; (this.viewportHeight &gt; 0))&amp;&amp;(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15819)!=0|true))||(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15820)==0&amp;false))) {{</span>
+<span class="nc" id="L249">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15821);at = new AffineTransform(this.width / this.viewportWidth, 0,</span>
                        0, -1 * (this.height / this.viewportHeight),
                        0, this.height);
-        } else {
-<span class="nc" id="L253">            at = new AffineTransform(1, 0, 0, -1, 0, this.height);</span>
+        } }else {{
+<span class="nc" id="L253">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15822);at = new AffineTransform(1, 0, 0, -1, 0, this.height);</span>
         }
         // Do not use concatMatrix, since it alters PSGenerator current state
         //gen.concatMatrix(at);
-<span class="nc" id="L257">        gen.writeln(gen.formatMatrix(at) + &quot; &quot; + gen.mapCommand(&quot;concat&quot;));</span>
-<span class="nc" id="L258">        gen.writeDSCComment(DSCConstants.END_PAGE_SETUP);</span>
-<span class="nc" id="L259">        this.pagePending = true;</span>
-<span class="nc" id="L260">    }</span>
+<span class="nc" id="L257">        }__CLR4_5_2c5xc5xm68iyhvw.R.inc(15823);gen.writeln(gen.formatMatrix(at) + &quot; &quot; + gen.mapCommand(&quot;concat&quot;));</span>
+<span class="nc" id="L258">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15824);gen.writeDSCComment(DSCConstants.END_PAGE_SETUP);</span>
+<span class="nc" id="L259">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15825);this.pagePending = true;</span>
+<span class="nc" id="L260">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * The rendering process has finished.
@@ -267,25 +267,25 @@ public abstract class AbstractPSDocumentGraphics2D extends PSGraphics2D {
      * @throws IOException an io exception if there is a problem
      *         writing to the output stream
      */
-    public void finish() throws IOException {
-<span class="nc bnc" id="L271" title="All 2 branches missed.">        if (this.pagePending) {</span>
-<span class="nc" id="L272">            closePage();</span>
+<span class="nc" id="L270">    public void finish() throws IOException {try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15826);</span>
+<span class="nc bnc" id="L271" title="All 10 branches missed.">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15827);if ((((this.pagePending)&amp;&amp;(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15828)!=0|true))||(__CLR4_5_2c5xc5xm68iyhvw.R.iget(15829)==0&amp;false))) {{</span>
+<span class="nc" id="L272">            __CLR4_5_2c5xc5xm68iyhvw.R.inc(15830);closePage();</span>
         }
 
         //Finish document
-<span class="nc" id="L276">        gen.writeDSCComment(DSCConstants.TRAILER);</span>
-<span class="nc" id="L277">        gen.writeDSCComment(DSCConstants.PAGES, this.pagecount);</span>
-<span class="nc" id="L278">        gen.writeDSCComment(DSCConstants.EOF);</span>
-<span class="nc" id="L279">        gen.flush();</span>
-<span class="nc" id="L280">    }</span>
+<span class="nc" id="L276">        }__CLR4_5_2c5xc5xm68iyhvw.R.inc(15831);gen.writeDSCComment(DSCConstants.TRAILER);</span>
+<span class="nc" id="L277">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15832);gen.writeDSCComment(DSCConstants.PAGES, this.pagecount);</span>
+<span class="nc" id="L278">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15833);gen.writeDSCComment(DSCConstants.EOF);</span>
+<span class="nc" id="L279">        __CLR4_5_2c5xc5xm68iyhvw.R.inc(15834);gen.flush();</span>
+<span class="nc" id="L280">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
     /**
      * This constructor supports the create method
      * @param g the PostScript document graphics to make a copy of
      */
     public AbstractPSDocumentGraphics2D(AbstractPSDocumentGraphics2D g) {
-<span class="nc" id="L287">        super(g);</span>
-<span class="nc" id="L288">    }</span>
+<span class="nc" id="L287">        super(g);__CLR4_5_2c5xc5xm68iyhvw.R.inc(15836);try{__CLR4_5_2c5xc5xm68iyhvw.R.inc(15835);</span>
+<span class="nc" id="L288">    }finally{__CLR4_5_2c5xc5xm68iyhvw.R.flushNeeded();}}</span>
 
 }
 

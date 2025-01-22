@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSPageDeviceDictionary.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSPageDeviceDictionary.java</span></div><h1>PSPageDeviceDictionary.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSPageDeviceDictionary.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSPageDeviceDictionary.java</span></div><h1>PSPageDeviceDictionary.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -28,7 +28,7 @@ import java.util.Map;
  * values.  It can also be used to minimize the number of setpagedevice calls when
  * DSC compliance is false.
  */
-<span class="fc" id="L31">public class PSPageDeviceDictionary extends PSDictionary {</span>
+<span class="pc bpc" id="L31" title="3 of 4 branches missed.">public class PSPageDeviceDictionary extends PSDictionary {public static class __CLR4_5_2dy1dy1m68iyi40{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,18114,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private static final long serialVersionUID = 845943256485806509L;
 
@@ -48,55 +48,55 @@ import java.util.Map;
      * @return the previous value associated with the key or null
      * @see java.util.Map#put(Object, Object)
      */
-    public Object put(Object key, Object value) {
-<span class="fc" id="L52">        Object previousValue = super.put(key, value);</span>
-<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (flushOnRetrieval) {</span>
-<span class="pc bpc" id="L54" title="3 of 4 branches missed.">            if (previousValue == null || !previousValue.equals(value)) {</span>
-<span class="fc" id="L55">                unRetrievedContentDictionary.put(key, value);</span>
+<span class="fc" id="L51">    public Object put(Object key, Object value) {try{__CLR4_5_2dy1dy1m68iyi40.R.inc(18073);</span>
+<span class="fc" id="L52">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18074);Object previousValue = super.put(key, value);</span>
+<span class="pc bpc" id="L53" title="7 of 10 branches missed.">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18075);if ((((flushOnRetrieval)&amp;&amp;(__CLR4_5_2dy1dy1m68iyi40.R.iget(18076)!=0|true))||(__CLR4_5_2dy1dy1m68iyi40.R.iget(18077)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L54" title="9 of 12 branches missed.">            __CLR4_5_2dy1dy1m68iyi40.R.inc(18078);if ((((previousValue == null || !previousValue.equals(value))&amp;&amp;(__CLR4_5_2dy1dy1m68iyi40.R.iget(18079)!=0|true))||(__CLR4_5_2dy1dy1m68iyi40.R.iget(18080)==0&amp;false))) {{</span>
+<span class="fc" id="L55">                __CLR4_5_2dy1dy1m68iyi40.R.inc(18081);unRetrievedContentDictionary.put(key, value);</span>
             }
-        }
-<span class="fc" id="L58">        return previousValue;</span>
-    }
+        }}
+<span class="fc" id="L58">        }__CLR4_5_2dy1dy1m68iyi40.R.inc(18082);return previousValue;</span>
+<span class="fc" id="L59">    }finally{__CLR4_5_2dy1dy1m68iyi40.R.flushNeeded();}}</span>
 
-    public void putAll(Map m) {
-<span class="fc bfc" id="L62" title="All 2 branches covered.">        for (Object x : m.entrySet()) {</span>
-<span class="fc" id="L63">            Map.Entry e = (Map.Entry) x;</span>
-<span class="fc" id="L64">            put(e.getKey(), e.getValue());</span>
-<span class="fc" id="L65">        }</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L61">    public void putAll(Map m) {try{__CLR4_5_2dy1dy1m68iyi40.R.inc(18083);</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18084);for (Object x : m.entrySet()) {{</span>
+<span class="fc" id="L63">            __CLR4_5_2dy1dy1m68iyi40.R.inc(18085);Map.Entry e = (Map.Entry) x;</span>
+<span class="fc" id="L64">            __CLR4_5_2dy1dy1m68iyi40.R.inc(18086);put(e.getKey(), e.getValue());</span>
+        }
+<span class="fc" id="L66">    }}finally{__CLR4_5_2dy1dy1m68iyi40.R.flushNeeded();}}</span>
 
     /**
      * @see java.util.Map#clear()
      */
-    public void clear() {
-<span class="nc" id="L72">        super.clear();</span>
-<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (unRetrievedContentDictionary != null) {</span>
-<span class="nc" id="L74">            unRetrievedContentDictionary.clear();</span>
+<span class="nc" id="L71">    public void clear() {try{__CLR4_5_2dy1dy1m68iyi40.R.inc(18087);</span>
+<span class="nc" id="L72">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18088);super.clear();</span>
+<span class="nc bnc" id="L73" title="All 10 branches missed.">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18089);if ((((unRetrievedContentDictionary != null)&amp;&amp;(__CLR4_5_2dy1dy1m68iyi40.R.iget(18090)!=0|true))||(__CLR4_5_2dy1dy1m68iyi40.R.iget(18091)==0&amp;false))) {{</span>
+<span class="nc" id="L74">            __CLR4_5_2dy1dy1m68iyi40.R.inc(18092);unRetrievedContentDictionary.clear();</span>
         }
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L76">    }}finally{__CLR4_5_2dy1dy1m68iyi40.R.flushNeeded();}}</span>
 
     /**
      * Returns &lt;tt&gt;true&lt;/tt&gt; if this map contains no key-value mappings.
      *
      * @return &lt;tt&gt;true&lt;/tt&gt; if this map contains no key-value mappings.
      */
-    public boolean isEmpty() {
-<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (flushOnRetrieval) {</span>
-<span class="nc" id="L85">            return unRetrievedContentDictionary.isEmpty();</span>
+<span class="nc" id="L83">    public boolean isEmpty() {try{__CLR4_5_2dy1dy1m68iyi40.R.inc(18093);</span>
+<span class="nc bnc" id="L84" title="All 10 branches missed.">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18094);if ((((flushOnRetrieval)&amp;&amp;(__CLR4_5_2dy1dy1m68iyi40.R.iget(18095)!=0|true))||(__CLR4_5_2dy1dy1m68iyi40.R.iget(18096)==0&amp;false))) {{</span>
+<span class="nc" id="L85">            __CLR4_5_2dy1dy1m68iyi40.R.inc(18097);return unRetrievedContentDictionary.isEmpty();</span>
         }
-<span class="nc" id="L87">        return super.isEmpty();</span>
-    }
+<span class="nc" id="L87">        }__CLR4_5_2dy1dy1m68iyi40.R.inc(18098);return super.isEmpty();</span>
+<span class="nc" id="L88">    }finally{__CLR4_5_2dy1dy1m68iyi40.R.flushNeeded();}}</span>
 
     /**
      * The contents of the dictionary are flushed when written
      * @param flushOnRetrieval boolean value
      */
-    public void setFlushOnRetrieval(boolean flushOnRetrieval) {
-<span class="fc" id="L95">        this.flushOnRetrieval = flushOnRetrieval;</span>
-<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        if (flushOnRetrieval) {</span>
-<span class="fc" id="L97">            unRetrievedContentDictionary = new PSDictionary();</span>
+<span class="fc" id="L94">    public void setFlushOnRetrieval(boolean flushOnRetrieval) {try{__CLR4_5_2dy1dy1m68iyi40.R.inc(18099);</span>
+<span class="fc" id="L95">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18100);this.flushOnRetrieval = flushOnRetrieval;</span>
+<span class="pc bpc" id="L96" title="7 of 10 branches missed.">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18101);if ((((flushOnRetrieval)&amp;&amp;(__CLR4_5_2dy1dy1m68iyi40.R.iget(18102)!=0|true))||(__CLR4_5_2dy1dy1m68iyi40.R.iget(18103)==0&amp;false))) {{</span>
+<span class="fc" id="L97">            __CLR4_5_2dy1dy1m68iyi40.R.inc(18104);unRetrievedContentDictionary = new PSDictionary();</span>
         }
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L99">    }}finally{__CLR4_5_2dy1dy1m68iyi40.R.flushNeeded();}}</span>
 
     /**
      * Returns a dictionary string with containing all unwritten content note:
@@ -106,15 +106,15 @@ import java.util.Map;
      *
      * @return unwritten content dictionary string
      */
-    public String getContent() {
-        String content;
-<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if (flushOnRetrieval) {</span>
-<span class="fc" id="L112">            content = unRetrievedContentDictionary.toString();</span>
-<span class="fc" id="L113">            unRetrievedContentDictionary.clear();</span>
-        } else {
-<span class="nc" id="L115">            content = super.toString();</span>
+<span class="fc" id="L109">    public String getContent() {try{__CLR4_5_2dy1dy1m68iyi40.R.inc(18105);</span>
+<span class="fc" id="L110">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18106);String content;</span>
+<span class="pc bpc" id="L111" title="7 of 10 branches missed.">        __CLR4_5_2dy1dy1m68iyi40.R.inc(18107);if ((((flushOnRetrieval)&amp;&amp;(__CLR4_5_2dy1dy1m68iyi40.R.iget(18108)!=0|true))||(__CLR4_5_2dy1dy1m68iyi40.R.iget(18109)==0&amp;false))) {{</span>
+<span class="fc" id="L112">            __CLR4_5_2dy1dy1m68iyi40.R.inc(18110);content = unRetrievedContentDictionary.toString();</span>
+<span class="fc" id="L113">            __CLR4_5_2dy1dy1m68iyi40.R.inc(18111);unRetrievedContentDictionary.clear();</span>
+        } }else {{
+<span class="nc" id="L115">            __CLR4_5_2dy1dy1m68iyi40.R.inc(18112);content = super.toString();</span>
         }
-<span class="fc" id="L117">        return content;</span>
-    }
+<span class="fc" id="L117">        }__CLR4_5_2dy1dy1m68iyi40.R.inc(18113);return content;</span>
+<span class="fc" id="L118">    }finally{__CLR4_5_2dy1dy1m68iyi40.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

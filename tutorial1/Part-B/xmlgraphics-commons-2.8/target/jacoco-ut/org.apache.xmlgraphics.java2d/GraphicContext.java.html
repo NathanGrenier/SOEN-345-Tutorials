@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GraphicContext.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">GraphicContext.java</span></div><h1>GraphicContext.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GraphicContext.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">GraphicContext.java</span></div><h1>GraphicContext.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -56,7 +56,7 @@ import java.util.Map;
  *
  * Originally authored by Vincent Hardy and Christophe Jolif.
  */
-public class GraphicContext implements Cloneable {
+<span class="pc bpc" id="L59" title="3 of 4 branches missed.">public class GraphicContext implements Cloneable {public static class __CLR4_5_2bd6bd6m68iyhs3{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,14925,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
     /**
      * Default Transform to be used for creating FontRenderContext.
      */
@@ -129,30 +129,30 @@ public class GraphicContext implements Cloneable {
     /**
      * Default constructor
      */
-<span class="fc" id="L132">    public GraphicContext() {</span>
+<span class="fc" id="L132">    public GraphicContext() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14730);</span>
         // to workaround a JDK bug
-<span class="fc" id="L134">        hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_DEFAULT);</span>
-<span class="fc" id="L135">    }</span>
+<span class="fc" id="L134">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14731);hints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_DEFAULT);</span>
+<span class="fc" id="L135">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * @param defaultDeviceTransform Default affine transform applied to map the user space to the
      *                               user space.
      */
     public GraphicContext(AffineTransform defaultDeviceTransform) {
-<span class="nc" id="L142">        this();</span>
-<span class="nc" id="L143">        defaultTransform = new AffineTransform(defaultDeviceTransform);</span>
-<span class="nc" id="L144">        transform = new AffineTransform(defaultTransform);</span>
-<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (!defaultTransform.isIdentity()) {</span>
-<span class="nc" id="L146">            transformStack.add(TransformStackElement.createGeneralTransformElement(defaultTransform));</span>
+<span class="nc" id="L142">        this();__CLR4_5_2bd6bd6m68iyhs3.R.inc(14733);try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14732);</span>
+<span class="nc" id="L143">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14734);defaultTransform = new AffineTransform(defaultDeviceTransform);</span>
+<span class="nc" id="L144">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14735);transform = new AffineTransform(defaultTransform);</span>
+<span class="nc bnc" id="L145" title="All 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14736);if ((((!defaultTransform.isIdentity())&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14737)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14738)==0&amp;false))) {{</span>
+<span class="nc" id="L146">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14739);transformStack.add(TransformStackElement.createGeneralTransformElement(defaultTransform));</span>
         }
-<span class="nc" id="L148">    }</span>
+<span class="nc" id="L148">    }}finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Copy constructor.
      * @param template the instance to make a copy of
      */
     protected GraphicContext(GraphicContext template) {
-<span class="nc" id="L155">        this(template.defaultTransform);</span>
+<span class="nc" id="L155">        this(template.defaultTransform);__CLR4_5_2bd6bd6m68iyhs3.R.inc(14741);try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14740);</span>
         //
         // Now, copy each GC element in turn
         //
@@ -161,52 +161,52 @@ public class GraphicContext implements Cloneable {
         /* Set in constructor */
 
         // Transform
-<span class="nc" id="L164">        this.transform = new AffineTransform(template.transform);</span>
+<span class="nc" id="L164">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14742);this.transform = new AffineTransform(template.transform);</span>
 
         // Transform stack
-<span class="nc" id="L167">        this.transformStack = new ArrayList(template.transformStack.size());</span>
-<span class="nc bnc" id="L168" title="All 2 branches missed.">        for (int i = 0; i &lt; template.transformStack.size(); i++) {</span>
-<span class="nc" id="L169">            TransformStackElement stackElement</span>
+<span class="nc" id="L167">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14743);this.transformStack = new ArrayList(template.transformStack.size());</span>
+<span class="nc bnc" id="L168" title="All 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14744);for (int i = 0; (((i &lt; template.transformStack.size())&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14745)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14746)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L169">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14747);TransformStackElement stackElement</span>
 <span class="nc" id="L170">                = (TransformStackElement)template.transformStack.get(i);</span>
-<span class="nc" id="L171">            this.transformStack.add(stackElement.clone());</span>
+<span class="nc" id="L171">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14748);this.transformStack.add(stackElement.clone());</span>
         }
 
         // Transform stack validity
-<span class="nc" id="L175">        this.transformStackValid = template.transformStackValid;</span>
+<span class="nc" id="L175">        }__CLR4_5_2bd6bd6m68iyhs3.R.inc(14749);this.transformStackValid = template.transformStackValid;</span>
 
         // Paint (immutable by requirement)
-<span class="nc" id="L178">        this.paint = template.paint;</span>
+<span class="nc" id="L178">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14750);this.paint = template.paint;</span>
 
         // Stroke (immutable by requirement)
-<span class="nc" id="L181">        this.stroke = template.stroke;</span>
+<span class="nc" id="L181">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14751);this.stroke = template.stroke;</span>
 
         // Composite (immutable by requirement)
-<span class="nc" id="L184">        this.composite = template.composite;</span>
+<span class="nc" id="L184">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14752);this.composite = template.composite;</span>
 
         // Clip
-<span class="nc bnc" id="L187" title="All 2 branches missed.">        if (template.clip != null) {</span>
-<span class="nc" id="L188">            this.clip = new GeneralPath(template.clip);</span>
-        } else {
-<span class="nc" id="L190">            this.clip = null;</span>
+<span class="nc bnc" id="L187" title="All 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14753);if ((((template.clip != null)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14754)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14755)==0&amp;false))) {{</span>
+<span class="nc" id="L188">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14756);this.clip = new GeneralPath(template.clip);</span>
+        } }else {{
+<span class="nc" id="L190">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14757);this.clip = null;</span>
         }
 
         // RenderingHints
-<span class="nc" id="L194">        this.hints = (RenderingHints)template.hints.clone();</span>
+<span class="nc" id="L194">        }__CLR4_5_2bd6bd6m68iyhs3.R.inc(14758);this.hints = (RenderingHints)template.hints.clone();</span>
 
         // Font (immutable)
-<span class="nc" id="L197">        this.font = template.font;</span>
+<span class="nc" id="L197">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14759);this.font = template.font;</span>
 
         // Background, Foreground (immutable)
-<span class="nc" id="L200">        this.background = template.background;</span>
-<span class="nc" id="L201">        this.foreground = template.foreground;</span>
-<span class="nc" id="L202">    }</span>
+<span class="nc" id="L200">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14760);this.background = template.background;</span>
+<span class="nc" id="L201">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14761);this.foreground = template.foreground;</span>
+<span class="nc" id="L202">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * @return a deep copy of this context
      */
-    public Object clone() {
-<span class="nc" id="L208">        return new GraphicContext(this);</span>
-    }
+<span class="nc" id="L207">    public Object clone() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14762);</span>
+<span class="nc" id="L208">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14763);return new GraphicContext(this);</span>
+<span class="nc" id="L209">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Gets this graphics context's current color.
@@ -214,9 +214,9 @@ public class GraphicContext implements Cloneable {
      * @see       java.awt.Color
      * @see       java.awt.Graphics#setColor
      */
-    public Color getColor() {
-<span class="fc" id="L218">        return foreground;</span>
-    }
+<span class="fc" id="L217">    public Color getColor() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14764);</span>
+<span class="fc" id="L218">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14765);return foreground;</span>
+<span class="fc" id="L219">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Sets this graphics context's current color to the specified
@@ -226,15 +226,15 @@ public class GraphicContext implements Cloneable {
      * @see       java.awt.Color
      * @see       java.awt.Graphics#getColor
      */
-    public void setColor(Color c) {
-<span class="nc bnc" id="L230" title="All 2 branches missed.">        if (c == null) {</span>
-<span class="nc" id="L231">            return;</span>
+<span class="nc" id="L229">    public void setColor(Color c) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14766);</span>
+<span class="nc bnc" id="L230" title="All 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14767);if ((((c == null)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14768)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14769)==0&amp;false))) {{</span>
+<span class="nc" id="L231">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14770);return;</span>
         }
 
-<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (paint != c) {</span>
-<span class="nc" id="L235">            setPaint(c);</span>
+<span class="nc bnc" id="L234" title="All 10 branches missed.">        }__CLR4_5_2bd6bd6m68iyhs3.R.inc(14771);if ((((paint != c)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14772)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14773)==0&amp;false))) {{</span>
+<span class="nc" id="L235">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14774);setPaint(c);</span>
         }
-<span class="nc" id="L237">    }</span>
+<span class="nc" id="L237">    }}finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Gets the current font.
@@ -242,9 +242,9 @@ public class GraphicContext implements Cloneable {
      * @see       java.awt.Font
      * @see       java.awt.Graphics#setFont
      */
-    public Font getFont() {
-<span class="fc" id="L246">        return font;</span>
-    }
+<span class="fc" id="L245">    public Font getFont() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14775);</span>
+<span class="fc" id="L246">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14776);return font;</span>
+<span class="fc" id="L247">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Sets this graphics context's font to the specified font.
@@ -253,11 +253,11 @@ public class GraphicContext implements Cloneable {
      * @param  font   the font.
      * @see     java.awt.Graphics#getFont
      */
-    public void setFont(Font font) {
-<span class="nc bnc" id="L257" title="All 2 branches missed.">        if (font != null) {</span>
-<span class="nc" id="L258">            this.font = font;</span>
+<span class="nc" id="L256">    public void setFont(Font font) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14777);</span>
+<span class="nc bnc" id="L257" title="All 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14778);if ((((font != null)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14779)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14780)==0&amp;false))) {{</span>
+<span class="nc" id="L258">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14781);this.font = font;</span>
         }
-<span class="nc" id="L260">    }</span>
+<span class="nc" id="L260">    }}finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Returns the bounding rectangle of the current clipping area.
@@ -276,14 +276,14 @@ public class GraphicContext implements Cloneable {
      * @see         java.awt.Graphics#setClip(Shape)
      * @since       JDK1.1
      */
-    public Rectangle getClipBounds() {
-<span class="nc" id="L280">        Shape c = getClip();</span>
-<span class="nc bnc" id="L281" title="All 2 branches missed.">        if (c == null) {</span>
-<span class="nc" id="L282">            return null;</span>
-        } else {
-<span class="nc" id="L284">            return c.getBounds();</span>
+<span class="nc" id="L279">    public Rectangle getClipBounds() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14782);</span>
+<span class="nc" id="L280">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14783);Shape c = getClip();</span>
+<span class="nc bnc" id="L281" title="All 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14784);if ((((c == null)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14785)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14786)==0&amp;false))) {{</span>
+<span class="nc" id="L282">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14787);return null;</span>
+        } }else {{
+<span class="nc" id="L284">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14788);return c.getBounds();</span>
         }
-    }
+<span class="nc" id="L286">    }}finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -305,9 +305,9 @@ public class GraphicContext implements Cloneable {
      * @see #setClip(int, int, int, int)
      * @see #setClip(Shape)
      */
-    public void clipRect(int x, int y, int width, int height) {
-<span class="nc" id="L309">        clip(new Rectangle(x, y, width, height));</span>
-<span class="nc" id="L310">    }</span>
+<span class="nc" id="L308">    public void clipRect(int x, int y, int width, int height) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14789);</span>
+<span class="nc" id="L309">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14790);clip(new Rectangle(x, y, width, height));</span>
+<span class="nc" id="L310">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -324,9 +324,9 @@ public class GraphicContext implements Cloneable {
      * @see         java.awt.Graphics#setClip(Shape)
      * @since       JDK1.1
      */
-    public void setClip(int x, int y, int width, int height) {
-<span class="nc" id="L328">        setClip(new Rectangle(x, y, width, height));</span>
-<span class="nc" id="L329">    }</span>
+<span class="nc" id="L327">    public void setClip(int x, int y, int width, int height) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14791);</span>
+<span class="nc" id="L328">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14792);setClip(new Rectangle(x, y, width, height));</span>
+<span class="nc" id="L329">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -345,13 +345,13 @@ public class GraphicContext implements Cloneable {
      * @see         java.awt.Graphics#setClip(Shape)
      * @since       JDK1.1
      */
-    public Shape getClip() {
-        try {
-<span class="fc" id="L350">            return transform.createInverse().createTransformedShape(clip);</span>
+<span class="fc" id="L348">    public Shape getClip() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14793);</span>
+<span class="fc" id="L349">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14794);try {</span>
+<span class="fc" id="L350">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14795);return transform.createInverse().createTransformedShape(clip);</span>
 <span class="nc" id="L351">        } catch (NoninvertibleTransformException e) {</span>
-<span class="nc" id="L352">            return null;</span>
+<span class="nc" id="L352">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14796);return null;</span>
         }
-    }
+<span class="fc" id="L354">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -370,13 +370,13 @@ public class GraphicContext implements Cloneable {
      * @see         java.awt.Graphics#setClip(int, int, int, int)
      * @since       JDK1.1
      */
-    public void setClip(Shape clip) {
-<span class="nc bnc" id="L374" title="All 2 branches missed.">        if (clip != null) {</span>
-<span class="nc" id="L375">            this.clip = transform.createTransformedShape(clip);</span>
-        } else {
-<span class="nc" id="L377">            this.clip = null;</span>
+<span class="nc" id="L373">    public void setClip(Shape clip) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14797);</span>
+<span class="nc bnc" id="L374" title="All 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14798);if ((((clip != null)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14799)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14800)==0&amp;false))) {{</span>
+<span class="nc" id="L375">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14801);this.clip = transform.createTransformedShape(clip);</span>
+        } }else {{
+<span class="nc" id="L377">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14802);this.clip = null;</span>
         }
-<span class="nc" id="L379">    }</span>
+<span class="nc" id="L379">    }}finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Sets the &lt;code&gt;Composite&lt;/code&gt; for the &lt;code&gt;Graphics2D&lt;/code&gt; context.
@@ -403,9 +403,9 @@ public class GraphicContext implements Cloneable {
      * @see java.awt.Graphics#setPaintMode
      * @see java.awt.AlphaComposite
      */
-    public void setComposite(Composite comp) {
-<span class="fc" id="L407">        this.composite = comp;</span>
-<span class="fc" id="L408">    }</span>
+<span class="fc" id="L406">    public void setComposite(Composite comp) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14803);</span>
+<span class="fc" id="L407">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14804);this.composite = comp;</span>
+<span class="fc" id="L408">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -420,19 +420,19 @@ public class GraphicContext implements Cloneable {
      * @see java.awt.GradientPaint
      * @see java.awt.TexturePaint
      */
-    public void setPaint(Paint paint) {
-<span class="pc bpc" id="L424" title="1 of 2 branches missed.">        if (paint == null) {</span>
-<span class="nc" id="L425">            return;</span>
+<span class="fc" id="L423">    public void setPaint(Paint paint) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14805);</span>
+<span class="pc bpc" id="L424" title="7 of 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14806);if ((((paint == null)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14807)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14808)==0&amp;false))) {{</span>
+<span class="nc" id="L425">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14809);return;</span>
         }
 
-<span class="fc" id="L428">        this.paint = paint;</span>
-<span class="fc bfc" id="L429" title="All 2 branches covered.">        if (paint instanceof Color) {</span>
-<span class="fc" id="L430">            foreground = (Color)paint;</span>
-        } else {
+<span class="fc" id="L428">        }__CLR4_5_2bd6bd6m68iyhs3.R.inc(14810);this.paint = paint;</span>
+<span class="pc bpc" id="L429" title="4 of 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14811);if ((((paint instanceof Color)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14812)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14813)==0&amp;false))) {{</span>
+<span class="fc" id="L430">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14814);foreground = (Color)paint;</span>
+        } }else {{
             // use default; otherwise the previous Color will be used
-<span class="fc" id="L433">            foreground = Color.black;</span>
+<span class="fc" id="L433">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14815);foreground = Color.black;</span>
         }
-<span class="fc" id="L435">    }</span>
+<span class="fc" id="L435">    }}finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -441,9 +441,9 @@ public class GraphicContext implements Cloneable {
      * &lt;code&gt;Shape&lt;/code&gt; during the rendering process
      * @see BasicStroke
      */
-    public void setStroke(Stroke s) {
-<span class="nc" id="L445">        stroke = s;</span>
-<span class="nc" id="L446">    }</span>
+<span class="nc" id="L444">    public void setStroke(Stroke s) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14816);</span>
+<span class="nc" id="L445">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14817);stroke = s;</span>
+<span class="nc" id="L446">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Sets the value of a single preference for the rendering algorithms.
@@ -456,9 +456,9 @@ public class GraphicContext implements Cloneable {
      * hint category.
      * @see RenderingHints
      */
-    public void setRenderingHint(RenderingHints.Key hintKey, Object hintValue) {
-<span class="nc" id="L460">        hints.put(hintKey, hintValue);</span>
-<span class="nc" id="L461">    }</span>
+<span class="nc" id="L459">    public void setRenderingHint(RenderingHints.Key hintKey, Object hintValue) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14818);</span>
+<span class="nc" id="L460">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14819);hints.put(hintKey, hintValue);</span>
+<span class="nc" id="L461">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -473,9 +473,9 @@ public class GraphicContext implements Cloneable {
      * &lt;code&gt;RenderingHints&lt;/code&gt; class.
      * @see RenderingHints
      */
-    public Object getRenderingHint(RenderingHints.Key hintKey) {
-<span class="nc" id="L477">        return hints.get(hintKey);</span>
-    }
+<span class="nc" id="L476">    public Object getRenderingHint(RenderingHints.Key hintKey) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14820);</span>
+<span class="nc" id="L477">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14821);return hints.get(hintKey);</span>
+<span class="nc" id="L478">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -491,9 +491,9 @@ public class GraphicContext implements Cloneable {
      * @param hints the rendering hints to be set
      * @see RenderingHints
      */
-    public void setRenderingHints(Map hints) {
-<span class="nc" id="L495">        this.hints = new RenderingHints(hints);</span>
-<span class="nc" id="L496">    }</span>
+<span class="nc" id="L494">    public void setRenderingHints(Map hints) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14822);</span>
+<span class="nc" id="L495">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14823);this.hints = new RenderingHints(hints);</span>
+<span class="nc" id="L496">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -510,9 +510,9 @@ public class GraphicContext implements Cloneable {
      * @param hints the rendering hints to be set
      * @see RenderingHints
      */
-    public void addRenderingHints(Map hints) {
-<span class="nc" id="L514">        this.hints.putAll(hints);</span>
-<span class="nc" id="L515">    }</span>
+<span class="nc" id="L513">    public void addRenderingHints(Map hints) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14824);</span>
+<span class="nc" id="L514">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14825);this.hints.putAll(hints);</span>
+<span class="nc" id="L515">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -527,9 +527,9 @@ public class GraphicContext implements Cloneable {
      * that contains the current preferences.
      * @see RenderingHints
      */
-    public RenderingHints getRenderingHints() {
-<span class="nc" id="L531">        return hints;</span>
-    }
+<span class="nc" id="L530">    public RenderingHints getRenderingHints() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14826);</span>
+<span class="nc" id="L531">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14827);return hints;</span>
+<span class="nc" id="L532">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Translates the origin of the graphics context to the point
@@ -542,12 +542,12 @@ public class GraphicContext implements Cloneable {
      * @param  x   the &lt;i&gt;x&lt;/i&gt; coordinate.
      * @param  y   the &lt;i&gt;y&lt;/i&gt; coordinate.
      */
-    public void translate(int x, int y) {
-<span class="nc bnc" id="L546" title="All 4 branches missed.">        if (x != 0 || y != 0) {</span>
-<span class="nc" id="L547">            transform.translate(x, y);</span>
-<span class="nc" id="L548">            transformStack.add(TransformStackElement.createTranslateElement(x, y));</span>
+<span class="nc" id="L545">    public void translate(int x, int y) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14828);</span>
+<span class="nc bnc" id="L546" title="All 12 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14829);if ((((x != 0 || y != 0)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14830)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14831)==0&amp;false))) {{</span>
+<span class="nc" id="L547">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14832);transform.translate(x, y);</span>
+<span class="nc" id="L548">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14833);transformStack.add(TransformStackElement.createTranslateElement(x, y));</span>
         }
-<span class="nc" id="L550">    }</span>
+<span class="nc" id="L550">    }}finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -566,10 +566,10 @@ public class GraphicContext implements Cloneable {
      * @param tx the distance to translate along the x-axis
      * @param ty the distance to translate along the y-axis
      */
-    public void translate(double tx, double ty) {
-<span class="nc" id="L570">        transform.translate(tx, ty);</span>
-<span class="nc" id="L571">        transformStack.add(TransformStackElement.createTranslateElement(tx, ty));</span>
-<span class="nc" id="L572">    }</span>
+<span class="nc" id="L569">    public void translate(double tx, double ty) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14834);</span>
+<span class="nc" id="L570">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14835);transform.translate(tx, ty);</span>
+<span class="nc" id="L571">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14836);transformStack.add(TransformStackElement.createTranslateElement(tx, ty));</span>
+<span class="nc" id="L572">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Concatenates the current &lt;code&gt;Graphics2D&lt;/code&gt;
@@ -587,10 +587,10 @@ public class GraphicContext implements Cloneable {
      * x axis toward the positive y axis.
      * @param theta the angle of rotation in radians
      */
-    public void rotate(double theta) {
-<span class="nc" id="L591">        transform.rotate(theta);</span>
-<span class="nc" id="L592">        transformStack.add(TransformStackElement.createRotateElement(theta));</span>
-<span class="nc" id="L593">    }</span>
+<span class="nc" id="L590">    public void rotate(double theta) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14837);</span>
+<span class="nc" id="L591">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14838);transform.rotate(theta);</span>
+<span class="nc" id="L592">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14839);transformStack.add(TransformStackElement.createRotateElement(theta));</span>
+<span class="nc" id="L593">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Concatenates the current &lt;code&gt;Graphics2D&lt;/code&gt;
@@ -611,12 +611,12 @@ public class GraphicContext implements Cloneable {
      * @param x x coordinate of the origin of the rotation
      * @param y y coordinate of the origin of the rotation
      */
-    public void rotate(double theta, double x, double y) {
-<span class="nc" id="L615">        transform.rotate(theta, x, y);</span>
-<span class="nc" id="L616">        transformStack.add(TransformStackElement.createTranslateElement(x, y));</span>
-<span class="nc" id="L617">        transformStack.add(TransformStackElement.createRotateElement(theta));</span>
-<span class="nc" id="L618">        transformStack.add(TransformStackElement.createTranslateElement(-x, -y));</span>
-<span class="nc" id="L619">    }</span>
+<span class="nc" id="L614">    public void rotate(double theta, double x, double y) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14840);</span>
+<span class="nc" id="L615">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14841);transform.rotate(theta, x, y);</span>
+<span class="nc" id="L616">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14842);transformStack.add(TransformStackElement.createTranslateElement(x, y));</span>
+<span class="nc" id="L617">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14843);transformStack.add(TransformStackElement.createRotateElement(theta));</span>
+<span class="nc" id="L618">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14844);transformStack.add(TransformStackElement.createTranslateElement(-x, -y));</span>
+<span class="nc" id="L619">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Concatenates the current &lt;code&gt;Graphics2D&lt;/code&gt;
@@ -637,10 +637,10 @@ public class GraphicContext implements Cloneable {
      * rendering operations are multiplied relative to previous
      * rendering operations.
      */
-    public void scale(double sx, double sy) {
-<span class="nc" id="L641">        transform.scale(sx, sy);</span>
-<span class="nc" id="L642">        transformStack.add(TransformStackElement.createScaleElement(sx, sy));</span>
-<span class="nc" id="L643">    }</span>
+<span class="nc" id="L640">    public void scale(double sx, double sy) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14845);</span>
+<span class="nc" id="L641">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14846);transform.scale(sx, sy);</span>
+<span class="nc" id="L642">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14847);transformStack.add(TransformStackElement.createScaleElement(sx, sy));</span>
+<span class="nc" id="L643">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Concatenates the current &lt;code&gt;Graphics2D&lt;/code&gt;
@@ -660,10 +660,10 @@ public class GraphicContext implements Cloneable {
      * @param shy the multiplier by which coordinates are shifted in
      * the positive Y axis direction as a function of their X coordinate
      */
-    public void shear(double shx, double shy) {
-<span class="nc" id="L664">        transform.shear(shx, shy);</span>
-<span class="nc" id="L665">        transformStack.add(TransformStackElement.createShearElement(shx, shy));</span>
-<span class="nc" id="L666">    }</span>
+<span class="nc" id="L663">    public void shear(double shx, double shy) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14848);</span>
+<span class="nc" id="L664">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14849);transform.shear(shx, shy);</span>
+<span class="nc" id="L665">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14850);transformStack.add(TransformStackElement.createShearElement(shx, shy));</span>
+<span class="nc" id="L666">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Composes an &lt;code&gt;AffineTransform&lt;/code&gt; object with the
@@ -682,10 +682,10 @@ public class GraphicContext implements Cloneable {
      * @see #setTransform
      * @see AffineTransform
      */
-    public void transform(AffineTransform tx) {
-<span class="nc" id="L686">        transform.concatenate(tx);</span>
-<span class="nc" id="L687">        transformStack.add(TransformStackElement.createGeneralTransformElement(tx));</span>
-<span class="nc" id="L688">    }</span>
+<span class="nc" id="L685">    public void transform(AffineTransform tx) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14851);</span>
+<span class="nc" id="L686">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14852);transform.concatenate(tx);</span>
+<span class="nc" id="L687">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14853);transformStack.add(TransformStackElement.createGeneralTransformElement(tx));</span>
+<span class="nc" id="L688">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Sets the &lt;code&gt;Transform&lt;/code&gt; in the &lt;code&gt;Graphics2D&lt;/code&gt;
@@ -695,13 +695,13 @@ public class GraphicContext implements Cloneable {
      * @see #transform
      * @see AffineTransform
      */
-    public void setTransform(AffineTransform tx) {
-<span class="fc" id="L699">        transform = new AffineTransform(tx);</span>
-<span class="fc" id="L700">        invalidateTransformStack();</span>
-<span class="pc bpc" id="L701" title="1 of 2 branches missed.">        if (!tx.isIdentity()) {</span>
-<span class="fc" id="L702">            transformStack.add(TransformStackElement.createGeneralTransformElement(tx));</span>
+<span class="fc" id="L698">    public void setTransform(AffineTransform tx) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14854);</span>
+<span class="fc" id="L699">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14855);transform = new AffineTransform(tx);</span>
+<span class="fc" id="L700">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14856);invalidateTransformStack();</span>
+<span class="pc bpc" id="L701" title="7 of 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14857);if ((((!tx.isIdentity())&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14858)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14859)==0&amp;false))) {{</span>
+<span class="fc" id="L702">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14860);transformStack.add(TransformStackElement.createGeneralTransformElement(tx));</span>
         }
-<span class="fc" id="L704">    }</span>
+<span class="fc" id="L704">    }}finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Marks the GraphicContext's isNewTransformStack to false
@@ -709,27 +709,27 @@ public class GraphicContext implements Cloneable {
      * has not been reset. Only the setTransform method can
      * override this memento.
      */
-    public void validateTransformStack() {
-<span class="nc" id="L713">        transformStackValid = true;</span>
-<span class="nc" id="L714">    }</span>
+<span class="nc" id="L712">    public void validateTransformStack() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14861);</span>
+<span class="nc" id="L713">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14862);transformStackValid = true;</span>
+<span class="nc" id="L714">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Checks the status of the transform stack.
      * @return true if the transform stack is valid
      */
-    public boolean isTransformStackValid() {
-<span class="nc" id="L721">        return transformStackValid;</span>
-    }
+<span class="nc" id="L720">    public boolean isTransformStackValid() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14863);</span>
+<span class="nc" id="L721">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14864);return transformStackValid;</span>
+<span class="nc" id="L722">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * @return array containing the successive transforms that
      *         were concatenated with the original one.
      */
-    public TransformStackElement[] getTransformStack() {
-<span class="nc" id="L729">        TransformStackElement[] stack = new TransformStackElement[transformStack.size()];</span>
-<span class="nc" id="L730">        transformStack.toArray(stack);</span>
-<span class="nc" id="L731">        return stack;</span>
-    }
+<span class="nc" id="L728">    public TransformStackElement[] getTransformStack() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14865);</span>
+<span class="nc" id="L729">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14866);TransformStackElement[] stack = new TransformStackElement[transformStack.size()];</span>
+<span class="nc" id="L730">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14867);transformStack.toArray(stack);</span>
+<span class="nc" id="L731">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14868);return stack;</span>
+<span class="nc" id="L732">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Marks the GraphicContext's isNewTransformStack to true
@@ -737,10 +737,10 @@ public class GraphicContext implements Cloneable {
      * since it was last read. Only validateTransformStack
      * can override this memento
      */
-    protected void invalidateTransformStack() {
-<span class="fc" id="L741">        transformStack.clear();</span>
-<span class="fc" id="L742">        transformStackValid = false;</span>
-<span class="fc" id="L743">    }</span>
+<span class="fc" id="L740">    protected void invalidateTransformStack() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14869);</span>
+<span class="fc" id="L741">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14870);transformStack.clear();</span>
+<span class="fc" id="L742">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14871);transformStackValid = false;</span>
+<span class="fc" id="L743">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Returns a copy of the current &lt;code&gt;Transform&lt;/code&gt; in the
@@ -750,9 +750,9 @@ public class GraphicContext implements Cloneable {
      * @see #transform
      * @see #setTransform
      */
-    public AffineTransform getTransform() {
-<span class="fc" id="L754">        return new AffineTransform(transform);</span>
-    }
+<span class="fc" id="L753">    public AffineTransform getTransform() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14872);</span>
+<span class="fc" id="L754">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14873);return new AffineTransform(transform);</span>
+<span class="fc" id="L755">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Returns the current &lt;code&gt;Paint&lt;/code&gt; of the
@@ -762,9 +762,9 @@ public class GraphicContext implements Cloneable {
      * @see #setPaint
      * @see java.awt.Graphics#setColor
      */
-    public Paint getPaint() {
-<span class="fc" id="L766">        return paint;</span>
-    }
+<span class="fc" id="L765">    public Paint getPaint() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14874);</span>
+<span class="fc" id="L766">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14875);return paint;</span>
+<span class="fc" id="L767">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -774,9 +774,9 @@ public class GraphicContext implements Cloneable {
      *              which defines a compositing style.
      * @see #setComposite
      */
-    public Composite getComposite() {
-<span class="fc" id="L778">        return composite;</span>
-    }
+<span class="fc" id="L777">    public Composite getComposite() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14876);</span>
+<span class="fc" id="L778">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14877);return composite;</span>
+<span class="fc" id="L779">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Sets the background color for the &lt;code&gt;Graphics2D&lt;/code&gt; context.
@@ -794,13 +794,13 @@ public class GraphicContext implements Cloneable {
      * @see #getBackground
      * @see java.awt.Graphics#clearRect
      */
-    public void setBackground(Color color) {
-<span class="nc bnc" id="L798" title="All 2 branches missed.">        if (color == null) {</span>
-<span class="nc" id="L799">            return;</span>
+<span class="nc" id="L797">    public void setBackground(Color color) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14878);</span>
+<span class="nc bnc" id="L798" title="All 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14879);if ((((color == null)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14880)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14881)==0&amp;false))) {{</span>
+<span class="nc" id="L799">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14882);return;</span>
         }
 
-<span class="nc" id="L802">        background = color;</span>
-<span class="nc" id="L803">    }</span>
+<span class="nc" id="L802">        }__CLR4_5_2bd6bd6m68iyhs3.R.inc(14883);background = color;</span>
+<span class="nc" id="L803">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -809,9 +809,9 @@ public class GraphicContext implements Cloneable {
      * which defines the background color.
      * @see #setBackground
      */
-    public Color getBackground() {
-<span class="nc" id="L813">        return background;</span>
-    }
+<span class="nc" id="L812">    public Color getBackground() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14884);</span>
+<span class="nc" id="L813">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14885);return background;</span>
+<span class="nc" id="L814">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Returns the current &lt;code&gt;Stroke&lt;/code&gt; in the
@@ -820,9 +820,9 @@ public class GraphicContext implements Cloneable {
      *                 which defines the line style.
      * @see #setStroke
      */
-    public Stroke getStroke() {
-<span class="fc" id="L824">        return stroke;</span>
-    }
+<span class="fc" id="L823">    public Stroke getStroke() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14886);</span>
+<span class="fc" id="L824">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14887);return stroke;</span>
+<span class="fc" id="L825">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
 
     /**
@@ -844,19 +844,19 @@ public class GraphicContext implements Cloneable {
      *          &lt;code&gt;Clip&lt;/code&gt;.  If &lt;code&gt;s&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;,
      *          this method clears the current &lt;code&gt;Clip&lt;/code&gt;.
      */
-    public void clip(Shape s) {
-<span class="nc bnc" id="L848" title="All 2 branches missed.">        if (s != null) {</span>
-<span class="nc" id="L849">            s = transform.createTransformedShape(s);</span>
+<span class="nc" id="L847">    public void clip(Shape s) {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14888);</span>
+<span class="nc bnc" id="L848" title="All 10 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14889);if ((((s != null)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14890)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14891)==0&amp;false))) {{</span>
+<span class="nc" id="L849">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14892);s = transform.createTransformedShape(s);</span>
         }
 
-<span class="nc bnc" id="L852" title="All 2 branches missed.">        if (clip != null) {</span>
-<span class="nc" id="L853">            Area newClip = new Area(clip);</span>
-<span class="nc" id="L854">            newClip.intersect(new Area(s));</span>
-<span class="nc" id="L855">            clip = new GeneralPath(newClip);</span>
-<span class="nc" id="L856">        } else {</span>
-<span class="nc" id="L857">            clip = s;</span>
+<span class="nc bnc" id="L852" title="All 10 branches missed.">        }__CLR4_5_2bd6bd6m68iyhs3.R.inc(14893);if ((((clip != null)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14894)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14895)==0&amp;false))) {{</span>
+<span class="nc" id="L853">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14896);Area newClip = new Area(clip);</span>
+<span class="nc" id="L854">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14897);newClip.intersect(new Area(s));</span>
+<span class="nc" id="L855">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14898);clip = new GeneralPath(newClip);</span>
+<span class="nc" id="L856">        } }else {{</span>
+<span class="nc" id="L857">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14899);clip = s;</span>
         }
-<span class="nc" id="L859">    }</span>
+<span class="nc" id="L859">    }}finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 
     /**
      * Get the rendering context of the &lt;code&gt;Font&lt;/code&gt; within this
@@ -879,48 +879,48 @@ public class GraphicContext implements Cloneable {
      * @see java.awt.font.TextLayout
      * @since     JDK1.2
      */
-    public FontRenderContext getFontRenderContext() {
+<span class="fc" id="L882">    public FontRenderContext getFontRenderContext() {try{__CLR4_5_2bd6bd6m68iyhs3.R.inc(14900);</span>
         //
         // Find if antialiasing should be used.
         //
-<span class="fc" id="L886">        Object antialiasingHint = hints.get(RenderingHints.KEY_TEXT_ANTIALIASING);</span>
-<span class="fc" id="L887">        boolean isAntialiased = true;</span>
-<span class="pc bpc" id="L888" title="2 of 4 branches missed.">        if (antialiasingHint != RenderingHints.VALUE_TEXT_ANTIALIAS_ON</span>
-           &amp;&amp; antialiasingHint != RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT) {
+<span class="fc" id="L886">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14901);Object antialiasingHint = hints.get(RenderingHints.KEY_TEXT_ANTIALIASING);</span>
+<span class="fc" id="L887">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14902);boolean isAntialiased = true;</span>
+<span class="pc bpc" id="L888" title="2 of 4 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14903);if ((((antialiasingHint != RenderingHints.VALUE_TEXT_ANTIALIAS_ON</span>
+<span class="pc bpc" id="L889" title="6 of 8 branches missed.">           &amp;&amp; antialiasingHint != RenderingHints.VALUE_TEXT_ANTIALIAS_DEFAULT)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14904)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14905)==0&amp;false))) {{</span>
 
             // If antialias was not turned off, then use the general rendering
             // hint.
-<span class="pc bpc" id="L893" title="1 of 2 branches missed.">            if (antialiasingHint != RenderingHints.VALUE_TEXT_ANTIALIAS_OFF) {</span>
-<span class="fc" id="L894">                antialiasingHint = hints.get(RenderingHints.KEY_ANTIALIASING);</span>
+<span class="pc bpc" id="L893" title="7 of 10 branches missed.">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14906);if ((((antialiasingHint != RenderingHints.VALUE_TEXT_ANTIALIAS_OFF)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14907)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14908)==0&amp;false))) {{</span>
+<span class="fc" id="L894">                __CLR4_5_2bd6bd6m68iyhs3.R.inc(14909);antialiasingHint = hints.get(RenderingHints.KEY_ANTIALIASING);</span>
 
                 // Test general hint
-<span class="pc bpc" id="L897" title="2 of 4 branches missed.">                if (antialiasingHint != RenderingHints.VALUE_ANTIALIAS_ON</span>
-                   &amp;&amp; antialiasingHint != RenderingHints.VALUE_ANTIALIAS_DEFAULT) {
+<span class="pc bpc" id="L897" title="2 of 4 branches missed.">                __CLR4_5_2bd6bd6m68iyhs3.R.inc(14910);if ((((antialiasingHint != RenderingHints.VALUE_ANTIALIAS_ON</span>
+<span class="pc bpc" id="L898" title="6 of 8 branches missed.">                   &amp;&amp; antialiasingHint != RenderingHints.VALUE_ANTIALIAS_DEFAULT)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14911)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14912)==0&amp;false))) {{</span>
                     // Antialiasing was not requested. However, if it was not turned
                     // off explicitly, use it.
-<span class="pc bpc" id="L901" title="1 of 2 branches missed.">                    if (antialiasingHint == RenderingHints.VALUE_ANTIALIAS_OFF) {</span>
-<span class="nc" id="L902">                        isAntialiased = false;</span>
+<span class="pc bpc" id="L901" title="7 of 10 branches missed.">                    __CLR4_5_2bd6bd6m68iyhs3.R.inc(14913);if ((((antialiasingHint == RenderingHints.VALUE_ANTIALIAS_OFF)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14914)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14915)==0&amp;false))) {{</span>
+<span class="nc" id="L902">                        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14916);isAntialiased = false;</span>
                     }
-                }
-            } else {
-<span class="nc" id="L906">                isAntialiased = false;</span>
+                }}
+            }} }else {{
+<span class="nc" id="L906">                __CLR4_5_2bd6bd6m68iyhs3.R.inc(14917);isAntialiased = false;</span>
             }
 
-        }
+        }}
 
         //
         // Find out whether fractional metrics should be used.
         //
-<span class="fc" id="L914">        boolean useFractionalMetrics = true;</span>
-<span class="pc bpc" id="L915" title="1 of 2 branches missed.">        if (hints.get(RenderingHints.KEY_FRACTIONALMETRICS)</span>
-           == RenderingHints.VALUE_FRACTIONALMETRICS_OFF) {
-<span class="nc" id="L917">            useFractionalMetrics = false;</span>
+<span class="fc" id="L914">        }__CLR4_5_2bd6bd6m68iyhs3.R.inc(14918);boolean useFractionalMetrics = true;</span>
+<span class="pc bpc" id="L915" title="1 of 2 branches missed.">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14919);if ((((hints.get(RenderingHints.KEY_FRACTIONALMETRICS)</span>
+<span class="pc bpc" id="L916" title="6 of 8 branches missed.">           == RenderingHints.VALUE_FRACTIONALMETRICS_OFF)&amp;&amp;(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14920)!=0|true))||(__CLR4_5_2bd6bd6m68iyhs3.R.iget(14921)==0&amp;false))) {{</span>
+<span class="nc" id="L917">            __CLR4_5_2bd6bd6m68iyhs3.R.inc(14922);useFractionalMetrics = false;</span>
         }
 
-<span class="fc" id="L920">        FontRenderContext frc = new FontRenderContext(defaultTransform,</span>
+<span class="fc" id="L920">        }__CLR4_5_2bd6bd6m68iyhs3.R.inc(14923);FontRenderContext frc = new FontRenderContext(defaultTransform,</span>
                                                       isAntialiased,
                                                       useFractionalMetrics);
-<span class="fc" id="L923">        return frc;</span>
-    }
+<span class="fc" id="L923">        __CLR4_5_2bd6bd6m68iyhs3.R.inc(14924);return frc;</span>
+<span class="fc" id="L924">    }finally{__CLR4_5_2bd6bd6m68iyhs3.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

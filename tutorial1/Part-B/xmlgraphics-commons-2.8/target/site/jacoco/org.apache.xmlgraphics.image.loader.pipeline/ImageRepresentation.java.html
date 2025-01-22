@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageRepresentation.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.pipeline</a> &gt; <span class="el_source">ImageRepresentation.java</span></div><h1>ImageRepresentation.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageRepresentation.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.pipeline</a> &gt; <span class="el_source">ImageRepresentation.java</span></div><h1>ImageRepresentation.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -27,7 +27,7 @@ import org.apache.xmlgraphics.util.dijkstra.Vertex;
  * It is used in conjunction with Dijkstra's algorithm to find and construct a
  * conversion pipeline for images.
  */
-<span class="pc bpc" id="L30" title="1 of 2 branches missed.">public class ImageRepresentation implements Vertex {</span>
+<span class="pc bpc" id="L30" title="4 of 6 branches missed.">public class ImageRepresentation implements Vertex {public static class __CLR4_5_29g59g5m68iyhhz{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,12263,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private ImageFlavor flavor;
 
@@ -35,41 +35,41 @@ import org.apache.xmlgraphics.util.dijkstra.Vertex;
      * Main constructor
      * @param flavor the image flavor
      */
-<span class="fc" id="L38">    public ImageRepresentation(ImageFlavor flavor) {</span>
-<span class="pc bpc" id="L39" title="1 of 2 branches missed.">        if (flavor == null) {</span>
-<span class="nc" id="L40">            throw new NullPointerException(&quot;flavor must not be null&quot;);</span>
+<span class="fc" id="L38">    public ImageRepresentation(ImageFlavor flavor) {try{__CLR4_5_29g59g5m68iyhhz.R.inc(12245);</span>
+<span class="pc bpc" id="L39" title="7 of 10 branches missed.">        __CLR4_5_29g59g5m68iyhhz.R.inc(12246);if ((((flavor == null)&amp;&amp;(__CLR4_5_29g59g5m68iyhhz.R.iget(12247)!=0|true))||(__CLR4_5_29g59g5m68iyhhz.R.iget(12248)==0&amp;false))) {{</span>
+<span class="nc" id="L40">            __CLR4_5_29g59g5m68iyhhz.R.inc(12249);throw new NullPointerException(&quot;flavor must not be null&quot;);</span>
         }
-<span class="fc" id="L42">        this.flavor = flavor;</span>
-<span class="fc" id="L43">    }</span>
+<span class="fc" id="L42">        }__CLR4_5_29g59g5m68iyhhz.R.inc(12250);this.flavor = flavor;</span>
+<span class="fc" id="L43">    }finally{__CLR4_5_29g59g5m68iyhhz.R.flushNeeded();}}</span>
 
     /**
      * Returns the image flavor.
      * @return the image flavor
      */
-    public ImageFlavor getFlavor() {
-<span class="fc" id="L50">        return flavor;</span>
-    }
+<span class="fc" id="L49">    public ImageFlavor getFlavor() {try{__CLR4_5_29g59g5m68iyhhz.R.inc(12251);</span>
+<span class="fc" id="L50">        __CLR4_5_29g59g5m68iyhhz.R.inc(12252);return flavor;</span>
+<span class="fc" id="L51">    }finally{__CLR4_5_29g59g5m68iyhhz.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public boolean equals(Object obj) {
-<span class="pc bpc" id="L55" title="2 of 4 branches missed.">        assert obj != null;</span>
-<span class="fc" id="L56">        return toString().equals(obj.toString());</span>
-    }
+<span class="fc" id="L54">    public boolean equals(Object obj) {try{__CLR4_5_29g59g5m68iyhhz.R.inc(12253);</span>
+<span class="pc bpc" id="L55" title="8 of 12 branches missed.">        assert (((obj != null)&amp;&amp;(__CLR4_5_29g59g5m68iyhhz.R.iget(12254)!=0|true))||(__CLR4_5_29g59g5m68iyhhz.R.iget(12255)==0&amp;false));</span>
+<span class="fc" id="L56">        __CLR4_5_29g59g5m68iyhhz.R.inc(12256);return toString().equals(obj.toString());</span>
+<span class="fc" id="L57">    }finally{__CLR4_5_29g59g5m68iyhhz.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public int hashCode() {
-<span class="fc" id="L61">        return getFlavor().hashCode();</span>
-    }
+<span class="fc" id="L60">    public int hashCode() {try{__CLR4_5_29g59g5m68iyhhz.R.inc(12257);</span>
+<span class="fc" id="L61">        __CLR4_5_29g59g5m68iyhhz.R.inc(12258);return getFlavor().hashCode();</span>
+<span class="fc" id="L62">    }finally{__CLR4_5_29g59g5m68iyhhz.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public int compareTo(Object obj) {
-<span class="fc" id="L66">        return toString().compareTo(((ImageRepresentation)obj).toString());</span>
-    }
+<span class="fc" id="L65">    public int compareTo(Object obj) {try{__CLR4_5_29g59g5m68iyhhz.R.inc(12259);</span>
+<span class="fc" id="L66">        __CLR4_5_29g59g5m68iyhhz.R.inc(12260);return toString().compareTo(((ImageRepresentation)obj).toString());</span>
+<span class="fc" id="L67">    }finally{__CLR4_5_29g59g5m68iyhhz.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String toString() {
-<span class="fc" id="L71">        return getFlavor().toString();</span>
-    }
+<span class="fc" id="L70">    public String toString() {try{__CLR4_5_29g59g5m68iyhhz.R.inc(12261);</span>
+<span class="fc" id="L71">        __CLR4_5_29g59g5m68iyhhz.R.inc(12262);return getFlavor().toString();</span>
+<span class="fc" id="L72">    }finally{__CLR4_5_29g59g5m68iyhhz.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

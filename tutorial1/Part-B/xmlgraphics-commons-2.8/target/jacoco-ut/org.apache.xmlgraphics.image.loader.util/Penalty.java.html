@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Penalty.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.util</a> &gt; <span class="el_source">Penalty.java</span></div><h1>Penalty.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Penalty.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.util</a> &gt; <span class="el_source">Penalty.java</span></div><h1>Penalty.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -24,7 +24,7 @@ package org.apache.xmlgraphics.image.loader.util;
  * {@link Integer}, but giving {@link Integer#MAX_VALUE} a special meaning: it means infinite
  * penalty, i.e. a candidate with this penalty will be excluded from any choice.
  */
-public final class Penalty {
+<span class="pc bpc" id="L27" title="3 of 4 branches missed.">@java.lang.SuppressWarnings({&quot;fallthrough&quot;}) public final class Penalty {public static class __CLR4_5_29u79u7m68iyhjv{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,12778,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
 <span class="fc" id="L29">    public static final Penalty ZERO_PENALTY = new Penalty(0);</span>
 <span class="fc" id="L30">    public static final Penalty INFINITE_PENALTY = new Penalty(Integer.MAX_VALUE);</span>
@@ -36,72 +36,72 @@ public final class Penalty {
      * @param value the penalty value
      * @return the penalty object
      */
-    public static Penalty toPenalty(int value) {
-<span class="fc bfc" id="L40" title="All 3 branches covered.">        switch (value) {</span>
-        case 0:
-<span class="fc" id="L42">            return ZERO_PENALTY;</span>
-        case Integer.MAX_VALUE:
-<span class="fc" id="L44">            return INFINITE_PENALTY;</span>
-        default:
-<span class="fc" id="L46">            return new Penalty(value);</span>
+<span class="fc" id="L39">    public static Penalty toPenalty(int value) {try{__CLR4_5_29u79u7m68iyhjv.R.inc(12751);</span>
+<span class="fc bfc" id="L40" title="All 3 branches covered.">        boolean __CLB4_5_2_bool0=false;__CLR4_5_29u79u7m68iyhjv.R.inc(12752);switch (value) {</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        case 0:if (!__CLB4_5_2_bool0) {__CLR4_5_29u79u7m68iyhjv.R.inc(12753);__CLB4_5_2_bool0=true;}</span>
+<span class="fc" id="L42">            __CLR4_5_29u79u7m68iyhjv.R.inc(12754);return ZERO_PENALTY;</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        case Integer.MAX_VALUE:if (!__CLB4_5_2_bool0) {__CLR4_5_29u79u7m68iyhjv.R.inc(12755);__CLB4_5_2_bool0=true;}</span>
+<span class="fc" id="L44">            __CLR4_5_29u79u7m68iyhjv.R.inc(12756);return INFINITE_PENALTY;</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">        default:if (!__CLB4_5_2_bool0) {__CLR4_5_29u79u7m68iyhjv.R.inc(12757);__CLB4_5_2_bool0=true;}</span>
+<span class="fc" id="L46">            __CLR4_5_29u79u7m68iyhjv.R.inc(12758);return new Penalty(value);</span>
         }
-    }
+<span class="fc" id="L48">    }finally{__CLR4_5_29u79u7m68iyhjv.R.flushNeeded();}}</span>
 
-<span class="fc" id="L50">    private Penalty(int value) {</span>
-<span class="fc" id="L51">        this.value = value;</span>
-<span class="fc" id="L52">    }</span>
-
-    /**
-     * Adds a penalty to this one and returns the combined penalty.
-     * @param value the penalty value to add
-     * @return the resulting penalty
-     */
-    public Penalty add(Penalty value) {
-<span class="fc" id="L60">        return add(value.getValue());</span>
-    }
+<span class="fc" id="L50">    private Penalty(int value) {try{__CLR4_5_29u79u7m68iyhjv.R.inc(12759);</span>
+<span class="fc" id="L51">        __CLR4_5_29u79u7m68iyhjv.R.inc(12760);this.value = value;</span>
+<span class="fc" id="L52">    }finally{__CLR4_5_29u79u7m68iyhjv.R.flushNeeded();}}</span>
 
     /**
      * Adds a penalty to this one and returns the combined penalty.
      * @param value the penalty value to add
      * @return the resulting penalty
      */
-    public Penalty add(int value) {
-<span class="fc" id="L69">        long p = (long)getValue() + value;</span>
-<span class="fc" id="L70">        return toPenalty(truncate(p));</span>
-    }
+<span class="fc" id="L59">    public Penalty add(Penalty value) {try{__CLR4_5_29u79u7m68iyhjv.R.inc(12761);</span>
+<span class="fc" id="L60">        __CLR4_5_29u79u7m68iyhjv.R.inc(12762);return add(value.getValue());</span>
+<span class="fc" id="L61">    }finally{__CLR4_5_29u79u7m68iyhjv.R.flushNeeded();}}</span>
+
+    /**
+     * Adds a penalty to this one and returns the combined penalty.
+     * @param value the penalty value to add
+     * @return the resulting penalty
+     */
+<span class="fc" id="L68">    public Penalty add(int value) {try{__CLR4_5_29u79u7m68iyhjv.R.inc(12763);</span>
+<span class="fc" id="L69">        __CLR4_5_29u79u7m68iyhjv.R.inc(12764);long p = (long)getValue() + value;</span>
+<span class="fc" id="L70">        __CLR4_5_29u79u7m68iyhjv.R.inc(12765);return toPenalty(truncate(p));</span>
+<span class="fc" id="L71">    }finally{__CLR4_5_29u79u7m68iyhjv.R.flushNeeded();}}</span>
 
     /**
      * Returns the penalty value.
      * @return the penalty value
      */
-    public int getValue() {
-<span class="fc" id="L78">        return this.value;</span>
-    }
+<span class="fc" id="L77">    public int getValue() {try{__CLR4_5_29u79u7m68iyhjv.R.inc(12766);</span>
+<span class="fc" id="L78">        __CLR4_5_29u79u7m68iyhjv.R.inc(12767);return this.value;</span>
+<span class="fc" id="L79">    }finally{__CLR4_5_29u79u7m68iyhjv.R.flushNeeded();}}</span>
 
     /**
      * Indicates whether this is an infinite penalty, meaning that a solution with this penalty
      * is effectively ineligible.
      * @return true if this is an infinite penalty
      */
-    public boolean isInfinitePenalty() {
-<span class="fc bfc" id="L87" title="All 2 branches covered.">        return (value == Integer.MAX_VALUE);</span>
-    }
+<span class="fc" id="L86">    public boolean isInfinitePenalty() {try{__CLR4_5_29u79u7m68iyhjv.R.inc(12768);</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        __CLR4_5_29u79u7m68iyhjv.R.inc(12769);return (value == Integer.MAX_VALUE);</span>
+<span class="fc" id="L88">    }finally{__CLR4_5_29u79u7m68iyhjv.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String toString() {
-<span class="nc bnc" id="L92" title="All 2 branches missed.">        return &quot;Penalty: &quot; + (isInfinitePenalty() ? &quot;INF&quot; : Integer.toString(getValue()));</span>
-    }
+<span class="nc" id="L91">    public String toString() {try{__CLR4_5_29u79u7m68iyhjv.R.inc(12770);</span>
+<span class="nc bnc" id="L92" title="All 10 branches missed.">        __CLR4_5_29u79u7m68iyhjv.R.inc(12771);return &quot;Penalty: &quot; + ((((isInfinitePenalty() )&amp;&amp;(__CLR4_5_29u79u7m68iyhjv.R.iget(12772)!=0|true))||(__CLR4_5_29u79u7m68iyhjv.R.iget(12773)==0&amp;false))? &quot;INF&quot; : Integer.toString(getValue()));</span>
+<span class="nc" id="L93">    }finally{__CLR4_5_29u79u7m68iyhjv.R.flushNeeded();}}</span>
 
     /**
      * Truncates the long penalty value to an integer without sign side-effects.
      * @param penalty the penalty value as a long
      * @return the penalty value as an int
      */
-    public static int truncate(long penalty) {
-<span class="fc" id="L101">        penalty = Math.min(Integer.MAX_VALUE, penalty);</span>
-<span class="fc" id="L102">        penalty = Math.max(Integer.MIN_VALUE, penalty);</span>
-<span class="fc" id="L103">        return (int)penalty;</span>
-    }
+<span class="fc" id="L100">    public static int truncate(long penalty) {try{__CLR4_5_29u79u7m68iyhjv.R.inc(12774);</span>
+<span class="fc" id="L101">        __CLR4_5_29u79u7m68iyhjv.R.inc(12775);penalty = Math.min(Integer.MAX_VALUE, penalty);</span>
+<span class="fc" id="L102">        __CLR4_5_29u79u7m68iyhjv.R.inc(12776);penalty = Math.max(Integer.MIN_VALUE, penalty);</span>
+<span class="fc" id="L103">        __CLR4_5_29u79u7m68iyhjv.R.inc(12777);return (int)penalty;</span>
+<span class="fc" id="L104">    }finally{__CLR4_5_29u79u7m68iyhjv.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

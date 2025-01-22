@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageLoaderImageIO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl.imageio</a> &gt; <span class="el_source">ImageLoaderImageIO.java</span></div><h1>ImageLoaderImageIO.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageLoaderImageIO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl.imageio</a> &gt; <span class="el_source">ImageLoaderImageIO.java</span></div><h1>ImageLoaderImageIO.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -72,7 +72,7 @@ import org.apache.xmlgraphics.java2d.color.profile.ColorProfileUtil;
 /**
  * An ImageLoader implementation based on ImageIO for loading bitmap images.
  */
-public class ImageLoaderImageIO extends AbstractImageLoader {
+<span class="pc bpc" id="L75" title="3 of 4 branches missed.">@java.lang.SuppressWarnings({&quot;fallthrough&quot;}) public class ImageLoaderImageIO extends AbstractImageLoader {public static class __CLR4_5_293k93km68iyhh8{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,12016,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /** logger */
 <span class="fc" id="L78">    protected static final Log log = LogFactory.getLog(ImageLoaderImageIO.class);</span>
@@ -89,44 +89,44 @@ public class ImageLoaderImageIO extends AbstractImageLoader {
      * Main constructor.
      * @param targetFlavor the target flavor
      */
-<span class="fc" id="L92">    public ImageLoaderImageIO(ImageFlavor targetFlavor) {</span>
-<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (!(ImageFlavor.BUFFERED_IMAGE.equals(targetFlavor)</span>
-<span class="fc bfc" id="L94" title="All 2 branches covered.">                || ImageFlavor.RENDERED_IMAGE.equals(targetFlavor))) {</span>
-<span class="fc" id="L95">            throw new IllegalArgumentException(&quot;Unsupported target ImageFlavor: &quot; + targetFlavor);</span>
+<span class="fc" id="L92">    public ImageLoaderImageIO(ImageFlavor targetFlavor) {try{__CLR4_5_293k93km68iyhh8.R.inc(11792);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        __CLR4_5_293k93km68iyhh8.R.inc(11793);if ((((!(ImageFlavor.BUFFERED_IMAGE.equals(targetFlavor)</span>
+<span class="pc bpc" id="L94" title="4 of 10 branches missed.">                || ImageFlavor.RENDERED_IMAGE.equals(targetFlavor)))&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11794)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11795)==0&amp;false))) {{</span>
+<span class="fc" id="L95">            __CLR4_5_293k93km68iyhh8.R.inc(11796);throw new IllegalArgumentException(&quot;Unsupported target ImageFlavor: &quot; + targetFlavor);</span>
         }
-<span class="fc" id="L97">        this.targetFlavor = targetFlavor;</span>
-<span class="fc" id="L98">    }</span>
+<span class="fc" id="L97">        }__CLR4_5_293k93km68iyhh8.R.inc(11797);this.targetFlavor = targetFlavor;</span>
+<span class="fc" id="L98">    }finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public ImageFlavor getTargetFlavor() {
-<span class="fc" id="L102">        return this.targetFlavor;</span>
-    }
+<span class="fc" id="L101">    public ImageFlavor getTargetFlavor() {try{__CLR4_5_293k93km68iyhh8.R.inc(11798);</span>
+<span class="fc" id="L102">        __CLR4_5_293k93km68iyhh8.R.inc(11799);return this.targetFlavor;</span>
+<span class="fc" id="L103">    }finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
     public Image loadImage(ImageInfo info, Map hints, ImageSessionContext session)
-            throws ImageException, IOException {
-<span class="fc" id="L108">        RenderedImage imageData = null;</span>
-<span class="fc" id="L109">        IIOException firstException = null;</span>
+<span class="fc" id="L107">            throws ImageException, IOException {try{__CLR4_5_293k93km68iyhh8.R.inc(11800);</span>
+<span class="fc" id="L108">        __CLR4_5_293k93km68iyhh8.R.inc(11801);RenderedImage imageData = null;</span>
+<span class="fc" id="L109">        __CLR4_5_293k93km68iyhh8.R.inc(11802);IIOException firstException = null;</span>
 
-<span class="fc" id="L111">        IIOMetadata iiometa = (IIOMetadata)info.getCustomObjects().get(</span>
+<span class="fc" id="L111">        __CLR4_5_293k93km68iyhh8.R.inc(11803);IIOMetadata iiometa = (IIOMetadata)info.getCustomObjects().get(</span>
                 ImageIOUtil.IMAGEIO_METADATA);
-<span class="fc bfc" id="L113" title="All 2 branches covered.">        boolean ignoreMetadata = (iiometa != null);</span>
-<span class="fc" id="L114">        boolean providerIgnoresICC = false;</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        __CLR4_5_293k93km68iyhh8.R.inc(11804);boolean ignoreMetadata = (iiometa != null);</span>
+<span class="fc" id="L114">        __CLR4_5_293k93km68iyhh8.R.inc(11805);boolean providerIgnoresICC = false;</span>
 
-<span class="fc" id="L116">        Source src = session.needSource(info.getOriginalURI());</span>
-<span class="fc" id="L117">        ImageInputStream imgStream = ImageUtil.needImageInputStream(src);</span>
-        try {
-<span class="fc" id="L119">            Iterator iter = ImageIO.getImageReaders(imgStream);</span>
-<span class="pc bpc" id="L120" title="1 of 2 branches missed.">            while (iter.hasNext()) {</span>
-<span class="fc" id="L121">                ImageReader reader = (ImageReader)iter.next();</span>
-                try {
-<span class="fc" id="L123">                    imgStream.mark();</span>
-<span class="fc" id="L124">                    reader.setInput(imgStream, false, ignoreMetadata);</span>
-<span class="fc" id="L125">                    ImageReadParam param = getParam(reader, hints);</span>
-<span class="fc" id="L126">                    final int pageIndex = ImageUtil.needPageIndexFromURI(info.getOriginalURI());</span>
-                    try {
+<span class="fc" id="L116">        __CLR4_5_293k93km68iyhh8.R.inc(11806);Source src = session.needSource(info.getOriginalURI());</span>
+<span class="fc" id="L117">        __CLR4_5_293k93km68iyhh8.R.inc(11807);ImageInputStream imgStream = ImageUtil.needImageInputStream(src);</span>
+<span class="fc" id="L118">        __CLR4_5_293k93km68iyhh8.R.inc(11808);try {</span>
+<span class="fc" id="L119">            __CLR4_5_293k93km68iyhh8.R.inc(11809);Iterator iter = ImageIO.getImageReaders(imgStream);</span>
+<span class="pc bpc" id="L120" title="7 of 10 branches missed.">            __CLR4_5_293k93km68iyhh8.R.inc(11810);while ((((iter.hasNext())&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11811)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11812)==0&amp;false))) {{</span>
+<span class="fc" id="L121">                __CLR4_5_293k93km68iyhh8.R.inc(11813);ImageReader reader = (ImageReader)iter.next();</span>
+<span class="fc" id="L122">                __CLR4_5_293k93km68iyhh8.R.inc(11814);try {</span>
+<span class="fc" id="L123">                    __CLR4_5_293k93km68iyhh8.R.inc(11815);imgStream.mark();</span>
+<span class="fc" id="L124">                    __CLR4_5_293k93km68iyhh8.R.inc(11816);reader.setInput(imgStream, false, ignoreMetadata);</span>
+<span class="fc" id="L125">                    __CLR4_5_293k93km68iyhh8.R.inc(11817);ImageReadParam param = getParam(reader, hints);</span>
+<span class="fc" id="L126">                    __CLR4_5_293k93km68iyhh8.R.inc(11818);final int pageIndex = ImageUtil.needPageIndexFromURI(info.getOriginalURI());</span>
+<span class="fc" id="L127">                    __CLR4_5_293k93km68iyhh8.R.inc(11819);try {</span>
 //                        if (ImageFlavor.BUFFERED_IMAGE.equals(this.targetFlavor)) {
-<span class="fc" id="L129">                            imageData = reader.read(pageIndex, param);</span>
+<span class="fc" id="L129">                            __CLR4_5_293k93km68iyhh8.R.inc(11820);imageData = reader.read(pageIndex, param);</span>
 //                        } else {
 //                            imageData = reader.read(pageIndex, param);
                             //imageData = reader.readAsRenderedImage(pageIndex, param);
@@ -134,139 +134,139 @@ public class ImageLoaderImageIO extends AbstractImageLoader {
                             //to react to late pixel population (so the stream can be closed
                             //properly).
 //                        }
-<span class="fc bfc" id="L137" title="All 2 branches covered.">                        if (iiometa == null) {</span>
-<span class="fc" id="L138">                            iiometa = reader.getImageMetadata(pageIndex);</span>
+<span class="pc bpc" id="L137" title="4 of 10 branches missed.">                        __CLR4_5_293k93km68iyhh8.R.inc(11821);if ((((iiometa == null)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11822)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11823)==0&amp;false))) {{</span>
+<span class="fc" id="L138">                            __CLR4_5_293k93km68iyhh8.R.inc(11824);iiometa = reader.getImageMetadata(pageIndex);</span>
                         }
-<span class="fc" id="L140">                        providerIgnoresICC = checkProviderIgnoresICC(reader</span>
+<span class="fc" id="L140">                        }__CLR4_5_293k93km68iyhh8.R.inc(11825);providerIgnoresICC = checkProviderIgnoresICC(reader</span>
 <span class="fc" id="L141">                                .getOriginatingProvider());</span>
-                        break; //Quit early, we have the image
+<span class="fc" id="L142">                        __CLR4_5_293k93km68iyhh8.R.inc(11826);break; //Quit early, we have the image</span>
 <span class="nc" id="L143">                    } catch (IndexOutOfBoundsException indexe) {</span>
-<span class="nc" id="L144">                        throw new ImageException(&quot;Page does not exist. Invalid image index: &quot;</span>
+<span class="nc" id="L144">                        __CLR4_5_293k93km68iyhh8.R.inc(11827);throw new ImageException(&quot;Page does not exist. Invalid image index: &quot;</span>
                                 + pageIndex);
 <span class="nc" id="L146">                    } catch (IllegalArgumentException iae) {</span>
                         //Some codecs like com.sun.imageio.plugins.wbmp.WBMPImageReader throw
                         //IllegalArgumentExceptions when they have trouble parsing the image.
-<span class="nc" id="L149">                        throw new ImageException(&quot;Error loading image using ImageIO codec&quot;, iae);</span>
+<span class="nc" id="L149">                        __CLR4_5_293k93km68iyhh8.R.inc(11828);throw new ImageException(&quot;Error loading image using ImageIO codec&quot;, iae);</span>
 <span class="nc" id="L150">                    } catch (IIOException iioe) {</span>
-<span class="nc bnc" id="L151" title="All 2 branches missed.">                        if (firstException == null) {</span>
-<span class="nc" id="L152">                            firstException = iioe;</span>
-                        } else {
-<span class="nc" id="L154">                            log.debug(&quot;non-first error loading image: &quot; + iioe.getMessage());</span>
+<span class="nc bnc" id="L151" title="All 10 branches missed.">                        __CLR4_5_293k93km68iyhh8.R.inc(11829);if ((((firstException == null)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11830)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11831)==0&amp;false))) {{</span>
+<span class="nc" id="L152">                            __CLR4_5_293k93km68iyhh8.R.inc(11832);firstException = iioe;</span>
+                        } }else {{
+<span class="nc" id="L154">                            __CLR4_5_293k93km68iyhh8.R.inc(11833);log.debug(&quot;non-first error loading image: &quot; + iioe.getMessage());</span>
                         }
-                    }
-                    try {
+                    }}
+<span class="nc" id="L157">                    __CLR4_5_293k93km68iyhh8.R.inc(11834);try {</span>
                         //Try fallback for CMYK images
-<span class="nc" id="L159">                        BufferedImage bi = getFallbackBufferedImage(reader, pageIndex, param);</span>
-<span class="nc" id="L160">                        imageData = bi;</span>
-<span class="nc" id="L161">                        firstException = null; //Clear exception after successful fallback attempt</span>
-                        break;
+<span class="nc" id="L159">                        __CLR4_5_293k93km68iyhh8.R.inc(11835);BufferedImage bi = getFallbackBufferedImage(reader, pageIndex, param);</span>
+<span class="nc" id="L160">                        __CLR4_5_293k93km68iyhh8.R.inc(11836);imageData = bi;</span>
+<span class="nc" id="L161">                        __CLR4_5_293k93km68iyhh8.R.inc(11837);firstException = null; //Clear exception after successful fallback attempt</span>
+<span class="nc" id="L162">                        __CLR4_5_293k93km68iyhh8.R.inc(11838);break;</span>
 <span class="nc" id="L163">                    } catch (IIOException iioe) {</span>
                         //ignore
                     }
-<span class="nc" id="L166">                    imgStream.reset();</span>
+<span class="nc" id="L166">                    __CLR4_5_293k93km68iyhh8.R.inc(11839);imgStream.reset();</span>
                 } finally {
-<span class="fc" id="L168">                    reader.dispose();</span>
+<span class="fc" id="L168">                    __CLR4_5_293k93km68iyhh8.R.inc(11840);reader.dispose();</span>
                 }
 <span class="nc" id="L170">            }</span>
-        } finally {
-<span class="fc" id="L172">            XmlSourceUtil.closeQuietly(src);</span>
+        }} finally {
+<span class="fc" id="L172">            __CLR4_5_293k93km68iyhh8.R.inc(11841);XmlSourceUtil.closeQuietly(src);</span>
             //TODO Some codecs may do late reading.
         }
-<span class="pc bpc" id="L175" title="1 of 2 branches missed.">        if (firstException != null) {</span>
-<span class="nc" id="L176">            throw new ImageException(&quot;Error while loading image: &quot;</span>
+<span class="pc bpc" id="L175" title="7 of 10 branches missed.">        __CLR4_5_293k93km68iyhh8.R.inc(11842);if ((((firstException != null)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11843)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11844)==0&amp;false))) {{</span>
+<span class="nc" id="L176">            __CLR4_5_293k93km68iyhh8.R.inc(11845);throw new ImageException(&quot;Error while loading image: &quot;</span>
 <span class="nc" id="L177">                    + firstException.getMessage(), firstException);</span>
         }
-<span class="pc bpc" id="L179" title="1 of 2 branches missed.">        if (imageData == null) {</span>
-<span class="nc" id="L180">            throw new ImageException(&quot;No ImageIO ImageReader found .&quot;);</span>
+<span class="pc bpc" id="L179" title="7 of 10 branches missed.">        }__CLR4_5_293k93km68iyhh8.R.inc(11846);if ((((imageData == null)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11847)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11848)==0&amp;false))) {{</span>
+<span class="nc" id="L180">            __CLR4_5_293k93km68iyhh8.R.inc(11849);throw new ImageException(&quot;No ImageIO ImageReader found .&quot;);</span>
         }
 
-<span class="fc" id="L183">        ColorModel cm = imageData.getColorModel();</span>
+<span class="fc" id="L183">        }__CLR4_5_293k93km68iyhh8.R.inc(11850);ColorModel cm = imageData.getColorModel();</span>
 
-<span class="fc" id="L185">        Color transparentColor = null;</span>
-<span class="fc bfc" id="L186" title="All 2 branches covered.">        if (cm instanceof IndexColorModel) {</span>
+<span class="fc" id="L185">        __CLR4_5_293k93km68iyhh8.R.inc(11851);Color transparentColor = null;</span>
+<span class="pc bpc" id="L186" title="4 of 10 branches missed.">        __CLR4_5_293k93km68iyhh8.R.inc(11852);if ((((cm instanceof IndexColorModel)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11853)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11854)==0&amp;false))) {{</span>
             //transparent color will be extracted later from the image
-        } else {
-<span class="pc bpc" id="L189" title="2 of 4 branches missed.">            if (providerIgnoresICC &amp;&amp; cm instanceof ComponentColorModel) {</span>
+        } }else {{
+<span class="pc bpc" id="L189" title="8 of 12 branches missed.">            __CLR4_5_293k93km68iyhh8.R.inc(11855);if ((((providerIgnoresICC &amp;&amp; cm instanceof ComponentColorModel)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11856)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11857)==0&amp;false))) {{</span>
                 // Apply ICC Profile to Image by creating a new image with a new
                 // color model.
-<span class="fc" id="L192">                ICC_Profile iccProf = tryToExctractICCProfile(iiometa);</span>
-<span class="fc bfc" id="L193" title="All 2 branches covered.">                if (iccProf != null) {</span>
-<span class="fc" id="L194">                    ColorModel cm2 = new ComponentColorModel(</span>
+<span class="fc" id="L192">                __CLR4_5_293k93km68iyhh8.R.inc(11858);ICC_Profile iccProf = tryToExctractICCProfile(iiometa);</span>
+<span class="pc bpc" id="L193" title="4 of 10 branches missed.">                __CLR4_5_293k93km68iyhh8.R.inc(11859);if ((((iccProf != null)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11860)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11861)==0&amp;false))) {{</span>
+<span class="fc" id="L194">                    __CLR4_5_293k93km68iyhh8.R.inc(11862);ColorModel cm2 = new ComponentColorModel(</span>
 <span class="fc" id="L195">                            new ICC_ColorSpace(iccProf), cm.hasAlpha(), cm</span>
 <span class="fc" id="L196">                                    .isAlphaPremultiplied(), cm</span>
 <span class="fc" id="L197">                                    .getTransparency(), cm.getTransferType());</span>
-<span class="fc" id="L198">                    WritableRaster wr = Raster.createWritableRaster(imageData</span>
+<span class="fc" id="L198">                    __CLR4_5_293k93km68iyhh8.R.inc(11863);WritableRaster wr = Raster.createWritableRaster(imageData</span>
 <span class="fc" id="L199">                            .getSampleModel(), null);</span>
-<span class="fc" id="L200">                    imageData.copyData(wr);</span>
-                    try {
-<span class="fc" id="L202">                        BufferedImage bi = new BufferedImage(cm2, wr, cm2</span>
+<span class="fc" id="L200">                    __CLR4_5_293k93km68iyhh8.R.inc(11864);imageData.copyData(wr);</span>
+<span class="fc" id="L201">                    __CLR4_5_293k93km68iyhh8.R.inc(11865);try {</span>
+<span class="fc" id="L202">                        __CLR4_5_293k93km68iyhh8.R.inc(11866);BufferedImage bi = new BufferedImage(cm2, wr, cm2</span>
 <span class="fc" id="L203">                                .isAlphaPremultiplied(), null);</span>
-<span class="fc" id="L204">                        imageData = bi;</span>
-<span class="fc" id="L205">                        cm = cm2;</span>
+<span class="fc" id="L204">                        __CLR4_5_293k93km68iyhh8.R.inc(11867);imageData = bi;</span>
+<span class="fc" id="L205">                        __CLR4_5_293k93km68iyhh8.R.inc(11868);cm = cm2;</span>
 <span class="fc" id="L206">                    } catch (IllegalArgumentException iae) {</span>
-<span class="fc" id="L207">                        String msg = &quot;Image &quot; + info.getOriginalURI()</span>
+<span class="fc" id="L207">                        __CLR4_5_293k93km68iyhh8.R.inc(11869);String msg = &quot;Image &quot; + info.getOriginalURI()</span>
                                 + &quot; has an incompatible color profile.&quot;
                                 + &quot; The color profile will be ignored.&quot;
                                 + &quot;\nColor model of loaded bitmap: &quot; + cm
                                 + &quot;\nColor model of color profile: &quot; + cm2;
-<span class="pc bpc" id="L212" title="1 of 2 branches missed.">                        if (info.getCustomObjects().get(&quot;warningincustomobject&quot;) != null) {</span>
-<span class="nc" id="L213">                            info.getCustomObjects().put(&quot;warning&quot;, msg);</span>
-                        } else {
-<span class="fc" id="L215">                            log.warn(msg);</span>
+<span class="pc bpc" id="L212" title="7 of 10 branches missed.">                        __CLR4_5_293k93km68iyhh8.R.inc(11870);if ((((info.getCustomObjects().get(&quot;warningincustomobject&quot;) != null)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11871)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11872)==0&amp;false))) {{</span>
+<span class="nc" id="L213">                            __CLR4_5_293k93km68iyhh8.R.inc(11873);info.getCustomObjects().put(&quot;warning&quot;, msg);</span>
+                        } }else {{
+<span class="fc" id="L215">                            __CLR4_5_293k93km68iyhh8.R.inc(11874);log.warn(msg);</span>
                         }
-<span class="fc" id="L217">                    }</span>
+<span class="fc" id="L217">                    }}</span>
                 }
-            }
+            }}
 
             // ImageIOUtil.dumpMetadataToSystemOut(iiometa);
             // Retrieve the transparent color from the metadata
-<span class="pc bpc" id="L223" title="2 of 4 branches missed.">            if (iiometa != null &amp;&amp; iiometa.isStandardMetadataFormatSupported()) {</span>
-<span class="fc" id="L224">                Element metanode = (Element)iiometa.getAsTree(</span>
+<span class="pc bpc" id="L223" title="8 of 12 branches missed.">            }__CLR4_5_293k93km68iyhh8.R.inc(11875);if ((((iiometa != null &amp;&amp; iiometa.isStandardMetadataFormatSupported())&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11876)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11877)==0&amp;false))) {{</span>
+<span class="fc" id="L224">                __CLR4_5_293k93km68iyhh8.R.inc(11878);Element metanode = (Element)iiometa.getAsTree(</span>
                         IIOMetadataFormatImpl.standardMetadataFormatName);
-<span class="fc" id="L226">                Element dim = ImageIOUtil.getChild(metanode, &quot;Transparency&quot;);</span>
-<span class="fc bfc" id="L227" title="All 2 branches covered.">                if (dim != null) {</span>
-                    Element child;
-<span class="fc" id="L229">                    child = ImageIOUtil.getChild(dim, &quot;TransparentColor&quot;);</span>
-<span class="pc bpc" id="L230" title="1 of 2 branches missed.">                    if (child != null) {</span>
-<span class="nc" id="L231">                        String value = child.getAttribute(&quot;value&quot;);</span>
-<span class="nc bnc" id="L232" title="All 2 branches missed.">                        if (value.length() == 0) {</span>
+<span class="fc" id="L226">                __CLR4_5_293k93km68iyhh8.R.inc(11879);Element dim = ImageIOUtil.getChild(metanode, &quot;Transparency&quot;);</span>
+<span class="pc bpc" id="L227" title="4 of 10 branches missed.">                __CLR4_5_293k93km68iyhh8.R.inc(11880);if ((((dim != null)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11881)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11882)==0&amp;false))) {{</span>
+<span class="fc" id="L228">                    __CLR4_5_293k93km68iyhh8.R.inc(11883);Element child;</span>
+<span class="fc" id="L229">                    __CLR4_5_293k93km68iyhh8.R.inc(11884);child = ImageIOUtil.getChild(dim, &quot;TransparentColor&quot;);</span>
+<span class="pc bpc" id="L230" title="7 of 10 branches missed.">                    __CLR4_5_293k93km68iyhh8.R.inc(11885);if ((((child != null)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11886)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11887)==0&amp;false))) {{</span>
+<span class="nc" id="L231">                        __CLR4_5_293k93km68iyhh8.R.inc(11888);String value = child.getAttribute(&quot;value&quot;);</span>
+<span class="nc bnc" id="L232" title="All 10 branches missed.">                        __CLR4_5_293k93km68iyhh8.R.inc(11889);if ((((value.length() == 0)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11890)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11891)==0&amp;false))) {{</span>
                             //ignore
-<span class="nc bnc" id="L234" title="All 2 branches missed.">                        } else if (cm.getNumColorComponents() == 1) {</span>
-<span class="nc" id="L235">                            int gray = Integer.parseInt(value);</span>
-<span class="nc" id="L236">                            transparentColor = new Color(gray, gray, gray);</span>
-<span class="nc" id="L237">                        } else {</span>
-<span class="nc" id="L238">                            StringTokenizer st = new StringTokenizer(value);</span>
-<span class="nc" id="L239">                            transparentColor = new Color(</span>
+<span class="nc bnc" id="L234" title="All 10 branches missed.">                        } }else {__CLR4_5_293k93km68iyhh8.R.inc(11892);if ((((cm.getNumColorComponents() == 1)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11893)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11894)==0&amp;false))) {{</span>
+<span class="nc" id="L235">                            __CLR4_5_293k93km68iyhh8.R.inc(11895);int gray = Integer.parseInt(value);</span>
+<span class="nc" id="L236">                            __CLR4_5_293k93km68iyhh8.R.inc(11896);transparentColor = new Color(gray, gray, gray);</span>
+<span class="nc" id="L237">                        } }else {{</span>
+<span class="nc" id="L238">                            __CLR4_5_293k93km68iyhh8.R.inc(11897);StringTokenizer st = new StringTokenizer(value);</span>
+<span class="nc" id="L239">                            __CLR4_5_293k93km68iyhh8.R.inc(11898);transparentColor = new Color(</span>
 <span class="nc" id="L240">                                    Integer.parseInt(st.nextToken()),</span>
 <span class="nc" id="L241">                                    Integer.parseInt(st.nextToken()),</span>
 <span class="nc" id="L242">                                    Integer.parseInt(st.nextToken()));</span>
                         }
-                    }
-                }
-            }
-        }
+                    }}}
+                }}
+            }}
+        }}
 
-<span class="fc bfc" id="L249" title="All 2 branches covered.">        if (ImageFlavor.BUFFERED_IMAGE.equals(this.targetFlavor)) {</span>
-<span class="fc" id="L250">            return new ImageBuffered(info, (BufferedImage)imageData, transparentColor);</span>
-        } else {
-<span class="fc" id="L252">            return new ImageRendered(info, imageData, transparentColor);</span>
+<span class="pc bpc" id="L249" title="4 of 10 branches missed.">        }__CLR4_5_293k93km68iyhh8.R.inc(11899);if ((((ImageFlavor.BUFFERED_IMAGE.equals(this.targetFlavor))&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11900)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11901)==0&amp;false))) {{</span>
+<span class="fc" id="L250">            __CLR4_5_293k93km68iyhh8.R.inc(11902);return new ImageBuffered(info, (BufferedImage)imageData, transparentColor);</span>
+        } }else {{
+<span class="fc" id="L252">            __CLR4_5_293k93km68iyhh8.R.inc(11903);return new ImageRendered(info, imageData, transparentColor);</span>
         }
-    }
+<span class="fc" id="L254">    }}finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 
-    private ImageReadParam getParam(ImageReader reader, Map hints) throws IOException {
-<span class="pc bpc" id="L257" title="1 of 4 branches missed.">        if (hints != null &amp;&amp; Boolean.TRUE.equals(hints.get(&quot;CMYK&quot;))) {</span>
-<span class="nc" id="L258">            Iterator&lt;ImageTypeSpecifier&gt; types = reader.getImageTypes(0);</span>
-<span class="nc bnc" id="L259" title="All 2 branches missed.">            while (types.hasNext()) {</span>
-<span class="nc" id="L260">                ImageTypeSpecifier type = types.next();</span>
-<span class="nc bnc" id="L261" title="All 2 branches missed.">                if (type.getNumComponents() == 4) {</span>
-<span class="nc" id="L262">                    ImageReadParam param = new ImageReadParam();</span>
-<span class="nc" id="L263">                    param.setDestinationType(type);</span>
-<span class="nc" id="L264">                    return param;</span>
+<span class="fc" id="L256">    private ImageReadParam getParam(ImageReader reader, Map hints) throws IOException {try{__CLR4_5_293k93km68iyhh8.R.inc(11904);</span>
+<span class="pc bpc" id="L257" title="7 of 12 branches missed.">        __CLR4_5_293k93km68iyhh8.R.inc(11905);if ((((hints != null &amp;&amp; Boolean.TRUE.equals(hints.get(&quot;CMYK&quot;)))&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11906)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11907)==0&amp;false))) {{</span>
+<span class="nc" id="L258">            __CLR4_5_293k93km68iyhh8.R.inc(11908);Iterator&lt;ImageTypeSpecifier&gt; types = reader.getImageTypes(0);</span>
+<span class="nc bnc" id="L259" title="All 10 branches missed.">            __CLR4_5_293k93km68iyhh8.R.inc(11909);while ((((types.hasNext())&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11910)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11911)==0&amp;false))) {{</span>
+<span class="nc" id="L260">                __CLR4_5_293k93km68iyhh8.R.inc(11912);ImageTypeSpecifier type = types.next();</span>
+<span class="nc bnc" id="L261" title="All 10 branches missed.">                __CLR4_5_293k93km68iyhh8.R.inc(11913);if ((((type.getNumComponents() == 4)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11914)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11915)==0&amp;false))) {{</span>
+<span class="nc" id="L262">                    __CLR4_5_293k93km68iyhh8.R.inc(11916);ImageReadParam param = new ImageReadParam();</span>
+<span class="nc" id="L263">                    __CLR4_5_293k93km68iyhh8.R.inc(11917);param.setDestinationType(type);</span>
+<span class="nc" id="L264">                    __CLR4_5_293k93km68iyhh8.R.inc(11918);return param;</span>
                 }
-<span class="nc" id="L266">            }</span>
-        }
-<span class="fc" id="L268">        return reader.getDefaultReadParam();</span>
-    }
+<span class="nc" id="L266">            }}</span>
+        }}
+<span class="fc" id="L268">        }__CLR4_5_293k93km68iyhh8.R.inc(11919);return reader.getDefaultReadParam();</span>
+<span class="fc" id="L269">    }finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 
     /**
      * Checks if the provider ignores the ICC color profile. This method will
@@ -278,16 +278,16 @@ public class ImageLoaderImageIO extends AbstractImageLoader {
      * @return true if we know the provider to be broken and ignore ICC
      *         profiles.
      */
-    private boolean checkProviderIgnoresICC(IIOServiceProvider provider) {
+<span class="fc" id="L281">    private boolean checkProviderIgnoresICC(IIOServiceProvider provider) {try{__CLR4_5_293k93km68iyhh8.R.inc(11920);</span>
         // TODO: This information could be cached.
-<span class="fc" id="L283">        StringBuffer b = new StringBuffer(provider.getDescription(Locale.ENGLISH));</span>
-<span class="fc" id="L284">        b.append('/').append(provider.getVendorName());</span>
-<span class="fc" id="L285">        b.append('/').append(provider.getVersion());</span>
-<span class="pc bpc" id="L286" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
-<span class="nc" id="L287">            log.debug(&quot;Image Provider: &quot; + b.toString());</span>
+<span class="fc" id="L283">        __CLR4_5_293k93km68iyhh8.R.inc(11921);StringBuffer b = new StringBuffer(provider.getDescription(Locale.ENGLISH));</span>
+<span class="fc" id="L284">        __CLR4_5_293k93km68iyhh8.R.inc(11922);b.append('/').append(provider.getVendorName());</span>
+<span class="fc" id="L285">        __CLR4_5_293k93km68iyhh8.R.inc(11923);b.append('/').append(provider.getVersion());</span>
+<span class="pc bpc" id="L286" title="7 of 10 branches missed.">        __CLR4_5_293k93km68iyhh8.R.inc(11924);if ((((log.isDebugEnabled())&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11925)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11926)==0&amp;false))) {{</span>
+<span class="nc" id="L287">            __CLR4_5_293k93km68iyhh8.R.inc(11927);log.debug(&quot;Image Provider: &quot; + b.toString());</span>
         }
-<span class="fc" id="L289">        return ImageLoaderImageIO.PROVIDERS_IGNORING_ICC.contains(b.toString());</span>
-    }
+<span class="fc" id="L289">        }__CLR4_5_293k93km68iyhh8.R.inc(11928);return ImageLoaderImageIO.PROVIDERS_IGNORING_ICC.contains(b.toString());</span>
+<span class="fc" id="L290">    }finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 
     /**
      * Extract ICC Profile from ImageIO Metadata. This method currently only
@@ -297,122 +297,122 @@ public class ImageLoaderImageIO extends AbstractImageLoader {
      *            The ImageIO Metadata
      * @return an ICC Profile or null.
      */
-    private ICC_Profile tryToExctractICCProfile(IIOMetadata iiometa) {
-<span class="fc" id="L301">        ICC_Profile iccProf = null;</span>
-<span class="fc" id="L302">        String[] supportedFormats = iiometa.getMetadataFormatNames();</span>
-<span class="fc bfc" id="L303" title="All 2 branches covered.">        for (String format : supportedFormats) {</span>
-<span class="fc" id="L304">            Element root = (Element) iiometa.getAsTree(format);</span>
-<span class="fc bfc" id="L305" title="All 2 branches covered.">            if (PNG_METADATA_NODE.equals(format)) {</span>
-<span class="fc" id="L306">                iccProf = this</span>
+<span class="fc" id="L300">    private ICC_Profile tryToExctractICCProfile(IIOMetadata iiometa) {try{__CLR4_5_293k93km68iyhh8.R.inc(11929);</span>
+<span class="fc" id="L301">        __CLR4_5_293k93km68iyhh8.R.inc(11930);ICC_Profile iccProf = null;</span>
+<span class="fc" id="L302">        __CLR4_5_293k93km68iyhh8.R.inc(11931);String[] supportedFormats = iiometa.getMetadataFormatNames();</span>
+<span class="fc bfc" id="L303" title="All 2 branches covered.">        __CLR4_5_293k93km68iyhh8.R.inc(11932);for (String format : supportedFormats) {{</span>
+<span class="fc" id="L304">            __CLR4_5_293k93km68iyhh8.R.inc(11933);Element root = (Element) iiometa.getAsTree(format);</span>
+<span class="pc bpc" id="L305" title="4 of 10 branches missed.">            __CLR4_5_293k93km68iyhh8.R.inc(11934);if ((((PNG_METADATA_NODE.equals(format))&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11935)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11936)==0&amp;false))) {{</span>
+<span class="fc" id="L306">                __CLR4_5_293k93km68iyhh8.R.inc(11937);iccProf = this</span>
 <span class="fc" id="L307">                        .tryToExctractICCProfileFromPNGMetadataNode(root);</span>
-<span class="fc bfc" id="L308" title="All 2 branches covered.">            } else if (JPEG_METADATA_NODE.equals(format)) {</span>
-<span class="fc" id="L309">                iccProf = this.tryToExctractICCProfileFromJPEGMetadataNode(root);</span>
+<span class="pc bpc" id="L308" title="4 of 10 branches missed.">            } }else {__CLR4_5_293k93km68iyhh8.R.inc(11938);if ((((JPEG_METADATA_NODE.equals(format))&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11939)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11940)==0&amp;false))) {{</span>
+<span class="fc" id="L309">                __CLR4_5_293k93km68iyhh8.R.inc(11941);iccProf = this.tryToExctractICCProfileFromJPEGMetadataNode(root);</span>
             }
-        }
-<span class="fc" id="L312">        return iccProf;</span>
-    }
+        }}}
+<span class="fc" id="L312">        }__CLR4_5_293k93km68iyhh8.R.inc(11942);return iccProf;</span>
+<span class="fc" id="L313">    }finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 
     private ICC_Profile tryToExctractICCProfileFromPNGMetadataNode(
-            Element pngNode) {
-<span class="fc" id="L317">        ICC_Profile iccProf = null;</span>
-<span class="fc" id="L318">        Element iccpNode = ImageIOUtil.getChild(pngNode, &quot;iCCP&quot;);</span>
-<span class="fc bfc" id="L319" title="All 2 branches covered.">        if (iccpNode instanceof IIOMetadataNode) {</span>
-<span class="fc" id="L320">            IIOMetadataNode imn = (IIOMetadataNode) iccpNode;</span>
-<span class="fc" id="L321">            byte[] prof = (byte[]) imn.getUserObject();</span>
-<span class="fc" id="L322">            String comp = imn.getAttribute(&quot;compressionMethod&quot;);</span>
-<span class="pc bpc" id="L323" title="1 of 2 branches missed.">            if (&quot;deflate&quot;.equalsIgnoreCase(comp)) {</span>
-<span class="fc" id="L324">                Inflater decompresser = new Inflater();</span>
-<span class="fc" id="L325">                decompresser.setInput(prof);</span>
-<span class="fc" id="L326">                byte[] result = new byte[100];</span>
-<span class="fc" id="L327">                ByteArrayOutputStream bos = new ByteArrayOutputStream();</span>
-<span class="fc" id="L328">                boolean failed = false;</span>
-<span class="fc bfc" id="L329" title="All 4 branches covered.">                while (!decompresser.finished() &amp;&amp; !failed) {</span>
-                    try {
-<span class="fc" id="L331">                        int resultLength = decompresser.inflate(result);</span>
-<span class="fc" id="L332">                        bos.write(result, 0, resultLength);</span>
-<span class="fc bfc" id="L333" title="All 2 branches covered.">                        if (resultLength == 0) {</span>
+<span class="fc" id="L316">            Element pngNode) {try{__CLR4_5_293k93km68iyhh8.R.inc(11943);</span>
+<span class="fc" id="L317">        __CLR4_5_293k93km68iyhh8.R.inc(11944);ICC_Profile iccProf = null;</span>
+<span class="fc" id="L318">        __CLR4_5_293k93km68iyhh8.R.inc(11945);Element iccpNode = ImageIOUtil.getChild(pngNode, &quot;iCCP&quot;);</span>
+<span class="pc bpc" id="L319" title="4 of 10 branches missed.">        __CLR4_5_293k93km68iyhh8.R.inc(11946);if ((((iccpNode instanceof IIOMetadataNode)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11947)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11948)==0&amp;false))) {{</span>
+<span class="fc" id="L320">            __CLR4_5_293k93km68iyhh8.R.inc(11949);IIOMetadataNode imn = (IIOMetadataNode) iccpNode;</span>
+<span class="fc" id="L321">            __CLR4_5_293k93km68iyhh8.R.inc(11950);byte[] prof = (byte[]) imn.getUserObject();</span>
+<span class="fc" id="L322">            __CLR4_5_293k93km68iyhh8.R.inc(11951);String comp = imn.getAttribute(&quot;compressionMethod&quot;);</span>
+<span class="pc bpc" id="L323" title="7 of 10 branches missed.">            __CLR4_5_293k93km68iyhh8.R.inc(11952);if ((((&quot;deflate&quot;.equalsIgnoreCase(comp))&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11953)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11954)==0&amp;false))) {{</span>
+<span class="fc" id="L324">                __CLR4_5_293k93km68iyhh8.R.inc(11955);Inflater decompresser = new Inflater();</span>
+<span class="fc" id="L325">                __CLR4_5_293k93km68iyhh8.R.inc(11956);decompresser.setInput(prof);</span>
+<span class="fc" id="L326">                __CLR4_5_293k93km68iyhh8.R.inc(11957);byte[] result = new byte[100];</span>
+<span class="fc" id="L327">                __CLR4_5_293k93km68iyhh8.R.inc(11958);ByteArrayOutputStream bos = new ByteArrayOutputStream();</span>
+<span class="fc" id="L328">                __CLR4_5_293k93km68iyhh8.R.inc(11959);boolean failed = false;</span>
+<span class="pc bpc" id="L329" title="4 of 12 branches missed.">                __CLR4_5_293k93km68iyhh8.R.inc(11960);while ((((!decompresser.finished() &amp;&amp; !failed)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11961)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11962)==0&amp;false))) {{</span>
+<span class="fc" id="L330">                    __CLR4_5_293k93km68iyhh8.R.inc(11963);try {</span>
+<span class="fc" id="L331">                        __CLR4_5_293k93km68iyhh8.R.inc(11964);int resultLength = decompresser.inflate(result);</span>
+<span class="fc" id="L332">                        __CLR4_5_293k93km68iyhh8.R.inc(11965);bos.write(result, 0, resultLength);</span>
+<span class="pc bpc" id="L333" title="4 of 10 branches missed.">                        __CLR4_5_293k93km68iyhh8.R.inc(11966);if ((((resultLength == 0)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11967)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11968)==0&amp;false))) {{</span>
                             // this means more data or an external dictionary is
                             // needed. Both of which are not available, so we
                             // fail.
-<span class="fc" id="L337">                            log.debug(&quot;Failed to deflate ICC Profile&quot;);</span>
-<span class="fc" id="L338">                            failed = true;</span>
+<span class="fc" id="L337">                            __CLR4_5_293k93km68iyhh8.R.inc(11969);log.debug(&quot;Failed to deflate ICC Profile&quot;);</span>
+<span class="fc" id="L338">                            __CLR4_5_293k93km68iyhh8.R.inc(11970);failed = true;</span>
                         }
-<span class="nc" id="L340">                    } catch (DataFormatException e) {</span>
-<span class="nc" id="L341">                        log.debug(&quot;Failed to deflate ICC Profile&quot;, e);</span>
-<span class="nc" id="L342">                        failed = true;</span>
+<span class="nc" id="L340">                    }} catch (DataFormatException e) {</span>
+<span class="nc" id="L341">                        __CLR4_5_293k93km68iyhh8.R.inc(11971);log.debug(&quot;Failed to deflate ICC Profile&quot;, e);</span>
+<span class="nc" id="L342">                        __CLR4_5_293k93km68iyhh8.R.inc(11972);failed = true;</span>
 <span class="pc" id="L343">                    }</span>
                 }
-<span class="fc" id="L345">                decompresser.end();</span>
-                try {
-<span class="fc" id="L347">                    iccProf = ColorProfileUtil.getICC_Profile(bos.toByteArray());</span>
+<span class="fc" id="L345">                }__CLR4_5_293k93km68iyhh8.R.inc(11973);decompresser.end();</span>
+<span class="fc" id="L346">                __CLR4_5_293k93km68iyhh8.R.inc(11974);try {</span>
+<span class="fc" id="L347">                    __CLR4_5_293k93km68iyhh8.R.inc(11975);iccProf = ColorProfileUtil.getICC_Profile(bos.toByteArray());</span>
 <span class="nc" id="L348">                } catch (IllegalArgumentException e) {</span>
-<span class="nc" id="L349">                    log.debug(&quot;Failed to interpret embedded ICC Profile&quot;, e);</span>
-<span class="nc" id="L350">                    iccProf = null;</span>
+<span class="nc" id="L349">                    __CLR4_5_293k93km68iyhh8.R.inc(11976);log.debug(&quot;Failed to interpret embedded ICC Profile&quot;, e);</span>
+<span class="nc" id="L350">                    __CLR4_5_293k93km68iyhh8.R.inc(11977);iccProf = null;</span>
 <span class="fc" id="L351">                }</span>
             }
-        }
-<span class="fc" id="L354">        return iccProf;</span>
-    }
+        }}
+<span class="fc" id="L354">        }__CLR4_5_293k93km68iyhh8.R.inc(11978);return iccProf;</span>
+<span class="fc" id="L355">    }finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 
     private ICC_Profile tryToExctractICCProfileFromJPEGMetadataNode(
-            Element jpgNode) {
-<span class="fc" id="L359">        ICC_Profile iccProf = null;</span>
-<span class="fc" id="L360">        Element jfifNode = ImageIOUtil.getChild(jpgNode, &quot;app0JFIF&quot;);</span>
-<span class="pc bpc" id="L361" title="1 of 2 branches missed.">        if (jfifNode != null) {</span>
-<span class="fc" id="L362">            Element app2iccNode = ImageIOUtil.getChild(jfifNode, &quot;app2ICC&quot;);</span>
-<span class="pc bpc" id="L363" title="1 of 2 branches missed.">            if (app2iccNode instanceof IIOMetadataNode) {</span>
-<span class="fc" id="L364">                IIOMetadataNode imn = (IIOMetadataNode) app2iccNode;</span>
-<span class="fc" id="L365">                iccProf = (ICC_Profile) imn.getUserObject();</span>
+<span class="fc" id="L358">            Element jpgNode) {try{__CLR4_5_293k93km68iyhh8.R.inc(11979);</span>
+<span class="fc" id="L359">        __CLR4_5_293k93km68iyhh8.R.inc(11980);ICC_Profile iccProf = null;</span>
+<span class="fc" id="L360">        __CLR4_5_293k93km68iyhh8.R.inc(11981);Element jfifNode = ImageIOUtil.getChild(jpgNode, &quot;app0JFIF&quot;);</span>
+<span class="pc bpc" id="L361" title="7 of 10 branches missed.">        __CLR4_5_293k93km68iyhh8.R.inc(11982);if ((((jfifNode != null)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11983)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11984)==0&amp;false))) {{</span>
+<span class="fc" id="L362">            __CLR4_5_293k93km68iyhh8.R.inc(11985);Element app2iccNode = ImageIOUtil.getChild(jfifNode, &quot;app2ICC&quot;);</span>
+<span class="pc bpc" id="L363" title="7 of 10 branches missed.">            __CLR4_5_293k93km68iyhh8.R.inc(11986);if ((((app2iccNode instanceof IIOMetadataNode)&amp;&amp;(__CLR4_5_293k93km68iyhh8.R.iget(11987)!=0|true))||(__CLR4_5_293k93km68iyhh8.R.iget(11988)==0&amp;false))) {{</span>
+<span class="fc" id="L364">                __CLR4_5_293k93km68iyhh8.R.inc(11989);IIOMetadataNode imn = (IIOMetadataNode) app2iccNode;</span>
+<span class="fc" id="L365">                __CLR4_5_293k93km68iyhh8.R.inc(11990);iccProf = (ICC_Profile) imn.getUserObject();</span>
             }
-        }
-<span class="fc" id="L368">        return iccProf;</span>
-    }
+        }}
+<span class="fc" id="L368">        }__CLR4_5_293k93km68iyhh8.R.inc(11991);return iccProf;</span>
+<span class="fc" id="L369">    }finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 
     private BufferedImage getFallbackBufferedImage(ImageReader reader,
-            int pageIndex, ImageReadParam param) throws IOException {
+<span class="nc" id="L372">            int pageIndex, ImageReadParam param) throws IOException {try{__CLR4_5_293k93km68iyhh8.R.inc(11992);</span>
         //Work-around found at: http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4799903
         //There are some additional ideas there if someone wants to go further.
 
         // Try reading a Raster (no color conversion).
-<span class="nc" id="L377">        Raster raster = reader.readRaster(pageIndex, param);</span>
+<span class="nc" id="L377">        __CLR4_5_293k93km68iyhh8.R.inc(11993);Raster raster = reader.readRaster(pageIndex, param);</span>
 
         // Arbitrarily select a BufferedImage type.
-        int imageType;
-<span class="nc" id="L381">        int numBands = raster.getNumBands();</span>
-<span class="nc bnc" id="L382" title="All 4 branches missed.">        switch(numBands) {</span>
-        case 1:
-<span class="nc" id="L384">            imageType = BufferedImage.TYPE_BYTE_GRAY;</span>
-<span class="nc" id="L385">            break;</span>
-        case 3:
-<span class="nc" id="L387">            imageType = BufferedImage.TYPE_3BYTE_BGR;</span>
-<span class="nc" id="L388">            break;</span>
-        case 4:
-<span class="nc" id="L390">            imageType = BufferedImage.TYPE_4BYTE_ABGR;</span>
-<span class="nc" id="L391">            break;</span>
-        default:
-<span class="nc" id="L393">            throw new UnsupportedOperationException(&quot;Unsupported band count: &quot; + numBands);</span>
+<span class="nc" id="L380">        __CLR4_5_293k93km68iyhh8.R.inc(11994);int imageType;</span>
+<span class="nc" id="L381">        __CLR4_5_293k93km68iyhh8.R.inc(11995);int numBands = raster.getNumBands();</span>
+<span class="nc bnc" id="L382" title="All 4 branches missed.">        boolean __CLB4_5_2_bool0=false;__CLR4_5_293k93km68iyhh8.R.inc(11996);switch(numBands) {</span>
+<span class="nc bnc" id="L383" title="All 2 branches missed.">        case 1:if (!__CLB4_5_2_bool0) {__CLR4_5_293k93km68iyhh8.R.inc(11997);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L384">            __CLR4_5_293k93km68iyhh8.R.inc(11998);imageType = BufferedImage.TYPE_BYTE_GRAY;</span>
+<span class="nc" id="L385">            __CLR4_5_293k93km68iyhh8.R.inc(11999);break;</span>
+<span class="nc bnc" id="L386" title="All 2 branches missed.">        case 3:if (!__CLB4_5_2_bool0) {__CLR4_5_293k93km68iyhh8.R.inc(12000);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L387">            __CLR4_5_293k93km68iyhh8.R.inc(12001);imageType = BufferedImage.TYPE_3BYTE_BGR;</span>
+<span class="nc" id="L388">            __CLR4_5_293k93km68iyhh8.R.inc(12002);break;</span>
+<span class="nc bnc" id="L389" title="All 2 branches missed.">        case 4:if (!__CLB4_5_2_bool0) {__CLR4_5_293k93km68iyhh8.R.inc(12003);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L390">            __CLR4_5_293k93km68iyhh8.R.inc(12004);imageType = BufferedImage.TYPE_4BYTE_ABGR;</span>
+<span class="nc" id="L391">            __CLR4_5_293k93km68iyhh8.R.inc(12005);break;</span>
+<span class="nc bnc" id="L392" title="All 2 branches missed.">        default:if (!__CLB4_5_2_bool0) {__CLR4_5_293k93km68iyhh8.R.inc(12006);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L393">            __CLR4_5_293k93km68iyhh8.R.inc(12007);throw new UnsupportedOperationException(&quot;Unsupported band count: &quot; + numBands);</span>
         }
 
         // Create a BufferedImage.
-<span class="nc" id="L397">        BufferedImage bi = new BufferedImage(raster.getWidth(),</span>
+<span class="nc" id="L397">        __CLR4_5_293k93km68iyhh8.R.inc(12008);BufferedImage bi = new BufferedImage(raster.getWidth(),</span>
 <span class="nc" id="L398">                                  raster.getHeight(),</span>
                                   imageType);
 
         // Set the image data.
-<span class="nc" id="L402">        bi.getRaster().setRect(raster);</span>
-<span class="nc" id="L403">        return bi;</span>
-    }
+<span class="nc" id="L402">        __CLR4_5_293k93km68iyhh8.R.inc(12009);bi.getRaster().setRect(raster);</span>
+<span class="nc" id="L403">        __CLR4_5_293k93km68iyhh8.R.inc(12010);return bi;</span>
+<span class="nc" id="L404">    }finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 
-    static {
+<span class="fc" id="L406">    static {try{__CLR4_5_293k93km68iyhh8.R.inc(12011);</span>
         // TODO: This list could be kept in a resource file.
-<span class="fc" id="L408">        PROVIDERS_IGNORING_ICC</span>
+<span class="fc" id="L408">        __CLR4_5_293k93km68iyhh8.R.inc(12012);PROVIDERS_IGNORING_ICC</span>
 <span class="fc" id="L409">                .add(&quot;Standard PNG image reader/Sun Microsystems, Inc./1.0&quot;);</span>
-<span class="fc" id="L410">        PROVIDERS_IGNORING_ICC</span>
+<span class="fc" id="L410">        __CLR4_5_293k93km68iyhh8.R.inc(12013);PROVIDERS_IGNORING_ICC</span>
 <span class="fc" id="L411">                .add(&quot;Standard PNG image reader/Oracle Corporation/1.0&quot;);</span>
-<span class="fc" id="L412">        PROVIDERS_IGNORING_ICC</span>
+<span class="fc" id="L412">        __CLR4_5_293k93km68iyhh8.R.inc(12014);PROVIDERS_IGNORING_ICC</span>
 <span class="fc" id="L413">                .add(&quot;Standard JPEG Image Reader/Sun Microsystems, Inc./0.5&quot;);</span>
-<span class="fc" id="L414">        PROVIDERS_IGNORING_ICC</span>
+<span class="fc" id="L414">        __CLR4_5_293k93km68iyhh8.R.inc(12015);PROVIDERS_IGNORING_ICC</span>
 <span class="fc" id="L415">                .add(&quot;Standard JPEG Image Reader/Oracle Corporation/0.5&quot;);</span>
-<span class="fc" id="L416">    }</span>
+<span class="fc" id="L416">    }finally{__CLR4_5_293k93km68iyhh8.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

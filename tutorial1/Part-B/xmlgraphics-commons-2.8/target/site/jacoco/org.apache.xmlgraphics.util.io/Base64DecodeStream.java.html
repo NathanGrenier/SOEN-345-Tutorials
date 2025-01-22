@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Base64DecodeStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.io</a> &gt; <span class="el_source">Base64DecodeStream.java</span></div><h1>Base64DecodeStream.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Base64DecodeStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.io</a> &gt; <span class="el_source">Base64DecodeStream.java</span></div><h1>Base64DecodeStream.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -54,144 +54,144 @@ import java.io.InputStream;
  * Originally authored by Thomas DeWeese, Vincent Hardy, and Chuck McManis.
  */
 
-public class Base64DecodeStream extends InputStream {
+<span class="pc bpc" id="L57" title="3 of 4 branches missed.">public class Base64DecodeStream extends InputStream {public static class __CLR4_5_2g0bg0bm68iyigf{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,20853,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     InputStream src;
 
-<span class="fc" id="L61">    public Base64DecodeStream(InputStream src) {</span>
-<span class="fc" id="L62">        this.src = src;</span>
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L61">    public Base64DecodeStream(InputStream src) {try{__CLR4_5_2g0bg0bm68iyigf.R.inc(20747);</span>
+<span class="fc" id="L62">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20748);this.src = src;</span>
+<span class="fc" id="L63">    }finally{__CLR4_5_2g0bg0bm68iyigf.R.flushNeeded();}}</span>
 
 <span class="fc" id="L65">    private static final byte[] PEM_ARRAY = new byte[256];</span>
-    static {
-<span class="fc bfc" id="L67" title="All 2 branches covered.">        for (int i = 0; i &lt; PEM_ARRAY.length; i++) {</span>
-<span class="fc" id="L68">            PEM_ARRAY[i] = -1;</span>
+<span class="fc" id="L66">    static {try{__CLR4_5_2g0bg0bm68iyigf.R.inc(20749);</span>
+<span class="pc bpc" id="L67" title="4 of 10 branches missed.">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20750);for (int i = 0; (((i &lt; PEM_ARRAY.length)&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20751)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20752)==0&amp;false)); i++) {{</span>
+<span class="fc" id="L68">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20753);PEM_ARRAY[i] = -1;</span>
         }
 
-<span class="fc" id="L71">        int idx = 0;</span>
-<span class="fc bfc" id="L72" title="All 2 branches covered.">        for (char c = 'A'; c &lt;= 'Z'; c++) {</span>
-<span class="fc" id="L73">            PEM_ARRAY[c] = (byte)idx++;</span>
+<span class="fc" id="L71">        }__CLR4_5_2g0bg0bm68iyigf.R.inc(20754);int idx = 0;</span>
+<span class="pc bpc" id="L72" title="4 of 10 branches missed.">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20755);for (char c = 'A'; (((c &lt;= 'Z')&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20756)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20757)==0&amp;false)); c++) {{</span>
+<span class="fc" id="L73">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20758);PEM_ARRAY[c] = (byte)idx++;</span>
         }
-<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (char c = 'a'; c &lt;= 'z'; c++) {</span>
-<span class="fc" id="L76">            PEM_ARRAY[c] = (byte)idx++;</span>
-        }
-
-<span class="fc bfc" id="L79" title="All 2 branches covered.">        for (char c = '0'; c &lt;= '9'; c++) {</span>
-<span class="fc" id="L80">            PEM_ARRAY[c] = (byte)idx++;</span>
+<span class="pc bpc" id="L75" title="4 of 10 branches missed.">        }__CLR4_5_2g0bg0bm68iyigf.R.inc(20759);for (char c = 'a'; (((c &lt;= 'z')&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20760)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20761)==0&amp;false)); c++) {{</span>
+<span class="fc" id="L76">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20762);PEM_ARRAY[c] = (byte)idx++;</span>
         }
 
-<span class="fc" id="L83">        PEM_ARRAY['+'] = (byte)idx++;</span>
-<span class="fc" id="L84">        PEM_ARRAY['/'] = (byte)idx++;</span>
-<span class="fc" id="L85">    }</span>
+<span class="pc bpc" id="L79" title="4 of 10 branches missed.">        }__CLR4_5_2g0bg0bm68iyigf.R.inc(20763);for (char c = '0'; (((c &lt;= '9')&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20764)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20765)==0&amp;false)); c++) {{</span>
+<span class="fc" id="L80">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20766);PEM_ARRAY[c] = (byte)idx++;</span>
+        }
 
-    public boolean markSupported() {
-<span class="nc" id="L88">        return false;</span>
-    }
+<span class="fc" id="L83">        }__CLR4_5_2g0bg0bm68iyigf.R.inc(20767);PEM_ARRAY['+'] = (byte)idx++;</span>
+<span class="fc" id="L84">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20768);PEM_ARRAY['/'] = (byte)idx++;</span>
+<span class="fc" id="L85">    }finally{__CLR4_5_2g0bg0bm68iyigf.R.flushNeeded();}}</span>
+
+<span class="nc" id="L87">    public boolean markSupported() {try{__CLR4_5_2g0bg0bm68iyigf.R.inc(20769);</span>
+<span class="nc" id="L88">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20770);return false;</span>
+<span class="nc" id="L89">    }finally{__CLR4_5_2g0bg0bm68iyigf.R.flushNeeded();}}</span>
 
     public void close()
-        throws IOException {
-<span class="nc" id="L93">        eof = true;</span>
-<span class="nc" id="L94">    }</span>
+<span class="nc" id="L92">        throws IOException {try{__CLR4_5_2g0bg0bm68iyigf.R.inc(20771);</span>
+<span class="nc" id="L93">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20772);eof = true;</span>
+<span class="nc" id="L94">    }finally{__CLR4_5_2g0bg0bm68iyigf.R.flushNeeded();}}</span>
 
     public int available()
-        throws IOException {
-<span class="nc" id="L98">        return 3 - outOffset;</span>
-    }
+<span class="nc" id="L97">        throws IOException {try{__CLR4_5_2g0bg0bm68iyigf.R.inc(20773);</span>
+<span class="nc" id="L98">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20774);return 3 - outOffset;</span>
+<span class="nc" id="L99">    }finally{__CLR4_5_2g0bg0bm68iyigf.R.flushNeeded();}}</span>
 
 <span class="fc" id="L101">    byte[] decodeBuffer = new byte[4];</span>
 <span class="fc" id="L102">    byte[] outBuffer = new byte[3];</span>
 <span class="fc" id="L103">    int  outOffset = 3;</span>
     boolean eof;
 
-    public int read() throws IOException {
+<span class="nc" id="L106">    public int read() throws IOException {try{__CLR4_5_2g0bg0bm68iyigf.R.inc(20775);</span>
 
-<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (outOffset == 3) {</span>
-<span class="nc bnc" id="L109" title="All 4 branches missed.">            if (eof || getNextAtom()) {</span>
-<span class="nc" id="L110">                eof = true;</span>
-<span class="nc" id="L111">                return -1;</span>
+<span class="nc bnc" id="L108" title="All 10 branches missed.">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20776);if ((((outOffset == 3)&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20777)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20778)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L109" title="All 12 branches missed.">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20779);if ((((eof || getNextAtom())&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20780)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20781)==0&amp;false))) {{</span>
+<span class="nc" id="L110">                __CLR4_5_2g0bg0bm68iyigf.R.inc(20782);eof = true;</span>
+<span class="nc" id="L111">                __CLR4_5_2g0bg0bm68iyigf.R.inc(20783);return -1;</span>
             }
-        }
+        }}
 
-<span class="nc" id="L115">        return ((int)outBuffer[outOffset++]) &amp; 0xFF;</span>
-    }
+<span class="nc" id="L115">        }__CLR4_5_2g0bg0bm68iyigf.R.inc(20784);return ((int)outBuffer[outOffset++]) &amp; 0xFF;</span>
+<span class="nc" id="L116">    }finally{__CLR4_5_2g0bg0bm68iyigf.R.flushNeeded();}}</span>
 
     public int read(byte []out, int offset, int len)
-        throws IOException {
+<span class="fc" id="L119">        throws IOException {try{__CLR4_5_2g0bg0bm68iyigf.R.inc(20785);</span>
 
-<span class="fc" id="L121">        int idx = 0;</span>
-<span class="fc bfc" id="L122" title="All 2 branches covered.">        while (idx &lt; len) {</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">            if (outOffset == 3) {</span>
-<span class="fc bfc" id="L124" title="All 4 branches covered.">                if (eof || getNextAtom()) {</span>
-<span class="fc" id="L125">                    eof = true;</span>
-<span class="fc bfc" id="L126" title="All 2 branches covered.">                    if (idx == 0) {</span>
-<span class="fc" id="L127">                        return -1;</span>
-                    } else {
-<span class="fc" id="L129">                        return idx;</span>
+<span class="fc" id="L121">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20786);int idx = 0;</span>
+<span class="pc bpc" id="L122" title="4 of 10 branches missed.">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20787);while ((((idx &lt; len)&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20788)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20789)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L123" title="4 of 10 branches missed.">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20790);if ((((outOffset == 3)&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20791)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20792)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L124" title="4 of 12 branches missed.">                __CLR4_5_2g0bg0bm68iyigf.R.inc(20793);if ((((eof || getNextAtom())&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20794)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20795)==0&amp;false))) {{</span>
+<span class="fc" id="L125">                    __CLR4_5_2g0bg0bm68iyigf.R.inc(20796);eof = true;</span>
+<span class="pc bpc" id="L126" title="4 of 10 branches missed.">                    __CLR4_5_2g0bg0bm68iyigf.R.inc(20797);if ((((idx == 0)&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20798)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20799)==0&amp;false))) {{</span>
+<span class="fc" id="L127">                        __CLR4_5_2g0bg0bm68iyigf.R.inc(20800);return -1;</span>
+                    } }else {{
+<span class="fc" id="L129">                        __CLR4_5_2g0bg0bm68iyigf.R.inc(20801);return idx;</span>
                     }
-                }
-            }
+                }}
+            }}
 
-<span class="fc" id="L134">            out[offset + idx] = outBuffer[outOffset++];</span>
+<span class="fc" id="L134">            }__CLR4_5_2g0bg0bm68iyigf.R.inc(20802);out[offset + idx] = outBuffer[outOffset++];</span>
 
-<span class="fc" id="L136">            idx++;</span>
+<span class="fc" id="L136">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20803);idx++;</span>
         }
-<span class="fc" id="L138">        return idx;</span>
-    }
+<span class="fc" id="L138">        }__CLR4_5_2g0bg0bm68iyigf.R.inc(20804);return idx;</span>
+<span class="fc" id="L139">    }finally{__CLR4_5_2g0bg0bm68iyigf.R.flushNeeded();}}</span>
 
-    final boolean getNextAtom() throws IOException {
-        int count;
-        int a;
-        int b;
-        int c;
-        int d;
+<span class="fc" id="L141">    final boolean getNextAtom() throws IOException {try{__CLR4_5_2g0bg0bm68iyigf.R.inc(20805);</span>
+<span class="fc" id="L142">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20806);int count;</span>
+<span class="fc" id="L143">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20807);int a;</span>
+<span class="fc" id="L144">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20808);int b;</span>
+<span class="fc" id="L145">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20809);int c;</span>
+<span class="fc" id="L146">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20810);int d;</span>
 
-<span class="fc" id="L148">        int off = 0;</span>
-<span class="fc bfc" id="L149" title="All 2 branches covered.">        while (off != 4) {</span>
-<span class="fc" id="L150">            count = src.read(decodeBuffer, off, 4 - off);</span>
-<span class="fc bfc" id="L151" title="All 2 branches covered.">            if (count == -1) {</span>
-<span class="fc" id="L152">                return true;</span>
+<span class="fc" id="L148">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20811);int off = 0;</span>
+<span class="pc bpc" id="L149" title="4 of 10 branches missed.">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20812);while ((((off != 4)&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20813)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20814)==0&amp;false))) {{</span>
+<span class="fc" id="L150">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20815);count = src.read(decodeBuffer, off, 4 - off);</span>
+<span class="pc bpc" id="L151" title="4 of 10 branches missed.">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20816);if ((((count == -1)&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20817)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20818)==0&amp;false))) {{</span>
+<span class="fc" id="L152">                __CLR4_5_2g0bg0bm68iyigf.R.inc(20819);return true;</span>
             }
 
-<span class="fc" id="L155">            int in = off;</span>
-<span class="fc" id="L156">            int out = off;</span>
-<span class="fc bfc" id="L157" title="All 2 branches covered.">            while (in &lt; off + count) {</span>
-<span class="pc bpc" id="L158" title="2 of 6 branches missed.">                if ((decodeBuffer[in] != '\n')</span>
+<span class="fc" id="L155">            }__CLR4_5_2g0bg0bm68iyigf.R.inc(20820);int in = off;</span>
+<span class="fc" id="L156">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20821);int out = off;</span>
+<span class="pc bpc" id="L157" title="4 of 10 branches missed.">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20822);while ((((in &lt; off + count)&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20823)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20824)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L158" title="2 of 6 branches missed.">                __CLR4_5_2g0bg0bm68iyigf.R.inc(20825);if (((((decodeBuffer[in] != '\n')</span>
                     &amp;&amp; (decodeBuffer[in] != '\r')
-                    &amp;&amp; (decodeBuffer[in] != ' ')) {
-<span class="fc" id="L161">                    decodeBuffer[out++] = decodeBuffer[in];</span>
+<span class="pc bpc" id="L160" title="4 of 8 branches missed.">                    &amp;&amp; (decodeBuffer[in] != ' '))&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20826)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20827)==0&amp;false))) {{</span>
+<span class="fc" id="L161">                    __CLR4_5_2g0bg0bm68iyigf.R.inc(20828);decodeBuffer[out++] = decodeBuffer[in];</span>
                 }
-<span class="fc" id="L163">                in++;</span>
+<span class="fc" id="L163">                }__CLR4_5_2g0bg0bm68iyigf.R.inc(20829);in++;</span>
             }
 
-<span class="fc" id="L166">            off = out;</span>
+<span class="fc" id="L166">            }__CLR4_5_2g0bg0bm68iyigf.R.inc(20830);off = out;</span>
 <span class="fc" id="L167">        }</span>
 
-<span class="fc" id="L169">        a = PEM_ARRAY[((int)decodeBuffer[0]) &amp; 0xFF];</span>
-<span class="fc" id="L170">        b = PEM_ARRAY[((int)decodeBuffer[1]) &amp; 0xFF];</span>
-<span class="fc" id="L171">        c = PEM_ARRAY[((int)decodeBuffer[2]) &amp; 0xFF];</span>
-<span class="fc" id="L172">        d = PEM_ARRAY[((int)decodeBuffer[3]) &amp; 0xFF];</span>
+<span class="fc" id="L169">        }__CLR4_5_2g0bg0bm68iyigf.R.inc(20831);a = PEM_ARRAY[((int)decodeBuffer[0]) &amp; 0xFF];</span>
+<span class="fc" id="L170">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20832);b = PEM_ARRAY[((int)decodeBuffer[1]) &amp; 0xFF];</span>
+<span class="fc" id="L171">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20833);c = PEM_ARRAY[((int)decodeBuffer[2]) &amp; 0xFF];</span>
+<span class="fc" id="L172">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20834);d = PEM_ARRAY[((int)decodeBuffer[3]) &amp; 0xFF];</span>
 
-<span class="fc" id="L174">        outBuffer[0] = (byte)((a &lt;&lt; 2) | (b &gt;&gt;&gt; 4));</span>
-<span class="fc" id="L175">        outBuffer[1] = (byte)((b &lt;&lt; 4) | (c &gt;&gt;&gt; 2));</span>
-<span class="fc" id="L176">        outBuffer[2] = (byte)((c &lt;&lt; 6) |  d);</span>
+<span class="fc" id="L174">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20835);outBuffer[0] = (byte)((a &lt;&lt; 2) | (b &gt;&gt;&gt; 4));</span>
+<span class="fc" id="L175">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20836);outBuffer[1] = (byte)((b &lt;&lt; 4) | (c &gt;&gt;&gt; 2));</span>
+<span class="fc" id="L176">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20837);outBuffer[2] = (byte)((c &lt;&lt; 6) |  d);</span>
 
-<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (decodeBuffer[3] != '=') {</span>
+<span class="pc bpc" id="L178" title="4 of 10 branches missed.">        __CLR4_5_2g0bg0bm68iyigf.R.inc(20838);if ((((decodeBuffer[3] != '=')&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20839)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20840)==0&amp;false))) {{</span>
             // All three bytes are good.
-<span class="fc" id="L180">            outOffset = 0;</span>
-<span class="fc bfc" id="L181" title="All 2 branches covered.">        } else if (decodeBuffer[2] == '=') {</span>
+<span class="fc" id="L180">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20841);outOffset = 0;</span>
+<span class="pc bpc" id="L181" title="4 of 10 branches missed.">        } }else {__CLR4_5_2g0bg0bm68iyigf.R.inc(20842);if ((((decodeBuffer[2] == '=')&amp;&amp;(__CLR4_5_2g0bg0bm68iyigf.R.iget(20843)!=0|true))||(__CLR4_5_2g0bg0bm68iyigf.R.iget(20844)==0&amp;false))) {{</span>
             // Only one byte of output.
-<span class="fc" id="L183">            outBuffer[2] = outBuffer[0];</span>
-<span class="fc" id="L184">            outOffset = 2;</span>
-<span class="fc" id="L185">            eof = true;</span>
-        } else {
+<span class="fc" id="L183">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20845);outBuffer[2] = outBuffer[0];</span>
+<span class="fc" id="L184">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20846);outOffset = 2;</span>
+<span class="fc" id="L185">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20847);eof = true;</span>
+        } }else {{
             // Only two bytes of output.
-<span class="fc" id="L188">            outBuffer[2] = outBuffer[1];</span>
-<span class="fc" id="L189">            outBuffer[1] = outBuffer[0];</span>
-<span class="fc" id="L190">            outOffset = 1;</span>
-<span class="fc" id="L191">            eof = true;</span>
+<span class="fc" id="L188">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20848);outBuffer[2] = outBuffer[1];</span>
+<span class="fc" id="L189">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20849);outBuffer[1] = outBuffer[0];</span>
+<span class="fc" id="L190">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20850);outOffset = 1;</span>
+<span class="fc" id="L191">            __CLR4_5_2g0bg0bm68iyigf.R.inc(20851);eof = true;</span>
         }
 
-<span class="fc" id="L194">        return false;</span>
-    }
+<span class="fc" id="L194">        }}__CLR4_5_2g0bg0bm68iyigf.R.inc(20852);return false;</span>
+<span class="fc" id="L195">    }finally{__CLR4_5_2g0bg0bm68iyigf.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

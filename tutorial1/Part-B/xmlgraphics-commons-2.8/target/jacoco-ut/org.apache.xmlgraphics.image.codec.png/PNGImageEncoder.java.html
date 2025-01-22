@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGImageEncoder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.png</a> &gt; <span class="el_source">PNGImageEncoder.java</span></div><h1>PNGImageEncoder.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGImageEncoder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.png</a> &gt; <span class="el_source">PNGImageEncoder.java</span></div><h1>PNGImageEncoder.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -48,153 +48,153 @@ import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
 // CSOFF: OperatorWrap
 // CSOFF: WhitespaceAround
 
-final class CRC {
+<span class="pc bpc" id="L51" title="3 of 4 branches missed.">final class CRC {public static class __CLR4_5_227z27zm68iyg2u{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,2901,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
-    private CRC() {
-    }
+<span class="nc" id="L53">    private CRC() {try{__CLR4_5_227z27zm68iyg2u.R.inc(2879);</span>
+<span class="nc" id="L54">    }finally{__CLR4_5_227z27zm68iyg2u.R.flushNeeded();}}</span>
 
 <span class="fc" id="L56">    private static int[] crcTable = new int[256];</span>
 
-    static {
+<span class="fc" id="L58">    static {try{__CLR4_5_227z27zm68iyg2u.R.inc(2880);</span>
         // Initialize CRC table
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        for (int n = 0; n &lt; 256; n++) {</span>
-<span class="fc" id="L61">            int c = n;</span>
-<span class="fc bfc" id="L62" title="All 2 branches covered.">            for (int k = 0; k &lt; 8; k++) {</span>
-<span class="fc bfc" id="L63" title="All 2 branches covered.">                if ((c &amp; 1) == 1) {</span>
-<span class="fc" id="L64">                    c = 0xedb88320 ^ (c &gt;&gt;&gt; 1);</span>
-                } else {
-<span class="fc" id="L66">                    c &gt;&gt;&gt;= 1;</span>
+<span class="pc bpc" id="L60" title="4 of 10 branches missed.">        __CLR4_5_227z27zm68iyg2u.R.inc(2881);for (int n = 0; (((n &lt; 256)&amp;&amp;(__CLR4_5_227z27zm68iyg2u.R.iget(2882)!=0|true))||(__CLR4_5_227z27zm68iyg2u.R.iget(2883)==0&amp;false)); n++) {{</span>
+<span class="fc" id="L61">            __CLR4_5_227z27zm68iyg2u.R.inc(2884);int c = n;</span>
+<span class="pc bpc" id="L62" title="4 of 10 branches missed.">            __CLR4_5_227z27zm68iyg2u.R.inc(2885);for (int k = 0; (((k &lt; 8)&amp;&amp;(__CLR4_5_227z27zm68iyg2u.R.iget(2886)!=0|true))||(__CLR4_5_227z27zm68iyg2u.R.iget(2887)==0&amp;false)); k++) {{</span>
+<span class="pc bpc" id="L63" title="4 of 10 branches missed.">                __CLR4_5_227z27zm68iyg2u.R.inc(2888);if (((((c &amp; 1) == 1)&amp;&amp;(__CLR4_5_227z27zm68iyg2u.R.iget(2889)!=0|true))||(__CLR4_5_227z27zm68iyg2u.R.iget(2890)==0&amp;false))) {{</span>
+<span class="fc" id="L64">                    __CLR4_5_227z27zm68iyg2u.R.inc(2891);c = 0xedb88320 ^ (c &gt;&gt;&gt; 1);</span>
+                } }else {{
+<span class="fc" id="L66">                    __CLR4_5_227z27zm68iyg2u.R.inc(2892);c &gt;&gt;&gt;= 1;</span>
                 }
 
-<span class="fc" id="L69">                crcTable[n] = c;</span>
+<span class="fc" id="L69">                }__CLR4_5_227z27zm68iyg2u.R.inc(2893);crcTable[n] = c;</span>
             }
+        }}
+<span class="fc" id="L72">    }}finally{__CLR4_5_227z27zm68iyg2u.R.flushNeeded();}}</span>
+
+<span class="fc" id="L74">    public static int updateCRC(int crc, byte[] data, int off, int len) {try{__CLR4_5_227z27zm68iyg2u.R.inc(2894);</span>
+<span class="fc" id="L75">        __CLR4_5_227z27zm68iyg2u.R.inc(2895);int c = crc;</span>
+
+<span class="pc bpc" id="L77" title="4 of 10 branches missed.">        __CLR4_5_227z27zm68iyg2u.R.inc(2896);for (int n = 0; (((n &lt; len)&amp;&amp;(__CLR4_5_227z27zm68iyg2u.R.iget(2897)!=0|true))||(__CLR4_5_227z27zm68iyg2u.R.iget(2898)==0&amp;false)); n++) {{</span>
+<span class="fc" id="L78">             __CLR4_5_227z27zm68iyg2u.R.inc(2899);c = crcTable[(c ^ data[off + n]) &amp; 0xff] ^ (c &gt;&gt;&gt; 8);</span>
         }
-<span class="fc" id="L72">    }</span>
 
-    public static int updateCRC(int crc, byte[] data, int off, int len) {
-<span class="fc" id="L75">        int c = crc;</span>
-
-<span class="fc bfc" id="L77" title="All 2 branches covered.">        for (int n = 0; n &lt; len; n++) {</span>
-<span class="fc" id="L78">             c = crcTable[(c ^ data[off + n]) &amp; 0xff] ^ (c &gt;&gt;&gt; 8);</span>
-        }
-
-<span class="fc" id="L81">        return c;</span>
-    }
+<span class="fc" id="L81">        }__CLR4_5_227z27zm68iyg2u.R.inc(2900);return c;</span>
+<span class="fc" id="L82">    }finally{__CLR4_5_227z27zm68iyg2u.R.flushNeeded();}}</span>
 }
 
 
-class ChunkStream extends OutputStream implements DataOutput {
+<span class="pc bpc" id="L86" title="3 of 4 branches missed.">class ChunkStream extends OutputStream implements DataOutput {public static class __CLR4_5_227z28lm68iyg2u{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,2961,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private String type;
     private ByteArrayOutputStream baos;
     private DataOutputStream dos;
 
-<span class="fc" id="L92">    ChunkStream(String type) throws IOException {</span>
-<span class="fc" id="L93">        this.type = type;</span>
+<span class="fc" id="L92">    ChunkStream(String type) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2901);</span>
+<span class="fc" id="L93">        __CLR4_5_227z28lm68iyg2u.R.inc(2902);this.type = type;</span>
 
-<span class="fc" id="L95">        this.baos = new ByteArrayOutputStream();</span>
-<span class="fc" id="L96">        this.dos = new DataOutputStream(baos);</span>
-<span class="fc" id="L97">    }</span>
-
-    @Override
-    public void write(byte[] b) throws IOException {
-<span class="nc" id="L101">        dos.write(b);</span>
-<span class="nc" id="L102">    }</span>
+<span class="fc" id="L95">        __CLR4_5_227z28lm68iyg2u.R.inc(2903);this.baos = new ByteArrayOutputStream();</span>
+<span class="fc" id="L96">        __CLR4_5_227z28lm68iyg2u.R.inc(2904);this.dos = new DataOutputStream(baos);</span>
+<span class="fc" id="L97">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
     @Override
-    public void write(byte[] b, int off, int len) throws IOException {
-<span class="nc" id="L106">        dos.write(b, off, len);</span>
-<span class="nc" id="L107">    }</span>
+<span class="nc" id="L100">    public void write(byte[] b) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2905);</span>
+<span class="nc" id="L101">        __CLR4_5_227z28lm68iyg2u.R.inc(2906);dos.write(b);</span>
+<span class="nc" id="L102">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
     @Override
-    public void write(int b) throws IOException {
-<span class="nc" id="L111">        dos.write(b);</span>
-<span class="nc" id="L112">    }</span>
+<span class="nc" id="L105">    public void write(byte[] b, int off, int len) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2907);</span>
+<span class="nc" id="L106">        __CLR4_5_227z28lm68iyg2u.R.inc(2908);dos.write(b, off, len);</span>
+<span class="nc" id="L107">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeBoolean(boolean v) throws IOException {
-<span class="nc" id="L115">        dos.writeBoolean(v);</span>
-<span class="nc" id="L116">    }</span>
+    @Override
+<span class="nc" id="L110">    public void write(int b) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2909);</span>
+<span class="nc" id="L111">        __CLR4_5_227z28lm68iyg2u.R.inc(2910);dos.write(b);</span>
+<span class="nc" id="L112">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeByte(int v) throws IOException {
-<span class="fc" id="L119">        dos.writeByte(v);</span>
-<span class="fc" id="L120">    }</span>
+<span class="nc" id="L114">    public void writeBoolean(boolean v) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2911);</span>
+<span class="nc" id="L115">        __CLR4_5_227z28lm68iyg2u.R.inc(2912);dos.writeBoolean(v);</span>
+<span class="nc" id="L116">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeBytes(String s) throws IOException {
-<span class="nc" id="L123">        dos.writeBytes(s);</span>
-<span class="nc" id="L124">    }</span>
+<span class="fc" id="L118">    public void writeByte(int v) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2913);</span>
+<span class="fc" id="L119">        __CLR4_5_227z28lm68iyg2u.R.inc(2914);dos.writeByte(v);</span>
+<span class="fc" id="L120">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeChar(int v) throws IOException {
-<span class="nc" id="L127">        dos.writeChar(v);</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L122">    public void writeBytes(String s) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2915);</span>
+<span class="nc" id="L123">        __CLR4_5_227z28lm68iyg2u.R.inc(2916);dos.writeBytes(s);</span>
+<span class="nc" id="L124">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeChars(String s) throws IOException {
-<span class="nc" id="L131">        dos.writeChars(s);</span>
-<span class="nc" id="L132">    }</span>
+<span class="nc" id="L126">    public void writeChar(int v) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2917);</span>
+<span class="nc" id="L127">        __CLR4_5_227z28lm68iyg2u.R.inc(2918);dos.writeChar(v);</span>
+<span class="nc" id="L128">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeDouble(double v) throws IOException {
-<span class="nc" id="L135">        dos.writeDouble(v);</span>
-<span class="nc" id="L136">    }</span>
+<span class="nc" id="L130">    public void writeChars(String s) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2919);</span>
+<span class="nc" id="L131">        __CLR4_5_227z28lm68iyg2u.R.inc(2920);dos.writeChars(s);</span>
+<span class="nc" id="L132">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeFloat(float v) throws IOException {
-<span class="nc" id="L139">        dos.writeFloat(v);</span>
-<span class="nc" id="L140">    }</span>
+<span class="nc" id="L134">    public void writeDouble(double v) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2921);</span>
+<span class="nc" id="L135">        __CLR4_5_227z28lm68iyg2u.R.inc(2922);dos.writeDouble(v);</span>
+<span class="nc" id="L136">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeInt(int v) throws IOException {
-<span class="fc" id="L143">        dos.writeInt(v);</span>
-<span class="fc" id="L144">    }</span>
+<span class="nc" id="L138">    public void writeFloat(float v) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2923);</span>
+<span class="nc" id="L139">        __CLR4_5_227z28lm68iyg2u.R.inc(2924);dos.writeFloat(v);</span>
+<span class="nc" id="L140">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeLong(long v) throws IOException {
-<span class="nc" id="L147">        dos.writeLong(v);</span>
-<span class="nc" id="L148">    }</span>
+<span class="fc" id="L142">    public void writeInt(int v) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2925);</span>
+<span class="fc" id="L143">        __CLR4_5_227z28lm68iyg2u.R.inc(2926);dos.writeInt(v);</span>
+<span class="fc" id="L144">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeShort(int v) throws IOException {
-<span class="nc" id="L151">        dos.writeShort(v);</span>
-<span class="nc" id="L152">    }</span>
+<span class="nc" id="L146">    public void writeLong(long v) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2927);</span>
+<span class="nc" id="L147">        __CLR4_5_227z28lm68iyg2u.R.inc(2928);dos.writeLong(v);</span>
+<span class="nc" id="L148">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeUTF(String str) throws IOException {
-<span class="nc" id="L155">        dos.writeUTF(str);</span>
-<span class="nc" id="L156">    }</span>
+<span class="nc" id="L150">    public void writeShort(int v) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2929);</span>
+<span class="nc" id="L151">        __CLR4_5_227z28lm68iyg2u.R.inc(2930);dos.writeShort(v);</span>
+<span class="nc" id="L152">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-    public void writeToStream(DataOutputStream output) throws IOException {
-<span class="fc" id="L159">        byte[] typeSignature = new byte[4];</span>
-<span class="fc" id="L160">        typeSignature[0] = (byte)type.charAt(0);</span>
-<span class="fc" id="L161">        typeSignature[1] = (byte)type.charAt(1);</span>
-<span class="fc" id="L162">        typeSignature[2] = (byte)type.charAt(2);</span>
-<span class="fc" id="L163">        typeSignature[3] = (byte)type.charAt(3);</span>
+<span class="nc" id="L154">    public void writeUTF(String str) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2931);</span>
+<span class="nc" id="L155">        __CLR4_5_227z28lm68iyg2u.R.inc(2932);dos.writeUTF(str);</span>
+<span class="nc" id="L156">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
-<span class="fc" id="L165">        dos.flush();</span>
-<span class="fc" id="L166">        baos.flush();</span>
+<span class="fc" id="L158">    public void writeToStream(DataOutputStream output) throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2933);</span>
+<span class="fc" id="L159">        __CLR4_5_227z28lm68iyg2u.R.inc(2934);byte[] typeSignature = new byte[4];</span>
+<span class="fc" id="L160">        __CLR4_5_227z28lm68iyg2u.R.inc(2935);typeSignature[0] = (byte)type.charAt(0);</span>
+<span class="fc" id="L161">        __CLR4_5_227z28lm68iyg2u.R.inc(2936);typeSignature[1] = (byte)type.charAt(1);</span>
+<span class="fc" id="L162">        __CLR4_5_227z28lm68iyg2u.R.inc(2937);typeSignature[2] = (byte)type.charAt(2);</span>
+<span class="fc" id="L163">        __CLR4_5_227z28lm68iyg2u.R.inc(2938);typeSignature[3] = (byte)type.charAt(3);</span>
 
-<span class="fc" id="L168">        byte[] data = baos.toByteArray();</span>
-<span class="fc" id="L169">        int len = data.length;</span>
+<span class="fc" id="L165">        __CLR4_5_227z28lm68iyg2u.R.inc(2939);dos.flush();</span>
+<span class="fc" id="L166">        __CLR4_5_227z28lm68iyg2u.R.inc(2940);baos.flush();</span>
 
-<span class="fc" id="L171">        output.writeInt(len);</span>
-<span class="fc" id="L172">        output.write(typeSignature);</span>
-<span class="fc" id="L173">        output.write(data, 0, len);</span>
+<span class="fc" id="L168">        __CLR4_5_227z28lm68iyg2u.R.inc(2941);byte[] data = baos.toByteArray();</span>
+<span class="fc" id="L169">        __CLR4_5_227z28lm68iyg2u.R.inc(2942);int len = data.length;</span>
 
-<span class="fc" id="L175">        int crc = 0xffffffff;</span>
-<span class="fc" id="L176">        crc = CRC.updateCRC(crc, typeSignature, 0, 4);</span>
-<span class="fc" id="L177">        crc = CRC.updateCRC(crc, data, 0, len);</span>
-<span class="fc" id="L178">        output.writeInt(crc ^ 0xffffffff);</span>
-<span class="fc" id="L179">    }</span>
+<span class="fc" id="L171">        __CLR4_5_227z28lm68iyg2u.R.inc(2943);output.writeInt(len);</span>
+<span class="fc" id="L172">        __CLR4_5_227z28lm68iyg2u.R.inc(2944);output.write(typeSignature);</span>
+<span class="fc" id="L173">        __CLR4_5_227z28lm68iyg2u.R.inc(2945);output.write(data, 0, len);</span>
+
+<span class="fc" id="L175">        __CLR4_5_227z28lm68iyg2u.R.inc(2946);int crc = 0xffffffff;</span>
+<span class="fc" id="L176">        __CLR4_5_227z28lm68iyg2u.R.inc(2947);crc = CRC.updateCRC(crc, typeSignature, 0, 4);</span>
+<span class="fc" id="L177">        __CLR4_5_227z28lm68iyg2u.R.inc(2948);crc = CRC.updateCRC(crc, data, 0, len);</span>
+<span class="fc" id="L178">        __CLR4_5_227z28lm68iyg2u.R.inc(2949);output.writeInt(crc ^ 0xffffffff);</span>
+<span class="fc" id="L179">    }finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
     @Override
-    public void close() throws IOException {
+<span class="fc" id="L183">    public void close() throws IOException {try{__CLR4_5_227z28lm68iyg2u.R.inc(2950);</span>
 
-<span class="pc bpc" id="L185" title="1 of 2 branches missed.">        if (baos != null) {</span>
-<span class="fc" id="L186">            baos.close();</span>
-<span class="fc" id="L187">            baos = null;</span>
+<span class="pc bpc" id="L185" title="7 of 10 branches missed.">        __CLR4_5_227z28lm68iyg2u.R.inc(2951);if ((((baos != null)&amp;&amp;(__CLR4_5_227z28lm68iyg2u.R.iget(2952)!=0|true))||(__CLR4_5_227z28lm68iyg2u.R.iget(2953)==0&amp;false))) {{</span>
+<span class="fc" id="L186">            __CLR4_5_227z28lm68iyg2u.R.inc(2954);baos.close();</span>
+<span class="fc" id="L187">            __CLR4_5_227z28lm68iyg2u.R.inc(2955);baos = null;</span>
         }
-<span class="pc bpc" id="L189" title="1 of 2 branches missed.">        if (dos != null) {</span>
-<span class="fc" id="L190">            dos.close();</span>
-<span class="fc" id="L191">            dos = null;</span>
+<span class="pc bpc" id="L189" title="7 of 10 branches missed.">        }__CLR4_5_227z28lm68iyg2u.R.inc(2956);if ((((dos != null)&amp;&amp;(__CLR4_5_227z28lm68iyg2u.R.iget(2957)!=0|true))||(__CLR4_5_227z28lm68iyg2u.R.iget(2958)==0&amp;false))) {{</span>
+<span class="fc" id="L190">            __CLR4_5_227z28lm68iyg2u.R.inc(2959);dos.close();</span>
+<span class="fc" id="L191">            __CLR4_5_227z28lm68iyg2u.R.inc(2960);dos = null;</span>
         }
-<span class="fc" id="L193">    }</span>
+<span class="fc" id="L193">    }}finally{__CLR4_5_227z28lm68iyg2u.R.flushNeeded();}}</span>
 }
 
 
-class IDATOutputStream extends FilterOutputStream {
+<span class="pc bpc" id="L197" title="3 of 4 branches missed.">class IDATOutputStream extends FilterOutputStream {public static class __CLR4_5_227z2a9m68iyg2v{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,3006,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
 <span class="fc" id="L199">    private static final byte[] TYPE_SIGNATURE</span>
          = {(byte)'I', (byte)'D', (byte)'A', (byte)'T'};
@@ -205,74 +205,74 @@ class IDATOutputStream extends FilterOutputStream {
 
     public IDATOutputStream(OutputStream output,
                             int segmentLength) {
-<span class="fc" id="L208">        super(output);</span>
-<span class="fc" id="L209">        this.segmentLength = segmentLength;</span>
-<span class="fc" id="L210">        this.buffer = new byte[segmentLength];</span>
-<span class="fc" id="L211">    }</span>
+<span class="fc" id="L208">        super(output);__CLR4_5_227z2a9m68iyg2v.R.inc(2962);try{__CLR4_5_227z2a9m68iyg2v.R.inc(2961);</span>
+<span class="fc" id="L209">        __CLR4_5_227z2a9m68iyg2v.R.inc(2963);this.segmentLength = segmentLength;</span>
+<span class="fc" id="L210">        __CLR4_5_227z2a9m68iyg2v.R.inc(2964);this.buffer = new byte[segmentLength];</span>
+<span class="fc" id="L211">    }finally{__CLR4_5_227z2a9m68iyg2v.R.flushNeeded();}}</span>
 
     @Override
-    public void close() throws IOException {
-<span class="fc" id="L215">        flush();</span>
-<span class="fc" id="L216">    }</span>
+<span class="fc" id="L214">    public void close() throws IOException {try{__CLR4_5_227z2a9m68iyg2v.R.inc(2965);</span>
+<span class="fc" id="L215">        __CLR4_5_227z2a9m68iyg2v.R.inc(2966);flush();</span>
+<span class="fc" id="L216">    }finally{__CLR4_5_227z2a9m68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeInt(int x) throws IOException {
-<span class="fc" id="L219">        out.write(x &gt;&gt; 24);</span>
-<span class="fc" id="L220">        out.write((x &gt;&gt; 16) &amp; 0xff);</span>
-<span class="fc" id="L221">        out.write((x &gt;&gt; 8) &amp; 0xff);</span>
-<span class="fc" id="L222">        out.write(x &amp; 0xff);</span>
-<span class="fc" id="L223">    }</span>
+<span class="fc" id="L218">    private void writeInt(int x) throws IOException {try{__CLR4_5_227z2a9m68iyg2v.R.inc(2967);</span>
+<span class="fc" id="L219">        __CLR4_5_227z2a9m68iyg2v.R.inc(2968);out.write(x &gt;&gt; 24);</span>
+<span class="fc" id="L220">        __CLR4_5_227z2a9m68iyg2v.R.inc(2969);out.write((x &gt;&gt; 16) &amp; 0xff);</span>
+<span class="fc" id="L221">        __CLR4_5_227z2a9m68iyg2v.R.inc(2970);out.write((x &gt;&gt; 8) &amp; 0xff);</span>
+<span class="fc" id="L222">        __CLR4_5_227z2a9m68iyg2v.R.inc(2971);out.write(x &amp; 0xff);</span>
+<span class="fc" id="L223">    }finally{__CLR4_5_227z2a9m68iyg2v.R.flushNeeded();}}</span>
 
     @Override
-    public void flush() throws IOException {
-<span class="fc bfc" id="L227" title="All 2 branches covered.">        if (bytesWritten == 0) {</span>
-<span class="fc" id="L228">            return;</span>
+<span class="fc" id="L226">    public void flush() throws IOException {try{__CLR4_5_227z2a9m68iyg2v.R.inc(2972);</span>
+<span class="pc bpc" id="L227" title="4 of 10 branches missed.">        __CLR4_5_227z2a9m68iyg2v.R.inc(2973);if ((((bytesWritten == 0)&amp;&amp;(__CLR4_5_227z2a9m68iyg2v.R.iget(2974)!=0|true))||(__CLR4_5_227z2a9m68iyg2v.R.iget(2975)==0&amp;false))) {{</span>
+<span class="fc" id="L228">            __CLR4_5_227z2a9m68iyg2v.R.inc(2976);return;</span>
         }
 
         // Length
-<span class="fc" id="L232">        writeInt(bytesWritten);</span>
+<span class="fc" id="L232">        }__CLR4_5_227z2a9m68iyg2v.R.inc(2977);writeInt(bytesWritten);</span>
         // 'IDAT' signature
-<span class="fc" id="L234">        out.write(TYPE_SIGNATURE);</span>
+<span class="fc" id="L234">        __CLR4_5_227z2a9m68iyg2v.R.inc(2978);out.write(TYPE_SIGNATURE);</span>
         // Data
-<span class="fc" id="L236">        out.write(buffer, 0, bytesWritten);</span>
+<span class="fc" id="L236">        __CLR4_5_227z2a9m68iyg2v.R.inc(2979);out.write(buffer, 0, bytesWritten);</span>
 
-<span class="fc" id="L238">        int crc = 0xffffffff;</span>
-<span class="fc" id="L239">        crc = CRC.updateCRC(crc, TYPE_SIGNATURE, 0, 4);</span>
-<span class="fc" id="L240">        crc = CRC.updateCRC(crc, buffer, 0, bytesWritten);</span>
+<span class="fc" id="L238">        __CLR4_5_227z2a9m68iyg2v.R.inc(2980);int crc = 0xffffffff;</span>
+<span class="fc" id="L239">        __CLR4_5_227z2a9m68iyg2v.R.inc(2981);crc = CRC.updateCRC(crc, TYPE_SIGNATURE, 0, 4);</span>
+<span class="fc" id="L240">        __CLR4_5_227z2a9m68iyg2v.R.inc(2982);crc = CRC.updateCRC(crc, buffer, 0, bytesWritten);</span>
 
         // CRC
-<span class="fc" id="L243">        writeInt(crc ^ 0xffffffff);</span>
+<span class="fc" id="L243">        __CLR4_5_227z2a9m68iyg2v.R.inc(2983);writeInt(crc ^ 0xffffffff);</span>
 
         // Reset buffer
-<span class="fc" id="L246">        bytesWritten = 0;</span>
-<span class="fc" id="L247">    }</span>
+<span class="fc" id="L246">        __CLR4_5_227z2a9m68iyg2v.R.inc(2984);bytesWritten = 0;</span>
+<span class="fc" id="L247">    }finally{__CLR4_5_227z2a9m68iyg2v.R.flushNeeded();}}</span>
 
     @Override
-    public void write(byte[] b) throws IOException {
-<span class="nc" id="L251">        this.write(b, 0, b.length);</span>
-<span class="nc" id="L252">    }</span>
+<span class="nc" id="L250">    public void write(byte[] b) throws IOException {try{__CLR4_5_227z2a9m68iyg2v.R.inc(2985);</span>
+<span class="nc" id="L251">        __CLR4_5_227z2a9m68iyg2v.R.inc(2986);this.write(b, 0, b.length);</span>
+<span class="nc" id="L252">    }finally{__CLR4_5_227z2a9m68iyg2v.R.flushNeeded();}}</span>
 
     @Override
-    public void write(byte[] b, int off, int len) throws IOException {
-<span class="fc bfc" id="L256" title="All 2 branches covered.">        while (len &gt; 0) {</span>
-<span class="fc" id="L257">            int bytes = Math.min(segmentLength - bytesWritten, len);</span>
-<span class="fc" id="L258">            System.arraycopy(b, off, buffer, bytesWritten, bytes);</span>
-<span class="fc" id="L259">            off += bytes;</span>
-<span class="fc" id="L260">            len -= bytes;</span>
-<span class="fc" id="L261">            bytesWritten += bytes;</span>
+<span class="fc" id="L255">    public void write(byte[] b, int off, int len) throws IOException {try{__CLR4_5_227z2a9m68iyg2v.R.inc(2987);</span>
+<span class="pc bpc" id="L256" title="4 of 10 branches missed.">        __CLR4_5_227z2a9m68iyg2v.R.inc(2988);while ((((len &gt; 0)&amp;&amp;(__CLR4_5_227z2a9m68iyg2v.R.iget(2989)!=0|true))||(__CLR4_5_227z2a9m68iyg2v.R.iget(2990)==0&amp;false))) {{</span>
+<span class="fc" id="L257">            __CLR4_5_227z2a9m68iyg2v.R.inc(2991);int bytes = Math.min(segmentLength - bytesWritten, len);</span>
+<span class="fc" id="L258">            __CLR4_5_227z2a9m68iyg2v.R.inc(2992);System.arraycopy(b, off, buffer, bytesWritten, bytes);</span>
+<span class="fc" id="L259">            __CLR4_5_227z2a9m68iyg2v.R.inc(2993);off += bytes;</span>
+<span class="fc" id="L260">            __CLR4_5_227z2a9m68iyg2v.R.inc(2994);len -= bytes;</span>
+<span class="fc" id="L261">            __CLR4_5_227z2a9m68iyg2v.R.inc(2995);bytesWritten += bytes;</span>
 
-<span class="pc bpc" id="L263" title="1 of 2 branches missed.">            if (bytesWritten == segmentLength) {</span>
-<span class="nc" id="L264">                flush();</span>
+<span class="pc bpc" id="L263" title="7 of 10 branches missed.">            __CLR4_5_227z2a9m68iyg2v.R.inc(2996);if ((((bytesWritten == segmentLength)&amp;&amp;(__CLR4_5_227z2a9m68iyg2v.R.iget(2997)!=0|true))||(__CLR4_5_227z2a9m68iyg2v.R.iget(2998)==0&amp;false))) {{</span>
+<span class="nc" id="L264">                __CLR4_5_227z2a9m68iyg2v.R.inc(2999);flush();</span>
             }
-<span class="fc" id="L266">        }</span>
-<span class="fc" id="L267">    }</span>
+<span class="fc" id="L266">        }}</span>
+<span class="fc" id="L267">    }}finally{__CLR4_5_227z2a9m68iyg2v.R.flushNeeded();}}</span>
 
     @Override
-    public void write(int b) throws IOException {
-<span class="nc" id="L271">        buffer[bytesWritten++] = (byte)b;</span>
-<span class="nc bnc" id="L272" title="All 2 branches missed.">        if (bytesWritten == segmentLength) {</span>
-<span class="nc" id="L273">            flush();</span>
+<span class="nc" id="L270">    public void write(int b) throws IOException {try{__CLR4_5_227z2a9m68iyg2v.R.inc(3000);</span>
+<span class="nc" id="L271">        __CLR4_5_227z2a9m68iyg2v.R.inc(3001);buffer[bytesWritten++] = (byte)b;</span>
+<span class="nc bnc" id="L272" title="All 10 branches missed.">        __CLR4_5_227z2a9m68iyg2v.R.inc(3002);if ((((bytesWritten == segmentLength)&amp;&amp;(__CLR4_5_227z2a9m68iyg2v.R.iget(3003)!=0|true))||(__CLR4_5_227z2a9m68iyg2v.R.iget(3004)==0&amp;false))) {{</span>
+<span class="nc" id="L273">            __CLR4_5_227z2a9m68iyg2v.R.inc(3005);flush();</span>
         }
-<span class="nc" id="L275">    }</span>
+<span class="nc" id="L275">    }}finally{__CLR4_5_227z2a9m68iyg2v.R.flushNeeded();}}</span>
 }
 
 /**
@@ -280,7 +280,7 @@ class IDATOutputStream extends FilterOutputStream {
  *
  * @since EA4
  */
-public class PNGImageEncoder extends ImageEncoderImpl {
+<span class="pc bpc" id="L283" title="3 of 4 branches missed.">@java.lang.SuppressWarnings({&quot;fallthrough&quot;}) public class PNGImageEncoder extends ImageEncoderImpl {public static class __CLR4_5_227z2bim68iyg2v{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,3632,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private static final int PNG_COLOR_GRAY = 0;
     private static final int PNG_COLOR_RGB = 2;
@@ -319,155 +319,155 @@ public class PNGImageEncoder extends ImageEncoderImpl {
 
     public PNGImageEncoder(OutputStream output,
                            PNGEncodeParam param) {
-<span class="fc" id="L322">        super(output, param);</span>
+<span class="fc" id="L322">        super(output, param);__CLR4_5_227z2bim68iyg2v.R.inc(3007);try{__CLR4_5_227z2bim68iyg2v.R.inc(3006);</span>
 
-<span class="pc bpc" id="L324" title="1 of 2 branches missed.">        if (param != null) {</span>
-<span class="fc" id="L325">            this.param = param;</span>
+<span class="pc bpc" id="L324" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3008);if ((((param != null)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3009)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3010)==0&amp;false))) {{</span>
+<span class="fc" id="L325">            __CLR4_5_227z2bim68iyg2v.R.inc(3011);this.param = param;</span>
         }
-<span class="fc" id="L327">        this.dataOutput = new DataOutputStream(output);</span>
-<span class="fc" id="L328">    }</span>
+<span class="fc" id="L327">        }__CLR4_5_227z2bim68iyg2v.R.inc(3012);this.dataOutput = new DataOutputStream(output);</span>
+<span class="fc" id="L328">    }finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeMagic() throws IOException {
-<span class="fc" id="L331">        dataOutput.write(MAGIC);</span>
-<span class="fc" id="L332">    }</span>
+<span class="fc" id="L330">    private void writeMagic() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3013);</span>
+<span class="fc" id="L331">        __CLR4_5_227z2bim68iyg2v.R.inc(3014);dataOutput.write(MAGIC);</span>
+<span class="fc" id="L332">    }finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeIHDR() throws IOException {
-<span class="fc" id="L335">        ChunkStream cs = new ChunkStream(&quot;IHDR&quot;);</span>
-        try {
-<span class="fc" id="L337">            cs.writeInt(width);</span>
-<span class="fc" id="L338">            cs.writeInt(height);</span>
-<span class="fc" id="L339">            cs.writeByte((byte)bitDepth);</span>
-<span class="fc" id="L340">            cs.writeByte((byte)colorType);</span>
-<span class="fc" id="L341">            cs.writeByte((byte)0);</span>
-<span class="fc" id="L342">            cs.writeByte((byte)0);</span>
-<span class="pc bpc" id="L343" title="1 of 2 branches missed.">            cs.writeByte(interlace ? (byte)1 : (byte)0);</span>
+<span class="fc" id="L334">    private void writeIHDR() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3015);</span>
+<span class="fc" id="L335">        __CLR4_5_227z2bim68iyg2v.R.inc(3016);ChunkStream cs = new ChunkStream(&quot;IHDR&quot;);</span>
+<span class="fc" id="L336">        __CLR4_5_227z2bim68iyg2v.R.inc(3017);try {</span>
+<span class="fc" id="L337">            __CLR4_5_227z2bim68iyg2v.R.inc(3018);cs.writeInt(width);</span>
+<span class="fc" id="L338">            __CLR4_5_227z2bim68iyg2v.R.inc(3019);cs.writeInt(height);</span>
+<span class="fc" id="L339">            __CLR4_5_227z2bim68iyg2v.R.inc(3020);cs.writeByte((byte)bitDepth);</span>
+<span class="fc" id="L340">            __CLR4_5_227z2bim68iyg2v.R.inc(3021);cs.writeByte((byte)colorType);</span>
+<span class="fc" id="L341">            __CLR4_5_227z2bim68iyg2v.R.inc(3022);cs.writeByte((byte)0);</span>
+<span class="fc" id="L342">            __CLR4_5_227z2bim68iyg2v.R.inc(3023);cs.writeByte((byte)0);</span>
+<span class="pc bpc" id="L343" title="7 of 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3024);cs.writeByte((((interlace )&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3025)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3026)==0&amp;false))? (byte)1 : (byte)0);</span>
 
-<span class="fc" id="L345">            cs.writeToStream(dataOutput);</span>
+<span class="fc" id="L345">            __CLR4_5_227z2bim68iyg2v.R.inc(3027);cs.writeToStream(dataOutput);</span>
         } finally {
-<span class="fc" id="L347">            cs.close();</span>
+<span class="fc" id="L347">            __CLR4_5_227z2bim68iyg2v.R.inc(3028);cs.close();</span>
         }
-<span class="fc" id="L349">    }</span>
+<span class="fc" id="L349">    }finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
     private byte[] prevRow;
     private byte[] currRow;
 
     private byte[][] filteredRows;
 
-    private static int clamp(int val, int maxValue) {
-<span class="pc bpc" id="L357" title="1 of 2 branches missed.">        return (val &gt; maxValue) ? maxValue : val;</span>
-    }
+<span class="fc" id="L356">    private static int clamp(int val, int maxValue) {try{__CLR4_5_227z2bim68iyg2v.R.inc(3029);</span>
+<span class="pc bpc" id="L357" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3030);return ((((val &gt; maxValue) )&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3031)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3032)==0&amp;false))? maxValue : val;</span>
+<span class="fc" id="L358">    }finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
     private void encodePass(OutputStream os, Raster ras,
                             int xOffset,     int yOffset,
                             int xSkip,       int ySkip)
-        throws IOException {
-<span class="fc" id="L364">        int minX   = ras.getMinX();</span>
-<span class="fc" id="L365">        int minY   = ras.getMinY();</span>
-<span class="fc" id="L366">        int width  = ras.getWidth();</span>
-<span class="fc" id="L367">        int height = ras.getHeight();</span>
+<span class="fc" id="L363">        throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3033);</span>
+<span class="fc" id="L364">        __CLR4_5_227z2bim68iyg2v.R.inc(3034);int minX   = ras.getMinX();</span>
+<span class="fc" id="L365">        __CLR4_5_227z2bim68iyg2v.R.inc(3035);int minY   = ras.getMinY();</span>
+<span class="fc" id="L366">        __CLR4_5_227z2bim68iyg2v.R.inc(3036);int width  = ras.getWidth();</span>
+<span class="fc" id="L367">        __CLR4_5_227z2bim68iyg2v.R.inc(3037);int height = ras.getHeight();</span>
 
-<span class="fc" id="L369">        xOffset *= numBands;</span>
-<span class="fc" id="L370">        xSkip   *= numBands;</span>
+<span class="fc" id="L369">        __CLR4_5_227z2bim68iyg2v.R.inc(3038);xOffset *= numBands;</span>
+<span class="fc" id="L370">        __CLR4_5_227z2bim68iyg2v.R.inc(3039);xSkip   *= numBands;</span>
 
-<span class="fc" id="L372">        int samplesPerByte = 8 / bitDepth;</span>
+<span class="fc" id="L372">        __CLR4_5_227z2bim68iyg2v.R.inc(3040);int samplesPerByte = 8 / bitDepth;</span>
 
-<span class="fc" id="L374">        int numSamples = width * numBands;</span>
-<span class="fc" id="L375">        int[] samples = new int[numSamples];</span>
+<span class="fc" id="L374">        __CLR4_5_227z2bim68iyg2v.R.inc(3041);int numSamples = width * numBands;</span>
+<span class="fc" id="L375">        __CLR4_5_227z2bim68iyg2v.R.inc(3042);int[] samples = new int[numSamples];</span>
 
-<span class="fc" id="L377">        int pixels = (numSamples - xOffset + xSkip - 1) / xSkip;</span>
-<span class="fc" id="L378">        int bytesPerRow = pixels * numBands;</span>
-<span class="pc bpc" id="L379" title="1 of 2 branches missed.">        if (bitDepth &lt; 8) {</span>
-<span class="nc" id="L380">            bytesPerRow = (bytesPerRow + samplesPerByte - 1) / samplesPerByte;</span>
-<span class="pc bpc" id="L381" title="1 of 2 branches missed.">        } else if (bitDepth == 16) {</span>
-<span class="nc" id="L382">            bytesPerRow *= 2;</span>
+<span class="fc" id="L377">        __CLR4_5_227z2bim68iyg2v.R.inc(3043);int pixels = (numSamples - xOffset + xSkip - 1) / xSkip;</span>
+<span class="fc" id="L378">        __CLR4_5_227z2bim68iyg2v.R.inc(3044);int bytesPerRow = pixels * numBands;</span>
+<span class="pc bpc" id="L379" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3045);if ((((bitDepth &lt; 8)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3046)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3047)==0&amp;false))) {{</span>
+<span class="nc" id="L380">            __CLR4_5_227z2bim68iyg2v.R.inc(3048);bytesPerRow = (bytesPerRow + samplesPerByte - 1) / samplesPerByte;</span>
+<span class="pc bpc" id="L381" title="7 of 10 branches missed.">        } }else {__CLR4_5_227z2bim68iyg2v.R.inc(3049);if ((((bitDepth == 16)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3050)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3051)==0&amp;false))) {{</span>
+<span class="nc" id="L382">            __CLR4_5_227z2bim68iyg2v.R.inc(3052);bytesPerRow *= 2;</span>
         }
 
-<span class="pc bpc" id="L385" title="1 of 2 branches missed.">        if (bytesPerRow == 0) {</span>
-<span class="nc" id="L386">            return;</span>
+<span class="pc bpc" id="L385" title="7 of 10 branches missed.">        }}__CLR4_5_227z2bim68iyg2v.R.inc(3053);if ((((bytesPerRow == 0)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3054)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3055)==0&amp;false))) {{</span>
+<span class="nc" id="L386">            __CLR4_5_227z2bim68iyg2v.R.inc(3056);return;</span>
         }
 
-<span class="fc" id="L389">        currRow = new byte[bytesPerRow + bpp];</span>
-<span class="fc" id="L390">        prevRow = new byte[bytesPerRow + bpp];</span>
+<span class="fc" id="L389">        }__CLR4_5_227z2bim68iyg2v.R.inc(3057);currRow = new byte[bytesPerRow + bpp];</span>
+<span class="fc" id="L390">        __CLR4_5_227z2bim68iyg2v.R.inc(3058);prevRow = new byte[bytesPerRow + bpp];</span>
 
-<span class="fc" id="L392">        filteredRows = new byte[5][bytesPerRow + bpp];</span>
+<span class="fc" id="L392">        __CLR4_5_227z2bim68iyg2v.R.inc(3059);filteredRows = new byte[5][bytesPerRow + bpp];</span>
 
-<span class="fc" id="L394">        int maxValue = (1 &lt;&lt; bitDepth) - 1;</span>
+<span class="fc" id="L394">        __CLR4_5_227z2bim68iyg2v.R.inc(3060);int maxValue = (1 &lt;&lt; bitDepth) - 1;</span>
 
-<span class="fc bfc" id="L396" title="All 2 branches covered.">        for (int row = minY + yOffset; row &lt; minY + height; row += ySkip) {</span>
-<span class="fc" id="L397">            ras.getPixels(minX, row, width, 1, samples);</span>
+<span class="pc bpc" id="L396" title="4 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3061);for (int row = minY + yOffset; (((row &lt; minY + height)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3062)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3063)==0&amp;false)); row += ySkip) {{</span>
+<span class="fc" id="L397">            __CLR4_5_227z2bim68iyg2v.R.inc(3064);ras.getPixels(minX, row, width, 1, samples);</span>
 
-<span class="pc bpc" id="L399" title="1 of 2 branches missed.">            if (compressGray) {</span>
-<span class="nc" id="L400">                int shift = 8 - bitDepth;</span>
-<span class="nc bnc" id="L401" title="All 2 branches missed.">                for (int i = 0; i &lt; width; i++) {</span>
-<span class="nc" id="L402">                    samples[i] &gt;&gt;= shift;</span>
+<span class="pc bpc" id="L399" title="7 of 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3065);if ((((compressGray)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3066)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3067)==0&amp;false))) {{</span>
+<span class="nc" id="L400">                __CLR4_5_227z2bim68iyg2v.R.inc(3068);int shift = 8 - bitDepth;</span>
+<span class="nc bnc" id="L401" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3069);for (int i = 0; (((i &lt; width)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3070)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3071)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L402">                    __CLR4_5_227z2bim68iyg2v.R.inc(3072);samples[i] &gt;&gt;= shift;</span>
                 }
-            }
+            }}
 
-<span class="fc" id="L406">            int count = bpp; // leave first 'bpp' bytes zero</span>
-<span class="fc" id="L407">            int pos = 0;</span>
-<span class="fc" id="L408">            int tmp = 0;</span>
+<span class="fc" id="L406">            }__CLR4_5_227z2bim68iyg2v.R.inc(3073);int count = bpp; // leave first 'bpp' bytes zero</span>
+<span class="fc" id="L407">            __CLR4_5_227z2bim68iyg2v.R.inc(3074);int pos = 0;</span>
+<span class="fc" id="L408">            __CLR4_5_227z2bim68iyg2v.R.inc(3075);int tmp = 0;</span>
 
-<span class="pc bpc" id="L410" title="3 of 4 branches missed.">            switch (bitDepth) {</span>
-            case 1: case 2: case 4:
+<span class="pc bpc" id="L410" title="5 of 6 branches missed.">            boolean __CLB4_5_2_bool0=false;__CLR4_5_227z2bim68iyg2v.R.inc(3076);switch (bitDepth) {</span>
+<span class="nc bnc" id="L411" title="All 6 branches missed.">            case 1:if (!__CLB4_5_2_bool0) {__CLR4_5_227z2bim68iyg2v.R.inc(3077);__CLB4_5_2_bool0=true;} case 2:if (!__CLB4_5_2_bool0) {__CLR4_5_227z2bim68iyg2v.R.inc(3078);__CLB4_5_2_bool0=true;} case 4:if (!__CLB4_5_2_bool0) {__CLR4_5_227z2bim68iyg2v.R.inc(3079);__CLB4_5_2_bool0=true;}</span>
                 // Image can only have a single band
 
-<span class="nc" id="L414">                int mask = samplesPerByte - 1;</span>
-<span class="nc bnc" id="L415" title="All 2 branches missed.">                for (int s = xOffset; s &lt; numSamples; s += xSkip) {</span>
-<span class="nc" id="L416">                    int val = clamp(samples[s] &gt;&gt; bitShift, maxValue);</span>
-<span class="nc" id="L417">                    tmp = (tmp &lt;&lt; bitDepth) | val;</span>
+<span class="nc" id="L414">                __CLR4_5_227z2bim68iyg2v.R.inc(3080);int mask = samplesPerByte - 1;</span>
+<span class="nc bnc" id="L415" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3081);for (int s = xOffset; (((s &lt; numSamples)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3082)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3083)==0&amp;false)); s += xSkip) {{</span>
+<span class="nc" id="L416">                    __CLR4_5_227z2bim68iyg2v.R.inc(3084);int val = clamp(samples[s] &gt;&gt; bitShift, maxValue);</span>
+<span class="nc" id="L417">                    __CLR4_5_227z2bim68iyg2v.R.inc(3085);tmp = (tmp &lt;&lt; bitDepth) | val;</span>
 
-<span class="nc bnc" id="L419" title="All 2 branches missed.">                    if (pos++  == mask) {</span>
-<span class="nc" id="L420">                        currRow[count++] = (byte)tmp;</span>
-<span class="nc" id="L421">                        tmp = 0;</span>
-<span class="nc" id="L422">                        pos = 0;</span>
+<span class="nc bnc" id="L419" title="All 10 branches missed.">                    __CLR4_5_227z2bim68iyg2v.R.inc(3086);if ((((pos++  == mask)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3087)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3088)==0&amp;false))) {{</span>
+<span class="nc" id="L420">                        __CLR4_5_227z2bim68iyg2v.R.inc(3089);currRow[count++] = (byte)tmp;</span>
+<span class="nc" id="L421">                        __CLR4_5_227z2bim68iyg2v.R.inc(3090);tmp = 0;</span>
+<span class="nc" id="L422">                        __CLR4_5_227z2bim68iyg2v.R.inc(3091);pos = 0;</span>
                     }
-                }
+                }}
 
                 // Left shift the last byte
-<span class="nc bnc" id="L427" title="All 2 branches missed.">                if (pos != 0) {</span>
-<span class="nc" id="L428">                    tmp &lt;&lt;= (samplesPerByte - pos) * bitDepth;</span>
-<span class="nc" id="L429">                    currRow[count++] = (byte)tmp;</span>
+<span class="nc bnc" id="L427" title="All 10 branches missed.">                }__CLR4_5_227z2bim68iyg2v.R.inc(3092);if ((((pos != 0)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3093)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3094)==0&amp;false))) {{</span>
+<span class="nc" id="L428">                    __CLR4_5_227z2bim68iyg2v.R.inc(3095);tmp &lt;&lt;= (samplesPerByte - pos) * bitDepth;</span>
+<span class="nc" id="L429">                    __CLR4_5_227z2bim68iyg2v.R.inc(3096);currRow[count++] = (byte)tmp;</span>
                 }
-                break;
+<span class="nc" id="L431">                }__CLR4_5_227z2bim68iyg2v.R.inc(3097);break;</span>
 
-            case 8:
-<span class="fc bfc" id="L434" title="All 2 branches covered.">                for (int s = xOffset; s &lt; numSamples; s += xSkip) {</span>
-<span class="fc bfc" id="L435" title="All 2 branches covered.">                    for (int b = 0; b &lt; numBands; b++) {</span>
-<span class="fc" id="L436">                        currRow[count++] =</span>
+<span class="pc bpc" id="L433" title="1 of 2 branches missed.">            case 8:if (!__CLB4_5_2_bool0) {__CLR4_5_227z2bim68iyg2v.R.inc(3098);__CLB4_5_2_bool0=true;}</span>
+<span class="pc bpc" id="L434" title="4 of 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3099);for (int s = xOffset; (((s &lt; numSamples)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3100)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3101)==0&amp;false)); s += xSkip) {{</span>
+<span class="pc bpc" id="L435" title="4 of 10 branches missed.">                    __CLR4_5_227z2bim68iyg2v.R.inc(3102);for (int b = 0; (((b &lt; numBands)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3103)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3104)==0&amp;false)); b++) {{</span>
+<span class="fc" id="L436">                        __CLR4_5_227z2bim68iyg2v.R.inc(3105);currRow[count++] =</span>
 <span class="fc" id="L437">                            (byte)clamp(samples[s + b] &gt;&gt; bitShift, maxValue);</span>
                     }
-                }
-<span class="fc" id="L440">                break;</span>
+                }}
+<span class="fc" id="L440">                }__CLR4_5_227z2bim68iyg2v.R.inc(3106);break;</span>
 
-            case 16:
-<span class="nc bnc" id="L443" title="All 2 branches missed.">                for (int s = xOffset; s &lt; numSamples; s += xSkip) {</span>
-<span class="nc bnc" id="L444" title="All 2 branches missed.">                    for (int b = 0; b &lt; numBands; b++) {</span>
-<span class="nc" id="L445">                        int val = clamp(samples[s + b] &gt;&gt; bitShift, maxValue);</span>
-<span class="nc" id="L446">                        currRow[count++] = (byte)(val &gt;&gt; 8);</span>
-<span class="nc" id="L447">                        currRow[count++] = (byte)(val &amp; 0xff);</span>
+<span class="nc bnc" id="L442" title="All 2 branches missed.">            case 16:if (!__CLB4_5_2_bool0) {__CLR4_5_227z2bim68iyg2v.R.inc(3107);__CLB4_5_2_bool0=true;}</span>
+<span class="nc bnc" id="L443" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3108);for (int s = xOffset; (((s &lt; numSamples)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3109)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3110)==0&amp;false)); s += xSkip) {{</span>
+<span class="nc bnc" id="L444" title="All 10 branches missed.">                    __CLR4_5_227z2bim68iyg2v.R.inc(3111);for (int b = 0; (((b &lt; numBands)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3112)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3113)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L445">                        __CLR4_5_227z2bim68iyg2v.R.inc(3114);int val = clamp(samples[s + b] &gt;&gt; bitShift, maxValue);</span>
+<span class="nc" id="L446">                        __CLR4_5_227z2bim68iyg2v.R.inc(3115);currRow[count++] = (byte)(val &gt;&gt; 8);</span>
+<span class="nc" id="L447">                        __CLR4_5_227z2bim68iyg2v.R.inc(3116);currRow[count++] = (byte)(val &amp; 0xff);</span>
                     }
-                }
-                break;
+                }}
+<span class="nc" id="L450">                }__CLR4_5_227z2bim68iyg2v.R.inc(3117);break;</span>
             }
 
             // Perform filtering
-<span class="fc" id="L454">            int filterType = param.filterRow(currRow, prevRow,</span>
+<span class="fc" id="L454">            __CLR4_5_227z2bim68iyg2v.R.inc(3118);int filterType = param.filterRow(currRow, prevRow,</span>
                                              filteredRows,
                                              bytesPerRow, bpp);
 
-<span class="fc" id="L458">            os.write(filterType);</span>
-<span class="fc" id="L459">            os.write(filteredRows[filterType], bpp, bytesPerRow);</span>
+<span class="fc" id="L458">            __CLR4_5_227z2bim68iyg2v.R.inc(3119);os.write(filterType);</span>
+<span class="fc" id="L459">            __CLR4_5_227z2bim68iyg2v.R.inc(3120);os.write(filteredRows[filterType], bpp, bytesPerRow);</span>
 
             // Swap current and previous rows
-<span class="fc" id="L462">            byte[] swap = currRow;</span>
-<span class="fc" id="L463">            currRow = prevRow;</span>
-<span class="fc" id="L464">            prevRow = swap;</span>
+<span class="fc" id="L462">            __CLR4_5_227z2bim68iyg2v.R.inc(3121);byte[] swap = currRow;</span>
+<span class="fc" id="L463">            __CLR4_5_227z2bim68iyg2v.R.inc(3122);currRow = prevRow;</span>
+<span class="fc" id="L464">            __CLR4_5_227z2bim68iyg2v.R.inc(3123);prevRow = swap;</span>
         }
-<span class="fc" id="L466">    }</span>
+<span class="fc" id="L466">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeIDAT() throws IOException {
-<span class="fc" id="L469">        IDATOutputStream ios = new IDATOutputStream(dataOutput, 8192);</span>
-<span class="fc" id="L470">        DeflaterOutputStream dos =</span>
+<span class="fc" id="L468">    private void writeIDAT() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3124);</span>
+<span class="fc" id="L469">        __CLR4_5_227z2bim68iyg2v.R.inc(3125);IDATOutputStream ios = new IDATOutputStream(dataOutput, 8192);</span>
+<span class="fc" id="L470">        __CLR4_5_227z2bim68iyg2v.R.inc(3126);DeflaterOutputStream dos =</span>
             new DeflaterOutputStream(ios, new Deflater(9));
 
         // Future work - don't convert entire image to a Raster It
@@ -477,7 +477,7 @@ public class PNGImageEncoder extends ImageEncoderImpl {
         // you get back here appears larger than it should.
         // This solves that problem by bounding the raster to the
         // image's bounds...
-<span class="fc" id="L480">        Raster ras = image.getData(new Rectangle(image.getMinX(),</span>
+<span class="fc" id="L480">        __CLR4_5_227z2bim68iyg2v.R.inc(3127);Raster ras = image.getData(new Rectangle(image.getMinX(),</span>
 <span class="fc" id="L481">                                                 image.getMinY(),</span>
 <span class="fc" id="L482">                                                 image.getWidth(),</span>
 <span class="fc" id="L483">                                                 image.getHeight()));</span>
@@ -492,382 +492,382 @@ public class PNGImageEncoder extends ImageEncoderImpl {
         //                    ras.getWidth()  + &quot;, &quot; +
         //                    ras.getHeight() + &quot;]&quot;);
 
-<span class="pc bpc" id="L495" title="1 of 2 branches missed.">        if (skipAlpha) {</span>
-<span class="nc" id="L496">            int numBands = ras.getNumBands() - 1;</span>
-<span class="nc" id="L497">            int[] bandList = new int[numBands];</span>
-<span class="nc bnc" id="L498" title="All 2 branches missed.">            for (int i = 0; i &lt; numBands; i++) {</span>
-<span class="nc" id="L499">                bandList[i] = i;</span>
+<span class="pc bpc" id="L495" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3128);if ((((skipAlpha)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3129)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3130)==0&amp;false))) {{</span>
+<span class="nc" id="L496">            __CLR4_5_227z2bim68iyg2v.R.inc(3131);int numBands = ras.getNumBands() - 1;</span>
+<span class="nc" id="L497">            __CLR4_5_227z2bim68iyg2v.R.inc(3132);int[] bandList = new int[numBands];</span>
+<span class="nc bnc" id="L498" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3133);for (int i = 0; (((i &lt; numBands)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3134)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3135)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L499">                __CLR4_5_227z2bim68iyg2v.R.inc(3136);bandList[i] = i;</span>
             }
-<span class="nc" id="L501">            ras = ras.createChild(0, 0,</span>
+<span class="nc" id="L501">            }__CLR4_5_227z2bim68iyg2v.R.inc(3137);ras = ras.createChild(0, 0,</span>
 <span class="nc" id="L502">                                  ras.getWidth(), ras.getHeight(),</span>
                                   0, 0,
                                   bandList);
         }
 
-<span class="pc bpc" id="L507" title="1 of 2 branches missed.">        if (interlace) {</span>
+<span class="pc bpc" id="L507" title="7 of 10 branches missed.">        }__CLR4_5_227z2bim68iyg2v.R.inc(3138);if ((((interlace)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3139)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3140)==0&amp;false))) {{</span>
             // Interlacing pass 1
-<span class="nc" id="L509">            encodePass(dos, ras, 0, 0, 8, 8);</span>
+<span class="nc" id="L509">            __CLR4_5_227z2bim68iyg2v.R.inc(3141);encodePass(dos, ras, 0, 0, 8, 8);</span>
             // Interlacing pass 2
-<span class="nc" id="L511">            encodePass(dos, ras, 4, 0, 8, 8);</span>
+<span class="nc" id="L511">            __CLR4_5_227z2bim68iyg2v.R.inc(3142);encodePass(dos, ras, 4, 0, 8, 8);</span>
             // Interlacing pass 3
-<span class="nc" id="L513">            encodePass(dos, ras, 0, 4, 4, 8);</span>
+<span class="nc" id="L513">            __CLR4_5_227z2bim68iyg2v.R.inc(3143);encodePass(dos, ras, 0, 4, 4, 8);</span>
             // Interlacing pass 4
-<span class="nc" id="L515">            encodePass(dos, ras, 2, 0, 4, 4);</span>
+<span class="nc" id="L515">            __CLR4_5_227z2bim68iyg2v.R.inc(3144);encodePass(dos, ras, 2, 0, 4, 4);</span>
             // Interlacing pass 5
-<span class="nc" id="L517">            encodePass(dos, ras, 0, 2, 2, 4);</span>
+<span class="nc" id="L517">            __CLR4_5_227z2bim68iyg2v.R.inc(3145);encodePass(dos, ras, 0, 2, 2, 4);</span>
             // Interlacing pass 6
-<span class="nc" id="L519">            encodePass(dos, ras, 1, 0, 2, 2);</span>
+<span class="nc" id="L519">            __CLR4_5_227z2bim68iyg2v.R.inc(3146);encodePass(dos, ras, 1, 0, 2, 2);</span>
             // Interlacing pass 7
-<span class="nc" id="L521">            encodePass(dos, ras, 0, 1, 1, 2);</span>
-        } else {
-<span class="fc" id="L523">            encodePass(dos, ras, 0, 0, 1, 1);</span>
+<span class="nc" id="L521">            __CLR4_5_227z2bim68iyg2v.R.inc(3147);encodePass(dos, ras, 0, 1, 1, 2);</span>
+        } }else {{
+<span class="fc" id="L523">            __CLR4_5_227z2bim68iyg2v.R.inc(3148);encodePass(dos, ras, 0, 0, 1, 1);</span>
         }
 
-<span class="fc" id="L526">        dos.finish();</span>
-<span class="fc" id="L527">        dos.close();</span>
-<span class="fc" id="L528">        ios.flush();</span>
-<span class="fc" id="L529">        ios.close();</span>
-<span class="fc" id="L530">    }</span>
+<span class="fc" id="L526">        }__CLR4_5_227z2bim68iyg2v.R.inc(3149);dos.finish();</span>
+<span class="fc" id="L527">        __CLR4_5_227z2bim68iyg2v.R.inc(3150);dos.close();</span>
+<span class="fc" id="L528">        __CLR4_5_227z2bim68iyg2v.R.inc(3151);ios.flush();</span>
+<span class="fc" id="L529">        __CLR4_5_227z2bim68iyg2v.R.inc(3152);ios.close();</span>
+<span class="fc" id="L530">    }finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeIEND() throws IOException {
-<span class="fc" id="L533">        ChunkStream cs = new ChunkStream(&quot;IEND&quot;);</span>
-        try {
-<span class="fc" id="L535">            cs.writeToStream(dataOutput);</span>
+<span class="fc" id="L532">    private void writeIEND() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3153);</span>
+<span class="fc" id="L533">        __CLR4_5_227z2bim68iyg2v.R.inc(3154);ChunkStream cs = new ChunkStream(&quot;IEND&quot;);</span>
+<span class="fc" id="L534">        __CLR4_5_227z2bim68iyg2v.R.inc(3155);try {</span>
+<span class="fc" id="L535">            __CLR4_5_227z2bim68iyg2v.R.inc(3156);cs.writeToStream(dataOutput);</span>
         } finally {
-<span class="fc" id="L537">            cs.close();</span>
+<span class="fc" id="L537">            __CLR4_5_227z2bim68iyg2v.R.inc(3157);cs.close();</span>
         }
-<span class="fc" id="L539">    }</span>
+<span class="fc" id="L539">    }finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
 <span class="fc" id="L541">    private static final float[] SRGB_CHROMA = {</span>
         0.31270F, 0.329F, 0.64F, 0.33F, 0.3F, 0.6F, 0.15F, 0.06F
     };
 
-    private void writeCHRM() throws IOException {
-<span class="pc bpc" id="L546" title="2 of 4 branches missed.">        if (param.isChromaticitySet() || param.isSRGBIntentSet()) {</span>
-<span class="nc" id="L547">            ChunkStream cs = new ChunkStream(&quot;cHRM&quot;);</span>
-            try {
-                float[] chroma;
-<span class="nc bnc" id="L550" title="All 2 branches missed.">                if (!param.isSRGBIntentSet()) {</span>
-<span class="nc" id="L551">                    chroma = param.getChromaticity();</span>
-                } else {
-<span class="nc" id="L553">                    chroma = SRGB_CHROMA; // SRGB chromaticities</span>
+<span class="fc" id="L545">    private void writeCHRM() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3158);</span>
+<span class="pc bpc" id="L546" title="8 of 12 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3159);if ((((param.isChromaticitySet() || param.isSRGBIntentSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3160)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3161)==0&amp;false))) {{</span>
+<span class="nc" id="L547">            __CLR4_5_227z2bim68iyg2v.R.inc(3162);ChunkStream cs = new ChunkStream(&quot;cHRM&quot;);</span>
+<span class="nc" id="L548">            __CLR4_5_227z2bim68iyg2v.R.inc(3163);try {</span>
+<span class="nc" id="L549">                __CLR4_5_227z2bim68iyg2v.R.inc(3164);float[] chroma;</span>
+<span class="nc bnc" id="L550" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3165);if ((((!param.isSRGBIntentSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3166)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3167)==0&amp;false))) {{</span>
+<span class="nc" id="L551">                    __CLR4_5_227z2bim68iyg2v.R.inc(3168);chroma = param.getChromaticity();</span>
+                } }else {{
+<span class="nc" id="L553">                    __CLR4_5_227z2bim68iyg2v.R.inc(3169);chroma = SRGB_CHROMA; // SRGB chromaticities</span>
                 }
 
-<span class="nc bnc" id="L556" title="All 2 branches missed.">                for (int i = 0; i &lt; 8; i++) {</span>
-<span class="nc" id="L557">                    cs.writeInt((int)(chroma[i] * 100000));</span>
+<span class="nc bnc" id="L556" title="All 10 branches missed.">                }__CLR4_5_227z2bim68iyg2v.R.inc(3170);for (int i = 0; (((i &lt; 8)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3171)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3172)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L557">                    __CLR4_5_227z2bim68iyg2v.R.inc(3173);cs.writeInt((int)(chroma[i] * 100000));</span>
                 }
-<span class="nc" id="L559">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L559">                }__CLR4_5_227z2bim68iyg2v.R.inc(3174);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L561">                cs.close();</span>
+<span class="nc" id="L561">                __CLR4_5_227z2bim68iyg2v.R.inc(3175);cs.close();</span>
             }
         }
-<span class="fc" id="L564">    }</span>
+<span class="fc" id="L564">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeGAMA() throws IOException {
-<span class="pc bpc" id="L567" title="2 of 4 branches missed.">        if (param.isGammaSet() || param.isSRGBIntentSet()) {</span>
-<span class="nc" id="L568">            ChunkStream cs = new ChunkStream(&quot;gAMA&quot;);</span>
-            try {
-                float gamma;
-<span class="nc bnc" id="L571" title="All 2 branches missed.">                if (!param.isSRGBIntentSet()) {</span>
-<span class="nc" id="L572">                    gamma = param.getGamma();</span>
-                } else {
-<span class="nc" id="L574">                    gamma = 1.0F / 2.2F; // SRGB gamma</span>
+<span class="fc" id="L566">    private void writeGAMA() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3176);</span>
+<span class="pc bpc" id="L567" title="8 of 12 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3177);if ((((param.isGammaSet() || param.isSRGBIntentSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3178)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3179)==0&amp;false))) {{</span>
+<span class="nc" id="L568">            __CLR4_5_227z2bim68iyg2v.R.inc(3180);ChunkStream cs = new ChunkStream(&quot;gAMA&quot;);</span>
+<span class="nc" id="L569">            __CLR4_5_227z2bim68iyg2v.R.inc(3181);try {</span>
+<span class="nc" id="L570">                __CLR4_5_227z2bim68iyg2v.R.inc(3182);float gamma;</span>
+<span class="nc bnc" id="L571" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3183);if ((((!param.isSRGBIntentSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3184)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3185)==0&amp;false))) {{</span>
+<span class="nc" id="L572">                    __CLR4_5_227z2bim68iyg2v.R.inc(3186);gamma = param.getGamma();</span>
+                } }else {{
+<span class="nc" id="L574">                    __CLR4_5_227z2bim68iyg2v.R.inc(3187);gamma = 1.0F / 2.2F; // SRGB gamma</span>
                 }
                 // TD should include the .5 but causes regard to say
                 // everything is different.
-<span class="nc" id="L578">                cs.writeInt((int)(gamma * 100000/*+0.5*/));</span>
-<span class="nc" id="L579">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L578">                }__CLR4_5_227z2bim68iyg2v.R.inc(3188);cs.writeInt((int)(gamma * 100000/*+0.5*/));</span>
+<span class="nc" id="L579">                __CLR4_5_227z2bim68iyg2v.R.inc(3189);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L581">                cs.close();</span>
+<span class="nc" id="L581">                __CLR4_5_227z2bim68iyg2v.R.inc(3190);cs.close();</span>
             }
         }
-<span class="fc" id="L584">    }</span>
+<span class="fc" id="L584">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeICCP() throws IOException {
-<span class="pc bpc" id="L587" title="1 of 2 branches missed.">        if (param.isICCProfileDataSet()) {</span>
-<span class="nc" id="L588">            ChunkStream cs = new ChunkStream(&quot;iCCP&quot;);</span>
-            try {
-<span class="nc" id="L590">                byte[] iccProfileData = param.getICCProfileData();</span>
-<span class="nc" id="L591">                cs.write(iccProfileData);</span>
-<span class="nc" id="L592">                cs.writeToStream(dataOutput);</span>
+<span class="fc" id="L586">    private void writeICCP() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3191);</span>
+<span class="pc bpc" id="L587" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3192);if ((((param.isICCProfileDataSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3193)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3194)==0&amp;false))) {{</span>
+<span class="nc" id="L588">            __CLR4_5_227z2bim68iyg2v.R.inc(3195);ChunkStream cs = new ChunkStream(&quot;iCCP&quot;);</span>
+<span class="nc" id="L589">            __CLR4_5_227z2bim68iyg2v.R.inc(3196);try {</span>
+<span class="nc" id="L590">                __CLR4_5_227z2bim68iyg2v.R.inc(3197);byte[] iccProfileData = param.getICCProfileData();</span>
+<span class="nc" id="L591">                __CLR4_5_227z2bim68iyg2v.R.inc(3198);cs.write(iccProfileData);</span>
+<span class="nc" id="L592">                __CLR4_5_227z2bim68iyg2v.R.inc(3199);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L594">                cs.close();</span>
+<span class="nc" id="L594">                __CLR4_5_227z2bim68iyg2v.R.inc(3200);cs.close();</span>
             }
         }
-<span class="fc" id="L597">    }</span>
+<span class="fc" id="L597">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeSBIT() throws IOException {
-<span class="pc bpc" id="L600" title="1 of 2 branches missed.">        if (param.isSignificantBitsSet()) {</span>
-<span class="nc" id="L601">            ChunkStream cs = new ChunkStream(&quot;sBIT&quot;);</span>
-            try {
-<span class="nc" id="L603">                int[] significantBits = param.getSignificantBits();</span>
-<span class="nc bnc" id="L604" title="All 2 branches missed.">                for (int significantBit : significantBits) {</span>
-<span class="nc" id="L605">                    cs.writeByte(significantBit);</span>
+<span class="fc" id="L599">    private void writeSBIT() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3201);</span>
+<span class="pc bpc" id="L600" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3202);if ((((param.isSignificantBitsSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3203)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3204)==0&amp;false))) {{</span>
+<span class="nc" id="L601">            __CLR4_5_227z2bim68iyg2v.R.inc(3205);ChunkStream cs = new ChunkStream(&quot;sBIT&quot;);</span>
+<span class="nc" id="L602">            __CLR4_5_227z2bim68iyg2v.R.inc(3206);try {</span>
+<span class="nc" id="L603">                __CLR4_5_227z2bim68iyg2v.R.inc(3207);int[] significantBits = param.getSignificantBits();</span>
+<span class="nc bnc" id="L604" title="All 2 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3208);for (int significantBit : significantBits) {{</span>
+<span class="nc" id="L605">                    __CLR4_5_227z2bim68iyg2v.R.inc(3209);cs.writeByte(significantBit);</span>
                 }
-<span class="nc" id="L607">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L607">                }__CLR4_5_227z2bim68iyg2v.R.inc(3210);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L609">                cs.close();</span>
+<span class="nc" id="L609">                __CLR4_5_227z2bim68iyg2v.R.inc(3211);cs.close();</span>
             }
         }
-<span class="fc" id="L612">    }</span>
+<span class="fc" id="L612">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeSRGB() throws IOException {
-<span class="pc bpc" id="L615" title="1 of 2 branches missed.">        if (param.isSRGBIntentSet()) {</span>
-<span class="nc" id="L616">            ChunkStream cs = new ChunkStream(&quot;sRGB&quot;);</span>
-            try {
-<span class="nc" id="L618">                int intent = param.getSRGBIntent();</span>
-<span class="nc" id="L619">                cs.write(intent);</span>
-<span class="nc" id="L620">                cs.writeToStream(dataOutput);</span>
+<span class="fc" id="L614">    private void writeSRGB() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3212);</span>
+<span class="pc bpc" id="L615" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3213);if ((((param.isSRGBIntentSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3214)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3215)==0&amp;false))) {{</span>
+<span class="nc" id="L616">            __CLR4_5_227z2bim68iyg2v.R.inc(3216);ChunkStream cs = new ChunkStream(&quot;sRGB&quot;);</span>
+<span class="nc" id="L617">            __CLR4_5_227z2bim68iyg2v.R.inc(3217);try {</span>
+<span class="nc" id="L618">                __CLR4_5_227z2bim68iyg2v.R.inc(3218);int intent = param.getSRGBIntent();</span>
+<span class="nc" id="L619">                __CLR4_5_227z2bim68iyg2v.R.inc(3219);cs.write(intent);</span>
+<span class="nc" id="L620">                __CLR4_5_227z2bim68iyg2v.R.inc(3220);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L622">                cs.close();</span>
+<span class="nc" id="L622">                __CLR4_5_227z2bim68iyg2v.R.inc(3221);cs.close();</span>
             }
         }
-<span class="fc" id="L625">    }</span>
+<span class="fc" id="L625">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writePLTE() throws IOException {
-<span class="pc bpc" id="L628" title="1 of 2 branches missed.">        if (redPalette == null) {</span>
-<span class="fc" id="L629">            return;</span>
+<span class="fc" id="L627">    private void writePLTE() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3222);</span>
+<span class="pc bpc" id="L628" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3223);if ((((redPalette == null)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3224)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3225)==0&amp;false))) {{</span>
+<span class="fc" id="L629">            __CLR4_5_227z2bim68iyg2v.R.inc(3226);return;</span>
         }
 
-<span class="nc" id="L632">        ChunkStream cs = new ChunkStream(&quot;PLTE&quot;);</span>
-        try {
-<span class="nc bnc" id="L634" title="All 2 branches missed.">            for (int i = 0; i &lt; redPalette.length; i++) {</span>
-<span class="nc" id="L635">                cs.writeByte(redPalette[i]);</span>
-<span class="nc" id="L636">                cs.writeByte(greenPalette[i]);</span>
-<span class="nc" id="L637">                cs.writeByte(bluePalette[i]);</span>
+<span class="nc" id="L632">        }__CLR4_5_227z2bim68iyg2v.R.inc(3227);ChunkStream cs = new ChunkStream(&quot;PLTE&quot;);</span>
+<span class="nc" id="L633">        __CLR4_5_227z2bim68iyg2v.R.inc(3228);try {</span>
+<span class="nc bnc" id="L634" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3229);for (int i = 0; (((i &lt; redPalette.length)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3230)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3231)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L635">                __CLR4_5_227z2bim68iyg2v.R.inc(3232);cs.writeByte(redPalette[i]);</span>
+<span class="nc" id="L636">                __CLR4_5_227z2bim68iyg2v.R.inc(3233);cs.writeByte(greenPalette[i]);</span>
+<span class="nc" id="L637">                __CLR4_5_227z2bim68iyg2v.R.inc(3234);cs.writeByte(bluePalette[i]);</span>
             }
 
-<span class="nc" id="L640">            cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L640">            }__CLR4_5_227z2bim68iyg2v.R.inc(3235);cs.writeToStream(dataOutput);</span>
         } finally {
-<span class="nc" id="L642">            cs.close();</span>
+<span class="nc" id="L642">            __CLR4_5_227z2bim68iyg2v.R.inc(3236);cs.close();</span>
         }
-<span class="nc" id="L644">    }</span>
+<span class="pc" id="L644">    }finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeBKGD() throws IOException {
-<span class="pc bpc" id="L647" title="1 of 2 branches missed.">        if (param.isBackgroundSet()) {</span>
-<span class="nc" id="L648">            ChunkStream cs = new ChunkStream(&quot;bKGD&quot;);</span>
-            try {
-<span class="nc bnc" id="L650" title="All 4 branches missed.">                switch (colorType) {</span>
-                case PNG_COLOR_GRAY:
-                case PNG_COLOR_GRAY_ALPHA:
-<span class="nc" id="L653">                    int gray = ((PNGEncodeParam.Gray)param).getBackgroundGray();</span>
-<span class="nc" id="L654">                    cs.writeShort(gray);</span>
-<span class="nc" id="L655">                    break;</span>
+<span class="fc" id="L646">    private void writeBKGD() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3237);</span>
+<span class="pc bpc" id="L647" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3238);if ((((param.isBackgroundSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3239)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3240)==0&amp;false))) {{</span>
+<span class="nc" id="L648">            __CLR4_5_227z2bim68iyg2v.R.inc(3241);ChunkStream cs = new ChunkStream(&quot;bKGD&quot;);</span>
+<span class="nc" id="L649">            __CLR4_5_227z2bim68iyg2v.R.inc(3242);try {</span>
+<span class="nc bnc" id="L650" title="All 6 branches missed.">                boolean __CLB4_5_2_bool1=false;__CLR4_5_227z2bim68iyg2v.R.inc(3243);switch (colorType) {</span>
+<span class="nc bnc" id="L651" title="All 2 branches missed.">                case PNG_COLOR_GRAY:if (!__CLB4_5_2_bool1) {__CLR4_5_227z2bim68iyg2v.R.inc(3244);__CLB4_5_2_bool1=true;}</span>
+<span class="nc bnc" id="L652" title="All 2 branches missed.">                case PNG_COLOR_GRAY_ALPHA:if (!__CLB4_5_2_bool1) {__CLR4_5_227z2bim68iyg2v.R.inc(3245);__CLB4_5_2_bool1=true;}</span>
+<span class="nc" id="L653">                    __CLR4_5_227z2bim68iyg2v.R.inc(3246);int gray = ((PNGEncodeParam.Gray)param).getBackgroundGray();</span>
+<span class="nc" id="L654">                    __CLR4_5_227z2bim68iyg2v.R.inc(3247);cs.writeShort(gray);</span>
+<span class="nc" id="L655">                    __CLR4_5_227z2bim68iyg2v.R.inc(3248);break;</span>
 
-                case PNG_COLOR_PALETTE:
-<span class="nc" id="L658">                    int index =</span>
+<span class="nc bnc" id="L657" title="All 2 branches missed.">                case PNG_COLOR_PALETTE:if (!__CLB4_5_2_bool1) {__CLR4_5_227z2bim68iyg2v.R.inc(3249);__CLB4_5_2_bool1=true;}</span>
+<span class="nc" id="L658">                    __CLR4_5_227z2bim68iyg2v.R.inc(3250);int index =</span>
 <span class="nc" id="L659">                       ((PNGEncodeParam.Palette)param).getBackgroundPaletteIndex();</span>
-<span class="nc" id="L660">                    cs.writeByte(index);</span>
-<span class="nc" id="L661">                    break;</span>
+<span class="nc" id="L660">                    __CLR4_5_227z2bim68iyg2v.R.inc(3251);cs.writeByte(index);</span>
+<span class="nc" id="L661">                    __CLR4_5_227z2bim68iyg2v.R.inc(3252);break;</span>
 
-                case PNG_COLOR_RGB:
-                case PNG_COLOR_RGB_ALPHA:
-<span class="nc" id="L665">                    int[] rgb = ((PNGEncodeParam.RGB)param).getBackgroundRGB();</span>
-<span class="nc" id="L666">                    cs.writeShort(rgb[0]);</span>
-<span class="nc" id="L667">                    cs.writeShort(rgb[1]);</span>
-<span class="nc" id="L668">                    cs.writeShort(rgb[2]);</span>
-                    break;
+<span class="nc bnc" id="L663" title="All 2 branches missed.">                case PNG_COLOR_RGB:if (!__CLB4_5_2_bool1) {__CLR4_5_227z2bim68iyg2v.R.inc(3253);__CLB4_5_2_bool1=true;}</span>
+<span class="nc bnc" id="L664" title="All 2 branches missed.">                case PNG_COLOR_RGB_ALPHA:if (!__CLB4_5_2_bool1) {__CLR4_5_227z2bim68iyg2v.R.inc(3254);__CLB4_5_2_bool1=true;}</span>
+<span class="nc" id="L665">                    __CLR4_5_227z2bim68iyg2v.R.inc(3255);int[] rgb = ((PNGEncodeParam.RGB)param).getBackgroundRGB();</span>
+<span class="nc" id="L666">                    __CLR4_5_227z2bim68iyg2v.R.inc(3256);cs.writeShort(rgb[0]);</span>
+<span class="nc" id="L667">                    __CLR4_5_227z2bim68iyg2v.R.inc(3257);cs.writeShort(rgb[1]);</span>
+<span class="nc" id="L668">                    __CLR4_5_227z2bim68iyg2v.R.inc(3258);cs.writeShort(rgb[2]);</span>
+<span class="nc" id="L669">                    __CLR4_5_227z2bim68iyg2v.R.inc(3259);break;</span>
                 }
 
-<span class="nc" id="L672">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L672">                __CLR4_5_227z2bim68iyg2v.R.inc(3260);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L674">                cs.close();</span>
+<span class="nc" id="L674">                __CLR4_5_227z2bim68iyg2v.R.inc(3261);cs.close();</span>
             }
         }
-<span class="fc" id="L677">    }</span>
+<span class="fc" id="L677">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeHIST() throws IOException {
-<span class="pc bpc" id="L680" title="1 of 2 branches missed.">        if (param.isPaletteHistogramSet()) {</span>
-<span class="nc" id="L681">            ChunkStream cs = new ChunkStream(&quot;hIST&quot;);</span>
-            try {
-<span class="nc" id="L683">                int[] hist = param.getPaletteHistogram();</span>
-<span class="nc bnc" id="L684" title="All 2 branches missed.">                for (int aHist : hist) {</span>
-<span class="nc" id="L685">                    cs.writeShort(aHist);</span>
+<span class="fc" id="L679">    private void writeHIST() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3262);</span>
+<span class="pc bpc" id="L680" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3263);if ((((param.isPaletteHistogramSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3264)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3265)==0&amp;false))) {{</span>
+<span class="nc" id="L681">            __CLR4_5_227z2bim68iyg2v.R.inc(3266);ChunkStream cs = new ChunkStream(&quot;hIST&quot;);</span>
+<span class="nc" id="L682">            __CLR4_5_227z2bim68iyg2v.R.inc(3267);try {</span>
+<span class="nc" id="L683">                __CLR4_5_227z2bim68iyg2v.R.inc(3268);int[] hist = param.getPaletteHistogram();</span>
+<span class="nc bnc" id="L684" title="All 2 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3269);for (int aHist : hist) {{</span>
+<span class="nc" id="L685">                    __CLR4_5_227z2bim68iyg2v.R.inc(3270);cs.writeShort(aHist);</span>
                 }
 
-<span class="nc" id="L688">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L688">                }__CLR4_5_227z2bim68iyg2v.R.inc(3271);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L690">                cs.close();</span>
+<span class="nc" id="L690">                __CLR4_5_227z2bim68iyg2v.R.inc(3272);cs.close();</span>
             }
         }
-<span class="fc" id="L693">    }</span>
+<span class="fc" id="L693">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeTRNS() throws IOException {
-<span class="pc bpc" id="L696" title="5 of 6 branches missed.">        if (param.isTransparencySet()</span>
+<span class="fc" id="L695">    private void writeTRNS() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3273);</span>
+<span class="pc bpc" id="L696" title="5 of 6 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3274);if ((((param.isTransparencySet()</span>
             &amp;&amp; (colorType != PNG_COLOR_GRAY_ALPHA)
-            &amp;&amp; (colorType != PNG_COLOR_RGB_ALPHA)) {
-<span class="nc" id="L699">            ChunkStream cs = new ChunkStream(&quot;tRNS&quot;);</span>
-            try {
-<span class="nc bnc" id="L701" title="All 2 branches missed.">                if (param instanceof PNGEncodeParam.Palette) {</span>
-<span class="nc" id="L702">                    byte[] t =</span>
+<span class="pc bpc" id="L698" title="6 of 8 branches missed.">            &amp;&amp; (colorType != PNG_COLOR_RGB_ALPHA))&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3275)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3276)==0&amp;false))) {{</span>
+<span class="nc" id="L699">            __CLR4_5_227z2bim68iyg2v.R.inc(3277);ChunkStream cs = new ChunkStream(&quot;tRNS&quot;);</span>
+<span class="nc" id="L700">            __CLR4_5_227z2bim68iyg2v.R.inc(3278);try {</span>
+<span class="nc bnc" id="L701" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3279);if ((((param instanceof PNGEncodeParam.Palette)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3280)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3281)==0&amp;false))) {{</span>
+<span class="nc" id="L702">                    __CLR4_5_227z2bim68iyg2v.R.inc(3282);byte[] t =</span>
 <span class="nc" id="L703">                        ((PNGEncodeParam.Palette)param).getPaletteTransparency();</span>
-<span class="nc bnc" id="L704" title="All 2 branches missed.">                    for (byte aT : t) {</span>
-<span class="nc" id="L705">                        cs.writeByte(aT);</span>
+<span class="nc bnc" id="L704" title="All 2 branches missed.">                    __CLR4_5_227z2bim68iyg2v.R.inc(3283);for (byte aT : t) {{</span>
+<span class="nc" id="L705">                        __CLR4_5_227z2bim68iyg2v.R.inc(3284);cs.writeByte(aT);</span>
                     }
-<span class="nc bnc" id="L707" title="All 2 branches missed.">                } else if (param instanceof PNGEncodeParam.Gray) {</span>
-<span class="nc" id="L708">                    int t = ((PNGEncodeParam.Gray)param).getTransparentGray();</span>
-<span class="nc" id="L709">                    cs.writeShort(t);</span>
-<span class="nc bnc" id="L710" title="All 2 branches missed.">                } else if (param instanceof PNGEncodeParam.RGB) {</span>
-<span class="nc" id="L711">                    int[] t = ((PNGEncodeParam.RGB)param).getTransparentRGB();</span>
-<span class="nc" id="L712">                    cs.writeShort(t[0]);</span>
-<span class="nc" id="L713">                    cs.writeShort(t[1]);</span>
-<span class="nc" id="L714">                    cs.writeShort(t[2]);</span>
+<span class="nc bnc" id="L707" title="All 10 branches missed.">                }} }else {__CLR4_5_227z2bim68iyg2v.R.inc(3285);if ((((param instanceof PNGEncodeParam.Gray)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3286)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3287)==0&amp;false))) {{</span>
+<span class="nc" id="L708">                    __CLR4_5_227z2bim68iyg2v.R.inc(3288);int t = ((PNGEncodeParam.Gray)param).getTransparentGray();</span>
+<span class="nc" id="L709">                    __CLR4_5_227z2bim68iyg2v.R.inc(3289);cs.writeShort(t);</span>
+<span class="nc bnc" id="L710" title="All 10 branches missed.">                } }else {__CLR4_5_227z2bim68iyg2v.R.inc(3290);if ((((param instanceof PNGEncodeParam.RGB)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3291)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3292)==0&amp;false))) {{</span>
+<span class="nc" id="L711">                    __CLR4_5_227z2bim68iyg2v.R.inc(3293);int[] t = ((PNGEncodeParam.RGB)param).getTransparentRGB();</span>
+<span class="nc" id="L712">                    __CLR4_5_227z2bim68iyg2v.R.inc(3294);cs.writeShort(t[0]);</span>
+<span class="nc" id="L713">                    __CLR4_5_227z2bim68iyg2v.R.inc(3295);cs.writeShort(t[1]);</span>
+<span class="nc" id="L714">                    __CLR4_5_227z2bim68iyg2v.R.inc(3296);cs.writeShort(t[2]);</span>
                 }
 
-<span class="nc" id="L717">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L717">                }}}__CLR4_5_227z2bim68iyg2v.R.inc(3297);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L719">                cs.close();</span>
+<span class="nc" id="L719">                __CLR4_5_227z2bim68iyg2v.R.inc(3298);cs.close();</span>
             }
-<span class="pc bpc" id="L721" title="1 of 2 branches missed.">        } else if (colorType == PNG_COLOR_PALETTE) {</span>
-<span class="nc" id="L722">            int lastEntry = Math.min(255, alphaPalette.length - 1);</span>
-            int nonOpaque;
-<span class="nc bnc" id="L724" title="All 2 branches missed.">            for (nonOpaque = lastEntry; nonOpaque &gt;= 0; nonOpaque--) {</span>
-<span class="nc bnc" id="L725" title="All 2 branches missed.">                if (alphaPalette[nonOpaque] != (byte)255) {</span>
-<span class="nc" id="L726">                    break;</span>
+<span class="pc bpc" id="L721" title="7 of 10 branches missed.">        } }else {__CLR4_5_227z2bim68iyg2v.R.inc(3299);if ((((colorType == PNG_COLOR_PALETTE)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3300)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3301)==0&amp;false))) {{</span>
+<span class="nc" id="L722">            __CLR4_5_227z2bim68iyg2v.R.inc(3302);int lastEntry = Math.min(255, alphaPalette.length - 1);</span>
+<span class="nc" id="L723">            __CLR4_5_227z2bim68iyg2v.R.inc(3303);int nonOpaque;</span>
+<span class="nc bnc" id="L724" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3304);for (nonOpaque = lastEntry; (((nonOpaque &gt;= 0)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3305)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3306)==0&amp;false)); nonOpaque--) {{</span>
+<span class="nc bnc" id="L725" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3307);if ((((alphaPalette[nonOpaque] != (byte)255)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3308)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3309)==0&amp;false))) {{</span>
+<span class="nc" id="L726">                    __CLR4_5_227z2bim68iyg2v.R.inc(3310);break;</span>
                 }
-            }
+            }}
 
-<span class="nc bnc" id="L730" title="All 2 branches missed.">            if (nonOpaque &gt;= 0) {</span>
-<span class="nc" id="L731">                ChunkStream cs = new ChunkStream(&quot;tRNS&quot;);</span>
-                try {
-<span class="nc bnc" id="L733" title="All 2 branches missed.">                    for (int i = 0; i &lt;= nonOpaque; i++) {</span>
-<span class="nc" id="L734">                        cs.writeByte(alphaPalette[i]);</span>
+<span class="nc bnc" id="L730" title="All 10 branches missed.">            }__CLR4_5_227z2bim68iyg2v.R.inc(3311);if ((((nonOpaque &gt;= 0)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3312)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3313)==0&amp;false))) {{</span>
+<span class="nc" id="L731">                __CLR4_5_227z2bim68iyg2v.R.inc(3314);ChunkStream cs = new ChunkStream(&quot;tRNS&quot;);</span>
+<span class="nc" id="L732">                __CLR4_5_227z2bim68iyg2v.R.inc(3315);try {</span>
+<span class="nc bnc" id="L733" title="All 10 branches missed.">                    __CLR4_5_227z2bim68iyg2v.R.inc(3316);for (int i = 0; (((i &lt;= nonOpaque)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3317)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3318)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L734">                        __CLR4_5_227z2bim68iyg2v.R.inc(3319);cs.writeByte(alphaPalette[i]);</span>
                     }
-<span class="nc" id="L736">                    cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L736">                    }__CLR4_5_227z2bim68iyg2v.R.inc(3320);cs.writeToStream(dataOutput);</span>
                 } finally {
-<span class="nc" id="L738">                    cs.close();</span>
+<span class="nc" id="L738">                    __CLR4_5_227z2bim68iyg2v.R.inc(3321);cs.close();</span>
                 }
             }
-        }
-<span class="fc" id="L742">    }</span>
+        }}
+<span class="fc" id="L742">    }}}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writePHYS() throws IOException {
-<span class="pc bpc" id="L745" title="1 of 2 branches missed.">        if (param.isPhysicalDimensionSet()) {</span>
-<span class="nc" id="L746">            ChunkStream cs = new ChunkStream(&quot;pHYs&quot;);</span>
-            try {
-<span class="nc" id="L748">                int[] dims = param.getPhysicalDimension();</span>
-<span class="nc" id="L749">                cs.writeInt(dims[0]);</span>
-<span class="nc" id="L750">                cs.writeInt(dims[1]);</span>
-<span class="nc" id="L751">                cs.writeByte((byte)dims[2]);</span>
+<span class="fc" id="L744">    private void writePHYS() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3322);</span>
+<span class="pc bpc" id="L745" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3323);if ((((param.isPhysicalDimensionSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3324)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3325)==0&amp;false))) {{</span>
+<span class="nc" id="L746">            __CLR4_5_227z2bim68iyg2v.R.inc(3326);ChunkStream cs = new ChunkStream(&quot;pHYs&quot;);</span>
+<span class="nc" id="L747">            __CLR4_5_227z2bim68iyg2v.R.inc(3327);try {</span>
+<span class="nc" id="L748">                __CLR4_5_227z2bim68iyg2v.R.inc(3328);int[] dims = param.getPhysicalDimension();</span>
+<span class="nc" id="L749">                __CLR4_5_227z2bim68iyg2v.R.inc(3329);cs.writeInt(dims[0]);</span>
+<span class="nc" id="L750">                __CLR4_5_227z2bim68iyg2v.R.inc(3330);cs.writeInt(dims[1]);</span>
+<span class="nc" id="L751">                __CLR4_5_227z2bim68iyg2v.R.inc(3331);cs.writeByte((byte)dims[2]);</span>
 
-<span class="nc" id="L753">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L753">                __CLR4_5_227z2bim68iyg2v.R.inc(3332);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L755">                cs.close();</span>
+<span class="nc" id="L755">                __CLR4_5_227z2bim68iyg2v.R.inc(3333);cs.close();</span>
             }
         }
-<span class="fc" id="L758">    }</span>
+<span class="fc" id="L758">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeSPLT() throws IOException {
-<span class="pc bpc" id="L761" title="1 of 2 branches missed.">        if (param.isSuggestedPaletteSet()) {</span>
-<span class="nc" id="L762">            ChunkStream cs = new ChunkStream(&quot;sPLT&quot;);</span>
-            try {
-<span class="nc" id="L764">                System.out.println(&quot;sPLT not supported yet.&quot;);</span>
+<span class="fc" id="L760">    private void writeSPLT() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3334);</span>
+<span class="pc bpc" id="L761" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3335);if ((((param.isSuggestedPaletteSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3336)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3337)==0&amp;false))) {{</span>
+<span class="nc" id="L762">            __CLR4_5_227z2bim68iyg2v.R.inc(3338);ChunkStream cs = new ChunkStream(&quot;sPLT&quot;);</span>
+<span class="nc" id="L763">            __CLR4_5_227z2bim68iyg2v.R.inc(3339);try {</span>
+<span class="nc" id="L764">                __CLR4_5_227z2bim68iyg2v.R.inc(3340);System.out.println(&quot;sPLT not supported yet.&quot;);</span>
 
-<span class="nc" id="L766">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L766">                __CLR4_5_227z2bim68iyg2v.R.inc(3341);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L768">                cs.close();</span>
+<span class="nc" id="L768">                __CLR4_5_227z2bim68iyg2v.R.inc(3342);cs.close();</span>
             }
         }
-<span class="fc" id="L771">    }</span>
+<span class="fc" id="L771">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeTIME() throws IOException {
-<span class="pc bpc" id="L774" title="1 of 2 branches missed.">        if (param.isModificationTimeSet()) {</span>
-<span class="nc" id="L775">            ChunkStream cs = new ChunkStream(&quot;tIME&quot;);</span>
-            try {
-<span class="nc" id="L777">                Date date = param.getModificationTime();</span>
-<span class="nc" id="L778">                TimeZone gmt = TimeZone.getTimeZone(&quot;GMT&quot;);</span>
+<span class="fc" id="L773">    private void writeTIME() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3343);</span>
+<span class="pc bpc" id="L774" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3344);if ((((param.isModificationTimeSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3345)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3346)==0&amp;false))) {{</span>
+<span class="nc" id="L775">            __CLR4_5_227z2bim68iyg2v.R.inc(3347);ChunkStream cs = new ChunkStream(&quot;tIME&quot;);</span>
+<span class="nc" id="L776">            __CLR4_5_227z2bim68iyg2v.R.inc(3348);try {</span>
+<span class="nc" id="L777">                __CLR4_5_227z2bim68iyg2v.R.inc(3349);Date date = param.getModificationTime();</span>
+<span class="nc" id="L778">                __CLR4_5_227z2bim68iyg2v.R.inc(3350);TimeZone gmt = TimeZone.getTimeZone(&quot;GMT&quot;);</span>
 
-<span class="nc" id="L780">                GregorianCalendar cal = new GregorianCalendar(gmt);</span>
-<span class="nc" id="L781">                cal.setTime(date);</span>
+<span class="nc" id="L780">                __CLR4_5_227z2bim68iyg2v.R.inc(3351);GregorianCalendar cal = new GregorianCalendar(gmt);</span>
+<span class="nc" id="L781">                __CLR4_5_227z2bim68iyg2v.R.inc(3352);cal.setTime(date);</span>
 
-<span class="nc" id="L783">                int year = cal.get(Calendar.YEAR);</span>
-<span class="nc" id="L784">                int month = cal.get(Calendar.MONTH);</span>
-<span class="nc" id="L785">                int day = cal.get(Calendar.DAY_OF_MONTH);</span>
-<span class="nc" id="L786">                int hour = cal.get(Calendar.HOUR_OF_DAY);</span>
-<span class="nc" id="L787">                int minute = cal.get(Calendar.MINUTE);</span>
-<span class="nc" id="L788">                int second = cal.get(Calendar.SECOND);</span>
+<span class="nc" id="L783">                __CLR4_5_227z2bim68iyg2v.R.inc(3353);int year = cal.get(Calendar.YEAR);</span>
+<span class="nc" id="L784">                __CLR4_5_227z2bim68iyg2v.R.inc(3354);int month = cal.get(Calendar.MONTH);</span>
+<span class="nc" id="L785">                __CLR4_5_227z2bim68iyg2v.R.inc(3355);int day = cal.get(Calendar.DAY_OF_MONTH);</span>
+<span class="nc" id="L786">                __CLR4_5_227z2bim68iyg2v.R.inc(3356);int hour = cal.get(Calendar.HOUR_OF_DAY);</span>
+<span class="nc" id="L787">                __CLR4_5_227z2bim68iyg2v.R.inc(3357);int minute = cal.get(Calendar.MINUTE);</span>
+<span class="nc" id="L788">                __CLR4_5_227z2bim68iyg2v.R.inc(3358);int second = cal.get(Calendar.SECOND);</span>
 
-<span class="nc" id="L790">                cs.writeShort(year);</span>
-<span class="nc" id="L791">                cs.writeByte(month + 1);</span>
-<span class="nc" id="L792">                cs.writeByte(day);</span>
-<span class="nc" id="L793">                cs.writeByte(hour);</span>
-<span class="nc" id="L794">                cs.writeByte(minute);</span>
-<span class="nc" id="L795">                cs.writeByte(second);</span>
+<span class="nc" id="L790">                __CLR4_5_227z2bim68iyg2v.R.inc(3359);cs.writeShort(year);</span>
+<span class="nc" id="L791">                __CLR4_5_227z2bim68iyg2v.R.inc(3360);cs.writeByte(month + 1);</span>
+<span class="nc" id="L792">                __CLR4_5_227z2bim68iyg2v.R.inc(3361);cs.writeByte(day);</span>
+<span class="nc" id="L793">                __CLR4_5_227z2bim68iyg2v.R.inc(3362);cs.writeByte(hour);</span>
+<span class="nc" id="L794">                __CLR4_5_227z2bim68iyg2v.R.inc(3363);cs.writeByte(minute);</span>
+<span class="nc" id="L795">                __CLR4_5_227z2bim68iyg2v.R.inc(3364);cs.writeByte(second);</span>
 
-<span class="nc" id="L797">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L797">                __CLR4_5_227z2bim68iyg2v.R.inc(3365);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L799">                cs.close();</span>
+<span class="nc" id="L799">                __CLR4_5_227z2bim68iyg2v.R.inc(3366);cs.close();</span>
             }
         }
-<span class="fc" id="L802">    }</span>
+<span class="fc" id="L802">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeTEXT() throws IOException {
-<span class="pc bpc" id="L805" title="1 of 2 branches missed.">        if (param.isTextSet()) {</span>
-<span class="nc" id="L806">            String[] text = param.getText();</span>
+<span class="fc" id="L804">    private void writeTEXT() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3367);</span>
+<span class="pc bpc" id="L805" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3368);if ((((param.isTextSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3369)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3370)==0&amp;false))) {{</span>
+<span class="nc" id="L806">            __CLR4_5_227z2bim68iyg2v.R.inc(3371);String[] text = param.getText();</span>
 
-<span class="nc bnc" id="L808" title="All 2 branches missed.">            for (int i = 0; i &lt; text.length / 2; i++) {</span>
-<span class="nc" id="L809">                byte[] keyword = text[2 * i].getBytes(&quot;UTF-8&quot;);</span>
-<span class="nc" id="L810">                byte[] value = text[2 * i + 1].getBytes(&quot;UTF-8&quot;);</span>
+<span class="nc bnc" id="L808" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3372);for (int i = 0; (((i &lt; text.length / 2)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3373)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3374)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L809">                __CLR4_5_227z2bim68iyg2v.R.inc(3375);byte[] keyword = text[2 * i].getBytes(&quot;UTF-8&quot;);</span>
+<span class="nc" id="L810">                __CLR4_5_227z2bim68iyg2v.R.inc(3376);byte[] value = text[2 * i + 1].getBytes(&quot;UTF-8&quot;);</span>
 
-<span class="nc" id="L812">                ChunkStream cs = new ChunkStream(&quot;tEXt&quot;);</span>
-                try {
-<span class="nc" id="L814">                    cs.write(keyword, 0, Math.min(keyword.length, 79));</span>
-<span class="nc" id="L815">                    cs.write(0);</span>
-<span class="nc" id="L816">                    cs.write(value);</span>
+<span class="nc" id="L812">                __CLR4_5_227z2bim68iyg2v.R.inc(3377);ChunkStream cs = new ChunkStream(&quot;tEXt&quot;);</span>
+<span class="nc" id="L813">                __CLR4_5_227z2bim68iyg2v.R.inc(3378);try {</span>
+<span class="nc" id="L814">                    __CLR4_5_227z2bim68iyg2v.R.inc(3379);cs.write(keyword, 0, Math.min(keyword.length, 79));</span>
+<span class="nc" id="L815">                    __CLR4_5_227z2bim68iyg2v.R.inc(3380);cs.write(0);</span>
+<span class="nc" id="L816">                    __CLR4_5_227z2bim68iyg2v.R.inc(3381);cs.write(value);</span>
 
-<span class="nc" id="L818">                    cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L818">                    __CLR4_5_227z2bim68iyg2v.R.inc(3382);cs.writeToStream(dataOutput);</span>
                 } finally {
-<span class="nc" id="L820">                    cs.close();</span>
+<span class="nc" id="L820">                    __CLR4_5_227z2bim68iyg2v.R.inc(3383);cs.close();</span>
                 }
             }
-        }
-<span class="fc" id="L824">    }</span>
+        }}
+<span class="fc" id="L824">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writeZTXT() throws IOException {
-<span class="pc bpc" id="L827" title="1 of 2 branches missed.">        if (param.isCompressedTextSet()) {</span>
-<span class="nc" id="L828">            String[] text = param.getCompressedText();</span>
+<span class="fc" id="L826">    private void writeZTXT() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3384);</span>
+<span class="pc bpc" id="L827" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3385);if ((((param.isCompressedTextSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3386)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3387)==0&amp;false))) {{</span>
+<span class="nc" id="L828">            __CLR4_5_227z2bim68iyg2v.R.inc(3388);String[] text = param.getCompressedText();</span>
 
-<span class="nc bnc" id="L830" title="All 2 branches missed.">            for (int i = 0; i &lt; text.length / 2; i++) {</span>
-<span class="nc" id="L831">                byte[] keyword = text[2 * i].getBytes(&quot;UTF-8&quot;);</span>
-<span class="nc" id="L832">                byte[] value = text[2 * i + 1].getBytes(&quot;UTF-8&quot;);</span>
+<span class="nc bnc" id="L830" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3389);for (int i = 0; (((i &lt; text.length / 2)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3390)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3391)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L831">                __CLR4_5_227z2bim68iyg2v.R.inc(3392);byte[] keyword = text[2 * i].getBytes(&quot;UTF-8&quot;);</span>
+<span class="nc" id="L832">                __CLR4_5_227z2bim68iyg2v.R.inc(3393);byte[] value = text[2 * i + 1].getBytes(&quot;UTF-8&quot;);</span>
 
-<span class="nc" id="L834">                ChunkStream cs = new ChunkStream(&quot;zTXt&quot;);</span>
-                try {
-<span class="nc" id="L836">                    cs.write(keyword, 0, Math.min(keyword.length, 79));</span>
-<span class="nc" id="L837">                    cs.write(0);</span>
-<span class="nc" id="L838">                    cs.write(0);</span>
+<span class="nc" id="L834">                __CLR4_5_227z2bim68iyg2v.R.inc(3394);ChunkStream cs = new ChunkStream(&quot;zTXt&quot;);</span>
+<span class="nc" id="L835">                __CLR4_5_227z2bim68iyg2v.R.inc(3395);try {</span>
+<span class="nc" id="L836">                    __CLR4_5_227z2bim68iyg2v.R.inc(3396);cs.write(keyword, 0, Math.min(keyword.length, 79));</span>
+<span class="nc" id="L837">                    __CLR4_5_227z2bim68iyg2v.R.inc(3397);cs.write(0);</span>
+<span class="nc" id="L838">                    __CLR4_5_227z2bim68iyg2v.R.inc(3398);cs.write(0);</span>
 
-<span class="nc" id="L840">                    DeflaterOutputStream dos = new DeflaterOutputStream(cs);</span>
-                    try {
-<span class="nc" id="L842">                        dos.write(value);</span>
-<span class="nc" id="L843">                        dos.finish();</span>
+<span class="nc" id="L840">                    __CLR4_5_227z2bim68iyg2v.R.inc(3399);DeflaterOutputStream dos = new DeflaterOutputStream(cs);</span>
+<span class="nc" id="L841">                    __CLR4_5_227z2bim68iyg2v.R.inc(3400);try {</span>
+<span class="nc" id="L842">                        __CLR4_5_227z2bim68iyg2v.R.inc(3401);dos.write(value);</span>
+<span class="nc" id="L843">                        __CLR4_5_227z2bim68iyg2v.R.inc(3402);dos.finish();</span>
                     } finally {
-<span class="nc" id="L845">                        dos.close();</span>
+<span class="nc" id="L845">                        __CLR4_5_227z2bim68iyg2v.R.inc(3403);dos.close();</span>
                     }
 
-<span class="nc" id="L848">                    cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L848">                    __CLR4_5_227z2bim68iyg2v.R.inc(3404);cs.writeToStream(dataOutput);</span>
                 } finally {
-<span class="nc" id="L850">                    cs.close();</span>
+<span class="nc" id="L850">                    __CLR4_5_227z2bim68iyg2v.R.inc(3405);cs.close();</span>
                 }
             }
-        }
-<span class="fc" id="L854">    }</span>
+        }}
+<span class="fc" id="L854">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
-    private void writePrivateChunks() throws IOException {
-<span class="fc" id="L857">        int numChunks = param.getNumPrivateChunks();</span>
-<span class="pc bpc" id="L858" title="1 of 2 branches missed.">        for (int i = 0; i &lt; numChunks; i++) {</span>
-<span class="nc" id="L859">            String type = param.getPrivateChunkType(i);</span>
-<span class="nc" id="L860">            byte[] data = param.getPrivateChunkData(i);</span>
+<span class="fc" id="L856">    private void writePrivateChunks() throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3406);</span>
+<span class="fc" id="L857">        __CLR4_5_227z2bim68iyg2v.R.inc(3407);int numChunks = param.getNumPrivateChunks();</span>
+<span class="pc bpc" id="L858" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3408);for (int i = 0; (((i &lt; numChunks)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3409)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3410)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L859">            __CLR4_5_227z2bim68iyg2v.R.inc(3411);String type = param.getPrivateChunkType(i);</span>
+<span class="nc" id="L860">            __CLR4_5_227z2bim68iyg2v.R.inc(3412);byte[] data = param.getPrivateChunkData(i);</span>
 
-<span class="nc" id="L862">            ChunkStream cs = new ChunkStream(type);</span>
-            try {
-<span class="nc" id="L864">                cs.write(data);</span>
-<span class="nc" id="L865">                cs.writeToStream(dataOutput);</span>
+<span class="nc" id="L862">            __CLR4_5_227z2bim68iyg2v.R.inc(3413);ChunkStream cs = new ChunkStream(type);</span>
+<span class="nc" id="L863">            __CLR4_5_227z2bim68iyg2v.R.inc(3414);try {</span>
+<span class="nc" id="L864">                __CLR4_5_227z2bim68iyg2v.R.inc(3415);cs.write(data);</span>
+<span class="nc" id="L865">                __CLR4_5_227z2bim68iyg2v.R.inc(3416);cs.writeToStream(dataOutput);</span>
             } finally {
-<span class="nc" id="L867">                cs.close();</span>
+<span class="nc" id="L867">                __CLR4_5_227z2bim68iyg2v.R.inc(3417);cs.close();</span>
             }
         }
-<span class="fc" id="L870">    }</span>
+<span class="fc" id="L870">    }}finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
     /**
      * Analyzes a set of palettes and determines if it can be expressed
@@ -880,36 +880,36 @@ public class PNGImageEncoder extends ImageEncoderImpl {
     private PNGEncodeParam.Gray createGrayParam(byte[] redPalette,
                                                 byte[] greenPalette,
                                                 byte[] bluePalette,
-                                                byte[] alphaPalette) {
-<span class="nc" id="L884">        PNGEncodeParam.Gray param = new PNGEncodeParam.Gray();</span>
-<span class="nc" id="L885">        int numTransparent = 0;</span>
+<span class="nc" id="L883">                                                byte[] alphaPalette) {try{__CLR4_5_227z2bim68iyg2v.R.inc(3418);</span>
+<span class="nc" id="L884">        __CLR4_5_227z2bim68iyg2v.R.inc(3419);PNGEncodeParam.Gray param = new PNGEncodeParam.Gray();</span>
+<span class="nc" id="L885">        __CLR4_5_227z2bim68iyg2v.R.inc(3420);int numTransparent = 0;</span>
 
-<span class="nc" id="L887">        int grayFactor = 255 / ((1 &lt;&lt; bitDepth) - 1);</span>
-<span class="nc" id="L888">        int entries = 1 &lt;&lt; bitDepth;</span>
-<span class="nc bnc" id="L889" title="All 2 branches missed.">        for (int i = 0; i &lt; entries; i++) {</span>
-<span class="nc" id="L890">            byte red = redPalette[i];</span>
-<span class="nc bnc" id="L891" title="All 6 branches missed.">            if ((red != i * grayFactor)</span>
+<span class="nc" id="L887">        __CLR4_5_227z2bim68iyg2v.R.inc(3421);int grayFactor = 255 / ((1 &lt;&lt; bitDepth) - 1);</span>
+<span class="nc" id="L888">        __CLR4_5_227z2bim68iyg2v.R.inc(3422);int entries = 1 &lt;&lt; bitDepth;</span>
+<span class="nc bnc" id="L889" title="All 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3423);for (int i = 0; (((i &lt; entries)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3424)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3425)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L890">            __CLR4_5_227z2bim68iyg2v.R.inc(3426);byte red = redPalette[i];</span>
+<span class="nc bnc" id="L891" title="All 6 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3427);if (((((red != i * grayFactor)</span>
                 || (red != greenPalette[i])
-                || (red != bluePalette[i])) {
-<span class="nc" id="L894">                return null;</span>
+<span class="nc bnc" id="L893" title="All 8 branches missed.">                || (red != bluePalette[i]))&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3428)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3429)==0&amp;false))) {{</span>
+<span class="nc" id="L894">                __CLR4_5_227z2bim68iyg2v.R.inc(3430);return null;</span>
             }
 
             // All alphas must be 255 except at most 1 can be 0
-<span class="nc" id="L898">            byte alpha = alphaPalette[i];</span>
-<span class="nc bnc" id="L899" title="All 2 branches missed.">            if (alpha == (byte)0) {</span>
-<span class="nc" id="L900">                param.setTransparentGray(i);</span>
+<span class="nc" id="L898">            }__CLR4_5_227z2bim68iyg2v.R.inc(3431);byte alpha = alphaPalette[i];</span>
+<span class="nc bnc" id="L899" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3432);if ((((alpha == (byte)0)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3433)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3434)==0&amp;false))) {{</span>
+<span class="nc" id="L900">                __CLR4_5_227z2bim68iyg2v.R.inc(3435);param.setTransparentGray(i);</span>
 
-<span class="nc" id="L902">                ++numTransparent;</span>
-<span class="nc bnc" id="L903" title="All 2 branches missed.">                if (numTransparent &gt; 1) {</span>
-<span class="nc" id="L904">                    return null;</span>
+<span class="nc" id="L902">                __CLR4_5_227z2bim68iyg2v.R.inc(3436);++numTransparent;</span>
+<span class="nc bnc" id="L903" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3437);if ((((numTransparent &gt; 1)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3438)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3439)==0&amp;false))) {{</span>
+<span class="nc" id="L904">                    __CLR4_5_227z2bim68iyg2v.R.inc(3440);return null;</span>
                 }
-<span class="nc bnc" id="L906" title="All 2 branches missed.">            } else if (alpha != (byte)255) {</span>
-<span class="nc" id="L907">                return null;</span>
+<span class="nc bnc" id="L906" title="All 10 branches missed.">            }} }else {__CLR4_5_227z2bim68iyg2v.R.inc(3441);if ((((alpha != (byte)255)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3442)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3443)==0&amp;false))) {{</span>
+<span class="nc" id="L907">                __CLR4_5_227z2bim68iyg2v.R.inc(3444);return null;</span>
             }
-        }
+        }}}
 
-<span class="nc" id="L911">        return param;</span>
-    }
+<span class="nc" id="L911">        }__CLR4_5_227z2bim68iyg2v.R.inc(3445);return param;</span>
+<span class="nc" id="L912">    }finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 
     /**
      * This method encodes a &lt;code&gt;RenderedImage&lt;/code&gt; into PNG.
@@ -918,191 +918,191 @@ public class PNGImageEncoder extends ImageEncoderImpl {
      * by the caller of this method.
      */
     @Override
-    public void encode(RenderedImage im) throws IOException {
-<span class="fc" id="L922">        this.image = im;</span>
-<span class="fc" id="L923">        this.width = image.getWidth();</span>
-<span class="fc" id="L924">        this.height = image.getHeight();</span>
+<span class="fc" id="L921">    public void encode(RenderedImage im) throws IOException {try{__CLR4_5_227z2bim68iyg2v.R.inc(3446);</span>
+<span class="fc" id="L922">        __CLR4_5_227z2bim68iyg2v.R.inc(3447);this.image = im;</span>
+<span class="fc" id="L923">        __CLR4_5_227z2bim68iyg2v.R.inc(3448);this.width = image.getWidth();</span>
+<span class="fc" id="L924">        __CLR4_5_227z2bim68iyg2v.R.inc(3449);this.height = image.getHeight();</span>
 
-<span class="fc" id="L926">        SampleModel sampleModel = image.getSampleModel();</span>
+<span class="fc" id="L926">        __CLR4_5_227z2bim68iyg2v.R.inc(3450);SampleModel sampleModel = image.getSampleModel();</span>
 
-<span class="fc" id="L928">        int[] sampleSize = sampleModel.getSampleSize();</span>
+<span class="fc" id="L928">        __CLR4_5_227z2bim68iyg2v.R.inc(3451);int[] sampleSize = sampleModel.getSampleSize();</span>
 
         // Set bitDepth to a sentinel value
-<span class="fc" id="L931">        this.bitDepth = -1;</span>
-<span class="fc" id="L932">        this.bitShift = 0;</span>
+<span class="fc" id="L931">        __CLR4_5_227z2bim68iyg2v.R.inc(3452);this.bitDepth = -1;</span>
+<span class="fc" id="L932">        __CLR4_5_227z2bim68iyg2v.R.inc(3453);this.bitShift = 0;</span>
 
         // Allow user to override the bit depth of gray images
-<span class="pc bpc" id="L935" title="1 of 2 branches missed.">        if (param instanceof PNGEncodeParam.Gray) {</span>
-<span class="nc" id="L936">            PNGEncodeParam.Gray paramg = (PNGEncodeParam.Gray)param;</span>
-<span class="nc bnc" id="L937" title="All 2 branches missed.">            if (paramg.isBitDepthSet()) {</span>
-<span class="nc" id="L938">                this.bitDepth = paramg.getBitDepth();</span>
+<span class="pc bpc" id="L935" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3454);if ((((param instanceof PNGEncodeParam.Gray)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3455)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3456)==0&amp;false))) {{</span>
+<span class="nc" id="L936">            __CLR4_5_227z2bim68iyg2v.R.inc(3457);PNGEncodeParam.Gray paramg = (PNGEncodeParam.Gray)param;</span>
+<span class="nc bnc" id="L937" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3458);if ((((paramg.isBitDepthSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3459)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3460)==0&amp;false))) {{</span>
+<span class="nc" id="L938">                __CLR4_5_227z2bim68iyg2v.R.inc(3461);this.bitDepth = paramg.getBitDepth();</span>
             }
 
-<span class="nc bnc" id="L941" title="All 2 branches missed.">            if (paramg.isBitShiftSet()) {</span>
-<span class="nc" id="L942">                this.bitShift = paramg.getBitShift();</span>
+<span class="nc bnc" id="L941" title="All 10 branches missed.">            }__CLR4_5_227z2bim68iyg2v.R.inc(3462);if ((((paramg.isBitShiftSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3463)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3464)==0&amp;false))) {{</span>
+<span class="nc" id="L942">                __CLR4_5_227z2bim68iyg2v.R.inc(3465);this.bitShift = paramg.getBitShift();</span>
             }
-        }
+        }}
 
         // Get bit depth from image if not set in param
-<span class="pc bpc" id="L947" title="1 of 2 branches missed.">        if (this.bitDepth == -1) {</span>
+<span class="pc bpc" id="L947" title="7 of 10 branches missed.">        }__CLR4_5_227z2bim68iyg2v.R.inc(3466);if ((((this.bitDepth == -1)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3467)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3468)==0&amp;false))) {{</span>
             // Get bit depth from channel 0 of the image
 
-<span class="fc" id="L950">            this.bitDepth = sampleSize[0];</span>
+<span class="fc" id="L950">            __CLR4_5_227z2bim68iyg2v.R.inc(3469);this.bitDepth = sampleSize[0];</span>
             // Ensure all channels have the same bit depth
-<span class="fc bfc" id="L952" title="All 2 branches covered.">            for (int i = 1; i &lt; sampleSize.length; i++) {</span>
-<span class="pc bpc" id="L953" title="1 of 2 branches missed.">                if (sampleSize[i] != bitDepth) {</span>
-<span class="nc" id="L954">                    throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder0&quot;));</span>
+<span class="pc bpc" id="L952" title="4 of 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3470);for (int i = 1; (((i &lt; sampleSize.length)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3471)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3472)==0&amp;false)); i++) {{</span>
+<span class="pc bpc" id="L953" title="7 of 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3473);if ((((sampleSize[i] != bitDepth)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3474)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3475)==0&amp;false))) {{</span>
+<span class="nc" id="L954">                    __CLR4_5_227z2bim68iyg2v.R.inc(3476);throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder0&quot;));</span>
                 }
-            }
+            }}
 
             // Round bit depth up to a power of 2
-<span class="pc bpc" id="L959" title="2 of 4 branches missed.">            if (bitDepth &gt; 2 &amp;&amp; bitDepth &lt; 4) {</span>
-<span class="nc" id="L960">                bitDepth = 4;</span>
-<span class="pc bpc" id="L961" title="2 of 4 branches missed.">            } else if (bitDepth &gt; 4 &amp;&amp; bitDepth &lt; 8) {</span>
-<span class="nc" id="L962">                bitDepth = 8;</span>
-<span class="pc bpc" id="L963" title="3 of 4 branches missed.">            } else if (bitDepth &gt; 8 &amp;&amp; bitDepth &lt; 16) {</span>
-<span class="nc" id="L964">                bitDepth = 16;</span>
-<span class="pc bpc" id="L965" title="1 of 2 branches missed.">            } else if (bitDepth &gt; 16) {</span>
-<span class="nc" id="L966">                throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder1&quot;));</span>
+<span class="pc bpc" id="L959" title="8 of 12 branches missed.">            }__CLR4_5_227z2bim68iyg2v.R.inc(3477);if ((((bitDepth &gt; 2 &amp;&amp; bitDepth &lt; 4)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3478)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3479)==0&amp;false))) {{</span>
+<span class="nc" id="L960">                __CLR4_5_227z2bim68iyg2v.R.inc(3480);bitDepth = 4;</span>
+<span class="pc bpc" id="L961" title="8 of 12 branches missed.">            } }else {__CLR4_5_227z2bim68iyg2v.R.inc(3481);if ((((bitDepth &gt; 4 &amp;&amp; bitDepth &lt; 8)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3482)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3483)==0&amp;false))) {{</span>
+<span class="nc" id="L962">                __CLR4_5_227z2bim68iyg2v.R.inc(3484);bitDepth = 8;</span>
+<span class="pc bpc" id="L963" title="9 of 12 branches missed.">            } }else {__CLR4_5_227z2bim68iyg2v.R.inc(3485);if ((((bitDepth &gt; 8 &amp;&amp; bitDepth &lt; 16)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3486)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3487)==0&amp;false))) {{</span>
+<span class="nc" id="L964">                __CLR4_5_227z2bim68iyg2v.R.inc(3488);bitDepth = 16;</span>
+<span class="pc bpc" id="L965" title="7 of 10 branches missed.">            } }else {__CLR4_5_227z2bim68iyg2v.R.inc(3489);if ((((bitDepth &gt; 16)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3490)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3491)==0&amp;false))) {{</span>
+<span class="nc" id="L966">                __CLR4_5_227z2bim68iyg2v.R.inc(3492);throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder1&quot;));</span>
             }
-        }
+        }}}}}
 
-<span class="fc" id="L970">        this.numBands = sampleModel.getNumBands();</span>
-<span class="pc bpc" id="L971" title="1 of 2 branches missed.">        this.bpp = numBands * ((bitDepth == 16) ? 2 : 1);</span>
+<span class="fc" id="L970">        }__CLR4_5_227z2bim68iyg2v.R.inc(3493);this.numBands = sampleModel.getNumBands();</span>
+<span class="pc bpc" id="L971" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3494);this.bpp = numBands * (((((bitDepth == 16) )&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3495)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3496)==0&amp;false))? 2 : 1);</span>
 
-<span class="fc" id="L973">        ColorModel colorModel = image.getColorModel();</span>
-<span class="pc bpc" id="L974" title="1 of 2 branches missed.">        if (colorModel instanceof IndexColorModel) {</span>
-<span class="nc bnc" id="L975" title="All 4 branches missed.">            if (bitDepth &lt; 1 || bitDepth &gt; 8) {</span>
-<span class="nc" id="L976">                throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder2&quot;));</span>
+<span class="fc" id="L973">        __CLR4_5_227z2bim68iyg2v.R.inc(3497);ColorModel colorModel = image.getColorModel();</span>
+<span class="pc bpc" id="L974" title="7 of 10 branches missed.">        __CLR4_5_227z2bim68iyg2v.R.inc(3498);if ((((colorModel instanceof IndexColorModel)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3499)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3500)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L975" title="All 12 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3501);if ((((bitDepth &lt; 1 || bitDepth &gt; 8)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3502)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3503)==0&amp;false))) {{</span>
+<span class="nc" id="L976">                __CLR4_5_227z2bim68iyg2v.R.inc(3504);throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder2&quot;));</span>
             }
-<span class="nc bnc" id="L978" title="All 2 branches missed.">            if (sampleModel.getNumBands() != 1) {</span>
-<span class="nc" id="L979">                throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder3&quot;));</span>
+<span class="nc bnc" id="L978" title="All 10 branches missed.">            }__CLR4_5_227z2bim68iyg2v.R.inc(3505);if ((((sampleModel.getNumBands() != 1)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3506)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3507)==0&amp;false))) {{</span>
+<span class="nc" id="L979">                __CLR4_5_227z2bim68iyg2v.R.inc(3508);throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder3&quot;));</span>
             }
 
-<span class="nc" id="L982">            IndexColorModel icm = (IndexColorModel)colorModel;</span>
-<span class="nc" id="L983">            int size = icm.getMapSize();</span>
+<span class="nc" id="L982">            }__CLR4_5_227z2bim68iyg2v.R.inc(3509);IndexColorModel icm = (IndexColorModel)colorModel;</span>
+<span class="nc" id="L983">            __CLR4_5_227z2bim68iyg2v.R.inc(3510);int size = icm.getMapSize();</span>
 
-<span class="nc" id="L985">            redPalette = new byte[size];</span>
-<span class="nc" id="L986">            greenPalette = new byte[size];</span>
-<span class="nc" id="L987">            bluePalette = new byte[size];</span>
-<span class="nc" id="L988">            alphaPalette = new byte[size];</span>
+<span class="nc" id="L985">            __CLR4_5_227z2bim68iyg2v.R.inc(3511);redPalette = new byte[size];</span>
+<span class="nc" id="L986">            __CLR4_5_227z2bim68iyg2v.R.inc(3512);greenPalette = new byte[size];</span>
+<span class="nc" id="L987">            __CLR4_5_227z2bim68iyg2v.R.inc(3513);bluePalette = new byte[size];</span>
+<span class="nc" id="L988">            __CLR4_5_227z2bim68iyg2v.R.inc(3514);alphaPalette = new byte[size];</span>
 
-<span class="nc" id="L990">            icm.getReds(redPalette);</span>
-<span class="nc" id="L991">            icm.getGreens(greenPalette);</span>
-<span class="nc" id="L992">            icm.getBlues(bluePalette);</span>
-<span class="nc" id="L993">            icm.getAlphas(alphaPalette);</span>
+<span class="nc" id="L990">            __CLR4_5_227z2bim68iyg2v.R.inc(3515);icm.getReds(redPalette);</span>
+<span class="nc" id="L991">            __CLR4_5_227z2bim68iyg2v.R.inc(3516);icm.getGreens(greenPalette);</span>
+<span class="nc" id="L992">            __CLR4_5_227z2bim68iyg2v.R.inc(3517);icm.getBlues(bluePalette);</span>
+<span class="nc" id="L993">            __CLR4_5_227z2bim68iyg2v.R.inc(3518);icm.getAlphas(alphaPalette);</span>
 
-<span class="nc" id="L995">            this.bpp = 1;</span>
+<span class="nc" id="L995">            __CLR4_5_227z2bim68iyg2v.R.inc(3519);this.bpp = 1;</span>
 
-<span class="nc bnc" id="L997" title="All 2 branches missed.">            if (param == null) {</span>
-<span class="nc" id="L998">                param = createGrayParam(redPalette,</span>
+<span class="nc bnc" id="L997" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3520);if ((((param == null)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3521)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3522)==0&amp;false))) {{</span>
+<span class="nc" id="L998">                __CLR4_5_227z2bim68iyg2v.R.inc(3523);param = createGrayParam(redPalette,</span>
                                         greenPalette,
                                         bluePalette,
                                         alphaPalette);
             }
 
             // If param is still null, it can't be expressed as gray
-<span class="nc bnc" id="L1005" title="All 2 branches missed.">            if (param == null) {</span>
-<span class="nc" id="L1006">                param = new PNGEncodeParam.Palette();</span>
+<span class="nc bnc" id="L1005" title="All 10 branches missed.">            }__CLR4_5_227z2bim68iyg2v.R.inc(3524);if ((((param == null)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3525)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3526)==0&amp;false))) {{</span>
+<span class="nc" id="L1006">                __CLR4_5_227z2bim68iyg2v.R.inc(3527);param = new PNGEncodeParam.Palette();</span>
             }
 
-<span class="nc bnc" id="L1009" title="All 2 branches missed.">            if (param instanceof PNGEncodeParam.Palette) {</span>
+<span class="nc bnc" id="L1009" title="All 10 branches missed.">            }__CLR4_5_227z2bim68iyg2v.R.inc(3528);if ((((param instanceof PNGEncodeParam.Palette)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3529)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3530)==0&amp;false))) {{</span>
                 // If palette not set in param, create one from the ColorModel.
-<span class="nc" id="L1011">                PNGEncodeParam.Palette parami = (PNGEncodeParam.Palette)param;</span>
-<span class="nc bnc" id="L1012" title="All 2 branches missed.">                if (parami.isPaletteSet()) {</span>
-<span class="nc" id="L1013">                    int[] palette = parami.getPalette();</span>
-<span class="nc" id="L1014">                    size = palette.length / 3;</span>
+<span class="nc" id="L1011">                __CLR4_5_227z2bim68iyg2v.R.inc(3531);PNGEncodeParam.Palette parami = (PNGEncodeParam.Palette)param;</span>
+<span class="nc bnc" id="L1012" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3532);if ((((parami.isPaletteSet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3533)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3534)==0&amp;false))) {{</span>
+<span class="nc" id="L1013">                    __CLR4_5_227z2bim68iyg2v.R.inc(3535);int[] palette = parami.getPalette();</span>
+<span class="nc" id="L1014">                    __CLR4_5_227z2bim68iyg2v.R.inc(3536);size = palette.length / 3;</span>
 
-<span class="nc" id="L1016">                    int index = 0;</span>
-<span class="nc bnc" id="L1017" title="All 2 branches missed.">                    for (int i = 0; i &lt; size; i++) {</span>
-<span class="nc" id="L1018">                        redPalette[i] = (byte)palette[index++];</span>
-<span class="nc" id="L1019">                        greenPalette[i] = (byte)palette[index++];</span>
-<span class="nc" id="L1020">                        bluePalette[i] = (byte)palette[index++];</span>
-<span class="nc" id="L1021">                        alphaPalette[i] = (byte)255;</span>
+<span class="nc" id="L1016">                    __CLR4_5_227z2bim68iyg2v.R.inc(3537);int index = 0;</span>
+<span class="nc bnc" id="L1017" title="All 10 branches missed.">                    __CLR4_5_227z2bim68iyg2v.R.inc(3538);for (int i = 0; (((i &lt; size)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3539)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3540)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L1018">                        __CLR4_5_227z2bim68iyg2v.R.inc(3541);redPalette[i] = (byte)palette[index++];</span>
+<span class="nc" id="L1019">                        __CLR4_5_227z2bim68iyg2v.R.inc(3542);greenPalette[i] = (byte)palette[index++];</span>
+<span class="nc" id="L1020">                        __CLR4_5_227z2bim68iyg2v.R.inc(3543);bluePalette[i] = (byte)palette[index++];</span>
+<span class="nc" id="L1021">                        __CLR4_5_227z2bim68iyg2v.R.inc(3544);alphaPalette[i] = (byte)255;</span>
                     }
+                }}
+<span class="nc" id="L1024">                }__CLR4_5_227z2bim68iyg2v.R.inc(3545);this.colorType = PNG_COLOR_PALETTE;</span>
+<span class="nc bnc" id="L1025" title="All 10 branches missed.">            } }else {__CLR4_5_227z2bim68iyg2v.R.inc(3546);if ((((param instanceof PNGEncodeParam.Gray)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3547)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3548)==0&amp;false))) {{</span>
+<span class="nc" id="L1026">                __CLR4_5_227z2bim68iyg2v.R.inc(3549);redPalette = greenPalette = bluePalette = alphaPalette = null;</span>
+<span class="nc" id="L1027">                __CLR4_5_227z2bim68iyg2v.R.inc(3550);this.colorType = PNG_COLOR_GRAY;</span>
+            } }else {{
+<span class="nc" id="L1029">                __CLR4_5_227z2bim68iyg2v.R.inc(3551);throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder4&quot;));</span>
+            }
+<span class="pc bpc" id="L1031" title="7 of 10 branches missed.">        }}} }else {__CLR4_5_227z2bim68iyg2v.R.inc(3552);if ((((numBands == 1)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3553)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3554)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L1032" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3555);if ((((param == null)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3556)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3557)==0&amp;false))) {{</span>
+<span class="nc" id="L1033">                __CLR4_5_227z2bim68iyg2v.R.inc(3558);param = new PNGEncodeParam.Gray();</span>
+            }
+<span class="nc" id="L1035">            }__CLR4_5_227z2bim68iyg2v.R.inc(3559);this.colorType = PNG_COLOR_GRAY;</span>
+<span class="pc bpc" id="L1036" title="7 of 10 branches missed.">        } }else {__CLR4_5_227z2bim68iyg2v.R.inc(3560);if ((((numBands == 2)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3561)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3562)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L1037" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3563);if ((((param == null)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3564)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3565)==0&amp;false))) {{</span>
+<span class="nc" id="L1038">                __CLR4_5_227z2bim68iyg2v.R.inc(3566);param = new PNGEncodeParam.Gray();</span>
+            }
+
+<span class="nc bnc" id="L1041" title="All 10 branches missed.">            }__CLR4_5_227z2bim68iyg2v.R.inc(3567);if ((((param.isTransparencySet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3568)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3569)==0&amp;false))) {{</span>
+<span class="nc" id="L1042">                __CLR4_5_227z2bim68iyg2v.R.inc(3570);skipAlpha = true;</span>
+<span class="nc" id="L1043">                __CLR4_5_227z2bim68iyg2v.R.inc(3571);numBands = 1;</span>
+<span class="nc bnc" id="L1044" title="All 12 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3572);if (((((sampleSize[0] == 8) &amp;&amp; (bitDepth &lt; 8))&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3573)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3574)==0&amp;false))) {{</span>
+<span class="nc" id="L1045">                    __CLR4_5_227z2bim68iyg2v.R.inc(3575);compressGray = true;</span>
                 }
-<span class="nc" id="L1024">                this.colorType = PNG_COLOR_PALETTE;</span>
-<span class="nc bnc" id="L1025" title="All 2 branches missed.">            } else if (param instanceof PNGEncodeParam.Gray) {</span>
-<span class="nc" id="L1026">                redPalette = greenPalette = bluePalette = alphaPalette = null;</span>
-<span class="nc" id="L1027">                this.colorType = PNG_COLOR_GRAY;</span>
-            } else {
-<span class="nc" id="L1029">                throw new RuntimeException(PropertyUtil.getString(&quot;PNGImageEncoder4&quot;));</span>
-            }
-<span class="pc bpc" id="L1031" title="1 of 2 branches missed.">        } else if (numBands == 1) {</span>
-<span class="nc bnc" id="L1032" title="All 2 branches missed.">            if (param == null) {</span>
-<span class="nc" id="L1033">                param = new PNGEncodeParam.Gray();</span>
-            }
-<span class="nc" id="L1035">            this.colorType = PNG_COLOR_GRAY;</span>
-<span class="pc bpc" id="L1036" title="1 of 2 branches missed.">        } else if (numBands == 2) {</span>
-<span class="nc bnc" id="L1037" title="All 2 branches missed.">            if (param == null) {</span>
-<span class="nc" id="L1038">                param = new PNGEncodeParam.Gray();</span>
-            }
-
-<span class="nc bnc" id="L1041" title="All 2 branches missed.">            if (param.isTransparencySet()) {</span>
-<span class="nc" id="L1042">                skipAlpha = true;</span>
-<span class="nc" id="L1043">                numBands = 1;</span>
-<span class="nc bnc" id="L1044" title="All 4 branches missed.">                if ((sampleSize[0] == 8) &amp;&amp; (bitDepth &lt; 8)) {</span>
-<span class="nc" id="L1045">                    compressGray = true;</span>
+<span class="nc bnc" id="L1047" title="All 10 branches missed.">                }__CLR4_5_227z2bim68iyg2v.R.inc(3576);bpp = ((((bitDepth == 16) )&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3577)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3578)==0&amp;false))? 2 : 1;</span>
+<span class="nc" id="L1048">                __CLR4_5_227z2bim68iyg2v.R.inc(3579);this.colorType = PNG_COLOR_GRAY;</span>
+            } }else {{
+<span class="nc bnc" id="L1050" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3580);if ((((this.bitDepth &lt; 8)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3581)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3582)==0&amp;false))) {{</span>
+<span class="nc" id="L1051">                    __CLR4_5_227z2bim68iyg2v.R.inc(3583);this.bitDepth = 8;</span>
                 }
-<span class="nc bnc" id="L1047" title="All 2 branches missed.">                bpp = (bitDepth == 16) ? 2 : 1;</span>
-<span class="nc" id="L1048">                this.colorType = PNG_COLOR_GRAY;</span>
-            } else {
-<span class="nc bnc" id="L1050" title="All 2 branches missed.">                if (this.bitDepth &lt; 8) {</span>
-<span class="nc" id="L1051">                    this.bitDepth = 8;</span>
-                }
-<span class="nc" id="L1053">                this.colorType = PNG_COLOR_GRAY_ALPHA;</span>
+<span class="nc" id="L1053">                }__CLR4_5_227z2bim68iyg2v.R.inc(3584);this.colorType = PNG_COLOR_GRAY_ALPHA;</span>
             }
-<span class="pc bpc" id="L1055" title="1 of 2 branches missed.">        } else if (numBands == 3) {</span>
-<span class="nc bnc" id="L1056" title="All 2 branches missed.">            if (param == null) {</span>
-<span class="nc" id="L1057">                param = new PNGEncodeParam.RGB();</span>
+<span class="pc bpc" id="L1055" title="7 of 10 branches missed.">        }} }else {__CLR4_5_227z2bim68iyg2v.R.inc(3585);if ((((numBands == 3)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3586)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3587)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L1056" title="All 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3588);if ((((param == null)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3589)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3590)==0&amp;false))) {{</span>
+<span class="nc" id="L1057">                __CLR4_5_227z2bim68iyg2v.R.inc(3591);param = new PNGEncodeParam.RGB();</span>
             }
-<span class="nc" id="L1059">            this.colorType = PNG_COLOR_RGB;</span>
-<span class="pc bpc" id="L1060" title="1 of 2 branches missed.">        } else if (numBands == 4) {</span>
-<span class="pc bpc" id="L1061" title="1 of 2 branches missed.">            if (param == null) {</span>
-<span class="nc" id="L1062">                param = new PNGEncodeParam.RGB();</span>
+<span class="nc" id="L1059">            }__CLR4_5_227z2bim68iyg2v.R.inc(3592);this.colorType = PNG_COLOR_RGB;</span>
+<span class="pc bpc" id="L1060" title="7 of 10 branches missed.">        } }else {__CLR4_5_227z2bim68iyg2v.R.inc(3593);if ((((numBands == 4)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3594)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3595)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L1061" title="7 of 10 branches missed.">            __CLR4_5_227z2bim68iyg2v.R.inc(3596);if ((((param == null)&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3597)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3598)==0&amp;false))) {{</span>
+<span class="nc" id="L1062">                __CLR4_5_227z2bim68iyg2v.R.inc(3599);param = new PNGEncodeParam.RGB();</span>
             }
-<span class="pc bpc" id="L1064" title="1 of 2 branches missed.">            if (param.isTransparencySet()) {</span>
-<span class="nc" id="L1065">                skipAlpha = true;</span>
-<span class="nc" id="L1066">                numBands = 3;</span>
-<span class="nc bnc" id="L1067" title="All 2 branches missed.">                bpp = (bitDepth == 16) ? 6 : 3;</span>
-<span class="nc" id="L1068">                this.colorType = PNG_COLOR_RGB;</span>
-            } else {
-<span class="fc" id="L1070">                this.colorType = PNG_COLOR_RGB_ALPHA;</span>
+<span class="pc bpc" id="L1064" title="7 of 10 branches missed.">            }__CLR4_5_227z2bim68iyg2v.R.inc(3600);if ((((param.isTransparencySet())&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3601)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3602)==0&amp;false))) {{</span>
+<span class="nc" id="L1065">                __CLR4_5_227z2bim68iyg2v.R.inc(3603);skipAlpha = true;</span>
+<span class="nc" id="L1066">                __CLR4_5_227z2bim68iyg2v.R.inc(3604);numBands = 3;</span>
+<span class="nc bnc" id="L1067" title="All 10 branches missed.">                __CLR4_5_227z2bim68iyg2v.R.inc(3605);bpp = ((((bitDepth == 16) )&amp;&amp;(__CLR4_5_227z2bim68iyg2v.R.iget(3606)!=0|true))||(__CLR4_5_227z2bim68iyg2v.R.iget(3607)==0&amp;false))? 6 : 3;</span>
+<span class="nc" id="L1068">                __CLR4_5_227z2bim68iyg2v.R.inc(3608);this.colorType = PNG_COLOR_RGB;</span>
+            } }else {{
+<span class="fc" id="L1070">                __CLR4_5_227z2bim68iyg2v.R.inc(3609);this.colorType = PNG_COLOR_RGB_ALPHA;</span>
             }
-        }
+        }}
 
-<span class="fc" id="L1074">        interlace = param.getInterlacing();</span>
+<span class="fc" id="L1074">        }}}}}__CLR4_5_227z2bim68iyg2v.R.inc(3610);interlace = param.getInterlacing();</span>
 
-<span class="fc" id="L1076">        writeMagic();</span>
+<span class="fc" id="L1076">        __CLR4_5_227z2bim68iyg2v.R.inc(3611);writeMagic();</span>
 
-<span class="fc" id="L1078">        writeIHDR();</span>
+<span class="fc" id="L1078">        __CLR4_5_227z2bim68iyg2v.R.inc(3612);writeIHDR();</span>
 
-<span class="fc" id="L1080">        writeCHRM();</span>
-<span class="fc" id="L1081">        writeGAMA();</span>
-<span class="fc" id="L1082">        writeICCP();</span>
-<span class="fc" id="L1083">        writeSBIT();</span>
-<span class="fc" id="L1084">        writeSRGB();</span>
+<span class="fc" id="L1080">        __CLR4_5_227z2bim68iyg2v.R.inc(3613);writeCHRM();</span>
+<span class="fc" id="L1081">        __CLR4_5_227z2bim68iyg2v.R.inc(3614);writeGAMA();</span>
+<span class="fc" id="L1082">        __CLR4_5_227z2bim68iyg2v.R.inc(3615);writeICCP();</span>
+<span class="fc" id="L1083">        __CLR4_5_227z2bim68iyg2v.R.inc(3616);writeSBIT();</span>
+<span class="fc" id="L1084">        __CLR4_5_227z2bim68iyg2v.R.inc(3617);writeSRGB();</span>
 
-<span class="fc" id="L1086">        writePLTE();</span>
+<span class="fc" id="L1086">        __CLR4_5_227z2bim68iyg2v.R.inc(3618);writePLTE();</span>
 
-<span class="fc" id="L1088">        writeHIST();</span>
-<span class="fc" id="L1089">        writeTRNS();</span>
-<span class="fc" id="L1090">        writeBKGD();</span>
+<span class="fc" id="L1088">        __CLR4_5_227z2bim68iyg2v.R.inc(3619);writeHIST();</span>
+<span class="fc" id="L1089">        __CLR4_5_227z2bim68iyg2v.R.inc(3620);writeTRNS();</span>
+<span class="fc" id="L1090">        __CLR4_5_227z2bim68iyg2v.R.inc(3621);writeBKGD();</span>
 
-<span class="fc" id="L1092">        writePHYS();</span>
-<span class="fc" id="L1093">        writeSPLT();</span>
-<span class="fc" id="L1094">        writeTIME();</span>
-<span class="fc" id="L1095">        writeTEXT();</span>
-<span class="fc" id="L1096">        writeZTXT();</span>
+<span class="fc" id="L1092">        __CLR4_5_227z2bim68iyg2v.R.inc(3622);writePHYS();</span>
+<span class="fc" id="L1093">        __CLR4_5_227z2bim68iyg2v.R.inc(3623);writeSPLT();</span>
+<span class="fc" id="L1094">        __CLR4_5_227z2bim68iyg2v.R.inc(3624);writeTIME();</span>
+<span class="fc" id="L1095">        __CLR4_5_227z2bim68iyg2v.R.inc(3625);writeTEXT();</span>
+<span class="fc" id="L1096">        __CLR4_5_227z2bim68iyg2v.R.inc(3626);writeZTXT();</span>
 
-<span class="fc" id="L1098">        writePrivateChunks();</span>
+<span class="fc" id="L1098">        __CLR4_5_227z2bim68iyg2v.R.inc(3627);writePrivateChunks();</span>
 
-<span class="fc" id="L1100">        writeIDAT();</span>
+<span class="fc" id="L1100">        __CLR4_5_227z2bim68iyg2v.R.inc(3628);writeIDAT();</span>
 
-<span class="fc" id="L1102">        writeIEND();</span>
+<span class="fc" id="L1102">        __CLR4_5_227z2bim68iyg2v.R.inc(3629);writeIEND();</span>
 
-<span class="fc" id="L1104">        dataOutput.flush();</span>
-<span class="fc" id="L1105">        dataOutput.close();</span>
-<span class="fc" id="L1106">    }</span>
+<span class="fc" id="L1104">        __CLR4_5_227z2bim68iyg2v.R.inc(3630);dataOutput.flush();</span>
+<span class="fc" id="L1105">        __CLR4_5_227z2bim68iyg2v.R.inc(3631);dataOutput.close();</span>
+<span class="fc" id="L1106">    }finally{__CLR4_5_227z2bim68iyg2v.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

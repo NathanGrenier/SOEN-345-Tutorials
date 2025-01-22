@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSProcSets.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSProcSets.java</span></div><h1>PSProcSets.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSProcSets.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSProcSets.java</span></div><h1>PSProcSets.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -28,10 +28,10 @@ import java.util.Map;
  *
  * @version $Id: PSProcSets.java 1804124 2017-08-04 14:13:54Z ssteiner $
  */
-public final class PSProcSets {
+<span class="pc bpc" id="L31" title="3 of 4 branches missed.">public final class PSProcSets {public static class __CLR4_5_2dzmdzmm68iyi4p{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,18354,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
-    private PSProcSets() {
-    }
+<span class="nc" id="L33">    private PSProcSets() {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18130);</span>
+<span class="nc" id="L34">    }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
     /** the standard procset for the XML Graphics project */
     public static final PSResource STD_PROCSET;
@@ -41,11 +41,11 @@ public final class PSProcSets {
     /** the standard command map matching the {@link #STD_PROCSET}. */
     public static final PSCommandMap STD_COMMAND_MAP;
 
-    static {
-<span class="fc" id="L45">        StdProcSet stdProcSet = new StdProcSet();</span>
-<span class="fc" id="L46">        STD_PROCSET = stdProcSet;</span>
-<span class="fc" id="L47">        STD_COMMAND_MAP = stdProcSet;</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L44">    static {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18131);</span>
+<span class="fc" id="L45">        __CLR4_5_2dzmdzmm68iyi4p.R.inc(18132);StdProcSet stdProcSet = new StdProcSet();</span>
+<span class="fc" id="L46">        __CLR4_5_2dzmdzmm68iyi4p.R.inc(18133);STD_PROCSET = stdProcSet;</span>
+<span class="fc" id="L47">        __CLR4_5_2dzmdzmm68iyi4p.R.inc(18134);STD_COMMAND_MAP = stdProcSet;</span>
+<span class="fc" id="L48">    }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
     /**
      * The standard procset used by XML Graphics Commons.
@@ -55,264 +55,264 @@ public final class PSProcSets {
         /** A Map&lt;String, String&gt; of standard shorthand macros defined in the {@link StdProcSet}. */
         private static final Map STANDARD_MACROS;
 
-        static {
-<span class="fc" id="L59">            Map macros = new java.util.HashMap();</span>
-<span class="fc" id="L60">            macros.put(&quot;moveto&quot;, &quot;M&quot;);</span>
-<span class="fc" id="L61">            macros.put(&quot;rmoveto&quot;, &quot;RM&quot;);</span>
-<span class="fc" id="L62">            macros.put(&quot;curveto&quot;, &quot;C&quot;);</span>
-<span class="fc" id="L63">            macros.put(&quot;lineto&quot;, &quot;L&quot;);</span>
-<span class="fc" id="L64">            macros.put(&quot;show&quot;, &quot;t&quot;);</span>
-<span class="fc" id="L65">            macros.put(&quot;ashow&quot;, &quot;A&quot;);</span>
-<span class="fc" id="L66">            macros.put(&quot;closepath&quot;, &quot;cp&quot;);</span>
-<span class="fc" id="L67">            macros.put(&quot;setrgbcolor&quot;, &quot;RC&quot;);</span>
-<span class="fc" id="L68">            macros.put(&quot;setgray&quot;, &quot;GC&quot;);</span>
-<span class="fc" id="L69">            macros.put(&quot;setcmykcolor&quot;, &quot;CC&quot;);</span>
-<span class="fc" id="L70">            macros.put(&quot;newpath&quot;, &quot;N&quot;);</span>
-<span class="fc" id="L71">            macros.put(&quot;setmiterlimit&quot;, &quot;ML&quot;);</span>
-<span class="fc" id="L72">            macros.put(&quot;setlinewidth&quot;, &quot;LC&quot;);</span>
-<span class="fc" id="L73">            macros.put(&quot;setlinewidth&quot;, &quot;LW&quot;);</span>
-<span class="fc" id="L74">            macros.put(&quot;setlinejoin&quot;, &quot;LJ&quot;);</span>
-<span class="fc" id="L75">            macros.put(&quot;grestore&quot;, &quot;GR&quot;);</span>
-<span class="fc" id="L76">            macros.put(&quot;gsave&quot;, &quot;GS&quot;);</span>
-<span class="fc" id="L77">            macros.put(&quot;fill&quot;, &quot;f&quot;);</span>
-<span class="fc" id="L78">            macros.put(&quot;stroke&quot;, &quot;S&quot;);</span>
-<span class="fc" id="L79">            macros.put(&quot;concat&quot;, &quot;CT&quot;);</span>
-<span class="fc" id="L80">            STANDARD_MACROS = Collections.unmodifiableMap(macros);</span>
-<span class="fc" id="L81">        }</span>
+<span class="fc" id="L58">        static {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18135);</span>
+<span class="fc" id="L59">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18136);Map macros = new java.util.HashMap();</span>
+<span class="fc" id="L60">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18137);macros.put(&quot;moveto&quot;, &quot;M&quot;);</span>
+<span class="fc" id="L61">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18138);macros.put(&quot;rmoveto&quot;, &quot;RM&quot;);</span>
+<span class="fc" id="L62">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18139);macros.put(&quot;curveto&quot;, &quot;C&quot;);</span>
+<span class="fc" id="L63">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18140);macros.put(&quot;lineto&quot;, &quot;L&quot;);</span>
+<span class="fc" id="L64">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18141);macros.put(&quot;show&quot;, &quot;t&quot;);</span>
+<span class="fc" id="L65">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18142);macros.put(&quot;ashow&quot;, &quot;A&quot;);</span>
+<span class="fc" id="L66">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18143);macros.put(&quot;closepath&quot;, &quot;cp&quot;);</span>
+<span class="fc" id="L67">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18144);macros.put(&quot;setrgbcolor&quot;, &quot;RC&quot;);</span>
+<span class="fc" id="L68">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18145);macros.put(&quot;setgray&quot;, &quot;GC&quot;);</span>
+<span class="fc" id="L69">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18146);macros.put(&quot;setcmykcolor&quot;, &quot;CC&quot;);</span>
+<span class="fc" id="L70">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18147);macros.put(&quot;newpath&quot;, &quot;N&quot;);</span>
+<span class="fc" id="L71">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18148);macros.put(&quot;setmiterlimit&quot;, &quot;ML&quot;);</span>
+<span class="fc" id="L72">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18149);macros.put(&quot;setlinewidth&quot;, &quot;LC&quot;);</span>
+<span class="fc" id="L73">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18150);macros.put(&quot;setlinewidth&quot;, &quot;LW&quot;);</span>
+<span class="fc" id="L74">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18151);macros.put(&quot;setlinejoin&quot;, &quot;LJ&quot;);</span>
+<span class="fc" id="L75">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18152);macros.put(&quot;grestore&quot;, &quot;GR&quot;);</span>
+<span class="fc" id="L76">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18153);macros.put(&quot;gsave&quot;, &quot;GS&quot;);</span>
+<span class="fc" id="L77">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18154);macros.put(&quot;fill&quot;, &quot;f&quot;);</span>
+<span class="fc" id="L78">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18155);macros.put(&quot;stroke&quot;, &quot;S&quot;);</span>
+<span class="fc" id="L79">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18156);macros.put(&quot;concat&quot;, &quot;CT&quot;);</span>
+<span class="fc" id="L80">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18157);STANDARD_MACROS = Collections.unmodifiableMap(macros);</span>
+<span class="fc" id="L81">        }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
         public StdProcSet() {
-<span class="fc" id="L84">            super(&quot;Apache XML Graphics Std ProcSet&quot;, 1.2f, 0);</span>
-<span class="fc" id="L85">        }</span>
+<span class="fc" id="L84">            super(&quot;Apache XML Graphics Std ProcSet&quot;, 1.2f, 0);__CLR4_5_2dzmdzmm68iyi4p.R.inc(18159);try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18158);</span>
+<span class="fc" id="L85">        }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
-        public void writeTo(PSGenerator gen) throws IOException {
-<span class="nc" id="L88">            gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE,</span>
+<span class="nc" id="L87">        public void writeTo(PSGenerator gen) throws IOException {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18160);</span>
+<span class="nc" id="L88">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18161);gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE,</span>
 <span class="nc" id="L89">                    new Object[] {TYPE_PROCSET, getName(),</span>
 <span class="nc" id="L90">                        Float.toString(getVersion()), Integer.toString(getRevision())});</span>
-<span class="nc" id="L91">            gen.writeDSCComment(DSCConstants.VERSION,</span>
+<span class="nc" id="L91">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18162);gen.writeDSCComment(DSCConstants.VERSION,</span>
 <span class="nc" id="L92">                    new Object[] {Float.toString(getVersion()), Integer.toString(getRevision())});</span>
-<span class="nc" id="L93">            gen.writeDSCComment(DSCConstants.COPYRIGHT, &quot;Copyright 2001-2003,2010 &quot;</span>
+<span class="nc" id="L93">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18163);gen.writeDSCComment(DSCConstants.COPYRIGHT, &quot;Copyright 2001-2003,2010 &quot;</span>
                         + &quot;The Apache Software Foundation. &quot;
                         + &quot;License terms: http://www.apache.org/licenses/LICENSE-2.0&quot;);
-<span class="nc" id="L96">            gen.writeDSCComment(DSCConstants.TITLE,</span>
+<span class="nc" id="L96">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18164);gen.writeDSCComment(DSCConstants.TITLE,</span>
                     &quot;Basic set of procedures used by the XML Graphics project (Batik and FOP)&quot;);
 
-<span class="nc" id="L99">            gen.writeln(&quot;/bd{bind def}bind def&quot;);</span>
-<span class="nc" id="L100">            gen.writeln(&quot;/ld{load def}bd&quot;);</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">            for (Object o : STANDARD_MACROS.entrySet()) {</span>
-<span class="nc" id="L102">                Map.Entry entry = (Map.Entry) o;</span>
-<span class="nc" id="L103">                gen.writeln(&quot;/&quot; + entry.getValue() + &quot;/&quot; + entry.getKey() + &quot; ld&quot;);</span>
-<span class="nc" id="L104">            }</span>
+<span class="nc" id="L99">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18165);gen.writeln(&quot;/bd{bind def}bind def&quot;);</span>
+<span class="nc" id="L100">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18166);gen.writeln(&quot;/ld{load def}bd&quot;);</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18167);for (Object o : STANDARD_MACROS.entrySet()) {{</span>
+<span class="nc" id="L102">                __CLR4_5_2dzmdzmm68iyi4p.R.inc(18168);Map.Entry entry = (Map.Entry) o;</span>
+<span class="nc" id="L103">                __CLR4_5_2dzmdzmm68iyi4p.R.inc(18169);gen.writeln(&quot;/&quot; + entry.getValue() + &quot;/&quot; + entry.getKey() + &quot; ld&quot;);</span>
+            }
 
-<span class="nc" id="L106">            gen.writeln(&quot;/re {4 2 roll M&quot;); //define rectangle</span>
-<span class="nc" id="L107">            gen.writeln(&quot;1 index 0 rlineto&quot;);</span>
-<span class="nc" id="L108">            gen.writeln(&quot;0 exch rlineto&quot;);</span>
-<span class="nc" id="L109">            gen.writeln(&quot;neg 0 rlineto&quot;);</span>
-<span class="nc" id="L110">            gen.writeln(&quot;cp } bd&quot;);</span>
+<span class="nc" id="L106">            }__CLR4_5_2dzmdzmm68iyi4p.R.inc(18170);gen.writeln(&quot;/re {4 2 roll M&quot;); //define rectangle</span>
+<span class="nc" id="L107">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18171);gen.writeln(&quot;1 index 0 rlineto&quot;);</span>
+<span class="nc" id="L108">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18172);gen.writeln(&quot;0 exch rlineto&quot;);</span>
+<span class="nc" id="L109">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18173);gen.writeln(&quot;neg 0 rlineto&quot;);</span>
+<span class="nc" id="L110">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18174);gen.writeln(&quot;cp } bd&quot;);</span>
 
-<span class="nc" id="L112">            gen.writeln(&quot;/_ctm matrix def&quot;); //Holds the current matrix</span>
-<span class="nc" id="L113">            gen.writeln(&quot;/_tm matrix def&quot;);</span>
+<span class="nc" id="L112">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18175);gen.writeln(&quot;/_ctm matrix def&quot;); //Holds the current matrix</span>
+<span class="nc" id="L113">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18176);gen.writeln(&quot;/_tm matrix def&quot;);</span>
             //BT: save currentmatrix, set _tm to identitymatrix and move to 0/0
-<span class="nc" id="L115">            gen.writeln(&quot;/BT { _ctm currentmatrix pop matrix _tm copy pop 0 0 moveto } bd&quot;);</span>
+<span class="nc" id="L115">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18177);gen.writeln(&quot;/BT { _ctm currentmatrix pop matrix _tm copy pop 0 0 moveto } bd&quot;);</span>
             //ET: restore last currentmatrix
-<span class="nc" id="L117">            gen.writeln(&quot;/ET { _ctm setmatrix } bd&quot;);</span>
-<span class="nc" id="L118">            gen.writeln(&quot;/iTm { _ctm setmatrix _tm concat } bd&quot;);</span>
-<span class="nc" id="L119">            gen.writeln(&quot;/Tm { _tm astore pop iTm 0 0 moveto } bd&quot;);</span>
+<span class="nc" id="L117">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18178);gen.writeln(&quot;/ET { _ctm setmatrix } bd&quot;);</span>
+<span class="nc" id="L118">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18179);gen.writeln(&quot;/iTm { _ctm setmatrix _tm concat } bd&quot;);</span>
+<span class="nc" id="L119">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18180);gen.writeln(&quot;/Tm { _tm astore pop iTm 0 0 moveto } bd&quot;);</span>
 
-<span class="nc" id="L121">            gen.writeln(&quot;/ux 0.0 def&quot;);</span>
-<span class="nc" id="L122">            gen.writeln(&quot;/uy 0.0 def&quot;);</span>
+<span class="nc" id="L121">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18181);gen.writeln(&quot;/ux 0.0 def&quot;);</span>
+<span class="nc" id="L122">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18182);gen.writeln(&quot;/uy 0.0 def&quot;);</span>
 
             // &lt;font&gt; &lt;size&gt; F
-<span class="nc" id="L125">            gen.writeln(&quot;/F {&quot;);</span>
-<span class="nc" id="L126">            gen.writeln(&quot;  /Tp exch def&quot;);</span>
+<span class="nc" id="L125">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18183);gen.writeln(&quot;/F {&quot;);</span>
+<span class="nc" id="L126">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18184);gen.writeln(&quot;  /Tp exch def&quot;);</span>
             // gen.writeln(&quot;  currentdict exch get&quot;);
-<span class="nc" id="L128">            gen.writeln(&quot;  /Tf exch def&quot;);</span>
-<span class="nc" id="L129">            gen.writeln(&quot;  Tf findfont Tp scalefont setfont&quot;);</span>
-<span class="nc" id="L130">            gen.writeln(&quot;  /cf Tf def  /cs Tp def&quot;);</span>
-<span class="nc" id="L131">            gen.writeln(&quot;} bd&quot;);</span>
+<span class="nc" id="L128">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18185);gen.writeln(&quot;  /Tf exch def&quot;);</span>
+<span class="nc" id="L129">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18186);gen.writeln(&quot;  Tf findfont Tp scalefont setfont&quot;);</span>
+<span class="nc" id="L130">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18187);gen.writeln(&quot;  /cf Tf def  /cs Tp def&quot;);</span>
+<span class="nc" id="L131">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18188);gen.writeln(&quot;} bd&quot;);</span>
 
-<span class="nc" id="L133">            gen.writeln(&quot;/ULS {currentpoint /uy exch def /ux exch def} bd&quot;);</span>
-<span class="nc" id="L134">            gen.writeln(&quot;/ULE {&quot;);</span>
-<span class="nc" id="L135">            gen.writeln(&quot;  /Tcx currentpoint pop def&quot;);</span>
-<span class="nc" id="L136">            gen.writeln(&quot;  gsave&quot;);</span>
-<span class="nc" id="L137">            gen.writeln(&quot;  newpath&quot;);</span>
-<span class="nc" id="L138">            gen.writeln(&quot;  cf findfont cs scalefont dup&quot;);</span>
-<span class="nc" id="L139">            gen.writeln(&quot;  /FontMatrix get 0 get /Ts exch def /FontInfo get dup&quot;);</span>
-<span class="nc" id="L140">            gen.writeln(&quot;  /UnderlinePosition get Ts mul /To exch def&quot;);</span>
-<span class="nc" id="L141">            gen.writeln(&quot;  /UnderlineThickness get Ts mul /Tt exch def&quot;);</span>
-<span class="nc" id="L142">            gen.writeln(&quot;  ux uy To add moveto  Tcx uy To add lineto&quot;);</span>
-<span class="nc" id="L143">            gen.writeln(&quot;  Tt setlinewidth stroke&quot;);</span>
-<span class="nc" id="L144">            gen.writeln(&quot;  grestore&quot;);</span>
-<span class="nc" id="L145">            gen.writeln(&quot;} bd&quot;);</span>
+<span class="nc" id="L133">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18189);gen.writeln(&quot;/ULS {currentpoint /uy exch def /ux exch def} bd&quot;);</span>
+<span class="nc" id="L134">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18190);gen.writeln(&quot;/ULE {&quot;);</span>
+<span class="nc" id="L135">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18191);gen.writeln(&quot;  /Tcx currentpoint pop def&quot;);</span>
+<span class="nc" id="L136">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18192);gen.writeln(&quot;  gsave&quot;);</span>
+<span class="nc" id="L137">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18193);gen.writeln(&quot;  newpath&quot;);</span>
+<span class="nc" id="L138">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18194);gen.writeln(&quot;  cf findfont cs scalefont dup&quot;);</span>
+<span class="nc" id="L139">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18195);gen.writeln(&quot;  /FontMatrix get 0 get /Ts exch def /FontInfo get dup&quot;);</span>
+<span class="nc" id="L140">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18196);gen.writeln(&quot;  /UnderlinePosition get Ts mul /To exch def&quot;);</span>
+<span class="nc" id="L141">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18197);gen.writeln(&quot;  /UnderlineThickness get Ts mul /Tt exch def&quot;);</span>
+<span class="nc" id="L142">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18198);gen.writeln(&quot;  ux uy To add moveto  Tcx uy To add lineto&quot;);</span>
+<span class="nc" id="L143">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18199);gen.writeln(&quot;  Tt setlinewidth stroke&quot;);</span>
+<span class="nc" id="L144">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18200);gen.writeln(&quot;  grestore&quot;);</span>
+<span class="nc" id="L145">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18201);gen.writeln(&quot;} bd&quot;);</span>
 
-<span class="nc" id="L147">            gen.writeln(&quot;/OLE {&quot;);</span>
-<span class="nc" id="L148">            gen.writeln(&quot;  /Tcx currentpoint pop def&quot;);</span>
-<span class="nc" id="L149">            gen.writeln(&quot;  gsave&quot;);</span>
-<span class="nc" id="L150">            gen.writeln(&quot;  newpath&quot;);</span>
-<span class="nc" id="L151">            gen.writeln(&quot;  cf findfont cs scalefont dup&quot;);</span>
-<span class="nc" id="L152">            gen.writeln(&quot;  /FontMatrix get 0 get /Ts exch def /FontInfo get dup&quot;);</span>
-<span class="nc" id="L153">            gen.writeln(&quot;  /UnderlinePosition get Ts mul /To exch def&quot;);</span>
-<span class="nc" id="L154">            gen.writeln(&quot;  /UnderlineThickness get Ts mul /Tt exch def&quot;);</span>
-<span class="nc" id="L155">            gen.writeln(&quot;  ux uy To add cs add moveto Tcx uy To add cs add lineto&quot;);</span>
-<span class="nc" id="L156">            gen.writeln(&quot;  Tt setlinewidth stroke&quot;);</span>
-<span class="nc" id="L157">            gen.writeln(&quot;  grestore&quot;);</span>
-<span class="nc" id="L158">            gen.writeln(&quot;} bd&quot;);</span>
+<span class="nc" id="L147">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18202);gen.writeln(&quot;/OLE {&quot;);</span>
+<span class="nc" id="L148">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18203);gen.writeln(&quot;  /Tcx currentpoint pop def&quot;);</span>
+<span class="nc" id="L149">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18204);gen.writeln(&quot;  gsave&quot;);</span>
+<span class="nc" id="L150">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18205);gen.writeln(&quot;  newpath&quot;);</span>
+<span class="nc" id="L151">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18206);gen.writeln(&quot;  cf findfont cs scalefont dup&quot;);</span>
+<span class="nc" id="L152">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18207);gen.writeln(&quot;  /FontMatrix get 0 get /Ts exch def /FontInfo get dup&quot;);</span>
+<span class="nc" id="L153">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18208);gen.writeln(&quot;  /UnderlinePosition get Ts mul /To exch def&quot;);</span>
+<span class="nc" id="L154">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18209);gen.writeln(&quot;  /UnderlineThickness get Ts mul /Tt exch def&quot;);</span>
+<span class="nc" id="L155">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18210);gen.writeln(&quot;  ux uy To add cs add moveto Tcx uy To add cs add lineto&quot;);</span>
+<span class="nc" id="L156">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18211);gen.writeln(&quot;  Tt setlinewidth stroke&quot;);</span>
+<span class="nc" id="L157">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18212);gen.writeln(&quot;  grestore&quot;);</span>
+<span class="nc" id="L158">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18213);gen.writeln(&quot;} bd&quot;);</span>
 
-<span class="nc" id="L160">            gen.writeln(&quot;/SOE {&quot;);</span>
-<span class="nc" id="L161">            gen.writeln(&quot;  /Tcx currentpoint pop def&quot;);</span>
-<span class="nc" id="L162">            gen.writeln(&quot;  gsave&quot;);</span>
-<span class="nc" id="L163">            gen.writeln(&quot;  newpath&quot;);</span>
-<span class="nc" id="L164">            gen.writeln(&quot;  cf findfont cs scalefont dup&quot;);</span>
-<span class="nc" id="L165">            gen.writeln(&quot;  /FontMatrix get 0 get /Ts exch def /FontInfo get dup&quot;);</span>
-<span class="nc" id="L166">            gen.writeln(&quot;  /UnderlinePosition get Ts mul /To exch def&quot;);</span>
-<span class="nc" id="L167">            gen.writeln(&quot;  /UnderlineThickness get Ts mul /Tt exch def&quot;);</span>
-<span class="nc" id="L168">            gen.writeln(&quot;  ux uy To add cs 10 mul 26 idiv add moveto &quot;</span>
+<span class="nc" id="L160">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18214);gen.writeln(&quot;/SOE {&quot;);</span>
+<span class="nc" id="L161">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18215);gen.writeln(&quot;  /Tcx currentpoint pop def&quot;);</span>
+<span class="nc" id="L162">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18216);gen.writeln(&quot;  gsave&quot;);</span>
+<span class="nc" id="L163">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18217);gen.writeln(&quot;  newpath&quot;);</span>
+<span class="nc" id="L164">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18218);gen.writeln(&quot;  cf findfont cs scalefont dup&quot;);</span>
+<span class="nc" id="L165">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18219);gen.writeln(&quot;  /FontMatrix get 0 get /Ts exch def /FontInfo get dup&quot;);</span>
+<span class="nc" id="L166">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18220);gen.writeln(&quot;  /UnderlinePosition get Ts mul /To exch def&quot;);</span>
+<span class="nc" id="L167">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18221);gen.writeln(&quot;  /UnderlineThickness get Ts mul /Tt exch def&quot;);</span>
+<span class="nc" id="L168">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18222);gen.writeln(&quot;  ux uy To add cs 10 mul 26 idiv add moveto &quot;</span>
                         + &quot;Tcx uy To add cs 10 mul 26 idiv add lineto&quot;);
-<span class="nc" id="L170">            gen.writeln(&quot;  Tt setlinewidth stroke&quot;);</span>
-<span class="nc" id="L171">            gen.writeln(&quot;  grestore&quot;);</span>
-<span class="nc" id="L172">            gen.writeln(&quot;} bd&quot;);</span>
+<span class="nc" id="L170">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18223);gen.writeln(&quot;  Tt setlinewidth stroke&quot;);</span>
+<span class="nc" id="L171">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18224);gen.writeln(&quot;  grestore&quot;);</span>
+<span class="nc" id="L172">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18225);gen.writeln(&quot;} bd&quot;);</span>
 
-<span class="nc" id="L174">            gen.writeln(&quot;/QT {&quot;);</span>
-<span class="nc" id="L175">            gen.writeln(&quot;/Y22 exch store&quot;);</span>
-<span class="nc" id="L176">            gen.writeln(&quot;/X22 exch store&quot;);</span>
-<span class="nc" id="L177">            gen.writeln(&quot;/Y21 exch store&quot;);</span>
-<span class="nc" id="L178">            gen.writeln(&quot;/X21 exch store&quot;);</span>
-<span class="nc" id="L179">            gen.writeln(&quot;currentpoint&quot;);</span>
-<span class="nc" id="L180">            gen.writeln(&quot;/Y21 load 2 mul add 3 div exch&quot;);</span>
-<span class="nc" id="L181">            gen.writeln(&quot;/X21 load 2 mul add 3 div exch&quot;);</span>
-<span class="nc" id="L182">            gen.writeln(&quot;/X21 load 2 mul /X22 load add 3 div&quot;);</span>
-<span class="nc" id="L183">            gen.writeln(&quot;/Y21 load 2 mul /Y22 load add 3 div&quot;);</span>
-<span class="nc" id="L184">            gen.writeln(&quot;/X22 load /Y22 load curveto&quot;);</span>
-<span class="nc" id="L185">            gen.writeln(&quot;} bd&quot;);</span>
+<span class="nc" id="L174">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18226);gen.writeln(&quot;/QT {&quot;);</span>
+<span class="nc" id="L175">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18227);gen.writeln(&quot;/Y22 exch store&quot;);</span>
+<span class="nc" id="L176">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18228);gen.writeln(&quot;/X22 exch store&quot;);</span>
+<span class="nc" id="L177">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18229);gen.writeln(&quot;/Y21 exch store&quot;);</span>
+<span class="nc" id="L178">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18230);gen.writeln(&quot;/X21 exch store&quot;);</span>
+<span class="nc" id="L179">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18231);gen.writeln(&quot;currentpoint&quot;);</span>
+<span class="nc" id="L180">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18232);gen.writeln(&quot;/Y21 load 2 mul add 3 div exch&quot;);</span>
+<span class="nc" id="L181">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18233);gen.writeln(&quot;/X21 load 2 mul add 3 div exch&quot;);</span>
+<span class="nc" id="L182">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18234);gen.writeln(&quot;/X21 load 2 mul /X22 load add 3 div&quot;);</span>
+<span class="nc" id="L183">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18235);gen.writeln(&quot;/Y21 load 2 mul /Y22 load add 3 div&quot;);</span>
+<span class="nc" id="L184">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18236);gen.writeln(&quot;/X22 load /Y22 load curveto&quot;);</span>
+<span class="nc" id="L185">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18237);gen.writeln(&quot;} bd&quot;);</span>
 
-<span class="nc" id="L187">            gen.writeln(&quot;/SSPD {&quot;);</span>
-<span class="nc" id="L188">            gen.writeln(&quot;dup length /d exch dict def&quot;);</span>
-<span class="nc" id="L189">            gen.writeln(&quot;{&quot;);</span>
-<span class="nc" id="L190">            gen.writeln(&quot;/v exch def&quot;);</span>
-<span class="nc" id="L191">            gen.writeln(&quot;/k exch def&quot;);</span>
-<span class="nc" id="L192">            gen.writeln(&quot;currentpagedevice k known {&quot;);</span>
-<span class="nc" id="L193">            gen.writeln(&quot;/cpdv currentpagedevice k get def&quot;);</span>
-<span class="nc" id="L194">            gen.writeln(&quot;v cpdv ne {&quot;);</span>
-<span class="nc" id="L195">            gen.writeln(&quot;/upd false def&quot;);</span>
-<span class="nc" id="L196">            gen.writeln(&quot;/nullv v type /nulltype eq def&quot;);</span>
-<span class="nc" id="L197">            gen.writeln(&quot;/nullcpdv cpdv type /nulltype eq def&quot;);</span>
-<span class="nc" id="L198">            gen.writeln(&quot;nullv nullcpdv or&quot;);</span>
-<span class="nc" id="L199">            gen.writeln(&quot;{&quot;);</span>
-<span class="nc" id="L200">            gen.writeln(&quot;/upd true def&quot;);</span>
-<span class="nc" id="L201">            gen.writeln(&quot;} {&quot;);</span>
-<span class="nc" id="L202">            gen.writeln(&quot;/sametype v type cpdv type eq def&quot;);</span>
-<span class="nc" id="L203">            gen.writeln(&quot;sametype {&quot;);</span>
-<span class="nc" id="L204">            gen.writeln(&quot;v type /arraytype eq {&quot;);</span>
-<span class="nc" id="L205">            gen.writeln(&quot;/vlen v length def&quot;);</span>
-<span class="nc" id="L206">            gen.writeln(&quot;/cpdvlen cpdv length def&quot;);</span>
-<span class="nc" id="L207">            gen.writeln(&quot;vlen cpdvlen eq {&quot;);</span>
-<span class="nc" id="L208">            gen.writeln(&quot;0 1 vlen 1 sub {&quot;);</span>
-<span class="nc" id="L209">            gen.writeln(&quot;/i exch def&quot;);</span>
-<span class="nc" id="L210">            gen.writeln(&quot;/obj v i get def&quot;);</span>
-<span class="nc" id="L211">            gen.writeln(&quot;/cpdobj cpdv i get def&quot;);</span>
-<span class="nc" id="L212">            gen.writeln(&quot;obj cpdobj ne {&quot;);</span>
-<span class="nc" id="L213">            gen.writeln(&quot;/upd true def&quot;);</span>
-<span class="nc" id="L214">            gen.writeln(&quot;exit&quot;);</span>
-<span class="nc" id="L215">            gen.writeln(&quot;} if&quot;);</span>
-<span class="nc" id="L216">            gen.writeln(&quot;} for&quot;);</span>
-<span class="nc" id="L217">            gen.writeln(&quot;} {&quot;);</span>
-<span class="nc" id="L218">            gen.writeln(&quot;/upd true def&quot;);</span>
-<span class="nc" id="L219">            gen.writeln(&quot;} ifelse&quot;);</span>
-<span class="nc" id="L220">            gen.writeln(&quot;} {&quot;);</span>
-<span class="nc" id="L221">            gen.writeln(&quot;v type /dicttype eq {&quot;);</span>
-<span class="nc" id="L222">            gen.writeln(&quot;v {&quot;);</span>
-<span class="nc" id="L223">            gen.writeln(&quot;/dv exch def&quot;);</span>
-<span class="nc" id="L224">            gen.writeln(&quot;/dk exch def&quot;);</span>
-<span class="nc" id="L225">            gen.writeln(&quot;/cpddv cpdv dk get def&quot;);</span>
-<span class="nc" id="L226">            gen.writeln(&quot;dv cpddv ne {&quot;);</span>
-<span class="nc" id="L227">            gen.writeln(&quot;/upd true def&quot;);</span>
-<span class="nc" id="L228">            gen.writeln(&quot;exit&quot;);</span>
-<span class="nc" id="L229">            gen.writeln(&quot;} if&quot;);</span>
-<span class="nc" id="L230">            gen.writeln(&quot;} forall&quot;);</span>
-<span class="nc" id="L231">            gen.writeln(&quot;} {&quot;);</span>
-<span class="nc" id="L232">            gen.writeln(&quot;/upd true def&quot;);</span>
-<span class="nc" id="L233">            gen.writeln(&quot;} ifelse&quot;);</span>
-<span class="nc" id="L234">            gen.writeln(&quot;} ifelse&quot;);</span>
-<span class="nc" id="L235">            gen.writeln(&quot;} if&quot;);</span>
-<span class="nc" id="L236">            gen.writeln(&quot;} ifelse&quot;);</span>
-<span class="nc" id="L237">            gen.writeln(&quot;upd true eq {&quot;);</span>
-<span class="nc" id="L238">            gen.writeln(&quot;d k v put&quot;);</span>
-<span class="nc" id="L239">            gen.writeln(&quot;} if&quot;);</span>
-<span class="nc" id="L240">            gen.writeln(&quot;} if&quot;);</span>
-<span class="nc" id="L241">            gen.writeln(&quot;} if&quot;);</span>
-<span class="nc" id="L242">            gen.writeln(&quot;} forall&quot;);</span>
-<span class="nc" id="L243">            gen.writeln(&quot;d length 0 gt {&quot;);</span>
-<span class="nc" id="L244">            gen.writeln(&quot;d setpagedevice&quot;);</span>
-<span class="nc" id="L245">            gen.writeln(&quot;} if&quot;);</span>
-<span class="nc" id="L246">            gen.writeln(&quot;} bd&quot;);</span>
+<span class="nc" id="L187">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18238);gen.writeln(&quot;/SSPD {&quot;);</span>
+<span class="nc" id="L188">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18239);gen.writeln(&quot;dup length /d exch dict def&quot;);</span>
+<span class="nc" id="L189">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18240);gen.writeln(&quot;{&quot;);</span>
+<span class="nc" id="L190">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18241);gen.writeln(&quot;/v exch def&quot;);</span>
+<span class="nc" id="L191">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18242);gen.writeln(&quot;/k exch def&quot;);</span>
+<span class="nc" id="L192">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18243);gen.writeln(&quot;currentpagedevice k known {&quot;);</span>
+<span class="nc" id="L193">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18244);gen.writeln(&quot;/cpdv currentpagedevice k get def&quot;);</span>
+<span class="nc" id="L194">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18245);gen.writeln(&quot;v cpdv ne {&quot;);</span>
+<span class="nc" id="L195">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18246);gen.writeln(&quot;/upd false def&quot;);</span>
+<span class="nc" id="L196">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18247);gen.writeln(&quot;/nullv v type /nulltype eq def&quot;);</span>
+<span class="nc" id="L197">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18248);gen.writeln(&quot;/nullcpdv cpdv type /nulltype eq def&quot;);</span>
+<span class="nc" id="L198">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18249);gen.writeln(&quot;nullv nullcpdv or&quot;);</span>
+<span class="nc" id="L199">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18250);gen.writeln(&quot;{&quot;);</span>
+<span class="nc" id="L200">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18251);gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L201">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18252);gen.writeln(&quot;} {&quot;);</span>
+<span class="nc" id="L202">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18253);gen.writeln(&quot;/sametype v type cpdv type eq def&quot;);</span>
+<span class="nc" id="L203">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18254);gen.writeln(&quot;sametype {&quot;);</span>
+<span class="nc" id="L204">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18255);gen.writeln(&quot;v type /arraytype eq {&quot;);</span>
+<span class="nc" id="L205">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18256);gen.writeln(&quot;/vlen v length def&quot;);</span>
+<span class="nc" id="L206">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18257);gen.writeln(&quot;/cpdvlen cpdv length def&quot;);</span>
+<span class="nc" id="L207">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18258);gen.writeln(&quot;vlen cpdvlen eq {&quot;);</span>
+<span class="nc" id="L208">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18259);gen.writeln(&quot;0 1 vlen 1 sub {&quot;);</span>
+<span class="nc" id="L209">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18260);gen.writeln(&quot;/i exch def&quot;);</span>
+<span class="nc" id="L210">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18261);gen.writeln(&quot;/obj v i get def&quot;);</span>
+<span class="nc" id="L211">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18262);gen.writeln(&quot;/cpdobj cpdv i get def&quot;);</span>
+<span class="nc" id="L212">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18263);gen.writeln(&quot;obj cpdobj ne {&quot;);</span>
+<span class="nc" id="L213">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18264);gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L214">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18265);gen.writeln(&quot;exit&quot;);</span>
+<span class="nc" id="L215">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18266);gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L216">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18267);gen.writeln(&quot;} for&quot;);</span>
+<span class="nc" id="L217">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18268);gen.writeln(&quot;} {&quot;);</span>
+<span class="nc" id="L218">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18269);gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L219">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18270);gen.writeln(&quot;} ifelse&quot;);</span>
+<span class="nc" id="L220">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18271);gen.writeln(&quot;} {&quot;);</span>
+<span class="nc" id="L221">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18272);gen.writeln(&quot;v type /dicttype eq {&quot;);</span>
+<span class="nc" id="L222">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18273);gen.writeln(&quot;v {&quot;);</span>
+<span class="nc" id="L223">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18274);gen.writeln(&quot;/dv exch def&quot;);</span>
+<span class="nc" id="L224">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18275);gen.writeln(&quot;/dk exch def&quot;);</span>
+<span class="nc" id="L225">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18276);gen.writeln(&quot;/cpddv cpdv dk get def&quot;);</span>
+<span class="nc" id="L226">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18277);gen.writeln(&quot;dv cpddv ne {&quot;);</span>
+<span class="nc" id="L227">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18278);gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L228">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18279);gen.writeln(&quot;exit&quot;);</span>
+<span class="nc" id="L229">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18280);gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L230">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18281);gen.writeln(&quot;} forall&quot;);</span>
+<span class="nc" id="L231">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18282);gen.writeln(&quot;} {&quot;);</span>
+<span class="nc" id="L232">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18283);gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L233">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18284);gen.writeln(&quot;} ifelse&quot;);</span>
+<span class="nc" id="L234">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18285);gen.writeln(&quot;} ifelse&quot;);</span>
+<span class="nc" id="L235">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18286);gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L236">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18287);gen.writeln(&quot;} ifelse&quot;);</span>
+<span class="nc" id="L237">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18288);gen.writeln(&quot;upd true eq {&quot;);</span>
+<span class="nc" id="L238">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18289);gen.writeln(&quot;d k v put&quot;);</span>
+<span class="nc" id="L239">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18290);gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L240">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18291);gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L241">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18292);gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L242">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18293);gen.writeln(&quot;} forall&quot;);</span>
+<span class="nc" id="L243">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18294);gen.writeln(&quot;d length 0 gt {&quot;);</span>
+<span class="nc" id="L244">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18295);gen.writeln(&quot;d setpagedevice&quot;);</span>
+<span class="nc" id="L245">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18296);gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L246">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18297);gen.writeln(&quot;} bd&quot;);</span>
 
-<span class="nc" id="L248">            gen.writeln(&quot;/RE { % /NewFontName [NewEncodingArray] /FontName RE -&quot;);</span>
-<span class="nc" id="L249">            gen.writeln(&quot;  findfont dup length dict begin&quot;);</span>
-<span class="nc" id="L250">            gen.writeln(&quot;  {&quot;);</span>
-<span class="nc" id="L251">            gen.writeln(&quot;    1 index /FID ne&quot;);</span>
-<span class="nc" id="L252">            gen.writeln(&quot;    {def} {pop pop} ifelse&quot;);</span>
-<span class="nc" id="L253">            gen.writeln(&quot;  } forall&quot;);</span>
-<span class="nc" id="L254">            gen.writeln(&quot;  /Encoding exch def&quot;);</span>
-<span class="nc" id="L255">            gen.writeln(&quot;  /FontName 1 index def&quot;);</span>
-<span class="nc" id="L256">            gen.writeln(&quot;  currentdict definefont pop&quot;);</span>
-<span class="nc" id="L257">            gen.writeln(&quot;  end&quot;);</span>
-<span class="nc" id="L258">            gen.writeln(&quot;} bind def&quot;);</span>
+<span class="nc" id="L248">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18298);gen.writeln(&quot;/RE { % /NewFontName [NewEncodingArray] /FontName RE -&quot;);</span>
+<span class="nc" id="L249">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18299);gen.writeln(&quot;  findfont dup length dict begin&quot;);</span>
+<span class="nc" id="L250">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18300);gen.writeln(&quot;  {&quot;);</span>
+<span class="nc" id="L251">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18301);gen.writeln(&quot;    1 index /FID ne&quot;);</span>
+<span class="nc" id="L252">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18302);gen.writeln(&quot;    {def} {pop pop} ifelse&quot;);</span>
+<span class="nc" id="L253">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18303);gen.writeln(&quot;  } forall&quot;);</span>
+<span class="nc" id="L254">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18304);gen.writeln(&quot;  /Encoding exch def&quot;);</span>
+<span class="nc" id="L255">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18305);gen.writeln(&quot;  /FontName 1 index def&quot;);</span>
+<span class="nc" id="L256">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18306);gen.writeln(&quot;  currentdict definefont pop&quot;);</span>
+<span class="nc" id="L257">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18307);gen.writeln(&quot;  end&quot;);</span>
+<span class="nc" id="L258">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18308);gen.writeln(&quot;} bind def&quot;);</span>
 
-<span class="nc" id="L260">            gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
-<span class="nc" id="L261">            gen.getResourceTracker().registerSuppliedResource(this);</span>
-<span class="nc" id="L262">        }</span>
+<span class="nc" id="L260">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18309);gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
+<span class="nc" id="L261">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18310);gen.getResourceTracker().registerSuppliedResource(this);</span>
+<span class="nc" id="L262">        }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
         /** {@inheritDoc} */
-        public String mapCommand(String command) {
-<span class="fc" id="L266">            String mapped = (String)STANDARD_MACROS.get(command);</span>
-<span class="fc bfc" id="L267" title="All 2 branches covered.">            return (mapped != null ? mapped : command);</span>
-        }
+<span class="fc" id="L265">        public String mapCommand(String command) {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18311);</span>
+<span class="fc" id="L266">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18312);String mapped = (String)STANDARD_MACROS.get(command);</span>
+<span class="pc bpc" id="L267" title="4 of 10 branches missed.">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18313);return ((((mapped != null )&amp;&amp;(__CLR4_5_2dzmdzmm68iyi4p.R.iget(18314)!=0|true))||(__CLR4_5_2dzmdzmm68iyi4p.R.iget(18315)==0&amp;false))? mapped : command);</span>
+<span class="fc" id="L268">        }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
     }
 
     private static class EPSProcSet extends PSProcSet {
 
         public EPSProcSet() {
-<span class="fc" id="L275">            super(&quot;Apache XML Graphics EPS ProcSet&quot;, 1.0f, 0);</span>
-<span class="fc" id="L276">        }</span>
+<span class="fc" id="L275">            super(&quot;Apache XML Graphics EPS ProcSet&quot;, 1.0f, 0);__CLR4_5_2dzmdzmm68iyi4p.R.inc(18317);try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18316);</span>
+<span class="fc" id="L276">        }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
-        public void writeTo(PSGenerator gen) throws IOException {
-<span class="nc" id="L279">            gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE,</span>
+<span class="nc" id="L278">        public void writeTo(PSGenerator gen) throws IOException {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18318);</span>
+<span class="nc" id="L279">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18319);gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE,</span>
 <span class="nc" id="L280">                    new Object[] {TYPE_PROCSET, getName(),</span>
 <span class="nc" id="L281">                        Float.toString(getVersion()), Integer.toString(getRevision())});</span>
-<span class="nc" id="L282">            gen.writeDSCComment(DSCConstants.VERSION,</span>
+<span class="nc" id="L282">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18320);gen.writeDSCComment(DSCConstants.VERSION,</span>
 <span class="nc" id="L283">                    new Object[] {Float.toString(getVersion()), Integer.toString(getRevision())});</span>
-<span class="nc" id="L284">            gen.writeDSCComment(DSCConstants.COPYRIGHT, &quot;Copyright 2002-2003 &quot;</span>
+<span class="nc" id="L284">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18321);gen.writeDSCComment(DSCConstants.COPYRIGHT, &quot;Copyright 2002-2003 &quot;</span>
                     + &quot;The Apache Software Foundation. &quot;
                     + &quot;License terms: http://www.apache.org/licenses/LICENSE-2.0&quot;);
-<span class="nc" id="L287">            gen.writeDSCComment(DSCConstants.TITLE,</span>
+<span class="nc" id="L287">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18322);gen.writeDSCComment(DSCConstants.TITLE,</span>
                     &quot;EPS procedures used by the Apache XML Graphics project (Batik and FOP)&quot;);
 
-<span class="nc" id="L290">            gen.writeln(&quot;/BeginEPSF { %def&quot;);</span>
-<span class="nc" id="L291">            gen.writeln(&quot;/b4_Inc_state save def         % Save state for cleanup&quot;);</span>
-<span class="nc" id="L292">            gen.writeln(&quot;/dict_count countdictstack def % Count objects on dict stack&quot;);</span>
-<span class="nc" id="L293">            gen.writeln(&quot;/op_count count 1 sub def      % Count objects on operand stack&quot;);</span>
-<span class="nc" id="L294">            gen.writeln(&quot;userdict begin                 % Push userdict on dict stack&quot;);</span>
-<span class="nc" id="L295">            gen.writeln(&quot;/showpage { } def              % Redefine showpage, { } = null proc&quot;);</span>
-<span class="nc" id="L296">            gen.writeln(&quot;0 setgray 0 setlinecap         % Prepare graphics state&quot;);</span>
-<span class="nc" id="L297">            gen.writeln(&quot;1 setlinewidth 0 setlinejoin&quot;);</span>
-<span class="nc" id="L298">            gen.writeln(&quot;10 setmiterlimit [ ] 0 setdash newpath&quot;);</span>
-<span class="nc" id="L299">            gen.writeln(&quot;/languagelevel where           % If level not equal to 1 then&quot;);</span>
-<span class="nc" id="L300">            gen.writeln(&quot;{pop languagelevel             % set strokeadjust and&quot;);</span>
-<span class="nc" id="L301">            gen.writeln(&quot;1 ne                           % overprint to their defaults.&quot;);</span>
-<span class="nc" id="L302">            gen.writeln(&quot;{false setstrokeadjust false setoverprint&quot;);</span>
-<span class="nc" id="L303">            gen.writeln(&quot;} if&quot;);</span>
-<span class="nc" id="L304">            gen.writeln(&quot;} if&quot;);</span>
-<span class="nc" id="L305">            gen.writeln(&quot;} bd&quot;);</span>
+<span class="nc" id="L290">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18323);gen.writeln(&quot;/BeginEPSF { %def&quot;);</span>
+<span class="nc" id="L291">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18324);gen.writeln(&quot;/b4_Inc_state save def         % Save state for cleanup&quot;);</span>
+<span class="nc" id="L292">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18325);gen.writeln(&quot;/dict_count countdictstack def % Count objects on dict stack&quot;);</span>
+<span class="nc" id="L293">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18326);gen.writeln(&quot;/op_count count 1 sub def      % Count objects on operand stack&quot;);</span>
+<span class="nc" id="L294">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18327);gen.writeln(&quot;userdict begin                 % Push userdict on dict stack&quot;);</span>
+<span class="nc" id="L295">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18328);gen.writeln(&quot;/showpage { } def              % Redefine showpage, { } = null proc&quot;);</span>
+<span class="nc" id="L296">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18329);gen.writeln(&quot;0 setgray 0 setlinecap         % Prepare graphics state&quot;);</span>
+<span class="nc" id="L297">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18330);gen.writeln(&quot;1 setlinewidth 0 setlinejoin&quot;);</span>
+<span class="nc" id="L298">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18331);gen.writeln(&quot;10 setmiterlimit [ ] 0 setdash newpath&quot;);</span>
+<span class="nc" id="L299">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18332);gen.writeln(&quot;/languagelevel where           % If level not equal to 1 then&quot;);</span>
+<span class="nc" id="L300">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18333);gen.writeln(&quot;{pop languagelevel             % set strokeadjust and&quot;);</span>
+<span class="nc" id="L301">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18334);gen.writeln(&quot;1 ne                           % overprint to their defaults.&quot;);</span>
+<span class="nc" id="L302">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18335);gen.writeln(&quot;{false setstrokeadjust false setoverprint&quot;);</span>
+<span class="nc" id="L303">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18336);gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L304">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18337);gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L305">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18338);gen.writeln(&quot;} bd&quot;);</span>
 
-<span class="nc" id="L307">            gen.writeln(&quot;/EndEPSF { %def&quot;);</span>
-<span class="nc" id="L308">            gen.writeln(&quot;count op_count sub {pop} repeat            % Clean up stacks&quot;);</span>
-<span class="nc" id="L309">            gen.writeln(&quot;countdictstack dict_count sub {end} repeat&quot;);</span>
-<span class="nc" id="L310">            gen.writeln(&quot;b4_Inc_state restore&quot;);</span>
-<span class="nc" id="L311">            gen.writeln(&quot;} bd&quot;);</span>
+<span class="nc" id="L307">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18339);gen.writeln(&quot;/EndEPSF { %def&quot;);</span>
+<span class="nc" id="L308">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18340);gen.writeln(&quot;count op_count sub {pop} repeat            % Clean up stacks&quot;);</span>
+<span class="nc" id="L309">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18341);gen.writeln(&quot;countdictstack dict_count sub {end} repeat&quot;);</span>
+<span class="nc" id="L310">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18342);gen.writeln(&quot;b4_Inc_state restore&quot;);</span>
+<span class="nc" id="L311">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18343);gen.writeln(&quot;} bd&quot;);</span>
 
-<span class="nc" id="L313">            gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
-<span class="nc" id="L314">            gen.getResourceTracker().registerSuppliedResource(this);</span>
-<span class="nc" id="L315">        }</span>
+<span class="nc" id="L313">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18344);gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
+<span class="nc" id="L314">            __CLR4_5_2dzmdzmm68iyi4p.R.inc(18345);gen.getResourceTracker().registerSuppliedResource(this);</span>
+<span class="nc" id="L315">        }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
     }
 
@@ -322,9 +322,9 @@ public final class PSProcSets {
      * @param gen PSGenerator to use for output
      * @throws IOException In case of an I/O problem
      */
-    public static void writeStdProcSet(PSGenerator gen) throws IOException {
-<span class="nc" id="L326">        ((StdProcSet)STD_PROCSET).writeTo(gen);</span>
-<span class="nc" id="L327">    }</span>
+<span class="nc" id="L325">    public static void writeStdProcSet(PSGenerator gen) throws IOException {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18346);</span>
+<span class="nc" id="L326">        __CLR4_5_2dzmdzmm68iyi4p.R.inc(18347);((StdProcSet)STD_PROCSET).writeTo(gen);</span>
+<span class="nc" id="L327">    }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
     /**
      * Generates a resource defining standard procset with operations used by the XML Graphics
@@ -333,9 +333,9 @@ public final class PSProcSets {
      * @throws IOException In case of an I/O problem
      * @deprecated Use writeStdProcSet() instead.
      */
-    public static void writeFOPStdProcSet(PSGenerator gen) throws IOException {
-<span class="nc" id="L337">        writeStdProcSet(gen);</span>
-<span class="nc" id="L338">    }</span>
+<span class="nc" id="L336">    public static void writeFOPStdProcSet(PSGenerator gen) throws IOException {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18348);</span>
+<span class="nc" id="L337">        __CLR4_5_2dzmdzmm68iyi4p.R.inc(18349);writeStdProcSet(gen);</span>
+<span class="nc" id="L338">    }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
 
     /**
@@ -343,9 +343,9 @@ public final class PSProcSets {
      * @param gen PSGenerator to use for output
      * @throws IOException In case of an I/O problem
      */
-    public static void writeEPSProcSet(PSGenerator gen) throws IOException {
-<span class="nc" id="L347">        ((EPSProcSet)EPS_PROCSET).writeTo(gen);</span>
-<span class="nc" id="L348">    }</span>
+<span class="nc" id="L346">    public static void writeEPSProcSet(PSGenerator gen) throws IOException {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18350);</span>
+<span class="nc" id="L347">        __CLR4_5_2dzmdzmm68iyi4p.R.inc(18351);((EPSProcSet)EPS_PROCSET).writeTo(gen);</span>
+<span class="nc" id="L348">    }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
     /**
      * Generates a resource defining a procset for including EPS graphics.
@@ -353,9 +353,9 @@ public final class PSProcSets {
      * @throws IOException In case of an I/O problem
      * @deprecated Use writeEPSProcSet() instead.
      */
-    public static void writeFOPEPSProcSet(PSGenerator gen) throws IOException {
-<span class="nc" id="L357">        writeEPSProcSet(gen);</span>
-<span class="nc" id="L358">    }</span>
+<span class="nc" id="L356">    public static void writeFOPEPSProcSet(PSGenerator gen) throws IOException {try{__CLR4_5_2dzmdzmm68iyi4p.R.inc(18352);</span>
+<span class="nc" id="L357">        __CLR4_5_2dzmdzmm68iyi4p.R.inc(18353);writeEPSProcSet(gen);</span>
+<span class="nc" id="L358">    }finally{__CLR4_5_2dzmdzmm68iyi4p.R.flushNeeded();}}</span>
 
 
 }

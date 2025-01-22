@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DeviceCMYKColorSpace.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color</a> &gt; <span class="el_source">DeviceCMYKColorSpace.java</span></div><h1>DeviceCMYKColorSpace.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DeviceCMYKColorSpace.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color</a> &gt; <span class="el_source">DeviceCMYKColorSpace.java</span></div><h1>DeviceCMYKColorSpace.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -25,7 +25,7 @@ import java.awt.Color;
  * This class represents an uncalibrated CMYK color space.
  */
 <span class="pc bpc" id="L27" title="1 of 2 branches missed.">public class DeviceCMYKColorSpace extends AbstractDeviceSpecificColorSpace</span>
-            implements ColorSpaceOrigin {
+<span class="pc bpc" id="L28" title="3 of 4 branches missed.">            implements ColorSpaceOrigin {public static class __CLR4_5_2bvwbvwm68iyhu6{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,15437,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private static final long serialVersionUID = 2925508946083542974L;
 
@@ -38,8 +38,8 @@ import java.awt.Color;
      * @see java.awt.color.ColorSpace#ColorSpace(int, int)
      */
     public DeviceCMYKColorSpace() {
-<span class="fc" id="L41">        super(TYPE_CMYK, 4);</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L41">        super(TYPE_CMYK, 4);__CLR4_5_2bvwbvwm68iyhu6.R.inc(15405);try{__CLR4_5_2bvwbvwm68iyhu6.R.inc(15404);</span>
+<span class="fc" id="L42">    }finally{__CLR4_5_2bvwbvwm68iyhu6.R.flushNeeded();}}</span>
 
     /**
      * Returns an instance of an uncalibrated CMYK color space.
@@ -47,49 +47,49 @@ import java.awt.Color;
      * @deprecated Use {@link ColorSpaces#getDeviceCMYKColorSpace()} instead.
      */
     @Deprecated
-    public static DeviceCMYKColorSpace getInstance() {
-<span class="nc" id="L51">        return ColorSpaces.getDeviceCMYKColorSpace();</span>
-    }
+<span class="nc" id="L50">    public static DeviceCMYKColorSpace getInstance() {try{__CLR4_5_2bvwbvwm68iyhu6.R.inc(15406);</span>
+<span class="nc" id="L51">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15407);return ColorSpaces.getDeviceCMYKColorSpace();</span>
+<span class="nc" id="L52">    }finally{__CLR4_5_2bvwbvwm68iyhu6.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
     @Override
-    public float[] toRGB(float[] colorvalue) {
-<span class="fc" id="L57">        return new float [] {</span>
+<span class="fc" id="L56">    public float[] toRGB(float[] colorvalue) {try{__CLR4_5_2bvwbvwm68iyhu6.R.inc(15408);</span>
+<span class="fc" id="L57">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15409);return new float [] {</span>
             (1 - colorvalue[0]) * (1 - colorvalue[3]),
             (1 - colorvalue[1]) * (1 - colorvalue[3]),
             (1 - colorvalue[2]) * (1 - colorvalue[3])};
-    }
+<span class="fc" id="L61">    }finally{__CLR4_5_2bvwbvwm68iyhu6.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
     @Override
-    public float[] fromRGB(float[] rgbvalue) {
-<span class="pc bpc" id="L66" title="2 of 4 branches missed.">        assert rgbvalue.length == 3;</span>
+<span class="fc" id="L65">    public float[] fromRGB(float[] rgbvalue) {try{__CLR4_5_2bvwbvwm68iyhu6.R.inc(15410);</span>
+<span class="pc bpc" id="L66" title="8 of 12 branches missed.">        assert (((rgbvalue.length == 3)&amp;&amp;(__CLR4_5_2bvwbvwm68iyhu6.R.iget(15411)!=0|true))||(__CLR4_5_2bvwbvwm68iyhu6.R.iget(15412)==0&amp;false));</span>
         //Note: this is an arbitrary conversion, not a color-managed one!
-<span class="fc" id="L68">        float r = rgbvalue[0];</span>
-<span class="fc" id="L69">        float g = rgbvalue[1];</span>
-<span class="fc" id="L70">        float b = rgbvalue[2];</span>
-<span class="pc bpc" id="L71" title="2 of 4 branches missed.">        if (r == g &amp;&amp; r == b) {</span>
-<span class="fc" id="L72">            return new float[] {0, 0, 0, 1 - r};</span>
-        } else {
-<span class="nc" id="L74">            float c = 1 - r;</span>
-<span class="nc" id="L75">            float m = 1 - g;</span>
-<span class="nc" id="L76">            float y = 1 - b;</span>
-<span class="nc" id="L77">            float k = Math.min(c, Math.min(m, y));</span>
-<span class="nc" id="L78">            return new float[] {c, m, y, k};</span>
+<span class="fc" id="L68">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15413);float r = rgbvalue[0];</span>
+<span class="fc" id="L69">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15414);float g = rgbvalue[1];</span>
+<span class="fc" id="L70">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15415);float b = rgbvalue[2];</span>
+<span class="pc bpc" id="L71" title="8 of 12 branches missed.">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15416);if ((((r == g &amp;&amp; r == b)&amp;&amp;(__CLR4_5_2bvwbvwm68iyhu6.R.iget(15417)!=0|true))||(__CLR4_5_2bvwbvwm68iyhu6.R.iget(15418)==0&amp;false))) {{</span>
+<span class="fc" id="L72">            __CLR4_5_2bvwbvwm68iyhu6.R.inc(15419);return new float[] {0, 0, 0, 1 - r};</span>
+        } }else {{
+<span class="nc" id="L74">            __CLR4_5_2bvwbvwm68iyhu6.R.inc(15420);float c = 1 - r;</span>
+<span class="nc" id="L75">            __CLR4_5_2bvwbvwm68iyhu6.R.inc(15421);float m = 1 - g;</span>
+<span class="nc" id="L76">            __CLR4_5_2bvwbvwm68iyhu6.R.inc(15422);float y = 1 - b;</span>
+<span class="nc" id="L77">            __CLR4_5_2bvwbvwm68iyhu6.R.inc(15423);float k = Math.min(c, Math.min(m, y));</span>
+<span class="nc" id="L78">            __CLR4_5_2bvwbvwm68iyhu6.R.inc(15424);return new float[] {c, m, y, k};</span>
         }
-    }
+<span class="fc" id="L80">    }}finally{__CLR4_5_2bvwbvwm68iyhu6.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
     @Override
-    public float[] toCIEXYZ(float[] colorvalue) {
-<span class="nc" id="L85">        throw new UnsupportedOperationException(&quot;NYI&quot;);</span>
-    }
+<span class="nc" id="L84">    public float[] toCIEXYZ(float[] colorvalue) {try{__CLR4_5_2bvwbvwm68iyhu6.R.inc(15425);</span>
+<span class="nc" id="L85">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15426);throw new UnsupportedOperationException(&quot;NYI&quot;);</span>
+<span class="nc" id="L86">    }finally{__CLR4_5_2bvwbvwm68iyhu6.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
     @Override
-    public float[] fromCIEXYZ(float[] colorvalue) {
-<span class="nc" id="L91">        throw new UnsupportedOperationException(&quot;NYI&quot;);</span>
-    }
+<span class="nc" id="L90">    public float[] fromCIEXYZ(float[] colorvalue) {try{__CLR4_5_2bvwbvwm68iyhu6.R.inc(15427);</span>
+<span class="nc" id="L91">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15428);throw new UnsupportedOperationException(&quot;NYI&quot;);</span>
+<span class="nc" id="L92">    }finally{__CLR4_5_2bvwbvwm68iyhu6.R.flushNeeded();}}</span>
 
     /**
      * Creates a color instance representing a device-specific CMYK color. An sRGB value
@@ -98,21 +98,21 @@ import java.awt.Color;
      * @param cmykComponents the CMYK components
      * @return the device-specific color
      */
-    public static Color createCMYKColor(float[] cmykComponents) {
-<span class="fc" id="L102">        DeviceCMYKColorSpace cmykCs = ColorSpaces.getDeviceCMYKColorSpace();</span>
-<span class="fc" id="L103">        Color cmykColor = new ColorWithAlternatives(cmykCs, cmykComponents, 1.0f, null);</span>
-<span class="fc" id="L104">        return cmykColor;</span>
-    }
+<span class="fc" id="L101">    public static Color createCMYKColor(float[] cmykComponents) {try{__CLR4_5_2bvwbvwm68iyhu6.R.inc(15429);</span>
+<span class="fc" id="L102">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15430);DeviceCMYKColorSpace cmykCs = ColorSpaces.getDeviceCMYKColorSpace();</span>
+<span class="fc" id="L103">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15431);Color cmykColor = new ColorWithAlternatives(cmykCs, cmykComponents, 1.0f, null);</span>
+<span class="fc" id="L104">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15432);return cmykColor;</span>
+<span class="fc" id="L105">    }finally{__CLR4_5_2bvwbvwm68iyhu6.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String getProfileName() {
-<span class="fc" id="L109">        return PSEUDO_PROFILE_NAME;</span>
-    }
+<span class="fc" id="L108">    public String getProfileName() {try{__CLR4_5_2bvwbvwm68iyhu6.R.inc(15433);</span>
+<span class="fc" id="L109">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15434);return PSEUDO_PROFILE_NAME;</span>
+<span class="fc" id="L110">    }finally{__CLR4_5_2bvwbvwm68iyhu6.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String getProfileURI() {
-<span class="fc" id="L114">        return null; //No URI</span>
-    }
+<span class="fc" id="L113">    public String getProfileURI() {try{__CLR4_5_2bvwbvwm68iyhu6.R.inc(15435);</span>
+<span class="fc" id="L114">        __CLR4_5_2bvwbvwm68iyhu6.R.inc(15436);return null; //No URI</span>
+<span class="fc" id="L115">    }finally{__CLR4_5_2bvwbvwm68iyhu6.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

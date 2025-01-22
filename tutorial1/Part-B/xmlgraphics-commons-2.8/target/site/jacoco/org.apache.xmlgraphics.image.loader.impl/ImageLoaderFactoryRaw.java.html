@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageLoaderFactoryRaw.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">ImageLoaderFactoryRaw.java</span></div><h1>ImageLoaderFactoryRaw.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageLoaderFactoryRaw.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">ImageLoaderFactoryRaw.java</span></div><h1>ImageLoaderFactoryRaw.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -36,7 +36,7 @@ import org.apache.xmlgraphics.util.MimeConstants;
 /**
  * Factory class for the ImageLoader for raw/undecoded images.
  */
-<span class="fc" id="L39">public class ImageLoaderFactoryRaw extends AbstractImageLoaderFactory {</span>
+<span class="pc bpc" id="L39" title="3 of 4 branches missed.">public class ImageLoaderFactoryRaw extends AbstractImageLoaderFactory {public static class __CLR4_5_27z57z5m68iyh78{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,10404,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /** MIME type for EMF (Windows Enhanced Metafile) */
     public static final String MIME_EMF = &quot;image/x-emf&quot;;
@@ -61,77 +61,77 @@ import org.apache.xmlgraphics.util.MimeConstants;
      * @param flavor the image flavor
      * @return the associated MIME type
      */
-    public static String getMimeForRawFlavor(ImageFlavor flavor) {
-<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (int i = 0, ci = FLAVORS.length; i &lt; ci; i++) {</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">            for (int j = 0, cj = FLAVORS[i].length; j &lt; cj; j++) {</span>
-<span class="pc bpc" id="L67" title="1 of 2 branches missed.">                if (FLAVORS[i][j].equals(flavor)) {</span>
-<span class="nc" id="L68">                    return MIMES[i];</span>
+<span class="fc" id="L64">    public static String getMimeForRawFlavor(ImageFlavor flavor) {try{__CLR4_5_27z57z5m68iyh78.R.inc(10337);</span>
+<span class="pc bpc" id="L65" title="4 of 10 branches missed.">        __CLR4_5_27z57z5m68iyh78.R.inc(10338);for (int i = 0, ci = FLAVORS.length; (((i &lt; ci)&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10339)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10340)==0&amp;false)); i++) {{</span>
+<span class="pc bpc" id="L66" title="4 of 10 branches missed.">            __CLR4_5_27z57z5m68iyh78.R.inc(10341);for (int j = 0, cj = FLAVORS[i].length; (((j &lt; cj)&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10342)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10343)==0&amp;false)); j++) {{</span>
+<span class="pc bpc" id="L67" title="7 of 10 branches missed.">                __CLR4_5_27z57z5m68iyh78.R.inc(10344);if ((((FLAVORS[i][j].equals(flavor))&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10345)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10346)==0&amp;false))) {{</span>
+<span class="nc" id="L68">                    __CLR4_5_27z57z5m68iyh78.R.inc(10347);return MIMES[i];</span>
                 }
+            }}
+        }}
+<span class="fc" id="L72">        }__CLR4_5_27z57z5m68iyh78.R.inc(10348);throw new IllegalArgumentException(&quot;ImageFlavor is not a \&quot;raw\&quot; flavor: &quot; + flavor);</span>
+<span class="fc" id="L73">    }finally{__CLR4_5_27z57z5m68iyh78.R.flushNeeded();}}</span>
+
+    /** {@inheritDoc} */
+<span class="fc" id="L76">    public String[] getSupportedMIMETypes() {try{__CLR4_5_27z57z5m68iyh78.R.inc(10349);</span>
+<span class="fc" id="L77">        __CLR4_5_27z57z5m68iyh78.R.inc(10350);return MIMES;</span>
+<span class="fc" id="L78">    }finally{__CLR4_5_27z57z5m68iyh78.R.flushNeeded();}}</span>
+
+    /** {@inheritDoc} */
+<span class="fc" id="L81">    public ImageFlavor[] getSupportedFlavors(String mime) {try{__CLR4_5_27z57z5m68iyh78.R.inc(10351);</span>
+<span class="pc bpc" id="L82" title="7 of 10 branches missed.">        __CLR4_5_27z57z5m68iyh78.R.inc(10352);for (int i = 0, c = MIMES.length; (((i &lt; c)&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10353)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10354)==0&amp;false)); i++) {{</span>
+<span class="pc bpc" id="L83" title="4 of 10 branches missed.">            __CLR4_5_27z57z5m68iyh78.R.inc(10355);if ((((MIMES[i].equals(mime))&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10356)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10357)==0&amp;false))) {{</span>
+<span class="fc" id="L84">                __CLR4_5_27z57z5m68iyh78.R.inc(10358);return FLAVORS[i];</span>
             }
+        }}
+<span class="nc" id="L87">        }__CLR4_5_27z57z5m68iyh78.R.inc(10359);throw new IllegalArgumentException(&quot;Unsupported MIME type: &quot; + mime);</span>
+<span class="fc" id="L88">    }finally{__CLR4_5_27z57z5m68iyh78.R.flushNeeded();}}</span>
+
+    /** {@inheritDoc} */
+<span class="fc" id="L91">    public ImageLoader newImageLoader(ImageFlavor targetFlavor) {try{__CLR4_5_27z57z5m68iyh78.R.inc(10360);</span>
+<span class="pc bpc" id="L92" title="4 of 10 branches missed.">        __CLR4_5_27z57z5m68iyh78.R.inc(10361);if ((((targetFlavor.equals(ImageFlavor.RAW_JPEG))&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10362)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10363)==0&amp;false))) {{</span>
+<span class="fc" id="L93">            __CLR4_5_27z57z5m68iyh78.R.inc(10364);return new ImageLoaderRawJPEG();</span>
+<span class="pc bpc" id="L94" title="4 of 10 branches missed.">        } }else {__CLR4_5_27z57z5m68iyh78.R.inc(10365);if ((((targetFlavor.equals(ImageFlavor.RAW_PNG))&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10366)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10367)==0&amp;false))) {{</span>
+<span class="fc" id="L95">            __CLR4_5_27z57z5m68iyh78.R.inc(10368);return new ImageLoaderRawPNG();</span>
+        } }else {{
+<span class="nc" id="L97">            __CLR4_5_27z57z5m68iyh78.R.inc(10369);return new ImageLoaderRaw(targetFlavor);</span>
         }
-<span class="fc" id="L72">        throw new IllegalArgumentException(&quot;ImageFlavor is not a \&quot;raw\&quot; flavor: &quot; + flavor);</span>
-    }
+<span class="fc" id="L99">    }}}finally{__CLR4_5_27z57z5m68iyh78.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String[] getSupportedMIMETypes() {
-<span class="fc" id="L77">        return MIMES;</span>
-    }
-
-    /** {@inheritDoc} */
-    public ImageFlavor[] getSupportedFlavors(String mime) {
-<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        for (int i = 0, c = MIMES.length; i &lt; c; i++) {</span>
-<span class="fc bfc" id="L83" title="All 2 branches covered.">            if (MIMES[i].equals(mime)) {</span>
-<span class="fc" id="L84">                return FLAVORS[i];</span>
-            }
-        }
-<span class="nc" id="L87">        throw new IllegalArgumentException(&quot;Unsupported MIME type: &quot; + mime);</span>
-    }
-
-    /** {@inheritDoc} */
-    public ImageLoader newImageLoader(ImageFlavor targetFlavor) {
-<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (targetFlavor.equals(ImageFlavor.RAW_JPEG)) {</span>
-<span class="fc" id="L93">            return new ImageLoaderRawJPEG();</span>
-<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        } else if (targetFlavor.equals(ImageFlavor.RAW_PNG)) {</span>
-<span class="fc" id="L95">            return new ImageLoaderRawPNG();</span>
-        } else {
-<span class="nc" id="L97">            return new ImageLoaderRaw(targetFlavor);</span>
-        }
-    }
-
-    /** {@inheritDoc} */
-    public boolean isAvailable() {
-<span class="fc" id="L103">        return true;</span>
-    }
+<span class="fc" id="L102">    public boolean isAvailable() {try{__CLR4_5_27z57z5m68iyh78.R.inc(10370);</span>
+<span class="fc" id="L103">        __CLR4_5_27z57z5m68iyh78.R.inc(10371);return true;</span>
+<span class="fc" id="L104">    }finally{__CLR4_5_27z57z5m68iyh78.R.flushNeeded();}}</span>
 
     @Override
-    public boolean isSupported(ImageInfo imageInfo) {
-<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        if (&quot;image/png&quot;.equals(imageInfo.getMimeType())) {</span>
-<span class="fc" id="L109">            Map additionalPenalties = (Map) imageInfo.getCustomObjects().get(&quot;additionalPenalties&quot;);</span>
-<span class="fc" id="L110">            int penalty = 0;</span>
-<span class="fc" id="L111">            Penalty penaltyObj = ((Penalty)additionalPenalties.get(ImageLoaderRawPNG.class.getName()));</span>
-<span class="pc bpc" id="L112" title="1 of 2 branches missed.">            if (penaltyObj != null) {</span>
-<span class="nc" id="L113">                penalty = penaltyObj.getValue();</span>
+<span class="fc" id="L107">    public boolean isSupported(ImageInfo imageInfo) {try{__CLR4_5_27z57z5m68iyh78.R.inc(10372);</span>
+<span class="pc bpc" id="L108" title="7 of 10 branches missed.">        __CLR4_5_27z57z5m68iyh78.R.inc(10373);if ((((&quot;image/png&quot;.equals(imageInfo.getMimeType()))&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10374)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10375)==0&amp;false))) {{</span>
+<span class="fc" id="L109">            __CLR4_5_27z57z5m68iyh78.R.inc(10376);Map additionalPenalties = (Map) imageInfo.getCustomObjects().get(&quot;additionalPenalties&quot;);</span>
+<span class="fc" id="L110">            __CLR4_5_27z57z5m68iyh78.R.inc(10377);int penalty = 0;</span>
+<span class="fc" id="L111">            __CLR4_5_27z57z5m68iyh78.R.inc(10378);Penalty penaltyObj = ((Penalty)additionalPenalties.get(ImageLoaderRawPNG.class.getName()));</span>
+<span class="pc bpc" id="L112" title="7 of 10 branches missed.">            __CLR4_5_27z57z5m68iyh78.R.inc(10379);if ((((penaltyObj != null)&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10380)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10381)==0&amp;false))) {{</span>
+<span class="nc" id="L113">                __CLR4_5_27z57z5m68iyh78.R.inc(10382);penalty = penaltyObj.getValue();</span>
             }
-<span class="fc" id="L115">            IIOMetadata metadata = (IIOMetadata) imageInfo.getCustomObjects().get(IIOMetadata.class);</span>
-<span class="pc bpc" id="L116" title="1 of 2 branches missed.">            if (metadata != null) {</span>
-<span class="fc" id="L117">                IIOMetadataNode children = (IIOMetadataNode)metadata.getAsTree(&quot;javax_imageio_png_1.0&quot;).getChildNodes();</span>
-<span class="fc" id="L118">                NamedNodeMap attr = children.getElementsByTagName(&quot;IHDR&quot;).item(0).getAttributes();</span>
-<span class="fc" id="L119">                String bitDepth = attr.getNamedItem(&quot;bitDepth&quot;).getNodeValue();</span>
-<span class="fc" id="L120">                String interlaceMethod = attr.getNamedItem(&quot;interlaceMethod&quot;).getNodeValue();</span>
-<span class="fc" id="L121">                String colorType = attr.getNamedItem(&quot;colorType&quot;).getNodeValue();</span>
-<span class="pc bpc" id="L122" title="2 of 4 branches missed.">                if (!bitDepth.equals(&quot;8&quot;) || !interlaceMethod.equals(&quot;none&quot;)</span>
-<span class="pc bpc" id="L123" title="4 of 6 branches missed.">                        || ((colorType.equals(&quot;RGBAlpha&quot;) || colorType.equals(&quot;GrayAlpha&quot;)) &amp;&amp; penalty &gt;= 0)) {</span>
-<span class="fc" id="L124">                    return false;</span>
+<span class="fc" id="L115">            }__CLR4_5_27z57z5m68iyh78.R.inc(10383);IIOMetadata metadata = (IIOMetadata) imageInfo.getCustomObjects().get(IIOMetadata.class);</span>
+<span class="pc bpc" id="L116" title="7 of 10 branches missed.">            __CLR4_5_27z57z5m68iyh78.R.inc(10384);if ((((metadata != null)&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10385)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10386)==0&amp;false))) {{</span>
+<span class="fc" id="L117">                __CLR4_5_27z57z5m68iyh78.R.inc(10387);IIOMetadataNode children = (IIOMetadataNode)metadata.getAsTree(&quot;javax_imageio_png_1.0&quot;).getChildNodes();</span>
+<span class="fc" id="L118">                __CLR4_5_27z57z5m68iyh78.R.inc(10388);NamedNodeMap attr = children.getElementsByTagName(&quot;IHDR&quot;).item(0).getAttributes();</span>
+<span class="fc" id="L119">                __CLR4_5_27z57z5m68iyh78.R.inc(10389);String bitDepth = attr.getNamedItem(&quot;bitDepth&quot;).getNodeValue();</span>
+<span class="fc" id="L120">                __CLR4_5_27z57z5m68iyh78.R.inc(10390);String interlaceMethod = attr.getNamedItem(&quot;interlaceMethod&quot;).getNodeValue();</span>
+<span class="fc" id="L121">                __CLR4_5_27z57z5m68iyh78.R.inc(10391);String colorType = attr.getNamedItem(&quot;colorType&quot;).getNodeValue();</span>
+<span class="pc bpc" id="L122" title="2 of 4 branches missed.">                __CLR4_5_27z57z5m68iyh78.R.inc(10392);if ((((!bitDepth.equals(&quot;8&quot;) || !interlaceMethod.equals(&quot;none&quot;)</span>
+<span class="pc bpc" id="L123" title="10 of 14 branches missed.">                        || ((colorType.equals(&quot;RGBAlpha&quot;) || colorType.equals(&quot;GrayAlpha&quot;)) &amp;&amp; penalty &gt;= 0))&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10393)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10394)==0&amp;false))) {{</span>
+<span class="fc" id="L124">                    __CLR4_5_27z57z5m68iyh78.R.inc(10395);return false;</span>
                 }
-<span class="nc" id="L126">                children = (IIOMetadataNode)metadata.getAsTree(&quot;javax_imageio_1.0&quot;).getChildNodes();</span>
-<span class="nc" id="L127">                Node numChannels = children.getElementsByTagName(&quot;NumChannels&quot;).item(0);</span>
-<span class="nc" id="L128">                String numChannelsStr = numChannels.getAttributes().getNamedItem(&quot;value&quot;).getNodeValue();</span>
-<span class="nc bnc" id="L129" title="All 6 branches missed.">                if (&quot;4&quot;.equals(numChannelsStr) &amp;&amp; &quot;Palette&quot;.equals(colorType) &amp;&amp; penalty &gt;= 0) {</span>
-<span class="nc" id="L130">                    return false;</span>
+<span class="nc" id="L126">                }__CLR4_5_27z57z5m68iyh78.R.inc(10396);children = (IIOMetadataNode)metadata.getAsTree(&quot;javax_imageio_1.0&quot;).getChildNodes();</span>
+<span class="nc" id="L127">                __CLR4_5_27z57z5m68iyh78.R.inc(10397);Node numChannels = children.getElementsByTagName(&quot;NumChannels&quot;).item(0);</span>
+<span class="nc" id="L128">                __CLR4_5_27z57z5m68iyh78.R.inc(10398);String numChannelsStr = numChannels.getAttributes().getNamedItem(&quot;value&quot;).getNodeValue();</span>
+<span class="nc bnc" id="L129" title="All 14 branches missed.">                __CLR4_5_27z57z5m68iyh78.R.inc(10399);if ((((&quot;4&quot;.equals(numChannelsStr) &amp;&amp; &quot;Palette&quot;.equals(colorType) &amp;&amp; penalty &gt;= 0)&amp;&amp;(__CLR4_5_27z57z5m68iyh78.R.iget(10400)!=0|true))||(__CLR4_5_27z57z5m68iyh78.R.iget(10401)==0&amp;false))) {{</span>
+<span class="nc" id="L130">                    __CLR4_5_27z57z5m68iyh78.R.inc(10402);return false;</span>
                 }
-            }
-        }
-<span class="nc" id="L134">        return true;</span>
-    }
+            }}
+        }}
+<span class="nc" id="L134">        }__CLR4_5_27z57z5m68iyh78.R.inc(10403);return true;</span>
+<span class="fc" id="L135">    }finally{__CLR4_5_27z57z5m68iyh78.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

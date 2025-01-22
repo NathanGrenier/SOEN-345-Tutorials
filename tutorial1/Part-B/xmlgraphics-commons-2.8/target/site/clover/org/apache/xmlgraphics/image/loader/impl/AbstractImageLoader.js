@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":62,"id":9790,"methods":[{"el":41,"sc":5,"sl":38},{"el":46,"sc":5,"sl":44},{"el":60,"sc":5,"sl":54}],"name":"AbstractImageLoader","sl":35}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_11":{"methods":[{"sl":44}],"name":"testBrokenIccPng","pass":true,"statements":[{"sl":45}]},"test_121":{"methods":[{"sl":44}],"name":"testGetUsagePenalty","pass":true,"statements":[{"sl":45}]},"test_124":{"methods":[{"sl":38},{"sl":54}],"name":"testICCProfiles","pass":true,"statements":[{"sl":40},{"sl":55},{"sl":56}]},"test_131":{"methods":[{"sl":44}],"name":"testPNG","pass":true,"statements":[{"sl":45}]},"test_138":{"methods":[{"sl":44}],"name":"testPipelineFromURIThroughManager","pass":true,"statements":[{"sl":45}]},"test_168":{"methods":[{"sl":44}],"name":"testEPSASCII","pass":true,"statements":[{"sl":45}]},"test_182":{"methods":[{"sl":44}],"name":"testGIF","pass":true,"statements":[{"sl":45}]},"test_24":{"methods":[{"sl":44}],"name":"testEPSBinary","pass":true,"statements":[{"sl":45}]},"test_37":{"methods":[{"sl":44}],"name":"testImageLoaderFactory","pass":true,"statements":[{"sl":45}]},"test_65":{"methods":[{"sl":44}],"name":"testPipelineFactoryAdditionalPenalty","pass":true,"statements":[{"sl":45}]},"test_76":{"methods":[{"sl":44}],"name":"testImageCache1","pass":true,"statements":[{"sl":45}]},"test_8":{"methods":[{"sl":44}],"name":"testPipelineFactoryImageInfoDependency","pass":true,"statements":[{"sl":45}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [124], [], [124], [], [], [], [37, 11, 8, 121, 76, 65, 182, 24, 131, 168, 138], [37, 11, 8, 121, 76, 65, 182, 24, 131, 168, 138], [], [], [], [], [], [], [], [], [124], [124], [124], [], [], [], [], [], []]

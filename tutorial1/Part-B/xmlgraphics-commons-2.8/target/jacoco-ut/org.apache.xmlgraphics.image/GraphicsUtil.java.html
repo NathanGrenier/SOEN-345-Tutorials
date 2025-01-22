@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GraphicsUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image</a> &gt; <span class="el_source">GraphicsUtil.java</span></div><h1>GraphicsUtil.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GraphicsUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image</a> &gt; <span class="el_source">GraphicsUtil.java</span></div><h1>GraphicsUtil.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -64,10 +64,10 @@ import org.apache.xmlgraphics.image.rendered.RenderedImageCachableRed;
  *
  * Originally authored by Thomas DeWeese.
  */
-public final class GraphicsUtil {
+<span class="nc bnc" id="L67" title="All 4 branches missed.">@java.lang.SuppressWarnings({&quot;fallthrough&quot;}) public final class GraphicsUtil {public static class __CLR4_5_27n7nm68iyfqc{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,974,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
-    private GraphicsUtil() {
-    }
+<span class="nc" id="L69">    private GraphicsUtil() {try{__CLR4_5_27n7nm68iyfqc.R.inc(275);</span>
+<span class="nc" id="L70">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
 <span class="nc" id="L72">    public static final AffineTransform IDENTITY = new AffineTransform();</span>
 
@@ -134,9 +134,9 @@ public final class GraphicsUtil {
      *                the alpha channel set in accordance with
      *                &lt;tt&gt;premult&lt;/tt&gt;
      */
-    public static ColorModel makeLinear_sRGBCM(boolean premult) {
-<span class="nc bnc" id="L138" title="All 2 branches missed.">         return premult ? Linear_sRGB_Pre : Linear_sRGB_Unpre;</span>
-    }
+<span class="nc" id="L137">    public static ColorModel makeLinear_sRGBCM(boolean premult) {try{__CLR4_5_27n7nm68iyfqc.R.inc(276);</span>
+<span class="nc bnc" id="L138" title="All 10 branches missed.">         __CLR4_5_27n7nm68iyfqc.R.inc(277);return (((premult )&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(278)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(279)==0&amp;false))? Linear_sRGB_Pre : Linear_sRGB_Unpre;</span>
+<span class="nc" id="L139">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * Constructs a BufferedImage with a linear sRGB colorModel, and alpha.
@@ -147,11 +147,11 @@ public final class GraphicsUtil {
      */
     public static BufferedImage makeLinearBufferedImage(int width,
                                                         int height,
-                                                        boolean premult) {
-<span class="nc" id="L151">        ColorModel cm = makeLinear_sRGBCM(premult);</span>
-<span class="nc" id="L152">        WritableRaster wr = cm.createCompatibleWritableRaster(width, height);</span>
-<span class="nc" id="L153">        return new BufferedImage(cm, wr, premult, null);</span>
-    }
+<span class="nc" id="L150">                                                        boolean premult) {try{__CLR4_5_27n7nm68iyfqc.R.inc(280);</span>
+<span class="nc" id="L151">        __CLR4_5_27n7nm68iyfqc.R.inc(281);ColorModel cm = makeLinear_sRGBCM(premult);</span>
+<span class="nc" id="L152">        __CLR4_5_27n7nm68iyfqc.R.inc(282);WritableRaster wr = cm.createCompatibleWritableRaster(width, height);</span>
+<span class="nc" id="L153">        __CLR4_5_27n7nm68iyfqc.R.inc(283);return new BufferedImage(cm, wr, premult, null);</span>
+<span class="nc" id="L154">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * This method will return a CacheableRed that has it's data in
@@ -164,15 +164,15 @@ public final class GraphicsUtil {
      * @return    An equivilant image to &lt;tt&gt;src&lt;/tt&gt; who's data is in
      *            linear sRGB.
      */
-    public static CachableRed convertToLsRGB(CachableRed src) {
-<span class="nc" id="L168">        ColorModel cm = src.getColorModel();</span>
-<span class="nc" id="L169">        ColorSpace cs = cm.getColorSpace();</span>
-<span class="nc bnc" id="L170" title="All 2 branches missed.">        if (cs == ColorSpace.getInstance(ColorSpace.CS_LINEAR_RGB)) {</span>
-<span class="nc" id="L171">            return src;</span>
+<span class="nc" id="L167">    public static CachableRed convertToLsRGB(CachableRed src) {try{__CLR4_5_27n7nm68iyfqc.R.inc(284);</span>
+<span class="nc" id="L168">        __CLR4_5_27n7nm68iyfqc.R.inc(285);ColorModel cm = src.getColorModel();</span>
+<span class="nc" id="L169">        __CLR4_5_27n7nm68iyfqc.R.inc(286);ColorSpace cs = cm.getColorSpace();</span>
+<span class="nc bnc" id="L170" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(287);if ((((cs == ColorSpace.getInstance(ColorSpace.CS_LINEAR_RGB))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(288)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(289)==0&amp;false))) {{</span>
+<span class="nc" id="L171">            __CLR4_5_27n7nm68iyfqc.R.inc(290);return src;</span>
         }
 
-<span class="nc" id="L174">        return new Any2LsRGBRed(src);</span>
-    }
+<span class="nc" id="L174">        }__CLR4_5_27n7nm68iyfqc.R.inc(291);return new Any2LsRGBRed(src);</span>
+<span class="nc" id="L175">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * This method will return a CacheableRed that has it's data in
@@ -184,15 +184,15 @@ public final class GraphicsUtil {
      * @param src The image to convert to sRGB.
      * @return    An equivilant image to &lt;tt&gt;src&lt;/tt&gt; who's data is in sRGB.
      */
-    public static CachableRed convertTosRGB(CachableRed src) {
-<span class="nc" id="L188">        ColorModel cm = src.getColorModel();</span>
-<span class="nc" id="L189">        ColorSpace cs = cm.getColorSpace();</span>
-<span class="nc bnc" id="L190" title="All 2 branches missed.">        if (cs == ColorSpace.getInstance(ColorSpace.CS_sRGB)) {</span>
-<span class="nc" id="L191">            return src;</span>
+<span class="nc" id="L187">    public static CachableRed convertTosRGB(CachableRed src) {try{__CLR4_5_27n7nm68iyfqc.R.inc(292);</span>
+<span class="nc" id="L188">        __CLR4_5_27n7nm68iyfqc.R.inc(293);ColorModel cm = src.getColorModel();</span>
+<span class="nc" id="L189">        __CLR4_5_27n7nm68iyfqc.R.inc(294);ColorSpace cs = cm.getColorSpace();</span>
+<span class="nc bnc" id="L190" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(295);if ((((cs == ColorSpace.getInstance(ColorSpace.CS_sRGB))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(296)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(297)==0&amp;false))) {{</span>
+<span class="nc" id="L191">            __CLR4_5_27n7nm68iyfqc.R.inc(298);return src;</span>
         }
 
-<span class="nc" id="L194">        return new Any2sRGBRed(src);</span>
-    }
+<span class="nc" id="L194">        }__CLR4_5_27n7nm68iyfqc.R.inc(299);return new Any2sRGBRed(src);</span>
+<span class="nc" id="L195">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * Convertes any RenderedImage to a CacheableRed.  &lt;p&gt;
@@ -207,15 +207,15 @@ public final class GraphicsUtil {
      * @param ri The RenderedImage to convert.
      * @return   a CacheableRed that contains the same data as ri.
      */
-    public static CachableRed wrap(RenderedImage ri) {
-<span class="nc bnc" id="L211" title="All 2 branches missed.">        if (ri instanceof CachableRed) {</span>
-<span class="nc" id="L212">            return (CachableRed) ri;</span>
+<span class="nc" id="L210">    public static CachableRed wrap(RenderedImage ri) {try{__CLR4_5_27n7nm68iyfqc.R.inc(300);</span>
+<span class="nc bnc" id="L211" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(301);if ((((ri instanceof CachableRed)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(302)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(303)==0&amp;false))) {{</span>
+<span class="nc" id="L212">            __CLR4_5_27n7nm68iyfqc.R.inc(304);return (CachableRed) ri;</span>
         }
-<span class="nc bnc" id="L214" title="All 2 branches missed.">        if (ri instanceof BufferedImage) {</span>
-<span class="nc" id="L215">            return new BufferedImageCachableRed((BufferedImage)ri);</span>
+<span class="nc bnc" id="L214" title="All 10 branches missed.">        }__CLR4_5_27n7nm68iyfqc.R.inc(305);if ((((ri instanceof BufferedImage)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(306)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(307)==0&amp;false))) {{</span>
+<span class="nc" id="L215">            __CLR4_5_27n7nm68iyfqc.R.inc(308);return new BufferedImageCachableRed((BufferedImage)ri);</span>
         }
-<span class="nc" id="L217">        return new RenderedImageCachableRed(ri);</span>
-    }
+<span class="nc" id="L217">        }__CLR4_5_27n7nm68iyfqc.R.inc(309);return new RenderedImageCachableRed(ri);</span>
+<span class="nc" id="L218">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * An internal optimized version of copyData designed to work on
@@ -228,110 +228,110 @@ public final class GraphicsUtil {
      * @param src The source of the data
      * @param dst The destination for the data.
      */
-    public static void copyData_INT_PACK(Raster src, WritableRaster dst) {
+<span class="nc" id="L231">    public static void copyData_INT_PACK(Raster src, WritableRaster dst) {try{__CLR4_5_27n7nm68iyfqc.R.inc(310);</span>
         // System.out.println(&quot;Fast copyData&quot;);
-<span class="nc" id="L233">        int x0 = dst.getMinX();</span>
-<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (x0 &lt; src.getMinX()) {</span>
-<span class="nc" id="L235">            x0 = src.getMinX();</span>
+<span class="nc" id="L233">        __CLR4_5_27n7nm68iyfqc.R.inc(311);int x0 = dst.getMinX();</span>
+<span class="nc bnc" id="L234" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(312);if ((((x0 &lt; src.getMinX())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(313)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(314)==0&amp;false))) {{</span>
+<span class="nc" id="L235">            __CLR4_5_27n7nm68iyfqc.R.inc(315);x0 = src.getMinX();</span>
         }
 
-<span class="nc" id="L238">        int y0 = dst.getMinY();</span>
-<span class="nc bnc" id="L239" title="All 2 branches missed.">        if (y0 &lt; src.getMinY()) {</span>
-<span class="nc" id="L240">            y0 = src.getMinY();</span>
+<span class="nc" id="L238">        }__CLR4_5_27n7nm68iyfqc.R.inc(316);int y0 = dst.getMinY();</span>
+<span class="nc bnc" id="L239" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(317);if ((((y0 &lt; src.getMinY())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(318)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(319)==0&amp;false))) {{</span>
+<span class="nc" id="L240">            __CLR4_5_27n7nm68iyfqc.R.inc(320);y0 = src.getMinY();</span>
         }
 
-<span class="nc" id="L243">        int x1 = dst.getMinX() + dst.getWidth() - 1;</span>
-<span class="nc bnc" id="L244" title="All 2 branches missed.">        if (x1 &gt; src.getMinX() + src.getWidth() - 1) {</span>
-<span class="nc" id="L245">            x1 = src.getMinX() + src.getWidth() - 1;</span>
+<span class="nc" id="L243">        }__CLR4_5_27n7nm68iyfqc.R.inc(321);int x1 = dst.getMinX() + dst.getWidth() - 1;</span>
+<span class="nc bnc" id="L244" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(322);if ((((x1 &gt; src.getMinX() + src.getWidth() - 1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(323)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(324)==0&amp;false))) {{</span>
+<span class="nc" id="L245">            __CLR4_5_27n7nm68iyfqc.R.inc(325);x1 = src.getMinX() + src.getWidth() - 1;</span>
         }
 
-<span class="nc" id="L248">        int y1 = dst.getMinY() + dst.getHeight() - 1;</span>
-<span class="nc bnc" id="L249" title="All 2 branches missed.">        if (y1 &gt; src.getMinY() + src.getHeight() - 1) {</span>
-<span class="nc" id="L250">            y1 = src.getMinY() + src.getHeight() - 1;</span>
+<span class="nc" id="L248">        }__CLR4_5_27n7nm68iyfqc.R.inc(326);int y1 = dst.getMinY() + dst.getHeight() - 1;</span>
+<span class="nc bnc" id="L249" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(327);if ((((y1 &gt; src.getMinY() + src.getHeight() - 1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(328)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(329)==0&amp;false))) {{</span>
+<span class="nc" id="L250">            __CLR4_5_27n7nm68iyfqc.R.inc(330);y1 = src.getMinY() + src.getHeight() - 1;</span>
         }
 
-<span class="nc" id="L253">        int width  = x1 - x0 + 1;</span>
-<span class="nc" id="L254">        int height = y1 - y0 + 1;</span>
+<span class="nc" id="L253">        }__CLR4_5_27n7nm68iyfqc.R.inc(331);int width  = x1 - x0 + 1;</span>
+<span class="nc" id="L254">        __CLR4_5_27n7nm68iyfqc.R.inc(332);int height = y1 - y0 + 1;</span>
 
-        SinglePixelPackedSampleModel srcSPPSM;
-<span class="nc" id="L257">        srcSPPSM = (SinglePixelPackedSampleModel)src.getSampleModel();</span>
+<span class="nc" id="L256">        __CLR4_5_27n7nm68iyfqc.R.inc(333);SinglePixelPackedSampleModel srcSPPSM;</span>
+<span class="nc" id="L257">        __CLR4_5_27n7nm68iyfqc.R.inc(334);srcSPPSM = (SinglePixelPackedSampleModel)src.getSampleModel();</span>
 
-<span class="nc" id="L259">        final int     srcScanStride = srcSPPSM.getScanlineStride();</span>
-<span class="nc" id="L260">        DataBufferInt srcDB         = (DataBufferInt)src.getDataBuffer();</span>
-<span class="nc" id="L261">        final int []  srcPixels     = srcDB.getBankData()[0];</span>
-<span class="nc" id="L262">        final int     srcBase =</span>
+<span class="nc" id="L259">        __CLR4_5_27n7nm68iyfqc.R.inc(335);final int     srcScanStride = srcSPPSM.getScanlineStride();</span>
+<span class="nc" id="L260">        __CLR4_5_27n7nm68iyfqc.R.inc(336);DataBufferInt srcDB         = (DataBufferInt)src.getDataBuffer();</span>
+<span class="nc" id="L261">        __CLR4_5_27n7nm68iyfqc.R.inc(337);final int []  srcPixels     = srcDB.getBankData()[0];</span>
+<span class="nc" id="L262">        __CLR4_5_27n7nm68iyfqc.R.inc(338);final int     srcBase =</span>
 <span class="nc" id="L263">            (srcDB.getOffset()</span>
 <span class="nc" id="L264">             + srcSPPSM.getOffset(x0 - src.getSampleModelTranslateX(),</span>
 <span class="nc" id="L265">                                y0 - src.getSampleModelTranslateY()));</span>
 
 
-        SinglePixelPackedSampleModel dstSPPSM;
-<span class="nc" id="L269">        dstSPPSM = (SinglePixelPackedSampleModel)dst.getSampleModel();</span>
+<span class="nc" id="L268">        __CLR4_5_27n7nm68iyfqc.R.inc(339);SinglePixelPackedSampleModel dstSPPSM;</span>
+<span class="nc" id="L269">        __CLR4_5_27n7nm68iyfqc.R.inc(340);dstSPPSM = (SinglePixelPackedSampleModel)dst.getSampleModel();</span>
 
-<span class="nc" id="L271">        final int     dstScanStride = dstSPPSM.getScanlineStride();</span>
-<span class="nc" id="L272">        DataBufferInt dstDB         = (DataBufferInt)dst.getDataBuffer();</span>
-<span class="nc" id="L273">        final int []  dstPixels     = dstDB.getBankData()[0];</span>
-<span class="nc" id="L274">        final int     dstBase =</span>
+<span class="nc" id="L271">        __CLR4_5_27n7nm68iyfqc.R.inc(341);final int     dstScanStride = dstSPPSM.getScanlineStride();</span>
+<span class="nc" id="L272">        __CLR4_5_27n7nm68iyfqc.R.inc(342);DataBufferInt dstDB         = (DataBufferInt)dst.getDataBuffer();</span>
+<span class="nc" id="L273">        __CLR4_5_27n7nm68iyfqc.R.inc(343);final int []  dstPixels     = dstDB.getBankData()[0];</span>
+<span class="nc" id="L274">        __CLR4_5_27n7nm68iyfqc.R.inc(344);final int     dstBase =</span>
 <span class="nc" id="L275">            (dstDB.getOffset()</span>
 <span class="nc" id="L276">             + dstSPPSM.getOffset(x0 - dst.getSampleModelTranslateX(),</span>
 <span class="nc" id="L277">                                y0 - dst.getSampleModelTranslateY()));</span>
 
-<span class="nc bnc" id="L279" title="All 4 branches missed.">        if ((srcScanStride == dstScanStride)</span>
-            &amp;&amp; (srcScanStride == width)) {
+<span class="nc bnc" id="L279" title="All 4 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(345);if (((((srcScanStride == dstScanStride)</span>
+<span class="nc bnc" id="L280" title="All 8 branches missed.">            &amp;&amp; (srcScanStride == width))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(346)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(347)==0&amp;false))) {{</span>
             // System.out.println(&quot;VERY Fast copyData&quot;);
 
-<span class="nc" id="L283">            System.arraycopy(srcPixels, srcBase, dstPixels, dstBase,</span>
+<span class="nc" id="L283">            __CLR4_5_27n7nm68iyfqc.R.inc(348);System.arraycopy(srcPixels, srcBase, dstPixels, dstBase,</span>
                              width * height);
-<span class="nc bnc" id="L285" title="All 2 branches missed.">        } else if (width &gt; 128) {</span>
-<span class="nc" id="L286">            int srcSP = srcBase;</span>
-<span class="nc" id="L287">            int dstSP = dstBase;</span>
-<span class="nc bnc" id="L288" title="All 2 branches missed.">            for (int y = 0; y &lt; height; y++) {</span>
-<span class="nc" id="L289">                System.arraycopy(srcPixels, srcSP, dstPixels, dstSP, width);</span>
-<span class="nc" id="L290">                srcSP += srcScanStride;</span>
-<span class="nc" id="L291">                dstSP += dstScanStride;</span>
+<span class="nc bnc" id="L285" title="All 10 branches missed.">        } }else {__CLR4_5_27n7nm68iyfqc.R.inc(349);if ((((width &gt; 128)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(350)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(351)==0&amp;false))) {{</span>
+<span class="nc" id="L286">            __CLR4_5_27n7nm68iyfqc.R.inc(352);int srcSP = srcBase;</span>
+<span class="nc" id="L287">            __CLR4_5_27n7nm68iyfqc.R.inc(353);int dstSP = dstBase;</span>
+<span class="nc bnc" id="L288" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(354);for (int y = 0; (((y &lt; height)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(355)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(356)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L289">                __CLR4_5_27n7nm68iyfqc.R.inc(357);System.arraycopy(srcPixels, srcSP, dstPixels, dstSP, width);</span>
+<span class="nc" id="L290">                __CLR4_5_27n7nm68iyfqc.R.inc(358);srcSP += srcScanStride;</span>
+<span class="nc" id="L291">                __CLR4_5_27n7nm68iyfqc.R.inc(359);dstSP += dstScanStride;</span>
             }
-<span class="nc" id="L293">        } else {</span>
-<span class="nc bnc" id="L294" title="All 2 branches missed.">            for (int y = 0; y &lt; height; y++) {</span>
-<span class="nc" id="L295">                int srcSP = srcBase + y * srcScanStride;</span>
-<span class="nc" id="L296">                int dstSP = dstBase + y * dstScanStride;</span>
-<span class="nc bnc" id="L297" title="All 2 branches missed.">                for (int x = 0; x &lt; width; x++) {</span>
-<span class="nc" id="L298">                    dstPixels[dstSP++] = srcPixels[srcSP++];</span>
+<span class="nc" id="L293">        }} }else {{</span>
+<span class="nc bnc" id="L294" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(360);for (int y = 0; (((y &lt; height)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(361)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(362)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L295">                __CLR4_5_27n7nm68iyfqc.R.inc(363);int srcSP = srcBase + y * srcScanStride;</span>
+<span class="nc" id="L296">                __CLR4_5_27n7nm68iyfqc.R.inc(364);int dstSP = dstBase + y * dstScanStride;</span>
+<span class="nc bnc" id="L297" title="All 10 branches missed.">                __CLR4_5_27n7nm68iyfqc.R.inc(365);for (int x = 0; (((x &lt; width)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(366)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(367)==0&amp;false)); x++) {{</span>
+<span class="nc" id="L298">                    __CLR4_5_27n7nm68iyfqc.R.inc(368);dstPixels[dstSP++] = srcPixels[srcSP++];</span>
                 }
-            }
-        }
-<span class="nc" id="L302">    }</span>
+            }}
+        }}
+<span class="nc" id="L302">    }}}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
-    public static void copyData_FALLBACK(Raster src, WritableRaster dst) {
+<span class="nc" id="L304">    public static void copyData_FALLBACK(Raster src, WritableRaster dst) {try{__CLR4_5_27n7nm68iyfqc.R.inc(369);</span>
         // System.out.println(&quot;Fallback copyData&quot;);
 
-<span class="nc" id="L307">        int x0 = dst.getMinX();</span>
-<span class="nc bnc" id="L308" title="All 2 branches missed.">        if (x0 &lt; src.getMinX()) {</span>
-<span class="nc" id="L309">            x0 = src.getMinX();</span>
+<span class="nc" id="L307">        __CLR4_5_27n7nm68iyfqc.R.inc(370);int x0 = dst.getMinX();</span>
+<span class="nc bnc" id="L308" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(371);if ((((x0 &lt; src.getMinX())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(372)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(373)==0&amp;false))) {{</span>
+<span class="nc" id="L309">            __CLR4_5_27n7nm68iyfqc.R.inc(374);x0 = src.getMinX();</span>
         }
 
-<span class="nc" id="L312">        int y0 = dst.getMinY();</span>
-<span class="nc bnc" id="L313" title="All 2 branches missed.">        if (y0 &lt; src.getMinY()) {</span>
-<span class="nc" id="L314">            y0 = src.getMinY();</span>
+<span class="nc" id="L312">        }__CLR4_5_27n7nm68iyfqc.R.inc(375);int y0 = dst.getMinY();</span>
+<span class="nc bnc" id="L313" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(376);if ((((y0 &lt; src.getMinY())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(377)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(378)==0&amp;false))) {{</span>
+<span class="nc" id="L314">            __CLR4_5_27n7nm68iyfqc.R.inc(379);y0 = src.getMinY();</span>
         }
 
-<span class="nc" id="L317">        int x1 = dst.getMinX() + dst.getWidth() - 1;</span>
-<span class="nc bnc" id="L318" title="All 2 branches missed.">        if (x1 &gt; src.getMinX() + src.getWidth() - 1) {</span>
-<span class="nc" id="L319">            x1 = src.getMinX() + src.getWidth() - 1;</span>
+<span class="nc" id="L317">        }__CLR4_5_27n7nm68iyfqc.R.inc(380);int x1 = dst.getMinX() + dst.getWidth() - 1;</span>
+<span class="nc bnc" id="L318" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(381);if ((((x1 &gt; src.getMinX() + src.getWidth() - 1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(382)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(383)==0&amp;false))) {{</span>
+<span class="nc" id="L319">            __CLR4_5_27n7nm68iyfqc.R.inc(384);x1 = src.getMinX() + src.getWidth() - 1;</span>
         }
 
-<span class="nc" id="L322">        int y1 = dst.getMinY() + dst.getHeight() - 1;</span>
-<span class="nc bnc" id="L323" title="All 2 branches missed.">        if (y1 &gt; src.getMinY() + src.getHeight() - 1) {</span>
-<span class="nc" id="L324">            y1 = src.getMinY() + src.getHeight() - 1;</span>
+<span class="nc" id="L322">        }__CLR4_5_27n7nm68iyfqc.R.inc(385);int y1 = dst.getMinY() + dst.getHeight() - 1;</span>
+<span class="nc bnc" id="L323" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(386);if ((((y1 &gt; src.getMinY() + src.getHeight() - 1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(387)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(388)==0&amp;false))) {{</span>
+<span class="nc" id="L324">            __CLR4_5_27n7nm68iyfqc.R.inc(389);y1 = src.getMinY() + src.getHeight() - 1;</span>
         }
 
-<span class="nc" id="L327">        int width  = x1 - x0 + 1;</span>
-<span class="nc" id="L328">        int [] data = null;</span>
+<span class="nc" id="L327">        }__CLR4_5_27n7nm68iyfqc.R.inc(390);int width  = x1 - x0 + 1;</span>
+<span class="nc" id="L328">        __CLR4_5_27n7nm68iyfqc.R.inc(391);int [] data = null;</span>
 
-<span class="nc bnc" id="L330" title="All 2 branches missed.">        for (int y = y0; y &lt;= y1; y++)  {</span>
-<span class="nc" id="L331">            data = src.getPixels(x0, y, width, 1, data);</span>
-<span class="nc" id="L332">            dst.setPixels(x0, y, width, 1, data);</span>
+<span class="nc bnc" id="L330" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(392);for (int y = y0; (((y &lt;= y1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(393)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(394)==0&amp;false)); y++)  {{</span>
+<span class="nc" id="L331">            __CLR4_5_27n7nm68iyfqc.R.inc(395);data = src.getPixels(x0, y, width, 1, data);</span>
+<span class="nc" id="L332">            __CLR4_5_27n7nm68iyfqc.R.inc(396);dst.setPixels(x0, y, width, 1, data);</span>
         }
-<span class="nc" id="L334">    }</span>
+<span class="nc" id="L334">    }}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * Copies data from one raster to another. Only the region of
@@ -341,15 +341,15 @@ public final class GraphicsUtil {
      * @param src The source of the data
      * @param dst The destination for the data.
      */
-    public static void copyData(Raster src, WritableRaster dst) {
-<span class="nc bnc" id="L345" title="All 2 branches missed.">        if (is_INT_PACK_Data(src.getSampleModel(), false)</span>
-<span class="nc bnc" id="L346" title="All 2 branches missed.">            &amp;&amp; is_INT_PACK_Data(dst.getSampleModel(), false)) {</span>
-<span class="nc" id="L347">            copyData_INT_PACK(src, dst);</span>
-<span class="nc" id="L348">            return;</span>
+<span class="nc" id="L344">    public static void copyData(Raster src, WritableRaster dst) {try{__CLR4_5_27n7nm68iyfqc.R.inc(397);</span>
+<span class="nc bnc" id="L345" title="All 2 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(398);if ((((is_INT_PACK_Data(src.getSampleModel(), false)</span>
+<span class="nc bnc" id="L346" title="All 10 branches missed.">            &amp;&amp; is_INT_PACK_Data(dst.getSampleModel(), false))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(399)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(400)==0&amp;false))) {{</span>
+<span class="nc" id="L347">            __CLR4_5_27n7nm68iyfqc.R.inc(401);copyData_INT_PACK(src, dst);</span>
+<span class="nc" id="L348">            __CLR4_5_27n7nm68iyfqc.R.inc(402);return;</span>
         }
 
-<span class="nc" id="L351">        copyData_FALLBACK(src, dst);</span>
-<span class="nc" id="L352">    }</span>
+<span class="nc" id="L351">        }__CLR4_5_27n7nm68iyfqc.R.inc(403);copyData_FALLBACK(src, dst);</span>
+<span class="nc" id="L352">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * Creates a new raster that has a &lt;b&gt;copy&lt;/b&gt; of the data in
@@ -362,9 +362,9 @@ public final class GraphicsUtil {
      * @param ras The Raster to copy.
      * @return    A writable copy of &lt;tt&gt;ras&lt;/tt&gt;
      */
-    public static WritableRaster copyRaster(Raster ras) {
-<span class="nc" id="L366">        return copyRaster(ras, ras.getMinX(), ras.getMinY());</span>
-    }
+<span class="nc" id="L365">    public static WritableRaster copyRaster(Raster ras) {try{__CLR4_5_27n7nm68iyfqc.R.inc(404);</span>
+<span class="nc" id="L366">        __CLR4_5_27n7nm68iyfqc.R.inc(405);return copyRaster(ras, ras.getMinX(), ras.getMinY());</span>
+<span class="nc" id="L367">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
 
     /**
@@ -387,65 +387,65 @@ public final class GraphicsUtil {
      *
      * @return    A writable copy of &lt;tt&gt;ras&lt;/tt&gt;
      */
-    public static WritableRaster copyRaster(Raster ras, int minX, int minY) {
-<span class="nc" id="L391">        WritableRaster ret = Raster.createWritableRaster(</span>
+<span class="nc" id="L390">    public static WritableRaster copyRaster(Raster ras, int minX, int minY) {try{__CLR4_5_27n7nm68iyfqc.R.inc(406);</span>
+<span class="nc" id="L391">        __CLR4_5_27n7nm68iyfqc.R.inc(407);WritableRaster ret = Raster.createWritableRaster(</span>
 <span class="nc" id="L392">            ras.getSampleModel(),</span>
              new Point(0, 0));
-<span class="nc" id="L394">        ret = ret.createWritableChild(</span>
+<span class="nc" id="L394">        __CLR4_5_27n7nm68iyfqc.R.inc(408);ret = ret.createWritableChild(</span>
 <span class="nc" id="L395">            ras.getMinX() - ras.getSampleModelTranslateX(),</span>
 <span class="nc" id="L396">             ras.getMinY() - ras.getSampleModelTranslateY(),</span>
 <span class="nc" id="L397">             ras.getWidth(), ras.getHeight(),</span>
              minX, minY, null);
 
         // Use System.arraycopy to copy the data between the two...
-<span class="nc" id="L401">        DataBuffer srcDB = ras.getDataBuffer();</span>
-<span class="nc" id="L402">        DataBuffer retDB = ret.getDataBuffer();</span>
-<span class="nc bnc" id="L403" title="All 2 branches missed.">        if (srcDB.getDataType() != retDB.getDataType()) {</span>
-<span class="nc" id="L404">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L401">        __CLR4_5_27n7nm68iyfqc.R.inc(409);DataBuffer srcDB = ras.getDataBuffer();</span>
+<span class="nc" id="L402">        __CLR4_5_27n7nm68iyfqc.R.inc(410);DataBuffer retDB = ret.getDataBuffer();</span>
+<span class="nc bnc" id="L403" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(411);if ((((srcDB.getDataType() != retDB.getDataType())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(412)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(413)==0&amp;false))) {{</span>
+<span class="nc" id="L404">            __CLR4_5_27n7nm68iyfqc.R.inc(414);throw new IllegalArgumentException(</span>
                 &quot;New DataBuffer doesn't match original&quot;);
         }
-<span class="nc" id="L407">        int len   = srcDB.getSize();</span>
-<span class="nc" id="L408">        int banks = srcDB.getNumBanks();</span>
-<span class="nc" id="L409">        int [] offsets = srcDB.getOffsets();</span>
-<span class="nc bnc" id="L410" title="All 2 branches missed.">        for (int b = 0; b &lt; banks; b++) {</span>
-<span class="nc bnc" id="L411" title="All 5 branches missed.">            switch (srcDB.getDataType()) {</span>
-            case DataBuffer.TYPE_BYTE: {
-<span class="nc" id="L413">                DataBufferByte srcDBT = (DataBufferByte)srcDB;</span>
-<span class="nc" id="L414">                DataBufferByte retDBT = (DataBufferByte)retDB;</span>
-<span class="nc" id="L415">                System.arraycopy(srcDBT.getData(b), offsets[b],</span>
+<span class="nc" id="L407">        }__CLR4_5_27n7nm68iyfqc.R.inc(415);int len   = srcDB.getSize();</span>
+<span class="nc" id="L408">        __CLR4_5_27n7nm68iyfqc.R.inc(416);int banks = srcDB.getNumBanks();</span>
+<span class="nc" id="L409">        __CLR4_5_27n7nm68iyfqc.R.inc(417);int [] offsets = srcDB.getOffsets();</span>
+<span class="nc bnc" id="L410" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(418);for (int b = 0; (((b &lt; banks)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(419)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(420)==0&amp;false)); b++) {{</span>
+<span class="nc bnc" id="L411" title="All 5 branches missed.">            boolean __CLB4_5_2_bool0=false;__CLR4_5_27n7nm68iyfqc.R.inc(421);switch (srcDB.getDataType()) {</span>
+<span class="nc bnc" id="L412" title="All 2 branches missed.">            case DataBuffer.TYPE_BYTE:if (!__CLB4_5_2_bool0) {__CLR4_5_27n7nm68iyfqc.R.inc(422);__CLB4_5_2_bool0=true;} {</span>
+<span class="nc" id="L413">                __CLR4_5_27n7nm68iyfqc.R.inc(423);DataBufferByte srcDBT = (DataBufferByte)srcDB;</span>
+<span class="nc" id="L414">                __CLR4_5_27n7nm68iyfqc.R.inc(424);DataBufferByte retDBT = (DataBufferByte)retDB;</span>
+<span class="nc" id="L415">                __CLR4_5_27n7nm68iyfqc.R.inc(425);System.arraycopy(srcDBT.getData(b), offsets[b],</span>
 <span class="nc" id="L416">                                 retDBT.getData(b), offsets[b], len);</span>
-<span class="nc" id="L417">                break;</span>
+<span class="nc" id="L417">                __CLR4_5_27n7nm68iyfqc.R.inc(426);break;</span>
             }
-            case DataBuffer.TYPE_INT: {
-<span class="nc" id="L420">                DataBufferInt srcDBT = (DataBufferInt)srcDB;</span>
-<span class="nc" id="L421">                DataBufferInt retDBT = (DataBufferInt)retDB;</span>
-<span class="nc" id="L422">                System.arraycopy(srcDBT.getData(b), offsets[b],</span>
+<span class="nc bnc" id="L419" title="All 2 branches missed.">            case DataBuffer.TYPE_INT:if (!__CLB4_5_2_bool0) {__CLR4_5_27n7nm68iyfqc.R.inc(427);__CLB4_5_2_bool0=true;} {</span>
+<span class="nc" id="L420">                __CLR4_5_27n7nm68iyfqc.R.inc(428);DataBufferInt srcDBT = (DataBufferInt)srcDB;</span>
+<span class="nc" id="L421">                __CLR4_5_27n7nm68iyfqc.R.inc(429);DataBufferInt retDBT = (DataBufferInt)retDB;</span>
+<span class="nc" id="L422">                __CLR4_5_27n7nm68iyfqc.R.inc(430);System.arraycopy(srcDBT.getData(b), offsets[b],</span>
 <span class="nc" id="L423">                                 retDBT.getData(b), offsets[b], len);</span>
-<span class="nc" id="L424">                break;</span>
+<span class="nc" id="L424">                __CLR4_5_27n7nm68iyfqc.R.inc(431);break;</span>
             }
-            case DataBuffer.TYPE_SHORT: {
-<span class="nc" id="L427">                DataBufferShort srcDBT = (DataBufferShort)srcDB;</span>
-<span class="nc" id="L428">                DataBufferShort retDBT = (DataBufferShort)retDB;</span>
-<span class="nc" id="L429">                System.arraycopy(srcDBT.getData(b), offsets[b],</span>
+<span class="nc bnc" id="L426" title="All 2 branches missed.">            case DataBuffer.TYPE_SHORT:if (!__CLB4_5_2_bool0) {__CLR4_5_27n7nm68iyfqc.R.inc(432);__CLB4_5_2_bool0=true;} {</span>
+<span class="nc" id="L427">                __CLR4_5_27n7nm68iyfqc.R.inc(433);DataBufferShort srcDBT = (DataBufferShort)srcDB;</span>
+<span class="nc" id="L428">                __CLR4_5_27n7nm68iyfqc.R.inc(434);DataBufferShort retDBT = (DataBufferShort)retDB;</span>
+<span class="nc" id="L429">                __CLR4_5_27n7nm68iyfqc.R.inc(435);System.arraycopy(srcDBT.getData(b), offsets[b],</span>
 <span class="nc" id="L430">                                 retDBT.getData(b), offsets[b], len);</span>
-<span class="nc" id="L431">                break;</span>
+<span class="nc" id="L431">                __CLR4_5_27n7nm68iyfqc.R.inc(436);break;</span>
             }
-            case DataBuffer.TYPE_USHORT: {
-<span class="nc" id="L434">                DataBufferUShort srcDBT = (DataBufferUShort)srcDB;</span>
-<span class="nc" id="L435">                DataBufferUShort retDBT = (DataBufferUShort)retDB;</span>
-<span class="nc" id="L436">                System.arraycopy(srcDBT.getData(b), offsets[b],</span>
+<span class="nc bnc" id="L433" title="All 2 branches missed.">            case DataBuffer.TYPE_USHORT:if (!__CLB4_5_2_bool0) {__CLR4_5_27n7nm68iyfqc.R.inc(437);__CLB4_5_2_bool0=true;} {</span>
+<span class="nc" id="L434">                __CLR4_5_27n7nm68iyfqc.R.inc(438);DataBufferUShort srcDBT = (DataBufferUShort)srcDB;</span>
+<span class="nc" id="L435">                __CLR4_5_27n7nm68iyfqc.R.inc(439);DataBufferUShort retDBT = (DataBufferUShort)retDB;</span>
+<span class="nc" id="L436">                __CLR4_5_27n7nm68iyfqc.R.inc(440);System.arraycopy(srcDBT.getData(b), offsets[b],</span>
 <span class="nc" id="L437">                                 retDBT.getData(b), offsets[b], len);</span>
-<span class="nc" id="L438">                break;</span>
+<span class="nc" id="L438">                __CLR4_5_27n7nm68iyfqc.R.inc(441);break;</span>
             }
-            default:
-<span class="nc" id="L441">                throw new</span>
+<span class="nc bnc" id="L440" title="All 2 branches missed.">            default:if (!__CLB4_5_2_bool0) {__CLR4_5_27n7nm68iyfqc.R.inc(442);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L441">                __CLR4_5_27n7nm68iyfqc.R.inc(443);throw new</span>
                     UnsupportedOperationException(&quot;unsupported data type: &quot;
 <span class="nc" id="L443">                                                  + srcDB.getDataType());</span>
             }
         }
 
-<span class="nc" id="L447">        return ret;</span>
-    }
+<span class="nc" id="L447">        }__CLR4_5_27n7nm68iyfqc.R.inc(444);return ret;</span>
+<span class="nc" id="L448">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * Coerces &lt;tt&gt;ras&lt;/tt&gt; to be writable.  The returned Raster continues to
@@ -461,9 +461,9 @@ public final class GraphicsUtil {
      * @return    A Writable version of ras (shares DataBuffer with
      *            &lt;tt&gt;ras&lt;/tt&gt;).
      */
-    public static WritableRaster makeRasterWritable(Raster ras) {
-<span class="nc" id="L465">        return makeRasterWritable(ras, ras.getMinX(), ras.getMinY());</span>
-    }
+<span class="nc" id="L464">    public static WritableRaster makeRasterWritable(Raster ras) {try{__CLR4_5_27n7nm68iyfqc.R.inc(445);</span>
+<span class="nc" id="L465">        __CLR4_5_27n7nm68iyfqc.R.inc(446);return makeRasterWritable(ras, ras.getMinX(), ras.getMinY());</span>
+<span class="nc" id="L466">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * Coerces &lt;tt&gt;ras&lt;/tt&gt; to be writable.  The returned Raster continues to
@@ -493,18 +493,18 @@ public final class GraphicsUtil {
      *         with &lt;tt&gt;ras&lt;/tt&gt;).
      */
     public static WritableRaster makeRasterWritable(Raster ras,
-                                                    int minX, int minY) {
-<span class="nc" id="L497">        WritableRaster ret = Raster.createWritableRaster(</span>
+<span class="nc" id="L496">                                                    int minX, int minY) {try{__CLR4_5_27n7nm68iyfqc.R.inc(447);</span>
+<span class="nc" id="L497">        __CLR4_5_27n7nm68iyfqc.R.inc(448);WritableRaster ret = Raster.createWritableRaster(</span>
 <span class="nc" id="L498">            ras.getSampleModel(),</span>
 <span class="nc" id="L499">             ras.getDataBuffer(),</span>
              new Point(0, 0));
-<span class="nc" id="L501">        ret = ret.createWritableChild(</span>
+<span class="nc" id="L501">        __CLR4_5_27n7nm68iyfqc.R.inc(449);ret = ret.createWritableChild(</span>
 <span class="nc" id="L502">            ras.getMinX() - ras.getSampleModelTranslateX(),</span>
 <span class="nc" id="L503">             ras.getMinY() - ras.getSampleModelTranslateY(),</span>
 <span class="nc" id="L504">             ras.getWidth(), ras.getHeight(),</span>
              minX, minY, null);
-<span class="nc" id="L506">        return ret;</span>
-    }
+<span class="nc" id="L506">        __CLR4_5_27n7nm68iyfqc.R.inc(450);return ret;</span>
+<span class="nc" id="L507">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * Create a new ColorModel with it's alpha premultiplied state matching
@@ -515,17 +515,17 @@ public final class GraphicsUtil {
      *           equal to newAlphaPreMult.
      */
     public static ColorModel
-        coerceColorModel(ColorModel cm, boolean newAlphaPreMult) {
-<span class="nc bnc" id="L519" title="All 2 branches missed.">        if (cm.isAlphaPremultiplied() == newAlphaPreMult) {</span>
-<span class="nc" id="L520">            return cm;</span>
+<span class="nc" id="L518">        coerceColorModel(ColorModel cm, boolean newAlphaPreMult) {try{__CLR4_5_27n7nm68iyfqc.R.inc(451);</span>
+<span class="nc bnc" id="L519" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(452);if ((((cm.isAlphaPremultiplied() == newAlphaPreMult)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(453)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(454)==0&amp;false))) {{</span>
+<span class="nc" id="L520">            __CLR4_5_27n7nm68iyfqc.R.inc(455);return cm;</span>
         }
 
         // Easiest way to build proper colormodel for new Alpha state...
         // Eventually this should switch on known ColorModel types and
         // only fall back on this hack when the CM type is unknown.
-<span class="nc" id="L526">        WritableRaster wr = cm.createCompatibleWritableRaster(1, 1);</span>
-<span class="nc" id="L527">        return cm.coerceData(wr, newAlphaPreMult);</span>
-    }
+<span class="nc" id="L526">        }__CLR4_5_27n7nm68iyfqc.R.inc(456);WritableRaster wr = cm.createCompatibleWritableRaster(1, 1);</span>
+<span class="nc" id="L527">        __CLR4_5_27n7nm68iyfqc.R.inc(457);return cm.coerceData(wr, newAlphaPreMult);</span>
+<span class="nc" id="L528">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * Coerces data within a bufferedImage to match newAlphaPreMult,
@@ -537,102 +537,102 @@ public final class GraphicsUtil {
      * @return A new colormodel that matches newAlphaPreMult.
      */
     public static ColorModel
-        coerceData(WritableRaster wr, ColorModel cm, boolean newAlphaPreMult) {
+<span class="nc" id="L540">        coerceData(WritableRaster wr, ColorModel cm, boolean newAlphaPreMult) {try{__CLR4_5_27n7nm68iyfqc.R.inc(458);</span>
 
         // System.out.println(&quot;CoerceData: &quot; + cm.isAlphaPremultiplied() +
         //                    &quot; Out: &quot; + newAlphaPreMult);
-<span class="nc bnc" id="L544" title="All 2 branches missed.">        if (!cm.hasAlpha()) {</span>
+<span class="nc bnc" id="L544" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(459);if ((((!cm.hasAlpha())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(460)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(461)==0&amp;false))) {{</span>
             // Nothing to do no alpha channel
-<span class="nc" id="L546">            return cm;</span>
+<span class="nc" id="L546">            __CLR4_5_27n7nm68iyfqc.R.inc(462);return cm;</span>
         }
 
-<span class="nc bnc" id="L549" title="All 2 branches missed.">        if (cm.isAlphaPremultiplied() == newAlphaPreMult) {</span>
+<span class="nc bnc" id="L549" title="All 10 branches missed.">        }__CLR4_5_27n7nm68iyfqc.R.inc(463);if ((((cm.isAlphaPremultiplied() == newAlphaPreMult)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(464)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(465)==0&amp;false))) {{</span>
             // nothing to do alpha state matches...
-<span class="nc" id="L551">            return cm;</span>
+<span class="nc" id="L551">            __CLR4_5_27n7nm68iyfqc.R.inc(466);return cm;</span>
         }
 
         // System.out.println(&quot;CoerceData: &quot; + wr.getSampleModel());
 
-<span class="nc bnc" id="L556" title="All 2 branches missed.">        if (newAlphaPreMult) {</span>
-<span class="nc" id="L557">            multiplyAlpha(wr);</span>
-        } else {
-<span class="nc" id="L559">            divideAlpha(wr);</span>
+<span class="nc bnc" id="L556" title="All 10 branches missed.">        }__CLR4_5_27n7nm68iyfqc.R.inc(467);if ((((newAlphaPreMult)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(468)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(469)==0&amp;false))) {{</span>
+<span class="nc" id="L557">            __CLR4_5_27n7nm68iyfqc.R.inc(470);multiplyAlpha(wr);</span>
+        } }else {{
+<span class="nc" id="L559">            __CLR4_5_27n7nm68iyfqc.R.inc(471);divideAlpha(wr);</span>
         }
 
-<span class="nc" id="L562">        return coerceColorModel(cm, newAlphaPreMult);</span>
-    }
+<span class="nc" id="L562">        }__CLR4_5_27n7nm68iyfqc.R.inc(472);return coerceColorModel(cm, newAlphaPreMult);</span>
+<span class="nc" id="L563">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
-    public static void multiplyAlpha(WritableRaster wr) {
-<span class="nc bnc" id="L566" title="All 2 branches missed.">        if (is_BYTE_COMP_Data(wr.getSampleModel())) {</span>
-<span class="nc" id="L567">            mult_BYTE_COMP_Data(wr);</span>
-<span class="nc bnc" id="L568" title="All 2 branches missed.">        } else if (is_INT_PACK_Data(wr.getSampleModel(), true)) {</span>
-<span class="nc" id="L569">            mult_INT_PACK_Data(wr);</span>
-        } else {
-<span class="nc" id="L571">            int [] pixel = null;</span>
-<span class="nc" id="L572">            int    bands = wr.getNumBands();</span>
-<span class="nc" id="L573">            float  norm = 1f / 255f;</span>
-            int x0;
-            int x1;
-            int y0;
-            int y1;
-            int a;
-            int b;
-            float alpha;
-<span class="nc" id="L581">            x0 = wr.getMinX();</span>
-<span class="nc" id="L582">            x1 = x0 + wr.getWidth();</span>
-<span class="nc" id="L583">            y0 = wr.getMinY();</span>
-<span class="nc" id="L584">            y1 = y0 + wr.getHeight();</span>
-<span class="nc bnc" id="L585" title="All 2 branches missed.">            for (int y = y0; y &lt; y1; y++) {</span>
-<span class="nc bnc" id="L586" title="All 2 branches missed.">                for (int x = x0; x &lt; x1; x++) {</span>
-<span class="nc" id="L587">                    pixel = wr.getPixel(x, y, pixel);</span>
-<span class="nc" id="L588">                    a = pixel[bands - 1];</span>
-<span class="nc bnc" id="L589" title="All 4 branches missed.">                    if ((a &gt;= 0) &amp;&amp; (a &lt; 255)) {</span>
-<span class="nc" id="L590">                        alpha = a * norm;</span>
-<span class="nc bnc" id="L591" title="All 2 branches missed.">                        for (b = 0; b &lt; bands - 1; b++) {</span>
-<span class="nc" id="L592">                            pixel[b] = (int)(pixel[b] * alpha + 0.5f);</span>
+<span class="nc" id="L565">    public static void multiplyAlpha(WritableRaster wr) {try{__CLR4_5_27n7nm68iyfqc.R.inc(473);</span>
+<span class="nc bnc" id="L566" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(474);if ((((is_BYTE_COMP_Data(wr.getSampleModel()))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(475)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(476)==0&amp;false))) {{</span>
+<span class="nc" id="L567">            __CLR4_5_27n7nm68iyfqc.R.inc(477);mult_BYTE_COMP_Data(wr);</span>
+<span class="nc bnc" id="L568" title="All 10 branches missed.">        } }else {__CLR4_5_27n7nm68iyfqc.R.inc(478);if ((((is_INT_PACK_Data(wr.getSampleModel(), true))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(479)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(480)==0&amp;false))) {{</span>
+<span class="nc" id="L569">            __CLR4_5_27n7nm68iyfqc.R.inc(481);mult_INT_PACK_Data(wr);</span>
+        } }else {{
+<span class="nc" id="L571">            __CLR4_5_27n7nm68iyfqc.R.inc(482);int [] pixel = null;</span>
+<span class="nc" id="L572">            __CLR4_5_27n7nm68iyfqc.R.inc(483);int    bands = wr.getNumBands();</span>
+<span class="nc" id="L573">            __CLR4_5_27n7nm68iyfqc.R.inc(484);float  norm = 1f / 255f;</span>
+<span class="nc" id="L574">            __CLR4_5_27n7nm68iyfqc.R.inc(485);int x0;</span>
+<span class="nc" id="L575">            __CLR4_5_27n7nm68iyfqc.R.inc(486);int x1;</span>
+<span class="nc" id="L576">            __CLR4_5_27n7nm68iyfqc.R.inc(487);int y0;</span>
+<span class="nc" id="L577">            __CLR4_5_27n7nm68iyfqc.R.inc(488);int y1;</span>
+<span class="nc" id="L578">            __CLR4_5_27n7nm68iyfqc.R.inc(489);int a;</span>
+<span class="nc" id="L579">            __CLR4_5_27n7nm68iyfqc.R.inc(490);int b;</span>
+<span class="nc" id="L580">            __CLR4_5_27n7nm68iyfqc.R.inc(491);float alpha;</span>
+<span class="nc" id="L581">            __CLR4_5_27n7nm68iyfqc.R.inc(492);x0 = wr.getMinX();</span>
+<span class="nc" id="L582">            __CLR4_5_27n7nm68iyfqc.R.inc(493);x1 = x0 + wr.getWidth();</span>
+<span class="nc" id="L583">            __CLR4_5_27n7nm68iyfqc.R.inc(494);y0 = wr.getMinY();</span>
+<span class="nc" id="L584">            __CLR4_5_27n7nm68iyfqc.R.inc(495);y1 = y0 + wr.getHeight();</span>
+<span class="nc bnc" id="L585" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(496);for (int y = y0; (((y &lt; y1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(497)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(498)==0&amp;false)); y++) {{</span>
+<span class="nc bnc" id="L586" title="All 10 branches missed.">                __CLR4_5_27n7nm68iyfqc.R.inc(499);for (int x = x0; (((x &lt; x1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(500)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(501)==0&amp;false)); x++) {{</span>
+<span class="nc" id="L587">                    __CLR4_5_27n7nm68iyfqc.R.inc(502);pixel = wr.getPixel(x, y, pixel);</span>
+<span class="nc" id="L588">                    __CLR4_5_27n7nm68iyfqc.R.inc(503);a = pixel[bands - 1];</span>
+<span class="nc bnc" id="L589" title="All 12 branches missed.">                    __CLR4_5_27n7nm68iyfqc.R.inc(504);if (((((a &gt;= 0) &amp;&amp; (a &lt; 255))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(505)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(506)==0&amp;false))) {{</span>
+<span class="nc" id="L590">                        __CLR4_5_27n7nm68iyfqc.R.inc(507);alpha = a * norm;</span>
+<span class="nc bnc" id="L591" title="All 10 branches missed.">                        __CLR4_5_27n7nm68iyfqc.R.inc(508);for (b = 0; (((b &lt; bands - 1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(509)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(510)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L592">                            __CLR4_5_27n7nm68iyfqc.R.inc(511);pixel[b] = (int)(pixel[b] * alpha + 0.5f);</span>
                         }
-<span class="nc" id="L594">                        wr.setPixel(x, y, pixel);</span>
+<span class="nc" id="L594">                        }__CLR4_5_27n7nm68iyfqc.R.inc(512);wr.setPixel(x, y, pixel);</span>
                     }
-                }
-            }
-        }
-<span class="nc" id="L599">    }</span>
+                }}
+            }}
+        }}
+<span class="nc" id="L599">    }}}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
-    public static void divideAlpha(WritableRaster wr) {
-<span class="nc bnc" id="L602" title="All 2 branches missed.">        if (is_BYTE_COMP_Data(wr.getSampleModel())) {</span>
-<span class="nc" id="L603">            divide_BYTE_COMP_Data(wr);</span>
-<span class="nc bnc" id="L604" title="All 2 branches missed.">        } else if (is_INT_PACK_Data(wr.getSampleModel(), true)) {</span>
-<span class="nc" id="L605">            divide_INT_PACK_Data(wr);</span>
-        } else {
-            int x0;
-            int x1;
-            int y0;
-            int y1;
-            int a;
-            int b;
-            float ialpha;
-<span class="nc" id="L614">            int    bands = wr.getNumBands();</span>
-<span class="nc" id="L615">            int [] pixel = null;</span>
+<span class="nc" id="L601">    public static void divideAlpha(WritableRaster wr) {try{__CLR4_5_27n7nm68iyfqc.R.inc(513);</span>
+<span class="nc bnc" id="L602" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(514);if ((((is_BYTE_COMP_Data(wr.getSampleModel()))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(515)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(516)==0&amp;false))) {{</span>
+<span class="nc" id="L603">            __CLR4_5_27n7nm68iyfqc.R.inc(517);divide_BYTE_COMP_Data(wr);</span>
+<span class="nc bnc" id="L604" title="All 10 branches missed.">        } }else {__CLR4_5_27n7nm68iyfqc.R.inc(518);if ((((is_INT_PACK_Data(wr.getSampleModel(), true))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(519)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(520)==0&amp;false))) {{</span>
+<span class="nc" id="L605">            __CLR4_5_27n7nm68iyfqc.R.inc(521);divide_INT_PACK_Data(wr);</span>
+        } }else {{
+<span class="nc" id="L607">            __CLR4_5_27n7nm68iyfqc.R.inc(522);int x0;</span>
+<span class="nc" id="L608">            __CLR4_5_27n7nm68iyfqc.R.inc(523);int x1;</span>
+<span class="nc" id="L609">            __CLR4_5_27n7nm68iyfqc.R.inc(524);int y0;</span>
+<span class="nc" id="L610">            __CLR4_5_27n7nm68iyfqc.R.inc(525);int y1;</span>
+<span class="nc" id="L611">            __CLR4_5_27n7nm68iyfqc.R.inc(526);int a;</span>
+<span class="nc" id="L612">            __CLR4_5_27n7nm68iyfqc.R.inc(527);int b;</span>
+<span class="nc" id="L613">            __CLR4_5_27n7nm68iyfqc.R.inc(528);float ialpha;</span>
+<span class="nc" id="L614">            __CLR4_5_27n7nm68iyfqc.R.inc(529);int    bands = wr.getNumBands();</span>
+<span class="nc" id="L615">            __CLR4_5_27n7nm68iyfqc.R.inc(530);int [] pixel = null;</span>
 
-<span class="nc" id="L617">            x0 = wr.getMinX();</span>
-<span class="nc" id="L618">            x1 = x0 + wr.getWidth();</span>
-<span class="nc" id="L619">            y0 = wr.getMinY();</span>
-<span class="nc" id="L620">            y1 = y0 + wr.getHeight();</span>
-<span class="nc bnc" id="L621" title="All 2 branches missed.">            for (int y = y0; y &lt; y1; y++) {</span>
-<span class="nc bnc" id="L622" title="All 2 branches missed.">                for (int x = x0; x &lt; x1; x++) {</span>
-<span class="nc" id="L623">                    pixel = wr.getPixel(x, y, pixel);</span>
-<span class="nc" id="L624">                    a = pixel[bands - 1];</span>
-<span class="nc bnc" id="L625" title="All 4 branches missed.">                    if ((a &gt; 0) &amp;&amp; (a &lt; 255)) {</span>
-<span class="nc" id="L626">                        ialpha = 255 / (float)a;</span>
-<span class="nc bnc" id="L627" title="All 2 branches missed.">                        for (b = 0; b &lt; bands - 1; b++) {</span>
-<span class="nc" id="L628">                            pixel[b] = (int)(pixel[b] * ialpha + 0.5f);</span>
+<span class="nc" id="L617">            __CLR4_5_27n7nm68iyfqc.R.inc(531);x0 = wr.getMinX();</span>
+<span class="nc" id="L618">            __CLR4_5_27n7nm68iyfqc.R.inc(532);x1 = x0 + wr.getWidth();</span>
+<span class="nc" id="L619">            __CLR4_5_27n7nm68iyfqc.R.inc(533);y0 = wr.getMinY();</span>
+<span class="nc" id="L620">            __CLR4_5_27n7nm68iyfqc.R.inc(534);y1 = y0 + wr.getHeight();</span>
+<span class="nc bnc" id="L621" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(535);for (int y = y0; (((y &lt; y1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(536)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(537)==0&amp;false)); y++) {{</span>
+<span class="nc bnc" id="L622" title="All 10 branches missed.">                __CLR4_5_27n7nm68iyfqc.R.inc(538);for (int x = x0; (((x &lt; x1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(539)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(540)==0&amp;false)); x++) {{</span>
+<span class="nc" id="L623">                    __CLR4_5_27n7nm68iyfqc.R.inc(541);pixel = wr.getPixel(x, y, pixel);</span>
+<span class="nc" id="L624">                    __CLR4_5_27n7nm68iyfqc.R.inc(542);a = pixel[bands - 1];</span>
+<span class="nc bnc" id="L625" title="All 12 branches missed.">                    __CLR4_5_27n7nm68iyfqc.R.inc(543);if (((((a &gt; 0) &amp;&amp; (a &lt; 255))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(544)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(545)==0&amp;false))) {{</span>
+<span class="nc" id="L626">                        __CLR4_5_27n7nm68iyfqc.R.inc(546);ialpha = 255 / (float)a;</span>
+<span class="nc bnc" id="L627" title="All 10 branches missed.">                        __CLR4_5_27n7nm68iyfqc.R.inc(547);for (b = 0; (((b &lt; bands - 1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(548)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(549)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L628">                            __CLR4_5_27n7nm68iyfqc.R.inc(550);pixel[b] = (int)(pixel[b] * ialpha + 0.5f);</span>
                         }
-<span class="nc" id="L630">                        wr.setPixel(x, y, pixel);</span>
+<span class="nc" id="L630">                        }__CLR4_5_27n7nm68iyfqc.R.inc(551);wr.setPixel(x, y, pixel);</span>
                     }
-                }
-            }
-        }
-<span class="nc" id="L635">    }</span>
+                }}
+            }}
+        }}
+<span class="nc" id="L635">    }}}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     /**
      * Copies data from one bufferedImage to another paying attention
@@ -642,11 +642,11 @@ public final class GraphicsUtil {
      * @param dst The destination
      */
     public static void
-        copyData(BufferedImage src, BufferedImage dst) {
-<span class="nc" id="L646">        Rectangle srcRect = new Rectangle(0, 0,</span>
+<span class="nc" id="L645">        copyData(BufferedImage src, BufferedImage dst) {try{__CLR4_5_27n7nm68iyfqc.R.inc(552);</span>
+<span class="nc" id="L646">        __CLR4_5_27n7nm68iyfqc.R.inc(553);Rectangle srcRect = new Rectangle(0, 0,</span>
 <span class="nc" id="L647">                                          src.getWidth(), src.getHeight());</span>
-<span class="nc" id="L648">        copyData(src, srcRect, dst, new Point(0, 0));</span>
-<span class="nc" id="L649">    }</span>
+<span class="nc" id="L648">        __CLR4_5_27n7nm68iyfqc.R.inc(554);copyData(src, srcRect, dst, new Point(0, 0));</span>
+<span class="nc" id="L649">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
 
     /**
@@ -660,7 +660,7 @@ public final class GraphicsUtil {
      */
     public static void
         copyData(BufferedImage src, Rectangle srcRect,
-                 BufferedImage dst, Point destP) {
+<span class="nc" id="L663">                 BufferedImage dst, Point destP) {try{__CLR4_5_27n7nm68iyfqc.R.inc(555);</span>
 
        /*
         if (srcCS != dstCS)
@@ -668,8 +668,8 @@ public final class GraphicsUtil {
                 (&quot;Images must be in the same ColorSpace in order &quot;+
                  &quot;to copy Data between them&quot;);
         */
-<span class="nc" id="L671">        boolean srcAlpha = src.getColorModel().hasAlpha();</span>
-<span class="nc" id="L672">        boolean dstAlpha = dst.getColorModel().hasAlpha();</span>
+<span class="nc" id="L671">        __CLR4_5_27n7nm68iyfqc.R.inc(556);boolean srcAlpha = src.getColorModel().hasAlpha();</span>
+<span class="nc" id="L672">        __CLR4_5_27n7nm68iyfqc.R.inc(557);boolean dstAlpha = dst.getColorModel().hasAlpha();</span>
 
         // System.out.println(&quot;Src has: &quot; + srcAlpha +
         //                    &quot; is: &quot; + src.isAlphaPremultiplied());
@@ -677,456 +677,456 @@ public final class GraphicsUtil {
         // System.out.println(&quot;Dst has: &quot; + dstAlpha +
         //                    &quot; is: &quot; + dst.isAlphaPremultiplied());
 
-<span class="nc bnc" id="L680" title="All 2 branches missed.">        if (srcAlpha == dstAlpha) {</span>
-<span class="nc bnc" id="L681" title="All 2 branches missed.">            if (!srcAlpha</span>
-<span class="nc bnc" id="L682" title="All 2 branches missed.">                    || src.isAlphaPremultiplied() == dst.isAlphaPremultiplied()) {</span>
+<span class="nc bnc" id="L680" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(558);if ((((srcAlpha == dstAlpha)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(559)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(560)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L681" title="All 2 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(561);if ((((!srcAlpha</span>
+<span class="nc bnc" id="L682" title="All 10 branches missed.">                    || src.isAlphaPremultiplied() == dst.isAlphaPremultiplied())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(562)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(563)==0&amp;false))) {{</span>
                 // They match one another so just copy everything...
-<span class="nc" id="L684">                copyData(src.getRaster(), dst.getRaster());</span>
-<span class="nc" id="L685">                return;</span>
+<span class="nc" id="L684">                __CLR4_5_27n7nm68iyfqc.R.inc(564);copyData(src.getRaster(), dst.getRaster());</span>
+<span class="nc" id="L685">                __CLR4_5_27n7nm68iyfqc.R.inc(565);return;</span>
             }
-        }
+        }}
 
         // System.out.println(&quot;Using Slow CopyData&quot;);
 
-<span class="nc" id="L691">        int [] pixel = null;</span>
-<span class="nc" id="L692">        Raster         srcR  = src.getRaster();</span>
-<span class="nc" id="L693">        WritableRaster dstR  = dst.getRaster();</span>
-<span class="nc" id="L694">        int            bands = dstR.getNumBands();</span>
+<span class="nc" id="L691">        }__CLR4_5_27n7nm68iyfqc.R.inc(566);int [] pixel = null;</span>
+<span class="nc" id="L692">        __CLR4_5_27n7nm68iyfqc.R.inc(567);Raster         srcR  = src.getRaster();</span>
+<span class="nc" id="L693">        __CLR4_5_27n7nm68iyfqc.R.inc(568);WritableRaster dstR  = dst.getRaster();</span>
+<span class="nc" id="L694">        __CLR4_5_27n7nm68iyfqc.R.inc(569);int            bands = dstR.getNumBands();</span>
 
-<span class="nc" id="L696">        int dx = destP.x - srcRect.x;</span>
-<span class="nc" id="L697">        int dy = destP.y - srcRect.y;</span>
+<span class="nc" id="L696">        __CLR4_5_27n7nm68iyfqc.R.inc(570);int dx = destP.x - srcRect.x;</span>
+<span class="nc" id="L697">        __CLR4_5_27n7nm68iyfqc.R.inc(571);int dy = destP.y - srcRect.y;</span>
 
-<span class="nc" id="L699">        int w  = srcRect.width;</span>
-<span class="nc" id="L700">        int x0 = srcRect.x;</span>
-<span class="nc" id="L701">        int y0 = srcRect.y;</span>
-<span class="nc" id="L702">        int y1 = y0 + srcRect.height - 1;</span>
+<span class="nc" id="L699">        __CLR4_5_27n7nm68iyfqc.R.inc(572);int w  = srcRect.width;</span>
+<span class="nc" id="L700">        __CLR4_5_27n7nm68iyfqc.R.inc(573);int x0 = srcRect.x;</span>
+<span class="nc" id="L701">        __CLR4_5_27n7nm68iyfqc.R.inc(574);int y0 = srcRect.y;</span>
+<span class="nc" id="L702">        __CLR4_5_27n7nm68iyfqc.R.inc(575);int y1 = y0 + srcRect.height - 1;</span>
 
-<span class="nc bnc" id="L704" title="All 2 branches missed.">        if (!srcAlpha) {</span>
+<span class="nc bnc" id="L704" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(576);if ((((!srcAlpha)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(577)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(578)==0&amp;false))) {{</span>
             // Src has no alpha dest does so set alpha to 1.0 everywhere.
             // System.out.println(&quot;Add Alpha&quot;);
-<span class="nc" id="L707">            int [] oPix = new int[bands * w];</span>
-<span class="nc" id="L708">            int out = (w * bands) - 1; // The 2 skips alpha channel</span>
-<span class="nc bnc" id="L709" title="All 2 branches missed.">            while (out &gt;= 0) {</span>
+<span class="nc" id="L707">            __CLR4_5_27n7nm68iyfqc.R.inc(579);int [] oPix = new int[bands * w];</span>
+<span class="nc" id="L708">            __CLR4_5_27n7nm68iyfqc.R.inc(580);int out = (w * bands) - 1; // The 2 skips alpha channel</span>
+<span class="nc bnc" id="L709" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(581);while ((((out &gt;= 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(582)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(583)==0&amp;false))) {{</span>
                 // Fill alpha channel with 255's
-<span class="nc" id="L711">                oPix[out] = 255;</span>
-<span class="nc" id="L712">                out -= bands;</span>
+<span class="nc" id="L711">                __CLR4_5_27n7nm68iyfqc.R.inc(584);oPix[out] = 255;</span>
+<span class="nc" id="L712">                __CLR4_5_27n7nm68iyfqc.R.inc(585);out -= bands;</span>
             }
 
-            int b;
-            int in;
-<span class="nc bnc" id="L717" title="All 2 branches missed.">            for (int y = y0; y &lt;= y1; y++) {</span>
-<span class="nc" id="L718">                pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
-<span class="nc" id="L719">                in  = w * (bands - 1) - 1;</span>
-<span class="nc" id="L720">                out = (w * bands) - 2; // The 2 skips alpha channel on last pix</span>
-<span class="nc bnc" id="L721" title="All 2 branches missed.">                switch (bands) {</span>
-                case 4:
-<span class="nc bnc" id="L723" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
-<span class="nc" id="L724">                        oPix[out--] = pixel[in--];</span>
-<span class="nc" id="L725">                        oPix[out--] = pixel[in--];</span>
-<span class="nc" id="L726">                        oPix[out--] = pixel[in--];</span>
-<span class="nc" id="L727">                        out--;</span>
+<span class="nc" id="L715">            }__CLR4_5_27n7nm68iyfqc.R.inc(586);int b;</span>
+<span class="nc" id="L716">            __CLR4_5_27n7nm68iyfqc.R.inc(587);int in;</span>
+<span class="nc bnc" id="L717" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(588);for (int y = y0; (((y &lt;= y1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(589)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(590)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L718">                __CLR4_5_27n7nm68iyfqc.R.inc(591);pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
+<span class="nc" id="L719">                __CLR4_5_27n7nm68iyfqc.R.inc(592);in  = w * (bands - 1) - 1;</span>
+<span class="nc" id="L720">                __CLR4_5_27n7nm68iyfqc.R.inc(593);out = (w * bands) - 2; // The 2 skips alpha channel on last pix</span>
+<span class="nc bnc" id="L721" title="All 2 branches missed.">                boolean __CLB4_5_2_bool1=false;__CLR4_5_27n7nm68iyfqc.R.inc(594);switch (bands) {</span>
+<span class="nc bnc" id="L722" title="All 2 branches missed.">                case 4:if (!__CLB4_5_2_bool1) {__CLR4_5_27n7nm68iyfqc.R.inc(595);__CLB4_5_2_bool1=true;}</span>
+<span class="nc bnc" id="L723" title="All 10 branches missed.">                    __CLR4_5_27n7nm68iyfqc.R.inc(596);while ((((in &gt;= 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(597)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(598)==0&amp;false))) {{</span>
+<span class="nc" id="L724">                        __CLR4_5_27n7nm68iyfqc.R.inc(599);oPix[out--] = pixel[in--];</span>
+<span class="nc" id="L725">                        __CLR4_5_27n7nm68iyfqc.R.inc(600);oPix[out--] = pixel[in--];</span>
+<span class="nc" id="L726">                        __CLR4_5_27n7nm68iyfqc.R.inc(601);oPix[out--] = pixel[in--];</span>
+<span class="nc" id="L727">                        __CLR4_5_27n7nm68iyfqc.R.inc(602);out--;</span>
                     }
-                    break;
-                default:
-<span class="nc bnc" id="L731" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
-<span class="nc bnc" id="L732" title="All 2 branches missed.">                        for (b = 0; b &lt; bands - 1; b++) {</span>
-<span class="nc" id="L733">                            oPix[out--] = pixel[in--];</span>
+<span class="nc" id="L729">                    }__CLR4_5_27n7nm68iyfqc.R.inc(603);break;</span>
+<span class="nc bnc" id="L730" title="All 2 branches missed.">                default:if (!__CLB4_5_2_bool1) {__CLR4_5_27n7nm68iyfqc.R.inc(604);__CLB4_5_2_bool1=true;}</span>
+<span class="nc bnc" id="L731" title="All 10 branches missed.">                    __CLR4_5_27n7nm68iyfqc.R.inc(605);while ((((in &gt;= 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(606)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(607)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L732" title="All 10 branches missed.">                        __CLR4_5_27n7nm68iyfqc.R.inc(608);for (b = 0; (((b &lt; bands - 1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(609)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(610)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L733">                            __CLR4_5_27n7nm68iyfqc.R.inc(611);oPix[out--] = pixel[in--];</span>
                         }
-<span class="nc" id="L735">                        out--;</span>
+<span class="nc" id="L735">                        }__CLR4_5_27n7nm68iyfqc.R.inc(612);out--;</span>
                     }
-                }
-<span class="nc" id="L738">                dstR.setPixels(x0 + dx, y + dy, w, 1, oPix);</span>
+                }}
+<span class="nc" id="L738">                __CLR4_5_27n7nm68iyfqc.R.inc(613);dstR.setPixels(x0 + dx, y + dy, w, 1, oPix);</span>
             }
-<span class="nc bnc" id="L740" title="All 4 branches missed.">        } else if (dstAlpha &amp;&amp; dst.isAlphaPremultiplied()) {</span>
+<span class="nc bnc" id="L740" title="All 12 branches missed.">        }} }else {__CLR4_5_27n7nm68iyfqc.R.inc(614);if ((((dstAlpha &amp;&amp; dst.isAlphaPremultiplied())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(615)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(616)==0&amp;false))) {{</span>
             // Src and dest have Alpha but we need to multiply it for dst.
             // System.out.println(&quot;Mult Case&quot;);
-            int a;
-            int b;
-            int alpha;
-            int in;
-<span class="nc" id="L747">            int fpNorm = (1 &lt;&lt; 24) / 255;</span>
-<span class="nc" id="L748">            int pt5 = 1 &lt;&lt; 23;</span>
-<span class="nc bnc" id="L749" title="All 2 branches missed.">            for (int y = y0; y &lt;= y1; y++) {</span>
-<span class="nc" id="L750">                pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
-<span class="nc" id="L751">                in = bands * w - 1;</span>
-<span class="nc bnc" id="L752" title="All 2 branches missed.">                switch (bands) {</span>
-                case 4:
-<span class="nc bnc" id="L754" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
-<span class="nc" id="L755">                        a = pixel[in];</span>
-<span class="nc bnc" id="L756" title="All 2 branches missed.">                        if (a == 255) {</span>
-<span class="nc" id="L757">                            in -= 4;</span>
-                        } else {
-<span class="nc" id="L759">                            in--;</span>
-<span class="nc" id="L760">                            alpha = fpNorm * a;</span>
-<span class="nc" id="L761">                            pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
-<span class="nc" id="L762">                            in--;</span>
-<span class="nc" id="L763">                            pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
-<span class="nc" id="L764">                            in--;</span>
-<span class="nc" id="L765">                            pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
-<span class="nc" id="L766">                            in--;</span>
+<span class="nc" id="L743">            __CLR4_5_27n7nm68iyfqc.R.inc(617);int a;</span>
+<span class="nc" id="L744">            __CLR4_5_27n7nm68iyfqc.R.inc(618);int b;</span>
+<span class="nc" id="L745">            __CLR4_5_27n7nm68iyfqc.R.inc(619);int alpha;</span>
+<span class="nc" id="L746">            __CLR4_5_27n7nm68iyfqc.R.inc(620);int in;</span>
+<span class="nc" id="L747">            __CLR4_5_27n7nm68iyfqc.R.inc(621);int fpNorm = (1 &lt;&lt; 24) / 255;</span>
+<span class="nc" id="L748">            __CLR4_5_27n7nm68iyfqc.R.inc(622);int pt5 = 1 &lt;&lt; 23;</span>
+<span class="nc bnc" id="L749" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(623);for (int y = y0; (((y &lt;= y1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(624)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(625)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L750">                __CLR4_5_27n7nm68iyfqc.R.inc(626);pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
+<span class="nc" id="L751">                __CLR4_5_27n7nm68iyfqc.R.inc(627);in = bands * w - 1;</span>
+<span class="nc bnc" id="L752" title="All 2 branches missed.">                boolean __CLB4_5_2_bool2=false;__CLR4_5_27n7nm68iyfqc.R.inc(628);switch (bands) {</span>
+<span class="nc bnc" id="L753" title="All 2 branches missed.">                case 4:if (!__CLB4_5_2_bool2) {__CLR4_5_27n7nm68iyfqc.R.inc(629);__CLB4_5_2_bool2=true;}</span>
+<span class="nc bnc" id="L754" title="All 10 branches missed.">                    __CLR4_5_27n7nm68iyfqc.R.inc(630);while ((((in &gt;= 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(631)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(632)==0&amp;false))) {{</span>
+<span class="nc" id="L755">                        __CLR4_5_27n7nm68iyfqc.R.inc(633);a = pixel[in];</span>
+<span class="nc bnc" id="L756" title="All 10 branches missed.">                        __CLR4_5_27n7nm68iyfqc.R.inc(634);if ((((a == 255)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(635)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(636)==0&amp;false))) {{</span>
+<span class="nc" id="L757">                            __CLR4_5_27n7nm68iyfqc.R.inc(637);in -= 4;</span>
+                        } }else {{
+<span class="nc" id="L759">                            __CLR4_5_27n7nm68iyfqc.R.inc(638);in--;</span>
+<span class="nc" id="L760">                            __CLR4_5_27n7nm68iyfqc.R.inc(639);alpha = fpNorm * a;</span>
+<span class="nc" id="L761">                            __CLR4_5_27n7nm68iyfqc.R.inc(640);pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
+<span class="nc" id="L762">                            __CLR4_5_27n7nm68iyfqc.R.inc(641);in--;</span>
+<span class="nc" id="L763">                            __CLR4_5_27n7nm68iyfqc.R.inc(642);pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
+<span class="nc" id="L764">                            __CLR4_5_27n7nm68iyfqc.R.inc(643);in--;</span>
+<span class="nc" id="L765">                            __CLR4_5_27n7nm68iyfqc.R.inc(644);pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
+<span class="nc" id="L766">                            __CLR4_5_27n7nm68iyfqc.R.inc(645);in--;</span>
                         }
-                    }
-                    break;
-                default:
-<span class="nc bnc" id="L771" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
-<span class="nc" id="L772">                        a = pixel[in];</span>
-<span class="nc bnc" id="L773" title="All 2 branches missed.">                        if (a == 255) {</span>
-<span class="nc" id="L774">                            in -= bands;</span>
-                        } else {
-<span class="nc" id="L776">                            in--;</span>
-<span class="nc" id="L777">                            alpha = fpNorm * a;</span>
-<span class="nc bnc" id="L778" title="All 2 branches missed.">                            for (b = 0; b &lt; bands - 1; b++) {</span>
-<span class="nc" id="L779">                                pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
-<span class="nc" id="L780">                                in--;</span>
+                    }}
+<span class="nc" id="L769">                    }__CLR4_5_27n7nm68iyfqc.R.inc(646);break;</span>
+<span class="nc bnc" id="L770" title="All 2 branches missed.">                default:if (!__CLB4_5_2_bool2) {__CLR4_5_27n7nm68iyfqc.R.inc(647);__CLB4_5_2_bool2=true;}</span>
+<span class="nc bnc" id="L771" title="All 10 branches missed.">                    __CLR4_5_27n7nm68iyfqc.R.inc(648);while ((((in &gt;= 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(649)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(650)==0&amp;false))) {{</span>
+<span class="nc" id="L772">                        __CLR4_5_27n7nm68iyfqc.R.inc(651);a = pixel[in];</span>
+<span class="nc bnc" id="L773" title="All 10 branches missed.">                        __CLR4_5_27n7nm68iyfqc.R.inc(652);if ((((a == 255)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(653)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(654)==0&amp;false))) {{</span>
+<span class="nc" id="L774">                            __CLR4_5_27n7nm68iyfqc.R.inc(655);in -= bands;</span>
+                        } }else {{
+<span class="nc" id="L776">                            __CLR4_5_27n7nm68iyfqc.R.inc(656);in--;</span>
+<span class="nc" id="L777">                            __CLR4_5_27n7nm68iyfqc.R.inc(657);alpha = fpNorm * a;</span>
+<span class="nc bnc" id="L778" title="All 10 branches missed.">                            __CLR4_5_27n7nm68iyfqc.R.inc(658);for (b = 0; (((b &lt; bands - 1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(659)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(660)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L779">                                __CLR4_5_27n7nm68iyfqc.R.inc(661);pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
+<span class="nc" id="L780">                                __CLR4_5_27n7nm68iyfqc.R.inc(662);in--;</span>
                             }
-                        }
-                    }
-                }
-<span class="nc" id="L785">                dstR.setPixels(x0 + dx, y + dy, w, 1, pixel);</span>
+                        }}
+                    }}
+                }}
+<span class="nc" id="L785">                __CLR4_5_27n7nm68iyfqc.R.inc(663);dstR.setPixels(x0 + dx, y + dy, w, 1, pixel);</span>
             }
-<span class="nc bnc" id="L787" title="All 4 branches missed.">        } else if (dstAlpha &amp;&amp; !dst.isAlphaPremultiplied()) {</span>
+<span class="nc bnc" id="L787" title="All 12 branches missed.">        }} }else {__CLR4_5_27n7nm68iyfqc.R.inc(664);if ((((dstAlpha &amp;&amp; !dst.isAlphaPremultiplied())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(665)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(666)==0&amp;false))) {{</span>
             // Src and dest have Alpha but we need to divide it out for dst.
             // System.out.println(&quot;Div Case&quot;);
-            int a;
-            int b;
-            int ialpha;
-            int in;
-<span class="nc" id="L794">            int fpNorm = 0x00FF0000;</span>
-<span class="nc" id="L795">            int pt5 = 1 &lt;&lt; 15;</span>
-<span class="nc bnc" id="L796" title="All 2 branches missed.">            for (int y = y0; y &lt;= y1; y++) {</span>
-<span class="nc" id="L797">                pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
-<span class="nc" id="L798">                in = (bands * w) - 1;</span>
-<span class="nc bnc" id="L799" title="All 2 branches missed.">                switch(bands) {</span>
-                case 4:
-<span class="nc bnc" id="L801" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
-<span class="nc" id="L802">                        a = pixel[in];</span>
-<span class="nc bnc" id="L803" title="All 4 branches missed.">                        if ((a &lt;= 0) || (a &gt;= 255)) {</span>
-<span class="nc" id="L804">                            in -= 4;</span>
-                        } else {
-<span class="nc" id="L806">                            in--;</span>
-<span class="nc" id="L807">                            ialpha = fpNorm / a;</span>
-<span class="nc" id="L808">                            pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
-<span class="nc" id="L809">                            in--;</span>
-<span class="nc" id="L810">                            pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
-<span class="nc" id="L811">                            in--;</span>
-<span class="nc" id="L812">                            pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
-<span class="nc" id="L813">                            in--;</span>
+<span class="nc" id="L790">            __CLR4_5_27n7nm68iyfqc.R.inc(667);int a;</span>
+<span class="nc" id="L791">            __CLR4_5_27n7nm68iyfqc.R.inc(668);int b;</span>
+<span class="nc" id="L792">            __CLR4_5_27n7nm68iyfqc.R.inc(669);int ialpha;</span>
+<span class="nc" id="L793">            __CLR4_5_27n7nm68iyfqc.R.inc(670);int in;</span>
+<span class="nc" id="L794">            __CLR4_5_27n7nm68iyfqc.R.inc(671);int fpNorm = 0x00FF0000;</span>
+<span class="nc" id="L795">            __CLR4_5_27n7nm68iyfqc.R.inc(672);int pt5 = 1 &lt;&lt; 15;</span>
+<span class="nc bnc" id="L796" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(673);for (int y = y0; (((y &lt;= y1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(674)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(675)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L797">                __CLR4_5_27n7nm68iyfqc.R.inc(676);pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
+<span class="nc" id="L798">                __CLR4_5_27n7nm68iyfqc.R.inc(677);in = (bands * w) - 1;</span>
+<span class="nc bnc" id="L799" title="All 2 branches missed.">                boolean __CLB4_5_2_bool3=false;__CLR4_5_27n7nm68iyfqc.R.inc(678);switch(bands) {</span>
+<span class="nc bnc" id="L800" title="All 2 branches missed.">                case 4:if (!__CLB4_5_2_bool3) {__CLR4_5_27n7nm68iyfqc.R.inc(679);__CLB4_5_2_bool3=true;}</span>
+<span class="nc bnc" id="L801" title="All 10 branches missed.">                    __CLR4_5_27n7nm68iyfqc.R.inc(680);while ((((in &gt;= 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(681)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(682)==0&amp;false))) {{</span>
+<span class="nc" id="L802">                        __CLR4_5_27n7nm68iyfqc.R.inc(683);a = pixel[in];</span>
+<span class="nc bnc" id="L803" title="All 12 branches missed.">                        __CLR4_5_27n7nm68iyfqc.R.inc(684);if (((((a &lt;= 0) || (a &gt;= 255))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(685)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(686)==0&amp;false))) {{</span>
+<span class="nc" id="L804">                            __CLR4_5_27n7nm68iyfqc.R.inc(687);in -= 4;</span>
+                        } }else {{
+<span class="nc" id="L806">                            __CLR4_5_27n7nm68iyfqc.R.inc(688);in--;</span>
+<span class="nc" id="L807">                            __CLR4_5_27n7nm68iyfqc.R.inc(689);ialpha = fpNorm / a;</span>
+<span class="nc" id="L808">                            __CLR4_5_27n7nm68iyfqc.R.inc(690);pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+<span class="nc" id="L809">                            __CLR4_5_27n7nm68iyfqc.R.inc(691);in--;</span>
+<span class="nc" id="L810">                            __CLR4_5_27n7nm68iyfqc.R.inc(692);pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+<span class="nc" id="L811">                            __CLR4_5_27n7nm68iyfqc.R.inc(693);in--;</span>
+<span class="nc" id="L812">                            __CLR4_5_27n7nm68iyfqc.R.inc(694);pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+<span class="nc" id="L813">                            __CLR4_5_27n7nm68iyfqc.R.inc(695);in--;</span>
                         }
-                    }
-                    break;
-                default:
-<span class="nc bnc" id="L818" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
-<span class="nc" id="L819">                        a = pixel[in];</span>
-<span class="nc bnc" id="L820" title="All 4 branches missed.">                        if ((a &lt;= 0) || (a &gt;= 255)) {</span>
-<span class="nc" id="L821">                            in -= bands;</span>
-                        } else {
-<span class="nc" id="L823">                            in--;</span>
-<span class="nc" id="L824">                            ialpha = fpNorm / a;</span>
-<span class="nc bnc" id="L825" title="All 2 branches missed.">                            for (b = 0; b &lt; bands - 1; b++) {</span>
-<span class="nc" id="L826">                                pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
-<span class="nc" id="L827">                                in--;</span>
+                    }}
+<span class="nc" id="L816">                    }__CLR4_5_27n7nm68iyfqc.R.inc(696);break;</span>
+<span class="nc bnc" id="L817" title="All 2 branches missed.">                default:if (!__CLB4_5_2_bool3) {__CLR4_5_27n7nm68iyfqc.R.inc(697);__CLB4_5_2_bool3=true;}</span>
+<span class="nc bnc" id="L818" title="All 10 branches missed.">                    __CLR4_5_27n7nm68iyfqc.R.inc(698);while ((((in &gt;= 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(699)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(700)==0&amp;false))) {{</span>
+<span class="nc" id="L819">                        __CLR4_5_27n7nm68iyfqc.R.inc(701);a = pixel[in];</span>
+<span class="nc bnc" id="L820" title="All 12 branches missed.">                        __CLR4_5_27n7nm68iyfqc.R.inc(702);if (((((a &lt;= 0) || (a &gt;= 255))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(703)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(704)==0&amp;false))) {{</span>
+<span class="nc" id="L821">                            __CLR4_5_27n7nm68iyfqc.R.inc(705);in -= bands;</span>
+                        } }else {{
+<span class="nc" id="L823">                            __CLR4_5_27n7nm68iyfqc.R.inc(706);in--;</span>
+<span class="nc" id="L824">                            __CLR4_5_27n7nm68iyfqc.R.inc(707);ialpha = fpNorm / a;</span>
+<span class="nc bnc" id="L825" title="All 10 branches missed.">                            __CLR4_5_27n7nm68iyfqc.R.inc(708);for (b = 0; (((b &lt; bands - 1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(709)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(710)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L826">                                __CLR4_5_27n7nm68iyfqc.R.inc(711);pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+<span class="nc" id="L827">                                __CLR4_5_27n7nm68iyfqc.R.inc(712);in--;</span>
                             }
-                        }
-                    }
-                }
-<span class="nc" id="L832">                dstR.setPixels(x0 + dx, y + dy, w, 1, pixel);</span>
+                        }}
+                    }}
+                }}
+<span class="nc" id="L832">                __CLR4_5_27n7nm68iyfqc.R.inc(713);dstR.setPixels(x0 + dx, y + dy, w, 1, pixel);</span>
             }
-<span class="nc bnc" id="L834" title="All 2 branches missed.">        } else if (src.isAlphaPremultiplied()) {</span>
-<span class="nc" id="L835">            int [] oPix = new int[bands * w];</span>
+<span class="nc bnc" id="L834" title="All 10 branches missed.">        }} }else {__CLR4_5_27n7nm68iyfqc.R.inc(714);if ((((src.isAlphaPremultiplied())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(715)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(716)==0&amp;false))) {{</span>
+<span class="nc" id="L835">            __CLR4_5_27n7nm68iyfqc.R.inc(717);int [] oPix = new int[bands * w];</span>
             // Src has alpha dest does not so unpremult and store...
             // System.out.println(&quot;Remove Alpha, Div Case&quot;);
-            int a;
-            int b;
-            int ialpha;
-            int in;
-            int out;
-<span class="nc" id="L843">            int fpNorm = 0x00FF0000;</span>
-<span class="nc" id="L844">            int pt5 = 1 &lt;&lt; 15;</span>
-<span class="nc bnc" id="L845" title="All 2 branches missed.">            for (int y = y0; y &lt;= y1; y++) {</span>
-<span class="nc" id="L846">                pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
-<span class="nc" id="L847">                in  = (bands + 1) * w - 1;</span>
-<span class="nc" id="L848">                out = (bands * w) - 1;</span>
-<span class="nc bnc" id="L849" title="All 2 branches missed.">                while (in &gt;= 0) {</span>
-<span class="nc" id="L850">                    a = pixel[in];</span>
-<span class="nc" id="L851">                    in--;</span>
-<span class="nc bnc" id="L852" title="All 2 branches missed.">                    if (a &gt; 0) {</span>
-<span class="nc bnc" id="L853" title="All 2 branches missed.">                        if (a &lt; 255) {</span>
-<span class="nc" id="L854">                            ialpha = fpNorm / a;</span>
-<span class="nc bnc" id="L855" title="All 2 branches missed.">                            for (b = 0; b &lt; bands; b++) {</span>
-<span class="nc" id="L856">                                oPix[out--] = (pixel[in--] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+<span class="nc" id="L838">            __CLR4_5_27n7nm68iyfqc.R.inc(718);int a;</span>
+<span class="nc" id="L839">            __CLR4_5_27n7nm68iyfqc.R.inc(719);int b;</span>
+<span class="nc" id="L840">            __CLR4_5_27n7nm68iyfqc.R.inc(720);int ialpha;</span>
+<span class="nc" id="L841">            __CLR4_5_27n7nm68iyfqc.R.inc(721);int in;</span>
+<span class="nc" id="L842">            __CLR4_5_27n7nm68iyfqc.R.inc(722);int out;</span>
+<span class="nc" id="L843">            __CLR4_5_27n7nm68iyfqc.R.inc(723);int fpNorm = 0x00FF0000;</span>
+<span class="nc" id="L844">            __CLR4_5_27n7nm68iyfqc.R.inc(724);int pt5 = 1 &lt;&lt; 15;</span>
+<span class="nc bnc" id="L845" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(725);for (int y = y0; (((y &lt;= y1)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(726)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(727)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L846">                __CLR4_5_27n7nm68iyfqc.R.inc(728);pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
+<span class="nc" id="L847">                __CLR4_5_27n7nm68iyfqc.R.inc(729);in  = (bands + 1) * w - 1;</span>
+<span class="nc" id="L848">                __CLR4_5_27n7nm68iyfqc.R.inc(730);out = (bands * w) - 1;</span>
+<span class="nc bnc" id="L849" title="All 10 branches missed.">                __CLR4_5_27n7nm68iyfqc.R.inc(731);while ((((in &gt;= 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(732)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(733)==0&amp;false))) {{</span>
+<span class="nc" id="L850">                    __CLR4_5_27n7nm68iyfqc.R.inc(734);a = pixel[in];</span>
+<span class="nc" id="L851">                    __CLR4_5_27n7nm68iyfqc.R.inc(735);in--;</span>
+<span class="nc bnc" id="L852" title="All 10 branches missed.">                    __CLR4_5_27n7nm68iyfqc.R.inc(736);if ((((a &gt; 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(737)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(738)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L853" title="All 10 branches missed.">                        __CLR4_5_27n7nm68iyfqc.R.inc(739);if ((((a &lt; 255)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(740)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(741)==0&amp;false))) {{</span>
+<span class="nc" id="L854">                            __CLR4_5_27n7nm68iyfqc.R.inc(742);ialpha = fpNorm / a;</span>
+<span class="nc bnc" id="L855" title="All 10 branches missed.">                            __CLR4_5_27n7nm68iyfqc.R.inc(743);for (b = 0; (((b &lt; bands)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(744)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(745)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L856">                                __CLR4_5_27n7nm68iyfqc.R.inc(746);oPix[out--] = (pixel[in--] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
                             }
-                        } else {
-<span class="nc bnc" id="L859" title="All 2 branches missed.">                            for (b = 0; b &lt; bands; b++) {</span>
-<span class="nc" id="L860">                                oPix[out--] = pixel[in--];</span>
+                        }} }else {{
+<span class="nc bnc" id="L859" title="All 10 branches missed.">                            __CLR4_5_27n7nm68iyfqc.R.inc(747);for (b = 0; (((b &lt; bands)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(748)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(749)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L860">                                __CLR4_5_27n7nm68iyfqc.R.inc(750);oPix[out--] = pixel[in--];</span>
                             }
+                        }}
+                    }} }else {{
+<span class="nc" id="L864">                        __CLR4_5_27n7nm68iyfqc.R.inc(751);in -= bands;</span>
+<span class="nc bnc" id="L865" title="All 10 branches missed.">                        __CLR4_5_27n7nm68iyfqc.R.inc(752);for (b = 0; (((b &lt; bands)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(753)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(754)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L866">                            __CLR4_5_27n7nm68iyfqc.R.inc(755);oPix[out--] = 255;</span>
                         }
-                    } else {
-<span class="nc" id="L864">                        in -= bands;</span>
-<span class="nc bnc" id="L865" title="All 2 branches missed.">                        for (b = 0; b &lt; bands; b++) {</span>
-<span class="nc" id="L866">                            oPix[out--] = 255;</span>
-                        }
-                    }
-                }
-<span class="nc" id="L870">                dstR.setPixels(x0 + dx, y + dy, w, 1, oPix);</span>
+                    }}
+                }}
+<span class="nc" id="L870">                }__CLR4_5_27n7nm68iyfqc.R.inc(756);dstR.setPixels(x0 + dx, y + dy, w, 1, oPix);</span>
             }
-<span class="nc" id="L872">        } else {</span>
+<span class="nc" id="L872">        }} }else {{</span>
             // Src has unpremult alpha, dest does not have alpha,
             // just copy the color channels over.
-<span class="nc" id="L875">            Rectangle dstRect = new Rectangle(destP.x, destP.y,</span>
+<span class="nc" id="L875">            __CLR4_5_27n7nm68iyfqc.R.inc(757);Rectangle dstRect = new Rectangle(destP.x, destP.y,</span>
                                               srcRect.width, srcRect.height);
-<span class="nc bnc" id="L877" title="All 2 branches missed.">            for (int b = 0; b &lt; bands; b++) {</span>
-<span class="nc" id="L878">                copyBand(srcR, srcRect, b,</span>
+<span class="nc bnc" id="L877" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(758);for (int b = 0; (((b &lt; bands)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(759)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(760)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L878">                __CLR4_5_27n7nm68iyfqc.R.inc(761);copyBand(srcR, srcRect, b,</span>
                          dstR, dstRect, b);
             }
-        }
-<span class="nc" id="L882">    }</span>
+        }}
+<span class="nc" id="L882">    }}}}}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     public static void copyBand(Raster         src, int srcBand,
-                                WritableRaster dst, int dstBand) {
+<span class="nc" id="L885">                                WritableRaster dst, int dstBand) {try{__CLR4_5_27n7nm68iyfqc.R.inc(762);</span>
 
-<span class="nc" id="L887">        Rectangle sR   = src.getBounds();</span>
-<span class="nc" id="L888">        Rectangle dR   = dst.getBounds();</span>
-<span class="nc" id="L889">        Rectangle cpR  = sR.intersection(dR);</span>
+<span class="nc" id="L887">        __CLR4_5_27n7nm68iyfqc.R.inc(763);Rectangle sR   = src.getBounds();</span>
+<span class="nc" id="L888">        __CLR4_5_27n7nm68iyfqc.R.inc(764);Rectangle dR   = dst.getBounds();</span>
+<span class="nc" id="L889">        __CLR4_5_27n7nm68iyfqc.R.inc(765);Rectangle cpR  = sR.intersection(dR);</span>
 
-<span class="nc" id="L891">        copyBand(src, cpR, srcBand, dst, cpR, dstBand);</span>
-<span class="nc" id="L892">    }</span>
+<span class="nc" id="L891">        __CLR4_5_27n7nm68iyfqc.R.inc(766);copyBand(src, cpR, srcBand, dst, cpR, dstBand);</span>
+<span class="nc" id="L892">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     public static void copyBand(Raster         src, Rectangle sR, int sBand,
-                                WritableRaster dst, Rectangle dR, int dBand) {
-<span class="nc" id="L896">        int dy = dR.y - sR.y;</span>
-<span class="nc" id="L897">        int dx = dR.x - sR.x;</span>
-<span class="nc" id="L898">        sR = sR.intersection(src.getBounds());</span>
-<span class="nc" id="L899">        dR = dR.intersection(dst.getBounds());</span>
-        int width;
-        int height;
-<span class="nc bnc" id="L902" title="All 2 branches missed.">        if (dR.width  &lt; sR.width) {</span>
-<span class="nc" id="L903">            width  = dR.width;</span>
-        } else {
-<span class="nc" id="L905">            width  = sR.width;</span>
+<span class="nc" id="L895">                                WritableRaster dst, Rectangle dR, int dBand) {try{__CLR4_5_27n7nm68iyfqc.R.inc(767);</span>
+<span class="nc" id="L896">        __CLR4_5_27n7nm68iyfqc.R.inc(768);int dy = dR.y - sR.y;</span>
+<span class="nc" id="L897">        __CLR4_5_27n7nm68iyfqc.R.inc(769);int dx = dR.x - sR.x;</span>
+<span class="nc" id="L898">        __CLR4_5_27n7nm68iyfqc.R.inc(770);sR = sR.intersection(src.getBounds());</span>
+<span class="nc" id="L899">        __CLR4_5_27n7nm68iyfqc.R.inc(771);dR = dR.intersection(dst.getBounds());</span>
+<span class="nc" id="L900">        __CLR4_5_27n7nm68iyfqc.R.inc(772);int width;</span>
+<span class="nc" id="L901">        __CLR4_5_27n7nm68iyfqc.R.inc(773);int height;</span>
+<span class="nc bnc" id="L902" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(774);if ((((dR.width  &lt; sR.width)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(775)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(776)==0&amp;false))) {{</span>
+<span class="nc" id="L903">            __CLR4_5_27n7nm68iyfqc.R.inc(777);width  = dR.width;</span>
+        } }else {{
+<span class="nc" id="L905">            __CLR4_5_27n7nm68iyfqc.R.inc(778);width  = sR.width;</span>
         }
-<span class="nc bnc" id="L907" title="All 2 branches missed.">        if (dR.height &lt; sR.height) {</span>
-<span class="nc" id="L908">            height = dR.height;</span>
-        } else {
-<span class="nc" id="L910">            height = sR.height;</span>
+<span class="nc bnc" id="L907" title="All 10 branches missed.">        }__CLR4_5_27n7nm68iyfqc.R.inc(779);if ((((dR.height &lt; sR.height)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(780)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(781)==0&amp;false))) {{</span>
+<span class="nc" id="L908">            __CLR4_5_27n7nm68iyfqc.R.inc(782);height = dR.height;</span>
+        } }else {{
+<span class="nc" id="L910">            __CLR4_5_27n7nm68iyfqc.R.inc(783);height = sR.height;</span>
         }
-<span class="nc" id="L912">        int x = sR.x + dx;</span>
-<span class="nc" id="L913">        int [] samples = null;</span>
-<span class="nc bnc" id="L914" title="All 2 branches missed.">        for (int y = sR.y; y &lt; sR.y + height; y++) {</span>
-<span class="nc" id="L915">            samples = src.getSamples(sR.x, y, width, 1, sBand, samples);</span>
-<span class="nc" id="L916">            dst.setSamples(x, y + dy, width, 1, dBand, samples);</span>
+<span class="nc" id="L912">        }__CLR4_5_27n7nm68iyfqc.R.inc(784);int x = sR.x + dx;</span>
+<span class="nc" id="L913">        __CLR4_5_27n7nm68iyfqc.R.inc(785);int [] samples = null;</span>
+<span class="nc bnc" id="L914" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(786);for (int y = sR.y; (((y &lt; sR.y + height)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(787)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(788)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L915">            __CLR4_5_27n7nm68iyfqc.R.inc(789);samples = src.getSamples(sR.x, y, width, 1, sBand, samples);</span>
+<span class="nc" id="L916">            __CLR4_5_27n7nm68iyfqc.R.inc(790);dst.setSamples(x, y + dy, width, 1, dBand, samples);</span>
         }
-<span class="nc" id="L918">    }</span>
+<span class="nc" id="L918">    }}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
     public static boolean is_INT_PACK_Data(SampleModel sm,
-                                           boolean requireAlpha) {
+<span class="nc" id="L921">                                           boolean requireAlpha) {try{__CLR4_5_27n7nm68iyfqc.R.inc(791);</span>
         // Check ColorModel is of type DirectColorModel
-<span class="nc bnc" id="L923" title="All 2 branches missed.">        if (!(sm instanceof SinglePixelPackedSampleModel)) {</span>
-<span class="nc" id="L924">            return false;</span>
+<span class="nc bnc" id="L923" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(792);if ((((!(sm instanceof SinglePixelPackedSampleModel))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(793)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(794)==0&amp;false))) {{</span>
+<span class="nc" id="L924">            __CLR4_5_27n7nm68iyfqc.R.inc(795);return false;</span>
         }
 
         // Check transfer type
-<span class="nc bnc" id="L928" title="All 2 branches missed.">        if (sm.getDataType() != DataBuffer.TYPE_INT) {</span>
-<span class="nc" id="L929">            return false;</span>
+<span class="nc bnc" id="L928" title="All 10 branches missed.">        }__CLR4_5_27n7nm68iyfqc.R.inc(796);if ((((sm.getDataType() != DataBuffer.TYPE_INT)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(797)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(798)==0&amp;false))) {{</span>
+<span class="nc" id="L929">            __CLR4_5_27n7nm68iyfqc.R.inc(799);return false;</span>
         }
 
-        SinglePixelPackedSampleModel sppsm;
-<span class="nc" id="L933">        sppsm = (SinglePixelPackedSampleModel)sm;</span>
+<span class="nc" id="L932">        }__CLR4_5_27n7nm68iyfqc.R.inc(800);SinglePixelPackedSampleModel sppsm;</span>
+<span class="nc" id="L933">        __CLR4_5_27n7nm68iyfqc.R.inc(801);sppsm = (SinglePixelPackedSampleModel)sm;</span>
 
-<span class="nc" id="L935">        int [] masks = sppsm.getBitMasks();</span>
-<span class="nc bnc" id="L936" title="All 2 branches missed.">        if (masks.length == 3) {</span>
-<span class="nc bnc" id="L937" title="All 2 branches missed.">            if (requireAlpha) {</span>
-<span class="nc" id="L938">                return false;</span>
+<span class="nc" id="L935">        __CLR4_5_27n7nm68iyfqc.R.inc(802);int [] masks = sppsm.getBitMasks();</span>
+<span class="nc bnc" id="L936" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(803);if ((((masks.length == 3)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(804)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(805)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L937" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(806);if ((((requireAlpha)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(807)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(808)==0&amp;false))) {{</span>
+<span class="nc" id="L938">                __CLR4_5_27n7nm68iyfqc.R.inc(809);return false;</span>
             }
-<span class="nc bnc" id="L940" title="All 2 branches missed.">        } else if (masks.length != 4) {</span>
-<span class="nc" id="L941">            return false;</span>
+<span class="nc bnc" id="L940" title="All 10 branches missed.">        }} }else {__CLR4_5_27n7nm68iyfqc.R.inc(810);if ((((masks.length != 4)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(811)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(812)==0&amp;false))) {{</span>
+<span class="nc" id="L941">            __CLR4_5_27n7nm68iyfqc.R.inc(813);return false;</span>
         }
 
-<span class="nc bnc" id="L944" title="All 2 branches missed.">        if (masks[0] != 0x00ff0000) {</span>
-<span class="nc" id="L945">            return false;</span>
+<span class="nc bnc" id="L944" title="All 10 branches missed.">        }}__CLR4_5_27n7nm68iyfqc.R.inc(814);if ((((masks[0] != 0x00ff0000)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(815)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(816)==0&amp;false))) {{</span>
+<span class="nc" id="L945">            __CLR4_5_27n7nm68iyfqc.R.inc(817);return false;</span>
         }
-<span class="nc bnc" id="L947" title="All 2 branches missed.">        if (masks[1] != 0x0000ff00) {</span>
-<span class="nc" id="L948">            return false;</span>
+<span class="nc bnc" id="L947" title="All 10 branches missed.">        }__CLR4_5_27n7nm68iyfqc.R.inc(818);if ((((masks[1] != 0x0000ff00)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(819)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(820)==0&amp;false))) {{</span>
+<span class="nc" id="L948">            __CLR4_5_27n7nm68iyfqc.R.inc(821);return false;</span>
         }
-<span class="nc bnc" id="L950" title="All 2 branches missed.">        if (masks[2] != 0x000000ff) {</span>
-<span class="nc" id="L951">            return false;</span>
+<span class="nc bnc" id="L950" title="All 10 branches missed.">        }__CLR4_5_27n7nm68iyfqc.R.inc(822);if ((((masks[2] != 0x000000ff)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(823)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(824)==0&amp;false))) {{</span>
+<span class="nc" id="L951">            __CLR4_5_27n7nm68iyfqc.R.inc(825);return false;</span>
         }
-<span class="nc bnc" id="L953" title="All 4 branches missed.">        if ((masks.length == 4)</span>
-            &amp;&amp; (masks[3] != 0xff000000)) {
-<span class="nc" id="L955">            return false;</span>
+<span class="nc bnc" id="L953" title="All 4 branches missed.">        }__CLR4_5_27n7nm68iyfqc.R.inc(826);if (((((masks.length == 4)</span>
+<span class="nc bnc" id="L954" title="All 8 branches missed.">            &amp;&amp; (masks[3] != 0xff000000))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(827)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(828)==0&amp;false))) {{</span>
+<span class="nc" id="L955">            __CLR4_5_27n7nm68iyfqc.R.inc(829);return false;</span>
         }
 
-<span class="nc" id="L958">        return true;</span>
-    }
+<span class="nc" id="L958">        }__CLR4_5_27n7nm68iyfqc.R.inc(830);return true;</span>
+<span class="nc" id="L959">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
-        public static boolean is_BYTE_COMP_Data(SampleModel sm) {
+<span class="nc" id="L961">        public static boolean is_BYTE_COMP_Data(SampleModel sm) {try{__CLR4_5_27n7nm68iyfqc.R.inc(831);</span>
             // Check ColorModel is of type DirectColorModel
-<span class="nc bnc" id="L963" title="All 2 branches missed.">            if (!(sm instanceof ComponentSampleModel)) {</span>
-<span class="nc" id="L964">                return false;</span>
+<span class="nc bnc" id="L963" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(832);if ((((!(sm instanceof ComponentSampleModel))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(833)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(834)==0&amp;false))) {{</span>
+<span class="nc" id="L964">                __CLR4_5_27n7nm68iyfqc.R.inc(835);return false;</span>
             }
 
             // Check transfer type
-<span class="nc bnc" id="L968" title="All 2 branches missed.">            if (sm.getDataType() != DataBuffer.TYPE_BYTE) {</span>
-<span class="nc" id="L969">                return false;</span>
+<span class="nc bnc" id="L968" title="All 10 branches missed.">            }__CLR4_5_27n7nm68iyfqc.R.inc(836);if ((((sm.getDataType() != DataBuffer.TYPE_BYTE)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(837)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(838)==0&amp;false))) {{</span>
+<span class="nc" id="L969">                __CLR4_5_27n7nm68iyfqc.R.inc(839);return false;</span>
             }
 
-<span class="nc" id="L972">            return true;</span>
-        }
+<span class="nc" id="L972">            }__CLR4_5_27n7nm68iyfqc.R.inc(840);return true;</span>
+<span class="nc" id="L973">        }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
-    protected static void divide_INT_PACK_Data(WritableRaster wr) {
+<span class="nc" id="L975">    protected static void divide_INT_PACK_Data(WritableRaster wr) {try{__CLR4_5_27n7nm68iyfqc.R.inc(841);</span>
         // System.out.println(&quot;Divide Int&quot;);
 
-        SinglePixelPackedSampleModel sppsm;
-<span class="nc" id="L979">        sppsm = (SinglePixelPackedSampleModel)wr.getSampleModel();</span>
+<span class="nc" id="L978">        __CLR4_5_27n7nm68iyfqc.R.inc(842);SinglePixelPackedSampleModel sppsm;</span>
+<span class="nc" id="L979">        __CLR4_5_27n7nm68iyfqc.R.inc(843);sppsm = (SinglePixelPackedSampleModel)wr.getSampleModel();</span>
 
-<span class="nc" id="L981">        final int width = wr.getWidth();</span>
+<span class="nc" id="L981">        __CLR4_5_27n7nm68iyfqc.R.inc(844);final int width = wr.getWidth();</span>
 
-<span class="nc" id="L983">        final int scanStride = sppsm.getScanlineStride();</span>
-<span class="nc" id="L984">        DataBufferInt db = (DataBufferInt)wr.getDataBuffer();</span>
-<span class="nc" id="L985">        final int base</span>
+<span class="nc" id="L983">        __CLR4_5_27n7nm68iyfqc.R.inc(845);final int scanStride = sppsm.getScanlineStride();</span>
+<span class="nc" id="L984">        __CLR4_5_27n7nm68iyfqc.R.inc(846);DataBufferInt db = (DataBufferInt)wr.getDataBuffer();</span>
+<span class="nc" id="L985">        __CLR4_5_27n7nm68iyfqc.R.inc(847);final int base</span>
 <span class="nc" id="L986">            = (db.getOffset()</span>
 <span class="nc" id="L987">               + sppsm.getOffset(wr.getMinX() - wr.getSampleModelTranslateX(),</span>
 <span class="nc" id="L988">                               wr.getMinY() - wr.getSampleModelTranslateY()));</span>
 
         // Access the pixel data array
-<span class="nc" id="L991">        final int[] pixels = db.getBankData()[0];</span>
-<span class="nc bnc" id="L992" title="All 2 branches missed.">        for (int y = 0; y &lt; wr.getHeight(); y++) {</span>
-<span class="nc" id="L993">            int sp = base + y * scanStride;</span>
-<span class="nc" id="L994">            final int end = sp + width;</span>
-<span class="nc bnc" id="L995" title="All 2 branches missed.">            while (sp &lt; end) {</span>
-<span class="nc" id="L996">                int pixel = pixels[sp];</span>
-<span class="nc" id="L997">                int a = pixel &gt;&gt;&gt; 24;</span>
-<span class="nc bnc" id="L998" title="All 2 branches missed.">                if (a &lt;= 0) {</span>
-<span class="nc" id="L999">                    pixels[sp] = 0x00FFFFFF;</span>
-<span class="nc bnc" id="L1000" title="All 2 branches missed.">                } else if (a &lt; 255) {</span>
-<span class="nc" id="L1001">                    int aFP = (0x00FF0000 / a);</span>
-<span class="nc" id="L1002">                    pixels[sp] =</span>
+<span class="nc" id="L991">        __CLR4_5_27n7nm68iyfqc.R.inc(848);final int[] pixels = db.getBankData()[0];</span>
+<span class="nc bnc" id="L992" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(849);for (int y = 0; (((y &lt; wr.getHeight())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(850)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(851)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L993">            __CLR4_5_27n7nm68iyfqc.R.inc(852);int sp = base + y * scanStride;</span>
+<span class="nc" id="L994">            __CLR4_5_27n7nm68iyfqc.R.inc(853);final int end = sp + width;</span>
+<span class="nc bnc" id="L995" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(854);while ((((sp &lt; end)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(855)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(856)==0&amp;false))) {{</span>
+<span class="nc" id="L996">                __CLR4_5_27n7nm68iyfqc.R.inc(857);int pixel = pixels[sp];</span>
+<span class="nc" id="L997">                __CLR4_5_27n7nm68iyfqc.R.inc(858);int a = pixel &gt;&gt;&gt; 24;</span>
+<span class="nc bnc" id="L998" title="All 10 branches missed.">                __CLR4_5_27n7nm68iyfqc.R.inc(859);if ((((a &lt;= 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(860)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(861)==0&amp;false))) {{</span>
+<span class="nc" id="L999">                    __CLR4_5_27n7nm68iyfqc.R.inc(862);pixels[sp] = 0x00FFFFFF;</span>
+<span class="nc bnc" id="L1000" title="All 10 branches missed.">                } }else {__CLR4_5_27n7nm68iyfqc.R.inc(863);if ((((a &lt; 255)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(864)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(865)==0&amp;false))) {{</span>
+<span class="nc" id="L1001">                    __CLR4_5_27n7nm68iyfqc.R.inc(866);int aFP = (0x00FF0000 / a);</span>
+<span class="nc" id="L1002">                    __CLR4_5_27n7nm68iyfqc.R.inc(867);pixels[sp] =</span>
                         ((a &lt;&lt; 24)
                          | (((((pixel &amp; 0xFF0000) &gt;&gt; 16) * aFP) &amp; 0xFF0000))
                          | (((((pixel &amp; 0x00FF00) &gt;&gt; 8) * aFP) &amp; 0xFF0000) &gt;&gt; 8)
                          | (((((pixel &amp; 0x0000FF))    * aFP) &amp; 0xFF0000) &gt;&gt; 16));
                 }
-<span class="nc" id="L1008">                sp++;</span>
+<span class="nc" id="L1008">                }}__CLR4_5_27n7nm68iyfqc.R.inc(868);sp++;</span>
 <span class="nc" id="L1009">            }</span>
-        }
-<span class="nc" id="L1011">    }</span>
+        }}
+<span class="nc" id="L1011">    }}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
-    protected static void mult_INT_PACK_Data(WritableRaster wr) {
+<span class="nc" id="L1013">    protected static void mult_INT_PACK_Data(WritableRaster wr) {try{__CLR4_5_27n7nm68iyfqc.R.inc(869);</span>
         // System.out.println(&quot;Multiply Int: &quot; + wr);
 
-        SinglePixelPackedSampleModel sppsm;
-<span class="nc" id="L1017">        sppsm = (SinglePixelPackedSampleModel)wr.getSampleModel();</span>
+<span class="nc" id="L1016">        __CLR4_5_27n7nm68iyfqc.R.inc(870);SinglePixelPackedSampleModel sppsm;</span>
+<span class="nc" id="L1017">        __CLR4_5_27n7nm68iyfqc.R.inc(871);sppsm = (SinglePixelPackedSampleModel)wr.getSampleModel();</span>
 
-<span class="nc" id="L1019">        final int width = wr.getWidth();</span>
+<span class="nc" id="L1019">        __CLR4_5_27n7nm68iyfqc.R.inc(872);final int width = wr.getWidth();</span>
 
-<span class="nc" id="L1021">        final int scanStride = sppsm.getScanlineStride();</span>
-<span class="nc" id="L1022">        DataBufferInt db = (DataBufferInt)wr.getDataBuffer();</span>
-<span class="nc" id="L1023">        final int base</span>
+<span class="nc" id="L1021">        __CLR4_5_27n7nm68iyfqc.R.inc(873);final int scanStride = sppsm.getScanlineStride();</span>
+<span class="nc" id="L1022">        __CLR4_5_27n7nm68iyfqc.R.inc(874);DataBufferInt db = (DataBufferInt)wr.getDataBuffer();</span>
+<span class="nc" id="L1023">        __CLR4_5_27n7nm68iyfqc.R.inc(875);final int base</span>
 <span class="nc" id="L1024">            = (db.getOffset()</span>
 <span class="nc" id="L1025">               + sppsm.getOffset(wr.getMinX() - wr.getSampleModelTranslateX(),</span>
 <span class="nc" id="L1026">                               wr.getMinY() - wr.getSampleModelTranslateY()));</span>
         // Access the pixel data array
-<span class="nc" id="L1028">        final int[] pixels = db.getBankData()[0];</span>
-<span class="nc bnc" id="L1029" title="All 2 branches missed.">        for (int y = 0; y &lt; wr.getHeight(); y++) {</span>
-<span class="nc" id="L1030">            int sp = base + y * scanStride;</span>
-<span class="nc" id="L1031">            final int end = sp + width;</span>
-<span class="nc bnc" id="L1032" title="All 2 branches missed.">            while (sp &lt; end) {</span>
-<span class="nc" id="L1033">                int pixel = pixels[sp];</span>
-<span class="nc" id="L1034">                int a = pixel &gt;&gt;&gt; 24;</span>
-<span class="nc bnc" id="L1035" title="All 4 branches missed.">                if ((a &gt;= 0) &amp;&amp; (a &lt; 255)) {   // this does NOT include a == 255 (0xff) !</span>
-<span class="nc" id="L1036">                    pixels[sp] = ((a &lt;&lt; 24)</span>
+<span class="nc" id="L1028">        __CLR4_5_27n7nm68iyfqc.R.inc(876);final int[] pixels = db.getBankData()[0];</span>
+<span class="nc bnc" id="L1029" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(877);for (int y = 0; (((y &lt; wr.getHeight())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(878)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(879)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L1030">            __CLR4_5_27n7nm68iyfqc.R.inc(880);int sp = base + y * scanStride;</span>
+<span class="nc" id="L1031">            __CLR4_5_27n7nm68iyfqc.R.inc(881);final int end = sp + width;</span>
+<span class="nc bnc" id="L1032" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(882);while ((((sp &lt; end)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(883)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(884)==0&amp;false))) {{</span>
+<span class="nc" id="L1033">                __CLR4_5_27n7nm68iyfqc.R.inc(885);int pixel = pixels[sp];</span>
+<span class="nc" id="L1034">                __CLR4_5_27n7nm68iyfqc.R.inc(886);int a = pixel &gt;&gt;&gt; 24;</span>
+<span class="nc bnc" id="L1035" title="All 12 branches missed.">                __CLR4_5_27n7nm68iyfqc.R.inc(887);if (((((a &gt;= 0) &amp;&amp; (a &lt; 255))&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(888)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(889)==0&amp;false))) {{   // this does NOT include a == 255 (0xff) !</span>
+<span class="nc" id="L1036">                    __CLR4_5_27n7nm68iyfqc.R.inc(890);pixels[sp] = ((a &lt;&lt; 24)</span>
                                   | ((((pixel &amp; 0xFF0000) * a) &gt;&gt; 8) &amp; 0xFF0000)
                                   | ((((pixel &amp; 0x00FF00) * a) &gt;&gt; 8) &amp; 0x00FF00)
                                   | ((((pixel &amp; 0x0000FF) * a) &gt;&gt; 8) &amp; 0x0000FF));
                 }
-<span class="nc" id="L1041">                sp++;</span>
+<span class="nc" id="L1041">                }__CLR4_5_27n7nm68iyfqc.R.inc(891);sp++;</span>
 <span class="nc" id="L1042">            }</span>
-        }
-<span class="nc" id="L1044">    }</span>
+        }}
+<span class="nc" id="L1044">    }}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
 
-    protected static void divide_BYTE_COMP_Data(WritableRaster wr) {
+<span class="nc" id="L1047">    protected static void divide_BYTE_COMP_Data(WritableRaster wr) {try{__CLR4_5_27n7nm68iyfqc.R.inc(892);</span>
         // System.out.println(&quot;Multiply Int: &quot; + wr);
 
-        ComponentSampleModel csm;
-<span class="nc" id="L1051">        csm = (ComponentSampleModel)wr.getSampleModel();</span>
+<span class="nc" id="L1050">        __CLR4_5_27n7nm68iyfqc.R.inc(893);ComponentSampleModel csm;</span>
+<span class="nc" id="L1051">        __CLR4_5_27n7nm68iyfqc.R.inc(894);csm = (ComponentSampleModel)wr.getSampleModel();</span>
 
-<span class="nc" id="L1053">        final int width = wr.getWidth();</span>
+<span class="nc" id="L1053">        __CLR4_5_27n7nm68iyfqc.R.inc(895);final int width = wr.getWidth();</span>
 
-<span class="nc" id="L1055">        final int scanStride = csm.getScanlineStride();</span>
-<span class="nc" id="L1056">        final int pixStride  = csm.getPixelStride();</span>
-<span class="nc" id="L1057">        final int [] bandOff = csm.getBandOffsets();</span>
+<span class="nc" id="L1055">        __CLR4_5_27n7nm68iyfqc.R.inc(896);final int scanStride = csm.getScanlineStride();</span>
+<span class="nc" id="L1056">        __CLR4_5_27n7nm68iyfqc.R.inc(897);final int pixStride  = csm.getPixelStride();</span>
+<span class="nc" id="L1057">        __CLR4_5_27n7nm68iyfqc.R.inc(898);final int [] bandOff = csm.getBandOffsets();</span>
 
-<span class="nc" id="L1059">        DataBufferByte db = (DataBufferByte)wr.getDataBuffer();</span>
-<span class="nc" id="L1060">        final int base</span>
+<span class="nc" id="L1059">        __CLR4_5_27n7nm68iyfqc.R.inc(899);DataBufferByte db = (DataBufferByte)wr.getDataBuffer();</span>
+<span class="nc" id="L1060">        __CLR4_5_27n7nm68iyfqc.R.inc(900);final int base</span>
 <span class="nc" id="L1061">            = (db.getOffset()</span>
 <span class="nc" id="L1062">               + csm.getOffset(wr.getMinX() - wr.getSampleModelTranslateX(),</span>
 <span class="nc" id="L1063">                             wr.getMinY() - wr.getSampleModelTranslateY()));</span>
 
-<span class="nc" id="L1065">        int aOff = bandOff[bandOff.length - 1];</span>
-<span class="nc" id="L1066">        int bands = bandOff.length - 1;</span>
+<span class="nc" id="L1065">        __CLR4_5_27n7nm68iyfqc.R.inc(901);int aOff = bandOff[bandOff.length - 1];</span>
+<span class="nc" id="L1066">        __CLR4_5_27n7nm68iyfqc.R.inc(902);int bands = bandOff.length - 1;</span>
 
         // Access the pixel data array
-<span class="nc" id="L1069">        final byte[] pixels = db.getBankData()[0];</span>
-<span class="nc bnc" id="L1070" title="All 2 branches missed.">        for (int y = 0; y &lt; wr.getHeight(); y++) {</span>
-<span class="nc" id="L1071">            int sp = base + y * scanStride;</span>
-<span class="nc" id="L1072">            final int end = sp + width * pixStride;</span>
-<span class="nc bnc" id="L1073" title="All 2 branches missed.">            while (sp &lt; end) {</span>
-<span class="nc" id="L1074">              int a = pixels[sp + aOff] &amp; 0xFF;</span>
-<span class="nc bnc" id="L1075" title="All 2 branches missed.">              if (a == 0) {</span>
-<span class="nc bnc" id="L1076" title="All 2 branches missed.">                for (int b = 0; b &lt; bands; b++) {</span>
-<span class="nc" id="L1077">                  pixels[sp + bandOff[b]] = (byte)0xFF;</span>
+<span class="nc" id="L1069">        __CLR4_5_27n7nm68iyfqc.R.inc(903);final byte[] pixels = db.getBankData()[0];</span>
+<span class="nc bnc" id="L1070" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(904);for (int y = 0; (((y &lt; wr.getHeight())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(905)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(906)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L1071">            __CLR4_5_27n7nm68iyfqc.R.inc(907);int sp = base + y * scanStride;</span>
+<span class="nc" id="L1072">            __CLR4_5_27n7nm68iyfqc.R.inc(908);final int end = sp + width * pixStride;</span>
+<span class="nc bnc" id="L1073" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(909);while ((((sp &lt; end)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(910)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(911)==0&amp;false))) {{</span>
+<span class="nc" id="L1074">              __CLR4_5_27n7nm68iyfqc.R.inc(912);int a = pixels[sp + aOff] &amp; 0xFF;</span>
+<span class="nc bnc" id="L1075" title="All 10 branches missed.">              __CLR4_5_27n7nm68iyfqc.R.inc(913);if ((((a == 0)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(914)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(915)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L1076" title="All 10 branches missed.">                __CLR4_5_27n7nm68iyfqc.R.inc(916);for (int b = 0; (((b &lt; bands)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(917)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(918)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L1077">                  __CLR4_5_27n7nm68iyfqc.R.inc(919);pixels[sp + bandOff[b]] = (byte)0xFF;</span>
                 }
-<span class="nc bnc" id="L1079" title="All 2 branches missed.">              } else if (a &lt; 255) {         // this does NOT include a == 255 (0xff) !</span>
-<span class="nc" id="L1080">                int aFP = (0x00FF0000 / a);</span>
-<span class="nc bnc" id="L1081" title="All 2 branches missed.">                for (int b = 0; b &lt; bands; b++) {</span>
-<span class="nc" id="L1082">                  int i = sp + bandOff[b];</span>
-<span class="nc" id="L1083">                  pixels[i] = (byte)(((pixels[i] &amp; 0xFF) * aFP) &gt;&gt;&gt; 16);</span>
+<span class="nc bnc" id="L1079" title="All 10 branches missed.">              }} }else {__CLR4_5_27n7nm68iyfqc.R.inc(920);if ((((a &lt; 255)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(921)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(922)==0&amp;false))) {{         // this does NOT include a == 255 (0xff) !</span>
+<span class="nc" id="L1080">                __CLR4_5_27n7nm68iyfqc.R.inc(923);int aFP = (0x00FF0000 / a);</span>
+<span class="nc bnc" id="L1081" title="All 10 branches missed.">                __CLR4_5_27n7nm68iyfqc.R.inc(924);for (int b = 0; (((b &lt; bands)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(925)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(926)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L1082">                  __CLR4_5_27n7nm68iyfqc.R.inc(927);int i = sp + bandOff[b];</span>
+<span class="nc" id="L1083">                  __CLR4_5_27n7nm68iyfqc.R.inc(928);pixels[i] = (byte)(((pixels[i] &amp; 0xFF) * aFP) &gt;&gt;&gt; 16);</span>
                 }
-              }
-<span class="nc" id="L1086">              sp += pixStride;</span>
+              }}
+<span class="nc" id="L1086">              }}__CLR4_5_27n7nm68iyfqc.R.inc(929);sp += pixStride;</span>
 <span class="nc" id="L1087">            }</span>
-        }
-<span class="nc" id="L1089">    }</span>
+        }}
+<span class="nc" id="L1089">    }}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
-    protected static void mult_BYTE_COMP_Data(WritableRaster wr) {
+<span class="nc" id="L1091">    protected static void mult_BYTE_COMP_Data(WritableRaster wr) {try{__CLR4_5_27n7nm68iyfqc.R.inc(930);</span>
         // System.out.println(&quot;Multiply Int: &quot; + wr);
 
-        ComponentSampleModel csm;
-<span class="nc" id="L1095">        csm = (ComponentSampleModel)wr.getSampleModel();</span>
+<span class="nc" id="L1094">        __CLR4_5_27n7nm68iyfqc.R.inc(931);ComponentSampleModel csm;</span>
+<span class="nc" id="L1095">        __CLR4_5_27n7nm68iyfqc.R.inc(932);csm = (ComponentSampleModel)wr.getSampleModel();</span>
 
-<span class="nc" id="L1097">        final int width = wr.getWidth();</span>
+<span class="nc" id="L1097">        __CLR4_5_27n7nm68iyfqc.R.inc(933);final int width = wr.getWidth();</span>
 
-<span class="nc" id="L1099">        final int scanStride = csm.getScanlineStride();</span>
-<span class="nc" id="L1100">        final int pixStride  = csm.getPixelStride();</span>
-<span class="nc" id="L1101">        final int [] bandOff = csm.getBandOffsets();</span>
+<span class="nc" id="L1099">        __CLR4_5_27n7nm68iyfqc.R.inc(934);final int scanStride = csm.getScanlineStride();</span>
+<span class="nc" id="L1100">        __CLR4_5_27n7nm68iyfqc.R.inc(935);final int pixStride  = csm.getPixelStride();</span>
+<span class="nc" id="L1101">        __CLR4_5_27n7nm68iyfqc.R.inc(936);final int [] bandOff = csm.getBandOffsets();</span>
 
-<span class="nc" id="L1103">        DataBufferByte db = (DataBufferByte)wr.getDataBuffer();</span>
-<span class="nc" id="L1104">        final int base</span>
+<span class="nc" id="L1103">        __CLR4_5_27n7nm68iyfqc.R.inc(937);DataBufferByte db = (DataBufferByte)wr.getDataBuffer();</span>
+<span class="nc" id="L1104">        __CLR4_5_27n7nm68iyfqc.R.inc(938);final int base</span>
 <span class="nc" id="L1105">            = (db.getOffset()</span>
 <span class="nc" id="L1106">               + csm.getOffset(wr.getMinX() - wr.getSampleModelTranslateX(),</span>
 <span class="nc" id="L1107">                             wr.getMinY() - wr.getSampleModelTranslateY()));</span>
 
 
-<span class="nc" id="L1110">        int aOff = bandOff[bandOff.length - 1];</span>
-<span class="nc" id="L1111">        int bands = bandOff.length - 1;</span>
+<span class="nc" id="L1110">        __CLR4_5_27n7nm68iyfqc.R.inc(939);int aOff = bandOff[bandOff.length - 1];</span>
+<span class="nc" id="L1111">        __CLR4_5_27n7nm68iyfqc.R.inc(940);int bands = bandOff.length - 1;</span>
 
         // Access the pixel data array
-<span class="nc" id="L1114">        final byte[] pixels = db.getBankData()[0];</span>
-<span class="nc bnc" id="L1115" title="All 2 branches missed.">        for (int y = 0; y &lt; wr.getHeight(); y++) {</span>
-<span class="nc" id="L1116">            int sp = base + y * scanStride;</span>
-<span class="nc" id="L1117">            final int end = sp + width * pixStride;</span>
-<span class="nc bnc" id="L1118" title="All 2 branches missed.">            while (sp &lt; end) {</span>
-<span class="nc" id="L1119">              int a = pixels[sp + aOff] &amp; 0xFF;</span>
-<span class="nc bnc" id="L1120" title="All 2 branches missed.">              if (a != 0xFF) {</span>
-<span class="nc bnc" id="L1121" title="All 2 branches missed.">                for (int b = 0; b &lt; bands; b++) {</span>
-<span class="nc" id="L1122">                  int i = sp + bandOff[b];</span>
-<span class="nc" id="L1123">                  pixels[i] = (byte)(((pixels[i] &amp; 0xFF) * a) &gt;&gt; 8);</span>
+<span class="nc" id="L1114">        __CLR4_5_27n7nm68iyfqc.R.inc(941);final byte[] pixels = db.getBankData()[0];</span>
+<span class="nc bnc" id="L1115" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(942);for (int y = 0; (((y &lt; wr.getHeight())&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(943)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(944)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L1116">            __CLR4_5_27n7nm68iyfqc.R.inc(945);int sp = base + y * scanStride;</span>
+<span class="nc" id="L1117">            __CLR4_5_27n7nm68iyfqc.R.inc(946);final int end = sp + width * pixStride;</span>
+<span class="nc bnc" id="L1118" title="All 10 branches missed.">            __CLR4_5_27n7nm68iyfqc.R.inc(947);while ((((sp &lt; end)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(948)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(949)==0&amp;false))) {{</span>
+<span class="nc" id="L1119">              __CLR4_5_27n7nm68iyfqc.R.inc(950);int a = pixels[sp + aOff] &amp; 0xFF;</span>
+<span class="nc bnc" id="L1120" title="All 10 branches missed.">              __CLR4_5_27n7nm68iyfqc.R.inc(951);if ((((a != 0xFF)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(952)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(953)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L1121" title="All 10 branches missed.">                __CLR4_5_27n7nm68iyfqc.R.inc(954);for (int b = 0; (((b &lt; bands)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(955)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(956)==0&amp;false)); b++) {{</span>
+<span class="nc" id="L1122">                  __CLR4_5_27n7nm68iyfqc.R.inc(957);int i = sp + bandOff[b];</span>
+<span class="nc" id="L1123">                  __CLR4_5_27n7nm68iyfqc.R.inc(958);pixels[i] = (byte)(((pixels[i] &amp; 0xFF) * a) &gt;&gt; 8);</span>
                 }
-              }
-<span class="nc" id="L1126">              sp += pixStride;</span>
+              }}
+<span class="nc" id="L1126">              }__CLR4_5_27n7nm68iyfqc.R.inc(959);sp += pixStride;</span>
 <span class="nc" id="L1127">            }</span>
-        }
-<span class="nc" id="L1129">    }</span>
+        }}
+<span class="nc" id="L1129">    }}finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
 /*
   This is skanky debugging code that might be useful in the future:
@@ -1202,21 +1202,21 @@ public final class GraphicsUtil {
      * @param image the image
      * @return the alpha raster
      */
-    public static Raster getAlphaRaster(RenderedImage image) {
-<span class="nc" id="L1206">        ColorModel cm = image.getColorModel();</span>
-<span class="nc bnc" id="L1207" title="All 4 branches missed.">        if (!cm.hasAlpha() || cm.getTransparency() != ColorModel.TRANSLUCENT) {</span>
-<span class="nc" id="L1208">            throw new IllegalStateException(&quot;Image doesn't have an alpha channel&quot;);</span>
+<span class="nc" id="L1205">    public static Raster getAlphaRaster(RenderedImage image) {try{__CLR4_5_27n7nm68iyfqc.R.inc(960);</span>
+<span class="nc" id="L1206">        __CLR4_5_27n7nm68iyfqc.R.inc(961);ColorModel cm = image.getColorModel();</span>
+<span class="nc bnc" id="L1207" title="All 12 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(962);if ((((!cm.hasAlpha() || cm.getTransparency() != ColorModel.TRANSLUCENT)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(963)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(964)==0&amp;false))) {{</span>
+<span class="nc" id="L1208">            __CLR4_5_27n7nm68iyfqc.R.inc(965);throw new IllegalStateException(&quot;Image doesn't have an alpha channel&quot;);</span>
         }
-        Raster alpha;
-<span class="nc bnc" id="L1211" title="All 2 branches missed.">        if (image instanceof BufferedImage) {</span>
+<span class="nc" id="L1210">        }__CLR4_5_27n7nm68iyfqc.R.inc(966);Raster alpha;</span>
+<span class="nc bnc" id="L1211" title="All 10 branches missed.">        __CLR4_5_27n7nm68iyfqc.R.inc(967);if ((((image instanceof BufferedImage)&amp;&amp;(__CLR4_5_27n7nm68iyfqc.R.iget(968)!=0|true))||(__CLR4_5_27n7nm68iyfqc.R.iget(969)==0&amp;false))) {{</span>
             //Optimization possible with BufferedImage (No copying)
-<span class="nc" id="L1213">            alpha = ((BufferedImage)image).getAlphaRaster();</span>
-        } else {
-<span class="nc" id="L1215">            WritableRaster wraster = GraphicsUtil.makeRasterWritable(image.getData());</span>
-<span class="nc" id="L1216">            alpha = image.getColorModel().getAlphaRaster(wraster);</span>
+<span class="nc" id="L1213">            __CLR4_5_27n7nm68iyfqc.R.inc(970);alpha = ((BufferedImage)image).getAlphaRaster();</span>
+        } }else {{
+<span class="nc" id="L1215">            __CLR4_5_27n7nm68iyfqc.R.inc(971);WritableRaster wraster = GraphicsUtil.makeRasterWritable(image.getData());</span>
+<span class="nc" id="L1216">            __CLR4_5_27n7nm68iyfqc.R.inc(972);alpha = image.getColorModel().getAlphaRaster(wraster);</span>
         }
-<span class="nc" id="L1218">        return alpha;</span>
-    }
+<span class="nc" id="L1218">        }__CLR4_5_27n7nm68iyfqc.R.inc(973);return alpha;</span>
+<span class="nc" id="L1219">    }finally{__CLR4_5_27n7nm68iyfqc.R.flushNeeded();}}</span>
 
 
 }

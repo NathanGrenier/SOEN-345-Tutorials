@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FormatRed.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.rendered</a> &gt; <span class="el_source">FormatRed.java</span></div><h1>FormatRed.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FormatRed.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.rendered</a> &gt; <span class="el_source">FormatRed.java</span></div><h1>FormatRed.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -49,33 +49,33 @@ import org.apache.xmlgraphics.image.GraphicsUtil;
  *
  * Originally authored by Thomas DeWeese.
  */
-public class FormatRed extends AbstractRed {
+<span class="nc bnc" id="L52" title="All 4 branches missed.">@java.lang.SuppressWarnings({&quot;fallthrough&quot;}) public class FormatRed extends AbstractRed {public static class __CLR4_5_2ageagem68iyhmc{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,13668,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
-    public static CachableRed construct(CachableRed src, ColorModel cm) {
-<span class="nc" id="L55">        ColorModel srcCM = src.getColorModel();</span>
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        if ((cm.hasAlpha() != srcCM.hasAlpha())</span>
-<span class="nc bnc" id="L57" title="All 2 branches missed.">            || (cm.isAlphaPremultiplied() != srcCM.isAlphaPremultiplied())) {</span>
-<span class="nc" id="L58">            return new FormatRed(src, cm);</span>
+<span class="nc" id="L54">    public static CachableRed construct(CachableRed src, ColorModel cm) {try{__CLR4_5_2ageagem68iyhmc.R.inc(13550);</span>
+<span class="nc" id="L55">        __CLR4_5_2ageagem68iyhmc.R.inc(13551);ColorModel srcCM = src.getColorModel();</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        __CLR4_5_2ageagem68iyhmc.R.inc(13552);if (((((cm.hasAlpha() != srcCM.hasAlpha())</span>
+<span class="nc bnc" id="L57" title="All 10 branches missed.">            || (cm.isAlphaPremultiplied() != srcCM.isAlphaPremultiplied()))&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13553)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13554)==0&amp;false))) {{</span>
+<span class="nc" id="L58">            __CLR4_5_2ageagem68iyhmc.R.inc(13555);return new FormatRed(src, cm);</span>
         }
 
-<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (cm.getNumComponents() != srcCM.getNumComponents()) {</span>
-<span class="nc" id="L62">            throw new IllegalArgumentException(</span>
+<span class="nc bnc" id="L61" title="All 10 branches missed.">        }__CLR4_5_2ageagem68iyhmc.R.inc(13556);if ((((cm.getNumComponents() != srcCM.getNumComponents())&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13557)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13558)==0&amp;false))) {{</span>
+<span class="nc" id="L62">            __CLR4_5_2ageagem68iyhmc.R.inc(13559);throw new IllegalArgumentException(</span>
                 &quot;Incompatible ColorModel given&quot;);
         }
 
 
-<span class="nc bnc" id="L67" title="All 4 branches missed.">        if ((srcCM instanceof ComponentColorModel)</span>
-            &amp;&amp; (cm    instanceof ComponentColorModel)) {
-<span class="nc" id="L69">            return src;</span>
+<span class="nc bnc" id="L67" title="All 4 branches missed.">        }__CLR4_5_2ageagem68iyhmc.R.inc(13560);if (((((srcCM instanceof ComponentColorModel)</span>
+<span class="nc bnc" id="L68" title="All 8 branches missed.">            &amp;&amp; (cm    instanceof ComponentColorModel))&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13561)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13562)==0&amp;false))) {{</span>
+<span class="nc" id="L69">            __CLR4_5_2ageagem68iyhmc.R.inc(13563);return src;</span>
         }
 
-<span class="nc bnc" id="L72" title="All 4 branches missed.">        if ((srcCM instanceof DirectColorModel)</span>
-            &amp;&amp; (cm    instanceof DirectColorModel)) {
-<span class="nc" id="L74">            return src;</span>
+<span class="nc bnc" id="L72" title="All 4 branches missed.">        }__CLR4_5_2ageagem68iyhmc.R.inc(13564);if (((((srcCM instanceof DirectColorModel)</span>
+<span class="nc bnc" id="L73" title="All 8 branches missed.">            &amp;&amp; (cm    instanceof DirectColorModel))&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13565)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13566)==0&amp;false))) {{</span>
+<span class="nc" id="L74">            __CLR4_5_2ageagem68iyhmc.R.inc(13567);return src;</span>
         }
 
-<span class="nc" id="L77">        return new FormatRed(src, cm);</span>
-    }
+<span class="nc" id="L77">        }__CLR4_5_2ageagem68iyhmc.R.inc(13568);return new FormatRed(src, cm);</span>
+<span class="nc" id="L78">    }finally{__CLR4_5_2ageagem68iyhmc.R.flushNeeded();}}</span>
 
     /**
      * Construct an instance of CachableRed around a BufferedImage.
@@ -85,134 +85,134 @@ public class FormatRed extends AbstractRed {
 <span class="nc" id="L85">              makeColorModel(cr, sm), sm,</span>
 <span class="nc" id="L86">              cr.getTileGridXOffset(),</span>
 <span class="nc" id="L87">              cr.getTileGridYOffset(),</span>
-              null);
-<span class="nc" id="L89">    }</span>
+<span class="nc" id="L88">              null);__CLR4_5_2ageagem68iyhmc.R.inc(13570);try{__CLR4_5_2ageagem68iyhmc.R.inc(13569);</span>
+<span class="nc" id="L89">    }finally{__CLR4_5_2ageagem68iyhmc.R.flushNeeded();}}</span>
 
     public FormatRed(CachableRed cr, ColorModel cm) {
 <span class="nc" id="L92">        super(cr, cr.getBounds(),</span>
 <span class="nc" id="L93">              cm, makeSampleModel(cr, cm),</span>
 <span class="nc" id="L94">              cr.getTileGridXOffset(),</span>
 <span class="nc" id="L95">              cr.getTileGridYOffset(),</span>
-              null);
-<span class="nc" id="L97">    }</span>
+<span class="nc" id="L96">              null);__CLR4_5_2ageagem68iyhmc.R.inc(13572);try{__CLR4_5_2ageagem68iyhmc.R.inc(13571);</span>
+<span class="nc" id="L97">    }finally{__CLR4_5_2ageagem68iyhmc.R.flushNeeded();}}</span>
 
     /**
      * fetch the source image for this node.
      */
-    public CachableRed getSource() {
-<span class="nc" id="L103">        return (CachableRed)getSources().get(0);</span>
-    }
+<span class="nc" id="L102">    public CachableRed getSource() {try{__CLR4_5_2ageagem68iyhmc.R.inc(13573);</span>
+<span class="nc" id="L103">        __CLR4_5_2ageagem68iyhmc.R.inc(13574);return (CachableRed)getSources().get(0);</span>
+<span class="nc" id="L104">    }finally{__CLR4_5_2ageagem68iyhmc.R.flushNeeded();}}</span>
 
-    public Object getProperty(String name) {
-<span class="nc" id="L107">        return getSource().getProperty(name);</span>
-    }
+<span class="nc" id="L106">    public Object getProperty(String name) {try{__CLR4_5_2ageagem68iyhmc.R.inc(13575);</span>
+<span class="nc" id="L107">        __CLR4_5_2ageagem68iyhmc.R.inc(13576);return getSource().getProperty(name);</span>
+<span class="nc" id="L108">    }finally{__CLR4_5_2ageagem68iyhmc.R.flushNeeded();}}</span>
 
-    public String [] getPropertyNames() {
-<span class="nc" id="L111">        return getSource().getPropertyNames();</span>
-    }
+<span class="nc" id="L110">    public String [] getPropertyNames() {try{__CLR4_5_2ageagem68iyhmc.R.inc(13577);</span>
+<span class="nc" id="L111">        __CLR4_5_2ageagem68iyhmc.R.inc(13578);return getSource().getPropertyNames();</span>
+<span class="nc" id="L112">    }finally{__CLR4_5_2ageagem68iyhmc.R.flushNeeded();}}</span>
 
-    public WritableRaster copyData(WritableRaster wr) {
-<span class="nc" id="L115">        ColorModel  cm    = getColorModel();</span>
-<span class="nc" id="L116">        CachableRed cr    = getSource();</span>
-<span class="nc" id="L117">        ColorModel  srcCM = cr.getColorModel();</span>
-<span class="nc" id="L118">        SampleModel srcSM = cr.getSampleModel();</span>
-<span class="nc" id="L119">        srcSM = srcSM.createCompatibleSampleModel(wr.getWidth(),</span>
+<span class="nc" id="L114">    public WritableRaster copyData(WritableRaster wr) {try{__CLR4_5_2ageagem68iyhmc.R.inc(13579);</span>
+<span class="nc" id="L115">        __CLR4_5_2ageagem68iyhmc.R.inc(13580);ColorModel  cm    = getColorModel();</span>
+<span class="nc" id="L116">        __CLR4_5_2ageagem68iyhmc.R.inc(13581);CachableRed cr    = getSource();</span>
+<span class="nc" id="L117">        __CLR4_5_2ageagem68iyhmc.R.inc(13582);ColorModel  srcCM = cr.getColorModel();</span>
+<span class="nc" id="L118">        __CLR4_5_2ageagem68iyhmc.R.inc(13583);SampleModel srcSM = cr.getSampleModel();</span>
+<span class="nc" id="L119">        __CLR4_5_2ageagem68iyhmc.R.inc(13584);srcSM = srcSM.createCompatibleSampleModel(wr.getWidth(),</span>
 <span class="nc" id="L120">                                                  wr.getHeight());</span>
-        WritableRaster srcWR;
-<span class="nc" id="L122">        srcWR = Raster.createWritableRaster(srcSM, new Point(wr.getMinX(),</span>
+<span class="nc" id="L121">        __CLR4_5_2ageagem68iyhmc.R.inc(13585);WritableRaster srcWR;</span>
+<span class="nc" id="L122">        __CLR4_5_2ageagem68iyhmc.R.inc(13586);srcWR = Raster.createWritableRaster(srcSM, new Point(wr.getMinX(),</span>
 <span class="nc" id="L123">                                                             wr.getMinY()));</span>
-<span class="nc" id="L124">        getSource().copyData(srcWR);</span>
+<span class="nc" id="L124">        __CLR4_5_2ageagem68iyhmc.R.inc(13587);getSource().copyData(srcWR);</span>
 
-<span class="nc" id="L126">        BufferedImage srcBI = new BufferedImage(</span>
+<span class="nc" id="L126">        __CLR4_5_2ageagem68iyhmc.R.inc(13588);BufferedImage srcBI = new BufferedImage(</span>
 <span class="nc" id="L127">            srcCM, srcWR.createWritableTranslatedChild(0, 0),</span>
 <span class="nc" id="L128">             srcCM.isAlphaPremultiplied(), null);</span>
-<span class="nc" id="L129">        BufferedImage dstBI = new BufferedImage(</span>
+<span class="nc" id="L129">        __CLR4_5_2ageagem68iyhmc.R.inc(13589);BufferedImage dstBI = new BufferedImage(</span>
 <span class="nc" id="L130">            cm, wr.createWritableTranslatedChild(0, 0),</span>
 <span class="nc" id="L131">             cm.isAlphaPremultiplied(), null);</span>
 
-<span class="nc" id="L133">        GraphicsUtil.copyData(srcBI, dstBI);</span>
+<span class="nc" id="L133">        __CLR4_5_2ageagem68iyhmc.R.inc(13590);GraphicsUtil.copyData(srcBI, dstBI);</span>
 
-<span class="nc" id="L135">        return wr;</span>
-    }
+<span class="nc" id="L135">        __CLR4_5_2ageagem68iyhmc.R.inc(13591);return wr;</span>
+<span class="nc" id="L136">    }finally{__CLR4_5_2ageagem68iyhmc.R.flushNeeded();}}</span>
 
-    public static SampleModel makeSampleModel(CachableRed cr, ColorModel cm) {
-<span class="nc" id="L139">        SampleModel srcSM = cr.getSampleModel();</span>
-<span class="nc" id="L140">        return cm.createCompatibleSampleModel(srcSM.getWidth(),</span>
+<span class="nc" id="L138">    public static SampleModel makeSampleModel(CachableRed cr, ColorModel cm) {try{__CLR4_5_2ageagem68iyhmc.R.inc(13592);</span>
+<span class="nc" id="L139">        __CLR4_5_2ageagem68iyhmc.R.inc(13593);SampleModel srcSM = cr.getSampleModel();</span>
+<span class="nc" id="L140">        __CLR4_5_2ageagem68iyhmc.R.inc(13594);return cm.createCompatibleSampleModel(srcSM.getWidth(),</span>
 <span class="nc" id="L141">                                              srcSM.getHeight());</span>
-    }
+<span class="nc" id="L142">    }finally{__CLR4_5_2ageagem68iyhmc.R.flushNeeded();}}</span>
 
-    public static ColorModel makeColorModel(CachableRed cr, SampleModel sm) {
-<span class="nc" id="L145">        ColorModel srcCM = cr.getColorModel();</span>
-<span class="nc" id="L146">        ColorSpace cs    = srcCM.getColorSpace();</span>
+<span class="nc" id="L144">    public static ColorModel makeColorModel(CachableRed cr, SampleModel sm) {try{__CLR4_5_2ageagem68iyhmc.R.inc(13595);</span>
+<span class="nc" id="L145">        __CLR4_5_2ageagem68iyhmc.R.inc(13596);ColorModel srcCM = cr.getColorModel();</span>
+<span class="nc" id="L146">        __CLR4_5_2ageagem68iyhmc.R.inc(13597);ColorSpace cs    = srcCM.getColorSpace();</span>
 
-<span class="nc" id="L148">        int bands = sm.getNumBands();</span>
+<span class="nc" id="L148">        __CLR4_5_2ageagem68iyhmc.R.inc(13598);int bands = sm.getNumBands();</span>
 
-        int bits;
-<span class="nc" id="L151">        int dt = sm.getDataType();</span>
-<span class="nc bnc" id="L152" title="All 5 branches missed.">        switch (dt) {</span>
-<span class="nc" id="L153">        case DataBuffer.TYPE_BYTE:   bits = 8;  break;</span>
-<span class="nc" id="L154">        case DataBuffer.TYPE_SHORT:  bits = 16; break;</span>
-<span class="nc" id="L155">        case DataBuffer.TYPE_USHORT: bits = 16; break;</span>
-<span class="nc" id="L156">        case DataBuffer.TYPE_INT:    bits = 32; break;</span>
-        default:
-<span class="nc" id="L158">            throw new IllegalArgumentException(</span>
+<span class="nc" id="L150">        __CLR4_5_2ageagem68iyhmc.R.inc(13599);int bits;</span>
+<span class="nc" id="L151">        __CLR4_5_2ageagem68iyhmc.R.inc(13600);int dt = sm.getDataType();</span>
+<span class="nc bnc" id="L152" title="All 5 branches missed.">        boolean __CLB4_5_2_bool0=false;__CLR4_5_2ageagem68iyhmc.R.inc(13601);switch (dt) {</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        case DataBuffer.TYPE_BYTE:if (!__CLB4_5_2_bool0) {__CLR4_5_2ageagem68iyhmc.R.inc(13602);__CLB4_5_2_bool0=true;}   __CLR4_5_2ageagem68iyhmc.R.inc(13603);bits = 8;  __CLR4_5_2ageagem68iyhmc.R.inc(13604);break;</span>
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        case DataBuffer.TYPE_SHORT:if (!__CLB4_5_2_bool0) {__CLR4_5_2ageagem68iyhmc.R.inc(13605);__CLB4_5_2_bool0=true;}  __CLR4_5_2ageagem68iyhmc.R.inc(13606);bits = 16; __CLR4_5_2ageagem68iyhmc.R.inc(13607);break;</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">        case DataBuffer.TYPE_USHORT:if (!__CLB4_5_2_bool0) {__CLR4_5_2ageagem68iyhmc.R.inc(13608);__CLB4_5_2_bool0=true;} __CLR4_5_2ageagem68iyhmc.R.inc(13609);bits = 16; __CLR4_5_2ageagem68iyhmc.R.inc(13610);break;</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">        case DataBuffer.TYPE_INT:if (!__CLB4_5_2_bool0) {__CLR4_5_2ageagem68iyhmc.R.inc(13611);__CLB4_5_2_bool0=true;}    __CLR4_5_2ageagem68iyhmc.R.inc(13612);bits = 32; __CLR4_5_2ageagem68iyhmc.R.inc(13613);break;</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">        default:if (!__CLB4_5_2_bool0) {__CLR4_5_2ageagem68iyhmc.R.inc(13614);__CLB4_5_2_bool0=true;}</span>
+<span class="nc" id="L158">            __CLR4_5_2ageagem68iyhmc.R.inc(13615);throw new IllegalArgumentException(</span>
                 &quot;Unsupported DataBuffer type: &quot; + dt);
         }
 
-<span class="nc" id="L162">        boolean hasAlpha = srcCM.hasAlpha();</span>
-<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (hasAlpha) {</span>
+<span class="nc" id="L162">        __CLR4_5_2ageagem68iyhmc.R.inc(13616);boolean hasAlpha = srcCM.hasAlpha();</span>
+<span class="nc bnc" id="L163" title="All 10 branches missed.">        __CLR4_5_2ageagem68iyhmc.R.inc(13617);if ((((hasAlpha)&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13618)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13619)==0&amp;false))) {{</span>
             // if Src has Alpha then our out bands must
             // either be one less than the source (no out alpha)
             // or equal (still has alpha)
-<span class="nc bnc" id="L167" title="All 2 branches missed.">            if (bands == srcCM.getNumComponents() - 1) {</span>
-<span class="nc" id="L168">                hasAlpha = false;</span>
-<span class="nc bnc" id="L169" title="All 2 branches missed.">            } else if (bands != srcCM.getNumComponents()) {</span>
-<span class="nc" id="L170">                throw new IllegalArgumentException(</span>
+<span class="nc bnc" id="L167" title="All 10 branches missed.">            __CLR4_5_2ageagem68iyhmc.R.inc(13620);if ((((bands == srcCM.getNumComponents() - 1)&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13621)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13622)==0&amp;false))) {{</span>
+<span class="nc" id="L168">                __CLR4_5_2ageagem68iyhmc.R.inc(13623);hasAlpha = false;</span>
+<span class="nc bnc" id="L169" title="All 10 branches missed.">            } }else {__CLR4_5_2ageagem68iyhmc.R.inc(13624);if ((((bands != srcCM.getNumComponents())&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13625)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13626)==0&amp;false))) {{</span>
+<span class="nc" id="L170">                __CLR4_5_2ageagem68iyhmc.R.inc(13627);throw new IllegalArgumentException(</span>
                     &quot;Incompatible number of bands in and out&quot;);
             }
-        } else {
-<span class="nc bnc" id="L174" title="All 2 branches missed.">            if (bands == srcCM.getNumComponents() + 1) {</span>
-<span class="nc" id="L175">                hasAlpha = true;</span>
-<span class="nc bnc" id="L176" title="All 2 branches missed.">            } else if (bands != srcCM.getNumComponents()) {</span>
-<span class="nc" id="L177">                throw new IllegalArgumentException(</span>
+        }}} }else {{
+<span class="nc bnc" id="L174" title="All 10 branches missed.">            __CLR4_5_2ageagem68iyhmc.R.inc(13628);if ((((bands == srcCM.getNumComponents() + 1)&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13629)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13630)==0&amp;false))) {{</span>
+<span class="nc" id="L175">                __CLR4_5_2ageagem68iyhmc.R.inc(13631);hasAlpha = true;</span>
+<span class="nc bnc" id="L176" title="All 10 branches missed.">            } }else {__CLR4_5_2ageagem68iyhmc.R.inc(13632);if ((((bands != srcCM.getNumComponents())&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13633)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13634)==0&amp;false))) {{</span>
+<span class="nc" id="L177">                __CLR4_5_2ageagem68iyhmc.R.inc(13635);throw new IllegalArgumentException(</span>
                     &quot;Incompatible number of bands in and out&quot;);
             }
+        }}}
+
+<span class="nc" id="L182">        }__CLR4_5_2ageagem68iyhmc.R.inc(13636);boolean preMult  = srcCM.isAlphaPremultiplied();</span>
+<span class="nc bnc" id="L183" title="All 10 branches missed.">        __CLR4_5_2ageagem68iyhmc.R.inc(13637);if ((((!hasAlpha)&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13638)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13639)==0&amp;false))) {{</span>
+<span class="nc" id="L184">            __CLR4_5_2ageagem68iyhmc.R.inc(13640);preMult = false;</span>
         }
 
-<span class="nc" id="L182">        boolean preMult  = srcCM.isAlphaPremultiplied();</span>
-<span class="nc bnc" id="L183" title="All 2 branches missed.">        if (!hasAlpha) {</span>
-<span class="nc" id="L184">            preMult = false;</span>
-        }
-
-<span class="nc bnc" id="L187" title="All 2 branches missed.">        if (sm instanceof ComponentSampleModel) {</span>
-<span class="nc" id="L188">            int [] bitsPer = new int[bands];</span>
-<span class="nc bnc" id="L189" title="All 2 branches missed.">            for (int i = 0; i &lt; bands; i++) {</span>
-<span class="nc" id="L190">                bitsPer[i] = bits;</span>
+<span class="nc bnc" id="L187" title="All 10 branches missed.">        }__CLR4_5_2ageagem68iyhmc.R.inc(13641);if ((((sm instanceof ComponentSampleModel)&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13642)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13643)==0&amp;false))) {{</span>
+<span class="nc" id="L188">            __CLR4_5_2ageagem68iyhmc.R.inc(13644);int [] bitsPer = new int[bands];</span>
+<span class="nc bnc" id="L189" title="All 10 branches missed.">            __CLR4_5_2ageagem68iyhmc.R.inc(13645);for (int i = 0; (((i &lt; bands)&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13646)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13647)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L190">                __CLR4_5_2ageagem68iyhmc.R.inc(13648);bitsPer[i] = bits;</span>
             }
 
-<span class="nc" id="L193">            return new ComponentColorModel(</span>
+<span class="nc" id="L193">            }__CLR4_5_2ageagem68iyhmc.R.inc(13649);return new ComponentColorModel(</span>
                 cs, bitsPer, hasAlpha, preMult,
-<span class="nc bnc" id="L195" title="All 2 branches missed.">                 hasAlpha ? Transparency.TRANSLUCENT : Transparency.OPAQUE,</span>
+<span class="nc bnc" id="L195" title="All 10 branches missed.">                 (((hasAlpha )&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13650)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13651)==0&amp;false))? Transparency.TRANSLUCENT : Transparency.OPAQUE,</span>
                  dt);
-<span class="nc bnc" id="L197" title="All 2 branches missed.">        } else if (sm instanceof SinglePixelPackedSampleModel) {</span>
-            SinglePixelPackedSampleModel sppsm;
-<span class="nc" id="L199">            sppsm = (SinglePixelPackedSampleModel)sm;</span>
-<span class="nc" id="L200">            int[] masks  = sppsm.getBitMasks();</span>
-<span class="nc bnc" id="L201" title="All 2 branches missed.">            if (bands == 4) {</span>
-<span class="nc" id="L202">                return new DirectColorModel(</span>
+<span class="nc bnc" id="L197" title="All 10 branches missed.">        } }else {__CLR4_5_2ageagem68iyhmc.R.inc(13652);if ((((sm instanceof SinglePixelPackedSampleModel)&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13653)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13654)==0&amp;false))) {{</span>
+<span class="nc" id="L198">            __CLR4_5_2ageagem68iyhmc.R.inc(13655);SinglePixelPackedSampleModel sppsm;</span>
+<span class="nc" id="L199">            __CLR4_5_2ageagem68iyhmc.R.inc(13656);sppsm = (SinglePixelPackedSampleModel)sm;</span>
+<span class="nc" id="L200">            __CLR4_5_2ageagem68iyhmc.R.inc(13657);int[] masks  = sppsm.getBitMasks();</span>
+<span class="nc bnc" id="L201" title="All 10 branches missed.">            __CLR4_5_2ageagem68iyhmc.R.inc(13658);if ((((bands == 4)&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13659)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13660)==0&amp;false))) {{</span>
+<span class="nc" id="L202">                __CLR4_5_2ageagem68iyhmc.R.inc(13661);return new DirectColorModel(</span>
                     cs, bits, masks[0], masks[1], masks[2], masks[3],
                      preMult, dt);
-<span class="nc bnc" id="L205" title="All 2 branches missed.">            } else if (bands == 3) {</span>
-<span class="nc" id="L206">                return new DirectColorModel(</span>
+<span class="nc bnc" id="L205" title="All 10 branches missed.">            } }else {__CLR4_5_2ageagem68iyhmc.R.inc(13662);if ((((bands == 3)&amp;&amp;(__CLR4_5_2ageagem68iyhmc.R.iget(13663)!=0|true))||(__CLR4_5_2ageagem68iyhmc.R.iget(13664)==0&amp;false))) {{</span>
+<span class="nc" id="L206">                __CLR4_5_2ageagem68iyhmc.R.inc(13665);return new DirectColorModel(</span>
                     cs, bits, masks[0], masks[1], masks[2], 0x0,
                      preMult, dt);
-            } else {
-<span class="nc" id="L210">                throw new IllegalArgumentException(</span>
+            } }else {{
+<span class="nc" id="L210">                __CLR4_5_2ageagem68iyhmc.R.inc(13666);throw new IllegalArgumentException(</span>
                     &quot;Incompatible number of bands out for ColorModel&quot;);
             }
-        }
-<span class="nc" id="L214">        throw new IllegalArgumentException(</span>
+        }}}
+<span class="nc" id="L214">        }}__CLR4_5_2ageagem68iyhmc.R.inc(13667);throw new IllegalArgumentException(</span>
             &quot;Unsupported SampleModel Type&quot;);
-    }
+<span class="nc" id="L216">    }finally{__CLR4_5_2ageagem68iyhmc.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

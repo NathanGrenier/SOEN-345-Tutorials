@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleRenderedImage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.util</a> &gt; <span class="el_source">SimpleRenderedImage.java</span></div><h1>SimpleRenderedImage.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleRenderedImage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.util</a> &gt; <span class="el_source">SimpleRenderedImage.java</span></div><h1>SimpleRenderedImage.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -48,7 +48,7 @@ import java.util.Vector;
  *
  * @version $Id: SimpleRenderedImage.java 1804124 2017-08-04 14:13:54Z ssteiner $
  */
-public abstract class SimpleRenderedImage implements RenderedImage {
+<span class="pc bpc" id="L51" title="3 of 4 branches missed.">public abstract class SimpleRenderedImage implements RenderedImage {public static class __CLR4_5_26xq6xqm68iygzb{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,9133,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /** The X coordinate of the image's upper-left pixel. */
     protected int minX;
@@ -86,12 +86,12 @@ public abstract class SimpleRenderedImage implements RenderedImage {
     /** A Hashtable containing the image properties. */
 <span class="fc" id="L87">    protected Map properties = new HashMap();</span>
 
-<span class="fc" id="L89">    public SimpleRenderedImage() { }</span>
+<span class="fc" id="L89">    public SimpleRenderedImage() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(8990); }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /** Returns the X coordinate of the leftmost column of the image. */
-    public int getMinX() {
-<span class="fc" id="L93">        return minX;</span>
-    }
+<span class="fc" id="L92">    public int getMinX() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(8991);</span>
+<span class="fc" id="L93">        __CLR4_5_26xq6xqm68iygzb.R.inc(8992);return minX;</span>
+<span class="fc" id="L94">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the X coordinate of the column immediatetely to the
@@ -99,14 +99,14 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * implemented in terms of getMinX() and getWidth() and so does
      * not need to be implemented by subclasses.
      */
-    public final int getMaxX() {
-<span class="nc" id="L103">        return getMinX() + getWidth();</span>
-    }
+<span class="nc" id="L102">    public final int getMaxX() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(8993);</span>
+<span class="nc" id="L103">        __CLR4_5_26xq6xqm68iygzb.R.inc(8994);return getMinX() + getWidth();</span>
+<span class="nc" id="L104">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /** Returns the X coordinate of the uppermost row of the image. */
-    public int getMinY() {
-<span class="fc" id="L108">        return minY;</span>
-    }
+<span class="fc" id="L107">    public int getMinY() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(8995);</span>
+<span class="fc" id="L108">        __CLR4_5_26xq6xqm68iygzb.R.inc(8996);return minY;</span>
+<span class="fc" id="L109">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the Y coordinate of the row immediately below the
@@ -114,67 +114,67 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * getMinY() and getHeight() and so does not need to be
      * implemented by subclasses.
      */
-    public final int getMaxY() {
-<span class="nc" id="L118">        return getMinY() + getHeight();</span>
-    }
+<span class="nc" id="L117">    public final int getMaxY() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(8997);</span>
+<span class="nc" id="L118">        __CLR4_5_26xq6xqm68iygzb.R.inc(8998);return getMinY() + getHeight();</span>
+<span class="nc" id="L119">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /** Returns the width of the image. */
-    public int getWidth() {
-<span class="fc" id="L123">        return width;</span>
-    }
+<span class="fc" id="L122">    public int getWidth() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(8999);</span>
+<span class="fc" id="L123">        __CLR4_5_26xq6xqm68iygzb.R.inc(9000);return width;</span>
+<span class="fc" id="L124">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /** Returns the height of the image. */
-    public int getHeight() {
-<span class="fc" id="L128">        return height;</span>
-    }
+<span class="fc" id="L127">    public int getHeight() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9001);</span>
+<span class="fc" id="L128">        __CLR4_5_26xq6xqm68iygzb.R.inc(9002);return height;</span>
+<span class="fc" id="L129">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /** Returns a Rectangle indicating the image bounds. */
-    public Rectangle getBounds() {
-<span class="nc" id="L133">        return new Rectangle(getMinX(), getMinY(),</span>
+<span class="nc" id="L132">    public Rectangle getBounds() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9003);</span>
+<span class="nc" id="L133">        __CLR4_5_26xq6xqm68iygzb.R.inc(9004);return new Rectangle(getMinX(), getMinY(),</span>
 <span class="nc" id="L134">                             getWidth(), getHeight());</span>
-    }
+<span class="nc" id="L135">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /** Returns the width of a tile. */
-    public int getTileWidth() {
-<span class="fc" id="L139">        return tileWidth;</span>
-    }
+<span class="fc" id="L138">    public int getTileWidth() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9005);</span>
+<span class="fc" id="L139">        __CLR4_5_26xq6xqm68iygzb.R.inc(9006);return tileWidth;</span>
+<span class="fc" id="L140">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /** Returns the height of a tile. */
-    public int getTileHeight() {
-<span class="fc" id="L144">        return tileHeight;</span>
-    }
+<span class="fc" id="L143">    public int getTileHeight() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9007);</span>
+<span class="fc" id="L144">        __CLR4_5_26xq6xqm68iygzb.R.inc(9008);return tileHeight;</span>
+<span class="fc" id="L145">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the X coordinate of the upper-left pixel of tile (0, 0).
      */
-    public int getTileGridXOffset() {
-<span class="fc" id="L151">        return tileGridXOffset;</span>
-    }
+<span class="fc" id="L150">    public int getTileGridXOffset() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9009);</span>
+<span class="fc" id="L151">        __CLR4_5_26xq6xqm68iygzb.R.inc(9010);return tileGridXOffset;</span>
+<span class="fc" id="L152">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the Y coordinate of the upper-left pixel of tile (0, 0).
      */
-    public int getTileGridYOffset() {
-<span class="fc" id="L158">        return tileGridYOffset;</span>
-    }
+<span class="fc" id="L157">    public int getTileGridYOffset() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9011);</span>
+<span class="fc" id="L158">        __CLR4_5_26xq6xqm68iygzb.R.inc(9012);return tileGridYOffset;</span>
+<span class="fc" id="L159">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the horizontal index of the leftmost column of tiles.
      * getMinTileX() is implemented in terms of getMinX()
      * and so does not need to be implemented by subclasses.
      */
-    public int getMinTileX() {
-<span class="nc" id="L167">        return convertXToTileX(getMinX());</span>
-    }
+<span class="nc" id="L166">    public int getMinTileX() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9013);</span>
+<span class="nc" id="L167">        __CLR4_5_26xq6xqm68iygzb.R.inc(9014);return convertXToTileX(getMinX());</span>
+<span class="nc" id="L168">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the horizontal index of the rightmost column of tiles.
      * getMaxTileX() is implemented in terms of getMaxX()
      * and so does not need to be implemented by subclasses.
      */
-    public int getMaxTileX() {
-<span class="nc" id="L176">        return convertXToTileX(getMaxX() - 1);</span>
-    }
+<span class="nc" id="L175">    public int getMaxTileX() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9015);</span>
+<span class="nc" id="L176">        __CLR4_5_26xq6xqm68iygzb.R.inc(9016);return convertXToTileX(getMaxX() - 1);</span>
+<span class="nc" id="L177">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the number of tiles along the tile grid in the
@@ -182,27 +182,27 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * of getMinTileX() and getMaxTileX() and so does not need to be
      * implemented by subclasses.
      */
-    public int getNumXTiles() {
-<span class="nc" id="L186">        return getMaxTileX() - getMinTileX() + 1;</span>
-    }
+<span class="nc" id="L185">    public int getNumXTiles() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9017);</span>
+<span class="nc" id="L186">        __CLR4_5_26xq6xqm68iygzb.R.inc(9018);return getMaxTileX() - getMinTileX() + 1;</span>
+<span class="nc" id="L187">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the vertical index of the uppermost row of tiles.  getMinTileY()
      * is implemented in terms of getMinY() and so does not need to be
      * implemented by subclasses.
      */
-    public int getMinTileY() {
-<span class="nc" id="L195">        return convertYToTileY(getMinY());</span>
-    }
+<span class="nc" id="L194">    public int getMinTileY() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9019);</span>
+<span class="nc" id="L195">        __CLR4_5_26xq6xqm68iygzb.R.inc(9020);return convertYToTileY(getMinY());</span>
+<span class="nc" id="L196">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the vertical index of the bottom row of tiles.  getMaxTileY()
      * is implemented in terms of getMaxY() and so does not need to
      * be implemented by subclasses.
      */
-    public int getMaxTileY() {
-<span class="nc" id="L204">        return convertYToTileY(getMaxY() - 1);</span>
-    }
+<span class="nc" id="L203">    public int getMaxTileY() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9021);</span>
+<span class="nc" id="L204">        __CLR4_5_26xq6xqm68iygzb.R.inc(9022);return convertYToTileY(getMaxY() - 1);</span>
+<span class="nc" id="L205">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the number of tiles along the tile grid in the vertical
@@ -210,19 +210,19 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * of getMinTileY() and getMaxTileY() and so does not need to be
      * implemented by subclasses.
      */
-    public int getNumYTiles() {
-<span class="nc" id="L214">        return getMaxTileY() - getMinTileY() + 1;</span>
-    }
+<span class="nc" id="L213">    public int getNumYTiles() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9023);</span>
+<span class="nc" id="L214">        __CLR4_5_26xq6xqm68iygzb.R.inc(9024);return getMaxTileY() - getMinTileY() + 1;</span>
+<span class="nc" id="L215">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /** Returns the SampleModel of the image. */
-    public SampleModel getSampleModel() {
-<span class="nc" id="L219">        return sampleModel;</span>
-    }
+<span class="nc" id="L218">    public SampleModel getSampleModel() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9025);</span>
+<span class="nc" id="L219">        __CLR4_5_26xq6xqm68iygzb.R.inc(9026);return sampleModel;</span>
+<span class="nc" id="L220">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /** Returns the ColorModel of the image. */
-    public ColorModel getColorModel() {
-<span class="fc" id="L224">        return colorModel;</span>
-    }
+<span class="fc" id="L223">    public ColorModel getColorModel() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9027);</span>
+<span class="fc" id="L224">        __CLR4_5_26xq6xqm68iygzb.R.inc(9028);return colorModel;</span>
+<span class="fc" id="L225">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Gets a property from the property set of this image.  If the
@@ -233,10 +233,10 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * @return a reference to the property
      * &lt;code&gt;Object&lt;/code&gt;, or the value &lt;code&gt;null&lt;/code&gt;
      */
-    public Object getProperty(String name) {
-<span class="nc" id="L237">        name = name.toLowerCase(Locale.getDefault());</span>
-<span class="nc" id="L238">        return properties.get(name);</span>
-    }
+<span class="nc" id="L236">    public Object getProperty(String name) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9029);</span>
+<span class="nc" id="L237">        __CLR4_5_26xq6xqm68iygzb.R.inc(9030);name = name.toLowerCase(Locale.getDefault());</span>
+<span class="nc" id="L238">        __CLR4_5_26xq6xqm68iygzb.R.inc(9031);return properties.get(name);</span>
+<span class="nc" id="L239">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns a list of the properties recognized by this image.  If
@@ -245,11 +245,11 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * @return an array of &lt;code&gt;String&lt;/code&gt;s representing valid
      *         property names.
      */
-    public String[] getPropertyNames() {
-<span class="nc" id="L249">        String[] names = new String[properties.size()];</span>
-<span class="nc" id="L250">        properties.keySet().toArray(names);</span>
-<span class="nc" id="L251">        return names;</span>
-    }
+<span class="nc" id="L248">    public String[] getPropertyNames() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9032);</span>
+<span class="nc" id="L249">        __CLR4_5_26xq6xqm68iygzb.R.inc(9033);String[] names = new String[properties.size()];</span>
+<span class="nc" id="L250">        __CLR4_5_26xq6xqm68iygzb.R.inc(9034);properties.keySet().toArray(names);</span>
+<span class="nc" id="L251">        __CLR4_5_26xq6xqm68iygzb.R.inc(9035);return names;</span>
+<span class="nc" id="L252">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns an array of &lt;code&gt;String&lt;/code&gt;s recognized as names by
@@ -264,30 +264,30 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * @return an array of &lt;code&gt;String&lt;/code&gt;s giving the valid
      * property names (can be null).
      */
-    public String[] getPropertyNames(String prefix) {
-<span class="nc" id="L268">        String[] propertyNames = getPropertyNames();</span>
+<span class="nc" id="L267">    public String[] getPropertyNames(String prefix) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9036);</span>
+<span class="nc" id="L268">        __CLR4_5_26xq6xqm68iygzb.R.inc(9037);String[] propertyNames = getPropertyNames();</span>
 //        if (propertyNames == null) {
 //            return null;
 //        }
 
-<span class="nc" id="L273">        prefix = prefix.toLowerCase(Locale.getDefault());</span>
+<span class="nc" id="L273">        __CLR4_5_26xq6xqm68iygzb.R.inc(9038);prefix = prefix.toLowerCase(Locale.getDefault());</span>
 
-<span class="nc" id="L275">        List names = new ArrayList();</span>
-<span class="nc bnc" id="L276" title="All 2 branches missed.">        for (String propertyName : propertyNames) {</span>
-<span class="nc bnc" id="L277" title="All 2 branches missed.">            if (propertyName.startsWith(prefix)) {</span>
-<span class="nc" id="L278">                names.add(propertyName);</span>
+<span class="nc" id="L275">        __CLR4_5_26xq6xqm68iygzb.R.inc(9039);List names = new ArrayList();</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        __CLR4_5_26xq6xqm68iygzb.R.inc(9040);for (String propertyName : propertyNames) {{</span>
+<span class="nc bnc" id="L277" title="All 10 branches missed.">            __CLR4_5_26xq6xqm68iygzb.R.inc(9041);if ((((propertyName.startsWith(prefix))&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9042)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9043)==0&amp;false))) {{</span>
+<span class="nc" id="L278">                __CLR4_5_26xq6xqm68iygzb.R.inc(9044);names.add(propertyName);</span>
             }
-        }
+        }}
 
-<span class="nc bnc" id="L282" title="All 2 branches missed.">        if (names.size() == 0) {</span>
-<span class="nc" id="L283">            return null;</span>
+<span class="nc bnc" id="L282" title="All 10 branches missed.">        }__CLR4_5_26xq6xqm68iygzb.R.inc(9045);if ((((names.size() == 0)&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9046)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9047)==0&amp;false))) {{</span>
+<span class="nc" id="L283">            __CLR4_5_26xq6xqm68iygzb.R.inc(9048);return null;</span>
         }
 
         // Copy the strings from the Vector over to a String array.
-<span class="nc" id="L287">        String[] prefixNames = new String[names.size()];</span>
-<span class="nc" id="L288">        names.toArray(prefixNames);</span>
-<span class="nc" id="L289">        return prefixNames;</span>
-    }
+<span class="nc" id="L287">        }__CLR4_5_26xq6xqm68iygzb.R.inc(9049);String[] prefixNames = new String[names.size()];</span>
+<span class="nc" id="L288">        __CLR4_5_26xq6xqm68iygzb.R.inc(9050);names.toArray(prefixNames);</span>
+<span class="nc" id="L289">        __CLR4_5_26xq6xqm68iygzb.R.inc(9051);return prefixNames;</span>
+<span class="nc" id="L290">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     // Utility methods.
 
@@ -296,26 +296,26 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * relative to a given tile grid layout specified by its X offset
      * and tile width.
      */
-    public static int convertXToTileX(int x, int tileGridXOffset, int tileWidth) {
-<span class="nc" id="L300">        x -= tileGridXOffset;</span>
-<span class="nc bnc" id="L301" title="All 2 branches missed.">        if (x &lt; 0) {</span>
-<span class="nc" id="L302">            x += 1 - tileWidth; // Force round to -infinity</span>
+<span class="nc" id="L299">    public static int convertXToTileX(int x, int tileGridXOffset, int tileWidth) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9052);</span>
+<span class="nc" id="L300">        __CLR4_5_26xq6xqm68iygzb.R.inc(9053);x -= tileGridXOffset;</span>
+<span class="nc bnc" id="L301" title="All 10 branches missed.">        __CLR4_5_26xq6xqm68iygzb.R.inc(9054);if ((((x &lt; 0)&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9055)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9056)==0&amp;false))) {{</span>
+<span class="nc" id="L302">            __CLR4_5_26xq6xqm68iygzb.R.inc(9057);x += 1 - tileWidth; // Force round to -infinity</span>
         }
-<span class="nc" id="L304">        return x / tileWidth;</span>
-    }
+<span class="nc" id="L304">        }__CLR4_5_26xq6xqm68iygzb.R.inc(9058);return x / tileWidth;</span>
+<span class="nc" id="L305">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Converts a pixel's Y coordinate into a vertical tile index
      * relative to a given tile grid layout specified by its Y offset
      * and tile height.
      */
-    public static int convertYToTileY(int y, int tileGridYOffset, int tileHeight) {
-<span class="nc" id="L313">        y -= tileGridYOffset;</span>
-<span class="nc bnc" id="L314" title="All 2 branches missed.">        if (y &lt; 0) {</span>
-<span class="nc" id="L315">            y += 1 - tileHeight; // Force round to -infinity</span>
+<span class="nc" id="L312">    public static int convertYToTileY(int y, int tileGridYOffset, int tileHeight) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9059);</span>
+<span class="nc" id="L313">        __CLR4_5_26xq6xqm68iygzb.R.inc(9060);y -= tileGridYOffset;</span>
+<span class="nc bnc" id="L314" title="All 10 branches missed.">        __CLR4_5_26xq6xqm68iygzb.R.inc(9061);if ((((y &lt; 0)&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9062)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9063)==0&amp;false))) {{</span>
+<span class="nc" id="L315">            __CLR4_5_26xq6xqm68iygzb.R.inc(9064);y += 1 - tileHeight; // Force round to -infinity</span>
         }
-<span class="nc" id="L317">        return y / tileHeight;</span>
-    }
+<span class="nc" id="L317">        }__CLR4_5_26xq6xqm68iygzb.R.inc(9065);return y / tileHeight;</span>
+<span class="nc" id="L318">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Converts a pixel's X coordinate into a horizontal tile index.
@@ -325,9 +325,9 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * @param x the X coordinate of a pixel.
      * @return the X index of the tile containing the pixel.
      */
-    public int convertXToTileX(int x) {
-<span class="nc" id="L329">        return convertXToTileX(x, getTileGridXOffset(), getTileWidth());</span>
-    }
+<span class="nc" id="L328">    public int convertXToTileX(int x) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9066);</span>
+<span class="nc" id="L329">        __CLR4_5_26xq6xqm68iygzb.R.inc(9067);return convertXToTileX(x, getTileGridXOffset(), getTileWidth());</span>
+<span class="nc" id="L330">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Converts a pixel's Y coordinate into a vertical tile index.
@@ -337,27 +337,27 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * @param y the Y coordinate of a pixel.
      * @return the Y index of the tile containing the pixel.
      */
-    public int convertYToTileY(int y) {
-<span class="nc" id="L341">        return convertYToTileY(y, getTileGridYOffset(), getTileHeight());</span>
-    }
+<span class="nc" id="L340">    public int convertYToTileY(int y) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9068);</span>
+<span class="nc" id="L341">        __CLR4_5_26xq6xqm68iygzb.R.inc(9069);return convertYToTileY(y, getTileGridYOffset(), getTileHeight());</span>
+<span class="nc" id="L342">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Converts a horizontal tile index into the X coordinate of its
      * upper left pixel relative to a given tile grid layout specified
      * by its X offset and tile width.
      */
-    public static int tileXToX(int tx, int tileGridXOffset, int tileWidth) {
-<span class="nc" id="L350">        return tx * tileWidth + tileGridXOffset;</span>
-    }
+<span class="nc" id="L349">    public static int tileXToX(int tx, int tileGridXOffset, int tileWidth) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9070);</span>
+<span class="nc" id="L350">        __CLR4_5_26xq6xqm68iygzb.R.inc(9071);return tx * tileWidth + tileGridXOffset;</span>
+<span class="nc" id="L351">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Converts a vertical tile index into the Y coordinate of
      * its upper left pixel relative to a given tile grid layout
      * specified by its Y offset and tile height.
      */
-    public static int tileYToY(int ty, int tileGridYOffset, int tileHeight) {
-<span class="nc" id="L359">        return ty * tileHeight + tileGridYOffset;</span>
-    }
+<span class="nc" id="L358">    public static int tileYToY(int ty, int tileGridYOffset, int tileHeight) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9072);</span>
+<span class="nc" id="L359">        __CLR4_5_26xq6xqm68iygzb.R.inc(9073);return ty * tileHeight + tileGridYOffset;</span>
+<span class="nc" id="L360">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Converts a horizontal tile index into the X coordinate of its
@@ -367,9 +367,9 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * @param tx the horizontal index of a tile.
      * @return the X coordinate of the tile's upper left pixel.
      */
-    public int tileXToX(int tx) {
-<span class="nc" id="L371">        return tx * tileWidth + tileGridXOffset;</span>
-    }
+<span class="nc" id="L370">    public int tileXToX(int tx) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9074);</span>
+<span class="nc" id="L371">        __CLR4_5_26xq6xqm68iygzb.R.inc(9075);return tx * tileWidth + tileGridXOffset;</span>
+<span class="nc" id="L372">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Converts a vertical tile index into the Y coordinate of its
@@ -379,13 +379,13 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * @param ty the vertical index of a tile.
      * @return the Y coordinate of the tile's upper left pixel.
      */
-    public int tileYToY(int ty) {
-<span class="nc" id="L383">        return ty * tileHeight + tileGridYOffset;</span>
-    }
+<span class="nc" id="L382">    public int tileYToY(int ty) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9076);</span>
+<span class="nc" id="L383">        __CLR4_5_26xq6xqm68iygzb.R.inc(9077);return ty * tileHeight + tileGridYOffset;</span>
+<span class="nc" id="L384">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
-    public Vector getSources() {
-<span class="nc" id="L387">        return null;</span>
-    }
+<span class="nc" id="L386">    public Vector getSources() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9078);</span>
+<span class="nc" id="L387">        __CLR4_5_26xq6xqm68iygzb.R.inc(9079);return null;</span>
+<span class="nc" id="L388">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns the entire image in a single Raster.  For images with
@@ -403,11 +403,11 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      *
      * @return a Raster containing a copy of this image's data.
      */
-    public Raster getData() {
-<span class="nc" id="L407">        Rectangle rect = new Rectangle(getMinX(), getMinY(),</span>
+<span class="nc" id="L406">    public Raster getData() {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9080);</span>
+<span class="nc" id="L407">        __CLR4_5_26xq6xqm68iygzb.R.inc(9081);Rectangle rect = new Rectangle(getMinX(), getMinY(),</span>
 <span class="nc" id="L408">                                       getWidth(), getHeight());</span>
-<span class="nc" id="L409">        return getData(rect);</span>
-    }
+<span class="nc" id="L409">        __CLR4_5_26xq6xqm68iygzb.R.inc(9082);return getData(rect);</span>
+<span class="nc" id="L410">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Returns an arbitrary rectangular region of the RenderedImage
@@ -426,46 +426,46 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      *
      * @param bounds the region of the RenderedImage to be returned.
      */
-    public Raster getData(Rectangle bounds) {
-<span class="nc" id="L430">        int startX = convertXToTileX(bounds.x);</span>
-<span class="nc" id="L431">        int startY = convertYToTileY(bounds.y);</span>
-<span class="nc" id="L432">        int endX = convertXToTileX(bounds.x + bounds.width - 1);</span>
-<span class="nc" id="L433">        int endY = convertYToTileY(bounds.y + bounds.height - 1);</span>
-        Raster tile;
+<span class="nc" id="L429">    public Raster getData(Rectangle bounds) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9083);</span>
+<span class="nc" id="L430">        __CLR4_5_26xq6xqm68iygzb.R.inc(9084);int startX = convertXToTileX(bounds.x);</span>
+<span class="nc" id="L431">        __CLR4_5_26xq6xqm68iygzb.R.inc(9085);int startY = convertYToTileY(bounds.y);</span>
+<span class="nc" id="L432">        __CLR4_5_26xq6xqm68iygzb.R.inc(9086);int endX = convertXToTileX(bounds.x + bounds.width - 1);</span>
+<span class="nc" id="L433">        __CLR4_5_26xq6xqm68iygzb.R.inc(9087);int endY = convertYToTileY(bounds.y + bounds.height - 1);</span>
+<span class="nc" id="L434">        __CLR4_5_26xq6xqm68iygzb.R.inc(9088);Raster tile;</span>
 
-<span class="nc bnc" id="L436" title="All 4 branches missed.">        if ((startX == endX) &amp;&amp; (startY == endY)) {</span>
-<span class="nc" id="L437">            tile = getTile(startX, startY);</span>
-<span class="nc" id="L438">            return tile.createChild(bounds.x, bounds.y,</span>
+<span class="nc bnc" id="L436" title="All 12 branches missed.">        __CLR4_5_26xq6xqm68iygzb.R.inc(9089);if (((((startX == endX) &amp;&amp; (startY == endY))&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9090)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9091)==0&amp;false))) {{</span>
+<span class="nc" id="L437">            __CLR4_5_26xq6xqm68iygzb.R.inc(9092);tile = getTile(startX, startY);</span>
+<span class="nc" id="L438">            __CLR4_5_26xq6xqm68iygzb.R.inc(9093);return tile.createChild(bounds.x, bounds.y,</span>
                                     bounds.width, bounds.height,
                                     bounds.x, bounds.y, null);
-        } else {
+        } }else {{
             // Create a WritableRaster of the desired size
-<span class="nc" id="L443">            SampleModel sm =</span>
+<span class="nc" id="L443">            __CLR4_5_26xq6xqm68iygzb.R.inc(9094);SampleModel sm =</span>
 <span class="nc" id="L444">                sampleModel.createCompatibleSampleModel(bounds.width,</span>
                                                        bounds.height);
 
             // Translate it
-<span class="nc" id="L448">            WritableRaster dest =</span>
+<span class="nc" id="L448">            __CLR4_5_26xq6xqm68iygzb.R.inc(9095);WritableRaster dest =</span>
 <span class="nc" id="L449">                Raster.createWritableRaster(sm, bounds.getLocation());</span>
 
-<span class="nc bnc" id="L451" title="All 2 branches missed.">            for (int j = startY; j &lt;= endY; j++) {</span>
-<span class="nc bnc" id="L452" title="All 2 branches missed.">                for (int i = startX; i &lt;= endX; i++) {</span>
-<span class="nc" id="L453">                    tile = getTile(i, j);</span>
-<span class="nc" id="L454">                    Rectangle intersectRect =</span>
+<span class="nc bnc" id="L451" title="All 10 branches missed.">            __CLR4_5_26xq6xqm68iygzb.R.inc(9096);for (int j = startY; (((j &lt;= endY)&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9097)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9098)==0&amp;false)); j++) {{</span>
+<span class="nc bnc" id="L452" title="All 10 branches missed.">                __CLR4_5_26xq6xqm68iygzb.R.inc(9099);for (int i = startX; (((i &lt;= endX)&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9100)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9101)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L453">                    __CLR4_5_26xq6xqm68iygzb.R.inc(9102);tile = getTile(i, j);</span>
+<span class="nc" id="L454">                    __CLR4_5_26xq6xqm68iygzb.R.inc(9103);Rectangle intersectRect =</span>
 <span class="nc" id="L455">                        bounds.intersection(tile.getBounds());</span>
-<span class="nc" id="L456">                    Raster liveRaster = tile.createChild(intersectRect.x,</span>
+<span class="nc" id="L456">                    __CLR4_5_26xq6xqm68iygzb.R.inc(9104);Raster liveRaster = tile.createChild(intersectRect.x,</span>
                                                          intersectRect.y,
                                                          intersectRect.width,
                                                          intersectRect.height,
                                                          intersectRect.x,
                                                          intersectRect.y,
                                                          null);
-<span class="nc" id="L463">                    dest.setDataElements(0, 0, liveRaster);</span>
+<span class="nc" id="L463">                    __CLR4_5_26xq6xqm68iygzb.R.inc(9105);dest.setDataElements(0, 0, liveRaster);</span>
                 }
-            }
-<span class="nc" id="L466">            return dest;</span>
+            }}
+<span class="nc" id="L466">            }__CLR4_5_26xq6xqm68iygzb.R.inc(9106);return dest;</span>
         }
-    }
+<span class="nc" id="L468">    }}finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 
     /**
      * Copies an arbitrary rectangular region of the RenderedImage
@@ -484,32 +484,32 @@ public abstract class SimpleRenderedImage implements RenderedImage {
      * @return a reference to the supplied WritableRaster, or to a
      *         new WritableRaster if the supplied one was null.
      */
-    public WritableRaster copyData(WritableRaster dest) {
-        Rectangle bounds;
-        Raster tile;
+<span class="nc" id="L487">    public WritableRaster copyData(WritableRaster dest) {try{__CLR4_5_26xq6xqm68iygzb.R.inc(9107);</span>
+<span class="nc" id="L488">        __CLR4_5_26xq6xqm68iygzb.R.inc(9108);Rectangle bounds;</span>
+<span class="nc" id="L489">        __CLR4_5_26xq6xqm68iygzb.R.inc(9109);Raster tile;</span>
 
-<span class="nc bnc" id="L491" title="All 2 branches missed.">        if (dest == null) {</span>
-<span class="nc" id="L492">            bounds = getBounds();</span>
-<span class="nc" id="L493">            Point p = new Point(minX, minY);</span>
+<span class="nc bnc" id="L491" title="All 10 branches missed.">        __CLR4_5_26xq6xqm68iygzb.R.inc(9110);if ((((dest == null)&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9111)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9112)==0&amp;false))) {{</span>
+<span class="nc" id="L492">            __CLR4_5_26xq6xqm68iygzb.R.inc(9113);bounds = getBounds();</span>
+<span class="nc" id="L493">            __CLR4_5_26xq6xqm68iygzb.R.inc(9114);Point p = new Point(minX, minY);</span>
             /* A SampleModel to hold the entire image. */
-<span class="nc" id="L495">            SampleModel sm = sampleModel.createCompatibleSampleModel(</span>
+<span class="nc" id="L495">            __CLR4_5_26xq6xqm68iygzb.R.inc(9115);SampleModel sm = sampleModel.createCompatibleSampleModel(</span>
                                          width, height);
-<span class="nc" id="L497">            dest = Raster.createWritableRaster(sm, p);</span>
-<span class="nc" id="L498">        } else {</span>
-<span class="nc" id="L499">            bounds = dest.getBounds();</span>
+<span class="nc" id="L497">            __CLR4_5_26xq6xqm68iygzb.R.inc(9116);dest = Raster.createWritableRaster(sm, p);</span>
+<span class="nc" id="L498">        } }else {{</span>
+<span class="nc" id="L499">            __CLR4_5_26xq6xqm68iygzb.R.inc(9117);bounds = dest.getBounds();</span>
         }
 
-<span class="nc" id="L502">        int startX = convertXToTileX(bounds.x);</span>
-<span class="nc" id="L503">        int startY = convertYToTileY(bounds.y);</span>
-<span class="nc" id="L504">        int endX = convertXToTileX(bounds.x + bounds.width - 1);</span>
-<span class="nc" id="L505">        int endY = convertYToTileY(bounds.y + bounds.height - 1);</span>
+<span class="nc" id="L502">        }__CLR4_5_26xq6xqm68iygzb.R.inc(9118);int startX = convertXToTileX(bounds.x);</span>
+<span class="nc" id="L503">        __CLR4_5_26xq6xqm68iygzb.R.inc(9119);int startY = convertYToTileY(bounds.y);</span>
+<span class="nc" id="L504">        __CLR4_5_26xq6xqm68iygzb.R.inc(9120);int endX = convertXToTileX(bounds.x + bounds.width - 1);</span>
+<span class="nc" id="L505">        __CLR4_5_26xq6xqm68iygzb.R.inc(9121);int endY = convertYToTileY(bounds.y + bounds.height - 1);</span>
 
-<span class="nc bnc" id="L507" title="All 2 branches missed.">        for (int j = startY; j &lt;= endY; j++) {</span>
-<span class="nc bnc" id="L508" title="All 2 branches missed.">            for (int i = startX; i &lt;= endX; i++) {</span>
-<span class="nc" id="L509">                tile = getTile(i, j);</span>
-<span class="nc" id="L510">                Rectangle intersectRect =</span>
+<span class="nc bnc" id="L507" title="All 10 branches missed.">        __CLR4_5_26xq6xqm68iygzb.R.inc(9122);for (int j = startY; (((j &lt;= endY)&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9123)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9124)==0&amp;false)); j++) {{</span>
+<span class="nc bnc" id="L508" title="All 10 branches missed.">            __CLR4_5_26xq6xqm68iygzb.R.inc(9125);for (int i = startX; (((i &lt;= endX)&amp;&amp;(__CLR4_5_26xq6xqm68iygzb.R.iget(9126)!=0|true))||(__CLR4_5_26xq6xqm68iygzb.R.iget(9127)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L509">                __CLR4_5_26xq6xqm68iygzb.R.inc(9128);tile = getTile(i, j);</span>
+<span class="nc" id="L510">                __CLR4_5_26xq6xqm68iygzb.R.inc(9129);Rectangle intersectRect =</span>
 <span class="nc" id="L511">                    bounds.intersection(tile.getBounds());</span>
-<span class="nc" id="L512">                Raster liveRaster = tile.createChild(intersectRect.x,</span>
+<span class="nc" id="L512">                __CLR4_5_26xq6xqm68iygzb.R.inc(9130);Raster liveRaster = tile.createChild(intersectRect.x,</span>
                                                      intersectRect.y,
                                                      intersectRect.width,
                                                      intersectRect.height,
@@ -524,10 +524,10 @@ public abstract class SimpleRenderedImage implements RenderedImage {
                  * following call should not again give these coordinates in
                  * places of x and y.
                  */
-<span class="nc" id="L527">                dest.setDataElements(0, 0, liveRaster);</span>
+<span class="nc" id="L527">                __CLR4_5_26xq6xqm68iygzb.R.inc(9131);dest.setDataElements(0, 0, liveRaster);</span>
             }
-        }
-<span class="nc" id="L530">        return dest;</span>
-    }
+        }}
+<span class="nc" id="L530">        }__CLR4_5_26xq6xqm68iygzb.R.inc(9132);return dest;</span>
+<span class="nc" id="L531">    }finally{__CLR4_5_26xq6xqm68iygzb.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

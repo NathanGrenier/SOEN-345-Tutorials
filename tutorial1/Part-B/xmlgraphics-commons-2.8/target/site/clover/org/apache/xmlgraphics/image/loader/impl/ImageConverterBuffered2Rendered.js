@@ -1,0 +1,10 @@
+var clover = new Object();
+
+// JSON: {classes : [{name, id, sl, el,  methods : [{sl, el}, ...]}, ...]}
+clover.pageData = {"classes":[{"el":57,"id":10127,"methods":[{"el":40,"sc":5,"sl":34},{"el":45,"sc":5,"sl":43},{"el":50,"sc":5,"sl":48},{"el":55,"sc":5,"sl":53}],"name":"ImageConverterBuffered2Rendered","sl":31}]}
+
+// JSON: {test_ID : {"methods": [ID1, ID2, ID3...], "name" : "testXXX() void"}, ...};
+clover.testTargets = {"test_114":{"methods":[{"sl":43},{"sl":48},{"sl":53}],"name":"testPipelineFactoryPlain","pass":true,"statements":[{"sl":44},{"sl":49},{"sl":54}]},"test_126":{"methods":[{"sl":34},{"sl":43},{"sl":48}],"name":"testPipelineWithoutLoader","pass":true,"statements":[{"sl":35},{"sl":36},{"sl":37},{"sl":38},{"sl":44},{"sl":49}]},"test_138":{"methods":[{"sl":53}],"name":"testPipelineFromURIThroughManager","pass":true,"statements":[{"sl":54}]},"test_20":{"methods":[{"sl":34},{"sl":43},{"sl":48},{"sl":53}],"name":"testPipelineWithoutURIThroughManager","pass":true,"statements":[{"sl":35},{"sl":36},{"sl":37},{"sl":38},{"sl":44},{"sl":49},{"sl":54}]},"test_65":{"methods":[{"sl":43},{"sl":48},{"sl":53}],"name":"testPipelineFactoryAdditionalPenalty","pass":true,"statements":[{"sl":44},{"sl":49},{"sl":54}]},"test_76":{"methods":[{"sl":43},{"sl":48},{"sl":53}],"name":"testImageCache1","pass":true,"statements":[{"sl":44},{"sl":49},{"sl":54}]},"test_8":{"methods":[{"sl":43},{"sl":48},{"sl":53}],"name":"testPipelineFactoryImageInfoDependency","pass":true,"statements":[{"sl":44},{"sl":49},{"sl":54}]}}
+
+// JSON: { lines : [{tests : [testid1, testid2, testid3, ...]}, ...]};
+clover.srcFileLines = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [], [20, 126], [20, 126], [20, 126], [20, 126], [20, 126], [], [], [], [], [20, 126, 8, 76, 65, 114], [20, 126, 8, 76, 65, 114], [], [], [], [20, 126, 8, 76, 65, 114], [20, 126, 8, 76, 65, 114], [], [], [], [20, 8, 76, 65, 114, 138], [20, 8, 76, 65, 114, 138], [], [], []]

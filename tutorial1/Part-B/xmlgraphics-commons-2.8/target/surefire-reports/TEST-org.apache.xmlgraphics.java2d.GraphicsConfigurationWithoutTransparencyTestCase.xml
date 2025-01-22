@@ -38,7 +38,7 @@
     <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean clover:setup test clover:aggregate clover:clover"/>
     <property name="java.home" value="/usr/lib/jvm/java-17-openjdk-amd64"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -56,7 +56,7 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.stdout.encoding" value="UTF-8"/>
   </properties>
-  <testcase name="testGetColorModel" classname="org.apache.xmlgraphics.java2d.GraphicsConfigurationWithoutTransparencyTestCase" time="0.033"/>
-  <testcase name="testCreateCompatibleImage" classname="org.apache.xmlgraphics.java2d.GraphicsConfigurationWithoutTransparencyTestCase" time="0.003"/>
-  <testcase name="testGetNormalizationTransformation" classname="org.apache.xmlgraphics.java2d.GraphicsConfigurationWithoutTransparencyTestCase" time="0"/>
+  <testcase name="testGetColorModel" classname="org.apache.xmlgraphics.java2d.GraphicsConfigurationWithoutTransparencyTestCase" time="0.026"/>
+  <testcase name="testCreateCompatibleImage" classname="org.apache.xmlgraphics.java2d.GraphicsConfigurationWithoutTransparencyTestCase" time="0.009"/>
+  <testcase name="testGetNormalizationTransformation" classname="org.apache.xmlgraphics.java2d.GraphicsConfigurationWithoutTransparencyTestCase" time="0.001"/>
 </testsuite>

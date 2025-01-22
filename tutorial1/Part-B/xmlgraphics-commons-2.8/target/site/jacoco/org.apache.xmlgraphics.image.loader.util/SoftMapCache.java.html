@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SoftMapCache.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.util</a> &gt; <span class="el_source">SoftMapCache.java</span></div><h1>SoftMapCache.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SoftMapCache.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.util</a> &gt; <span class="el_source">SoftMapCache.java</span></div><h1>SoftMapCache.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
  * the Map are hard references, the values are referenced through soft references. The collected
  * values are cleaned up through a ReferenceQueue.
  */
-public class SoftMapCache {
+<span class="pc bpc" id="L35" title="3 of 4 branches missed.">public class SoftMapCache {public static class __CLR4_5_29vc9vcm68iyhk3{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,12837,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /** logger */
 <span class="fc" id="L38">    private static Log log = LogFactory.getLog(SoftMapCache.class);</span>
@@ -44,12 +44,12 @@ public class SoftMapCache {
      * Creates a new soft cache.
      * @param synched true if the Map containing the values should by synchronized
      */
-<span class="fc" id="L47">    public SoftMapCache(boolean synched) {</span>
-<span class="fc" id="L48">        this.map = new java.util.HashMap();</span>
-<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (synched) {</span>
-<span class="fc" id="L50">            this.map = Collections.synchronizedMap(this.map);</span>
+<span class="fc" id="L47">    public SoftMapCache(boolean synched) {try{__CLR4_5_29vc9vcm68iyhk3.R.inc(12792);</span>
+<span class="fc" id="L48">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12793);this.map = new java.util.HashMap();</span>
+<span class="pc bpc" id="L49" title="4 of 10 branches missed.">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12794);if ((((synched)&amp;&amp;(__CLR4_5_29vc9vcm68iyhk3.R.iget(12795)!=0|true))||(__CLR4_5_29vc9vcm68iyhk3.R.iget(12796)==0&amp;false))) {{</span>
+<span class="fc" id="L50">            __CLR4_5_29vc9vcm68iyhk3.R.inc(12797);this.map = Collections.synchronizedMap(this.map);</span>
         }
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L52">    }}finally{__CLR4_5_29vc9vcm68iyhk3.R.flushNeeded();}}</span>
 
     /**
      * Returns the value associated with the given key. If the value is not found or the value
@@ -57,10 +57,10 @@ public class SoftMapCache {
      * @param key the key
      * @return the requested value or null
      */
-    public Object get(Object key) {
-<span class="fc" id="L61">        Reference ref = (Reference)map.get(key);</span>
-<span class="fc" id="L62">        return getReference(key, ref);</span>
-    }
+<span class="fc" id="L60">    public Object get(Object key) {try{__CLR4_5_29vc9vcm68iyhk3.R.inc(12798);</span>
+<span class="fc" id="L61">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12799);Reference ref = (Reference)map.get(key);</span>
+<span class="fc" id="L62">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12800);return getReference(key, ref);</span>
+<span class="fc" id="L63">    }finally{__CLR4_5_29vc9vcm68iyhk3.R.flushNeeded();}}</span>
 
     /**
      * Removed the value associated with the given key. The value that is removed is returned
@@ -69,65 +69,65 @@ public class SoftMapCache {
      * @param key the key
      * @return the requested value or null
      */
-    public Object remove(Object key) {
-<span class="fc" id="L73">        Reference ref = (Reference)map.remove(key);</span>
-<span class="fc" id="L74">        return getReference(key, ref);</span>
-    }
+<span class="fc" id="L72">    public Object remove(Object key) {try{__CLR4_5_29vc9vcm68iyhk3.R.inc(12801);</span>
+<span class="fc" id="L73">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12802);Reference ref = (Reference)map.remove(key);</span>
+<span class="fc" id="L74">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12803);return getReference(key, ref);</span>
+<span class="fc" id="L75">    }finally{__CLR4_5_29vc9vcm68iyhk3.R.flushNeeded();}}</span>
 
-    private Object getReference(Object key, Reference ref) {
-<span class="fc" id="L78">        Object value = null;</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">        if (ref != null) {</span>
-<span class="fc" id="L80">            value = ref.get();</span>
-<span class="pc bpc" id="L81" title="1 of 2 branches missed.">            if (value == null) {</span>
+<span class="fc" id="L77">    private Object getReference(Object key, Reference ref) {try{__CLR4_5_29vc9vcm68iyhk3.R.inc(12804);</span>
+<span class="fc" id="L78">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12805);Object value = null;</span>
+<span class="pc bpc" id="L79" title="4 of 10 branches missed.">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12806);if ((((ref != null)&amp;&amp;(__CLR4_5_29vc9vcm68iyhk3.R.iget(12807)!=0|true))||(__CLR4_5_29vc9vcm68iyhk3.R.iget(12808)==0&amp;false))) {{</span>
+<span class="fc" id="L80">            __CLR4_5_29vc9vcm68iyhk3.R.inc(12809);value = ref.get();</span>
+<span class="pc bpc" id="L81" title="7 of 10 branches missed.">            __CLR4_5_29vc9vcm68iyhk3.R.inc(12810);if ((((value == null)&amp;&amp;(__CLR4_5_29vc9vcm68iyhk3.R.iget(12811)!=0|true))||(__CLR4_5_29vc9vcm68iyhk3.R.iget(12812)==0&amp;false))) {{</span>
                 //Remove key if its value has been garbage collected
-<span class="nc bnc" id="L83" title="All 2 branches missed.">                if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L84">                    log.trace(&quot;Image has been collected: &quot; + key);</span>
+<span class="nc bnc" id="L83" title="All 10 branches missed.">                __CLR4_5_29vc9vcm68iyhk3.R.inc(12813);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_29vc9vcm68iyhk3.R.iget(12814)!=0|true))||(__CLR4_5_29vc9vcm68iyhk3.R.iget(12815)==0&amp;false))) {{</span>
+<span class="nc" id="L84">                    __CLR4_5_29vc9vcm68iyhk3.R.inc(12816);log.trace(&quot;Image has been collected: &quot; + key);</span>
                 }
-<span class="nc" id="L86">                checkReferenceQueue();</span>
+<span class="nc" id="L86">                }__CLR4_5_29vc9vcm68iyhk3.R.inc(12817);checkReferenceQueue();</span>
             }
-        }
-<span class="fc" id="L89">        return value;</span>
-    }
+        }}
+<span class="fc" id="L89">        }__CLR4_5_29vc9vcm68iyhk3.R.inc(12818);return value;</span>
+<span class="fc" id="L90">    }finally{__CLR4_5_29vc9vcm68iyhk3.R.flushNeeded();}}</span>
 
     /**
      * Put a new value in the cache overwriting any existing value with the same key.
      * @param key The key
      * @param value the value
      */
-    public void put(Object key, Object value) {
-<span class="fc" id="L98">        map.put(key, wrapInReference(value, key));</span>
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L97">    public void put(Object key, Object value) {try{__CLR4_5_29vc9vcm68iyhk3.R.inc(12819);</span>
+<span class="fc" id="L98">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12820);map.put(key, wrapInReference(value, key));</span>
+<span class="fc" id="L99">    }finally{__CLR4_5_29vc9vcm68iyhk3.R.flushNeeded();}}</span>
 
     /**
      * Clears the cache.
      */
-    public void clear() {
-<span class="fc" id="L105">        map.clear();</span>
-<span class="fc" id="L106">    }</span>
+<span class="fc" id="L104">    public void clear() {try{__CLR4_5_29vc9vcm68iyhk3.R.inc(12821);</span>
+<span class="fc" id="L105">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12822);map.clear();</span>
+<span class="fc" id="L106">    }finally{__CLR4_5_29vc9vcm68iyhk3.R.flushNeeded();}}</span>
 
     /**
      * Triggers some house-keeping, i.e. processes any pending objects in the reference queue.
      */
-    public void doHouseKeeping() {
-<span class="fc" id="L112">        checkReferenceQueue();</span>
-<span class="fc" id="L113">    }</span>
+<span class="fc" id="L111">    public void doHouseKeeping() {try{__CLR4_5_29vc9vcm68iyhk3.R.inc(12823);</span>
+<span class="fc" id="L112">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12824);checkReferenceQueue();</span>
+<span class="fc" id="L113">    }finally{__CLR4_5_29vc9vcm68iyhk3.R.flushNeeded();}}</span>
 
-    private Reference wrapInReference(Object obj, Object key) {
-<span class="fc" id="L116">        return new SoftReferenceWithKey(obj, key, refQueue);</span>
-    }
+<span class="fc" id="L115">    private Reference wrapInReference(Object obj, Object key) {try{__CLR4_5_29vc9vcm68iyhk3.R.inc(12825);</span>
+<span class="fc" id="L116">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12826);return new SoftReferenceWithKey(obj, key, refQueue);</span>
+<span class="fc" id="L117">    }finally{__CLR4_5_29vc9vcm68iyhk3.R.flushNeeded();}}</span>
 
     /**
      * Checks the reference queue if any references have been cleared and removes them from the
      * cache.
      */
-    private void checkReferenceQueue() {
-        SoftReferenceWithKey ref;
-<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        while ((ref = (SoftReferenceWithKey)refQueue.poll()) != null) {</span>
-<span class="nc bnc" id="L126" title="All 2 branches missed.">            if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L127">                log.trace(&quot;Removing ImageInfo from ref queue: &quot; + ref.getKey());</span>
+<span class="fc" id="L123">    private void checkReferenceQueue() {try{__CLR4_5_29vc9vcm68iyhk3.R.inc(12827);</span>
+<span class="fc" id="L124">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12828);SoftReferenceWithKey ref;</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        __CLR4_5_29vc9vcm68iyhk3.R.inc(12829);while ((ref = (SoftReferenceWithKey)refQueue.poll()) != null) {{</span>
+<span class="nc bnc" id="L126" title="All 10 branches missed.">            __CLR4_5_29vc9vcm68iyhk3.R.inc(12832);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_29vc9vcm68iyhk3.R.iget(12833)!=0|true))||(__CLR4_5_29vc9vcm68iyhk3.R.iget(12834)==0&amp;false))) {{</span>
+<span class="nc" id="L127">                __CLR4_5_29vc9vcm68iyhk3.R.inc(12835);log.trace(&quot;Removing ImageInfo from ref queue: &quot; + ref.getKey());</span>
             }
-<span class="nc" id="L129">            map.remove(ref.getKey());</span>
+<span class="nc" id="L129">            }__CLR4_5_29vc9vcm68iyhk3.R.inc(12836);map.remove(ref.getKey());</span>
         }
-<span class="fc" id="L131">    }</span>
+<span class="fc" id="L131">    }}finally{__CLR4_5_29vc9vcm68iyhk3.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

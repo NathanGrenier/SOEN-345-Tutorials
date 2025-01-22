@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractRed.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.rendered</a> &gt; <span class="el_source">AbstractRed.java</span></div><h1>AbstractRed.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractRed.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.rendered</a> &gt; <span class="el_source">AbstractRed.java</span></div><h1>AbstractRed.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -55,7 +55,7 @@ import org.apache.xmlgraphics.image.GraphicsUtil;
  *
  * Originally authored by Thomas DeWeese.
  */
-public abstract class AbstractRed implements CachableRed {
+<span class="nc bnc" id="L58" title="All 4 branches missed.">public abstract class AbstractRed implements CachableRed {public static class __CLR4_5_29wq9wqm68iyhkp{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,13138,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     protected Rectangle   bounds;
     protected Vector      srcs;
@@ -77,8 +77,8 @@ public abstract class AbstractRed implements CachableRed {
      * This is useful when the proper parameters to the init
      * method need to be computed in the subclasses constructor.
      */
-<span class="nc" id="L80">    protected AbstractRed() {</span>
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L80">    protected AbstractRed() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12842);</span>
+<span class="nc" id="L81">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
 
     /**
@@ -88,10 +88,10 @@ public abstract class AbstractRed implements CachableRed {
      * user coordinate system.
      * @param props this initializes the props Map (may be null)
      */
-<span class="nc" id="L91">    protected AbstractRed(Rectangle bounds, Map props) {</span>
-<span class="nc" id="L92">        init((CachableRed)null, bounds, null, null,</span>
+<span class="nc" id="L91">    protected AbstractRed(Rectangle bounds, Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12843);</span>
+<span class="nc" id="L92">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12844);init((CachableRed)null, bounds, null, null,</span>
              bounds.x, bounds.y, props);
-<span class="nc" id="L94">    }</span>
+<span class="nc" id="L94">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Construct an Abstract RenderedImage from a source image and
@@ -100,12 +100,12 @@ public abstract class AbstractRed implements CachableRed {
      * Vector. Src is also used to set the bounds, ColorModel,
      * SampleModel, and tile grid offsets.
      * @param props this initializes the props Map.  */
-<span class="nc" id="L103">    protected AbstractRed(CachableRed src, Map props) {</span>
-<span class="nc" id="L104">        init(src, src.getBounds(), src.getColorModel(), src.getSampleModel(),</span>
+<span class="nc" id="L103">    protected AbstractRed(CachableRed src, Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12845);</span>
+<span class="nc" id="L104">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12846);init(src, src.getBounds(), src.getColorModel(), src.getSampleModel(),</span>
 <span class="nc" id="L105">             src.getTileGridXOffset(),</span>
 <span class="nc" id="L106">             src.getTileGridYOffset(),</span>
              props);
-<span class="nc" id="L108">    }</span>
+<span class="nc" id="L108">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Construct an Abstract RenderedImage from a source image, bounds
@@ -115,12 +115,12 @@ public abstract class AbstractRed implements CachableRed {
      * and tile grid offsets.
      * @param bounds The bounds of this image.
      * @param props this initializes the props Map.  */
-<span class="nc" id="L118">    protected AbstractRed(CachableRed src, Rectangle bounds, Map props) {</span>
-<span class="nc" id="L119">        init(src, bounds, src.getColorModel(), src.getSampleModel(),</span>
+<span class="nc" id="L118">    protected AbstractRed(CachableRed src, Rectangle bounds, Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12847);</span>
+<span class="nc" id="L119">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12848);init(src, bounds, src.getColorModel(), src.getSampleModel(),</span>
 <span class="nc" id="L120">             src.getTileGridXOffset(),</span>
 <span class="nc" id="L121">             src.getTileGridYOffset(),</span>
              props);
-<span class="nc" id="L123">    }</span>
+<span class="nc" id="L123">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Construct an Abstract RenderedImage from a source image, bounds
@@ -137,12 +137,12 @@ public abstract class AbstractRed implements CachableRed {
      * @param props this initializes the props Map.  */
     protected AbstractRed(CachableRed src, Rectangle bounds,
                           ColorModel cm, SampleModel sm,
-<span class="nc" id="L140">                          Map props) {</span>
-<span class="nc" id="L141">        init(src, bounds, cm, sm,</span>
-<span class="nc bnc" id="L142" title="All 2 branches missed.">             (src == null) ? 0 : src.getTileGridXOffset(),</span>
-<span class="nc bnc" id="L143" title="All 2 branches missed.">             (src == null) ? 0 : src.getTileGridYOffset(),</span>
+<span class="nc" id="L140">                          Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12849);</span>
+<span class="nc" id="L141">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12850);init(src, bounds, cm, sm,</span>
+<span class="nc bnc" id="L142" title="All 10 branches missed.">             ((((src == null) )&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12851)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12852)==0&amp;false))? 0 : src.getTileGridXOffset(),</span>
+<span class="nc bnc" id="L143" title="All 10 branches missed.">             ((((src == null) )&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12853)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12854)==0&amp;false))? 0 : src.getTileGridYOffset(),</span>
              props);
-<span class="nc" id="L145">    }</span>
+<span class="nc" id="L145">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Construct an Abstract Rable from a bounds rect and props
@@ -164,9 +164,9 @@ public abstract class AbstractRed implements CachableRed {
     protected AbstractRed(CachableRed src, Rectangle bounds,
                           ColorModel cm, SampleModel sm,
                           int tileGridXOff, int tileGridYOff,
-<span class="nc" id="L167">                          Map props) {</span>
-<span class="nc" id="L168">        init(src, bounds, cm, sm, tileGridXOff, tileGridYOff, props);</span>
-<span class="nc" id="L169">    }</span>
+<span class="nc" id="L167">                          Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12855);</span>
+<span class="nc" id="L168">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12856);init(src, bounds, cm, sm, tileGridXOff, tileGridYOff, props);</span>
+<span class="nc" id="L169">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * This is one of two basic init function (this is for single
@@ -191,47 +191,47 @@ public abstract class AbstractRed implements CachableRed {
     protected void init(CachableRed src, Rectangle   bounds,
                         ColorModel  cm,   SampleModel sm,
                         int tileGridXOff, int tileGridYOff,
-                        Map props) {
-<span class="nc" id="L195">        this.srcs         = new Vector(1);</span>
-<span class="nc bnc" id="L196" title="All 2 branches missed.">        if (src != null) {</span>
-<span class="nc" id="L197">            this.srcs.add(src);</span>
-<span class="nc bnc" id="L198" title="All 2 branches missed.">            if (bounds == null) {</span>
-<span class="nc" id="L199">                bounds = src.getBounds();</span>
+<span class="nc" id="L194">                        Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12857);</span>
+<span class="nc" id="L195">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12858);this.srcs         = new Vector(1);</span>
+<span class="nc bnc" id="L196" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12859);if ((((src != null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12860)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12861)==0&amp;false))) {{</span>
+<span class="nc" id="L197">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12862);this.srcs.add(src);</span>
+<span class="nc bnc" id="L198" title="All 10 branches missed.">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12863);if ((((bounds == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12864)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12865)==0&amp;false))) {{</span>
+<span class="nc" id="L199">                __CLR4_5_29wq9wqm68iyhkp.R.inc(12866);bounds = src.getBounds();</span>
             }
-<span class="nc bnc" id="L201" title="All 2 branches missed.">            if (cm     == null) {</span>
-<span class="nc" id="L202">                cm     = src.getColorModel();</span>
+<span class="nc bnc" id="L201" title="All 10 branches missed.">            }__CLR4_5_29wq9wqm68iyhkp.R.inc(12867);if ((((cm     == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12868)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12869)==0&amp;false))) {{</span>
+<span class="nc" id="L202">                __CLR4_5_29wq9wqm68iyhkp.R.inc(12870);cm     = src.getColorModel();</span>
             }
-<span class="nc bnc" id="L204" title="All 2 branches missed.">            if (sm     == null) {</span>
-<span class="nc" id="L205">                sm     = src.getSampleModel();</span>
+<span class="nc bnc" id="L204" title="All 10 branches missed.">            }__CLR4_5_29wq9wqm68iyhkp.R.inc(12871);if ((((sm     == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12872)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12873)==0&amp;false))) {{</span>
+<span class="nc" id="L205">                __CLR4_5_29wq9wqm68iyhkp.R.inc(12874);sm     = src.getSampleModel();</span>
             }
+        }}
+
+<span class="nc" id="L209">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(12875);this.bounds       = bounds;</span>
+<span class="nc" id="L210">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12876);this.tileGridXOff = tileGridXOff;</span>
+<span class="nc" id="L211">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12877);this.tileGridYOff = tileGridYOff;</span>
+
+<span class="nc" id="L213">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12878);this.props        = new HashMap();</span>
+<span class="nc bnc" id="L214" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12879);if ((((props != null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12880)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12881)==0&amp;false))) {{</span>
+<span class="nc" id="L215">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12882);this.props.putAll(props);</span>
         }
 
-<span class="nc" id="L209">        this.bounds       = bounds;</span>
-<span class="nc" id="L210">        this.tileGridXOff = tileGridXOff;</span>
-<span class="nc" id="L211">        this.tileGridYOff = tileGridYOff;</span>
-
-<span class="nc" id="L213">        this.props        = new HashMap();</span>
-<span class="nc bnc" id="L214" title="All 2 branches missed.">        if (props != null) {</span>
-<span class="nc" id="L215">            this.props.putAll(props);</span>
-        }
-
-<span class="nc bnc" id="L218" title="All 2 branches missed.">        if (cm == null) {</span>
-<span class="nc" id="L219">            cm = new ComponentColorModel(</span>
+<span class="nc bnc" id="L218" title="All 10 branches missed.">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(12883);if ((((cm == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12884)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12885)==0&amp;false))) {{</span>
+<span class="nc" id="L219">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12886);cm = new ComponentColorModel(</span>
 <span class="nc" id="L220">                ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
                  new int [] { 8 }, false, false, Transparency.OPAQUE,
                  DataBuffer.TYPE_BYTE);
         }
 
-<span class="nc" id="L225">        this.cm = cm;</span>
+<span class="nc" id="L225">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(12887);this.cm = cm;</span>
 
-<span class="nc bnc" id="L227" title="All 2 branches missed.">        if (sm == null) {</span>
-<span class="nc" id="L228">            sm = cm.createCompatibleSampleModel(bounds.width, bounds.height);</span>
+<span class="nc bnc" id="L227" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12888);if ((((sm == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12889)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12890)==0&amp;false))) {{</span>
+<span class="nc" id="L228">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12891);sm = cm.createCompatibleSampleModel(bounds.width, bounds.height);</span>
         }
-<span class="nc" id="L230">        this.sm = sm;</span>
+<span class="nc" id="L230">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(12892);this.sm = sm;</span>
 
         // Recompute tileWidth/Height, minTileX/Y, numX/YTiles.
-<span class="nc" id="L233">        updateTileGridInfo();</span>
-<span class="nc" id="L234">    }</span>
+<span class="nc" id="L233">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12893);updateTileGridInfo();</span>
+<span class="nc" id="L234">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Construct an Abstract Rable from a List of sources a bounds rect
@@ -242,9 +242,9 @@ public abstract class AbstractRed implements CachableRed {
      * @param bounds this defines the extent of the rendered in pixels
      * @param props this initializes the props Map.
      */
-<span class="nc" id="L245">    protected AbstractRed(List srcs, Rectangle bounds, Map props) {</span>
-<span class="nc" id="L246">        init(srcs, bounds, null, null, bounds.x, bounds.y, props);</span>
-<span class="nc" id="L247">    }</span>
+<span class="nc" id="L245">    protected AbstractRed(List srcs, Rectangle bounds, Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12894);</span>
+<span class="nc" id="L246">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12895);init(srcs, bounds, null, null, bounds.x, bounds.y, props);</span>
+<span class="nc" id="L247">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Construct an Abstract RenderedImage from a bounds rect,
@@ -263,9 +263,9 @@ public abstract class AbstractRed implements CachableRed {
      */
     protected AbstractRed(List srcs, Rectangle bounds,
                           ColorModel cm, SampleModel sm,
-<span class="nc" id="L266">                          Map props) {</span>
-<span class="nc" id="L267">        init(srcs, bounds, cm, sm, bounds.x, bounds.y, props);</span>
-<span class="nc" id="L268">    }</span>
+<span class="nc" id="L266">                          Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12896);</span>
+<span class="nc" id="L267">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12897);init(srcs, bounds, cm, sm, bounds.x, bounds.y, props);</span>
+<span class="nc" id="L268">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Construct an Abstract RenderedImage from a bounds rect,
@@ -289,9 +289,9 @@ public abstract class AbstractRed implements CachableRed {
     protected AbstractRed(List srcs, Rectangle bounds,
                           ColorModel cm, SampleModel sm,
                           int tileGridXOff, int tileGridYOff,
-<span class="nc" id="L292">                          Map props) {</span>
-<span class="nc" id="L293">        init(srcs, bounds, cm, sm, tileGridXOff, tileGridYOff, props);</span>
-<span class="nc" id="L294">    }</span>
+<span class="nc" id="L292">                          Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12898);</span>
+<span class="nc" id="L293">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12899);init(srcs, bounds, cm, sm, tileGridXOff, tileGridYOff, props);</span>
+<span class="nc" id="L294">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * This is the basic init function.
@@ -314,49 +314,49 @@ public abstract class AbstractRed implements CachableRed {
     protected void init(List srcs, Rectangle bounds,
                         ColorModel cm, SampleModel sm,
                         int tileGridXOff, int tileGridYOff,
-                        Map props) {
-<span class="nc" id="L318">        this.srcs = new Vector();</span>
-<span class="nc bnc" id="L319" title="All 2 branches missed.">        if (srcs != null) {</span>
-<span class="nc" id="L320">            this.srcs.addAll(srcs);</span>
-<span class="nc bnc" id="L321" title="All 2 branches missed.">            if (srcs.size() != 0) {</span>
-<span class="nc" id="L322">                CachableRed src = (CachableRed)srcs.get(0);</span>
-<span class="nc bnc" id="L323" title="All 2 branches missed.">                if (bounds == null) {</span>
-<span class="nc" id="L324">                    bounds = src.getBounds();</span>
+<span class="nc" id="L317">                        Map props) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12900);</span>
+<span class="nc" id="L318">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12901);this.srcs = new Vector();</span>
+<span class="nc bnc" id="L319" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12902);if ((((srcs != null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12903)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12904)==0&amp;false))) {{</span>
+<span class="nc" id="L320">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12905);this.srcs.addAll(srcs);</span>
+<span class="nc bnc" id="L321" title="All 10 branches missed.">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12906);if ((((srcs.size() != 0)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12907)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12908)==0&amp;false))) {{</span>
+<span class="nc" id="L322">                __CLR4_5_29wq9wqm68iyhkp.R.inc(12909);CachableRed src = (CachableRed)srcs.get(0);</span>
+<span class="nc bnc" id="L323" title="All 10 branches missed.">                __CLR4_5_29wq9wqm68iyhkp.R.inc(12910);if ((((bounds == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12911)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12912)==0&amp;false))) {{</span>
+<span class="nc" id="L324">                    __CLR4_5_29wq9wqm68iyhkp.R.inc(12913);bounds = src.getBounds();</span>
                 }
-<span class="nc bnc" id="L326" title="All 2 branches missed.">                if (cm     == null) {</span>
-<span class="nc" id="L327">                    cm     = src.getColorModel();</span>
+<span class="nc bnc" id="L326" title="All 10 branches missed.">                }__CLR4_5_29wq9wqm68iyhkp.R.inc(12914);if ((((cm     == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12915)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12916)==0&amp;false))) {{</span>
+<span class="nc" id="L327">                    __CLR4_5_29wq9wqm68iyhkp.R.inc(12917);cm     = src.getColorModel();</span>
                 }
-<span class="nc bnc" id="L329" title="All 2 branches missed.">                if (sm     == null) {</span>
-<span class="nc" id="L330">                    sm     = src.getSampleModel();</span>
+<span class="nc bnc" id="L329" title="All 10 branches missed.">                }__CLR4_5_29wq9wqm68iyhkp.R.inc(12918);if ((((sm     == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12919)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12920)==0&amp;false))) {{</span>
+<span class="nc" id="L330">                    __CLR4_5_29wq9wqm68iyhkp.R.inc(12921);sm     = src.getSampleModel();</span>
                 }
-            }
+            }}
+        }}
+
+<span class="nc" id="L335">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(12922);this.bounds       = bounds;</span>
+<span class="nc" id="L336">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12923);this.tileGridXOff = tileGridXOff;</span>
+<span class="nc" id="L337">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12924);this.tileGridYOff = tileGridYOff;</span>
+<span class="nc" id="L338">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12925);this.props        = new HashMap();</span>
+<span class="nc bnc" id="L339" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12926);if ((((props != null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12927)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12928)==0&amp;false))) {{</span>
+<span class="nc" id="L340">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12929);this.props.putAll(props);</span>
         }
 
-<span class="nc" id="L335">        this.bounds       = bounds;</span>
-<span class="nc" id="L336">        this.tileGridXOff = tileGridXOff;</span>
-<span class="nc" id="L337">        this.tileGridYOff = tileGridYOff;</span>
-<span class="nc" id="L338">        this.props        = new HashMap();</span>
-<span class="nc bnc" id="L339" title="All 2 branches missed.">        if (props != null) {</span>
-<span class="nc" id="L340">            this.props.putAll(props);</span>
-        }
-
-<span class="nc bnc" id="L343" title="All 2 branches missed.">        if (cm == null) {</span>
-<span class="nc" id="L344">            cm = new ComponentColorModel(</span>
+<span class="nc bnc" id="L343" title="All 10 branches missed.">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(12930);if ((((cm == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12931)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12932)==0&amp;false))) {{</span>
+<span class="nc" id="L344">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12933);cm = new ComponentColorModel(</span>
 <span class="nc" id="L345">                ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
                  new int [] { 8 }, false, false, Transparency.OPAQUE,
                  DataBuffer.TYPE_BYTE);
         }
 
-<span class="nc" id="L350">        this.cm = cm;</span>
+<span class="nc" id="L350">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(12934);this.cm = cm;</span>
 
-<span class="nc bnc" id="L352" title="All 2 branches missed.">        if (sm == null) {</span>
-<span class="nc" id="L353">            sm = cm.createCompatibleSampleModel(bounds.width, bounds.height);</span>
+<span class="nc bnc" id="L352" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12935);if ((((sm == null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12936)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12937)==0&amp;false))) {{</span>
+<span class="nc" id="L353">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12938);sm = cm.createCompatibleSampleModel(bounds.width, bounds.height);</span>
         }
-<span class="nc" id="L355">        this.sm = sm;</span>
+<span class="nc" id="L355">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(12939);this.sm = sm;</span>
 
         // Recompute tileWidth/Height, minTileX/Y, numX/YTiles.
-<span class="nc" id="L358">        updateTileGridInfo();</span>
-<span class="nc" id="L359">    }</span>
+<span class="nc" id="L358">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12940);updateTileGridInfo();</span>
+<span class="nc" id="L359">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * This function computes all the basic information about the tile
@@ -364,161 +364,161 @@ public abstract class AbstractRed implements CachableRed {
      * It is responsible for updating tileWidth, tileHeight,
      * minTileX/Y, and numX/YTiles.
      */
-    protected void updateTileGridInfo() {
-<span class="nc" id="L368">        this.tileWidth  = sm.getWidth();</span>
-<span class="nc" id="L369">        this.tileHeight = sm.getHeight();</span>
+<span class="nc" id="L367">    protected void updateTileGridInfo() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12941);</span>
+<span class="nc" id="L368">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12942);this.tileWidth  = sm.getWidth();</span>
+<span class="nc" id="L369">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12943);this.tileHeight = sm.getHeight();</span>
 
-        int x1;
-        int y1;
-        int maxTileX;
-        int maxTileY;
+<span class="nc" id="L371">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12944);int x1;</span>
+<span class="nc" id="L372">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12945);int y1;</span>
+<span class="nc" id="L373">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12946);int maxTileX;</span>
+<span class="nc" id="L374">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12947);int maxTileY;</span>
 
         // This computes and caches important information about the
         // structure of the tile grid in general.
-<span class="nc" id="L378">        minTileX = getXTile(bounds.x);</span>
-<span class="nc" id="L379">        minTileY = getYTile(bounds.y);</span>
+<span class="nc" id="L378">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12948);minTileX = getXTile(bounds.x);</span>
+<span class="nc" id="L379">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12949);minTileY = getYTile(bounds.y);</span>
 
-<span class="nc" id="L381">        x1       = bounds.x + bounds.width - 1;     // Xloc of right edge</span>
-<span class="nc" id="L382">        maxTileX = getXTile(x1);</span>
-<span class="nc" id="L383">        numXTiles = maxTileX - minTileX + 1;</span>
+<span class="nc" id="L381">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12950);x1       = bounds.x + bounds.width - 1;     // Xloc of right edge</span>
+<span class="nc" id="L382">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12951);maxTileX = getXTile(x1);</span>
+<span class="nc" id="L383">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12952);numXTiles = maxTileX - minTileX + 1;</span>
 
-<span class="nc" id="L385">        y1       = bounds.y + bounds.height - 1;     // Yloc of right edge</span>
-<span class="nc" id="L386">        maxTileY = getYTile(y1);</span>
-<span class="nc" id="L387">        numYTiles = maxTileY - minTileY + 1;</span>
-<span class="nc" id="L388">    }</span>
+<span class="nc" id="L385">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12953);y1       = bounds.y + bounds.height - 1;     // Yloc of right edge</span>
+<span class="nc" id="L386">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12954);maxTileY = getYTile(y1);</span>
+<span class="nc" id="L387">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12955);numYTiles = maxTileY - minTileY + 1;</span>
+<span class="nc" id="L388">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
 
-    public Rectangle getBounds() {
-<span class="nc" id="L392">        return new Rectangle(getMinX(),</span>
+<span class="nc" id="L391">    public Rectangle getBounds() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12956);</span>
+<span class="nc" id="L392">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12957);return new Rectangle(getMinX(),</span>
 <span class="nc" id="L393">                             getMinY(),</span>
 <span class="nc" id="L394">                             getWidth(),</span>
 <span class="nc" id="L395">                             getHeight());</span>
-    }
+<span class="nc" id="L396">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public Vector getSources() {
-<span class="nc" id="L399">        return srcs;</span>
-    }
+<span class="nc" id="L398">    public Vector getSources() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12958);</span>
+<span class="nc" id="L399">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12959);return srcs;</span>
+<span class="nc" id="L400">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public ColorModel getColorModel() {
-<span class="nc" id="L403">        return cm;</span>
-    }
+<span class="nc" id="L402">    public ColorModel getColorModel() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12960);</span>
+<span class="nc" id="L403">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12961);return cm;</span>
+<span class="nc" id="L404">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public SampleModel getSampleModel() {
-<span class="nc" id="L407">        return sm;</span>
-    }
+<span class="nc" id="L406">    public SampleModel getSampleModel() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12962);</span>
+<span class="nc" id="L407">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12963);return sm;</span>
+<span class="nc" id="L408">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getMinX() {
-<span class="nc" id="L411">        return bounds.x;</span>
-    }
-    public int getMinY() {
-<span class="nc" id="L414">        return bounds.y;</span>
-    }
+<span class="nc" id="L410">    public int getMinX() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12964);</span>
+<span class="nc" id="L411">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12965);return bounds.x;</span>
+<span class="nc" id="L412">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
+<span class="nc" id="L413">    public int getMinY() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12966);</span>
+<span class="nc" id="L414">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12967);return bounds.y;</span>
+<span class="nc" id="L415">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getWidth() {
-<span class="nc" id="L418">        return bounds.width;</span>
-    }
+<span class="nc" id="L417">    public int getWidth() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12968);</span>
+<span class="nc" id="L418">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12969);return bounds.width;</span>
+<span class="nc" id="L419">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getHeight() {
-<span class="nc" id="L422">        return bounds.height;</span>
-    }
+<span class="nc" id="L421">    public int getHeight() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12970);</span>
+<span class="nc" id="L422">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12971);return bounds.height;</span>
+<span class="nc" id="L423">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getTileWidth() {
-<span class="nc" id="L426">        return tileWidth;</span>
-    }
+<span class="nc" id="L425">    public int getTileWidth() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12972);</span>
+<span class="nc" id="L426">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12973);return tileWidth;</span>
+<span class="nc" id="L427">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getTileHeight() {
-<span class="nc" id="L430">        return tileHeight;</span>
-    }
+<span class="nc" id="L429">    public int getTileHeight() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12974);</span>
+<span class="nc" id="L430">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12975);return tileHeight;</span>
+<span class="nc" id="L431">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getTileGridXOffset() {
-<span class="nc" id="L434">        return tileGridXOff;</span>
-    }
+<span class="nc" id="L433">    public int getTileGridXOffset() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12976);</span>
+<span class="nc" id="L434">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12977);return tileGridXOff;</span>
+<span class="nc" id="L435">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getTileGridYOffset() {
-<span class="nc" id="L438">        return tileGridYOff;</span>
-    }
+<span class="nc" id="L437">    public int getTileGridYOffset() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12978);</span>
+<span class="nc" id="L438">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12979);return tileGridYOff;</span>
+<span class="nc" id="L439">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getMinTileX() {
-<span class="nc" id="L442">        return minTileX;</span>
-    }
+<span class="nc" id="L441">    public int getMinTileX() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12980);</span>
+<span class="nc" id="L442">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12981);return minTileX;</span>
+<span class="nc" id="L443">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getMinTileY() {
-<span class="nc" id="L446">        return minTileY;</span>
-    }
+<span class="nc" id="L445">    public int getMinTileY() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12982);</span>
+<span class="nc" id="L446">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12983);return minTileY;</span>
+<span class="nc" id="L447">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getNumXTiles() {
-<span class="nc" id="L450">        return numXTiles;</span>
-    }
+<span class="nc" id="L449">    public int getNumXTiles() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12984);</span>
+<span class="nc" id="L450">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12985);return numXTiles;</span>
+<span class="nc" id="L451">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public int getNumYTiles() {
-<span class="nc" id="L454">        return numYTiles;</span>
-    }
+<span class="nc" id="L453">    public int getNumYTiles() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12986);</span>
+<span class="nc" id="L454">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12987);return numYTiles;</span>
+<span class="nc" id="L455">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public Object getProperty(String name) {
-<span class="nc" id="L458">        Object ret = props.get(name);</span>
-<span class="nc bnc" id="L459" title="All 2 branches missed.">        if (ret != null) {</span>
-<span class="nc" id="L460">            return ret;</span>
+<span class="nc" id="L457">    public Object getProperty(String name) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(12988);</span>
+<span class="nc" id="L458">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12989);Object ret = props.get(name);</span>
+<span class="nc bnc" id="L459" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(12990);if ((((ret != null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12991)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12992)==0&amp;false))) {{</span>
+<span class="nc" id="L460">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12993);return ret;</span>
         }
-<span class="nc bnc" id="L462" title="All 2 branches missed.">        for (Object src : srcs) {</span>
-<span class="nc" id="L463">            RenderedImage ri = (RenderedImage) src;</span>
-<span class="nc" id="L464">            ret = ri.getProperty(name);</span>
-<span class="nc bnc" id="L465" title="All 2 branches missed.">            if (ret != null) {</span>
-<span class="nc" id="L466">                return ret;</span>
+<span class="nc bnc" id="L462" title="All 2 branches missed.">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(12994);for (Object src : srcs) {{</span>
+<span class="nc" id="L463">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12995);RenderedImage ri = (RenderedImage) src;</span>
+<span class="nc" id="L464">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12996);ret = ri.getProperty(name);</span>
+<span class="nc bnc" id="L465" title="All 10 branches missed.">            __CLR4_5_29wq9wqm68iyhkp.R.inc(12997);if ((((ret != null)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(12998)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(12999)==0&amp;false))) {{</span>
+<span class="nc" id="L466">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13000);return ret;</span>
             }
-<span class="nc" id="L468">        }</span>
-<span class="nc" id="L469">        return null;</span>
-    }
+        }}
+<span class="nc" id="L469">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13001);return null;</span>
+<span class="nc" id="L470">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public String [] getPropertyNames() {
-<span class="nc" id="L473">        Set keys = props.keySet();</span>
-<span class="nc" id="L474">        String[] ret  = new String[keys.size()];</span>
-<span class="nc" id="L475">        keys.toArray(ret);</span>
+<span class="nc" id="L472">    public String [] getPropertyNames() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13002);</span>
+<span class="nc" id="L473">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13003);Set keys = props.keySet();</span>
+<span class="nc" id="L474">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13004);String[] ret  = new String[keys.size()];</span>
+<span class="nc" id="L475">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13005);keys.toArray(ret);</span>
 
-<span class="nc bnc" id="L477" title="All 2 branches missed.">        for (Object src : srcs) {</span>
-<span class="nc" id="L478">            RenderedImage ri = (RenderedImage) src;</span>
-<span class="nc" id="L479">            String[] srcProps = ri.getPropertyNames();</span>
-<span class="nc bnc" id="L480" title="All 2 branches missed.">            if (srcProps.length != 0) {</span>
-<span class="nc" id="L481">                String[] tmp = new String[ret.length + srcProps.length];</span>
-<span class="nc" id="L482">                System.arraycopy(ret, 0, tmp, 0, ret.length);</span>
-<span class="nc" id="L483">                System.arraycopy(srcProps, 0, tmp, ret.length, srcProps.length);</span>
-<span class="nc" id="L484">                ret = tmp;</span>
+<span class="nc bnc" id="L477" title="All 2 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13006);for (Object src : srcs) {{</span>
+<span class="nc" id="L478">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13007);RenderedImage ri = (RenderedImage) src;</span>
+<span class="nc" id="L479">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13008);String[] srcProps = ri.getPropertyNames();</span>
+<span class="nc bnc" id="L480" title="All 10 branches missed.">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13009);if ((((srcProps.length != 0)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13010)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13011)==0&amp;false))) {{</span>
+<span class="nc" id="L481">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13012);String[] tmp = new String[ret.length + srcProps.length];</span>
+<span class="nc" id="L482">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13013);System.arraycopy(ret, 0, tmp, 0, ret.length);</span>
+<span class="nc" id="L483">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13014);System.arraycopy(srcProps, 0, tmp, ret.length, srcProps.length);</span>
+<span class="nc" id="L484">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13015);ret = tmp;</span>
             }
-<span class="nc" id="L486">        }</span>
+        }}
 
-<span class="nc" id="L488">        return ret;</span>
-    }
+<span class="nc" id="L488">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13016);return ret;</span>
+<span class="nc" id="L489">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public Shape getDependencyRegion(int srcIndex, Rectangle outputRgn) {
-<span class="nc bnc" id="L492" title="All 4 branches missed.">        if ((srcIndex &lt; 0) || (srcIndex &gt; srcs.size())) {</span>
-<span class="nc" id="L493">            throw new IndexOutOfBoundsException(</span>
+<span class="nc" id="L491">    public Shape getDependencyRegion(int srcIndex, Rectangle outputRgn) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13017);</span>
+<span class="nc bnc" id="L492" title="All 12 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13018);if (((((srcIndex &lt; 0) || (srcIndex &gt; srcs.size()))&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13019)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13020)==0&amp;false))) {{</span>
+<span class="nc" id="L493">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13021);throw new IndexOutOfBoundsException(</span>
                 &quot;Nonexistent source requested.&quot;);
         }
 
         // Return empty rect if they don't intersect.
-<span class="nc bnc" id="L498" title="All 2 branches missed.">        if (!outputRgn.intersects(bounds)) {</span>
-<span class="nc" id="L499">            return new Rectangle();</span>
+<span class="nc bnc" id="L498" title="All 10 branches missed.">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13022);if ((((!outputRgn.intersects(bounds))&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13023)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13024)==0&amp;false))) {{</span>
+<span class="nc" id="L499">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13025);return new Rectangle();</span>
         }
 
         // We only depend on our source for stuff that is inside
         // our bounds...
-<span class="nc" id="L504">        return outputRgn.intersection(bounds);</span>
-    }
+<span class="nc" id="L504">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13026);return outputRgn.intersection(bounds);</span>
+<span class="nc" id="L505">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public Shape getDirtyRegion(int srcIndex, Rectangle inputRgn) {
-<span class="nc bnc" id="L508" title="All 2 branches missed.">        if (srcIndex != 0) {</span>
-<span class="nc" id="L509">            throw new IndexOutOfBoundsException(</span>
+<span class="nc" id="L507">    public Shape getDirtyRegion(int srcIndex, Rectangle inputRgn) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13027);</span>
+<span class="nc bnc" id="L508" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13028);if ((((srcIndex != 0)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13029)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13030)==0&amp;false))) {{</span>
+<span class="nc" id="L509">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13031);throw new IndexOutOfBoundsException(</span>
                 &quot;Nonexistent source requested.&quot;);
         }
 
         // Return empty rect if they don't intersect.
-<span class="nc bnc" id="L514" title="All 2 branches missed.">        if (!inputRgn.intersects(bounds)) {</span>
-<span class="nc" id="L515">            return new Rectangle();</span>
+<span class="nc bnc" id="L514" title="All 10 branches missed.">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13032);if ((((!inputRgn.intersects(bounds))&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13033)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13034)==0&amp;false))) {{</span>
+<span class="nc" id="L515">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13035);return new Rectangle();</span>
         }
 
         // Changes in the input region don't propogate outside our
         // bounds.
-<span class="nc" id="L520">        return inputRgn.intersection(bounds);</span>
-    }
+<span class="nc" id="L520">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13036);return inputRgn.intersection(bounds);</span>
+<span class="nc" id="L521">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
 
     // This is not included but can be implemented by the following.
@@ -528,55 +528,55 @@ public abstract class AbstractRed implements CachableRed {
     //     return wr;
     // }
 
-    public Raster getTile(int tileX, int tileY) {
-<span class="nc" id="L532">        WritableRaster wr = makeTile(tileX, tileY);</span>
-<span class="nc" id="L533">        return copyData(wr);</span>
-    }
+<span class="nc" id="L531">    public Raster getTile(int tileX, int tileY) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13037);</span>
+<span class="nc" id="L532">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13038);WritableRaster wr = makeTile(tileX, tileY);</span>
+<span class="nc" id="L533">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13039);return copyData(wr);</span>
+<span class="nc" id="L534">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public Raster getData() {
-<span class="nc" id="L537">        return getData(bounds);</span>
-    }
+<span class="nc" id="L536">    public Raster getData() {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13040);</span>
+<span class="nc" id="L537">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13041);return getData(bounds);</span>
+<span class="nc" id="L538">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
-    public Raster getData(Rectangle rect) {
-<span class="nc" id="L541">        SampleModel smRet = sm.createCompatibleSampleModel(</span>
+<span class="nc" id="L540">    public Raster getData(Rectangle rect) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13042);</span>
+<span class="nc" id="L541">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13043);SampleModel smRet = sm.createCompatibleSampleModel(</span>
             rect.width, rect.height);
 
-<span class="nc" id="L544">        Point pt = new Point(rect.x, rect.y);</span>
-<span class="nc" id="L545">        WritableRaster wr = Raster.createWritableRaster(smRet, pt);</span>
+<span class="nc" id="L544">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13044);Point pt = new Point(rect.x, rect.y);</span>
+<span class="nc" id="L545">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13045);WritableRaster wr = Raster.createWritableRaster(smRet, pt);</span>
 
         // System.out.println(&quot;GD DB: &quot; + wr.getDataBuffer().getSize());
-<span class="nc" id="L548">        return copyData(wr);</span>
-    }
+<span class="nc" id="L548">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13046);return copyData(wr);</span>
+<span class="nc" id="L549">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Returns the x index of tile under xloc.
      * @param  xloc the x location (in pixels) to get tile for.
      * @return The tile index under xloc (may be outside tile grid).
      */
-    public final int getXTile(int xloc) {
-<span class="nc" id="L557">        int tgx = xloc - tileGridXOff;</span>
+<span class="nc" id="L556">    public final int getXTile(int xloc) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13047);</span>
+<span class="nc" id="L557">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13048);int tgx = xloc - tileGridXOff;</span>
         // We need to round to -infinity...
-<span class="nc bnc" id="L559" title="All 2 branches missed.">        if (tgx &gt;= 0) {</span>
-<span class="nc" id="L560">            return tgx / tileWidth;</span>
-        } else {
-<span class="nc" id="L562">            return (tgx - tileWidth + 1) / tileWidth;</span>
+<span class="nc bnc" id="L559" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13049);if ((((tgx &gt;= 0)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13050)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13051)==0&amp;false))) {{</span>
+<span class="nc" id="L560">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13052);return tgx / tileWidth;</span>
+        } }else {{
+<span class="nc" id="L562">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13053);return (tgx - tileWidth + 1) / tileWidth;</span>
         }
-    }
+<span class="nc" id="L564">    }}finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Returns the y index of tile under yloc.
      * @param  yloc the y location (in pixels) to get tile for.
      * @return The tile index under yloc (may be outside tile grid).
      */
-    public final int getYTile(int yloc) {
-<span class="nc" id="L572">        int tgy = yloc - tileGridYOff;</span>
+<span class="nc" id="L571">    public final int getYTile(int yloc) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13054);</span>
+<span class="nc" id="L572">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13055);int tgy = yloc - tileGridYOff;</span>
         // We need to round to -infinity...
-<span class="nc bnc" id="L574" title="All 2 branches missed.">        if (tgy &gt;= 0) {</span>
-<span class="nc" id="L575">            return tgy / tileHeight;</span>
-        } else {
-<span class="nc" id="L577">            return (tgy - tileHeight + 1) / tileHeight;</span>
+<span class="nc bnc" id="L574" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13056);if ((((tgy &gt;= 0)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13057)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13058)==0&amp;false))) {{</span>
+<span class="nc" id="L575">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13059);return tgy / tileHeight;</span>
+        } }else {{
+<span class="nc" id="L577">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13060);return (tgy - tileHeight + 1) / tileHeight;</span>
         }
-    }
+<span class="nc" id="L579">    }}finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     /**
      * Copies data from this images tile grid into wr.  wr may
@@ -584,40 +584,40 @@ public abstract class AbstractRed implements CachableRed {
      * data in wr outside the bounds will not be touched.
      * @param wr Raster to fill with image data.
      */
-    public void copyToRaster(WritableRaster wr) {
-<span class="nc" id="L588">        int tx0 = getXTile(wr.getMinX());</span>
-<span class="nc" id="L589">        int ty0 = getYTile(wr.getMinY());</span>
-<span class="nc" id="L590">        int tx1 = getXTile(wr.getMinX() + wr.getWidth() - 1);</span>
-<span class="nc" id="L591">        int ty1 = getYTile(wr.getMinY() + wr.getHeight() - 1);</span>
+<span class="nc" id="L587">    public void copyToRaster(WritableRaster wr) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13061);</span>
+<span class="nc" id="L588">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13062);int tx0 = getXTile(wr.getMinX());</span>
+<span class="nc" id="L589">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13063);int ty0 = getYTile(wr.getMinY());</span>
+<span class="nc" id="L590">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13064);int tx1 = getXTile(wr.getMinX() + wr.getWidth() - 1);</span>
+<span class="nc" id="L591">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13065);int ty1 = getYTile(wr.getMinY() + wr.getHeight() - 1);</span>
 
-<span class="nc bnc" id="L593" title="All 2 branches missed.">        if (tx0 &lt; minTileX) {</span>
-<span class="nc" id="L594">            tx0 = minTileX;</span>
+<span class="nc bnc" id="L593" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13066);if ((((tx0 &lt; minTileX)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13067)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13068)==0&amp;false))) {{</span>
+<span class="nc" id="L594">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13069);tx0 = minTileX;</span>
         }
-<span class="nc bnc" id="L596" title="All 2 branches missed.">        if (ty0 &lt; minTileY) {</span>
-<span class="nc" id="L597">            ty0 = minTileY;</span>
-        }
-
-<span class="nc bnc" id="L600" title="All 2 branches missed.">        if (tx1 &gt;= minTileX + numXTiles) {</span>
-<span class="nc" id="L601">            tx1 = minTileX + numXTiles - 1;</span>
-        }
-<span class="nc bnc" id="L603" title="All 2 branches missed.">        if (ty1 &gt;= minTileY + numYTiles) {</span>
-<span class="nc" id="L604">            ty1 = minTileY + numYTiles - 1;</span>
+<span class="nc bnc" id="L596" title="All 10 branches missed.">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13070);if ((((ty0 &lt; minTileY)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13071)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13072)==0&amp;false))) {{</span>
+<span class="nc" id="L597">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13073);ty0 = minTileY;</span>
         }
 
-<span class="nc" id="L607">        final boolean isIntPack =</span>
+<span class="nc bnc" id="L600" title="All 10 branches missed.">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13074);if ((((tx1 &gt;= minTileX + numXTiles)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13075)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13076)==0&amp;false))) {{</span>
+<span class="nc" id="L601">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13077);tx1 = minTileX + numXTiles - 1;</span>
+        }
+<span class="nc bnc" id="L603" title="All 10 branches missed.">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13078);if ((((ty1 &gt;= minTileY + numYTiles)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13079)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13080)==0&amp;false))) {{</span>
+<span class="nc" id="L604">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13081);ty1 = minTileY + numYTiles - 1;</span>
+        }
+
+<span class="nc" id="L607">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13082);final boolean isIntPack =</span>
 <span class="nc" id="L608">            GraphicsUtil.is_INT_PACK_Data(getSampleModel(), false);</span>
 
-<span class="nc bnc" id="L610" title="All 2 branches missed.">        for (int y = ty0; y &lt;= ty1; y++) {</span>
-<span class="nc bnc" id="L611" title="All 2 branches missed.">            for (int x = tx0; x &lt;= tx1; x++) {</span>
-<span class="nc" id="L612">                Raster r = getTile(x, y);</span>
-<span class="nc bnc" id="L613" title="All 2 branches missed.">                if (isIntPack) {</span>
-<span class="nc" id="L614">                    GraphicsUtil.copyData_INT_PACK(r, wr);</span>
-                } else {
-<span class="nc" id="L616">                    GraphicsUtil.copyData_FALLBACK(r, wr);</span>
+<span class="nc bnc" id="L610" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13083);for (int y = ty0; (((y &lt;= ty1)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13084)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13085)==0&amp;false)); y++) {{</span>
+<span class="nc bnc" id="L611" title="All 10 branches missed.">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13086);for (int x = tx0; (((x &lt;= tx1)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13087)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13088)==0&amp;false)); x++) {{</span>
+<span class="nc" id="L612">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13089);Raster r = getTile(x, y);</span>
+<span class="nc bnc" id="L613" title="All 10 branches missed.">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13090);if ((((isIntPack)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13091)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13092)==0&amp;false))) {{</span>
+<span class="nc" id="L614">                    __CLR4_5_29wq9wqm68iyhkp.R.inc(13093);GraphicsUtil.copyData_INT_PACK(r, wr);</span>
+                } }else {{
+<span class="nc" id="L616">                    __CLR4_5_29wq9wqm68iyhkp.R.inc(13094);GraphicsUtil.copyData_FALLBACK(r, wr);</span>
                 }
-            }
-        }
-<span class="nc" id="L620">    }</span>
+            }}
+        }}
+<span class="nc" id="L620">    }}finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
 
     // static DataBufferReclaimer reclaim = new DataBufferReclaimer();
@@ -632,19 +632,19 @@ public abstract class AbstractRed implements CachableRed {
      * @exception IndexOutOfBoundsException if the requested tile index
      *   falles outside of the bounds of the tile grid for the image.
      */
-    public WritableRaster makeTile(int tileX, int tileY) {
-<span class="nc bnc" id="L636" title="All 8 branches missed.">        if ((tileX &lt; minTileX) || (tileX &gt;= minTileX + numXTiles)</span>
-            || (tileY &lt; minTileY) || (tileY &gt;= minTileY + numYTiles)) {
-<span class="nc" id="L638">            throw new IndexOutOfBoundsException(</span>
+<span class="nc" id="L635">    public WritableRaster makeTile(int tileX, int tileY) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13095);</span>
+<span class="nc bnc" id="L636" title="All 8 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13096);if (((((tileX &lt; minTileX) || (tileX &gt;= minTileX + numXTiles)</span>
+<span class="nc bnc" id="L637" title="All 8 branches missed.">            || (tileY &lt; minTileY) || (tileY &gt;= minTileY + numYTiles))&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13097)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13098)==0&amp;false))) {{</span>
+<span class="nc" id="L638">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13099);throw new IndexOutOfBoundsException(</span>
                 &quot;Requested Tile (&quot; + tileX + ',' + tileY
                  + &quot;) lies outside the bounds of image&quot;);
         }
 
-<span class="nc" id="L643">        Point pt = new Point(tileGridXOff + tileX * tileWidth,</span>
+<span class="nc" id="L643">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13100);Point pt = new Point(tileGridXOff + tileX * tileWidth,</span>
                              tileGridYOff + tileY * tileHeight);
 
-        WritableRaster wr;
-<span class="nc" id="L647">        wr = Raster.createWritableRaster(sm, pt);</span>
+<span class="nc" id="L646">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13101);WritableRaster wr;</span>
+<span class="nc" id="L647">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13102);wr = Raster.createWritableRaster(sm, pt);</span>
         // if (!(sm instanceof SinglePixelPackedSampleModel))
         //     wr = Raster.createWritableRaster(sm, pt);
         // else {
@@ -663,49 +663,49 @@ public abstract class AbstractRed implements CachableRed {
 
         // System.out.println(&quot;MT DB: &quot; + wr.getDataBuffer().getSize());
 
-<span class="nc" id="L666">        int x0 = wr.getMinX();</span>
-<span class="nc" id="L667">        int y0 = wr.getMinY();</span>
-<span class="nc" id="L668">        int x1 = x0 + wr.getWidth() - 1;</span>
-<span class="nc" id="L669">        int y1 = y0 + wr.getHeight() - 1;</span>
+<span class="nc" id="L666">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13103);int x0 = wr.getMinX();</span>
+<span class="nc" id="L667">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13104);int y0 = wr.getMinY();</span>
+<span class="nc" id="L668">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13105);int x1 = x0 + wr.getWidth() - 1;</span>
+<span class="nc" id="L669">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13106);int y1 = y0 + wr.getHeight() - 1;</span>
 
-<span class="nc bnc" id="L671" title="All 8 branches missed.">        if ((x0 &lt; bounds.x) || (x1 &gt;= (bounds.x + bounds.width))</span>
-            || (y0 &lt; bounds.y) || (y1 &gt;= (bounds.y + bounds.height))) {
+<span class="nc bnc" id="L671" title="All 8 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13107);if (((((x0 &lt; bounds.x) || (x1 &gt;= (bounds.x + bounds.width))</span>
+<span class="nc bnc" id="L672" title="All 8 branches missed.">            || (y0 &lt; bounds.y) || (y1 &gt;= (bounds.y + bounds.height)))&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13108)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13109)==0&amp;false))) {{</span>
             // Part of this raster lies outside our bounds so subset
             // it so it only advertises the stuff inside our bounds.
-<span class="nc bnc" id="L675" title="All 2 branches missed.">            if (x0 &lt; bounds.x) {</span>
-<span class="nc" id="L676">                x0 = bounds.x;</span>
+<span class="nc bnc" id="L675" title="All 10 branches missed.">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13110);if ((((x0 &lt; bounds.x)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13111)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13112)==0&amp;false))) {{</span>
+<span class="nc" id="L676">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13113);x0 = bounds.x;</span>
             }
-<span class="nc bnc" id="L678" title="All 2 branches missed.">            if (y0 &lt; bounds.y) {</span>
-<span class="nc" id="L679">                y0 = bounds.y;</span>
+<span class="nc bnc" id="L678" title="All 10 branches missed.">            }__CLR4_5_29wq9wqm68iyhkp.R.inc(13114);if ((((y0 &lt; bounds.y)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13115)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13116)==0&amp;false))) {{</span>
+<span class="nc" id="L679">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13117);y0 = bounds.y;</span>
             }
-<span class="nc bnc" id="L681" title="All 2 branches missed.">            if (x1 &gt;= (bounds.x + bounds.width)) {</span>
-<span class="nc" id="L682">                x1 = bounds.x + bounds.width - 1;</span>
+<span class="nc bnc" id="L681" title="All 10 branches missed.">            }__CLR4_5_29wq9wqm68iyhkp.R.inc(13118);if ((((x1 &gt;= (bounds.x + bounds.width))&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13119)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13120)==0&amp;false))) {{</span>
+<span class="nc" id="L682">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13121);x1 = bounds.x + bounds.width - 1;</span>
             }
-<span class="nc bnc" id="L684" title="All 2 branches missed.">            if (y1 &gt;= (bounds.y + bounds.height)) {</span>
-<span class="nc" id="L685">                y1 = bounds.y + bounds.height - 1;</span>
+<span class="nc bnc" id="L684" title="All 10 branches missed.">            }__CLR4_5_29wq9wqm68iyhkp.R.inc(13122);if ((((y1 &gt;= (bounds.y + bounds.height))&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13123)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13124)==0&amp;false))) {{</span>
+<span class="nc" id="L685">                __CLR4_5_29wq9wqm68iyhkp.R.inc(13125);y1 = bounds.y + bounds.height - 1;</span>
             }
 
-<span class="nc" id="L688">            wr = wr.createWritableChild(x0, y0, x1 - x0 + 1, y1 - y0 + 1,</span>
+<span class="nc" id="L688">            }__CLR4_5_29wq9wqm68iyhkp.R.inc(13126);wr = wr.createWritableChild(x0, y0, x1 - x0 + 1, y1 - y0 + 1,</span>
                                         x0, y0, null);
         }
-<span class="nc" id="L691">        return wr;</span>
-    }
+<span class="nc" id="L691">        }__CLR4_5_29wq9wqm68iyhkp.R.inc(13127);return wr;</span>
+<span class="nc" id="L692">    }finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 
     public static void copyBand(Raster         src, int srcBand,
-                                WritableRaster dst, int dstBand) {
-<span class="nc" id="L696">        Rectangle srcR = new Rectangle(src.getMinX(),  src.getMinY(),</span>
+<span class="nc" id="L695">                                WritableRaster dst, int dstBand) {try{__CLR4_5_29wq9wqm68iyhkp.R.inc(13128);</span>
+<span class="nc" id="L696">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13129);Rectangle srcR = new Rectangle(src.getMinX(),  src.getMinY(),</span>
 <span class="nc" id="L697">                                       src.getWidth(), src.getHeight());</span>
-<span class="nc" id="L698">        Rectangle dstR = new Rectangle(dst.getMinX(),  dst.getMinY(),</span>
+<span class="nc" id="L698">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13130);Rectangle dstR = new Rectangle(dst.getMinX(),  dst.getMinY(),</span>
 <span class="nc" id="L699">                                       dst.getWidth(), dst.getHeight());</span>
 
-<span class="nc" id="L701">        Rectangle cpR  = srcR.intersection(dstR);</span>
+<span class="nc" id="L701">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13131);Rectangle cpR  = srcR.intersection(dstR);</span>
 
-<span class="nc" id="L703">        int [] samples = null;</span>
-<span class="nc bnc" id="L704" title="All 2 branches missed.">        for (int y = cpR.y; y &lt; cpR.y + cpR.height; y++) {</span>
-<span class="nc" id="L705">            samples = src.getSamples(cpR.x, y, cpR.width, 1, srcBand, samples);</span>
-<span class="nc" id="L706">            dst.setSamples(cpR.x, y, cpR.width, 1, dstBand, samples);</span>
+<span class="nc" id="L703">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13132);int [] samples = null;</span>
+<span class="nc bnc" id="L704" title="All 10 branches missed.">        __CLR4_5_29wq9wqm68iyhkp.R.inc(13133);for (int y = cpR.y; (((y &lt; cpR.y + cpR.height)&amp;&amp;(__CLR4_5_29wq9wqm68iyhkp.R.iget(13134)!=0|true))||(__CLR4_5_29wq9wqm68iyhkp.R.iget(13135)==0&amp;false)); y++) {{</span>
+<span class="nc" id="L705">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13136);samples = src.getSamples(cpR.x, y, cpR.width, 1, srcBand, samples);</span>
+<span class="nc" id="L706">            __CLR4_5_29wq9wqm68iyhkp.R.inc(13137);dst.setSamples(cpR.x, y, cpR.width, 1, dstBand, samples);</span>
         }
-<span class="nc" id="L708">    }</span>
+<span class="nc" id="L708">    }}finally{__CLR4_5_29wq9wqm68iyhkp.R.flushNeeded();}}</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

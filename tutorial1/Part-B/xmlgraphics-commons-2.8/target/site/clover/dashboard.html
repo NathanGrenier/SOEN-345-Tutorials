@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>org.apache.xmlgraphics:xmlgraphics-commons 2.8</title>
+    </head>
+
+<body onresize="processTreeMapDashJson(treeMapJson);" >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://xmlgraphics.apache.org/commons/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://xmlgraphics.apache.org/commons/" target="_top">
+                                        org.apache.xmlgraphics:xmlgraphics-commons 2.8
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database Wed Jan 22 2025 18:17:57 EST</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+        <ul class="tabs-menu">
+            <li class="menu-item active-tab">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+
+
+
+
+
+<div class="aui-group">
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                
+                <h3>
+                    Code coverage
+                    <small style="float:right; font-weight: normal">
+                        352 classes,
+                        8,918 /
+                        22,486 elements
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.39660233</span>39.7%</div><div style="display: table-cell">
+ <div title="39.7% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:39.7%"></div></div></div></div>
+                <p><a href="pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>
+                    Test results
+                    <small style="float:right; font-weight: normal">
+                        190 /
+                        190 tests
+                        5.04 secs
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                                    
+
+<div style="display: table; width: 100%">
+            <div class="barGraphValue"><span class="sortValue">1.0</span>100%</div>         <div style="display: table-cell">
+            
+            <div title="0% Errors" style="min-width: 40px;" class="testBarError">
+                <div title="100% of tests passed&lt;br/&gt;0% of tests failed" class="testBarFail" style="width: 100%"><div class="testBarPass" style="width: 100%"></div></div>
+            </div>
+        </div>
+    </div>                                <p><a href="test-pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Code metrics</h3>
+            </header>
+                         
+
+<div id="$statsId" class="aui-item" style="display: ${display}">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this project">Branches:</label></div>
+        <div class="stats-box-value">5,368</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this project">Statements:</label></div>
+        <div class="stats-box-value">14,656</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this project">Methods:</label></div>
+        <div class="stats-box-value">2,462</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this project">Classes:</label></div>
+        <div class="stats-box-value">352</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of files in this project">Files:</label></div>
+            <div class="stats-box-value">314</div>
+        </div>
+                <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of packages in this project">Packages:</label></div>
+            <div class="stats-box-value">34</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this project">LOC:</label></div>
+        <div class="stats-box-value">57,799</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this project">NCLOC:</label></div>
+        <div class="stats-box-value">29,776</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this project">Total complexity:</label></div>
+        <div class="stats-box-value">5,993</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this project">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.41</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">5.95</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">6.99</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Number of classes per package.">Classes/Package:</label></div>
+            <div class="stats-box-value">10.35</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this project">Average method complexity:</label></div>
+        <div class="stats-box-value">2.43</div>
+    </div>
+</div>
+
+</div>        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Coverage Distribution</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">                     <img src="img/classDistrubutionChart.png" alt="img/classDistrubutionChart.png" usemap="#classDistrubutionChart.png"/>
+                </div>
+                <map id="classDistrubutionChart.png" name="classDistrubutionChart.png">
+<area shape="rect" coords="288,106,310,206" title="39 classes have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="263,111,285,206" title="37 classes have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="238,129,260,206" title="30 classes have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="213,163,235,206" title="17 classes have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="188,152,210,206" title="21 classes have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="163,157,185,206" title="19 classes have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="138,144,160,206" title="24 classes have 31-40% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="113,150,135,206" title="22 classes have 21-30% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="88,188,110,206" title="7 classes have 11-20% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="63,191,85,206" title="6 classes have 1-10% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,15,60,206" title="74 classes have 0% coverage" alt="" nohref="nohref"/>
+</map>
+            </div>
+        </div>
+        
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Complexity</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">
+                    <img src="img/classComplexityChart.png" alt="img/classComplexityChart.png" usemap="#classComplexityChart.png"/>
+                </div>
+                <map id="classComplexityChart.png" name="classComplexityChart.png">
+<area shape="poly" coords="54,110,51,112,49,110,51,107,54,110,54,110" title="Complexity: 149; Coverage: 0%; Class: GraphicsUtil" alt="" href="org/apache/xmlgraphics/image/GraphicsUtil.html#GraphicsUtil"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: GraphicsConstants" alt="" href="org/apache/xmlgraphics/image/GraphicsConstants.html#GraphicsConstants"/>
+<area shape="poly" coords="257,183,254,186,252,183,254,181,257,183,257,183" title="Complexity: 39; Coverage: 83%; Class: Glyphs" alt="" href="org/apache/xmlgraphics/fonts/Glyphs.html#Glyphs"/>
+<area shape="poly" coords="54,191,51,194,49,191,51,189,54,191,54,191" title="Complexity: 27; Coverage: 0%; Class: TIFFLZWDecoder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFLZWDecoder.html#TIFFLZWDecoder"/>
+<area shape="poly" coords="137,75,134,78,132,75,134,73,137,75,137,75" title="Complexity: 201; Coverage: 34%; Class: TIFFImageEncoder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFImageEncoder.html#TIFFImageEncoder"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: TIFFImageDecoder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFImageDecoder.html#TIFFImageDecoder"/>
+<area shape="poly" coords="54,29,51,31,49,29,51,26,54,29,54,29" title="Complexity: 271; Coverage: 0%; Class: TIFFImage" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFImage.html#TIFFImage"/>
+<area shape="poly" coords="129,170,127,173,124,170,127,168,129,170,129,170" title="Complexity: 58; Coverage: 31%; Class: TIFFField" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFField.html#TIFFField"/>
+<area shape="poly" coords="54,137,51,139,49,137,51,134,54,137,54,137" title="Complexity: 109; Coverage: 0%; Class: TIFFFaxDecoder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFFaxDecoder.html#TIFFFaxDecoder"/>
+<area shape="poly" coords="120,195,117,198,115,195,117,193,120,195,120,195" title="Complexity: 21; Coverage: 27%; Class: TIFFEncodeParam" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFEncodeParam.html#TIFFEncodeParam"/>
+<area shape="poly" coords="159,158,156,160,154,158,156,155,159,158,159,158" title="Complexity: 77; Coverage: 43%; Class: TIFFDirectory" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFDirectory.html#TIFFDirectory"/>
+<area shape="poly" coords="54,203,51,206,49,203,51,201,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: TIFFDecodeParam" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFDecodeParam.html#TIFFDecodeParam"/>
+<area shape="poly" coords="294,196,291,199,289,196,291,194,294,196,294,196" title="Complexity: 19; Coverage: 98%; Class: ImageType" alt="" href="org/apache/xmlgraphics/image/codec/tiff/ImageType.html#ImageType"/>
+<area shape="poly" coords="298,207,296,210,293,207,296,205,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: ImageInfo.ImageInfoBuilder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/ImageInfo.html#ImageInfo.ImageInfoBuilder"/>
+<area shape="poly" coords="289,189,286,192,284,189,286,187,289,189,289,189" title="Complexity: 30; Coverage: 96%; Class: ImageInfo" alt="" href="org/apache/xmlgraphics/image/codec/tiff/ImageInfo.html#ImageInfo"/>
+<area shape="poly" coords="176,205,174,208,171,205,174,203,176,205,176,205" title="Complexity: 6; Coverage: 50%; Class: ExtraSamplesType" alt="" href="org/apache/xmlgraphics/image/codec/tiff/ExtraSamplesType.html#ExtraSamplesType"/>
+<area shape="poly" coords="117,206,115,208,112,206,115,203,117,206,117,206" title="Complexity: 5; Coverage: 26%; Class: CompressionValue" alt="" href="org/apache/xmlgraphics/image/codec/tiff/CompressionValue.html#CompressionValue"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: PipelineFactory.PipelineComparator" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html#PipelineFactory.PipelineComparator"/>
+<area shape="poly" coords="276,192,274,195,271,192,274,190,276,192,276,192" title="Complexity: 25; Coverage: 91%; Class: PipelineFactory" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html#PipelineFactory"/>
+<area shape="poly" coords="257,204,254,206,252,204,254,201,257,204,257,204" title="Complexity: 8; Coverage: 83%; Class: ImageRepresentation" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/ImageRepresentation.html#ImageRepresentation"/>
+<area shape="poly" coords="259,180,257,183,254,180,257,178,259,180,259,180" title="Complexity: 43; Coverage: 84%; Class: ImageProviderPipeline" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/ImageProviderPipeline.html#ImageProviderPipeline"/>
+<area shape="poly" coords="298,206,296,208,293,206,296,203,298,206,298,206" title="Complexity: 5; Coverage: 100%; Class: ImageConversionEdge" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/ImageConversionEdge.html#ImageConversionEdge"/>
+<area shape="poly" coords="90,202,88,204,85,202,88,199,90,202,90,202" title="Complexity: 11; Coverage: 15%; Class: XMLNamespaceEnabledImageFlavor" alt="" href="org/apache/xmlgraphics/image/loader/XMLNamespaceEnabledImageFlavor.html#XMLNamespaceEnabledImageFlavor"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: SubImageNotFoundException" alt="" href="org/apache/xmlgraphics/image/loader/SubImageNotFoundException.html#SubImageNotFoundException"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: PipelineFactory.PipelineComparator" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html#PipelineFactory.PipelineComparator"/>
+<area shape="poly" coords="259,205,257,208,254,205,257,203,259,205,259,205" title="Complexity: 6; Coverage: 84%; Class: RefinedImageFlavor" alt="" href="org/apache/xmlgraphics/image/loader/RefinedImageFlavor.html#RefinedImageFlavor"/>
+<area shape="poly" coords="220,202,218,204,215,202,218,199,220,202,220,202" title="Complexity: 11; Coverage: 68%; Class: MimeEnabledImageFlavor" alt="" href="org/apache/xmlgraphics/image/loader/MimeEnabledImageFlavor.html#MimeEnabledImageFlavor"/>
+<area shape="poly" coords="176,202,174,204,171,202,174,199,176,202,176,202" title="Complexity: 11; Coverage: 50%; Class: ImageSource" alt="" href="org/apache/xmlgraphics/image/loader/ImageSource.html#ImageSource"/>
+<area shape="poly" coords="210,193,208,196,205,193,208,191,210,193,210,193" title="Complexity: 24; Coverage: 64%; Class: ImageSize" alt="" href="org/apache/xmlgraphics/image/loader/ImageSize.html#ImageSize"/>
+<area shape="poly" coords="230,182,227,185,225,182,227,180,230,182,230,182" title="Complexity: 40; Coverage: 72%; Class: ImageManager" alt="" href="org/apache/xmlgraphics/image/loader/ImageManager.html#ImageManager"/>
+<area shape="poly" coords="269,204,267,206,264,204,267,201,269,204,269,204" title="Complexity: 8; Coverage: 88%; Class: ImageInfo" alt="" href="org/apache/xmlgraphics/image/loader/ImageInfo.html#ImageInfo"/>
+<area shape="poly" coords="254,199,252,202,249,199,252,197,254,199,254,199" title="Complexity: 15; Coverage: 82%; Class: ImageFlavor" alt="" href="org/apache/xmlgraphics/image/loader/ImageFlavor.html#ImageFlavor"/>
+<area shape="poly" coords="176,208,174,210,171,208,174,205,176,208,176,208" title="Complexity: 2; Coverage: 50%; Class: ImageException" alt="" href="org/apache/xmlgraphics/image/loader/ImageException.html#ImageException"/>
+<area shape="poly" coords="107,192,105,195,102,192,105,190,107,192,107,192" title="Complexity: 25; Coverage: 22%; Class: PSState" alt="" href="org/apache/xmlgraphics/ps/PSState.html#PSState"/>
+<area shape="poly" coords="220,201,218,204,215,201,218,199,220,201,220,201" title="Complexity: 12; Coverage: 68%; Class: PSResource" alt="" href="org/apache/xmlgraphics/ps/PSResource.html#PSResource"/>
+<area shape="poly" coords="68,208,66,210,63,208,66,205,68,208,68,208" title="Complexity: 2; Coverage: 6%; Class: PSProcSets.EPSProcSet" alt="" href="org/apache/xmlgraphics/ps/PSProcSets.html#PSProcSets.EPSProcSet"/>
+<area shape="poly" coords="93,206,90,208,88,206,90,203,93,206,93,206" title="Complexity: 5; Coverage: 16%; Class: PSProcSets.StdProcSet" alt="" href="org/apache/xmlgraphics/ps/PSProcSets.html#PSProcSets.StdProcSet"/>
+<area shape="poly" coords="127,205,125,208,122,205,125,203,127,205,127,205" title="Complexity: 6; Coverage: 30%; Class: PSProcSets" alt="" href="org/apache/xmlgraphics/ps/PSProcSets.html#PSProcSets"/>
+<area shape="poly" coords="115,206,112,208,110,206,112,203,115,206,115,206" title="Complexity: 5; Coverage: 25%; Class: PSProcSet" alt="" href="org/apache/xmlgraphics/ps/PSProcSet.html#PSProcSet"/>
+<area shape="poly" coords="196,200,193,203,191,200,193,198,196,200,196,200" title="Complexity: 13; Coverage: 58%; Class: PSPageDeviceDictionary" alt="" href="org/apache/xmlgraphics/ps/PSPageDeviceDictionary.html#PSPageDeviceDictionary"/>
+<area shape="poly" coords="125,150,122,152,120,150,122,147,125,150,125,150" title="Complexity: 89; Coverage: 29%; Class: PSImageUtils" alt="" href="org/apache/xmlgraphics/ps/PSImageUtils.html#PSImageUtils"/>
+<area shape="poly" coords="152,131,149,134,147,131,149,129,152,131,152,131" title="Complexity: 117; Coverage: 40%; Class: PSGenerator" alt="" href="org/apache/xmlgraphics/ps/PSGenerator.html#PSGenerator"/>
+<area shape="poly" coords="54,195,51,198,49,195,51,193,54,195,54,195" title="Complexity: 21; Coverage: 0%; Class: PSFontUtils" alt="" href="org/apache/xmlgraphics/ps/PSFontUtils.html#PSFontUtils"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: GraphicsConstants" alt="" href="org/apache/xmlgraphics/image/GraphicsConstants.html#GraphicsConstants"/>
+<area shape="poly" coords="54,188,51,191,49,188,51,186,54,188,54,188" title="Complexity: 31; Coverage: 0%; Class: PSDictionary.Maker" alt="" href="org/apache/xmlgraphics/ps/PSDictionary.html#PSDictionary.Maker"/>
+<area shape="poly" coords="122,202,120,205,117,202,120,200,122,202,122,202" title="Complexity: 10; Coverage: 28%; Class: PSDictionary" alt="" href="org/apache/xmlgraphics/ps/PSDictionary.html#PSDictionary"/>
+<area shape="poly" coords="269,199,267,202,264,199,267,197,269,199,269,199" title="Complexity: 15; Coverage: 88%; Class: ImageFormGenerator" alt="" href="org/apache/xmlgraphics/ps/ImageFormGenerator.html#ImageFormGenerator"/>
+<area shape="poly" coords="298,206,296,208,293,206,296,203,298,206,298,206" title="Complexity: 5; Coverage: 100%; Class: ImageConversionEdge" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/ImageConversionEdge.html#ImageConversionEdge"/>
+<area shape="poly" coords="193,151,191,154,188,151,191,149,193,151,193,151" title="Complexity: 87; Coverage: 57%; Class: ImageEncodingHelper" alt="" href="org/apache/xmlgraphics/ps/ImageEncodingHelper.html#ImageEncodingHelper"/>
+<area shape="poly" coords="262,202,259,205,257,202,259,200,262,202,262,202" title="Complexity: 10; Coverage: 85%; Class: FormGenerator" alt="" href="org/apache/xmlgraphics/ps/FormGenerator.html#FormGenerator"/>
+<area shape="poly" coords="298,208,296,210,293,208,296,205,298,208,298,208" title="Complexity: 2; Coverage: 100%; Class: DSCConstants.AtendIndicator" alt="" href="org/apache/xmlgraphics/ps/DSCConstants.html#DSCConstants.AtendIndicator"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: GraphicsConstants" alt="" href="org/apache/xmlgraphics/image/GraphicsConstants.html#GraphicsConstants"/>
+<area shape="poly" coords="200,202,198,205,195,202,198,200,200,202,200,202" title="Complexity: 10; Coverage: 60%; Class: UnparsedDSCComment" alt="" href="org/apache/xmlgraphics/ps/dsc/events/UnparsedDSCComment.html#UnparsedDSCComment"/>
+<area shape="poly" coords="134,205,132,208,129,205,132,203,134,205,134,205" title="Complexity: 6; Coverage: 33%; Class: PostScriptLine" alt="" href="org/apache/xmlgraphics/ps/dsc/events/PostScriptLine.html#PostScriptLine"/>
+<area shape="poly" coords="227,204,225,207,222,204,225,202,227,204,227,204" title="Complexity: 7; Coverage: 71%; Class: PostScriptComment" alt="" href="org/apache/xmlgraphics/ps/dsc/events/PostScriptComment.html#PostScriptComment"/>
+<area shape="poly" coords="134,205,132,208,129,205,132,203,134,205,134,205" title="Complexity: 6; Coverage: 33%; Class: PostScriptLine" alt="" href="org/apache/xmlgraphics/ps/dsc/events/PostScriptLine.html#PostScriptLine"/>
+<area shape="poly" coords="134,204,132,207,129,204,132,202,134,204,134,204" title="Complexity: 7; Coverage: 33%; Class: DSCCommentTitle" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentTitle.html#DSCCommentTitle"/>
+<area shape="poly" coords="105,203,102,206,100,203,102,201,105,203,105,203" title="Complexity: 9; Coverage: 21%; Class: DSCCommentPages" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPages.html#DSCCommentPages"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="54,201,51,204,49,201,51,199,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: DSCCommentPage" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPage.html#DSCCommentPage"/>
+<area shape="poly" coords="154,204,151,206,149,204,151,201,154,204,154,204" title="Complexity: 8; Coverage: 41%; Class: DSCCommentLanguageLevel" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentLanguageLevel.html#DSCCommentLanguageLevel"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="134,206,132,208,129,206,132,203,134,206,134,206" title="Complexity: 5; Coverage: 33%; Class: DSCCommentHiResBoundingBox" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentHiResBoundingBox.html#DSCCommentHiResBoundingBox"/>
+<area shape="poly" coords="188,206,186,208,183,206,186,203,188,206,188,206" title="Complexity: 5; Coverage: 55%; Class: DSCCommentEndOfFile" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentEndOfFile.html#DSCCommentEndOfFile"/>
+<area shape="poly" coords="156,206,154,209,151,206,154,204,156,206,156,206" title="Complexity: 4; Coverage: 42%; Class: DSCCommentEndComments" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentEndComments.html#DSCCommentEndComments"/>
+<area shape="poly" coords="134,207,132,210,129,207,132,205,134,207,134,207" title="Complexity: 3; Coverage: 33%; Class: DSCCommentDocumentSuppliedResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentDocumentSuppliedResources.html#DSCCommentDocumentSuppliedResources"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="181,203,178,206,176,203,178,201,181,203,181,203" title="Complexity: 9; Coverage: 52%; Class: DSCCommentBoundingBox" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentBoundingBox.html#DSCCommentBoundingBox"/>
+<area shape="poly" coords="76,204,73,206,71,204,73,201,76,204,76,204" title="Complexity: 8; Coverage: 9%; Class: DSCCommentBeginResource" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentBeginResource.html#DSCCommentBeginResource"/>
+<area shape="poly" coords="54,198,51,201,49,198,51,196,54,198,54,198" title="Complexity: 16; Coverage: 0%; Class: DSCCommentBeginDocument" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentBeginDocument.html#DSCCommentBeginDocument"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: DSCAtend" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCAtend.html#DSCAtend"/>
+<area shape="poly" coords="164,194,161,197,159,194,161,192,164,194,164,194" title="Complexity: 22; Coverage: 45%; Class: AbstractResourcesDSCComment" alt="" href="org/apache/xmlgraphics/ps/dsc/events/AbstractResourcesDSCComment.html#AbstractResourcesDSCComment"/>
+<area shape="poly" coords="122,201,120,204,117,201,120,199,122,201,122,201" title="Complexity: 12; Coverage: 28%; Class: AbstractResourceDSCComment" alt="" href="org/apache/xmlgraphics/ps/dsc/events/AbstractResourceDSCComment.html#AbstractResourceDSCComment"/>
+<area shape="poly" coords="134,205,132,208,129,205,132,203,134,205,134,205" title="Complexity: 6; Coverage: 33%; Class: PostScriptLine" alt="" href="org/apache/xmlgraphics/ps/dsc/events/PostScriptLine.html#PostScriptLine"/>
+<area shape="poly" coords="240,190,237,193,235,190,237,188,240,190,240,190" title="Complexity: 28; Coverage: 76%; Class: AbstractDSCComment" alt="" href="org/apache/xmlgraphics/ps/dsc/events/AbstractDSCComment.html#AbstractDSCComment"/>
+<area shape="poly" coords="176,208,174,210,171,208,174,205,176,208,176,208" title="Complexity: 2; Coverage: 50%; Class: ImageException" alt="" href="org/apache/xmlgraphics/image/loader/ImageException.html#ImageException"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: TIFFImageDecoder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFImageDecoder.html#TIFFImageDecoder"/>
+<area shape="poly" coords="176,208,174,210,171,208,174,205,176,208,176,208" title="Complexity: 2; Coverage: 50%; Class: ImageException" alt="" href="org/apache/xmlgraphics/image/loader/ImageException.html#ImageException"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: SubImageNotFoundException" alt="" href="org/apache/xmlgraphics/image/loader/SubImageNotFoundException.html#SubImageNotFoundException"/>
+<area shape="poly" coords="176,208,174,210,171,208,174,205,176,208,176,208" title="Complexity: 2; Coverage: 50%; Class: ImageException" alt="" href="org/apache/xmlgraphics/image/loader/ImageException.html#ImageException"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="134,207,132,210,129,207,132,205,134,207,134,207" title="Complexity: 3; Coverage: 33%; Class: DSCCommentDocumentSuppliedResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentDocumentSuppliedResources.html#DSCCommentDocumentSuppliedResources"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="134,207,132,210,129,207,132,205,134,207,134,207" title="Complexity: 3; Coverage: 33%; Class: DSCCommentDocumentSuppliedResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentDocumentSuppliedResources.html#DSCCommentDocumentSuppliedResources"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: DSCAtend" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCAtend.html#DSCAtend"/>
+<area shape="poly" coords="215,207,213,210,210,207,213,205,215,207,215,207" title="Complexity: 3; Coverage: 66%; Class: AdobePDFSchema" alt="" href="org/apache/xmlgraphics/xmp/schemas/pdf/AdobePDFSchema.html#AdobePDFSchema"/>
+<area shape="poly" coords="144,204,142,206,139,204,142,201,144,204,144,204" title="Complexity: 8; Coverage: 37%; Class: AdobePDFAdapter" alt="" href="org/apache/xmlgraphics/xmp/schemas/pdf/AdobePDFAdapter.html#AdobePDFAdapter"/>
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: SingleTileRenderedImage" alt="" href="org/apache/xmlgraphics/image/codec/util/SingleTileRenderedImage.html#SingleTileRenderedImage"/>
+<area shape="poly" coords="85,178,83,181,80,178,83,176,85,178,85,178" title="Complexity: 46; Coverage: 13%; Class: SimpleRenderedImage" alt="" href="org/apache/xmlgraphics/image/codec/util/SimpleRenderedImage.html#SimpleRenderedImage"/>
+<area shape="poly" coords="115,172,112,174,110,172,112,169,115,172,115,172" title="Complexity: 56; Coverage: 25%; Class: SeekableStream" alt="" href="org/apache/xmlgraphics/image/codec/util/SeekableStream.html#SeekableStream"/>
+<area shape="poly" coords="54,203,51,206,49,203,51,201,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: TIFFDecodeParam" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFDecodeParam.html#TIFFDecodeParam"/>
+<area shape="poly" coords="200,207,198,210,195,207,198,205,200,207,200,207" title="Complexity: 3; Coverage: 60%; Class: PropertyUtil" alt="" href="org/apache/xmlgraphics/image/codec/util/PropertyUtil.html#PropertyUtil"/>
+<area shape="poly" coords="193,196,191,198,188,196,191,193,193,196,193,196" title="Complexity: 20; Coverage: 57%; Class: MemoryCacheSeekableStream" alt="" href="org/apache/xmlgraphics/image/codec/util/MemoryCacheSeekableStream.html#MemoryCacheSeekableStream"/>
+<area shape="poly" coords="298,204,296,207,293,204,296,202,298,204,298,204" title="Complexity: 7; Coverage: 100%; Class: ImageInputStreamSeekableStreamAdapter" alt="" href="org/apache/xmlgraphics/image/codec/util/ImageInputStreamSeekableStreamAdapter.html#ImageInputStreamSeekableStreamAdapter"/>
+<area shape="poly" coords="115,206,112,208,110,206,112,203,115,206,115,206" title="Complexity: 5; Coverage: 25%; Class: PSProcSet" alt="" href="org/apache/xmlgraphics/ps/PSProcSet.html#PSProcSet"/>
+<area shape="poly" coords="110,203,107,206,105,203,107,201,110,203,110,203" title="Complexity: 9; Coverage: 23%; Class: ImageDecoderImpl" alt="" href="org/apache/xmlgraphics/image/codec/util/ImageDecoderImpl.html#ImageDecoderImpl"/>
+<area shape="poly" coords="198,198,196,201,193,198,196,196,198,198,198,198" title="Complexity: 16; Coverage: 59%; Class: ForwardSeekableStream" alt="" href="org/apache/xmlgraphics/image/codec/util/ForwardSeekableStream.html#ForwardSeekableStream"/>
+<area shape="poly" coords="54,196,51,198,49,196,51,193,54,196,54,196" title="Complexity: 20; Coverage: 0%; Class: FileCacheSeekableStream" alt="" href="org/apache/xmlgraphics/image/codec/util/FileCacheSeekableStream.html#FileCacheSeekableStream"/>
+<area shape="poly" coords="88,203,85,206,83,203,85,201,88,203,88,203" title="Complexity: 9; Coverage: 14%; Class: TransformType" alt="" href="org/apache/xmlgraphics/java2d/TransformType.html#TransformType"/>
+<area shape="poly" coords="78,194,76,196,73,194,76,191,78,194,78,194" title="Complexity: 23; Coverage: 10%; Class: TransformStackElement" alt="" href="org/apache/xmlgraphics/java2d/TransformStackElement.html#TransformStackElement"/>
+<area shape="poly" coords="298,208,296,210,293,208,296,205,298,208,298,208" title="Complexity: 2; Coverage: 100%; Class: DSCConstants.AtendIndicator" alt="" href="org/apache/xmlgraphics/ps/DSCConstants.html#DSCConstants.AtendIndicator"/>
+<area shape="poly" coords="237,202,235,205,232,202,235,200,237,202,237,202" title="Complexity: 10; Coverage: 75%; Class: GraphicsConfigurationWithoutTransparency" alt="" href="org/apache/xmlgraphics/java2d/GraphicsConfigurationWithoutTransparency.html#GraphicsConfigurationWithoutTransparency"/>
+<area shape="poly" coords="237,202,235,205,232,202,235,200,237,202,237,202" title="Complexity: 10; Coverage: 75%; Class: GraphicsConfigurationWithoutTransparency" alt="" href="org/apache/xmlgraphics/java2d/GraphicsConfigurationWithoutTransparency.html#GraphicsConfigurationWithoutTransparency"/>
+<area shape="poly" coords="120,166,117,168,115,166,117,163,120,166,120,166" title="Complexity: 65; Coverage: 27%; Class: GraphicContext" alt="" href="org/apache/xmlgraphics/java2d/GraphicContext.html#GraphicContext"/>
+<area shape="poly" coords="54,205,51,208,49,205,51,203,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: GenericGraphicsDevice" alt="" href="org/apache/xmlgraphics/java2d/GenericGraphicsDevice.html#GenericGraphicsDevice"/>
+<area shape="poly" coords="98,201,95,204,93,201,95,199,98,201,98,201" title="Complexity: 12; Coverage: 18%; Class: Dimension2DDouble" alt="" href="org/apache/xmlgraphics/java2d/Dimension2DDouble.html#Dimension2DDouble"/>
+<area shape="poly" coords="54,198,51,200,49,198,51,195,54,198,54,198" title="Complexity: 17; Coverage: 0%; Class: DefaultGraphics2D" alt="" href="org/apache/xmlgraphics/java2d/DefaultGraphics2D.html#DefaultGraphics2D"/>
+<area shape="poly" coords="54,204,51,207,49,204,51,202,54,204,54,204" title="Complexity: 7; Coverage: 0%; Class: DSCAtend" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCAtend.html#DSCAtend"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: SubImageNotFoundException" alt="" href="org/apache/xmlgraphics/image/loader/SubImageNotFoundException.html#SubImageNotFoundException"/>
+<area shape="poly" coords="83,164,80,166,78,164,80,161,83,164,83,164" title="Complexity: 68; Coverage: 12%; Class: AbstractGraphics2D" alt="" href="org/apache/xmlgraphics/java2d/AbstractGraphics2D.html#AbstractGraphics2D"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: PipelineFactory.PipelineComparator" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html#PipelineFactory.PipelineComparator"/>
+<area shape="poly" coords="200,200,198,203,195,200,198,198,200,200,200,200" title="Complexity: 13; Coverage: 60%; Class: ImageKey" alt="" href="org/apache/xmlgraphics/image/loader/cache/ImageKey.html#ImageKey"/>
+<area shape="poly" coords="254,196,252,199,249,196,252,194,254,196,254,196" title="Complexity: 19; Coverage: 82%; Class: ImageCacheStatistics" alt="" href="org/apache/xmlgraphics/image/loader/cache/ImageCacheStatistics.html#ImageCacheStatistics"/>
+<area shape="poly" coords="272,184,269,187,267,184,269,182,272,184,272,184" title="Complexity: 37; Coverage: 89%; Class: ImageCache" alt="" href="org/apache/xmlgraphics/image/loader/cache/ImageCache.html#ImageCache"/>
+<area shape="poly" coords="298,206,296,208,293,206,296,203,298,206,298,206" title="Complexity: 5; Coverage: 100%; Class: ImageConversionEdge" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/ImageConversionEdge.html#ImageConversionEdge"/>
+<area shape="poly" coords="281,206,279,209,276,206,279,204,281,206,281,206" title="Complexity: 4; Coverage: 93%; Class: DataURLUtil" alt="" href="org/apache/xmlgraphics/util/uri/DataURLUtil.html#DataURLUtil"/>
+<area shape="poly" coords="267,204,264,206,262,204,264,201,267,204,267,204" title="Complexity: 8; Coverage: 87%; Class: DataURIResolver" alt="" href="org/apache/xmlgraphics/util/uri/DataURIResolver.html#DataURIResolver"/>
+<area shape="poly" coords="249,204,247,206,244,204,247,201,249,204,249,204" title="Complexity: 8; Coverage: 80%; Class: CommonURIResolver" alt="" href="org/apache/xmlgraphics/util/uri/CommonURIResolver.html#CommonURIResolver"/>
+<area shape="poly" coords="252,194,249,197,247,194,249,192,252,194,252,194" title="Complexity: 22; Coverage: 81%; Class: NamedColorProfileParser" alt="" href="org/apache/xmlgraphics/java2d/color/profile/NamedColorProfileParser.html#NamedColorProfileParser"/>
+<area shape="poly" coords="176,203,174,206,171,203,174,201,176,203,176,203" title="Complexity: 9; Coverage: 50%; Class: NamedColorProfile" alt="" href="org/apache/xmlgraphics/java2d/color/profile/NamedColorProfile.html#NamedColorProfile"/>
+<area shape="poly" coords="137,200,134,202,132,200,134,197,137,200,137,200" title="Complexity: 14; Coverage: 34%; Class: ColorProfileUtil" alt="" href="org/apache/xmlgraphics/java2d/color/profile/ColorProfileUtil.html#ColorProfileUtil"/>
+<area shape="poly" coords="227,202,225,204,222,202,225,199,227,202,227,202" title="Complexity: 11; Coverage: 71%; Class: PreloaderImageIO" alt="" href="org/apache/xmlgraphics/image/loader/impl/imageio/PreloaderImageIO.html#PreloaderImageIO"/>
+<area shape="poly" coords="215,174,213,176,210,174,213,171,215,174,215,174" title="Complexity: 53; Coverage: 66%; Class: ImageLoaderImageIO" alt="" href="org/apache/xmlgraphics/image/loader/impl/imageio/ImageLoaderImageIO.html#ImageLoaderImageIO"/>
+<area shape="poly" coords="298,206,296,209,293,206,296,204,298,206,298,206" title="Complexity: 4; Coverage: 100%; Class: ImageLoaderFactoryImageIO" alt="" href="org/apache/xmlgraphics/image/loader/impl/imageio/ImageLoaderFactoryImageIO.html#ImageLoaderFactoryImageIO"/>
+<area shape="poly" coords="215,198,213,200,210,198,213,195,215,198,215,198" title="Complexity: 17; Coverage: 66%; Class: ImageIOUtil" alt="" href="org/apache/xmlgraphics/image/loader/impl/imageio/ImageIOUtil.html#ImageIOUtil"/>
+<area shape="poly" coords="200,208,198,210,195,208,198,205,200,208,200,208" title="Complexity: 2; Coverage: 60%; Class: SoftReferenceWithKey" alt="" href="org/apache/xmlgraphics/image/loader/util/SoftReferenceWithKey.html#SoftReferenceWithKey"/>
+<area shape="poly" coords="227,199,225,202,222,199,225,197,227,199,227,199" title="Complexity: 15; Coverage: 71%; Class: SoftMapCache" alt="" href="org/apache/xmlgraphics/image/loader/util/SoftMapCache.html#SoftMapCache"/>
+<area shape="poly" coords="227,204,225,207,222,204,225,202,227,204,227,204" title="Complexity: 7; Coverage: 71%; Class: PostScriptComment" alt="" href="org/apache/xmlgraphics/ps/dsc/events/PostScriptComment.html#PostScriptComment"/>
+<area shape="poly" coords="262,202,259,204,257,202,259,199,262,202,262,202" title="Complexity: 11; Coverage: 85%; Class: Penalty" alt="" href="org/apache/xmlgraphics/image/loader/util/Penalty.html#Penalty"/>
+<area shape="poly" coords="249,186,247,188,244,186,247,183,249,186,249,186" title="Complexity: 35; Coverage: 80%; Class: ImageUtil" alt="" href="org/apache/xmlgraphics/image/loader/util/ImageUtil.html#ImageUtil"/>
+<area shape="poly" coords="210,201,208,204,205,201,208,199,210,201,210,201" title="Complexity: 12; Coverage: 64%; Class: ImageInputStreamAdapter" alt="" href="org/apache/xmlgraphics/image/loader/util/ImageInputStreamAdapter.html#ImageInputStreamAdapter"/>
+<area shape="poly" coords="237,206,235,209,232,206,235,204,237,206,237,206" title="Complexity: 4; Coverage: 75%; Class: XMPBasicSchema" alt="" href="org/apache/xmlgraphics/xmp/schemas/XMPBasicSchema.html#XMPBasicSchema"/>
+<area shape="poly" coords="208,198,205,200,203,198,205,195,208,198,208,198" title="Complexity: 17; Coverage: 63%; Class: XMPBasicAdapter" alt="" href="org/apache/xmlgraphics/xmp/schemas/XMPBasicAdapter.html#XMPBasicAdapter"/>
+<area shape="poly" coords="242,206,240,209,237,206,240,204,242,206,242,206" title="Complexity: 4; Coverage: 77%; Class: DublinCoreSchema" alt="" href="org/apache/xmlgraphics/xmp/schemas/DublinCoreSchema.html#DublinCoreSchema"/>
+<area shape="poly" coords="169,181,166,184,164,181,166,179,169,181,169,181" title="Complexity: 42; Coverage: 47%; Class: DublinCoreAdapter" alt="" href="org/apache/xmlgraphics/xmp/schemas/DublinCoreAdapter.html#DublinCoreAdapter"/>
+<area shape="poly" coords="281,194,279,197,276,194,279,192,281,194,281,194" title="Complexity: 22; Coverage: 93%; Class: DijkstraAlgorithm" alt="" href="org/apache/xmlgraphics/util/dijkstra/DijkstraAlgorithm.html#DijkstraAlgorithm"/>
+<area shape="poly" coords="262,199,259,202,257,199,259,197,262,199,262,199" title="Complexity: 15; Coverage: 85%; Class: DefaultEdgeDirectory" alt="" href="org/apache/xmlgraphics/util/dijkstra/DefaultEdgeDirectory.html#DefaultEdgeDirectory"/>
+<area shape="poly" coords="161,157,159,160,156,157,159,155,161,157,161,157" title="Complexity: 78; Coverage: 44%; Class: PSTilingPattern" alt="" href="org/apache/xmlgraphics/java2d/ps/PSTilingPattern.html#PSTilingPattern"/>
+<area shape="poly" coords="223,144,220,146,218,144,220,141,223,144,223,144" title="Complexity: 98; Coverage: 69%; Class: PSGraphics2D" alt="" href="org/apache/xmlgraphics/java2d/ps/PSGraphics2D.html#PSGraphics2D"/>
+<area shape="poly" coords="54,203,51,206,49,203,51,201,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: TIFFDecodeParam" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFDecodeParam.html#TIFFDecodeParam"/>
+<area shape="poly" coords="54,205,51,208,49,205,51,203,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: GenericGraphicsDevice" alt="" href="org/apache/xmlgraphics/java2d/GenericGraphicsDevice.html#GenericGraphicsDevice"/>
+<area shape="poly" coords="54,194,51,196,49,194,51,191,54,194,54,194" title="Complexity: 23; Coverage: 0%; Class: AbstractPSDocumentGraphics2D" alt="" href="org/apache/xmlgraphics/java2d/ps/AbstractPSDocumentGraphics2D.html#AbstractPSDocumentGraphics2D"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: TIFFImageDecoder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFImageDecoder.html#TIFFImageDecoder"/>
+<area shape="poly" coords="63,203,61,206,58,203,61,201,63,203,63,203" title="Complexity: 9; Coverage: 4%; Class: TIFFImageWriter" alt="" href="org/apache/xmlgraphics/image/writer/internal/TIFFImageWriter.html#TIFFImageWriter"/>
+<area shape="poly" coords="122,207,120,210,117,207,120,205,122,207,122,207" title="Complexity: 3; Coverage: 28%; Class: PNGImageWriter" alt="" href="org/apache/xmlgraphics/image/writer/internal/PNGImageWriter.html#PNGImageWriter"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="68,185,66,188,63,185,66,183,68,185,68,185" title="Complexity: 36; Coverage: 6%; Class: ResourceTracker" alt="" href="org/apache/xmlgraphics/ps/dsc/ResourceTracker.html#ResourceTracker"/>
+<area shape="poly" coords="298,207,296,210,293,207,296,205,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: ImageInfo.ImageInfoBuilder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/ImageInfo.html#ImageInfo.ImageInfoBuilder"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: SubImageNotFoundException" alt="" href="org/apache/xmlgraphics/image/loader/SubImageNotFoundException.html#SubImageNotFoundException"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: SubImageNotFoundException" alt="" href="org/apache/xmlgraphics/image/loader/SubImageNotFoundException.html#SubImageNotFoundException"/>
+<area shape="poly" coords="54,203,51,206,49,203,51,201,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: TIFFDecodeParam" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFDecodeParam.html#TIFFDecodeParam"/>
+<area shape="poly" coords="54,201,51,204,49,201,51,199,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: DSCCommentPage" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPage.html#DSCCommentPage"/>
+<area shape="poly" coords="54,205,51,208,49,205,51,203,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: GenericGraphicsDevice" alt="" href="org/apache/xmlgraphics/java2d/GenericGraphicsDevice.html#GenericGraphicsDevice"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: GraphicsConstants" alt="" href="org/apache/xmlgraphics/image/GraphicsConstants.html#GraphicsConstants"/>
+<area shape="poly" coords="188,160,186,163,183,160,186,158,188,160,188,160" title="Complexity: 73; Coverage: 55%; Class: DSCParser" alt="" href="org/apache/xmlgraphics/ps/dsc/DSCParser.html#DSCParser"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: PipelineFactory.PipelineComparator" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html#PipelineFactory.PipelineComparator"/>
+<area shape="poly" coords="257,204,254,206,252,204,254,201,257,204,257,204" title="Complexity: 8; Coverage: 83%; Class: ImageRepresentation" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/ImageRepresentation.html#ImageRepresentation"/>
+<area shape="poly" coords="284,192,281,194,279,192,281,189,284,192,284,192" title="Complexity: 26; Coverage: 94%; Class: XmlSourceUtil" alt="" href="org/apache/xmlgraphics/io/XmlSourceUtil.html#XmlSourceUtil"/>
+<area shape="poly" coords="54,205,51,208,49,205,51,203,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: GenericGraphicsDevice" alt="" href="org/apache/xmlgraphics/java2d/GenericGraphicsDevice.html#GenericGraphicsDevice"/>
+<area shape="poly" coords="298,206,296,209,293,206,296,204,298,206,298,206" title="Complexity: 4; Coverage: 100%; Class: ImageLoaderFactoryImageIO" alt="" href="org/apache/xmlgraphics/image/loader/impl/imageio/ImageLoaderFactoryImageIO.html#ImageLoaderFactoryImageIO"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="54,190,51,192,49,190,51,187,54,190,54,190" title="Complexity: 29; Coverage: 0%; Class: RenderedImageCachableRed" alt="" href="org/apache/xmlgraphics/image/rendered/RenderedImageCachableRed.html#RenderedImageCachableRed"/>
+<area shape="poly" coords="54,188,51,190,49,188,51,185,54,188,54,188" title="Complexity: 32; Coverage: 0%; Class: FormatRed" alt="" href="org/apache/xmlgraphics/image/rendered/FormatRed.html#FormatRed"/>
+<area shape="poly" coords="54,202,51,204,49,202,51,199,54,202,54,202" title="Complexity: 11; Coverage: 0%; Class: BufferedImageCachableRed" alt="" href="org/apache/xmlgraphics/image/rendered/BufferedImageCachableRed.html#BufferedImageCachableRed"/>
+<area shape="poly" coords="54,177,51,180,49,177,51,175,54,177,54,177" title="Complexity: 48; Coverage: 0%; Class: Any2sRGBRed" alt="" href="org/apache/xmlgraphics/image/rendered/Any2sRGBRed.html#Any2sRGBRed"/>
+<area shape="poly" coords="54,189,51,192,49,189,51,187,54,189,54,189" title="Complexity: 30; Coverage: 0%; Class: Any2LsRGBRed" alt="" href="org/apache/xmlgraphics/image/rendered/Any2LsRGBRed.html#Any2LsRGBRed"/>
+<area shape="poly" coords="54,151,51,154,49,151,51,149,54,151,54,151" title="Complexity: 87; Coverage: 0%; Class: AbstractRed" alt="" href="org/apache/xmlgraphics/image/rendered/AbstractRed.html#AbstractRed"/>
+<area shape="poly" coords="298,208,296,210,293,208,296,205,298,208,298,208" title="Complexity: 2; Coverage: 100%; Class: DSCConstants.AtendIndicator" alt="" href="org/apache/xmlgraphics/ps/DSCConstants.html#DSCConstants.AtendIndicator"/>
+<area shape="poly" coords="208,206,205,209,203,206,205,204,208,206,208,206" title="Complexity: 4; Coverage: 63%; Class: ImageImplRegistry.MyIterator" alt="" href="org/apache/xmlgraphics/image/loader/spi/ImageImplRegistry.html#ImageImplRegistry.MyIterator"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: GraphicsConstants" alt="" href="org/apache/xmlgraphics/image/GraphicsConstants.html#GraphicsConstants"/>
+<area shape="poly" coords="264,178,262,180,259,178,262,175,264,178,264,178" title="Complexity: 47; Coverage: 86%; Class: ImageImplRegistry" alt="" href="org/apache/xmlgraphics/image/loader/spi/ImageImplRegistry.html#ImageImplRegistry"/>
+<area shape="poly" coords="54,202,51,204,49,202,51,199,54,202,54,202" title="Complexity: 11; Coverage: 0%; Class: BufferedImageCachableRed" alt="" href="org/apache/xmlgraphics/image/rendered/BufferedImageCachableRed.html#BufferedImageCachableRed"/>
+<area shape="poly" coords="54,18,51,20,49,18,51,15,54,18,54,18" title="Complexity: 288; Coverage: 0%; Class: PNGRed" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGRed.html#PNGRed"/>
+<area shape="poly" coords="132,121,129,124,127,121,129,119,132,121,132,121" title="Complexity: 132; Coverage: 32%; Class: PNGImageEncoder" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGImageEncoder.html#PNGImageEncoder"/>
+<area shape="poly" coords="242,202,240,204,237,202,240,199,242,202,242,202" title="Complexity: 11; Coverage: 77%; Class: IDATOutputStream" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGImageEncoder.html#IDATOutputStream"/>
+<area shape="poly" coords="191,196,188,199,186,196,188,194,191,196,191,196" title="Complexity: 19; Coverage: 56%; Class: ChunkStream" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGImageEncoder.html#ChunkStream"/>
+<area shape="poly" coords="286,204,284,207,281,204,284,202,286,204,286,204" title="Complexity: 7; Coverage: 95%; Class: CRC" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGImageEncoder.html#CRC"/>
+<area shape="poly" coords="122,18,120,20,117,18,120,15,122,18,122,18" title="Complexity: 288; Coverage: 28%; Class: PNGImage" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGImageDecoder.html#PNGImage"/>
+<area shape="poly" coords="200,204,198,206,195,204,198,201,200,204,200,204" title="Complexity: 8; Coverage: 60%; Class: PNGImageDecoder" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGImageDecoder.html#PNGImageDecoder"/>
+<area shape="poly" coords="73,200,71,203,68,200,71,198,73,200,73,200" title="Complexity: 13; Coverage: 8%; Class: PNGEncodeParam.RGB" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGEncodeParam.html#PNGEncodeParam.RGB"/>
+<area shape="poly" coords="54,194,51,197,49,194,51,192,54,194,54,194" title="Complexity: 22; Coverage: 0%; Class: PNGEncodeParam.Gray" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGEncodeParam.html#PNGEncodeParam.Gray"/>
+<area shape="poly" coords="54,193,51,196,49,193,51,191,54,193,54,193" title="Complexity: 24; Coverage: 0%; Class: PNGEncodeParam.Palette" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGEncodeParam.html#PNGEncodeParam.Palette"/>
+<area shape="poly" coords="125,138,122,140,120,138,122,135,125,138,125,138" title="Complexity: 107; Coverage: 29%; Class: PNGEncodeParam" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGEncodeParam.html#PNGEncodeParam"/>
+<area shape="poly" coords="144,195,142,198,139,195,142,193,144,195,144,195" title="Complexity: 21; Coverage: 37%; Class: PNGDecodeParam" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGDecodeParam.html#PNGDecodeParam"/>
+<area shape="poly" coords="235,196,232,199,230,196,232,194,235,196,235,196" title="Complexity: 19; Coverage: 74%; Class: PNGChunk" alt="" href="org/apache/xmlgraphics/image/codec/png/PNGChunk.html#PNGChunk"/>
+<area shape="poly" coords="144,204,142,207,139,204,142,202,144,204,144,204" title="Complexity: 7; Coverage: 37%; Class: RenderingIntent" alt="" href="org/apache/xmlgraphics/java2d/color/RenderingIntent.html#RenderingIntent"/>
+<area shape="poly" coords="181,189,178,192,176,189,178,187,181,189,181,189" title="Complexity: 30; Coverage: 52%; Class: NamedColorSpace" alt="" href="org/apache/xmlgraphics/java2d/color/NamedColorSpace.html#NamedColorSpace"/>
+<area shape="poly" coords="54,200,51,202,49,200,51,197,54,200,54,200" title="Complexity: 14; Coverage: 0%; Class: ICCColorSpaceWithIntent" alt="" href="org/apache/xmlgraphics/java2d/color/ICCColorSpaceWithIntent.html#ICCColorSpaceWithIntent"/>
+<area shape="poly" coords="298,207,296,210,293,207,296,205,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: ImageInfo.ImageInfoBuilder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/ImageInfo.html#ImageInfo.ImageInfoBuilder"/>
+<area shape="poly" coords="200,201,198,204,195,201,198,199,200,201,200,201" title="Complexity: 12; Coverage: 60%; Class: DeviceCMYKColorSpace" alt="" href="org/apache/xmlgraphics/java2d/color/DeviceCMYKColorSpace.html#DeviceCMYKColorSpace"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="95,194,93,196,90,194,93,191,95,194,95,194" title="Complexity: 23; Coverage: 17%; Class: ColorWithAlternatives" alt="" href="org/apache/xmlgraphics/java2d/color/ColorWithAlternatives.html#ColorWithAlternatives"/>
+<area shape="poly" coords="169,196,166,198,164,196,166,193,169,196,169,196" title="Complexity: 20; Coverage: 47%; Class: ColorUtil" alt="" href="org/apache/xmlgraphics/java2d/color/ColorUtil.html#ColorUtil"/>
+<area shape="poly" coords="171,201,169,204,166,201,169,199,171,201,171,201" title="Complexity: 12; Coverage: 48%; Class: ColorSpaces" alt="" href="org/apache/xmlgraphics/java2d/color/ColorSpaces.html#ColorSpaces"/>
+<area shape="poly" coords="176,182,174,185,171,182,174,180,176,182,176,182" title="Complexity: 40; Coverage: 50%; Class: CIELabColorSpace" alt="" href="org/apache/xmlgraphics/java2d/color/CIELabColorSpace.html#CIELabColorSpace"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: PipelineFactory.PipelineComparator" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html#PipelineFactory.PipelineComparator"/>
+<area shape="poly" coords="134,195,132,198,129,195,132,193,134,195,134,195" title="Complexity: 21; Coverage: 33%; Class: LocalizableSupport" alt="" href="org/apache/xmlgraphics/util/i18n/LocalizableSupport.html#LocalizableSupport"/>
+<area shape="poly" coords="176,208,174,210,171,208,174,205,176,208,176,208" title="Complexity: 2; Coverage: 50%; Class: ImageException" alt="" href="org/apache/xmlgraphics/image/loader/ImageException.html#ImageException"/>
+<area shape="poly" coords="210,193,208,196,205,193,208,191,210,193,210,193" title="Complexity: 24; Coverage: 64%; Class: ImageSize" alt="" href="org/apache/xmlgraphics/image/loader/ImageSize.html#ImageSize"/>
+<area shape="poly" coords="298,208,296,211,293,208,296,206,298,208,298,208" title="Complexity: 1; Coverage: 100%; Class: PipelineFactory.PipelineComparator" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html#PipelineFactory.PipelineComparator"/>
+<area shape="poly" coords="240,200,237,202,235,200,237,197,240,200,240,200" title="Complexity: 14; Coverage: 76%; Class: ImageIOJPEGImageWriter" alt="" href="org/apache/xmlgraphics/image/writer/imageio/ImageIOJPEGImageWriter.html#ImageIOJPEGImageWriter"/>
+<area shape="poly" coords="54,203,51,206,49,203,51,201,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: TIFFDecodeParam" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFDecodeParam.html#TIFFDecodeParam"/>
+<area shape="poly" coords="254,186,252,189,249,186,252,184,254,186,254,186" title="Complexity: 34; Coverage: 82%; Class: ImageIOImageWriter" alt="" href="org/apache/xmlgraphics/image/writer/imageio/ImageIOImageWriter.html#ImageIOImageWriter"/>
+<area shape="poly" coords="237,202,235,204,232,202,235,199,237,202,237,202" title="Complexity: 11; Coverage: 75%; Class: SubInputStream" alt="" href="org/apache/xmlgraphics/util/io/SubInputStream.html#SubInputStream"/>
+<area shape="poly" coords="54,194,51,196,49,194,51,191,54,194,54,194" title="Complexity: 23; Coverage: 0%; Class: AbstractPSDocumentGraphics2D" alt="" href="org/apache/xmlgraphics/java2d/ps/AbstractPSDocumentGraphics2D.html#AbstractPSDocumentGraphics2D"/>
+<area shape="poly" coords="274,207,271,210,269,207,271,205,274,207,274,207" title="Complexity: 3; Coverage: 90%; Class: FlateEncodeOutputStream" alt="" href="org/apache/xmlgraphics/util/io/FlateEncodeOutputStream.html#FlateEncodeOutputStream"/>
+<area shape="poly" coords="257,191,254,194,252,191,254,189,257,191,257,191" title="Complexity: 27; Coverage: 83%; Class: Base64EncodeStream" alt="" href="org/apache/xmlgraphics/util/io/Base64EncodeStream.html#Base64EncodeStream"/>
+<area shape="poly" coords="259,190,257,193,254,190,257,188,259,190,259,190" title="Complexity: 28; Coverage: 84%; Class: Base64DecodeStream" alt="" href="org/apache/xmlgraphics/util/io/Base64DecodeStream.html#Base64DecodeStream"/>
+<area shape="poly" coords="54,203,51,206,49,203,51,201,54,203,54,203" title="Complexity: 9; Coverage: 0%; Class: TIFFDecodeParam" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFDecodeParam.html#TIFFDecodeParam"/>
+<area shape="poly" coords="267,192,264,194,262,192,264,189,267,192,267,192" title="Complexity: 26; Coverage: 87%; Class: ASCII85OutputStream" alt="" href="org/apache/xmlgraphics/util/io/ASCII85OutputStream.html#ASCII85OutputStream"/>
+<area shape="poly" coords="269,190,267,192,264,190,267,187,269,190,269,190" title="Complexity: 29; Coverage: 88%; Class: ASCII85InputStream" alt="" href="org/apache/xmlgraphics/util/io/ASCII85InputStream.html#ASCII85InputStream"/>
+<area shape="poly" coords="54,201,51,204,49,201,51,199,54,201,54,201" title="Complexity: 12; Coverage: 0%; Class: DSCCommentPage" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPage.html#DSCCommentPage"/>
+<area shape="poly" coords="117,197,115,200,112,197,115,195,117,197,117,197" title="Complexity: 18; Coverage: 26%; Class: DSCTools" alt="" href="org/apache/xmlgraphics/ps/dsc/tools/DSCTools.html#DSCTools"/>
+<area shape="poly" coords="257,206,254,208,252,206,254,203,257,206,257,206" title="Complexity: 5; Coverage: 83%; Class: ResolutionUnit" alt="" href="org/apache/xmlgraphics/image/writer/ResolutionUnit.html#ResolutionUnit"/>
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: SingleTileRenderedImage" alt="" href="org/apache/xmlgraphics/image/codec/util/SingleTileRenderedImage.html#SingleTileRenderedImage"/>
+<area shape="poly" coords="274,195,271,198,269,195,271,193,274,195,274,195" title="Complexity: 21; Coverage: 90%; Class: ImageWriterRegistry" alt="" href="org/apache/xmlgraphics/image/writer/ImageWriterRegistry.html#ImageWriterRegistry"/>
+<area shape="poly" coords="178,194,176,196,173,194,176,191,178,194,178,194" title="Complexity: 23; Coverage: 51%; Class: ImageWriterParams" alt="" href="org/apache/xmlgraphics/image/writer/ImageWriterParams.html#ImageWriterParams"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="134,207,132,210,129,207,132,205,134,207,134,207" title="Complexity: 3; Coverage: 33%; Class: DSCCommentDocumentSuppliedResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentDocumentSuppliedResources.html#DSCCommentDocumentSuppliedResources"/>
+<area shape="poly" coords="169,204,166,206,164,204,166,201,169,204,169,204" title="Complexity: 8; Coverage: 47%; Class: WriterOutputStream" alt="" href="org/apache/xmlgraphics/util/WriterOutputStream.html#WriterOutputStream"/>
+<area shape="poly" coords="112,194,110,197,107,194,110,192,112,194,112,194" title="Complexity: 22; Coverage: 24%; Class: UnitConv" alt="" href="org/apache/xmlgraphics/util/UnitConv.html#UnitConv"/>
+<area shape="poly" coords="257,194,254,196,252,194,254,191,257,194,257,194" title="Complexity: 23; Coverage: 83%; Class: Service" alt="" href="org/apache/xmlgraphics/util/Service.html#Service"/>
+<area shape="poly" coords="230,193,227,196,225,193,227,191,230,193,230,193" title="Complexity: 24; Coverage: 72%; Class: QName" alt="" href="org/apache/xmlgraphics/util/QName.html#QName"/>
+<area shape="poly" coords="54,205,51,208,49,205,51,203,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: GenericGraphicsDevice" alt="" href="org/apache/xmlgraphics/java2d/GenericGraphicsDevice.html#GenericGraphicsDevice"/>
+<area shape="poly" coords="284,166,281,169,279,166,281,164,284,166,284,166" title="Complexity: 64; Coverage: 94%; Class: DoubleFormatUtil" alt="" href="org/apache/xmlgraphics/util/DoubleFormatUtil.html#DoubleFormatUtil"/>
+<area shape="poly" coords="294,196,291,198,289,196,291,193,294,196,294,196" title="Complexity: 20; Coverage: 98%; Class: DateFormatUtil" alt="" href="org/apache/xmlgraphics/util/DateFormatUtil.html#DateFormatUtil"/>
+<area shape="poly" coords="279,196,276,198,274,196,276,193,279,196,279,196" title="Complexity: 20; Coverage: 92%; Class: ClasspathResource" alt="" href="org/apache/xmlgraphics/util/ClasspathResource.html#ClasspathResource"/>
+<area shape="poly" coords="232,189,230,192,227,189,230,187,232,189,232,189" title="Complexity: 30; Coverage: 73%; Class: PreloaderTIFF" alt="" href="org/apache/xmlgraphics/image/loader/impl/PreloaderTIFF.html#PreloaderTIFF"/>
+<area shape="poly" coords="252,206,249,209,247,206,249,204,252,206,252,206" title="Complexity: 4; Coverage: 81%; Class: PreloaderRawPNG" alt="" href="org/apache/xmlgraphics/image/loader/impl/PreloaderRawPNG.html#PreloaderRawPNG"/>
+<area shape="poly" coords="240,184,237,187,235,184,237,182,240,184,240,184" title="Complexity: 37; Coverage: 76%; Class: PreloaderJPEG" alt="" href="org/apache/xmlgraphics/image/loader/impl/PreloaderJPEG.html#PreloaderJPEG"/>
+<area shape="poly" coords="281,206,279,208,276,206,279,203,281,206,281,206" title="Complexity: 5; Coverage: 93%; Class: PreloaderGIF" alt="" href="org/apache/xmlgraphics/image/loader/impl/PreloaderGIF.html#PreloaderGIF"/>
+<area shape="poly" coords="115,204,112,206,110,204,112,201,115,204,115,204" title="Complexity: 8; Coverage: 25%; Class: PreloaderEPS.EPSBinaryFileHeader" alt="" href="org/apache/xmlgraphics/image/loader/impl/PreloaderEPS.html#PreloaderEPS.EPSBinaryFileHeader"/>
+<area shape="poly" coords="272,196,269,198,267,196,269,193,272,196,272,196" title="Complexity: 20; Coverage: 89%; Class: PreloaderEPS" alt="" href="org/apache/xmlgraphics/image/loader/impl/PreloaderEPS.html#PreloaderEPS"/>
+<area shape="poly" coords="284,206,281,209,279,206,281,204,284,206,284,206" title="Complexity: 4; Coverage: 94%; Class: PreloaderEMF" alt="" href="org/apache/xmlgraphics/image/loader/impl/PreloaderEMF.html#PreloaderEMF"/>
+<area shape="poly" coords="286,205,284,208,281,205,284,203,286,205,286,205" title="Complexity: 6; Coverage: 95%; Class: PreloaderBMP" alt="" href="org/apache/xmlgraphics/image/loader/impl/PreloaderBMP.html#PreloaderBMP"/>
+<area shape="poly" coords="225,176,222,179,220,176,222,174,225,176,225,176" title="Complexity: 49; Coverage: 70%; Class: PNGFile" alt="" href="org/apache/xmlgraphics/image/loader/impl/PNGFile.html#PNGFile"/>
+<area shape="poly" coords="237,204,235,206,232,204,235,201,237,204,237,204" title="Complexity: 8; Coverage: 75%; Class: JPEGFile" alt="" href="org/apache/xmlgraphics/image/loader/impl/JPEGFile.html#JPEGFile"/>
+<area shape="poly" coords="54,205,51,208,49,205,51,203,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: GenericGraphicsDevice" alt="" href="org/apache/xmlgraphics/java2d/GenericGraphicsDevice.html#GenericGraphicsDevice"/>
+<area shape="poly" coords="298,204,296,206,293,204,296,201,298,204,298,204" title="Complexity: 8; Coverage: 100%; Class: ImageRendered" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageRendered.html#ImageRendered"/>
+<area shape="poly" coords="262,206,259,209,257,206,259,204,262,206,262,206" title="Complexity: 4; Coverage: 85%; Class: ImageRawStream.ByteArrayStreamFactory" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageRawStream.html#ImageRawStream.ByteArrayStreamFactory"/>
+<area shape="poly" coords="269,205,267,208,264,205,267,203,269,205,269,205" title="Complexity: 6; Coverage: 88%; Class: ImageRawStream.SingleStreamFactory" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageRawStream.html#ImageRawStream.SingleStreamFactory"/>
+<area shape="poly" coords="205,202,203,205,200,202,203,200,205,202,205,202" title="Complexity: 10; Coverage: 62%; Class: ImageRawStream" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageRawStream.html#ImageRawStream"/>
+<area shape="poly" coords="149,200,147,202,144,200,147,197,149,200,149,200" title="Complexity: 14; Coverage: 39%; Class: ImageRawPNG" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageRawPNG.html#ImageRawPNG"/>
+<area shape="poly" coords="227,206,225,208,222,206,225,203,227,206,227,206" title="Complexity: 5; Coverage: 71%; Class: ImageRawJPEG" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageRawJPEG.html#ImageRawJPEG"/>
+<area shape="poly" coords="122,207,120,210,117,207,120,205,122,207,122,207" title="Complexity: 3; Coverage: 28%; Class: PNGImageWriter" alt="" href="org/apache/xmlgraphics/image/writer/internal/PNGImageWriter.html#PNGImageWriter"/>
+<area shape="poly" coords="227,207,225,210,222,207,225,205,227,207,227,207" title="Complexity: 3; Coverage: 71%; Class: ImageRawCCITTFax" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageRawCCITTFax.html#ImageRawCCITTFax"/>
+<area shape="poly" coords="298,206,296,209,293,206,296,204,298,206,298,206" title="Complexity: 4; Coverage: 100%; Class: ImageLoaderFactoryImageIO" alt="" href="org/apache/xmlgraphics/image/loader/impl/imageio/ImageLoaderFactoryImageIO.html#ImageLoaderFactoryImageIO"/>
+<area shape="poly" coords="193,184,191,186,188,184,191,181,193,184,193,184" title="Complexity: 38; Coverage: 57%; Class: ImageLoaderRawJPEG" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderRawJPEG.html#ImageLoaderRawJPEG"/>
+<area shape="poly" coords="54,205,51,208,49,205,51,203,54,205,54,205" title="Complexity: 6; Coverage: 0%; Class: GenericGraphicsDevice" alt="" href="org/apache/xmlgraphics/java2d/GenericGraphicsDevice.html#GenericGraphicsDevice"/>
+<area shape="poly" coords="230,200,227,202,225,200,227,197,230,200,230,200" title="Complexity: 14; Coverage: 72%; Class: ImageLoaderRawCCITTFax" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderRawCCITTFax.html#ImageLoaderRawCCITTFax"/>
+<area shape="poly" coords="110,206,107,209,105,206,107,204,110,206,110,206" title="Complexity: 4; Coverage: 23%; Class: ImageLoaderRaw" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderRaw.html#ImageLoaderRaw"/>
+<area shape="poly" coords="298,206,296,209,293,206,296,204,298,206,298,206" title="Complexity: 4; Coverage: 100%; Class: ImageLoaderFactoryImageIO" alt="" href="org/apache/xmlgraphics/image/loader/impl/imageio/ImageLoaderFactoryImageIO.html#ImageLoaderFactoryImageIO"/>
+<area shape="poly" coords="110,206,107,208,105,206,107,203,110,206,110,206" title="Complexity: 5; Coverage: 23%; Class: ImageLoaderInternalTIFF" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderInternalTIFF.html#ImageLoaderInternalTIFF"/>
+<area shape="poly" coords="183,197,181,200,178,197,181,195,183,197,183,197" title="Complexity: 18; Coverage: 53%; Class: ImageLoaderFactoryRawCCITTFax" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderFactoryRawCCITTFax.html#ImageLoaderFactoryRawCCITTFax"/>
+<area shape="poly" coords="235,193,232,196,230,193,232,191,235,193,235,193" title="Complexity: 24; Coverage: 74%; Class: ImageLoaderFactoryRaw" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderFactoryRaw.html#ImageLoaderFactoryRaw"/>
+<area shape="poly" coords="298,205,296,208,293,205,296,203,298,205,298,205" title="Complexity: 6; Coverage: 100%; Class: ImageLoaderFactoryPNG" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderFactoryPNG.html#ImageLoaderFactoryPNG"/>
+<area shape="poly" coords="257,206,254,208,252,206,254,203,257,206,257,206" title="Complexity: 5; Coverage: 83%; Class: ResolutionUnit" alt="" href="org/apache/xmlgraphics/image/writer/ResolutionUnit.html#ResolutionUnit"/>
+<area shape="poly" coords="257,206,254,208,252,206,254,203,257,206,257,206" title="Complexity: 5; Coverage: 83%; Class: ResolutionUnit" alt="" href="org/apache/xmlgraphics/image/writer/ResolutionUnit.html#ResolutionUnit"/>
+<area shape="poly" coords="274,206,271,208,269,206,271,203,274,206,274,206" title="Complexity: 5; Coverage: 90%; Class: ImageLoaderEPS" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderEPS.html#ImageLoaderEPS"/>
+<area shape="poly" coords="191,205,188,208,186,205,188,203,191,205,191,205" title="Complexity: 6; Coverage: 56%; Class: ImageGraphics2D" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageGraphics2D.html#ImageGraphics2D"/>
+<area shape="poly" coords="259,206,257,208,254,206,257,203,259,206,259,206" title="Complexity: 5; Coverage: 84%; Class: ImageConverterRendered2PNG" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageConverterRendered2PNG.html#ImageConverterRendered2PNG"/>
+<area shape="poly" coords="213,196,210,199,208,196,210,194,213,196,213,196" title="Complexity: 19; Coverage: 65%; Class: ImageConverterG2D2Bitmap" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageConverterG2D2Bitmap.html#ImageConverterG2D2Bitmap"/>
+<area shape="poly" coords="276,206,274,208,271,206,274,203,276,206,276,206" title="Complexity: 5; Coverage: 91%; Class: ImageConverterBuffered2Rendered" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageConverterBuffered2Rendered.html#ImageConverterBuffered2Rendered"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: TIFFImageDecoder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFImageDecoder.html#TIFFImageDecoder"/>
+<area shape="poly" coords="134,206,132,209,129,206,132,204,134,206,134,206" title="Complexity: 4; Coverage: 33%; Class: ImageConverterBitmap2G2D" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageConverterBitmap2G2D.html#ImageConverterBitmap2G2D"/>
+<area shape="poly" coords="298,207,296,210,293,207,296,205,298,207,298,207" title="Complexity: 3; Coverage: 100%; Class: ImageInfo.ImageInfoBuilder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/ImageInfo.html#ImageInfo.ImageInfoBuilder"/>
+<area shape="poly" coords="262,204,259,206,257,204,259,201,262,204,262,204" title="Complexity: 8; Coverage: 85%; Class: DefaultImageSessionContext" alt="" href="org/apache/xmlgraphics/image/loader/impl/DefaultImageSessionContext.html#DefaultImageSessionContext"/>
+<area shape="poly" coords="54,207,51,210,49,207,51,205,54,207,54,207" title="Complexity: 3; Coverage: 0%; Class: DSCCommentPageResources" alt="" href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPageResources.html#DSCCommentPageResources"/>
+<area shape="poly" coords="147,198,144,201,142,198,144,196,147,198,147,198" title="Complexity: 16; Coverage: 38%; Class: CompositeImageLoader" alt="" href="org/apache/xmlgraphics/image/loader/impl/CompositeImageLoader.html#CompositeImageLoader"/>
+<area shape="poly" coords="54,206,51,209,49,206,51,204,54,206,54,206" title="Complexity: 4; Coverage: 0%; Class: SingleTileRenderedImage" alt="" href="org/apache/xmlgraphics/image/codec/util/SingleTileRenderedImage.html#SingleTileRenderedImage"/>
+<area shape="poly" coords="213,195,210,198,208,195,210,193,213,195,213,195" title="Complexity: 21; Coverage: 65%; Class: AbstractImageSessionContext.UnrestrictedFallbackResolver" alt="" href="org/apache/xmlgraphics/image/loader/impl/AbstractImageSessionContext.html#AbstractImageSessionContext.UnrestrictedFallbackResolver"/>
+<area shape="poly" coords="193,206,191,209,188,206,191,204,193,206,193,206" title="Complexity: 4; Coverage: 57%; Class: AbstractImageSessionContext.ObservingImageInputStreamInvocationHandler" alt="" href="org/apache/xmlgraphics/image/loader/impl/AbstractImageSessionContext.html#AbstractImageSessionContext.ObservingImageInputStreamInvocationHandler"/>
+<area shape="poly" coords="230,187,227,190,225,187,227,185,230,187,230,187" title="Complexity: 33; Coverage: 72%; Class: AbstractImageSessionContext" alt="" href="org/apache/xmlgraphics/image/loader/impl/AbstractImageSessionContext.html#AbstractImageSessionContext"/>
+<area shape="poly" coords="257,207,254,210,252,207,254,205,257,207,257,207" title="Complexity: 3; Coverage: 83%; Class: AbstractImagePreloader" alt="" href="org/apache/xmlgraphics/image/loader/impl/AbstractImagePreloader.html#AbstractImagePreloader"/>
+<area shape="poly" coords="152,208,149,210,147,208,149,205,152,208,152,208" title="Complexity: 2; Coverage: 40%; Class: AbstractImageLoaderFactory" alt="" href="org/apache/xmlgraphics/image/loader/impl/AbstractImageLoaderFactory.html#AbstractImageLoaderFactory"/>
+<area shape="poly" coords="230,206,227,209,225,206,227,204,230,206,230,206" title="Complexity: 4; Coverage: 72%; Class: AbstractImageLoader" alt="" href="org/apache/xmlgraphics/image/loader/impl/AbstractImageLoader.html#AbstractImageLoader"/>
+<area shape="poly" coords="227,207,225,210,222,207,225,205,227,207,227,207" title="Complexity: 3; Coverage: 71%; Class: ImageRawCCITTFax" alt="" href="org/apache/xmlgraphics/image/loader/impl/ImageRawCCITTFax.html#ImageRawCCITTFax"/>
+<area shape="poly" coords="144,204,142,207,139,204,142,202,144,204,144,204" title="Complexity: 7; Coverage: 37%; Class: RenderingIntent" alt="" href="org/apache/xmlgraphics/java2d/color/RenderingIntent.html#RenderingIntent"/>
+<area shape="poly" coords="227,202,225,204,222,202,225,199,227,202,227,202" title="Complexity: 11; Coverage: 71%; Class: PreloaderImageIO" alt="" href="org/apache/xmlgraphics/image/loader/impl/imageio/PreloaderImageIO.html#PreloaderImageIO"/>
+<area shape="poly" coords="156,202,154,204,151,202,154,199,156,202,156,202" title="Complexity: 11; Coverage: 42%; Class: XMPSerializer" alt="" href="org/apache/xmlgraphics/xmp/XMPSerializer.html#XMPSerializer"/>
+<area shape="poly" coords="298,206,296,208,293,206,296,203,298,206,298,206" title="Complexity: 5; Coverage: 100%; Class: ImageConversionEdge" alt="" href="org/apache/xmlgraphics/image/loader/pipeline/ImageConversionEdge.html#ImageConversionEdge"/>
+<area shape="poly" coords="269,159,267,162,264,159,267,157,269,159,269,159" title="Complexity: 75; Coverage: 88%; Class: XMPSchemaAdapter" alt="" href="org/apache/xmlgraphics/xmp/XMPSchemaAdapter.html#XMPSchemaAdapter"/>
+<area shape="poly" coords="208,206,205,208,203,206,205,203,208,206,208,206" title="Complexity: 5; Coverage: 63%; Class: XMPSchema" alt="" href="org/apache/xmlgraphics/xmp/XMPSchema.html#XMPSchema"/>
+<area shape="poly" coords="181,186,178,189,176,186,178,184,181,186,181,186" title="Complexity: 34; Coverage: 52%; Class: XMPProperty" alt="" href="org/apache/xmlgraphics/xmp/XMPProperty.html#XMPProperty"/>
+<area shape="poly" coords="279,206,276,209,274,206,276,204,279,206,279,206" title="Complexity: 4; Coverage: 92%; Class: XMPParser" alt="" href="org/apache/xmlgraphics/xmp/XMPParser.html#XMPParser"/>
+<area shape="poly" coords="54,199,51,202,49,199,51,197,54,199,54,199" title="Complexity: 15; Coverage: 0%; Class: XMPPacketParser" alt="" href="org/apache/xmlgraphics/xmp/XMPPacketParser.html#XMPPacketParser"/>
+<area shape="poly" coords="257,174,254,176,252,174,254,171,257,174,257,174" title="Complexity: 53; Coverage: 83%; Class: XMPHandler" alt="" href="org/apache/xmlgraphics/xmp/XMPHandler.html#XMPHandler"/>
+<area shape="poly" coords="215,207,213,210,210,207,213,205,215,207,215,207" title="Complexity: 3; Coverage: 66%; Class: AdobePDFSchema" alt="" href="org/apache/xmlgraphics/xmp/schemas/pdf/AdobePDFSchema.html#AdobePDFSchema"/>
+<area shape="poly" coords="230,176,227,179,225,176,227,174,230,176,230,176" title="Complexity: 49; Coverage: 72%; Class: XMPArray" alt="" href="org/apache/xmlgraphics/xmp/XMPArray.html#XMPArray"/>
+<area shape="poly" coords="232,196,230,199,227,196,230,194,232,196,232,196" title="Complexity: 19; Coverage: 73%; Class: Metadata" alt="" href="org/apache/xmlgraphics/xmp/Metadata.html#Metadata"/>
+<area shape="poly" coords="54,208,51,211,49,208,51,206,54,208,54,208" title="Complexity: 1; Coverage: 0%; Class: GraphicsConstants" alt="" href="org/apache/xmlgraphics/image/GraphicsConstants.html#GraphicsConstants"/>
+<area shape="poly" coords="54,208,51,210,49,208,51,205,54,208,54,208" title="Complexity: 2; Coverage: 0%; Class: SubImageNotFoundException" alt="" href="org/apache/xmlgraphics/image/loader/SubImageNotFoundException.html#SubImageNotFoundException"/>
+<area shape="poly" coords="144,206,142,209,139,206,142,204,144,206,144,206" title="Complexity: 4; Coverage: 37%; Class: MergeRuleSet" alt="" href="org/apache/xmlgraphics/xmp/merge/MergeRuleSet.html#MergeRuleSet"/>
+<area shape="poly" coords="54,206,51,208,49,206,51,203,54,206,54,206" title="Complexity: 5; Coverage: 0%; Class: TIFFImageDecoder" alt="" href="org/apache/xmlgraphics/image/codec/tiff/TIFFImageDecoder.html#TIFFImageDecoder"/>
+</map>
+            </div>
+        </div>
+        
+                    <div class="dashboard-widget">
+                <header class="dashboard-widget-header">
+                    <h3>Coverage tree map</h3>
+                </header>
+                <div class="dashboard-widget-content">
+                    <div id="infovis" style="width:100%; height:250px;">
+                        <div id="treemap-loader" style="position:relative;top:50px;">
+                            <p>
+                                Generating Coverage Tree Map. Please wait...
+                            </p>
+                            <p>
+                                <img src="img/ajax-loader.gif" alt="Loading Treemap"/>
+                            </p>
+                        </div>
+                    </div>
+                    <p><a href="treemap.html">See more</a></p>
+                </div>
+
+            </div>
+            </div>
+
+
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Top 20 project risks</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                                                                <a class="tag" href="org/apache/xmlgraphics/util/DoubleFormatUtil.html"
+                            style="font-size: 16px;color:#89c495"
+                            title="Average Method Complexity - 5.333 , Coverage - 94% ">DoubleFormatUtil</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/image/loader/impl/PreloaderEPS.html"
+                            style="font-size: 17px;color:#14892c"
+                            title="Average Method Complexity - 6.667 , Coverage - 89.5% ">PreloaderEPS</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/util/io/ASCII85InputStream.html"
+                            style="font-size: 16px;color:#14892c"
+                            title="Average Method Complexity - 5.8 , Coverage - 88.9% ">ASCII85InputStream</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/io/XmlSourceUtil.html"
+                            style="font-size: 14px;color:#89c495"
+                            title="Average Method Complexity - 3.714 , Coverage - 94.6% ">XmlSourceUtil</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/util/ClasspathResource.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3.333 , Coverage - 93% ">ClasspathResource</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/util/uri/DataURIResolver.html"
+                            style="font-size: 15px;color:#14892c"
+                            title="Average Method Complexity - 4 , Coverage - 87.5% ">DataURIResolver</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/image/loader/impl/PreloaderBMP.html"
+                            style="font-size: 14px;color:#89c495"
+                            title="Average Method Complexity - 3 , Coverage - 95.3% ">PreloaderBMP</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/xmp/XMPHandler.html"
+                            style="font-size: 15px;color:#14892c"
+                            title="Average Method Complexity - 4.818 , Coverage - 83.6% ">XMPHandler</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/image/loader/impl/PreloaderJPEG.html"
+                            style="font-size: 26px;color:#fae1a0"
+                            title="Average Method Complexity - 18.5 , Coverage - 76.5% ">PreloaderJPEG</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3.125 , Coverage - 91.6% ">PipelineFactory</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/xmp/XMPSchemaAdapter.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3.125 , Coverage - 88.8% ">XMPSchemaAdapter</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/util/io/Base64DecodeStream.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3.5 , Coverage - 84.9% ">Base64DecodeStream</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/fonts/Glyphs.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3.9 , Coverage - 83.2% ">Glyphs</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/image/loader/impl/PreloaderTIFF.html"
+                            style="font-size: 23px;color:#fae1a0"
+                            title="Average Method Complexity - 15 , Coverage - 73.8% ">PreloaderTIFF</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/image/codec/tiff/ImageType.html"
+                            style="font-size: 13px;color:#89c495"
+                            title="Average Method Complexity - 2.375 , Coverage - 98% ">ImageType</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/image/loader/pipeline/ImageProviderPipeline.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3.308 , Coverage - 84.4% ">ImageProviderPipeline</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/util/dijkstra/DefaultEdgeDirectory.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 3 , Coverage - 85.5% ">DefaultEdgeDirectory</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/image/codec/png/PNGImageEncoder.html"
+                            style="font-size: 13px;color:#89c495"
+                            title="Average Method Complexity - 2.333 , Coverage - 95.5% ">CRC</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/util/io/ASCII85OutputStream.html"
+                            style="font-size: 14px;color:#14892c"
+                            title="Average Method Complexity - 2.889 , Coverage - 87.1% ">ASCII85OutputStream</a>
+                                    
+                                                                <a class="tag" href="org/apache/xmlgraphics/image/loader/impl/imageio/PreloaderImageIO.html"
+                            style="font-size: 16px;color:#fae1a0"
+                            title="Average Method Complexity - 5.5 , Coverage - 71.4% ">PreloaderImageIO</a>
+                                                    <p><a href="top-risks.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex packages</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.2143037</span>21.4%</div><div style="display: table-cell">
+ <div title="21.4% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:21.4%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/xmlgraphics/image/codec/png/pkg-summary.html">org.apache.xmlgraphics.image.codec.png</a>
+                                <span class="aui-badge" title="Package complexity">970</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.18654007</span>18.7%</div><div style="display: table-cell">
+ <div title="18.7% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:18.7%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/xmlgraphics/image/codec/tiff/pkg-summary.html">org.apache.xmlgraphics.image.codec.tiff</a>
+                                <span class="aui-badge" title="Package complexity">841</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.6792453</span>67.9%</div><div style="display: table-cell">
+ <div title="67.9% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:67.9%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/xmlgraphics/image/loader/impl/pkg-summary.html">org.apache.xmlgraphics.image.loader.impl</a>
+                                <span class="aui-badge" title="Package complexity">523</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.35962635</span>36%</div><div style="display: table-cell">
+ <div title="36% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:36%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/xmlgraphics/ps/pkg-summary.html">org.apache.xmlgraphics.ps</a>
+                                <span class="aui-badge" title="Package complexity">457</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.722664</span>72.3%</div><div style="display: table-cell">
+ <div title="72.3% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:72.3%"></div></div></div></div></td>
+                            <td>
+                                <a href="org/apache/xmlgraphics/xmp/pkg-summary.html">org.apache.xmlgraphics.xmp</a>
+                                <span class="aui-badge" title="Package complexity">284</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex classes</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/xmlgraphics/image/codec/png/PNGRed.html"  title="org.apache.xmlgraphics.image.codec.png.PNGRed">PNGRed</a>
+                                <span class="aui-badge" title="Class complexity">288</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.28809524</span>28.8%</div><div style="display: table-cell">
+ <div title="28.8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:28.8%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/xmlgraphics/image/codec/png/PNGImageDecoder.html"  title="org.apache.xmlgraphics.image.codec.png.PNGImage">PNGImage</a>
+                                <span class="aui-badge" title="Class complexity">288</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/xmlgraphics/image/codec/tiff/TIFFImage.html"  title="org.apache.xmlgraphics.image.codec.tiff.TIFFImage">TIFFImage</a>
+                                <span class="aui-badge" title="Class complexity">271</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.34013605</span>34%</div><div style="display: table-cell">
+ <div title="34% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:34%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/xmlgraphics/image/codec/tiff/TIFFImageEncoder.html"  title="org.apache.xmlgraphics.image.codec.tiff.TIFFImageEncoder">TIFFImageEncoder</a>
+                                <span class="aui-badge" title="Class complexity">201</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                            <td>
+                                <a  href="org/apache/xmlgraphics/image/GraphicsUtil.html"  title="org.apache.xmlgraphics.image.GraphicsUtil">GraphicsUtil</a>
+                                <span class="aui-badge" title="Class complexity">149</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Least tested methods</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+
+                    <tr>
+                        <td align="right">1.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TIFFImage.getTile(int,int)&#160;:&#160;Raster" href="org/apache/xmlgraphics/image/codec/tiff/TIFFImage.html?line=747#src-747">TIFFImage.getTile(int,int)&#160;:&#160;Raster</a>
+                            <span class="aui-badge" title="Method complexity">126</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">2.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TIFFImage.TIFFImage(SeekableStream,TIFFDecodeParam,int)" href="org/apache/xmlgraphics/image/codec/tiff/TIFFImage.html?line=181#src-181">TIFFImage.TIFFImage(SeekableStream,TIFFDecodeParam,int)</a>
+                            <span class="aui-badge" title="Method complexity">105</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">3.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PNGRed.processPixels(int,Raster,WritableRaster,int,int,int,int)&#160;:&#160;void" href="org/apache/xmlgraphics/image/codec/png/PNGRed.html?line=1484#src-1484">PNGRed.processPixels(int,Raster,WritableRaster,int,int,int,int)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">42</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">4.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="GraphicsUtil.copyData(BufferedImage,Rectangle,BufferedImage,Point)&#160;:&#160;void" href="org/apache/xmlgraphics/image/GraphicsUtil.html?line=661#src-661">GraphicsUtil.copyData(BufferedImage,Rectangle,BufferedImage,Point)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">40</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">5.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PNGRed.parse_IHDR_chunk(PNGChunk)&#160;:&#160;void" href="org/apache/xmlgraphics/image/codec/png/PNGRed.html?line=520#src-520">PNGRed.parse_IHDR_chunk(PNGChunk)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">51</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">6.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PSProcSets.StdProcSet.writeTo(PSGenerator)&#160;:&#160;void" href="org/apache/xmlgraphics/ps/PSProcSets.html?line=87#src-87">PSProcSets.StdProcSet.writeTo(PSGenerator)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">7.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TIFFFaxDecoder.decodeT6(byte[],byte[],int,int,long)&#160;:&#160;void" href="org/apache/xmlgraphics/image/codec/tiff/TIFFFaxDecoder.html?line=892#src-892">TIFFFaxDecoder.decodeT6(byte[],byte[],int,int,long)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">22</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">8.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PNGRed.PNGRed(InputStream,PNGDecodeParam)" href="org/apache/xmlgraphics/image/codec/png/PNGRed.html?line=360#src-360">PNGRed.PNGRed(InputStream,PNGDecodeParam)</a>
+                            <span class="aui-badge" title="Method complexity">28</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">9.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TIFFFaxDecoder.decodeNextScanline(byte[],int,int)&#160;:&#160;void" href="org/apache/xmlgraphics/image/codec/tiff/TIFFFaxDecoder.html?line=593#src-593">TIFFFaxDecoder.decodeNextScanline(byte[],int,int)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">17</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">10.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Any2sRGBRed.copyData(WritableRaster)&#160;:&#160;WritableRaster" href="org/apache/xmlgraphics/image/rendered/Any2sRGBRed.html?line=182#src-182">Any2sRGBRed.copyData(WritableRaster)&#160;:&#160;WritableRaster</a>
+                            <span class="aui-badge" title="Method complexity">18</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">11.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TIFFFaxDecoder.decode2D(byte[],byte[],int,int,long)&#160;:&#160;void" href="org/apache/xmlgraphics/image/codec/tiff/TIFFFaxDecoder.html?line=736#src-736">TIFFFaxDecoder.decode2D(byte[],byte[],int,int,long)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">11</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">12.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PNGRed.parse_IEND_chunk(PNGChunk)&#160;:&#160;void" href="org/apache/xmlgraphics/image/codec/png/PNGRed.html?line=716#src-716">PNGRed.parse_IEND_chunk(PNGChunk)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">24</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">13.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Any2LsRGBRed.copyData(WritableRaster)&#160;:&#160;WritableRaster" href="org/apache/xmlgraphics/image/rendered/Any2LsRGBRed.html?line=111#src-111">Any2LsRGBRed.copyData(WritableRaster)&#160;:&#160;WritableRaster</a>
+                            <span class="aui-badge" title="Method complexity">12</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">14.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PSTilingPattern.equals(Object)&#160;:&#160;boolean" href="org/apache/xmlgraphics/java2d/ps/PSTilingPattern.html?line=499#src-499">PSTilingPattern.equals(Object)&#160;:&#160;boolean</a>
+                            <span class="aui-badge" title="Method complexity">24</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">15.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="RunLengthEncodeOutputStream.write(byte)&#160;:&#160;void" href="org/apache/xmlgraphics/util/io/RunLengthEncodeOutputStream.html?line=58#src-58">RunLengthEncodeOutputStream.write(byte)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">15</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">16.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PNGImage.parse_tRNS_chunk(PNGChunk)&#160;:&#160;void" href="org/apache/xmlgraphics/image/codec/png/PNGImageDecoder.html?line=1217#src-1217">PNGImage.parse_tRNS_chunk(PNGChunk)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">17</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">17.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PNGRed.parse_tRNS_chunk(PNGChunk)&#160;:&#160;void" href="org/apache/xmlgraphics/image/codec/png/PNGRed.html?line=1262#src-1262">PNGRed.parse_tRNS_chunk(PNGChunk)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">17</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">18.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="FormatRed.makeColorModel(CachableRed,SampleModel)&#160;:&#160;ColorModel" href="org/apache/xmlgraphics/image/rendered/FormatRed.html?line=144#src-144">FormatRed.makeColorModel(CachableRed,SampleModel)&#160;:&#160;ColorModel</a>
+                            <span class="aui-badge" title="Method complexity">17</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">19.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TIFFFaxDecoder.nextNBits(int)&#160;:&#160;int" href="org/apache/xmlgraphics/image/codec/tiff/TIFFFaxDecoder.html?line=1339#src-1339">TIFFFaxDecoder.nextNBits(int)&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">10</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">20.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="PNGRed.decodePass(WritableRaster,int,int,int,int,int,int)&#160;:&#160;void" href="org/apache/xmlgraphics/image/codec/png/PNGRed.html?line=1745#src-1745">PNGRed.decodePass(WritableRaster,int,int,int,int,int,int)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">14</span>
+
+                        </td>
+                    </tr>
+                                    </table>
+            </div>
+        </div>
+        
+    </div>
+</div>
+                            </div> <!-- tabs-pane active-pane -->
+                        </div>
+
+    <script type="text/javascript" src="jit.js" ></script>
+    <script type="text/javascript" src="treemap-dash-json.js" ></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Wed Jan 22 2025 18:18:18 EST using coverage data from Wed Jan 22 2025 18:18:14 EST.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

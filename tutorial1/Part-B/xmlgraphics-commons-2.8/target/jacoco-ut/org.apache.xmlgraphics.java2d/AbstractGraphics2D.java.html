@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">AbstractGraphics2D.java</span></div><h1>AbstractGraphics2D.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">AbstractGraphics2D.java</span></div><h1>AbstractGraphics2D.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -71,7 +71,7 @@ import java.util.Map;
  *
  * Originally authored by Vincent Hardy.
  */
-public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable {
+<span class="pc bpc" id="L74" title="3 of 4 branches missed.">public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable {public static class __CLR4_5_2b4tb4tm68iyhqq{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,14623,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
     /**
      * Current state of the Graphic Context. The GraphicsContext
      * class manages the state of this &lt;tt&gt;Graphics2D&lt;/tt&gt; graphic context
@@ -94,19 +94,19 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      *        convertion. No text is output.
      *
      */
-<span class="fc" id="L97">    public AbstractGraphics2D(boolean textAsShapes) {</span>
-<span class="fc" id="L98">        this.textAsShapes = textAsShapes;</span>
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L97">    public AbstractGraphics2D(boolean textAsShapes) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14429);</span>
+<span class="fc" id="L98">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14430);this.textAsShapes = textAsShapes;</span>
+<span class="fc" id="L99">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Creates a new AbstractGraphics2D from an existing instance.
      * @param g the AbstractGraphics2D whose properties should be copied
      */
-<span class="nc" id="L105">    public AbstractGraphics2D(AbstractGraphics2D g) {</span>
-<span class="nc" id="L106">        this.gc = (GraphicContext)g.gc.clone();</span>
-<span class="nc" id="L107">        this.gc.validateTransformStack();</span>
-<span class="nc" id="L108">        this.textAsShapes = g.textAsShapes;</span>
-<span class="nc" id="L109">    }</span>
+<span class="nc" id="L105">    public AbstractGraphics2D(AbstractGraphics2D g) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14431);</span>
+<span class="nc" id="L106">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14432);this.gc = (GraphicContext)g.gc.clone();</span>
+<span class="nc" id="L107">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14433);this.gc.validateTransformStack();</span>
+<span class="nc" id="L108">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14434);this.textAsShapes = g.textAsShapes;</span>
+<span class="nc" id="L109">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Translates the origin of the graphics context to the point
@@ -119,9 +119,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param  x   the &lt;i&gt;x&lt;/i&gt; coordinate.
      * @param  y   the &lt;i&gt;y&lt;/i&gt; coordinate.
      */
-    public void translate(int x, int y) {
-<span class="nc" id="L123">        gc.translate(x, y);</span>
-<span class="nc" id="L124">    }</span>
+<span class="nc" id="L122">    public void translate(int x, int y) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14435);</span>
+<span class="nc" id="L123">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14436);gc.translate(x, y);</span>
+<span class="nc" id="L124">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Gets this graphics context's current color.
@@ -129,9 +129,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see       java.awt.Color
      * @see       java.awt.Graphics#setColor
      */
-    public Color getColor() {
-<span class="fc" id="L133">        return gc.getColor();</span>
-    }
+<span class="fc" id="L132">    public Color getColor() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14437);</span>
+<span class="fc" id="L133">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14438);return gc.getColor();</span>
+<span class="fc" id="L134">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Sets this graphics context's current color to the specified
@@ -141,9 +141,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see       java.awt.Color
      * @see       java.awt.Graphics#getColor
      */
-    public void setColor(Color c) {
-<span class="nc" id="L145">        gc.setColor(c);</span>
-<span class="nc" id="L146">    }</span>
+<span class="nc" id="L144">    public void setColor(Color c) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14439);</span>
+<span class="nc" id="L145">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14440);gc.setColor(c);</span>
+<span class="nc" id="L146">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Sets the paint mode of this graphics context to overwrite the
@@ -152,9 +152,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * overwrite mode.  All subsequent rendering operations will
      * overwrite the destination with the current color.
      */
-    public void setPaintMode() {
-<span class="nc" id="L156">        gc.setComposite(AlphaComposite.SrcOver);</span>
-<span class="nc" id="L157">    }</span>
+<span class="nc" id="L155">    public void setPaintMode() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14441);</span>
+<span class="nc" id="L156">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14442);gc.setComposite(AlphaComposite.SrcOver);</span>
+<span class="nc" id="L157">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Gets the current font.
@@ -162,9 +162,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see       java.awt.Font
      * @see       java.awt.Graphics#setFont
      */
-    public Font getFont() {
-<span class="fc" id="L166">        return gc.getFont();</span>
-    }
+<span class="fc" id="L165">    public Font getFont() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14443);</span>
+<span class="fc" id="L166">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14444);return gc.getFont();</span>
+<span class="fc" id="L167">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Sets this graphics context's font to the specified font.
@@ -173,9 +173,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param  font   the font.
      * @see     java.awt.Graphics#getFont
      */
-    public void setFont(Font font) {
-<span class="nc" id="L177">        gc.setFont(font);</span>
-<span class="nc" id="L178">    }</span>
+<span class="nc" id="L176">    public void setFont(Font font) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14445);</span>
+<span class="nc" id="L177">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14446);gc.setFont(font);</span>
+<span class="nc" id="L178">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Returns the bounding rectangle of the current clipping area.
@@ -194,9 +194,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#setClip(Shape)
      * @since       JDK1.1
      */
-    public Rectangle getClipBounds() {
-<span class="nc" id="L198">        return gc.getClipBounds();</span>
-    }
+<span class="nc" id="L197">    public Rectangle getClipBounds() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14447);</span>
+<span class="nc" id="L198">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14448);return gc.getClipBounds();</span>
+<span class="nc" id="L199">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -218,9 +218,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see #setClip(int, int, int, int)
      * @see #setClip(Shape)
      */
-    public void clipRect(int x, int y, int width, int height) {
-<span class="nc" id="L222">        gc.clipRect(x, y, width, height);</span>
-<span class="nc" id="L223">    }</span>
+<span class="nc" id="L221">    public void clipRect(int x, int y, int width, int height) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14449);</span>
+<span class="nc" id="L222">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14450);gc.clipRect(x, y, width, height);</span>
+<span class="nc" id="L223">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -237,9 +237,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#setClip(Shape)
      * @since       JDK1.1
      */
-    public void setClip(int x, int y, int width, int height) {
-<span class="nc" id="L241">        gc.setClip(x, y, width, height);</span>
-<span class="nc" id="L242">    }</span>
+<span class="nc" id="L240">    public void setClip(int x, int y, int width, int height) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14451);</span>
+<span class="nc" id="L241">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14452);gc.setClip(x, y, width, height);</span>
+<span class="nc" id="L242">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -258,9 +258,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#setClip(Shape)
      * @since       JDK1.1
      */
-    public Shape getClip() {
-<span class="fc" id="L262">        return gc.getClip();</span>
-    }
+<span class="fc" id="L261">    public Shape getClip() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14453);</span>
+<span class="fc" id="L262">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14454);return gc.getClip();</span>
+<span class="fc" id="L263">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -279,9 +279,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#setClip(int, int, int, int)
      * @since       JDK1.1
      */
-    public void setClip(Shape clip) {
-<span class="nc" id="L283">        gc.setClip(clip);</span>
-<span class="nc" id="L284">    }</span>
+<span class="nc" id="L282">    public void setClip(Shape clip) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14455);</span>
+<span class="nc" id="L283">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14456);gc.setClip(clip);</span>
+<span class="nc" id="L284">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -293,10 +293,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param   x2  the second point's &lt;i&gt;x&lt;/i&gt; coordinate.
      * @param   y2  the second point's &lt;i&gt;y&lt;/i&gt; coordinate.
      */
-    public void drawLine(int x1, int y1, int x2, int y2) {
-<span class="nc" id="L297">        Line2D line = new Line2D.Float(x1, y1, x2, y2);</span>
-<span class="nc" id="L298">        draw(line);</span>
-<span class="nc" id="L299">    }</span>
+<span class="nc" id="L296">    public void drawLine(int x1, int y1, int x2, int y2) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14457);</span>
+<span class="nc" id="L297">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14458);Line2D line = new Line2D.Float(x1, y1, x2, y2);</span>
+<span class="nc" id="L298">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14459);draw(line);</span>
+<span class="nc" id="L299">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -318,15 +318,15 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see           java.awt.Graphics#clearRect
      * @see           java.awt.Graphics#drawRect
      */
-    public void fillRect(int x, int y, int width, int height) {
-<span class="nc" id="L322">        Rectangle rect = new Rectangle(x, y, width, height);</span>
-<span class="nc" id="L323">        fill(rect);</span>
-<span class="nc" id="L324">    }</span>
+<span class="nc" id="L321">    public void fillRect(int x, int y, int width, int height) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14460);</span>
+<span class="nc" id="L322">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14461);Rectangle rect = new Rectangle(x, y, width, height);</span>
+<span class="nc" id="L323">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14462);fill(rect);</span>
+<span class="nc" id="L324">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
-    public void drawRect(int x, int y, int width, int height) {
-<span class="nc" id="L327">        Rectangle rect = new Rectangle(x, y, width, height);</span>
-<span class="nc" id="L328">        draw(rect);</span>
-<span class="nc" id="L329">    }</span>
+<span class="nc" id="L326">    public void drawRect(int x, int y, int width, int height) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14463);</span>
+<span class="nc" id="L327">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14464);Rectangle rect = new Rectangle(x, y, width, height);</span>
+<span class="nc" id="L328">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14465);draw(rect);</span>
+<span class="nc" id="L329">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
 
@@ -349,12 +349,12 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#setPaintMode
      * @see         java.awt.Graphics#setXORMode(java.awt.Color)
      */
-    public void clearRect(int x, int y, int width, int height) {
-<span class="nc" id="L353">        Paint paint = gc.getPaint();</span>
-<span class="nc" id="L354">        gc.setColor(gc.getBackground());</span>
-<span class="nc" id="L355">        fillRect(x, y, width, height);</span>
-<span class="nc" id="L356">        gc.setPaint(paint);</span>
-<span class="nc" id="L357">    }</span>
+<span class="nc" id="L352">    public void clearRect(int x, int y, int width, int height) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14466);</span>
+<span class="nc" id="L353">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14467);Paint paint = gc.getPaint();</span>
+<span class="nc" id="L354">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14468);gc.setColor(gc.getBackground());</span>
+<span class="nc" id="L355">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14469);fillRect(x, y, width, height);</span>
+<span class="nc" id="L356">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14470);gc.setPaint(paint);</span>
+<span class="nc" id="L357">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Draws an outlined round-cornered rectangle using this graphics
@@ -373,10 +373,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see        java.awt.Graphics#fillRoundRect
      */
     public void drawRoundRect(int x, int y, int width, int height,
-                              int arcWidth, int arcHeight) {
-<span class="nc" id="L377">        RoundRectangle2D rect = new RoundRectangle2D.Float(x, y, width, height, arcWidth, arcHeight);</span>
-<span class="nc" id="L378">        draw(rect);</span>
-<span class="nc" id="L379">    }</span>
+<span class="nc" id="L376">                              int arcWidth, int arcHeight) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14471);</span>
+<span class="nc" id="L377">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14472);RoundRectangle2D rect = new RoundRectangle2D.Float(x, y, width, height, arcWidth, arcHeight);</span>
+<span class="nc" id="L378">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14473);draw(rect);</span>
+<span class="nc" id="L379">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -396,10 +396,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#drawRoundRect
      */
     public void fillRoundRect(int x, int y, int width, int height,
-                              int arcWidth, int arcHeight) {
-<span class="nc" id="L400">        RoundRectangle2D rect = new RoundRectangle2D.Float(x, y, width, height, arcWidth, arcHeight);</span>
-<span class="nc" id="L401">        fill(rect);</span>
-<span class="nc" id="L402">    }</span>
+<span class="nc" id="L399">                              int arcWidth, int arcHeight) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14474);</span>
+<span class="nc" id="L400">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14475);RoundRectangle2D rect = new RoundRectangle2D.Float(x, y, width, height, arcWidth, arcHeight);</span>
+<span class="nc" id="L401">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14476);fill(rect);</span>
+<span class="nc" id="L402">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -419,10 +419,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param       height the height of the oval to be drawn.
      * @see         java.awt.Graphics#fillOval
      */
-    public void drawOval(int x, int y, int width, int height) {
-<span class="nc" id="L423">        Ellipse2D oval = new Ellipse2D.Float(x, y, width, height);</span>
-<span class="nc" id="L424">        draw(oval);</span>
-<span class="nc" id="L425">    }</span>
+<span class="nc" id="L422">    public void drawOval(int x, int y, int width, int height) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14477);</span>
+<span class="nc" id="L423">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14478);Ellipse2D oval = new Ellipse2D.Float(x, y, width, height);</span>
+<span class="nc" id="L424">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14479);draw(oval);</span>
+<span class="nc" id="L425">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -436,10 +436,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param       height the height of the oval to be filled.
      * @see         java.awt.Graphics#drawOval
      */
-    public void fillOval(int x, int y, int width, int height) {
-<span class="nc" id="L440">        Ellipse2D oval = new Ellipse2D.Float(x, y, width, height);</span>
-<span class="nc" id="L441">        fill(oval);</span>
-<span class="nc" id="L442">    }</span>
+<span class="nc" id="L439">    public void fillOval(int x, int y, int width, int height) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14480);</span>
+<span class="nc" id="L440">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14481);Ellipse2D oval = new Ellipse2D.Float(x, y, width, height);</span>
+<span class="nc" id="L441">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14482);fill(oval);</span>
+<span class="nc" id="L442">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -480,10 +480,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#fillArc
      */
     public void drawArc(int x, int y, int width, int height,
-                        int startAngle, int arcAngle) {
-<span class="nc" id="L484">        Arc2D arc = new Arc2D.Float(x, y, width, height, startAngle, arcAngle, Arc2D.OPEN);</span>
-<span class="nc" id="L485">        draw(arc);</span>
-<span class="nc" id="L486">    }</span>
+<span class="nc" id="L483">                        int startAngle, int arcAngle) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14483);</span>
+<span class="nc" id="L484">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14484);Arc2D arc = new Arc2D.Float(x, y, width, height, startAngle, arcAngle, Arc2D.OPEN);</span>
+<span class="nc" id="L485">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14485);draw(arc);</span>
+<span class="nc" id="L486">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -523,10 +523,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#drawArc
      */
     public void fillArc(int x, int y, int width, int height,
-                        int startAngle, int arcAngle) {
-<span class="nc" id="L527">        Arc2D arc = new Arc2D.Float(x, y, width, height, startAngle, arcAngle, Arc2D.PIE);</span>
-<span class="nc" id="L528">        fill(arc);</span>
-<span class="nc" id="L529">    }</span>
+<span class="nc" id="L526">                        int startAngle, int arcAngle) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14486);</span>
+<span class="nc" id="L527">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14487);Arc2D arc = new Arc2D.Float(x, y, width, height, startAngle, arcAngle, Arc2D.PIE);</span>
+<span class="nc" id="L528">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14488);fill(arc);</span>
+<span class="nc" id="L529">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -542,17 +542,17 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @since       JDK1.1
      */
     public void drawPolyline(int[] xPoints, int[] yPoints,
-                             int nPoints) {
-<span class="nc bnc" id="L546" title="All 2 branches missed.">        if (nPoints &gt; 0) {</span>
-<span class="nc" id="L547">            GeneralPath path = new GeneralPath();</span>
-<span class="nc" id="L548">            path.moveTo(xPoints[0], yPoints[0]);</span>
-<span class="nc bnc" id="L549" title="All 2 branches missed.">            for (int i = 1; i &lt; nPoints; i++) {</span>
-<span class="nc" id="L550">                path.lineTo(xPoints[i], yPoints[i]);</span>
+<span class="nc" id="L545">                             int nPoints) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14489);</span>
+<span class="nc bnc" id="L546" title="All 10 branches missed.">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14490);if ((((nPoints &gt; 0)&amp;&amp;(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14491)!=0|true))||(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14492)==0&amp;false))) {{</span>
+<span class="nc" id="L547">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14493);GeneralPath path = new GeneralPath();</span>
+<span class="nc" id="L548">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14494);path.moveTo(xPoints[0], yPoints[0]);</span>
+<span class="nc bnc" id="L549" title="All 10 branches missed.">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14495);for (int i = 1; (((i &lt; nPoints)&amp;&amp;(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14496)!=0|true))||(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14497)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L550">                __CLR4_5_2b4tb4tm68iyhqq.R.inc(14498);path.lineTo(xPoints[i], yPoints[i]);</span>
             }
 
-<span class="nc" id="L553">            draw(path);</span>
+<span class="nc" id="L553">            }__CLR4_5_2b4tb4tm68iyhqq.R.inc(14499);draw(path);</span>
         }
-<span class="nc" id="L555">    }</span>
+<span class="nc" id="L555">    }}finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Draws a closed polygon defined by
@@ -574,10 +574,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see          java.awt.Graphics#drawPolyline
      */
     public void drawPolygon(int[] xPoints, int[] yPoints,
-                            int nPoints) {
-<span class="nc" id="L578">        Polygon polygon = new Polygon(xPoints, yPoints, nPoints);</span>
-<span class="nc" id="L579">        draw(polygon);</span>
-<span class="nc" id="L580">    }</span>
+<span class="nc" id="L577">                            int nPoints) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14500);</span>
+<span class="nc" id="L578">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14501);Polygon polygon = new Polygon(xPoints, yPoints, nPoints);</span>
+<span class="nc" id="L579">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14502);draw(polygon);</span>
+<span class="nc" id="L580">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -601,10 +601,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see          java.awt.Graphics#drawPolygon(int[], int[], int)
      */
     public void fillPolygon(int[] xPoints, int[] yPoints,
-                            int nPoints) {
-<span class="nc" id="L605">        Polygon polygon = new Polygon(xPoints, yPoints, nPoints);</span>
-<span class="nc" id="L606">        fill(polygon);</span>
-<span class="nc" id="L607">    }</span>
+<span class="nc" id="L604">                            int nPoints) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14503);</span>
+<span class="nc" id="L605">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14504);Polygon polygon = new Polygon(xPoints, yPoints, nPoints);</span>
+<span class="nc" id="L606">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14505);fill(polygon);</span>
+<span class="nc" id="L607">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Draws the text given by the specified string, using this
@@ -617,9 +617,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#drawBytes
      * @see         java.awt.Graphics#drawChars
      */
-    public void drawString(String str, int x, int y) {
-<span class="nc" id="L621">        drawString(str, (float)x, (float)y);</span>
-<span class="nc" id="L622">    }</span>
+<span class="nc" id="L620">    public void drawString(String str, int x, int y) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14506);</span>
+<span class="nc" id="L621">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14507);drawString(str, (float)x, (float)y);</span>
+<span class="nc" id="L622">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Generic implementation for drawing attributed strings using TextLayout.
@@ -630,16 +630,16 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see java.awt.Graphics2D#drawString (java.text.AttributedCharacterIterator,
      *      float, float)
      */
-    public void drawString(AttributedCharacterIterator iterator, float x, float y) {
-<span class="nc bnc" id="L634" title="All 2 branches missed.">        if (inPossibleRecursion) {</span>
-<span class="nc" id="L635">            System.err.println(&quot;Called itself: drawString(AttributedCharacterIterator)&quot;);</span>
-        } else {
-<span class="nc" id="L637">            inPossibleRecursion = true;</span>
-<span class="nc" id="L638">            TextLayout layout = new TextLayout(iterator, getFontRenderContext());</span>
-<span class="nc" id="L639">            layout.draw(this, x, y);</span>
-<span class="nc" id="L640">            inPossibleRecursion = false;</span>
+<span class="nc" id="L633">    public void drawString(AttributedCharacterIterator iterator, float x, float y) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14508);</span>
+<span class="nc bnc" id="L634" title="All 10 branches missed.">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14509);if ((((inPossibleRecursion)&amp;&amp;(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14510)!=0|true))||(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14511)==0&amp;false))) {{</span>
+<span class="nc" id="L635">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14512);System.err.println(&quot;Called itself: drawString(AttributedCharacterIterator)&quot;);</span>
+        } }else {{
+<span class="nc" id="L637">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14513);inPossibleRecursion = true;</span>
+<span class="nc" id="L638">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14514);TextLayout layout = new TextLayout(iterator, getFontRenderContext());</span>
+<span class="nc" id="L639">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14515);layout.draw(this, x, y);</span>
+<span class="nc" id="L640">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14516);inPossibleRecursion = false;</span>
         }
-<span class="nc" id="L642">    }</span>
+<span class="nc" id="L642">    }}finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Draws the text given by the specified iterator, using this
@@ -654,9 +654,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see         java.awt.Graphics#drawChars
      */
     public void drawString(AttributedCharacterIterator iterator,
-                           int x, int y) {
-<span class="nc" id="L658">        drawString(iterator, (float)x, (float)y);</span>
-<span class="nc" id="L659">    }</span>
+<span class="nc" id="L657">                           int x, int y) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14517);</span>
+<span class="nc" id="L658">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14518);drawString(iterator, (float)x, (float)y);</span>
+<span class="nc" id="L659">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Draws as much of the specified image as is currently available.
@@ -690,10 +690,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      */
     public boolean drawImage(Image img, int x, int y,
                              Color bgcolor,
-                             ImageObserver observer) {
-<span class="nc" id="L694">        return drawImage(img, x, y, img.getWidth(null), img.getHeight(null),</span>
+<span class="nc" id="L693">                             ImageObserver observer) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14519);</span>
+<span class="nc" id="L694">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14520);return drawImage(img, x, y, img.getWidth(null), img.getHeight(null),</span>
                          bgcolor, observer);
-    }
+<span class="nc" id="L696">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -737,15 +737,15 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
     public boolean drawImage(Image img, int x, int y,
                              int width, int height,
                              Color bgcolor,
-                             ImageObserver observer) {
-<span class="nc" id="L741">        Paint paint = gc.getPaint();</span>
-<span class="nc" id="L742">        gc.setPaint(bgcolor);</span>
-<span class="nc" id="L743">        fillRect(x, y, width, height);</span>
-<span class="nc" id="L744">        gc.setPaint(paint);</span>
-<span class="nc" id="L745">        drawImage(img, x, y, width, height, observer);</span>
+<span class="nc" id="L740">                             ImageObserver observer) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14521);</span>
+<span class="nc" id="L741">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14522);Paint paint = gc.getPaint();</span>
+<span class="nc" id="L742">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14523);gc.setPaint(bgcolor);</span>
+<span class="nc" id="L743">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14524);fillRect(x, y, width, height);</span>
+<span class="nc" id="L744">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14525);gc.setPaint(paint);</span>
+<span class="nc" id="L745">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14526);drawImage(img, x, y, width, height, observer);</span>
 
-<span class="nc" id="L747">        return true;</span>
-    }
+<span class="nc" id="L747">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14527);return true;</span>
+<span class="nc" id="L748">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Draws as much of the specified area of the specified image as is
@@ -797,16 +797,16 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
     public boolean drawImage(Image img,
                              int dx1, int dy1, int dx2, int dy2,
                              int sx1, int sy1, int sx2, int sy2,
-                             ImageObserver observer) {
-<span class="nc" id="L801">        BufferedImage src = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);</span>
-<span class="nc" id="L802">        Graphics2D g = src.createGraphics();</span>
-<span class="nc" id="L803">        g.drawImage(img, 0, 0, null);</span>
-<span class="nc" id="L804">        g.dispose();</span>
+<span class="nc" id="L800">                             ImageObserver observer) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14528);</span>
+<span class="nc" id="L801">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14529);BufferedImage src = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);</span>
+<span class="nc" id="L802">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14530);Graphics2D g = src.createGraphics();</span>
+<span class="nc" id="L803">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14531);g.drawImage(img, 0, 0, null);</span>
+<span class="nc" id="L804">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14532);g.dispose();</span>
 
-<span class="nc" id="L806">        src = src.getSubimage(sx1, sy1, sx2 - sx1, sy2 - sy1);</span>
+<span class="nc" id="L806">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14533);src = src.getSubimage(sx1, sy1, sx2 - sx1, sy2 - sy1);</span>
 
-<span class="nc" id="L808">        return drawImage(src, dx1, dy1, dx2 - dx1, dy2 - dy1, observer);</span>
-    }
+<span class="nc" id="L808">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14534);return drawImage(src, dx1, dy1, dx2 - dx1, dy2 - dy1, observer);</span>
+<span class="nc" id="L809">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -866,13 +866,13 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
                              int dx1, int dy1, int dx2, int dy2,
                              int sx1, int sy1, int sx2, int sy2,
                              Color bgcolor,
-                             ImageObserver observer) {
-<span class="nc" id="L870">        Paint paint = gc.getPaint();</span>
-<span class="nc" id="L871">        gc.setPaint(bgcolor);</span>
-<span class="nc" id="L872">        fillRect(dx1, dy1, dx2 - dx1, dy2 - dy1);</span>
-<span class="nc" id="L873">        gc.setPaint(paint);</span>
-<span class="nc" id="L874">        return drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);</span>
-    }
+<span class="nc" id="L869">                             ImageObserver observer) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14535);</span>
+<span class="nc" id="L870">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14536);Paint paint = gc.getPaint();</span>
+<span class="nc" id="L871">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14537);gc.setPaint(bgcolor);</span>
+<span class="nc" id="L872">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14538);fillRect(dx1, dy1, dx2 - dx1, dy2 - dy1);</span>
+<span class="nc" id="L873">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14539);gc.setPaint(paint);</span>
+<span class="nc" id="L874">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14540);return drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);</span>
+<span class="nc" id="L875">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -902,34 +902,34 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      */
     public boolean drawImage(Image img,
                              AffineTransform xform,
-                             ImageObserver obs) {
-<span class="nc" id="L906">        boolean retVal = true;</span>
-<span class="nc bnc" id="L907" title="All 2 branches missed.">        if (xform == null) {</span>
-<span class="nc" id="L908">            xform = new AffineTransform();</span>
+<span class="nc" id="L905">                             ImageObserver obs) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14541);</span>
+<span class="nc" id="L906">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14542);boolean retVal = true;</span>
+<span class="nc bnc" id="L907" title="All 10 branches missed.">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14543);if ((((xform == null)&amp;&amp;(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14544)!=0|true))||(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14545)==0&amp;false))) {{</span>
+<span class="nc" id="L908">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14546);xform = new AffineTransform();</span>
         }
-<span class="nc bnc" id="L910" title="All 2 branches missed.">        if (xform.getDeterminant() != 0) {</span>
-<span class="nc" id="L911">            AffineTransform inverseTransform = null;</span>
-            try {
-<span class="nc" id="L913">                inverseTransform = xform.createInverse();</span>
+<span class="nc bnc" id="L910" title="All 10 branches missed.">        }__CLR4_5_2b4tb4tm68iyhqq.R.inc(14547);if ((((xform.getDeterminant() != 0)&amp;&amp;(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14548)!=0|true))||(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14549)==0&amp;false))) {{</span>
+<span class="nc" id="L911">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14550);AffineTransform inverseTransform = null;</span>
+<span class="nc" id="L912">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14551);try {</span>
+<span class="nc" id="L913">                __CLR4_5_2b4tb4tm68iyhqq.R.inc(14552);inverseTransform = xform.createInverse();</span>
 <span class="nc" id="L914">            }   catch (NoninvertibleTransformException e) {</span>
                                 // Should never happen since we checked the
                                 // matrix determinant
-<span class="nc" id="L917">                throw new RuntimeException(e);</span>
+<span class="nc" id="L917">                __CLR4_5_2b4tb4tm68iyhqq.R.inc(14553);throw new RuntimeException(e);</span>
 <span class="nc" id="L918">            }</span>
 
-<span class="nc" id="L920">            gc.transform(xform);</span>
-<span class="nc" id="L921">            retVal = drawImage(img, 0, 0, null);</span>
-<span class="nc" id="L922">            gc.transform(inverseTransform);</span>
-<span class="nc" id="L923">        } else {</span>
-<span class="nc" id="L924">            AffineTransform savTransform = new AffineTransform(gc.getTransform());</span>
-<span class="nc" id="L925">            gc.transform(xform);</span>
-<span class="nc" id="L926">            retVal = drawImage(img, 0, 0, null);</span>
-<span class="nc" id="L927">            gc.setTransform(savTransform);</span>
+<span class="nc" id="L920">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14554);gc.transform(xform);</span>
+<span class="nc" id="L921">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14555);retVal = drawImage(img, 0, 0, null);</span>
+<span class="nc" id="L922">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14556);gc.transform(inverseTransform);</span>
+<span class="nc" id="L923">        } }else {{</span>
+<span class="nc" id="L924">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14557);AffineTransform savTransform = new AffineTransform(gc.getTransform());</span>
+<span class="nc" id="L925">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14558);gc.transform(xform);</span>
+<span class="nc" id="L926">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14559);retVal = drawImage(img, 0, 0, null);</span>
+<span class="nc" id="L927">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14560);gc.setTransform(savTransform);</span>
         }
 
-<span class="nc" id="L930">        return retVal;</span>
+<span class="nc" id="L930">        }__CLR4_5_2b4tb4tm68iyhqq.R.inc(14561);return retVal;</span>
 
-    }
+<span class="nc" id="L932">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -956,10 +956,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
     public void drawImage(BufferedImage img,
                           BufferedImageOp op,
                           int x,
-                          int y) {
-<span class="nc" id="L960">        img = op.filter(img, null);</span>
-<span class="nc" id="L961">        drawImage(img, x, y, null);</span>
-<span class="nc" id="L962">    }</span>
+<span class="nc" id="L959">                          int y) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14562);</span>
+<span class="nc" id="L960">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14563);img = op.filter(img, null);</span>
+<span class="nc" id="L961">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14564);drawImage(img, x, y, null);</span>
+<span class="nc" id="L962">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
 
@@ -989,10 +989,10 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see #setComposite
      * @see #setClip(Shape)
      */
-    public void drawGlyphVector(GlyphVector g, float x, float y) {
-<span class="nc" id="L993">        Shape glyphOutline = g.getOutline(x, y);</span>
-<span class="nc" id="L994">        fill(glyphOutline);</span>
-<span class="nc" id="L995">    }</span>
+<span class="nc" id="L992">    public void drawGlyphVector(GlyphVector g, float x, float y) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14565);</span>
+<span class="nc" id="L993">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14566);Shape glyphOutline = g.getOutline(x, y);</span>
+<span class="nc" id="L994">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14567);fill(glyphOutline);</span>
+<span class="nc" id="L995">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Checks whether or not the specified &lt;code&gt;Shape&lt;/code&gt; intersects
@@ -1025,15 +1025,15 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      */
     public boolean hit(Rectangle rect,
                        Shape s,
-                       boolean onStroke) {
-<span class="nc bnc" id="L1029" title="All 2 branches missed.">        if (onStroke) {</span>
-<span class="nc" id="L1030">            s = gc.getStroke().createStrokedShape(s);</span>
+<span class="nc" id="L1028">                       boolean onStroke) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14568);</span>
+<span class="nc bnc" id="L1029" title="All 10 branches missed.">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14569);if ((((onStroke)&amp;&amp;(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14570)!=0|true))||(__CLR4_5_2b4tb4tm68iyhqq.R.iget(14571)==0&amp;false))) {{</span>
+<span class="nc" id="L1030">            __CLR4_5_2b4tb4tm68iyhqq.R.inc(14572);s = gc.getStroke().createStrokedShape(s);</span>
         }
 
-<span class="nc" id="L1033">        s = gc.getTransform().createTransformedShape(s);</span>
+<span class="nc" id="L1033">        }__CLR4_5_2b4tb4tm68iyhqq.R.inc(14573);s = gc.getTransform().createTransformedShape(s);</span>
 
-<span class="nc" id="L1035">        return s.intersects(rect);</span>
-    }
+<span class="nc" id="L1035">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14574);return s.intersects(rect);</span>
+<span class="nc" id="L1036">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Sets the &lt;code&gt;Composite&lt;/code&gt; for the &lt;code&gt;Graphics2D&lt;/code&gt; context.
@@ -1059,9 +1059,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see java.awt.Graphics#setPaintMode
      * @see java.awt.AlphaComposite
      */
-    public void setComposite(Composite comp) {
-<span class="fc" id="L1063">        gc.setComposite(comp);</span>
-<span class="fc" id="L1064">    }</span>
+<span class="fc" id="L1062">    public void setComposite(Composite comp) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14575);</span>
+<span class="fc" id="L1063">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14576);gc.setComposite(comp);</span>
+<span class="fc" id="L1064">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1074,9 +1074,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * color during the rendering process, or &lt;code&gt;null&lt;/code&gt;
      * @see java.awt.Graphics#setColor
      */
-    public void setPaint(Paint paint) {
-<span class="fc" id="L1078">        gc.setPaint(paint);</span>
-<span class="fc" id="L1079">    }</span>
+<span class="fc" id="L1077">    public void setPaint(Paint paint) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14577);</span>
+<span class="fc" id="L1078">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14578);gc.setPaint(paint);</span>
+<span class="fc" id="L1079">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1084,9 +1084,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param s the &lt;code&gt;Stroke&lt;/code&gt; object to be used to stroke a
      * &lt;code&gt;Shape&lt;/code&gt; during the rendering process
      */
-    public void setStroke(Stroke s) {
-<span class="nc" id="L1088">        gc.setStroke(s);</span>
-<span class="nc" id="L1089">    }</span>
+<span class="nc" id="L1087">    public void setStroke(Stroke s) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14579);</span>
+<span class="nc" id="L1088">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14580);gc.setStroke(s);</span>
+<span class="nc" id="L1089">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1100,9 +1100,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * hint category.
      * @see RenderingHints
      */
-    public void setRenderingHint(RenderingHints.Key hintKey, Object hintValue) {
-<span class="nc" id="L1104">        gc.setRenderingHint(hintKey, hintValue);</span>
-<span class="nc" id="L1105">    }</span>
+<span class="nc" id="L1103">    public void setRenderingHint(RenderingHints.Key hintKey, Object hintValue) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14581);</span>
+<span class="nc" id="L1104">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14582);gc.setRenderingHint(hintKey, hintValue);</span>
+<span class="nc" id="L1105">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1117,9 +1117,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * &lt;code&gt;RenderingHints&lt;/code&gt; class.
      * @see RenderingHints
      */
-    public Object getRenderingHint(RenderingHints.Key hintKey) {
-<span class="nc" id="L1121">        return gc.getRenderingHint(hintKey);</span>
-    }
+<span class="nc" id="L1120">    public Object getRenderingHint(RenderingHints.Key hintKey) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14583);</span>
+<span class="nc" id="L1121">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14584);return gc.getRenderingHint(hintKey);</span>
+<span class="nc" id="L1122">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1135,9 +1135,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param hints the rendering hints to be set
      * @see RenderingHints
      */
-    public void setRenderingHints(Map hints) {
-<span class="nc" id="L1139">        gc.setRenderingHints(hints);</span>
-<span class="nc" id="L1140">    }</span>
+<span class="nc" id="L1138">    public void setRenderingHints(Map hints) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14585);</span>
+<span class="nc" id="L1139">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14586);gc.setRenderingHints(hints);</span>
+<span class="nc" id="L1140">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1154,9 +1154,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param hints the rendering hints to be set
      * @see RenderingHints
      */
-    public void addRenderingHints(Map hints) {
-<span class="nc" id="L1158">        gc.addRenderingHints(hints);</span>
-<span class="nc" id="L1159">    }</span>
+<span class="nc" id="L1157">    public void addRenderingHints(Map hints) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14587);</span>
+<span class="nc" id="L1158">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14588);gc.addRenderingHints(hints);</span>
+<span class="nc" id="L1159">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1171,9 +1171,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * that contains the current preferences.
      * @see RenderingHints
      */
-    public RenderingHints getRenderingHints() {
-<span class="nc" id="L1175">        return gc.getRenderingHints();</span>
-    }
+<span class="nc" id="L1174">    public RenderingHints getRenderingHints() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14589);</span>
+<span class="nc" id="L1175">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14590);return gc.getRenderingHints();</span>
+<span class="nc" id="L1176">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Concatenates the current
@@ -1191,9 +1191,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param tx the distance to translate along the x-axis
      * @param ty the distance to translate along the y-axis
      */
-    public void translate(double tx, double ty) {
-<span class="nc" id="L1195">        gc.translate(tx, ty);</span>
-<span class="nc" id="L1196">    }</span>
+<span class="nc" id="L1194">    public void translate(double tx, double ty) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14591);</span>
+<span class="nc" id="L1195">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14592);gc.translate(tx, ty);</span>
+<span class="nc" id="L1196">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1212,9 +1212,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * x axis toward the positive y axis.
      * @param theta the angle of rotation in radians
      */
-    public void rotate(double theta) {
-<span class="nc" id="L1216">        gc.rotate(theta);</span>
-<span class="nc" id="L1217">    }</span>
+<span class="nc" id="L1215">    public void rotate(double theta) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14593);</span>
+<span class="nc" id="L1216">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14594);gc.rotate(theta);</span>
+<span class="nc" id="L1217">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1236,9 +1236,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param x the x coordinate of the origin of the rotation
      * @param y the y coordinate of the origin of the rotation
      */
-    public void rotate(double theta, double x, double y) {
-<span class="nc" id="L1240">        gc.rotate(theta, x, y);</span>
-<span class="nc" id="L1241">    }</span>
+<span class="nc" id="L1239">    public void rotate(double theta, double x, double y) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14595);</span>
+<span class="nc" id="L1240">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14596);gc.rotate(theta, x, y);</span>
+<span class="nc" id="L1241">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1260,9 +1260,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * rendering operations are multiplied relative to previous
      * rendering operations.
      */
-    public void scale(double sx, double sy) {
-<span class="nc" id="L1264">        gc.scale(sx, sy);</span>
-<span class="nc" id="L1265">    }</span>
+<span class="nc" id="L1263">    public void scale(double sx, double sy) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14597);</span>
+<span class="nc" id="L1264">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14598);gc.scale(sx, sy);</span>
+<span class="nc" id="L1265">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Concatenates the current &lt;code&gt;Graphics2D&lt;/code&gt;
@@ -1282,9 +1282,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @param shy the multiplier by which coordinates are shifted in
      * the positive Y axis direction as a function of their X coordinate
      */
-    public void shear(double shx, double shy) {
-<span class="nc" id="L1286">        gc.shear(shx, shy);</span>
-<span class="nc" id="L1287">    }</span>
+<span class="nc" id="L1285">    public void shear(double shx, double shy) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14599);</span>
+<span class="nc" id="L1286">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14600);gc.shear(shx, shy);</span>
+<span class="nc" id="L1287">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Composes an &lt;code&gt;AffineTransform&lt;/code&gt; object with the
@@ -1303,9 +1303,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see #setTransform
      * @see AffineTransform
      */
-    public void transform(AffineTransform tx) {
-<span class="nc" id="L1307">        gc.transform(tx);</span>
-<span class="nc" id="L1308">    }</span>
+<span class="nc" id="L1306">    public void transform(AffineTransform tx) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14601);</span>
+<span class="nc" id="L1307">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14602);gc.transform(tx);</span>
+<span class="nc" id="L1308">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * Sets the &lt;code&gt;Transform&lt;/code&gt; in the &lt;code&gt;Graphics2D&lt;/code&gt;
@@ -1315,9 +1315,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see #transform
      * @see AffineTransform
      */
-    public void setTransform(AffineTransform tx) {
-<span class="fc" id="L1319">        gc.setTransform(tx);</span>
-<span class="fc" id="L1320">    }</span>
+<span class="fc" id="L1318">    public void setTransform(AffineTransform tx) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14603);</span>
+<span class="fc" id="L1319">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14604);gc.setTransform(tx);</span>
+<span class="fc" id="L1320">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1328,9 +1328,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see #transform
      * @see #setTransform
      */
-    public AffineTransform getTransform() {
-<span class="fc" id="L1332">        return gc.getTransform();</span>
-    }
+<span class="fc" id="L1331">    public AffineTransform getTransform() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14605);</span>
+<span class="fc" id="L1332">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14606);return gc.getTransform();</span>
+<span class="fc" id="L1333">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1341,9 +1341,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see #setPaint
      * @see java.awt.Graphics#setColor
      */
-    public Paint getPaint() {
-<span class="fc" id="L1345">        return gc.getPaint();</span>
-    }
+<span class="fc" id="L1344">    public Paint getPaint() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14607);</span>
+<span class="fc" id="L1345">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14608);return gc.getPaint();</span>
+<span class="fc" id="L1346">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1353,9 +1353,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      *              which defines a compositing style.
      * @see #setComposite
      */
-    public Composite getComposite() {
-<span class="fc" id="L1357">        return gc.getComposite();</span>
-    }
+<span class="fc" id="L1356">    public Composite getComposite() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14609);</span>
+<span class="fc" id="L1357">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14610);return gc.getComposite();</span>
+<span class="fc" id="L1358">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1374,9 +1374,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see #getBackground
      * @see java.awt.Graphics#clearRect
      */
-    public void setBackground(Color color) {
-<span class="nc" id="L1378">        gc.setBackground(color);</span>
-<span class="nc" id="L1379">    }</span>
+<span class="nc" id="L1377">    public void setBackground(Color color) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14611);</span>
+<span class="nc" id="L1378">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14612);gc.setBackground(color);</span>
+<span class="nc" id="L1379">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1385,9 +1385,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * which defines the background color.
      * @see #setBackground
      */
-    public Color getBackground() {
-<span class="nc" id="L1389">        return gc.getBackground();</span>
-    }
+<span class="nc" id="L1388">    public Color getBackground() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14613);</span>
+<span class="nc" id="L1389">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14614);return gc.getBackground();</span>
+<span class="nc" id="L1390">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1397,9 +1397,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      *                 which defines the line style.
      * @see #setStroke
      */
-    public Stroke getStroke() {
-<span class="fc" id="L1401">        return gc.getStroke();</span>
-    }
+<span class="fc" id="L1400">    public Stroke getStroke() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14615);</span>
+<span class="fc" id="L1401">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14616);return gc.getStroke();</span>
+<span class="fc" id="L1402">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1421,9 +1421,9 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      *          &lt;code&gt;Clip&lt;/code&gt;.  If &lt;code&gt;s&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;,
      *          this method clears the current &lt;code&gt;Clip&lt;/code&gt;.
      */
-    public void clip(Shape s) {
-<span class="nc" id="L1425">        gc.clip(s);</span>
-<span class="nc" id="L1426">    }</span>
+<span class="nc" id="L1424">    public void clip(Shape s) {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14617);</span>
+<span class="nc" id="L1425">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14618);gc.clip(s);</span>
+<span class="nc" id="L1426">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
 
     /**
@@ -1447,15 +1447,15 @@ public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable
      * @see java.awt.font.TextLayout
      * @since     JDK1.2
      */
-    public FontRenderContext getFontRenderContext() {
-<span class="fc" id="L1451">        return gc.getFontRenderContext();</span>
-    }
+<span class="fc" id="L1450">    public FontRenderContext getFontRenderContext() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14619);</span>
+<span class="fc" id="L1451">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14620);return gc.getFontRenderContext();</span>
+<span class="fc" id="L1452">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 
     /**
      * @return the {@link GraphicContext} of this &lt;code&gt;Graphics2D&lt;/code&gt;.
      */
-    public GraphicContext getGraphicContext() {
-<span class="nc" id="L1458">        return gc;</span>
-    }
+<span class="nc" id="L1457">    public GraphicContext getGraphicContext() {try{__CLR4_5_2b4tb4tm68iyhqq.R.inc(14621);</span>
+<span class="nc" id="L1458">        __CLR4_5_2b4tb4tm68iyhqq.R.inc(14622);return gc;</span>
+<span class="nc" id="L1459">    }finally{__CLR4_5_2b4tb4tm68iyhqq.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

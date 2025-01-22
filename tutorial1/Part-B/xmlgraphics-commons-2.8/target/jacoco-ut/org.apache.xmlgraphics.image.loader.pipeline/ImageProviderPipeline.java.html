@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageProviderPipeline.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.pipeline</a> &gt; <span class="el_source">ImageProviderPipeline.java</span></div><h1>ImageProviderPipeline.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageProviderPipeline.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.pipeline</a> &gt; <span class="el_source">ImageProviderPipeline.java</span></div><h1>ImageProviderPipeline.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -46,7 +46,7 @@ import org.apache.xmlgraphics.image.loader.util.Penalty;
  * Represents a pipeline of ImageConverters with an ImageLoader at the beginning of the
  * pipeline.
  */
-public class ImageProviderPipeline {
+<span class="pc bpc" id="L49" title="3 of 4 branches missed.">public class ImageProviderPipeline {public static class __CLR4_5_29bp9bpm68iyhhv{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,12245,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /** logger */
 <span class="fc" id="L52">    protected static final Log log = LogFactory.getLog(ImageProviderPipeline.class);</span>
@@ -60,26 +60,26 @@ public class ImageProviderPipeline {
      * @param cache the image cache (may be null if no caching is desired)
      * @param loader the image loader to drive the pipeline with
      */
-<span class="fc" id="L63">    public ImageProviderPipeline(ImageCache cache, ImageLoader loader) {</span>
-<span class="fc" id="L64">        this.cache = cache;</span>
-<span class="fc" id="L65">        setImageLoader(loader);</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L63">    public ImageProviderPipeline(ImageCache cache, ImageLoader loader) {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12085);</span>
+<span class="fc" id="L64">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12086);this.cache = cache;</span>
+<span class="fc" id="L65">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12087);setImageLoader(loader);</span>
+<span class="fc" id="L66">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * Constructor for operation without caching.
      * @param loader the image loader to drive the pipeline with
      */
     public ImageProviderPipeline(ImageLoader loader) {
-<span class="nc" id="L73">        this(null, loader);</span>
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L73">        this(null, loader);__CLR4_5_29bp9bpm68iyhhv.R.inc(12089);try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12088);</span>
+<span class="nc" id="L74">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * Default constructor without caching and without an ImageLoader (or the ImageLoader may
      * be set later).
      */
     public ImageProviderPipeline() {
-<span class="nc" id="L81">        this(null, null);</span>
-<span class="nc" id="L82">    }</span>
+<span class="nc" id="L81">        this(null, null);__CLR4_5_29bp9bpm68iyhhv.R.inc(12091);try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12090);</span>
+<span class="nc" id="L82">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * Executes the image converter pipeline. First, the image indicated by the ImageInfo instance
@@ -94,9 +94,9 @@ public class ImageProviderPipeline {
      * @throws IOException if an I/O error occurs
      */
     public Image execute(ImageInfo info, Map hints, ImageSessionContext context)
-                throws ImageException, IOException {
-<span class="fc" id="L98">        return execute(info, null, hints, context);</span>
-    }
+<span class="fc" id="L97">                throws ImageException, IOException {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12092);</span>
+<span class="fc" id="L98">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12093);return execute(info, null, hints, context);</span>
+<span class="fc" id="L99">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * Executes the image converter pipeline. First, the image indicated by the ImageInfo instance
@@ -113,98 +113,98 @@ public class ImageProviderPipeline {
      * @throws IOException if an I/O error occurs
      */
     public Image execute(ImageInfo info, Image originalImage,
-            Map hints, ImageSessionContext context) throws ImageException, IOException {
-<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (hints == null) {</span>
-<span class="fc" id="L118">            hints = Collections.EMPTY_MAP;</span>
+<span class="fc" id="L116">            Map hints, ImageSessionContext context) throws ImageException, IOException {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12094);</span>
+<span class="pc bpc" id="L117" title="4 of 10 branches missed.">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12095);if ((((hints == null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12096)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12097)==0&amp;false))) {{</span>
+<span class="fc" id="L118">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12098);hints = Collections.EMPTY_MAP;</span>
         }
-<span class="fc" id="L120">        long start = System.currentTimeMillis();</span>
-<span class="fc" id="L121">        Image img = null;</span>
+<span class="fc" id="L120">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12099);long start = System.currentTimeMillis();</span>
+<span class="fc" id="L121">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12100);Image img = null;</span>
 
         //Remember the last image in the pipeline that is cacheable and cache that.
-<span class="fc" id="L124">        Image lastCacheableImage = null;</span>
+<span class="fc" id="L124">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12101);Image lastCacheableImage = null;</span>
 
-<span class="fc" id="L126">        int converterCount = converters.size();</span>
-<span class="fc" id="L127">        int startingPoint = 0;</span>
-<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (cache != null) {</span>
-<span class="fc bfc" id="L129" title="All 2 branches covered.">            for (int i = converterCount - 1; i &gt;= 0; i--) {</span>
-<span class="fc" id="L130">                ImageConverter converter = getConverter(i);</span>
-<span class="fc" id="L131">                ImageFlavor flavor = converter.getTargetFlavor();</span>
-<span class="fc" id="L132">                img = cache.getImage(info, flavor);</span>
-<span class="pc bpc" id="L133" title="1 of 2 branches missed.">                if (img != null) {</span>
-<span class="nc" id="L134">                    startingPoint = i + 1;</span>
-<span class="nc" id="L135">                    break;</span>
+<span class="fc" id="L126">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12102);int converterCount = converters.size();</span>
+<span class="fc" id="L127">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12103);int startingPoint = 0;</span>
+<span class="pc bpc" id="L128" title="7 of 10 branches missed.">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12104);if ((((cache != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12105)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12106)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L129" title="4 of 10 branches missed.">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12107);for (int i = converterCount - 1; (((i &gt;= 0)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12108)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12109)==0&amp;false)); i--) {{</span>
+<span class="fc" id="L130">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12110);ImageConverter converter = getConverter(i);</span>
+<span class="fc" id="L131">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12111);ImageFlavor flavor = converter.getTargetFlavor();</span>
+<span class="fc" id="L132">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12112);img = cache.getImage(info, flavor);</span>
+<span class="pc bpc" id="L133" title="7 of 10 branches missed.">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12113);if ((((img != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12114)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12115)==0&amp;false))) {{</span>
+<span class="nc" id="L134">                    __CLR4_5_29bp9bpm68iyhhv.R.inc(12116);startingPoint = i + 1;</span>
+<span class="nc" id="L135">                    __CLR4_5_29bp9bpm68iyhhv.R.inc(12117);break;</span>
                 }
-            }
+            }}
 
-<span class="pc bpc" id="L139" title="1 of 4 branches missed.">            if (img == null &amp;&amp; loader != null) {</span>
+<span class="pc bpc" id="L139" title="5 of 12 branches missed.">            }__CLR4_5_29bp9bpm68iyhhv.R.inc(12118);if ((((img == null &amp;&amp; loader != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12119)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12120)==0&amp;false))) {{</span>
                 //try target flavor of loader from cache
-<span class="fc" id="L141">                ImageFlavor flavor = loader.getTargetFlavor();</span>
-<span class="fc" id="L142">                img = cache.getImage(info, flavor);</span>
+<span class="fc" id="L141">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12121);ImageFlavor flavor = loader.getTargetFlavor();</span>
+<span class="fc" id="L142">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12122);img = cache.getImage(info, flavor);</span>
             }
-        }
-<span class="fc bfc" id="L145" title="All 4 branches covered.">        if (img == null &amp;&amp; originalImage != null) {</span>
-<span class="fc" id="L146">            img = originalImage;</span>
+        }}
+<span class="pc bpc" id="L145" title="4 of 12 branches missed.">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12123);if ((((img == null &amp;&amp; originalImage != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12124)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12125)==0&amp;false))) {{</span>
+<span class="fc" id="L146">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12126);img = originalImage;</span>
         }
 
-<span class="fc" id="L149">        boolean entirelyInCache = true;</span>
-        long duration;
-<span class="pc bpc" id="L151" title="1 of 4 branches missed.">        if (img == null &amp;&amp; loader != null) {</span>
+<span class="fc" id="L149">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12127);boolean entirelyInCache = true;</span>
+<span class="fc" id="L150">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12128);long duration;</span>
+<span class="pc bpc" id="L151" title="5 of 12 branches missed.">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12129);if ((((img == null &amp;&amp; loader != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12130)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12131)==0&amp;false))) {{</span>
             //Load image
-<span class="fc" id="L153">            img = loader.loadImage(info, hints, context);</span>
-<span class="pc bpc" id="L154" title="1 of 2 branches missed.">            if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L155">                duration = System.currentTimeMillis() - start;</span>
-<span class="nc" id="L156">                log.trace(&quot;Image loading using &quot; + loader + &quot; took &quot; + duration + &quot; ms.&quot;);</span>
+<span class="fc" id="L153">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12132);img = loader.loadImage(info, hints, context);</span>
+<span class="pc bpc" id="L154" title="7 of 10 branches missed.">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12133);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12134)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12135)==0&amp;false))) {{</span>
+<span class="nc" id="L155">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12136);duration = System.currentTimeMillis() - start;</span>
+<span class="nc" id="L156">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12137);log.trace(&quot;Image loading using &quot; + loader + &quot; took &quot; + duration + &quot; ms.&quot;);</span>
             }
 
             //Caching
-<span class="fc" id="L160">            entirelyInCache = false;</span>
-<span class="fc bfc" id="L161" title="All 2 branches covered.">            if (img.isCacheable()) {</span>
-<span class="fc" id="L162">                lastCacheableImage = img;</span>
+<span class="fc" id="L160">            }__CLR4_5_29bp9bpm68iyhhv.R.inc(12138);entirelyInCache = false;</span>
+<span class="pc bpc" id="L161" title="4 of 10 branches missed.">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12139);if ((((img.isCacheable())&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12140)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12141)==0&amp;false))) {{</span>
+<span class="fc" id="L162">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12142);lastCacheableImage = img;</span>
             }
-        }
-<span class="pc bpc" id="L165" title="1 of 2 branches missed.">        if (img == null) {</span>
-<span class="nc" id="L166">            throw new ImageException(</span>
+        }}
+<span class="pc bpc" id="L165" title="7 of 10 branches missed.">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12143);if ((((img == null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12144)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12145)==0&amp;false))) {{</span>
+<span class="nc" id="L166">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12146);throw new ImageException(</span>
                     &quot;Pipeline fails. No ImageLoader and no original Image available.&quot;);
         }
 
-<span class="fc bfc" id="L170" title="All 2 branches covered.">        if (converterCount &gt; 0) {</span>
-<span class="fc bfc" id="L171" title="All 2 branches covered.">            for (int i = startingPoint; i &lt; converterCount; i++) {</span>
-<span class="fc" id="L172">                ImageConverter converter = getConverter(i);</span>
-<span class="fc" id="L173">                start = System.currentTimeMillis();</span>
-<span class="fc" id="L174">                img = converter.convert(img, hints);</span>
-<span class="pc bpc" id="L175" title="1 of 2 branches missed.">                if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L176">                    duration = System.currentTimeMillis() - start;</span>
-<span class="nc" id="L177">                    log.trace(&quot;Image conversion using &quot; + converter + &quot; took &quot; + duration + &quot; ms.&quot;);</span>
+<span class="pc bpc" id="L170" title="4 of 10 branches missed.">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12147);if ((((converterCount &gt; 0)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12148)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12149)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L171" title="4 of 10 branches missed.">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12150);for (int i = startingPoint; (((i &lt; converterCount)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12151)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12152)==0&amp;false)); i++) {{</span>
+<span class="fc" id="L172">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12153);ImageConverter converter = getConverter(i);</span>
+<span class="fc" id="L173">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12154);start = System.currentTimeMillis();</span>
+<span class="fc" id="L174">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12155);img = converter.convert(img, hints);</span>
+<span class="pc bpc" id="L175" title="7 of 10 branches missed.">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12156);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12157)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12158)==0&amp;false))) {{</span>
+<span class="nc" id="L176">                    __CLR4_5_29bp9bpm68iyhhv.R.inc(12159);duration = System.currentTimeMillis() - start;</span>
+<span class="nc" id="L177">                    __CLR4_5_29bp9bpm68iyhhv.R.inc(12160);log.trace(&quot;Image conversion using &quot; + converter + &quot; took &quot; + duration + &quot; ms.&quot;);</span>
                 }
 
                 //Caching
-<span class="fc" id="L181">                entirelyInCache = false;</span>
-<span class="fc bfc" id="L182" title="All 2 branches covered.">                if (img.isCacheable()) {</span>
-<span class="fc" id="L183">                    lastCacheableImage = img;</span>
+<span class="fc" id="L181">                }__CLR4_5_29bp9bpm68iyhhv.R.inc(12161);entirelyInCache = false;</span>
+<span class="pc bpc" id="L182" title="4 of 10 branches missed.">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12162);if ((((img.isCacheable())&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12163)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12164)==0&amp;false))) {{</span>
+<span class="fc" id="L183">                    __CLR4_5_29bp9bpm68iyhhv.R.inc(12165);lastCacheableImage = img;</span>
                 }
-            }
-        }
+            }}
+        }}
 
         //Note: Currently we just cache the end result of the pipeline, not all intermediate
         //results as it is expected that the cache hit ration would be rather small.
-<span class="pc bpc" id="L190" title="1 of 4 branches missed.">        if (cache != null &amp;&amp; !entirelyInCache) {</span>
-<span class="fc bfc" id="L191" title="All 2 branches covered.">            if (lastCacheableImage == null) {</span>
+<span class="pc bpc" id="L190" title="5 of 12 branches missed.">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12166);if ((((cache != null &amp;&amp; !entirelyInCache)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12167)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12168)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L191" title="4 of 10 branches missed.">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12169);if ((((lastCacheableImage == null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12170)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12171)==0&amp;false))) {{</span>
                 //Try to make the Image cacheable
-<span class="fc" id="L193">                lastCacheableImage = forceCaching(img);</span>
+<span class="fc" id="L193">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12172);lastCacheableImage = forceCaching(img);</span>
             }
-<span class="pc bpc" id="L195" title="1 of 2 branches missed.">            if (lastCacheableImage != null) {</span>
-<span class="pc bpc" id="L196" title="1 of 2 branches missed.">                if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L197">                    log.trace(&quot;Caching image: &quot; + lastCacheableImage);</span>
+<span class="pc bpc" id="L195" title="7 of 10 branches missed.">            }__CLR4_5_29bp9bpm68iyhhv.R.inc(12173);if ((((lastCacheableImage != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12174)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12175)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L196" title="7 of 10 branches missed.">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12176);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12177)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12178)==0&amp;false))) {{</span>
+<span class="nc" id="L197">                    __CLR4_5_29bp9bpm68iyhhv.R.inc(12179);log.trace(&quot;Caching image: &quot; + lastCacheableImage);</span>
                 }
-<span class="fc" id="L199">                cache.putImage(lastCacheableImage);</span>
+<span class="fc" id="L199">                }__CLR4_5_29bp9bpm68iyhhv.R.inc(12180);cache.putImage(lastCacheableImage);</span>
             }
-        }
-<span class="fc" id="L202">        return img;</span>
-    }
+        }}
+<span class="fc" id="L202">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12181);return img;</span>
+<span class="fc" id="L203">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
-    private ImageConverter getConverter(int index) {
-<span class="fc" id="L206">        return (ImageConverter)converters.get(index);</span>
-    }
+<span class="fc" id="L205">    private ImageConverter getConverter(int index) {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12182);</span>
+<span class="fc" id="L206">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12183);return (ImageConverter)converters.get(index);</span>
+<span class="fc" id="L207">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * In some cases the provided Image is not cacheable, nor is any of the intermediate Image
@@ -216,65 +216,65 @@ public class ImageProviderPipeline {
      * @return the converted, cacheable Image or null if the Image cannot be converted
      * @throws IOException if an I/O error occurs
      */
-    protected Image forceCaching(Image img) throws IOException {
-<span class="pc bpc" id="L220" title="1 of 2 branches missed.">        if (img instanceof ImageRawStream) {</span>
-<span class="fc" id="L221">            ImageRawStream raw = (ImageRawStream)img;</span>
-<span class="pc bpc" id="L222" title="1 of 2 branches missed.">            if (log.isDebugEnabled()) {</span>
-<span class="nc" id="L223">                log.debug(&quot;Image is made cacheable: &quot; + img.getInfo());</span>
+<span class="fc" id="L219">    protected Image forceCaching(Image img) throws IOException {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12184);</span>
+<span class="pc bpc" id="L220" title="7 of 10 branches missed.">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12185);if ((((img instanceof ImageRawStream)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12186)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12187)==0&amp;false))) {{</span>
+<span class="fc" id="L221">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12188);ImageRawStream raw = (ImageRawStream)img;</span>
+<span class="pc bpc" id="L222" title="7 of 10 branches missed.">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12189);if ((((log.isDebugEnabled())&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12190)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12191)==0&amp;false))) {{</span>
+<span class="nc" id="L223">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12192);log.debug(&quot;Image is made cacheable: &quot; + img.getInfo());</span>
             }
 
             //Read the whole stream and hold it in memory so the image can be cached
-<span class="fc" id="L227">            ByteArrayOutputStream baout = new ByteArrayOutputStream();</span>
-<span class="fc" id="L228">            InputStream in = raw.createInputStream();</span>
-            try {
-<span class="fc" id="L230">                IOUtils.copy(in, baout);</span>
+<span class="fc" id="L227">            }__CLR4_5_29bp9bpm68iyhhv.R.inc(12193);ByteArrayOutputStream baout = new ByteArrayOutputStream();</span>
+<span class="fc" id="L228">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12194);InputStream in = raw.createInputStream();</span>
+<span class="fc" id="L229">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12195);try {</span>
+<span class="fc" id="L230">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12196);IOUtils.copy(in, baout);</span>
             } finally {
-<span class="fc" id="L232">                IOUtils.closeQuietly(in);</span>
+<span class="fc" id="L232">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12197);IOUtils.closeQuietly(in);</span>
             }
-<span class="fc" id="L234">            final byte[] data = baout.toByteArray();</span>
-<span class="fc" id="L235">            raw.setInputStreamFactory(new ImageRawStream.ByteArrayStreamFactory(data));</span>
-<span class="fc" id="L236">            return raw;</span>
+<span class="fc" id="L234">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12198);final byte[] data = baout.toByteArray();</span>
+<span class="fc" id="L235">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12199);raw.setInputStreamFactory(new ImageRawStream.ByteArrayStreamFactory(data));</span>
+<span class="fc" id="L236">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12200);return raw;</span>
         }
-<span class="nc" id="L238">        return null;</span>
-    }
+<span class="nc" id="L238">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12201);return null;</span>
+<span class="fc" id="L239">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * Sets the ImageLoader that is used at the beginning of the pipeline if the image is not
      * loaded, yet.
      * @param imageLoader the image loader implementation
      */
-    public void setImageLoader(ImageLoader imageLoader) {
-<span class="fc" id="L247">        this.loader = imageLoader;</span>
-<span class="fc" id="L248">    }</span>
+<span class="fc" id="L246">    public void setImageLoader(ImageLoader imageLoader) {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12202);</span>
+<span class="fc" id="L247">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12203);this.loader = imageLoader;</span>
+<span class="fc" id="L248">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * Adds an additional ImageConverter to the end of the pipeline.
      * @param converter the ImageConverter instance
      */
-    public void addConverter(ImageConverter converter) {
+<span class="fc" id="L254">    public void addConverter(ImageConverter converter) {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12204);</span>
         //TODO check for compatibility
-<span class="fc" id="L256">        this.converters.add(converter);</span>
-<span class="fc" id="L257">    }</span>
+<span class="fc" id="L256">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12205);this.converters.add(converter);</span>
+<span class="fc" id="L257">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String toString() {
-<span class="fc" id="L261">        StringBuffer sb = new StringBuffer();</span>
-<span class="fc" id="L262">        sb.append(&quot;Loader: &quot;).append(loader);</span>
-<span class="fc bfc" id="L263" title="All 2 branches covered.">        if (converters.size() &gt; 0) {</span>
-<span class="fc" id="L264">            sb.append(&quot; Converters: &quot;);</span>
-<span class="fc" id="L265">            sb.append(converters);</span>
+<span class="fc" id="L260">    public String toString() {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12206);</span>
+<span class="fc" id="L261">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12207);StringBuffer sb = new StringBuffer();</span>
+<span class="fc" id="L262">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12208);sb.append(&quot;Loader: &quot;).append(loader);</span>
+<span class="pc bpc" id="L263" title="4 of 10 branches missed.">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12209);if ((((converters.size() &gt; 0)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12210)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12211)==0&amp;false))) {{</span>
+<span class="fc" id="L264">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12212);sb.append(&quot; Converters: &quot;);</span>
+<span class="fc" id="L265">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12213);sb.append(converters);</span>
         }
-<span class="fc" id="L267">        return sb.toString();</span>
-    }
+<span class="fc" id="L267">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12214);return sb.toString();</span>
+<span class="fc" id="L268">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * Returns the overall conversion penalty for the pipeline. This can be used to choose among
      * different possible pipelines.
      * @return the overall penalty (a non-negative integer)
      */
-    public int getConversionPenalty() {
-<span class="fc" id="L276">        return getConversionPenalty(null).getValue();</span>
-    }
+<span class="fc" id="L275">    public int getConversionPenalty() {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12215);</span>
+<span class="fc" id="L276">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12216);return getConversionPenalty(null).getValue();</span>
+<span class="fc" id="L277">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * Returns the overall conversion penalty for the pipeline. This can be used to choose among
@@ -282,39 +282,39 @@ public class ImageProviderPipeline {
      * @param registry the image implementation registry
      * @return the overall penalty (a non-negative integer)
      */
-    public Penalty getConversionPenalty(ImageImplRegistry registry) {
-<span class="fc" id="L286">        Penalty penalty = Penalty.ZERO_PENALTY;</span>
-<span class="fc bfc" id="L287" title="All 2 branches covered.">        if (loader != null) {</span>
-<span class="fc" id="L288">            penalty = penalty.add(loader.getUsagePenalty());</span>
-<span class="fc bfc" id="L289" title="All 2 branches covered.">            if (registry != null) {</span>
-<span class="fc" id="L290">                penalty = penalty.add(</span>
+<span class="fc" id="L285">    public Penalty getConversionPenalty(ImageImplRegistry registry) {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12217);</span>
+<span class="fc" id="L286">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12218);Penalty penalty = Penalty.ZERO_PENALTY;</span>
+<span class="pc bpc" id="L287" title="4 of 10 branches missed.">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12219);if ((((loader != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12220)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12221)==0&amp;false))) {{</span>
+<span class="fc" id="L288">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12222);penalty = penalty.add(loader.getUsagePenalty());</span>
+<span class="pc bpc" id="L289" title="4 of 10 branches missed.">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12223);if ((((registry != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12224)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12225)==0&amp;false))) {{</span>
+<span class="fc" id="L290">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12226);penalty = penalty.add(</span>
 <span class="fc" id="L291">                        registry.getAdditionalPenalty(loader.getClass().getName()));</span>
             }
-        }
-<span class="fc bfc" id="L294" title="All 2 branches covered.">        for (Object converter1 : converters) {</span>
-<span class="fc" id="L295">            ImageConverter converter = (ImageConverter) converter1;</span>
-<span class="fc" id="L296">            penalty = penalty.add(converter.getConversionPenalty());</span>
-<span class="fc bfc" id="L297" title="All 2 branches covered.">            if (registry != null) {</span>
-<span class="fc" id="L298">                penalty = penalty.add(</span>
+        }}
+<span class="fc bfc" id="L294" title="All 2 branches covered.">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12227);for (Object converter1 : converters) {{</span>
+<span class="fc" id="L295">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12228);ImageConverter converter = (ImageConverter) converter1;</span>
+<span class="fc" id="L296">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12229);penalty = penalty.add(converter.getConversionPenalty());</span>
+<span class="pc bpc" id="L297" title="4 of 10 branches missed.">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12230);if ((((registry != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12231)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12232)==0&amp;false))) {{</span>
+<span class="fc" id="L298">                __CLR4_5_29bp9bpm68iyhhv.R.inc(12233);penalty = penalty.add(</span>
 <span class="fc" id="L299">                        registry.getAdditionalPenalty(converter.getClass().getName()));</span>
             }
-<span class="fc" id="L301">        }</span>
-<span class="fc" id="L302">        return penalty;</span>
-    }
+        }}
+<span class="fc" id="L302">        }__CLR4_5_29bp9bpm68iyhhv.R.inc(12234);return penalty;</span>
+<span class="fc" id="L303">    }finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
     /**
      * Returns the target flavor generated by this pipeline.
      * @return the target flavor
      */
-    public ImageFlavor getTargetFlavor() {
-<span class="fc bfc" id="L310" title="All 2 branches covered.">        if (converters.size() &gt; 0) {</span>
-<span class="fc" id="L311">            return getConverter(converters.size() - 1).getTargetFlavor();</span>
-<span class="pc bpc" id="L312" title="1 of 2 branches missed.">        } else if (this.loader != null) {</span>
-<span class="fc" id="L313">            return this.loader.getTargetFlavor();</span>
-        } else {
-<span class="nc" id="L315">            return null;</span>
+<span class="fc" id="L309">    public ImageFlavor getTargetFlavor() {try{__CLR4_5_29bp9bpm68iyhhv.R.inc(12235);</span>
+<span class="pc bpc" id="L310" title="4 of 10 branches missed.">        __CLR4_5_29bp9bpm68iyhhv.R.inc(12236);if ((((converters.size() &gt; 0)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12237)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12238)==0&amp;false))) {{</span>
+<span class="fc" id="L311">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12239);return getConverter(converters.size() - 1).getTargetFlavor();</span>
+<span class="pc bpc" id="L312" title="7 of 10 branches missed.">        } }else {__CLR4_5_29bp9bpm68iyhhv.R.inc(12240);if ((((this.loader != null)&amp;&amp;(__CLR4_5_29bp9bpm68iyhhv.R.iget(12241)!=0|true))||(__CLR4_5_29bp9bpm68iyhhv.R.iget(12242)==0&amp;false))) {{</span>
+<span class="fc" id="L313">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12243);return this.loader.getTargetFlavor();</span>
+        } }else {{
+<span class="nc" id="L315">            __CLR4_5_29bp9bpm68iyhhv.R.inc(12244);return null;</span>
         }
-    }
+<span class="fc" id="L317">    }}}finally{__CLR4_5_29bp9bpm68iyhhv.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

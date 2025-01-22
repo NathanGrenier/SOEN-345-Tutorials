@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMPSchemaAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp</a> &gt; <span class="el_source">XMPSchemaAdapter.java</span></div><h1>XMPSchemaAdapter.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMPSchemaAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp</a> &gt; <span class="el_source">XMPSchemaAdapter.java</span></div><h1>XMPSchemaAdapter.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -28,7 +28,7 @@ import org.apache.xmlgraphics.util.QName;
 /**
  * Base class for schema-specific adapters that provide user-friendly access to XMP values.
  */
-public class XMPSchemaAdapter {
+<span class="pc bpc" id="L31" title="3 of 4 branches missed.">public class XMPSchemaAdapter {public static class __CLR4_5_2gv6gv6m68iyikw{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,22127,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /** the Metadata object this schema instance operates on */
     protected Metadata meta;
@@ -40,30 +40,30 @@ public class XMPSchemaAdapter {
      * @param meta the Metadata object to wrao
      * @param schema the XMP schema for which this adapter was written
      */
-<span class="fc" id="L43">    public XMPSchemaAdapter(Metadata meta, XMPSchema schema) {</span>
-<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (meta == null) {</span>
-<span class="nc" id="L45">            throw new NullPointerException(&quot;Parameter meta must not be null&quot;);</span>
+<span class="fc" id="L43">    public XMPSchemaAdapter(Metadata meta, XMPSchema schema) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21858);</span>
+<span class="pc bpc" id="L44" title="7 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21859);if ((((meta == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21860)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21861)==0&amp;false))) {{</span>
+<span class="nc" id="L45">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21862);throw new NullPointerException(&quot;Parameter meta must not be null&quot;);</span>
         }
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (schema == null) {</span>
-<span class="nc" id="L48">            throw new NullPointerException(&quot;Parameter schema must not be null&quot;);</span>
+<span class="pc bpc" id="L47" title="7 of 10 branches missed.">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(21863);if ((((schema == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21864)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21865)==0&amp;false))) {{</span>
+<span class="nc" id="L48">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21866);throw new NullPointerException(&quot;Parameter schema must not be null&quot;);</span>
         }
-<span class="fc" id="L50">        this.meta = meta;</span>
-<span class="fc" id="L51">        this.schema = schema;</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L50">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(21867);this.meta = meta;</span>
+<span class="fc" id="L51">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21868);this.schema = schema;</span>
+<span class="fc" id="L52">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /** @return the XMP schema associated with this adapter */
-    public XMPSchema getSchema() {
-<span class="fc" id="L56">        return this.schema;</span>
-    }
+<span class="fc" id="L55">    public XMPSchema getSchema() {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21869);</span>
+<span class="fc" id="L56">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21870);return this.schema;</span>
+<span class="fc" id="L57">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Returns the QName for a given property
      * @param propName the property name
      * @return the resulting QName
      */
-    protected QName getQName(String propName) {
-<span class="fc" id="L65">        return new QName(getSchema().getNamespace(), getSchema().getPreferredPrefix(), propName);</span>
-    }
+<span class="fc" id="L64">    protected QName getQName(String propName) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21871);</span>
+<span class="fc" id="L65">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21872);return new QName(getSchema().getNamespace(), getSchema().getPreferredPrefix(), propName);</span>
+<span class="fc" id="L66">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Adds a String value to an array.
@@ -71,12 +71,12 @@ public class XMPSchemaAdapter {
      * @param value the String value
      * @param arrayType the type of array to operate on
      */
-    private void addStringToArray(String propName, String value, XMPArrayType arrayType) {
-<span class="pc bpc" id="L75" title="1 of 4 branches missed.">        if (value == null || value.length() == 0) {</span>
-<span class="fc" id="L76">            throw new IllegalArgumentException(&quot;'&quot; + propName + &quot;' value must not be empty&quot;);</span>
+<span class="fc" id="L74">    private void addStringToArray(String propName, String value, XMPArrayType arrayType) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21873);</span>
+<span class="pc bpc" id="L75" title="5 of 12 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21874);if ((((value == null || value.length() == 0)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21875)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21876)==0&amp;false))) {{</span>
+<span class="fc" id="L76">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21877);throw new IllegalArgumentException(&quot;'&quot; + propName + &quot;' value must not be empty&quot;);</span>
         }
-<span class="fc" id="L78">        addObjectToArray(propName, value, arrayType);</span>
-<span class="fc" id="L79">    }</span>
+<span class="fc" id="L78">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(21878);addObjectToArray(propName, value, arrayType);</span>
+<span class="fc" id="L79">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Adds a Object value to an array.
@@ -84,23 +84,23 @@ public class XMPSchemaAdapter {
      * @param value the Object value
      * @param arrayType the type of array to operate on
      */
-    protected void addObjectToArray(String propName, Object value, XMPArrayType arrayType) {
-<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (value == null) {</span>
-<span class="nc" id="L89">            throw new IllegalArgumentException(&quot;'&quot; + propName + &quot;' value must not be null&quot;);</span>
+<span class="fc" id="L87">    protected void addObjectToArray(String propName, Object value, XMPArrayType arrayType) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21879);</span>
+<span class="pc bpc" id="L88" title="7 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21880);if ((((value == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21881)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21882)==0&amp;false))) {{</span>
+<span class="nc" id="L89">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21883);throw new IllegalArgumentException(&quot;'&quot; + propName + &quot;' value must not be null&quot;);</span>
         }
-<span class="fc" id="L91">        QName name = getQName(propName);</span>
-<span class="fc" id="L92">        XMPProperty prop = meta.getProperty(name);</span>
-<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (prop == null) {</span>
-<span class="fc" id="L94">            prop = new XMPProperty(name, value);</span>
-<span class="fc" id="L95">            meta.setProperty(prop);</span>
-<span class="pc bpc" id="L96" title="1 of 2 branches missed.">            if (!compact) {</span>
-<span class="nc" id="L97">                prop.convertSimpleValueToArray(arrayType);</span>
+<span class="fc" id="L91">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(21884);QName name = getQName(propName);</span>
+<span class="fc" id="L92">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21885);XMPProperty prop = meta.getProperty(name);</span>
+<span class="pc bpc" id="L93" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21886);if ((((prop == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21887)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21888)==0&amp;false))) {{</span>
+<span class="fc" id="L94">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21889);prop = new XMPProperty(name, value);</span>
+<span class="fc" id="L95">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21890);meta.setProperty(prop);</span>
+<span class="pc bpc" id="L96" title="7 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21891);if ((((!compact)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21892)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21893)==0&amp;false))) {{</span>
+<span class="nc" id="L97">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21894);prop.convertSimpleValueToArray(arrayType);</span>
             }
-        } else {
-<span class="fc" id="L100">            prop.convertSimpleValueToArray(arrayType);</span>
-<span class="fc" id="L101">            prop.getArrayValue().add(value);</span>
+        }} }else {{
+<span class="fc" id="L100">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21895);prop.convertSimpleValueToArray(arrayType);</span>
+<span class="fc" id="L101">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21896);prop.getArrayValue().add(value);</span>
         }
-<span class="fc" id="L103">    }</span>
+<span class="fc" id="L103">    }}finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Removes a value from an array.
@@ -108,57 +108,57 @@ public class XMPSchemaAdapter {
      * @param value the value to be removed
      * @return true if the value was removed, false if it was not found
      */
-    protected boolean removeStringFromArray(String propName, String value) {
-<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (value == null) {</span>
-<span class="nc" id="L113">            return false;</span>
+<span class="fc" id="L111">    protected boolean removeStringFromArray(String propName, String value) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21897);</span>
+<span class="pc bpc" id="L112" title="7 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21898);if ((((value == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21899)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21900)==0&amp;false))) {{</span>
+<span class="nc" id="L113">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21901);return false;</span>
         }
-<span class="fc" id="L115">        QName name = getQName(propName);</span>
-<span class="fc" id="L116">        XMPProperty prop = meta.getProperty(name);</span>
-<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (prop != null) {</span>
-<span class="fc bfc" id="L118" title="All 2 branches covered.">            if (prop.isArray()) {</span>
-<span class="fc" id="L119">                XMPArray arr = prop.getArrayValue();</span>
-<span class="fc" id="L120">                boolean removed = arr.remove(value);</span>
-<span class="fc bfc" id="L121" title="All 2 branches covered.">                if (arr.isEmpty()) {</span>
-<span class="fc" id="L122">                    meta.removeProperty(name);</span>
+<span class="fc" id="L115">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(21902);QName name = getQName(propName);</span>
+<span class="fc" id="L116">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21903);XMPProperty prop = meta.getProperty(name);</span>
+<span class="pc bpc" id="L117" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21904);if ((((prop != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21905)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21906)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L118" title="4 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21907);if ((((prop.isArray())&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21908)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21909)==0&amp;false))) {{</span>
+<span class="fc" id="L119">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21910);XMPArray arr = prop.getArrayValue();</span>
+<span class="fc" id="L120">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21911);boolean removed = arr.remove(value);</span>
+<span class="pc bpc" id="L121" title="4 of 10 branches missed.">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21912);if ((((arr.isEmpty())&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21913)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21914)==0&amp;false))) {{</span>
+<span class="fc" id="L122">                    __CLR4_5_2gv6gv6m68iyikw.R.inc(21915);meta.removeProperty(name);</span>
                 }
-<span class="fc" id="L124">                return removed;</span>
-            } else {
-<span class="fc" id="L126">                Object currentValue = prop.getValue();</span>
-<span class="pc bpc" id="L127" title="1 of 2 branches missed.">                if (value.equals(currentValue)) {</span>
-<span class="fc" id="L128">                    meta.removeProperty(name);</span>
-<span class="fc" id="L129">                    return true;</span>
+<span class="fc" id="L124">                }__CLR4_5_2gv6gv6m68iyikw.R.inc(21916);return removed;</span>
+            } }else {{
+<span class="fc" id="L126">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21917);Object currentValue = prop.getValue();</span>
+<span class="pc bpc" id="L127" title="7 of 10 branches missed.">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21918);if ((((value.equals(currentValue))&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21919)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21920)==0&amp;false))) {{</span>
+<span class="fc" id="L128">                    __CLR4_5_2gv6gv6m68iyikw.R.inc(21921);meta.removeProperty(name);</span>
+<span class="fc" id="L129">                    __CLR4_5_2gv6gv6m68iyikw.R.inc(21922);return true;</span>
                 }
-            }
-        }
-<span class="fc" id="L133">        return false;</span>
-    }
+            }}
+        }}
+<span class="fc" id="L133">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(21923);return false;</span>
+<span class="fc" id="L134">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Adds a String value to an ordered array.
      * @param propName the property name
      * @param value the String value
      */
-    protected void addStringToSeq(String propName, String value) {
-<span class="fc" id="L142">        addStringToArray(propName, value, XMPArrayType.SEQ);</span>
-<span class="fc" id="L143">    }</span>
+<span class="fc" id="L141">    protected void addStringToSeq(String propName, String value) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21924);</span>
+<span class="fc" id="L142">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21925);addStringToArray(propName, value, XMPArrayType.SEQ);</span>
+<span class="fc" id="L143">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Adds a String value to an unordered array.
      * @param propName the property name
      * @param value the String value
      */
-    protected void addStringToBag(String propName, String value) {
-<span class="fc" id="L151">        addStringToArray(propName, value, XMPArrayType.BAG);</span>
-<span class="fc" id="L152">    }</span>
+<span class="fc" id="L150">    protected void addStringToBag(String propName, String value) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21926);</span>
+<span class="fc" id="L151">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21927);addStringToArray(propName, value, XMPArrayType.BAG);</span>
+<span class="fc" id="L152">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Formats a Date using ISO 8601 format in the default time zone.
      * @param dt the date
      * @return the formatted date
      */
-    public static String formatISO8601Date(Date dt) {
-<span class="fc" id="L160">        return formatISO8601Date(dt, TimeZone.getDefault());</span>
-    }
+<span class="fc" id="L159">    public static String formatISO8601Date(Date dt) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21928);</span>
+<span class="fc" id="L160">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21929);return formatISO8601Date(dt, TimeZone.getDefault());</span>
+<span class="fc" id="L161">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Formats a Date using ISO 8601 format in the given time zone.
@@ -166,43 +166,43 @@ public class XMPSchemaAdapter {
      * @param tz the time zone
      * @return the formatted date
      */
-    public static String formatISO8601Date(Date dt, TimeZone tz) {
-<span class="fc" id="L170">        return DateFormatUtil.formatISO8601(dt, tz);</span>
-    }
+<span class="fc" id="L169">    public static String formatISO8601Date(Date dt, TimeZone tz) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21930);</span>
+<span class="fc" id="L170">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21931);return DateFormatUtil.formatISO8601(dt, tz);</span>
+<span class="fc" id="L171">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Adds a date value to an ordered array.
      * @param propName the property name
      * @param value the date value
      */
-    protected void addDateToSeq(String propName, Date value) {
-<span class="fc" id="L179">        String dt = formatISO8601Date(value);</span>
-<span class="fc" id="L180">        addStringToSeq(propName, dt);</span>
-<span class="fc" id="L181">    }</span>
+<span class="fc" id="L178">    protected void addDateToSeq(String propName, Date value) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21932);</span>
+<span class="fc" id="L179">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21933);String dt = formatISO8601Date(value);</span>
+<span class="fc" id="L180">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21934);addStringToSeq(propName, dt);</span>
+<span class="fc" id="L181">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Set a date value.
      * @param propName the property name
      * @param value the date value
      */
-    protected void setDateValue(String propName, Date value) {
-<span class="fc" id="L189">        String dt = formatISO8601Date(value);</span>
-<span class="fc" id="L190">        setValue(propName, dt);</span>
-<span class="fc" id="L191">    }</span>
+<span class="fc" id="L188">    protected void setDateValue(String propName, Date value) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21935);</span>
+<span class="fc" id="L189">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21936);String dt = formatISO8601Date(value);</span>
+<span class="fc" id="L190">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21937);setValue(propName, dt);</span>
+<span class="fc" id="L191">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Returns a date value.
      * @param propName the property name
      * @return the date value or null if the value is not set
      */
-    protected Date getDateValue(String propName) {
-<span class="fc" id="L199">        String dt = getValue(propName);</span>
-<span class="fc bfc" id="L200" title="All 2 branches covered.">        if (dt == null) {</span>
-<span class="fc" id="L201">            return null;</span>
-        } else {
-<span class="fc" id="L203">            return DateFormatUtil.parseISO8601Date(dt);</span>
+<span class="fc" id="L198">    protected Date getDateValue(String propName) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21938);</span>
+<span class="fc" id="L199">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21939);String dt = getValue(propName);</span>
+<span class="pc bpc" id="L200" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21940);if ((((dt == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21941)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21942)==0&amp;false))) {{</span>
+<span class="fc" id="L201">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21943);return null;</span>
+        } }else {{
+<span class="fc" id="L203">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21944);return DateFormatUtil.parseISO8601Date(dt);</span>
         }
-    }
+<span class="fc" id="L205">    }}finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Sets a language-dependent value.
@@ -210,69 +210,69 @@ public class XMPSchemaAdapter {
      * @param lang the language (&quot;x-default&quot; or null for the default language)
      * @param value the value
      */
-    protected void setLangAlt(String propName, String lang, String value) {
-<span class="fc bfc" id="L214" title="All 2 branches covered.">        if (lang == null) {</span>
-<span class="fc" id="L215">            lang = XMPConstants.DEFAULT_LANGUAGE;</span>
+<span class="fc" id="L213">    protected void setLangAlt(String propName, String lang, String value) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21945);</span>
+<span class="pc bpc" id="L214" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21946);if ((((lang == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21947)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21948)==0&amp;false))) {{</span>
+<span class="fc" id="L215">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21949);lang = XMPConstants.DEFAULT_LANGUAGE;</span>
         }
-<span class="fc" id="L217">        QName name = getQName(propName);</span>
-<span class="fc" id="L218">        XMPProperty prop = meta.getProperty(name);</span>
-        XMPArray array;
-<span class="fc bfc" id="L220" title="All 2 branches covered.">        if (prop == null) {</span>
-<span class="pc bpc" id="L221" title="1 of 4 branches missed.">            if (value != null &amp;&amp; value.length() &gt; 0) {</span>
-<span class="fc" id="L222">                prop = new XMPProperty(name, value);</span>
-<span class="fc" id="L223">                prop.setXMLLang(lang);</span>
-<span class="fc" id="L224">                meta.setProperty(prop);</span>
+<span class="fc" id="L217">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(21950);QName name = getQName(propName);</span>
+<span class="fc" id="L218">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21951);XMPProperty prop = meta.getProperty(name);</span>
+<span class="fc" id="L219">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21952);XMPArray array;</span>
+<span class="pc bpc" id="L220" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21953);if ((((prop == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21954)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21955)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L221" title="5 of 12 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21956);if ((((value != null &amp;&amp; value.length() &gt; 0)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21957)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21958)==0&amp;false))) {{</span>
+<span class="fc" id="L222">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21959);prop = new XMPProperty(name, value);</span>
+<span class="fc" id="L223">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21960);prop.setXMLLang(lang);</span>
+<span class="fc" id="L224">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21961);meta.setProperty(prop);</span>
             }
-        } else {
-<span class="fc" id="L227">            prop.convertSimpleValueToArray(XMPArrayType.ALT);</span>
-<span class="fc" id="L228">            array = prop.getArrayValue();</span>
-<span class="fc" id="L229">            array.removeLangValue(lang);</span>
-<span class="pc bpc" id="L230" title="1 of 4 branches missed.">            if (value != null &amp;&amp; value.length() &gt; 0) {</span>
-<span class="fc" id="L231">                array.add(value, lang);</span>
-            } else {
-<span class="pc bpc" id="L233" title="1 of 2 branches missed.">                if (array.isEmpty()) {</span>
-<span class="fc" id="L234">                    meta.removeProperty(name);</span>
+        }} }else {{
+<span class="fc" id="L227">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21962);prop.convertSimpleValueToArray(XMPArrayType.ALT);</span>
+<span class="fc" id="L228">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21963);array = prop.getArrayValue();</span>
+<span class="fc" id="L229">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21964);array.removeLangValue(lang);</span>
+<span class="pc bpc" id="L230" title="5 of 12 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21965);if ((((value != null &amp;&amp; value.length() &gt; 0)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21966)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21967)==0&amp;false))) {{</span>
+<span class="fc" id="L231">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21968);array.add(value, lang);</span>
+            } }else {{
+<span class="pc bpc" id="L233" title="7 of 10 branches missed.">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21969);if ((((array.isEmpty())&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21970)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21971)==0&amp;false))) {{</span>
+<span class="fc" id="L234">                    __CLR4_5_2gv6gv6m68iyikw.R.inc(21972);meta.removeProperty(name);</span>
                 }
-            }
-        }
-<span class="fc" id="L238">    }</span>
+            }}
+        }}
+<span class="fc" id="L238">    }}finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Sets a simple value.
      * @param propName the property name
      * @param value the value
      */
-    protected void setValue(String propName, String value) {
-<span class="fc" id="L246">        QName name = getQName(propName);</span>
-<span class="fc" id="L247">        XMPProperty prop = meta.getProperty(name);</span>
-<span class="fc bfc" id="L248" title="All 4 branches covered.">        if (value != null &amp;&amp; value.length() &gt; 0) {</span>
-<span class="fc bfc" id="L249" title="All 2 branches covered.">            if (prop != null) {</span>
-<span class="fc" id="L250">                prop.setValue(value);</span>
-            } else {
-<span class="fc" id="L252">                prop = new XMPProperty(name, value);</span>
-<span class="fc" id="L253">                meta.setProperty(prop);</span>
+<span class="fc" id="L245">    protected void setValue(String propName, String value) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21973);</span>
+<span class="fc" id="L246">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21974);QName name = getQName(propName);</span>
+<span class="fc" id="L247">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21975);XMPProperty prop = meta.getProperty(name);</span>
+<span class="pc bpc" id="L248" title="4 of 12 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21976);if ((((value != null &amp;&amp; value.length() &gt; 0)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21977)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21978)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L249" title="4 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21979);if ((((prop != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21980)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21981)==0&amp;false))) {{</span>
+<span class="fc" id="L250">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21982);prop.setValue(value);</span>
+            } }else {{
+<span class="fc" id="L252">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21983);prop = new XMPProperty(name, value);</span>
+<span class="fc" id="L253">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21984);meta.setProperty(prop);</span>
             }
-        } else {
-<span class="fc bfc" id="L256" title="All 2 branches covered.">            if (prop != null) {</span>
-<span class="fc" id="L257">                meta.removeProperty(name);</span>
+        }} }else {{
+<span class="pc bpc" id="L256" title="4 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21985);if ((((prop != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21986)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21987)==0&amp;false))) {{</span>
+<span class="fc" id="L257">                __CLR4_5_2gv6gv6m68iyikw.R.inc(21988);meta.removeProperty(name);</span>
             }
-        }
-<span class="fc" id="L260">    }</span>
+        }}
+<span class="fc" id="L260">    }}finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Returns a simple value.
      * @param propName the property name
      * @return the requested value or null if it isn't set
      */
-    protected String getValue(String propName) {
-<span class="fc" id="L268">        QName name = getQName(propName);</span>
-<span class="fc" id="L269">        XMPProperty prop = meta.getProperty(name);</span>
-<span class="fc bfc" id="L270" title="All 2 branches covered.">        if (prop == null) {</span>
-<span class="fc" id="L271">            return null;</span>
-        } else {
-<span class="fc" id="L273">            return prop.getValue().toString();</span>
+<span class="fc" id="L267">    protected String getValue(String propName) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21989);</span>
+<span class="fc" id="L268">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21990);QName name = getQName(propName);</span>
+<span class="fc" id="L269">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21991);XMPProperty prop = meta.getProperty(name);</span>
+<span class="pc bpc" id="L270" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21992);if ((((prop == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(21993)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(21994)==0&amp;false))) {{</span>
+<span class="fc" id="L271">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21995);return null;</span>
+        } }else {{
+<span class="fc" id="L273">            __CLR4_5_2gv6gv6m68iyikw.R.inc(21996);return prop.getValue().toString();</span>
         }
-    }
+<span class="fc" id="L275">    }}finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Removes a language-dependent value from an alternative array.
@@ -280,28 +280,28 @@ public class XMPSchemaAdapter {
      * @param propName the property name
      * @return the removed value
      */
-    protected String removeLangAlt(String lang, String propName) {
-<span class="fc" id="L284">        QName name = getQName(propName);</span>
-<span class="fc" id="L285">        XMPProperty prop = meta.getProperty(name);</span>
-        XMPArray array;
-<span class="pc bpc" id="L287" title="1 of 4 branches missed.">        if (prop != null &amp;&amp; lang != null) {</span>
-<span class="fc" id="L288">            array = prop.getArrayValue();</span>
-<span class="fc bfc" id="L289" title="All 2 branches covered.">            if (array != null) {</span>
-<span class="fc" id="L290">                String removed = array.removeLangValue(lang);</span>
-<span class="fc bfc" id="L291" title="All 2 branches covered.">                if (array.isEmpty()) {</span>
-<span class="fc" id="L292">                    meta.removeProperty(name);</span>
+<span class="fc" id="L283">    protected String removeLangAlt(String lang, String propName) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(21997);</span>
+<span class="fc" id="L284">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21998);QName name = getQName(propName);</span>
+<span class="fc" id="L285">        __CLR4_5_2gv6gv6m68iyikw.R.inc(21999);XMPProperty prop = meta.getProperty(name);</span>
+<span class="fc" id="L286">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22000);XMPArray array;</span>
+<span class="pc bpc" id="L287" title="5 of 12 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22001);if ((((prop != null &amp;&amp; lang != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22002)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22003)==0&amp;false))) {{</span>
+<span class="fc" id="L288">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22004);array = prop.getArrayValue();</span>
+<span class="pc bpc" id="L289" title="4 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22005);if ((((array != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22006)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22007)==0&amp;false))) {{</span>
+<span class="fc" id="L290">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22008);String removed = array.removeLangValue(lang);</span>
+<span class="pc bpc" id="L291" title="4 of 10 branches missed.">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22009);if ((((array.isEmpty())&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22010)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22011)==0&amp;false))) {{</span>
+<span class="fc" id="L292">                    __CLR4_5_2gv6gv6m68iyikw.R.inc(22012);meta.removeProperty(name);</span>
                 }
-<span class="fc" id="L294">                return removed;</span>
-            } else {
-<span class="fc" id="L296">                String removed = prop.getValue().toString();</span>
-<span class="pc bpc" id="L297" title="1 of 2 branches missed.">                if (lang.equals(prop.getXMLLang())) {</span>
-<span class="fc" id="L298">                    meta.removeProperty(name);</span>
+<span class="fc" id="L294">                }__CLR4_5_2gv6gv6m68iyikw.R.inc(22013);return removed;</span>
+            } }else {{
+<span class="fc" id="L296">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22014);String removed = prop.getValue().toString();</span>
+<span class="pc bpc" id="L297" title="7 of 10 branches missed.">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22015);if ((((lang.equals(prop.getXMLLang()))&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22016)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22017)==0&amp;false))) {{</span>
+<span class="fc" id="L298">                    __CLR4_5_2gv6gv6m68iyikw.R.inc(22018);meta.removeProperty(name);</span>
                 }
-<span class="fc" id="L300">                return removed;</span>
+<span class="fc" id="L300">                }__CLR4_5_2gv6gv6m68iyikw.R.inc(22019);return removed;</span>
             }
-        }
-<span class="fc" id="L303">        return null;</span>
-    }
+        }}
+<span class="fc" id="L303">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(22020);return null;</span>
+<span class="fc" id="L304">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Returns a language-dependent value. If the value in the requested language is not available
@@ -310,20 +310,20 @@ public class XMPSchemaAdapter {
      * @param propName the property name
      * @return the requested value
      */
-    protected String getLangAlt(String lang, String propName) {
-<span class="fc" id="L314">        XMPProperty prop = meta.getProperty(getQName(propName));</span>
-        XMPArray array;
-<span class="fc bfc" id="L316" title="All 2 branches covered.">        if (prop == null) {</span>
-<span class="fc" id="L317">            return null;</span>
-        } else {
-<span class="fc" id="L319">            array = prop.getArrayValue();</span>
-<span class="fc bfc" id="L320" title="All 2 branches covered.">            if (array != null) {</span>
-<span class="fc" id="L321">                return array.getLangValue(lang);</span>
-            } else {
-<span class="fc" id="L323">                return prop.getValue().toString();</span>
+<span class="fc" id="L313">    protected String getLangAlt(String lang, String propName) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(22021);</span>
+<span class="fc" id="L314">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22022);XMPProperty prop = meta.getProperty(getQName(propName));</span>
+<span class="fc" id="L315">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22023);XMPArray array;</span>
+<span class="pc bpc" id="L316" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22024);if ((((prop == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22025)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22026)==0&amp;false))) {{</span>
+<span class="fc" id="L317">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22027);return null;</span>
+        } }else {{
+<span class="fc" id="L319">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22028);array = prop.getArrayValue();</span>
+<span class="pc bpc" id="L320" title="4 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22029);if ((((array != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22030)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22031)==0&amp;false))) {{</span>
+<span class="fc" id="L321">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22032);return array.getLangValue(lang);</span>
+            } }else {{
+<span class="fc" id="L323">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22033);return prop.getValue().toString();</span>
             }
-        }
-    }
+        }}
+<span class="fc" id="L326">    }}finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Finds a structure that matches a given qualifier.
@@ -333,32 +333,32 @@ public class XMPSchemaAdapter {
      * @return the structure if a match was found (or null if no match was found)
      */
     protected PropertyAccess findQualifiedStructure(String propName,
-            QName qualifier, String qualifierValue) {
-<span class="fc" id="L337">        XMPProperty prop = meta.getProperty(getQName(propName));</span>
-        XMPArray array;
-<span class="pc bpc" id="L339" title="1 of 2 branches missed.">        if (prop != null) {</span>
-<span class="fc" id="L340">            array = prop.getArrayValue();</span>
-<span class="fc bfc" id="L341" title="All 2 branches covered.">            if (array != null) {</span>
-<span class="fc bfc" id="L342" title="All 2 branches covered.">                for (int i = 0, c = array.getSize(); i &lt; c; i++) {</span>
-<span class="fc" id="L343">                    Object value = array.getValue(i);</span>
-<span class="fc bfc" id="L344" title="All 2 branches covered.">                    if (value instanceof PropertyAccess) {</span>
-<span class="fc" id="L345">                        PropertyAccess pa = (PropertyAccess)value;</span>
-<span class="fc" id="L346">                        XMPProperty q = pa.getProperty(qualifier);</span>
-<span class="pc bpc" id="L347" title="1 of 4 branches missed.">                        if (q != null &amp;&amp; q.getValue().equals(qualifierValue)) {</span>
-<span class="fc" id="L348">                            return pa;</span>
+<span class="fc" id="L336">            QName qualifier, String qualifierValue) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(22034);</span>
+<span class="fc" id="L337">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22035);XMPProperty prop = meta.getProperty(getQName(propName));</span>
+<span class="fc" id="L338">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22036);XMPArray array;</span>
+<span class="pc bpc" id="L339" title="7 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22037);if ((((prop != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22038)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22039)==0&amp;false))) {{</span>
+<span class="fc" id="L340">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22040);array = prop.getArrayValue();</span>
+<span class="pc bpc" id="L341" title="4 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22041);if ((((array != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22042)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22043)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L342" title="4 of 10 branches missed.">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22044);for (int i = 0, c = array.getSize(); (((i &lt; c)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22045)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22046)==0&amp;false)); i++) {{</span>
+<span class="fc" id="L343">                    __CLR4_5_2gv6gv6m68iyikw.R.inc(22047);Object value = array.getValue(i);</span>
+<span class="pc bpc" id="L344" title="4 of 10 branches missed.">                    __CLR4_5_2gv6gv6m68iyikw.R.inc(22048);if ((((value instanceof PropertyAccess)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22049)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22050)==0&amp;false))) {{</span>
+<span class="fc" id="L345">                        __CLR4_5_2gv6gv6m68iyikw.R.inc(22051);PropertyAccess pa = (PropertyAccess)value;</span>
+<span class="fc" id="L346">                        __CLR4_5_2gv6gv6m68iyikw.R.inc(22052);XMPProperty q = pa.getProperty(qualifier);</span>
+<span class="pc bpc" id="L347" title="5 of 12 branches missed.">                        __CLR4_5_2gv6gv6m68iyikw.R.inc(22053);if ((((q != null &amp;&amp; q.getValue().equals(qualifierValue))&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22054)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22055)==0&amp;false))) {{</span>
+<span class="fc" id="L348">                            __CLR4_5_2gv6gv6m68iyikw.R.inc(22056);return pa;</span>
                         }
-                    }
+                    }}
+                }}
+<span class="pc bpc" id="L352" title="7 of 10 branches missed.">            }} }else {__CLR4_5_2gv6gv6m68iyikw.R.inc(22057);if ((((prop.getStructureValue() != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22058)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22059)==0&amp;false))) {{</span>
+<span class="nc" id="L353">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22060);PropertyAccess pa = prop.getStructureValue();</span>
+<span class="nc" id="L354">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22061);XMPProperty q = pa.getProperty(qualifier);</span>
+<span class="nc bnc" id="L355" title="All 12 branches missed.">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22062);if ((((q != null &amp;&amp; q.getValue().equals(qualifierValue))&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22063)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22064)==0&amp;false))) {{</span>
+<span class="nc" id="L356">                    __CLR4_5_2gv6gv6m68iyikw.R.inc(22065);return pa;</span>
                 }
-<span class="pc bpc" id="L352" title="1 of 2 branches missed.">            } else if (prop.getStructureValue() != null) {</span>
-<span class="nc" id="L353">                PropertyAccess pa = prop.getStructureValue();</span>
-<span class="nc" id="L354">                XMPProperty q = pa.getProperty(qualifier);</span>
-<span class="nc bnc" id="L355" title="All 4 branches missed.">                if (q != null &amp;&amp; q.getValue().equals(qualifierValue)) {</span>
-<span class="nc" id="L356">                    return pa;</span>
-                }
-            }
-        }
-<span class="fc" id="L360">        return null;</span>
-    }
+            }}
+        }}}
+<span class="fc" id="L360">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(22066);return null;</span>
+<span class="fc" id="L361">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Finds a value that matches a given qualifier.
@@ -368,34 +368,34 @@ public class XMPSchemaAdapter {
      * @return the value if a match was found (or null if no match was found)
      */
     protected Object findQualifiedValue(String propName,
-            QName qualifier, String qualifierValue) {
-<span class="fc" id="L372">        PropertyAccess pa = findQualifiedStructure(propName, qualifier, qualifierValue);</span>
-<span class="pc bpc" id="L373" title="1 of 2 branches missed.">        if (pa != null) {</span>
-<span class="fc" id="L374">            XMPProperty rdfValue = pa.getValueProperty();</span>
-<span class="pc bpc" id="L375" title="1 of 2 branches missed.">            if (rdfValue != null) {</span>
-<span class="fc" id="L376">                return rdfValue.getValue();</span>
+<span class="fc" id="L371">            QName qualifier, String qualifierValue) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(22067);</span>
+<span class="fc" id="L372">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22068);PropertyAccess pa = findQualifiedStructure(propName, qualifier, qualifierValue);</span>
+<span class="pc bpc" id="L373" title="7 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22069);if ((((pa != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22070)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22071)==0&amp;false))) {{</span>
+<span class="fc" id="L374">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22072);XMPProperty rdfValue = pa.getValueProperty();</span>
+<span class="pc bpc" id="L375" title="7 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22073);if ((((rdfValue != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22074)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22075)==0&amp;false))) {{</span>
+<span class="fc" id="L376">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22076);return rdfValue.getValue();</span>
             }
-        }
-<span class="nc" id="L379">        return null;</span>
-    }
+        }}
+<span class="nc" id="L379">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(22077);return null;</span>
+<span class="fc" id="L380">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Returns an object array representation of the property's values.
      * @param propName the property name
      * @return the object array or null if the property isn't set
      */
-    protected Object[] getObjectArray(String propName) {
-<span class="fc" id="L388">        XMPProperty prop = meta.getProperty(getQName(propName));</span>
-<span class="fc bfc" id="L389" title="All 2 branches covered.">        if (prop == null) {</span>
-<span class="fc" id="L390">            return null;</span>
+<span class="fc" id="L387">    protected Object[] getObjectArray(String propName) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(22078);</span>
+<span class="fc" id="L388">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22079);XMPProperty prop = meta.getProperty(getQName(propName));</span>
+<span class="pc bpc" id="L389" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22080);if ((((prop == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22081)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22082)==0&amp;false))) {{</span>
+<span class="fc" id="L390">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22083);return null;</span>
         }
-<span class="fc" id="L392">        XMPArray array = prop.getArrayValue();</span>
-<span class="fc bfc" id="L393" title="All 2 branches covered.">        if (array != null) {</span>
-<span class="fc" id="L394">            return array.toObjectArray();</span>
-        } else {
-<span class="fc" id="L396">            return new Object[] {prop.getValue()};</span>
+<span class="fc" id="L392">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(22084);XMPArray array = prop.getArrayValue();</span>
+<span class="pc bpc" id="L393" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22085);if ((((array != null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22086)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22087)==0&amp;false))) {{</span>
+<span class="fc" id="L394">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22088);return array.toObjectArray();</span>
+        } }else {{
+<span class="fc" id="L396">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22089);return new Object[] {prop.getValue()};</span>
         }
-    }
+<span class="fc" id="L398">    }}finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Returns a String array representation of the property's values. Complex values are converted
@@ -403,48 +403,48 @@ public class XMPSchemaAdapter {
      * @param propName the property name
      * @return the String array or null if the property isn't set
      */
-    protected String[] getStringArray(String propName) {
-<span class="fc" id="L407">        Object[] arr = getObjectArray(propName);</span>
-<span class="fc bfc" id="L408" title="All 2 branches covered.">        if (arr == null) {</span>
-<span class="fc" id="L409">            return null;</span>
+<span class="fc" id="L406">    protected String[] getStringArray(String propName) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(22090);</span>
+<span class="fc" id="L407">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22091);Object[] arr = getObjectArray(propName);</span>
+<span class="pc bpc" id="L408" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22092);if ((((arr == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22093)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22094)==0&amp;false))) {{</span>
+<span class="fc" id="L409">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22095);return null;</span>
         }
-<span class="fc" id="L411">        String[] res = new String[arr.length];</span>
-<span class="fc bfc" id="L412" title="All 2 branches covered.">        for (int i = 0, c = res.length; i &lt; c; i++) {</span>
-<span class="fc" id="L413">            Object o = arr[i];</span>
-<span class="fc bfc" id="L414" title="All 2 branches covered.">            if (o instanceof PropertyAccess) {</span>
-<span class="fc" id="L415">                XMPProperty prop = ((PropertyAccess)o).getValueProperty();</span>
-<span class="fc" id="L416">                res[i] = prop.getValue().toString();</span>
-<span class="fc" id="L417">            } else {</span>
-<span class="fc" id="L418">                res[i] = o.toString();</span>
+<span class="fc" id="L411">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(22096);String[] res = new String[arr.length];</span>
+<span class="pc bpc" id="L412" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22097);for (int i = 0, c = res.length; (((i &lt; c)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22098)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22099)==0&amp;false)); i++) {{</span>
+<span class="fc" id="L413">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22100);Object o = arr[i];</span>
+<span class="pc bpc" id="L414" title="4 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22101);if ((((o instanceof PropertyAccess)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22102)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22103)==0&amp;false))) {{</span>
+<span class="fc" id="L415">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22104);XMPProperty prop = ((PropertyAccess)o).getValueProperty();</span>
+<span class="fc" id="L416">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22105);res[i] = prop.getValue().toString();</span>
+<span class="fc" id="L417">            } }else {{</span>
+<span class="fc" id="L418">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22106);res[i] = o.toString();</span>
             }
-        }
-<span class="fc" id="L421">        return res;</span>
-    }
+        }}
+<span class="fc" id="L421">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(22107);return res;</span>
+<span class="fc" id="L422">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
     /**
      * Returns a Date array representation of the property's values.
      * @param propName the property name
      * @return the Date array or null if the property isn't set
      */
-    protected Date[] getDateArray(String propName) {
-<span class="fc" id="L430">        Object[] arr = getObjectArray(propName);</span>
-<span class="pc bpc" id="L431" title="1 of 2 branches missed.">        if (arr == null) {</span>
-<span class="nc" id="L432">            return null;</span>
+<span class="fc" id="L429">    protected Date[] getDateArray(String propName) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(22108);</span>
+<span class="fc" id="L430">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22109);Object[] arr = getObjectArray(propName);</span>
+<span class="pc bpc" id="L431" title="7 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22110);if ((((arr == null)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22111)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22112)==0&amp;false))) {{</span>
+<span class="nc" id="L432">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22113);return null;</span>
         }
-<span class="fc" id="L434">        Date[] res = new Date[arr.length];</span>
-<span class="fc bfc" id="L435" title="All 2 branches covered.">        for (int i = 0, c = res.length; i &lt; c; i++) {</span>
-<span class="fc" id="L436">            Object obj = arr[i];</span>
-<span class="pc bpc" id="L437" title="1 of 2 branches missed.">            if (obj instanceof Date) {</span>
-<span class="nc" id="L438">                res[i] = (Date) ((Date) obj).clone();</span>
-            } else {
-<span class="fc" id="L440">                res[i] = DateFormatUtil.parseISO8601Date(obj.toString());</span>
+<span class="fc" id="L434">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(22114);Date[] res = new Date[arr.length];</span>
+<span class="pc bpc" id="L435" title="4 of 10 branches missed.">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22115);for (int i = 0, c = res.length; (((i &lt; c)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22116)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22117)==0&amp;false)); i++) {{</span>
+<span class="fc" id="L436">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22118);Object obj = arr[i];</span>
+<span class="pc bpc" id="L437" title="7 of 10 branches missed.">            __CLR4_5_2gv6gv6m68iyikw.R.inc(22119);if ((((obj instanceof Date)&amp;&amp;(__CLR4_5_2gv6gv6m68iyikw.R.iget(22120)!=0|true))||(__CLR4_5_2gv6gv6m68iyikw.R.iget(22121)==0&amp;false))) {{</span>
+<span class="nc" id="L438">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22122);res[i] = (Date) ((Date) obj).clone();</span>
+            } }else {{
+<span class="fc" id="L440">                __CLR4_5_2gv6gv6m68iyikw.R.inc(22123);res[i] = DateFormatUtil.parseISO8601Date(obj.toString());</span>
             }
-        }
-<span class="fc" id="L443">        return res;</span>
-    }
+        }}
+<span class="fc" id="L443">        }__CLR4_5_2gv6gv6m68iyikw.R.inc(22124);return res;</span>
+<span class="fc" id="L444">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 
-    public void setCompact(boolean c) {
-<span class="nc" id="L447">        compact = c;</span>
-<span class="nc" id="L448">    }</span>
+<span class="nc" id="L446">    public void setCompact(boolean c) {try{__CLR4_5_2gv6gv6m68iyikw.R.inc(22125);</span>
+<span class="nc" id="L447">        __CLR4_5_2gv6gv6m68iyikw.R.inc(22126);compact = c;</span>
+<span class="nc" id="L448">    }finally{__CLR4_5_2gv6gv6m68iyikw.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

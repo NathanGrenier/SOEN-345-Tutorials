@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMPPacketParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp</a> &gt; <span class="el_source">XMPPacketParser.java</span></div><h1>XMPPacketParser.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMPPacketParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp</a> &gt; <span class="el_source">XMPPacketParser.java</span></div><h1>XMPPacketParser.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -38,24 +38,24 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
  * Important: Before you use this class to look for an XMP packet in some random file, please read
  * the chapter on &quot;Scanning Files for XMP Packets&quot; in the XMP specification!
  */
-public final class XMPPacketParser {
+<span class="nc bnc" id="L41" title="All 4 branches missed.">public final class XMPPacketParser {public static class __CLR4_5_2gprgprm68iyijz{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,21722,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
-    private XMPPacketParser() {
-    }
+<span class="nc" id="L43">    private XMPPacketParser() {try{__CLR4_5_2gprgprm68iyijz.R.inc(21663);</span>
+<span class="nc" id="L44">    }finally{__CLR4_5_2gprgprm68iyijz.R.flushNeeded();}}</span>
 
     private static final byte[] PACKET_HEADER;
     private static final byte[] PACKET_HEADER_END;
     private static final byte[] PACKET_TRAILER;
 
-    static {
-        try {
-<span class="nc" id="L52">            PACKET_HEADER = &quot;&lt;?xpacket begin=&quot;.getBytes(&quot;US-ASCII&quot;);</span>
-<span class="nc" id="L53">            PACKET_HEADER_END = &quot;?&gt;&quot;.getBytes(&quot;US-ASCII&quot;);</span>
-<span class="nc" id="L54">            PACKET_TRAILER = &quot;&lt;?xpacket&quot;.getBytes(&quot;US-ASCII&quot;);</span>
+<span class="nc" id="L50">    static {try{__CLR4_5_2gprgprm68iyijz.R.inc(21664);</span>
+<span class="nc" id="L51">        __CLR4_5_2gprgprm68iyijz.R.inc(21665);try {</span>
+<span class="nc" id="L52">            __CLR4_5_2gprgprm68iyijz.R.inc(21666);PACKET_HEADER = &quot;&lt;?xpacket begin=&quot;.getBytes(&quot;US-ASCII&quot;);</span>
+<span class="nc" id="L53">            __CLR4_5_2gprgprm68iyijz.R.inc(21667);PACKET_HEADER_END = &quot;?&gt;&quot;.getBytes(&quot;US-ASCII&quot;);</span>
+<span class="nc" id="L54">            __CLR4_5_2gprgprm68iyijz.R.inc(21668);PACKET_TRAILER = &quot;&lt;?xpacket&quot;.getBytes(&quot;US-ASCII&quot;);</span>
 <span class="nc" id="L55">        } catch (UnsupportedEncodingException e) {</span>
-<span class="nc" id="L56">            throw new RuntimeException(&quot;Incompatible JVM! US-ASCII encoding not supported.&quot;);</span>
+<span class="nc" id="L56">            __CLR4_5_2gprgprm68iyijz.R.inc(21669);throw new RuntimeException(&quot;Incompatible JVM! US-ASCII encoding not supported.&quot;);</span>
 <span class="nc" id="L57">        }</span>
-<span class="nc" id="L58">    }</span>
+<span class="nc" id="L58">    }finally{__CLR4_5_2gprgprm68iyijz.R.flushNeeded();}}</span>
 
     /**
      * Locates an XMP packet in a stream, parses it and returns the XMP metadata. If no
@@ -67,63 +67,63 @@ public final class XMPPacketParser {
      * @throws IOException if an I/O error occurs
      * @throws TransformerException if an error occurs while parsing the XMP packet
      */
-    public static Metadata parse(InputStream in) throws IOException, TransformerException {
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (!in.markSupported()) {</span>
-<span class="nc" id="L72">            in = new java.io.BufferedInputStream(in);</span>
+<span class="nc" id="L70">    public static Metadata parse(InputStream in) throws IOException, TransformerException {try{__CLR4_5_2gprgprm68iyijz.R.inc(21670);</span>
+<span class="nc bnc" id="L71" title="All 10 branches missed.">        __CLR4_5_2gprgprm68iyijz.R.inc(21671);if ((((!in.markSupported())&amp;&amp;(__CLR4_5_2gprgprm68iyijz.R.iget(21672)!=0|true))||(__CLR4_5_2gprgprm68iyijz.R.iget(21673)==0&amp;false))) {{</span>
+<span class="nc" id="L72">            __CLR4_5_2gprgprm68iyijz.R.inc(21674);in = new java.io.BufferedInputStream(in);</span>
         }
-<span class="nc" id="L74">        boolean foundXMP = skipAfter(in, PACKET_HEADER);</span>
-<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (!foundXMP) {</span>
-<span class="nc" id="L76">            return null;</span>
+<span class="nc" id="L74">        }__CLR4_5_2gprgprm68iyijz.R.inc(21675);boolean foundXMP = skipAfter(in, PACKET_HEADER);</span>
+<span class="nc bnc" id="L75" title="All 10 branches missed.">        __CLR4_5_2gprgprm68iyijz.R.inc(21676);if ((((!foundXMP)&amp;&amp;(__CLR4_5_2gprgprm68iyijz.R.iget(21677)!=0|true))||(__CLR4_5_2gprgprm68iyijz.R.iget(21678)==0&amp;false))) {{</span>
+<span class="nc" id="L76">            __CLR4_5_2gprgprm68iyijz.R.inc(21679);return null;</span>
         }
         //TODO Inspect &quot;begin&quot; attribute!
-<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (!skipAfter(in, PACKET_HEADER_END)) {</span>
-<span class="nc" id="L80">            throw new IOException(&quot;Invalid XMP packet header!&quot;);</span>
+<span class="nc bnc" id="L79" title="All 10 branches missed.">        }__CLR4_5_2gprgprm68iyijz.R.inc(21680);if ((((!skipAfter(in, PACKET_HEADER_END))&amp;&amp;(__CLR4_5_2gprgprm68iyijz.R.iget(21681)!=0|true))||(__CLR4_5_2gprgprm68iyijz.R.iget(21682)==0&amp;false))) {{</span>
+<span class="nc" id="L80">            __CLR4_5_2gprgprm68iyijz.R.inc(21683);throw new IOException(&quot;Invalid XMP packet header!&quot;);</span>
         }
-<span class="nc" id="L82">        ByteArrayOutputStream baout = null;</span>
-        Metadata metadata;
-        try {
+<span class="nc" id="L82">        }__CLR4_5_2gprgprm68iyijz.R.inc(21684);ByteArrayOutputStream baout = null;</span>
+<span class="nc" id="L83">        __CLR4_5_2gprgprm68iyijz.R.inc(21685);Metadata metadata;</span>
+<span class="nc" id="L84">        __CLR4_5_2gprgprm68iyijz.R.inc(21686);try {</span>
             //TODO think about not buffering this but for example, parse in another thread
             //ex. using PipedInput/OutputStream
-<span class="nc" id="L87">            baout = new ByteArrayOutputStream();</span>
+<span class="nc" id="L87">            __CLR4_5_2gprgprm68iyijz.R.inc(21687);baout = new ByteArrayOutputStream();</span>
             //TODO Do with TeeInputStream when Commons IO 1.4 is available
-<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (!skipAfter(in, PACKET_TRAILER, baout)) {</span>
-<span class="nc" id="L90">                throw new IOException(&quot;XMP packet not properly terminated!&quot;);</span>
+<span class="nc bnc" id="L89" title="All 10 branches missed.">            __CLR4_5_2gprgprm68iyijz.R.inc(21688);if ((((!skipAfter(in, PACKET_TRAILER, baout))&amp;&amp;(__CLR4_5_2gprgprm68iyijz.R.iget(21689)!=0|true))||(__CLR4_5_2gprgprm68iyijz.R.iget(21690)==0&amp;false))) {{</span>
+<span class="nc" id="L90">                __CLR4_5_2gprgprm68iyijz.R.inc(21691);throw new IOException(&quot;XMP packet not properly terminated!&quot;);</span>
             }
-<span class="nc" id="L92">            metadata = XMPParser.parseXMP(</span>
+<span class="nc" id="L92">            }__CLR4_5_2gprgprm68iyijz.R.inc(21692);metadata = XMPParser.parseXMP(</span>
 <span class="nc" id="L93">                new StreamSource(new ByteArrayInputStream(baout.toByteArray())));</span>
         } finally {
-<span class="nc" id="L95">            IOUtils.closeQuietly(baout);</span>
+<span class="nc" id="L95">            __CLR4_5_2gprgprm68iyijz.R.inc(21693);IOUtils.closeQuietly(baout);</span>
         }
-<span class="nc" id="L97">        return metadata;</span>
-    }
+<span class="nc" id="L97">        __CLR4_5_2gprgprm68iyijz.R.inc(21694);return metadata;</span>
+<span class="nc" id="L98">    }finally{__CLR4_5_2gprgprm68iyijz.R.flushNeeded();}}</span>
 
-    private static boolean skipAfter(InputStream in, byte[] match) throws IOException {
-<span class="nc" id="L101">        return skipAfter(in, match, null);</span>
-    }
+<span class="nc" id="L100">    private static boolean skipAfter(InputStream in, byte[] match) throws IOException {try{__CLR4_5_2gprgprm68iyijz.R.inc(21695);</span>
+<span class="nc" id="L101">        __CLR4_5_2gprgprm68iyijz.R.inc(21696);return skipAfter(in, match, null);</span>
+<span class="nc" id="L102">    }finally{__CLR4_5_2gprgprm68iyijz.R.flushNeeded();}}</span>
 
     private static boolean skipAfter(InputStream in, byte[] match, OutputStream out)
-            throws IOException {
-<span class="nc" id="L106">        int found = 0;</span>
-<span class="nc" id="L107">        int len = match.length;</span>
-        int b;
-<span class="nc bnc" id="L109" title="All 2 branches missed.">        while ((b = in.read()) &gt;= 0) {</span>
-<span class="nc bnc" id="L110" title="All 2 branches missed.">            if (b == match[found]) {</span>
-<span class="nc" id="L111">                found++;</span>
-<span class="nc bnc" id="L112" title="All 2 branches missed.">                if (found == len) {</span>
-<span class="nc" id="L113">                    return true;</span>
+<span class="nc" id="L105">            throws IOException {try{__CLR4_5_2gprgprm68iyijz.R.inc(21697);</span>
+<span class="nc" id="L106">        __CLR4_5_2gprgprm68iyijz.R.inc(21698);int found = 0;</span>
+<span class="nc" id="L107">        __CLR4_5_2gprgprm68iyijz.R.inc(21699);int len = match.length;</span>
+<span class="nc" id="L108">        __CLR4_5_2gprgprm68iyijz.R.inc(21700);int b;</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        __CLR4_5_2gprgprm68iyijz.R.inc(21701);while ((b = in.read()) &gt;= 0) {{</span>
+<span class="nc bnc" id="L110" title="All 10 branches missed.">            __CLR4_5_2gprgprm68iyijz.R.inc(21704);if ((((b == match[found])&amp;&amp;(__CLR4_5_2gprgprm68iyijz.R.iget(21705)!=0|true))||(__CLR4_5_2gprgprm68iyijz.R.iget(21706)==0&amp;false))) {{</span>
+<span class="nc" id="L111">                __CLR4_5_2gprgprm68iyijz.R.inc(21707);found++;</span>
+<span class="nc bnc" id="L112" title="All 10 branches missed.">                __CLR4_5_2gprgprm68iyijz.R.inc(21708);if ((((found == len)&amp;&amp;(__CLR4_5_2gprgprm68iyijz.R.iget(21709)!=0|true))||(__CLR4_5_2gprgprm68iyijz.R.iget(21710)==0&amp;false))) {{</span>
+<span class="nc" id="L113">                    __CLR4_5_2gprgprm68iyijz.R.inc(21711);return true;</span>
                 }
-            } else {
-<span class="nc bnc" id="L116" title="All 2 branches missed.">                if (out != null) {</span>
-<span class="nc bnc" id="L117" title="All 2 branches missed.">                    if (found &gt; 0) {</span>
-<span class="nc" id="L118">                        out.write(match, 0, found);</span>
+            }} }else {{
+<span class="nc bnc" id="L116" title="All 10 branches missed.">                __CLR4_5_2gprgprm68iyijz.R.inc(21712);if ((((out != null)&amp;&amp;(__CLR4_5_2gprgprm68iyijz.R.iget(21713)!=0|true))||(__CLR4_5_2gprgprm68iyijz.R.iget(21714)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L117" title="All 10 branches missed.">                    __CLR4_5_2gprgprm68iyijz.R.inc(21715);if ((((found &gt; 0)&amp;&amp;(__CLR4_5_2gprgprm68iyijz.R.iget(21716)!=0|true))||(__CLR4_5_2gprgprm68iyijz.R.iget(21717)==0&amp;false))) {{</span>
+<span class="nc" id="L118">                        __CLR4_5_2gprgprm68iyijz.R.inc(21718);out.write(match, 0, found);</span>
                     }
-<span class="nc" id="L120">                    out.write(b);</span>
+<span class="nc" id="L120">                    }__CLR4_5_2gprgprm68iyijz.R.inc(21719);out.write(b);</span>
                 }
-<span class="nc" id="L122">                found = 0;</span>
+<span class="nc" id="L122">                }__CLR4_5_2gprgprm68iyijz.R.inc(21720);found = 0;</span>
             }
-        }
-<span class="nc" id="L125">        return false;</span>
-    }
+        }}
+<span class="nc" id="L125">        }__CLR4_5_2gprgprm68iyijz.R.inc(21721);return false;</span>
+<span class="nc" id="L126">    }finally{__CLR4_5_2gprgprm68iyijz.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

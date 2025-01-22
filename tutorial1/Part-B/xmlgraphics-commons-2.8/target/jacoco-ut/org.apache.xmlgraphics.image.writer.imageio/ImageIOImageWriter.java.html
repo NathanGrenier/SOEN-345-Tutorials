@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageIOImageWriter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.writer.imageio</a> &gt; <span class="el_source">ImageIOImageWriter.java</span></div><h1>ImageIOImageWriter.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageIOImageWriter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.writer.imageio</a> &gt; <span class="el_source">ImageIOImageWriter.java</span></div><h1>ImageIOImageWriter.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -48,7 +48,7 @@ import org.apache.xmlgraphics.util.UnitConv;
  *
  * @version $Id: ImageIOImageWriter.java 1732018 2016-02-24 04:51:06Z gadams $
  */
-public class ImageIOImageWriter implements ImageWriter, IIOWriteWarningListener {
+<span class="pc bpc" id="L51" title="3 of 4 branches missed.">public class ImageIOImageWriter implements ImageWriter, IIOWriteWarningListener {public static class __CLR4_5_2aq9aq9m68iyho1{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,14072,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private static final String DIMENSION = &quot;Dimension&quot;;
     private static final String VERTICAL_PIXEL_SIZE = &quot;VerticalPixelSize&quot;;
@@ -62,54 +62,54 @@ public class ImageIOImageWriter implements ImageWriter, IIOWriteWarningListener 
      * Main constructor.
      * @param mime the MIME type of the image format
      */
-<span class="fc" id="L65">    public ImageIOImageWriter(String mime) {</span>
-<span class="fc" id="L66">        this.targetMIME = mime;</span>
-<span class="fc" id="L67">    }</span>
+<span class="fc" id="L65">    public ImageIOImageWriter(String mime) {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13905);</span>
+<span class="fc" id="L66">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13906);this.targetMIME = mime;</span>
+<span class="fc" id="L67">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public void writeImage(RenderedImage image, OutputStream out) throws IOException {
-<span class="nc" id="L71">        writeImage(image, out, null);</span>
-<span class="nc" id="L72">    }</span>
+<span class="nc" id="L70">    public void writeImage(RenderedImage image, OutputStream out) throws IOException {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13907);</span>
+<span class="nc" id="L71">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13908);writeImage(image, out, null);</span>
+<span class="nc" id="L72">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
     public void writeImage(RenderedImage image, OutputStream out,
             ImageWriterParams params)
-                throws IOException {
-<span class="fc" id="L78">        javax.imageio.ImageWriter iiowriter = getIIOImageWriter();</span>
-<span class="fc" id="L79">        iiowriter.addIIOWriteWarningListener(this);</span>
+<span class="fc" id="L77">                throws IOException {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13909);</span>
+<span class="fc" id="L78">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13910);javax.imageio.ImageWriter iiowriter = getIIOImageWriter();</span>
+<span class="fc" id="L79">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13911);iiowriter.addIIOWriteWarningListener(this);</span>
 
-<span class="fc" id="L81">        ImageOutputStream imgout = ImageIO.createImageOutputStream(out);</span>
-        try {
+<span class="fc" id="L81">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13912);ImageOutputStream imgout = ImageIO.createImageOutputStream(out);</span>
+<span class="fc" id="L82">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13913);try {</span>
 
-<span class="fc" id="L84">            ImageWriteParam iwParam = getDefaultWriteParam(iiowriter, image, params);</span>
+<span class="fc" id="L84">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13914);ImageWriteParam iwParam = getDefaultWriteParam(iiowriter, image, params);</span>
 
-<span class="fc" id="L86">            IIOMetadata streamMetadata = createStreamMetadata(iiowriter, iwParam, params);</span>
+<span class="fc" id="L86">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13915);IIOMetadata streamMetadata = createStreamMetadata(iiowriter, iwParam, params);</span>
 
-            ImageTypeSpecifier type;
-<span class="pc bpc" id="L89" title="1 of 2 branches missed.">            if (iwParam.getDestinationType() != null) {</span>
-<span class="nc" id="L90">                type = iwParam.getDestinationType();</span>
-            } else {
-<span class="fc" id="L92">                type = ImageTypeSpecifier.createFromRenderedImage(image);</span>
+<span class="fc" id="L88">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13916);ImageTypeSpecifier type;</span>
+<span class="pc bpc" id="L89" title="7 of 10 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13917);if ((((iwParam.getDestinationType() != null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13918)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13919)==0&amp;false))) {{</span>
+<span class="nc" id="L90">                __CLR4_5_2aq9aq9m68iyho1.R.inc(13920);type = iwParam.getDestinationType();</span>
+            } }else {{
+<span class="fc" id="L92">                __CLR4_5_2aq9aq9m68iyho1.R.inc(13921);type = ImageTypeSpecifier.createFromRenderedImage(image);</span>
             }
 
             //Handle metadata
-<span class="fc" id="L96">            IIOMetadata meta = iiowriter.getDefaultImageMetadata(</span>
+<span class="fc" id="L96">            }__CLR4_5_2aq9aq9m68iyho1.R.inc(13922);IIOMetadata meta = iiowriter.getDefaultImageMetadata(</span>
                     type, iwParam);
             //meta might be null for some JAI codecs as they don't support metadata
-<span class="pc bpc" id="L99" title="2 of 4 branches missed.">            if (params != null &amp;&amp; meta != null) {</span>
-<span class="fc" id="L100">                meta = updateMetadata(image, meta, params);</span>
+<span class="pc bpc" id="L99" title="8 of 12 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13923);if ((((params != null &amp;&amp; meta != null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13924)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13925)==0&amp;false))) {{</span>
+<span class="fc" id="L100">                __CLR4_5_2aq9aq9m68iyho1.R.inc(13926);meta = updateMetadata(image, meta, params);</span>
             }
 
             //Write image
-<span class="fc" id="L104">            iiowriter.setOutput(imgout);</span>
-<span class="fc" id="L105">            IIOImage iioimg = new IIOImage(image, null, meta);</span>
-<span class="fc" id="L106">            iiowriter.write(streamMetadata, iioimg, iwParam);</span>
+<span class="fc" id="L104">            }__CLR4_5_2aq9aq9m68iyho1.R.inc(13927);iiowriter.setOutput(imgout);</span>
+<span class="fc" id="L105">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13928);IIOImage iioimg = new IIOImage(image, null, meta);</span>
+<span class="fc" id="L106">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13929);iiowriter.write(streamMetadata, iioimg, iwParam);</span>
 
         } finally {
-<span class="fc" id="L109">            imgout.close();</span>
-<span class="fc" id="L110">            iiowriter.dispose();</span>
+<span class="fc" id="L109">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13930);imgout.close();</span>
+<span class="fc" id="L110">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13931);iiowriter.dispose();</span>
         }
-<span class="fc" id="L112">    }</span>
+<span class="fc" id="L112">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /**
      * Creates the stream metadata for image. By default, this method returns null which
@@ -121,22 +121,22 @@ public class ImageIOImageWriter implements ImageWriter, IIOWriteWarningListener 
      * @return the stream metadata (or null if no special metadata needs to be produced)
      */
     protected IIOMetadata createStreamMetadata(javax.imageio.ImageWriter writer,
-            ImageWriteParam writeParam, ImageWriterParams params) {
-<span class="fc" id="L125">        return null; //leave the default</span>
-    }
+<span class="fc" id="L124">            ImageWriteParam writeParam, ImageWriterParams params) {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13932);</span>
+<span class="fc" id="L125">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13933);return null; //leave the default</span>
+<span class="fc" id="L126">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
-    private javax.imageio.ImageWriter getIIOImageWriter() {
-<span class="fc" id="L129">        Iterator&lt;javax.imageio.ImageWriter&gt; iter = ImageIO.getImageWritersByMIMEType(getMIMEType());</span>
-<span class="fc" id="L130">        javax.imageio.ImageWriter iiowriter = null;</span>
-<span class="pc bpc" id="L131" title="1 of 2 branches missed.">        if (iter.hasNext()) {</span>
-<span class="fc" id="L132">            iiowriter = iter.next();</span>
+<span class="fc" id="L128">    private javax.imageio.ImageWriter getIIOImageWriter() {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13934);</span>
+<span class="fc" id="L129">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13935);Iterator&lt;javax.imageio.ImageWriter&gt; iter = ImageIO.getImageWritersByMIMEType(getMIMEType());</span>
+<span class="fc" id="L130">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13936);javax.imageio.ImageWriter iiowriter = null;</span>
+<span class="pc bpc" id="L131" title="7 of 10 branches missed.">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13937);if ((((iter.hasNext())&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13938)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13939)==0&amp;false))) {{</span>
+<span class="fc" id="L132">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13940);iiowriter = iter.next();</span>
         }
-<span class="pc bpc" id="L134" title="1 of 2 branches missed.">        if (iiowriter == null) {</span>
-<span class="nc" id="L135">            throw new UnsupportedOperationException(&quot;No ImageIO codec for writing &quot;</span>
+<span class="pc bpc" id="L134" title="7 of 10 branches missed.">        }__CLR4_5_2aq9aq9m68iyho1.R.inc(13941);if ((((iiowriter == null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13942)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13943)==0&amp;false))) {{</span>
+<span class="nc" id="L135">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13944);throw new UnsupportedOperationException(&quot;No ImageIO codec for writing &quot;</span>
 <span class="nc" id="L136">                    + getMIMEType() + &quot; is available!&quot;);</span>
         }
-<span class="fc" id="L138">        return iiowriter;</span>
-    }
+<span class="fc" id="L138">        }__CLR4_5_2aq9aq9m68iyho1.R.inc(13945);return iiowriter;</span>
+<span class="fc" id="L139">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /**
      * Returns the default write parameters for encoding the image.
@@ -147,15 +147,15 @@ public class ImageIOImageWriter implements ImageWriter, IIOWriteWarningListener 
      */
     protected ImageWriteParam getDefaultWriteParam(
             javax.imageio.ImageWriter iiowriter, RenderedImage image,
-            ImageWriterParams params) {
-<span class="fc" id="L151">        ImageWriteParam param = iiowriter.getDefaultWriteParam();</span>
+<span class="fc" id="L150">            ImageWriterParams params) {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13946);</span>
+<span class="fc" id="L151">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13947);ImageWriteParam param = iiowriter.getDefaultWriteParam();</span>
         //System.err.println(&quot;Param: &quot; + params);
-<span class="pc bpc" id="L153" title="2 of 4 branches missed.">        if ((params != null) &amp;&amp; (params.getCompressionMethod() != null)) {</span>
-<span class="nc" id="L154">            param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);</span>
-<span class="nc" id="L155">            param.setCompressionType(params.getCompressionMethod());</span>
+<span class="pc bpc" id="L153" title="8 of 12 branches missed.">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13948);if (((((params != null) &amp;&amp; (params.getCompressionMethod() != null))&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13949)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13950)==0&amp;false))) {{</span>
+<span class="nc" id="L154">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13951);param.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);</span>
+<span class="nc" id="L155">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13952);param.setCompressionType(params.getCompressionMethod());</span>
         }
-<span class="fc" id="L157">        return param;</span>
-    }
+<span class="fc" id="L157">        }__CLR4_5_2aq9aq9m68iyho1.R.inc(13953);return param;</span>
+<span class="fc" id="L158">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /**
      * Updates the metadata information based on the parameters to this writer.
@@ -165,75 +165,75 @@ public class ImageIOImageWriter implements ImageWriter, IIOWriteWarningListener 
      * @return the updated metadata
      */
     protected IIOMetadata updateMetadata(RenderedImage image, IIOMetadata meta,
-                ImageWriterParams params) {
-<span class="pc bpc" id="L169" title="2 of 4 branches missed.">        if (meta.isStandardMetadataFormatSupported() &amp;&amp; params.getResolution() != null) {</span>
+<span class="fc" id="L168">                ImageWriterParams params) {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13954);</span>
+<span class="pc bpc" id="L169" title="8 of 12 branches missed.">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13955);if ((((meta.isStandardMetadataFormatSupported() &amp;&amp; params.getResolution() != null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13956)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13957)==0&amp;false))) {{</span>
 
             //NOTE: There are several bugs in ImageIO codecs concerning resolution handling
             //http://www.tracemodeler.com/articles/aging-bugs-and-setting-dpi-with-java-image-io/
 
-<span class="fc bfc" id="L174" title="All 2 branches covered.">            float multiplier = (ResolutionUnit.CENTIMETER == params.getResolutionUnit()) ? 10f : UnitConv.IN2MM;</span>
-<span class="fc" id="L175">            double pixelWidthInMillimeters = multiplier / params.getXResolution().doubleValue();</span>
-<span class="fc" id="L176">            double pixelHeightInMillimeters = multiplier / params.getYResolution().doubleValue();</span>
+<span class="pc bpc" id="L174" title="4 of 10 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13958);float multiplier = ((((ResolutionUnit.CENTIMETER == params.getResolutionUnit()) )&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13959)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13960)==0&amp;false))? 10f : UnitConv.IN2MM;</span>
+<span class="fc" id="L175">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13961);double pixelWidthInMillimeters = multiplier / params.getXResolution().doubleValue();</span>
+<span class="fc" id="L176">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13962);double pixelHeightInMillimeters = multiplier / params.getYResolution().doubleValue();</span>
 
             //Try with the right value as per the ImageIO spec
-<span class="fc" id="L179">            updatePixelSize(meta, pixelWidthInMillimeters, pixelHeightInMillimeters);</span>
+<span class="fc" id="L179">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13963);updatePixelSize(meta, pixelWidthInMillimeters, pixelHeightInMillimeters);</span>
 
             //Check the merge result
-<span class="fc" id="L182">            double checkMerged = getHorizontalPixelSize(meta);</span>
-<span class="pc bpc" id="L183" title="1 of 2 branches missed.">            if (!equals(checkMerged, pixelWidthInMillimeters, 0.00001)) {</span>
+<span class="fc" id="L182">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13964);double checkMerged = getHorizontalPixelSize(meta);</span>
+<span class="pc bpc" id="L183" title="7 of 10 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13965);if ((((!equals(checkMerged, pixelWidthInMillimeters, 0.00001))&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13966)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13967)==0&amp;false))) {{</span>
                 //Merging bug in Sun/Oracle JRE encountered
                 //Try compensation strategy for PNG bug:
                 //http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5106305
-<span class="fc" id="L187">                double horzValue = 1 / pixelWidthInMillimeters;</span>
-<span class="fc" id="L188">                double vertValue = 1 / pixelHeightInMillimeters;</span>
-<span class="fc" id="L189">                updatePixelSize(meta, horzValue, vertValue);</span>
+<span class="fc" id="L187">                __CLR4_5_2aq9aq9m68iyho1.R.inc(13968);double horzValue = 1 / pixelWidthInMillimeters;</span>
+<span class="fc" id="L188">                __CLR4_5_2aq9aq9m68iyho1.R.inc(13969);double vertValue = 1 / pixelHeightInMillimeters;</span>
+<span class="fc" id="L189">                __CLR4_5_2aq9aq9m68iyho1.R.inc(13970);updatePixelSize(meta, horzValue, vertValue);</span>
             }
-        }
-<span class="fc" id="L192">        return meta;</span>
-    }
+        }}
+<span class="fc" id="L192">        }__CLR4_5_2aq9aq9m68iyho1.R.inc(13971);return meta;</span>
+<span class="fc" id="L193">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
-    private static boolean equals(double d1, double d2, double maxDelta) {
-<span class="pc bpc" id="L196" title="1 of 2 branches missed.">        return Math.abs(d1 - d2) &lt;= maxDelta;</span>
-    }
+<span class="fc" id="L195">    private static boolean equals(double d1, double d2, double maxDelta) {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13972);</span>
+<span class="pc bpc" id="L196" title="1 of 2 branches missed.">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13973);return Math.abs(d1 - d2) &lt;= maxDelta;</span>
+<span class="fc" id="L197">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
-    private double getHorizontalPixelSize(IIOMetadata meta) {
-<span class="fc" id="L200">        double result = 0;</span>
-<span class="fc" id="L201">        IIOMetadataNode root = (IIOMetadataNode)meta.getAsTree(STANDARD_METADATA_FORMAT);</span>
-<span class="fc" id="L202">        IIOMetadataNode dim = getChildNode(root, DIMENSION);</span>
-<span class="pc bpc" id="L203" title="1 of 2 branches missed.">        if (dim != null) {</span>
-<span class="fc" id="L204">            IIOMetadataNode horz = getChildNode(dim, HORIZONTAL_PIXEL_SIZE);</span>
-<span class="fc bfc" id="L205" title="All 2 branches covered.">            if (horz != null) {</span>
-<span class="fc" id="L206">                result = Double.parseDouble(horz.getAttribute(&quot;value&quot;));</span>
+<span class="fc" id="L199">    private double getHorizontalPixelSize(IIOMetadata meta) {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13974);</span>
+<span class="fc" id="L200">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13975);double result = 0;</span>
+<span class="fc" id="L201">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13976);IIOMetadataNode root = (IIOMetadataNode)meta.getAsTree(STANDARD_METADATA_FORMAT);</span>
+<span class="fc" id="L202">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13977);IIOMetadataNode dim = getChildNode(root, DIMENSION);</span>
+<span class="pc bpc" id="L203" title="7 of 10 branches missed.">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13978);if ((((dim != null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13979)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13980)==0&amp;false))) {{</span>
+<span class="fc" id="L204">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13981);IIOMetadataNode horz = getChildNode(dim, HORIZONTAL_PIXEL_SIZE);</span>
+<span class="pc bpc" id="L205" title="4 of 10 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13982);if ((((horz != null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13983)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13984)==0&amp;false))) {{</span>
+<span class="fc" id="L206">                __CLR4_5_2aq9aq9m68iyho1.R.inc(13985);result = Double.parseDouble(horz.getAttribute(&quot;value&quot;));</span>
             }
-        }
-<span class="fc" id="L209">        return result;</span>
-    }
+        }}
+<span class="fc" id="L209">        }__CLR4_5_2aq9aq9m68iyho1.R.inc(13986);return result;</span>
+<span class="fc" id="L210">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
-    private void updatePixelSize(IIOMetadata meta, double horzValue, double vertValue) {
-<span class="fc" id="L213">        IIOMetadataNode root = (IIOMetadataNode)meta.getAsTree(STANDARD_METADATA_FORMAT);</span>
-<span class="fc" id="L214">        IIOMetadataNode dim = getChildNode(root, DIMENSION);</span>
-        IIOMetadataNode child;
+<span class="fc" id="L212">    private void updatePixelSize(IIOMetadata meta, double horzValue, double vertValue) {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(13987);</span>
+<span class="fc" id="L213">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13988);IIOMetadataNode root = (IIOMetadataNode)meta.getAsTree(STANDARD_METADATA_FORMAT);</span>
+<span class="fc" id="L214">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13989);IIOMetadataNode dim = getChildNode(root, DIMENSION);</span>
+<span class="fc" id="L215">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13990);IIOMetadataNode child;</span>
 
-<span class="fc" id="L217">        child = getChildNode(dim, HORIZONTAL_PIXEL_SIZE);</span>
-<span class="fc bfc" id="L218" title="All 2 branches covered.">        if (child == null) {</span>
-<span class="fc" id="L219">            child = new IIOMetadataNode(HORIZONTAL_PIXEL_SIZE);</span>
-<span class="fc" id="L220">            dim.appendChild(child);</span>
+<span class="fc" id="L217">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13991);child = getChildNode(dim, HORIZONTAL_PIXEL_SIZE);</span>
+<span class="pc bpc" id="L218" title="4 of 10 branches missed.">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13992);if ((((child == null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(13993)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(13994)==0&amp;false))) {{</span>
+<span class="fc" id="L219">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13995);child = new IIOMetadataNode(HORIZONTAL_PIXEL_SIZE);</span>
+<span class="fc" id="L220">            __CLR4_5_2aq9aq9m68iyho1.R.inc(13996);dim.appendChild(child);</span>
         }
-<span class="fc" id="L222">        child.setAttribute(&quot;value&quot;, Double.toString(horzValue));</span>
+<span class="fc" id="L222">        }__CLR4_5_2aq9aq9m68iyho1.R.inc(13997);child.setAttribute(&quot;value&quot;, Double.toString(horzValue));</span>
 
-<span class="fc" id="L224">        child = getChildNode(dim, VERTICAL_PIXEL_SIZE);</span>
-<span class="fc bfc" id="L225" title="All 2 branches covered.">        if (child == null) {</span>
-<span class="fc" id="L226">            child = new IIOMetadataNode(VERTICAL_PIXEL_SIZE);</span>
-<span class="fc" id="L227">            dim.appendChild(child);</span>
+<span class="fc" id="L224">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13998);child = getChildNode(dim, VERTICAL_PIXEL_SIZE);</span>
+<span class="pc bpc" id="L225" title="4 of 10 branches missed.">        __CLR4_5_2aq9aq9m68iyho1.R.inc(13999);if ((((child == null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(14000)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(14001)==0&amp;false))) {{</span>
+<span class="fc" id="L226">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14002);child = new IIOMetadataNode(VERTICAL_PIXEL_SIZE);</span>
+<span class="fc" id="L227">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14003);dim.appendChild(child);</span>
         }
-<span class="fc" id="L229">        child.setAttribute(&quot;value&quot;, Double.toString(vertValue));</span>
-        try {
-<span class="fc" id="L231">            meta.mergeTree(STANDARD_METADATA_FORMAT, root);</span>
+<span class="fc" id="L229">        }__CLR4_5_2aq9aq9m68iyho1.R.inc(14004);child.setAttribute(&quot;value&quot;, Double.toString(vertValue));</span>
+<span class="fc" id="L230">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14005);try {</span>
+<span class="fc" id="L231">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14006);meta.mergeTree(STANDARD_METADATA_FORMAT, root);</span>
 <span class="nc" id="L232">        } catch (IIOInvalidTreeException e) {</span>
-<span class="nc" id="L233">            throw new RuntimeException(&quot;Cannot update image metadata: &quot;</span>
+<span class="nc" id="L233">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14007);throw new RuntimeException(&quot;Cannot update image metadata: &quot;</span>
 <span class="nc" id="L234">                        + e.getMessage());</span>
 <span class="fc" id="L235">        }</span>
-<span class="fc" id="L236">    }</span>
+<span class="fc" id="L236">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /**
      * Returns a specific metadata child node
@@ -241,50 +241,50 @@ public class ImageIOImageWriter implements ImageWriter, IIOWriteWarningListener 
      * @param name the name of the child
      * @return the requested child node
      */
-    protected static IIOMetadataNode getChildNode(Node n, String name) {
-<span class="fc" id="L245">        NodeList nodes = n.getChildNodes();</span>
-<span class="fc bfc" id="L246" title="All 2 branches covered.">        for (int i = 0; i &lt; nodes.getLength(); i++) {</span>
-<span class="fc" id="L247">            Node child = nodes.item(i);</span>
-<span class="fc bfc" id="L248" title="All 2 branches covered.">            if (name.equals(child.getNodeName())) {</span>
-<span class="fc" id="L249">                return (IIOMetadataNode)child;</span>
+<span class="fc" id="L244">    protected static IIOMetadataNode getChildNode(Node n, String name) {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(14008);</span>
+<span class="fc" id="L245">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14009);NodeList nodes = n.getChildNodes();</span>
+<span class="pc bpc" id="L246" title="4 of 10 branches missed.">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14010);for (int i = 0; (((i &lt; nodes.getLength())&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(14011)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(14012)==0&amp;false)); i++) {{</span>
+<span class="fc" id="L247">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14013);Node child = nodes.item(i);</span>
+<span class="pc bpc" id="L248" title="4 of 10 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14014);if ((((name.equals(child.getNodeName()))&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(14015)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(14016)==0&amp;false))) {{</span>
+<span class="fc" id="L249">                __CLR4_5_2aq9aq9m68iyho1.R.inc(14017);return (IIOMetadataNode)child;</span>
             }
-        }
-<span class="fc" id="L252">        return null;</span>
-    }
+        }}
+<span class="fc" id="L252">        }__CLR4_5_2aq9aq9m68iyho1.R.inc(14018);return null;</span>
+<span class="fc" id="L253">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String getMIMEType() {
-<span class="fc" id="L257">        return this.targetMIME;</span>
-    }
+<span class="fc" id="L256">    public String getMIMEType() {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(14019);</span>
+<span class="fc" id="L257">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14020);return this.targetMIME;</span>
+<span class="fc" id="L258">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public boolean isFunctional() {
-<span class="fc" id="L262">        Iterator&lt;javax.imageio.ImageWriter&gt; iter = ImageIO.getImageWritersByMIMEType(getMIMEType());</span>
+<span class="fc" id="L261">    public boolean isFunctional() {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(14021);</span>
+<span class="fc" id="L262">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14022);Iterator&lt;javax.imageio.ImageWriter&gt; iter = ImageIO.getImageWritersByMIMEType(getMIMEType());</span>
         //Only return true if an IIO ImageWriter is available in the current environment
-<span class="fc" id="L264">        return (iter.hasNext());</span>
-    }
+<span class="fc" id="L264">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14023);return (iter.hasNext());</span>
+<span class="fc" id="L265">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
     public void warningOccurred(javax.imageio.ImageWriter source,
-            int imageIndex, String warning) {
-<span class="fc" id="L270">        System.err.println(&quot;Problem while writing image using ImageI/O: &quot;</span>
+<span class="fc" id="L269">            int imageIndex, String warning) {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(14024);</span>
+<span class="fc" id="L270">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14025);System.err.println(&quot;Problem while writing image using ImageI/O: &quot;</span>
                 + warning);
-<span class="fc" id="L272">    }</span>
+<span class="fc" id="L272">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public MultiImageWriter createMultiImageWriter(OutputStream out) throws IOException {
-<span class="nc" id="L276">        return new IIOMultiImageWriter(out);</span>
-    }
+<span class="nc" id="L275">    public MultiImageWriter createMultiImageWriter(OutputStream out) throws IOException {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(14026);</span>
+<span class="nc" id="L276">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14027);return new IIOMultiImageWriter(out);</span>
+<span class="nc" id="L277">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public boolean supportsMultiImageWriter() {
-<span class="nc" id="L281">        javax.imageio.ImageWriter iiowriter = getIIOImageWriter();</span>
-        try {
-<span class="nc" id="L283">            return iiowriter.canWriteSequence();</span>
+<span class="nc" id="L280">    public boolean supportsMultiImageWriter() {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(14028);</span>
+<span class="nc" id="L281">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14029);javax.imageio.ImageWriter iiowriter = getIIOImageWriter();</span>
+<span class="nc" id="L282">        __CLR4_5_2aq9aq9m68iyho1.R.inc(14030);try {</span>
+<span class="nc" id="L283">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14031);return iiowriter.canWriteSequence();</span>
         } finally {
-<span class="nc" id="L285">            iiowriter.dispose();</span>
+<span class="nc" id="L285">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14032);iiowriter.dispose();</span>
         }
-    }
+<span class="nc" id="L287">    }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     private class IIOMultiImageWriter implements MultiImageWriter {
 
@@ -292,58 +292,58 @@ public class ImageIOImageWriter implements ImageWriter, IIOWriteWarningListener 
         private ImageOutputStream imageStream;
         private boolean prepared;
 
-<span class="nc" id="L295">        public IIOMultiImageWriter(OutputStream out) throws IOException {</span>
-<span class="nc" id="L296">            this.iiowriter = getIIOImageWriter();</span>
-<span class="nc bnc" id="L297" title="All 2 branches missed.">            if (!iiowriter.canWriteSequence()) {</span>
-<span class="nc" id="L298">                throw new UnsupportedOperationException(&quot;This ImageWriter does not support writing&quot;</span>
+<span class="nc" id="L295">        public IIOMultiImageWriter(OutputStream out) throws IOException {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(14033);</span>
+<span class="nc" id="L296">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14034);this.iiowriter = getIIOImageWriter();</span>
+<span class="nc bnc" id="L297" title="All 10 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14035);if ((((!iiowriter.canWriteSequence())&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(14036)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(14037)==0&amp;false))) {{</span>
+<span class="nc" id="L298">                __CLR4_5_2aq9aq9m68iyho1.R.inc(14038);throw new UnsupportedOperationException(&quot;This ImageWriter does not support writing&quot;</span>
                         + &quot; multiple images to a single image file.&quot;);
             }
-<span class="nc" id="L301">            iiowriter.addIIOWriteWarningListener(ImageIOImageWriter.this);</span>
+<span class="nc" id="L301">            }__CLR4_5_2aq9aq9m68iyho1.R.inc(14039);iiowriter.addIIOWriteWarningListener(ImageIOImageWriter.this);</span>
 
-<span class="nc" id="L303">            imageStream = ImageIO.createImageOutputStream(out);</span>
-<span class="nc" id="L304">            iiowriter.setOutput(imageStream);</span>
+<span class="nc" id="L303">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14040);imageStream = ImageIO.createImageOutputStream(out);</span>
+<span class="nc" id="L304">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14041);iiowriter.setOutput(imageStream);</span>
 
-<span class="nc" id="L306">        }</span>
+<span class="nc" id="L306">        }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
-        public void writeImage(RenderedImage image, ImageWriterParams params) throws IOException {
-<span class="nc bnc" id="L309" title="All 2 branches missed.">            if (iiowriter == null) {</span>
-<span class="nc" id="L310">                throw new IllegalStateException(&quot;MultiImageWriter already closed!&quot;);</span>
+<span class="nc" id="L308">        public void writeImage(RenderedImage image, ImageWriterParams params) throws IOException {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(14042);</span>
+<span class="nc bnc" id="L309" title="All 10 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14043);if ((((iiowriter == null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(14044)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(14045)==0&amp;false))) {{</span>
+<span class="nc" id="L310">                __CLR4_5_2aq9aq9m68iyho1.R.inc(14046);throw new IllegalStateException(&quot;MultiImageWriter already closed!&quot;);</span>
             }
-<span class="nc" id="L312">            ImageWriteParam iwParam = getDefaultWriteParam(iiowriter, image, params);</span>
+<span class="nc" id="L312">            }__CLR4_5_2aq9aq9m68iyho1.R.inc(14047);ImageWriteParam iwParam = getDefaultWriteParam(iiowriter, image, params);</span>
 
-<span class="nc bnc" id="L314" title="All 2 branches missed.">            if (!prepared) {</span>
+<span class="nc bnc" id="L314" title="All 10 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14048);if ((((!prepared)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(14049)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(14050)==0&amp;false))) {{</span>
                 //Only prepare once
-<span class="nc" id="L316">                IIOMetadata streamMetadata = createStreamMetadata(iiowriter, iwParam, params);</span>
-<span class="nc" id="L317">                iiowriter.prepareWriteSequence(streamMetadata);</span>
-<span class="nc" id="L318">                prepared = true;</span>
+<span class="nc" id="L316">                __CLR4_5_2aq9aq9m68iyho1.R.inc(14051);IIOMetadata streamMetadata = createStreamMetadata(iiowriter, iwParam, params);</span>
+<span class="nc" id="L317">                __CLR4_5_2aq9aq9m68iyho1.R.inc(14052);iiowriter.prepareWriteSequence(streamMetadata);</span>
+<span class="nc" id="L318">                __CLR4_5_2aq9aq9m68iyho1.R.inc(14053);prepared = true;</span>
             }
 
-            ImageTypeSpecifier type;
-<span class="nc bnc" id="L322" title="All 2 branches missed.">            if (iwParam.getDestinationType() != null) {</span>
-<span class="nc" id="L323">                type = iwParam.getDestinationType();</span>
-            } else {
-<span class="nc" id="L325">                type = ImageTypeSpecifier.createFromRenderedImage(image);</span>
+<span class="nc" id="L321">            }__CLR4_5_2aq9aq9m68iyho1.R.inc(14054);ImageTypeSpecifier type;</span>
+<span class="nc bnc" id="L322" title="All 10 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14055);if ((((iwParam.getDestinationType() != null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(14056)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(14057)==0&amp;false))) {{</span>
+<span class="nc" id="L323">                __CLR4_5_2aq9aq9m68iyho1.R.inc(14058);type = iwParam.getDestinationType();</span>
+            } }else {{
+<span class="nc" id="L325">                __CLR4_5_2aq9aq9m68iyho1.R.inc(14059);type = ImageTypeSpecifier.createFromRenderedImage(image);</span>
             }
 
             //Handle metadata
-<span class="nc" id="L329">            IIOMetadata meta = iiowriter.getDefaultImageMetadata(</span>
+<span class="nc" id="L329">            }__CLR4_5_2aq9aq9m68iyho1.R.inc(14060);IIOMetadata meta = iiowriter.getDefaultImageMetadata(</span>
                     type, iwParam);
             //meta might be null for some JAI codecs as they don't support metadata
-<span class="nc bnc" id="L332" title="All 4 branches missed.">            if (params != null &amp;&amp; meta != null) {</span>
-<span class="nc" id="L333">                meta = updateMetadata(image, meta, params);</span>
+<span class="nc bnc" id="L332" title="All 12 branches missed.">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14061);if ((((params != null &amp;&amp; meta != null)&amp;&amp;(__CLR4_5_2aq9aq9m68iyho1.R.iget(14062)!=0|true))||(__CLR4_5_2aq9aq9m68iyho1.R.iget(14063)==0&amp;false))) {{</span>
+<span class="nc" id="L333">                __CLR4_5_2aq9aq9m68iyho1.R.inc(14064);meta = updateMetadata(image, meta, params);</span>
             }
 
             //Write image
-<span class="nc" id="L337">            IIOImage iioimg = new IIOImage(image, null, meta);</span>
-<span class="nc" id="L338">            iiowriter.writeToSequence(iioimg, iwParam);</span>
-<span class="nc" id="L339">        }</span>
+<span class="nc" id="L337">            }__CLR4_5_2aq9aq9m68iyho1.R.inc(14065);IIOImage iioimg = new IIOImage(image, null, meta);</span>
+<span class="nc" id="L338">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14066);iiowriter.writeToSequence(iioimg, iwParam);</span>
+<span class="nc" id="L339">        }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
-        public void close() throws IOException {
-<span class="nc" id="L342">            imageStream.close();</span>
-<span class="nc" id="L343">            imageStream = null;</span>
-<span class="nc" id="L344">            iiowriter.dispose();</span>
-<span class="nc" id="L345">            iiowriter = null;</span>
-<span class="nc" id="L346">        }</span>
+<span class="nc" id="L341">        public void close() throws IOException {try{__CLR4_5_2aq9aq9m68iyho1.R.inc(14067);</span>
+<span class="nc" id="L342">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14068);imageStream.close();</span>
+<span class="nc" id="L343">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14069);imageStream = null;</span>
+<span class="nc" id="L344">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14070);iiowriter.dispose();</span>
+<span class="nc" id="L345">            __CLR4_5_2aq9aq9m68iyho1.R.inc(14071);iiowriter = null;</span>
+<span class="nc" id="L346">        }finally{__CLR4_5_2aq9aq9m68iyho1.R.flushNeeded();}}</span>
 
     }
 

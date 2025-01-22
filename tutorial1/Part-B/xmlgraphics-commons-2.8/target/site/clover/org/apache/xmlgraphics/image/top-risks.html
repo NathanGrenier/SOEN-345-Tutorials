@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="../../../../img/clover.ico" />
+
+    <link rel="stylesheet" href="../../../../aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="../../../../aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="../../../../aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('../../../../style.css');
+        @import url('../../../../tree.css');
+        
+    </style>
+
+    <script src="../../../../jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../../../aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="../../../../aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="../../../../aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="../../../../package-nodes-tree.js" type="text/javascript"></script>
+    <script src="../../../../clover-tree.js" type="text/javascript"></script>
+    <script src="../../../../clover.js" type="text/javascript"></script>
+    <script src="../../../../clover-descriptions.js" type="text/javascript"></script>
+    <script src="../../../../cloud.js" type="text/javascript"></script>
+
+            <title>org.apache.xmlgraphics:xmlgraphics-commons 2.8</title>
+    </head>
+
+<body  >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://xmlgraphics.apache.org/commons/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="../../../../img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://xmlgraphics.apache.org/commons/" target="_top">
+                                        org.apache.xmlgraphics:xmlgraphics-commons 2.8
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="">
+                    <a href="../../../../dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                <div class="packages-tree-wrapper" data-root-relative="../../../../" data-package-name="org.apache.xmlgraphics.image">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="../../../../dashboard.html">Project Clover database Wed Jan 22 2025 18:17:57 EST</a></li> 
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Package org.apache.xmlgraphics.image
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+            <ul class="tabs-menu">
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                    <li class="menu-item active-tab">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+        
+
+
+                        <div style="text-align: right; margin-bottom: 10px">
+            
+                            <button id="cloudDepthCheckbox" class="aui-button active"
+                        onclick="showDeepPackageCloud(this)">Include classes from sub-packages</button>
+            
+                                    <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;How to read this chart
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function (content, trigger, showPopup) {
+                var description = topRisksDescription();
+                var title = 'Top Risks';
+                content.css({"padding": "20px"}).html(
+                        '<h2>' + title + '</h2>' + description);
+                showPopup();
+                return false;
+            },
+            {
+                width: 600
+            }
+    );
+</script>
+        </div>
+
+        
+
+<div style="padding: 20px; border: 1px solid #cccccc; background-color: #f5f5f5; border-radius: 3px">
+          <div id="deepPackageCloud"  >
+                          
+    
+        
+    
+            <a href="../image/loader/impl/AbstractImage.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1.167 , Coverage - 37.5% ">AbstractImage</a>
+            
+    
+            <a href="../image/loader/impl/AbstractImageConverter.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.5 , Coverage - 71.4% ">AbstractImageConverter</a>
+            
+    
+            <a href="../image/loader/impl/AbstractImageLoader.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.333 , Coverage - 72.7% ">AbstractImageLoader</a>
+            
+    
+            <a href="../image/loader/impl/AbstractImageLoaderFactory.html" class="tag"
+            style="font-size: 13px;color:#e28e87"
+            title="Average Method Complexity - 1 , Coverage - 40% ">AbstractImageLoaderFactory</a>
+            
+    
+            <a href="../image/loader/impl/AbstractImagePreloader.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.5 , Coverage - 83.3% ">AbstractImagePreloader</a>
+            
+    
+            <a href="../image/loader/impl/AbstractImageSessionContext.html" class="tag"
+            style="font-size: 16px;color:#f6c342"
+            title="Average Method Complexity - 2.75 , Coverage - 72.2% ">AbstractImageSessionContext</a>
+            
+    
+            <a href="../image/loader/impl/AbstractImageSessionContext.html" class="tag"
+            style="font-size: 15px;color:#e7a19b"
+            title="Average Method Complexity - 2 , Coverage - 57.1% ">AbstractImageSessionContext.ObservingImageInputStreamInvocationHandler</a>
+            
+    
+            <a href="../image/loader/impl/AbstractImageSessionContext.html" class="tag"
+            style="font-size: 48px;color:#f6c342"
+            title="Average Method Complexity - 21 , Coverage - 65.3% ">AbstractImageSessionContext.UnrestrictedFallbackResolver</a>
+            
+    
+            <a href="../image/writer/AbstractImageWriter.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 33.3% ">AbstractImageWriter</a>
+            
+    
+            <a href="../image/codec/png/PNGImageEncoder.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 2.333 , Coverage - 95.5% ">CRC</a>
+            
+    
+            <a href="../image/codec/png/PNGImageEncoder.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1.118 , Coverage - 56.7% ">ChunkStream</a>
+            
+    
+            <a href="../image/loader/impl/CompositeImageLoader.html" class="tag"
+            style="font-size: 17px;color:#de7b72"
+            title="Average Method Complexity - 3.2 , Coverage - 38.8% ">CompositeImageLoader</a>
+            
+    
+            <a href="../image/codec/tiff/CompressionValue.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="Average Method Complexity - 1.667 , Coverage - 26.7% ">CompressionValue</a>
+            
+    
+            <a href="../image/loader/cache/DefaultExpirationPolicy.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.25 , Coverage - 100% ">DefaultExpirationPolicy</a>
+            
+    
+            <a href="../image/loader/impl/DefaultImageSessionContext.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.6 , Coverage - 85% ">DefaultImageSessionContext</a>
+            
+    
+            <a href="../image/codec/tiff/ExtraSamplesType.html" class="tag"
+            style="font-size: 15px;color:#e7a19b"
+            title="Average Method Complexity - 2 , Coverage - 50% ">ExtraSamplesType</a>
+            
+    
+            <a href="../image/codec/util/ForwardSeekableStream.html" class="tag"
+            style="font-size: 14px;color:#e7a19b"
+            title="Average Method Complexity - 1.333 , Coverage - 59.1% ">ForwardSeekableStream</a>
+            
+    
+            <a href="../image/codec/png/PNGImageEncoder.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.571 , Coverage - 77.8% ">IDATOutputStream</a>
+            
+    
+            <a href="../image/loader/impl/ImageBuffered.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ImageBuffered</a>
+            
+    
+            <a href="../image/loader/cache/ImageCache.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 2.312 , Coverage - 89.7% ">ImageCache</a>
+            
+    
+            <a href="../image/loader/cache/ImageCacheStatistics.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.267 , Coverage - 82% ">ImageCacheStatistics</a>
+            
+    
+            <a href="../image/loader/pipeline/ImageConversionEdge.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ImageConversionEdge</a>
+            
+    
+            <a href="../image/loader/impl/ImageConverterBitmap2G2D.html" class="tag"
+            style="font-size: 14px;color:#de7b72"
+            title="Average Method Complexity - 1.333 , Coverage - 33.3% ">ImageConverterBitmap2G2D</a>
+            
+    
+            <a href="../image/loader/impl/ImageConverterBuffered2Rendered.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.25 , Coverage - 91.7% ">ImageConverterBuffered2Rendered</a>
+            
+    
+            <a href="../image/loader/impl/ImageConverterG2D2Bitmap.html" class="tag"
+            style="font-size: 17px;color:#f6c342"
+            title="Average Method Complexity - 3.167 , Coverage - 65.1% ">ImageConverterG2D2Bitmap</a>
+            
+    
+            <a href="../image/loader/impl/ImageConverterRendered2PNG.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.667 , Coverage - 84.2% ">ImageConverterRendered2PNG</a>
+            
+    
+            <a href="../image/codec/util/ImageDecoderImpl.html" class="tag"
+            style="font-size: 13px;color:#d9695f"
+            title="Average Method Complexity - 1 , Coverage - 23.8% ">ImageDecoderImpl</a>
+            
+    
+            <a href="../image/codec/util/ImageEncoderImpl.html" class="tag"
+            style="font-size: 13px;color:#d9695f"
+            title="Average Method Complexity - 1 , Coverage - 25% ">ImageEncoderImpl</a>
+            
+    
+            <a href="../image/loader/ImageException.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1 , Coverage - 50% ">ImageException</a>
+            
+    
+            <a href="../image/loader/ImageFlavor.html" class="tag"
+            style="font-size: 15px;color:#fae1a0"
+            title="Average Method Complexity - 1.875 , Coverage - 82.2% ">ImageFlavor</a>
+            
+    
+            <a href="../image/loader/impl/ImageGraphics2D.html" class="tag"
+            style="font-size: 14px;color:#e7a19b"
+            title="Average Method Complexity - 1.2 , Coverage - 56.2% ">ImageGraphics2D</a>
+            
+    
+            <a href="../image/writer/imageio/ImageIOImageWriter.html" class="tag"
+            style="font-size: 15px;color:#fae1a0"
+            title="Average Method Complexity - 2.125 , Coverage - 82.8% ">ImageIOImageWriter</a>
+            
+    
+            <a href="../image/writer/imageio/ImageIOJPEGImageWriter.html" class="tag"
+            style="font-size: 18px;color:#fae1a0"
+            title="Average Method Complexity - 3.5 , Coverage - 76.5% ">ImageIOJPEGImageWriter</a>
+            
+    
+            <a href="../image/writer/imageio/ImageIOPNGImageWriter.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ImageIOPNGImageWriter</a>
+            
+    
+            <a href="../image/writer/imageio/ImageIOTIFFImageWriter.html" class="tag"
+            style="font-size: 16px;color:#f6c342"
+            title="Average Method Complexity - 2.4 , Coverage - 64.6% ">ImageIOTIFFImageWriter</a>
+            
+    
+            <a href="../image/loader/impl/imageio/ImageIOUtil.html" class="tag"
+            style="font-size: 17px;color:#f6c342"
+            title="Average Method Complexity - 3.4 , Coverage - 66.1% ">ImageIOUtil</a>
+            
+    
+            <a href="../image/loader/spi/ImageImplRegistry.html" class="tag"
+            style="font-size: 16px;color:#14892c"
+            title="Average Method Complexity - 2.611 , Coverage - 86.8% ">ImageImplRegistry</a>
+            
+    
+            <a href="../image/loader/spi/ImageImplRegistry.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ImageImplRegistry.ImageLoaderFactoryComparator</a>
+            
+    
+            <a href="../image/loader/spi/ImageImplRegistry.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.333 , Coverage - 63.6% ">ImageImplRegistry.MyIterator</a>
+            
+    
+            <a href="../image/loader/ImageInfo.html" class="tag"
+            style="font-size: 13px;color:#14892c"
+            title="Average Method Complexity - 1 , Coverage - 88.2% ">ImageInfo</a>
+            
+    
+            <a href="../image/codec/tiff/ImageInfo.html" class="tag"
+            style="font-size: 15px;color:#89c495"
+            title="Average Method Complexity - 1.875 , Coverage - 96.6% ">ImageInfo</a>
+            
+    
+            <a href="../image/codec/tiff/ImageInfo.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ImageInfo.ImageInfoBuilder</a>
+            
+    
+            <a href="../image/loader/util/ImageInputStreamAdapter.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.2 , Coverage - 64% ">ImageInputStreamAdapter</a>
+            
+    
+            <a href="../image/codec/util/ImageInputStreamSeekableStreamAdapter.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ImageInputStreamSeekableStreamAdapter</a>
+            
+    
+            <a href="../image/loader/cache/ImageKey.html" class="tag"
+            style="font-size: 17px;color:#e7a19b"
+            title="Average Method Complexity - 3.25 , Coverage - 60.9% ">ImageKey</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderEPS.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.667 , Coverage - 90% ">ImageLoaderEPS</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderFactoryEPS.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.25 , Coverage - 83.3% ">ImageLoaderFactoryEPS</a>
+            
+    
+            <a href="../image/loader/impl/imageio/ImageLoaderFactoryImageIO.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ImageLoaderFactoryImageIO</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderFactoryInternalTIFF.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.25 , Coverage - 83.3% ">ImageLoaderFactoryInternalTIFF</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderFactoryPNG.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.2 , Coverage - 100% ">ImageLoaderFactoryPNG</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderFactoryRaw.html" class="tag"
+            style="font-size: 18px;color:#fae1a0"
+            title="Average Method Complexity - 4 , Coverage - 74.6% ">ImageLoaderFactoryRaw</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderFactoryRawCCITTFax.html" class="tag"
+            style="font-size: 17px;color:#e7a19b"
+            title="Average Method Complexity - 3 , Coverage - 53.6% ">ImageLoaderFactoryRawCCITTFax</a>
+            
+    
+            <a href="../image/loader/impl/imageio/ImageLoaderImageIO.html" class="tag"
+            style="font-size: 21px;color:#f6c342"
+            title="Average Method Complexity - 5.3 , Coverage - 67% ">ImageLoaderImageIO</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderInternalTIFF.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="Average Method Complexity - 1.25 , Coverage - 23.1% ">ImageLoaderInternalTIFF</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderPNG.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">ImageLoaderPNG</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderRaw.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="Average Method Complexity - 1.333 , Coverage - 23.1% ">ImageLoaderRaw</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderRawCCITTFax.html" class="tag"
+            style="font-size: 19px;color:#f6c342"
+            title="Average Method Complexity - 4.667 , Coverage - 72.6% ">ImageLoaderRawCCITTFax</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderRawJPEG.html" class="tag"
+            style="font-size: 28px;color:#e7a19b"
+            title="Average Method Complexity - 9.5 , Coverage - 57.1% ">ImageLoaderRawJPEG</a>
+            
+    
+            <a href="../image/loader/impl/ImageLoaderRawPNG.html" class="tag"
+            style="font-size: 14px;color:#89c495"
+            title="Average Method Complexity - 1.333 , Coverage - 100% ">ImageLoaderRawPNG</a>
+            
+    
+            <a href="../image/loader/ImageManager.html" class="tag"
+            style="font-size: 15px;color:#f6c342"
+            title="Average Method Complexity - 2.222 , Coverage - 72.6% ">ImageManager</a>
+            
+    
+            <a href="../image/loader/pipeline/ImageProviderPipeline.html" class="tag"
+            style="font-size: 17px;color:#14892c"
+            title="Average Method Complexity - 3.308 , Coverage - 84.4% ">ImageProviderPipeline</a>
+            
+    
+            <a href="../image/loader/impl/ImageRawCCITTFax.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 71.4% ">ImageRawCCITTFax</a>
+            
+    
+            <a href="../image/loader/impl/ImageRawEPS.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 28.6% ">ImageRawEPS</a>
+            
+    
+            <a href="../image/loader/impl/ImageRawJPEG.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 71.4% ">ImageRawJPEG</a>
+            
+    
+            <a href="../image/loader/impl/ImageRawPNG.html" class="tag"
+            style="font-size: 13px;color:#e28e87"
+            title="Average Method Complexity - 1.167 , Coverage - 39% ">ImageRawPNG</a>
+            
+    
+            <a href="../image/loader/impl/ImageRawStream.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.25 , Coverage - 62.1% ">ImageRawStream</a>
+            
+    
+            <a href="../image/loader/impl/ImageRawStream.html" class="tag"
+            style="font-size: 13px;color:#14892c"
+            title="Average Method Complexity - 1 , Coverage - 85.7% ">ImageRawStream.ByteArrayStreamFactory</a>
+            
+    
+            <a href="../image/loader/impl/ImageRawStream.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.2 , Coverage - 88.2% ">ImageRawStream.SingleStreamFactory</a>
+            
+    
+            <a href="../image/loader/impl/ImageRendered.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1.143 , Coverage - 100% ">ImageRendered</a>
+            
+    
+            <a href="../image/loader/pipeline/ImageRepresentation.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.333 , Coverage - 83.3% ">ImageRepresentation</a>
+            
+    
+            <a href="../image/loader/ImageSize.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1.091 , Coverage - 64.5% ">ImageSize</a>
+            
+    
+            <a href="../image/loader/ImageSource.html" class="tag"
+            style="font-size: 14px;color:#e7a19b"
+            title="Average Method Complexity - 1.375 , Coverage - 50% ">ImageSource</a>
+            
+    
+            <a href="../image/codec/tiff/ImageType.html" class="tag"
+            style="font-size: 16px;color:#89c495"
+            title="Average Method Complexity - 2.375 , Coverage - 98% ">ImageType</a>
+            
+    
+            <a href="../image/loader/util/ImageUtil.html" class="tag"
+            style="font-size: 15px;color:#fae1a0"
+            title="Average Method Complexity - 1.944 , Coverage - 80.7% ">ImageUtil</a>
+            
+    
+            <a href="../image/writer/ImageWriterParams.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1.095 , Coverage - 51.1% ">ImageWriterParams</a>
+            
+    
+            <a href="../image/writer/ImageWriterRegistry.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 2.333 , Coverage - 90.6% ">ImageWriterRegistry</a>
+            
+    
+            <a href="../image/loader/impl/JPEGFile.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.333 , Coverage - 75% ">JPEGFile</a>
+            
+    
+            <a href="../image/codec/util/MemoryCacheSeekableStream.html" class="tag"
+            style="font-size: 16px;color:#e7a19b"
+            title="Average Method Complexity - 2.857 , Coverage - 57.3% ">MemoryCacheSeekableStream</a>
+            
+    
+            <a href="../image/loader/MimeEnabledImageFlavor.html" class="tag"
+            style="font-size: 16px;color:#f6c342"
+            title="Average Method Complexity - 2.75 , Coverage - 68.8% ">MimeEnabledImageFlavor</a>
+            
+    
+            <a href="../image/codec/png/PNGChunk.html" class="tag"
+            style="font-size: 14px;color:#fae1a0"
+            title="Average Method Complexity - 1.267 , Coverage - 74.2% ">PNGChunk</a>
+            
+    
+            <a href="../image/codec/png/PNGDecodeParam.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1.105 , Coverage - 37.8% ">PNGDecodeParam</a>
+            
+    
+            <a href="../image/codec/png/PNGEncodeParam.html" class="tag"
+            style="font-size: 14px;color:#de7b72"
+            title="Average Method Complexity - 1.672 , Coverage - 29.7% ">PNGEncodeParam</a>
+            
+    
+            <a href="../image/codec/png/PNGEncodeParam.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="Average Method Complexity - 1.625 , Coverage - 8.8% ">PNGEncodeParam.RGB</a>
+            
+    
+            <a href="../image/loader/impl/PNGFile.html" class="tag"
+            style="font-size: 24px;color:#f6c342"
+            title="Average Method Complexity - 7 , Coverage - 70.8% ">PNGFile</a>
+            
+    
+            <a href="../image/codec/png/PNGImageDecoder.html" class="tag"
+            style="font-size: 29px;color:#de7b72"
+            title="Average Method Complexity - 9.931 , Coverage - 28.8% ">PNGImage</a>
+            
+    
+            <a href="../image/codec/png/PNGImageDecoder.html" class="tag"
+            style="font-size: 15px;color:#e7a19b"
+            title="Average Method Complexity - 2 , Coverage - 60.7% ">PNGImageDecoder</a>
+            
+    
+            <a href="../image/codec/png/PNGImageEncoder.html" class="tag"
+            style="font-size: 21px;color:#de7b72"
+            title="Average Method Complexity - 5.5 , Coverage - 32.7% ">PNGImageEncoder</a>
+            
+    
+            <a href="../image/writer/internal/PNGImageWriter.html" class="tag"
+            style="font-size: 13px;color:#de7b72"
+            title="Average Method Complexity - 1 , Coverage - 28.6% ">PNGImageWriter</a>
+            
+    
+            <a href="../image/loader/util/Penalty.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.375 , Coverage - 85.2% ">Penalty</a>
+            
+    
+            <a href="../image/loader/pipeline/PipelineFactory.html" class="tag"
+            style="font-size: 17px;color:#14892c"
+            title="Average Method Complexity - 3.125 , Coverage - 91.6% ">PipelineFactory</a>
+            
+    
+            <a href="../image/loader/pipeline/PipelineFactory.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">PipelineFactory.PipelineComparator</a>
+            
+    
+            <a href="../image/loader/impl/PreloaderBMP.html" class="tag"
+            style="font-size: 17px;color:#89c495"
+            title="Average Method Complexity - 3 , Coverage - 95.3% ">PreloaderBMP</a>
+            
+    
+            <a href="../image/loader/impl/PreloaderEMF.html" class="tag"
+            style="font-size: 15px;color:#14892c"
+            title="Average Method Complexity - 2 , Coverage - 94.9% ">PreloaderEMF</a>
+            
+    
+            <a href="../image/loader/impl/PreloaderEPS.html" class="tag"
+            style="font-size: 23px;color:#14892c"
+            title="Average Method Complexity - 6.667 , Coverage - 89.5% ">PreloaderEPS</a>
+            
+    
+            <a href="../image/loader/impl/PreloaderEPS.html" class="tag"
+            style="font-size: 13px;color:#d9695f"
+            title="Average Method Complexity - 1 , Coverage - 25% ">PreloaderEPS.EPSBinaryFileHeader</a>
+            
+    
+            <a href="../image/loader/impl/PreloaderGIF.html" class="tag"
+            style="font-size: 14px;color:#14892c"
+            title="Average Method Complexity - 1.667 , Coverage - 93.3% ">PreloaderGIF</a>
+            
+    
+            <a href="../image/loader/impl/imageio/PreloaderImageIO.html" class="tag"
+            style="font-size: 21px;color:#f6c342"
+            title="Average Method Complexity - 5.5 , Coverage - 71.4% ">PreloaderImageIO</a>
+            
+    
+            <a href="../image/loader/impl/PreloaderJPEG.html" class="tag"
+            style="font-size: 43px;color:#fae1a0"
+            title="Average Method Complexity - 18.5 , Coverage - 76.5% ">PreloaderJPEG</a>
+            
+    
+            <a href="../image/loader/impl/PreloaderRawPNG.html" class="tag"
+            style="font-size: 15px;color:#fae1a0"
+            title="Average Method Complexity - 2 , Coverage - 81.8% ">PreloaderRawPNG</a>
+            
+    
+            <a href="../image/loader/impl/PreloaderTIFF.html" class="tag"
+            style="font-size: 37px;color:#fae1a0"
+            title="Average Method Complexity - 15 , Coverage - 73.8% ">PreloaderTIFF</a>
+            
+    
+            <a href="../image/codec/util/PropertyUtil.html" class="tag"
+            style="font-size: 14px;color:#e7a19b"
+            title="Average Method Complexity - 1.5 , Coverage - 60% ">PropertyUtil</a>
+            
+    
+            <a href="../image/loader/RefinedImageFlavor.html" class="tag"
+            style="font-size: 13px;color:#14892c"
+            title="Average Method Complexity - 1 , Coverage - 84.6% ">RefinedImageFlavor</a>
+            
+    
+            <a href="../image/writer/ResolutionUnit.html" class="tag"
+            style="font-size: 13px;color:#fae1a0"
+            title="Average Method Complexity - 1 , Coverage - 83.3% ">ResolutionUnit</a>
+            
+    
+            <a href="../image/codec/util/SeekableStream.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="Average Method Complexity - 1.867 , Coverage - 25% ">SeekableStream</a>
+            
+    
+            <a href="../image/loader/util/SeekableStreamAdapter.html" class="tag"
+            style="font-size: 13px;color:#f6c342"
+            title="Average Method Complexity - 1 , Coverage - 71.4% ">SeekableStreamAdapter</a>
+            
+    
+            <a href="../image/loader/SimpleRefinedImageFlavor.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">SimpleRefinedImageFlavor</a>
+            
+    
+            <a href="../image/codec/util/SimpleRenderedImage.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="Average Method Complexity - 1.314 , Coverage - 13.3% ">SimpleRenderedImage</a>
+            
+    
+            <a href="../image/loader/util/SoftMapCache.html" class="tag"
+            style="font-size: 14px;color:#f6c342"
+            title="Average Method Complexity - 1.667 , Coverage - 71.1% ">SoftMapCache</a>
+            
+    
+            <a href="../image/loader/util/SoftReferenceWithKey.html" class="tag"
+            style="font-size: 13px;color:#e7a19b"
+            title="Average Method Complexity - 1 , Coverage - 60% ">SoftReferenceWithKey</a>
+            
+    
+            <a href="../image/codec/tiff/TIFFDirectory.html" class="tag"
+            style="font-size: 16px;color:#e28e87"
+            title="Average Method Complexity - 2.567 , Coverage - 43.3% ">TIFFDirectory</a>
+            
+    
+            <a href="../image/codec/tiff/TIFFEncodeParam.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="Average Method Complexity - 1.312 , Coverage - 27.7% ">TIFFEncodeParam</a>
+            
+    
+            <a href="../image/codec/tiff/TIFFField.html" class="tag"
+            style="font-size: 16px;color:#de7b72"
+            title="Average Method Complexity - 2.636 , Coverage - 31.9% ">TIFFField</a>
+            
+    
+            <a href="../image/codec/tiff/TIFFImageEncoder.html" class="tag"
+            style="font-size: 32px;color:#de7b72"
+            title="Average Method Complexity - 11.824 , Coverage - 34% ">TIFFImageEncoder</a>
+            
+    
+            <a href="../image/writer/internal/TIFFImageWriter.html" class="tag"
+            style="font-size: 14px;color:#d04437"
+            title="Average Method Complexity - 1.5 , Coverage - 4.9% ">TIFFImageWriter</a>
+            
+    
+            <a href="../image/loader/cache/TimeStampProvider.html" class="tag"
+            style="font-size: 13px;color:#89c495"
+            title="Average Method Complexity - 1 , Coverage - 100% ">TimeStampProvider</a>
+            
+    
+            <a href="../image/loader/XMLNamespaceEnabledImageFlavor.html" class="tag"
+            style="font-size: 16px;color:#d5584c"
+            title="Average Method Complexity - 2.75 , Coverage - 15.6% ">XMLNamespaceEnabledImageFlavor</a>
+           </div>
+   
+          <div id="shallowPackageCloud"  style="display: none"  >
+                          
+    
+       </div>
+   </div>
+    </div> <!-- tabs-pane active-pane -->
+</div> <!-- aui-tabs horizontal-tabs -->
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Wed Jan 22 2025 18:18:18 EST using coverage data from Wed Jan 22 2025 18:18:14 EST.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader</a> &gt; <span class="el_source">ImageManager.java</span></div><h1>ImageManager.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageManager.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader</a> &gt; <span class="el_source">ImageManager.java</span></div><h1>ImageManager.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -40,7 +40,7 @@ import org.apache.xmlgraphics.io.XmlSourceUtil;
 /**
  * ImageManager is the central starting point for image access.
  */
-public class ImageManager {
+<span class="pc bpc" id="L43" title="3 of 4 branches missed.">public class ImageManager {public static class __CLR4_5_273x73xm68iyh0s{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,9359,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     /** logger */
 <span class="fc" id="L46">    protected static final Log log = LogFactory.getLog(ImageManager.class);</span>
@@ -61,50 +61,50 @@ public class ImageManager {
      * @param context the session-independent context information
      */
     public ImageManager(ImageContext context) {
-<span class="nc" id="L64">        this(ImageImplRegistry.getDefaultInstance(), context);</span>
-<span class="nc" id="L65">    }</span>
+<span class="nc" id="L64">        this(ImageImplRegistry.getDefaultInstance(), context);__CLR4_5_273x73xm68iyh0s.R.inc(9214);try{__CLR4_5_273x73xm68iyh0s.R.inc(9213);</span>
+<span class="nc" id="L65">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Constructor for testing purposes.
      * @param registry the implementation registry with all plug-ins
      * @param context the session-independent context information
      */
-<span class="fc" id="L72">    public ImageManager(ImageImplRegistry registry, ImageContext context) {</span>
-<span class="fc" id="L73">        this.registry = registry;</span>
-<span class="fc" id="L74">        this.imageContext = context;</span>
-<span class="fc" id="L75">    }</span>
+<span class="fc" id="L72">    public ImageManager(ImageImplRegistry registry, ImageContext context) {try{__CLR4_5_273x73xm68iyh0s.R.inc(9215);</span>
+<span class="fc" id="L73">        __CLR4_5_273x73xm68iyh0s.R.inc(9216);this.registry = registry;</span>
+<span class="fc" id="L74">        __CLR4_5_273x73xm68iyh0s.R.inc(9217);this.imageContext = context;</span>
+<span class="fc" id="L75">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Returns the ImageImplRegistry in use by the ImageManager.
      * @return the ImageImplRegistry
      */
-    public ImageImplRegistry getRegistry() {
-<span class="fc" id="L82">        return this.registry;</span>
-    }
+<span class="fc" id="L81">    public ImageImplRegistry getRegistry() {try{__CLR4_5_273x73xm68iyh0s.R.inc(9218);</span>
+<span class="fc" id="L82">        __CLR4_5_273x73xm68iyh0s.R.inc(9219);return this.registry;</span>
+<span class="fc" id="L83">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Returns the ImageContext in use by the ImageManager.
      * @return the ImageContext
      */
-    public ImageContext getImageContext() {
-<span class="nc" id="L90">        return this.imageContext;</span>
-    }
+<span class="nc" id="L89">    public ImageContext getImageContext() {try{__CLR4_5_273x73xm68iyh0s.R.inc(9220);</span>
+<span class="nc" id="L90">        __CLR4_5_273x73xm68iyh0s.R.inc(9221);return this.imageContext;</span>
+<span class="nc" id="L91">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Returns the ImageCache in use by the ImageManager.
      * @return the ImageCache
      */
-    public ImageCache getCache() {
-<span class="fc" id="L98">        return this.cache;</span>
-    }
+<span class="fc" id="L97">    public ImageCache getCache() {try{__CLR4_5_273x73xm68iyh0s.R.inc(9222);</span>
+<span class="fc" id="L98">        __CLR4_5_273x73xm68iyh0s.R.inc(9223);return this.cache;</span>
+<span class="fc" id="L99">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Returns the PipelineFactory in use by the ImageManager.
      * @return the PipelineFactory
      */
-    public PipelineFactory getPipelineFactory() {
-<span class="fc" id="L106">        return this.pipelineFactory;</span>
-    }
+<span class="fc" id="L105">    public PipelineFactory getPipelineFactory() {try{__CLR4_5_273x73xm68iyh0s.R.inc(9224);</span>
+<span class="fc" id="L106">        __CLR4_5_273x73xm68iyh0s.R.inc(9225);return this.pipelineFactory;</span>
+<span class="fc" id="L107">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Returns an ImageInfo object containing its intrinsic size for a given URI. The ImageInfo
@@ -118,13 +118,13 @@ public class ImageManager {
      * @throws IOException If an I/O error occurs while preloading the image
      */
     public ImageInfo getImageInfo(String uri, ImageSessionContext session)
-                throws ImageException, IOException {
-<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (getCache() != null) {</span>
-<span class="fc" id="L123">            return getCache().needImageInfo(uri, session, this);</span>
-        } else {
-<span class="nc" id="L125">            return preloadImage(uri, session);</span>
+<span class="fc" id="L121">                throws ImageException, IOException {try{__CLR4_5_273x73xm68iyh0s.R.inc(9226);</span>
+<span class="pc bpc" id="L122" title="7 of 10 branches missed.">        __CLR4_5_273x73xm68iyh0s.R.inc(9227);if ((((getCache() != null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9228)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9229)==0&amp;false))) {{</span>
+<span class="fc" id="L123">            __CLR4_5_273x73xm68iyh0s.R.inc(9230);return getCache().needImageInfo(uri, session, this);</span>
+        } }else {{
+<span class="nc" id="L125">            __CLR4_5_273x73xm68iyh0s.R.inc(9231);return preloadImage(uri, session);</span>
         }
-    }
+<span class="fc" id="L127">    }}finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Preloads an image, i.e. the format of the image is identified and some basic information
@@ -144,12 +144,12 @@ public class ImageManager {
      * @throws IOException If an I/O error occurs while preloading the image
      */
     public ImageInfo preloadImage(String uri, ImageSessionContext session)
-            throws ImageException, IOException {
-<span class="fc" id="L148">        Source src = session.needSource(uri);</span>
-<span class="fc" id="L149">        ImageInfo info = preloadImage(uri, src);</span>
-<span class="fc" id="L150">        session.returnSource(uri, src);</span>
-<span class="fc" id="L151">        return info;</span>
-    }
+<span class="fc" id="L147">            throws ImageException, IOException {try{__CLR4_5_273x73xm68iyh0s.R.inc(9232);</span>
+<span class="fc" id="L148">        __CLR4_5_273x73xm68iyh0s.R.inc(9233);Source src = session.needSource(uri);</span>
+<span class="fc" id="L149">        __CLR4_5_273x73xm68iyh0s.R.inc(9234);ImageInfo info = preloadImage(uri, src);</span>
+<span class="fc" id="L150">        __CLR4_5_273x73xm68iyh0s.R.inc(9235);session.returnSource(uri, src);</span>
+<span class="fc" id="L151">        __CLR4_5_273x73xm68iyh0s.R.inc(9236);return info;</span>
+<span class="fc" id="L152">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Preloads an image, i.e. the format of the image is identified and some basic information
@@ -169,34 +169,34 @@ public class ImageManager {
      * @throws IOException If an I/O error occurs while preloading the image
      */
     public ImageInfo preloadImage(String uri, Source src)
-            throws ImageException, IOException {
-<span class="fc" id="L173">        Iterator iter = registry.getPreloaderIterator();</span>
-<span class="pc bpc" id="L174" title="1 of 2 branches missed.">        while (iter.hasNext()) {</span>
-<span class="fc" id="L175">            ImagePreloader preloader = (ImagePreloader) iter.next();</span>
-<span class="fc" id="L176">            ImageInfo info = preloader.preloadImage(uri, src, imageContext);</span>
-<span class="fc bfc" id="L177" title="All 2 branches covered.">            if (info != null) {</span>
-<span class="fc" id="L178">                return info;</span>
+<span class="fc" id="L172">            throws ImageException, IOException {try{__CLR4_5_273x73xm68iyh0s.R.inc(9237);</span>
+<span class="fc" id="L173">        __CLR4_5_273x73xm68iyh0s.R.inc(9238);Iterator iter = registry.getPreloaderIterator();</span>
+<span class="pc bpc" id="L174" title="7 of 10 branches missed.">        __CLR4_5_273x73xm68iyh0s.R.inc(9239);while ((((iter.hasNext())&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9240)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9241)==0&amp;false))) {{</span>
+<span class="fc" id="L175">            __CLR4_5_273x73xm68iyh0s.R.inc(9242);ImagePreloader preloader = (ImagePreloader) iter.next();</span>
+<span class="fc" id="L176">            __CLR4_5_273x73xm68iyh0s.R.inc(9243);ImageInfo info = preloader.preloadImage(uri, src, imageContext);</span>
+<span class="pc bpc" id="L177" title="4 of 10 branches missed.">            __CLR4_5_273x73xm68iyh0s.R.inc(9244);if ((((info != null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9245)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9246)==0&amp;false))) {{</span>
+<span class="fc" id="L178">                __CLR4_5_273x73xm68iyh0s.R.inc(9247);return info;</span>
             }
-<span class="fc" id="L180">        }</span>
-<span class="nc" id="L181">        throw new ImageException(&quot;The file format is not supported. No ImagePreloader found for &quot;</span>
+<span class="fc" id="L180">        }}</span>
+<span class="nc" id="L181">        }__CLR4_5_273x73xm68iyh0s.R.inc(9248);throw new ImageException(&quot;The file format is not supported. No ImagePreloader found for &quot;</span>
                 + uri);
-    }
+<span class="fc" id="L183">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
-    private Map prepareHints(Map hints, ImageSessionContext sessionContext) {
-<span class="fc" id="L186">        Map newHints = new java.util.HashMap();</span>
-<span class="fc bfc" id="L187" title="All 2 branches covered.">        if (hints != null) {</span>
-<span class="fc" id="L188">            newHints.putAll(hints); //Copy in case an unmodifiable map is passed in</span>
+<span class="fc" id="L185">    private Map prepareHints(Map hints, ImageSessionContext sessionContext) {try{__CLR4_5_273x73xm68iyh0s.R.inc(9249);</span>
+<span class="fc" id="L186">        __CLR4_5_273x73xm68iyh0s.R.inc(9250);Map newHints = new java.util.HashMap();</span>
+<span class="pc bpc" id="L187" title="4 of 10 branches missed.">        __CLR4_5_273x73xm68iyh0s.R.inc(9251);if ((((hints != null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9252)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9253)==0&amp;false))) {{</span>
+<span class="fc" id="L188">            __CLR4_5_273x73xm68iyh0s.R.inc(9254);newHints.putAll(hints); //Copy in case an unmodifiable map is passed in</span>
         }
-<span class="pc bpc" id="L190" title="1 of 4 branches missed.">        if (!newHints.containsKey(ImageProcessingHints.IMAGE_SESSION_CONTEXT)</span>
-                &amp;&amp; sessionContext != null) {
-<span class="nc" id="L192">            newHints.put(ImageProcessingHints.IMAGE_SESSION_CONTEXT, sessionContext);</span>
+<span class="pc bpc" id="L190" title="1 of 4 branches missed.">        }__CLR4_5_273x73xm68iyh0s.R.inc(9255);if ((((!newHints.containsKey(ImageProcessingHints.IMAGE_SESSION_CONTEXT)</span>
+<span class="pc bpc" id="L191" title="6 of 8 branches missed.">                &amp;&amp; sessionContext != null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9256)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9257)==0&amp;false))) {{</span>
+<span class="nc" id="L192">            __CLR4_5_273x73xm68iyh0s.R.inc(9258);newHints.put(ImageProcessingHints.IMAGE_SESSION_CONTEXT, sessionContext);</span>
 
         }
-<span class="pc bpc" id="L195" title="1 of 2 branches missed.">        if (!newHints.containsKey(ImageProcessingHints.IMAGE_MANAGER)) {</span>
-<span class="fc" id="L196">            newHints.put(ImageProcessingHints.IMAGE_MANAGER, this);</span>
+<span class="pc bpc" id="L195" title="7 of 10 branches missed.">        }__CLR4_5_273x73xm68iyh0s.R.inc(9259);if ((((!newHints.containsKey(ImageProcessingHints.IMAGE_MANAGER))&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9260)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9261)==0&amp;false))) {{</span>
+<span class="fc" id="L196">            __CLR4_5_273x73xm68iyh0s.R.inc(9262);newHints.put(ImageProcessingHints.IMAGE_MANAGER, this);</span>
         }
-<span class="fc" id="L198">        return newHints;</span>
-    }
+<span class="fc" id="L198">        }__CLR4_5_273x73xm68iyh0s.R.inc(9263);return newHints;</span>
+<span class="fc" id="L199">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Loads an image. The caller can indicate what kind of image flavor is requested. When this
@@ -218,23 +218,23 @@ public class ImageManager {
      */
     public Image getImage(ImageInfo info, ImageFlavor flavor, Map hints,
                 ImageSessionContext session)
-            throws ImageException, IOException {
-<span class="fc" id="L222">        hints = prepareHints(hints, session);</span>
+<span class="fc" id="L221">            throws ImageException, IOException {try{__CLR4_5_273x73xm68iyh0s.R.inc(9264);</span>
+<span class="fc" id="L222">        __CLR4_5_273x73xm68iyh0s.R.inc(9265);hints = prepareHints(hints, session);</span>
 
-<span class="fc" id="L224">        Image img = null;</span>
-<span class="fc" id="L225">        ImageProviderPipeline pipeline = getPipelineFactory().newImageConverterPipeline(</span>
+<span class="fc" id="L224">        __CLR4_5_273x73xm68iyh0s.R.inc(9266);Image img = null;</span>
+<span class="fc" id="L225">        __CLR4_5_273x73xm68iyh0s.R.inc(9267);ImageProviderPipeline pipeline = getPipelineFactory().newImageConverterPipeline(</span>
                 info, flavor);
-<span class="pc bpc" id="L227" title="1 of 2 branches missed.">        if (pipeline != null) {</span>
-<span class="fc" id="L228">            img = pipeline.execute(info, hints, session);</span>
+<span class="pc bpc" id="L227" title="7 of 10 branches missed.">        __CLR4_5_273x73xm68iyh0s.R.inc(9268);if ((((pipeline != null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9269)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9270)==0&amp;false))) {{</span>
+<span class="fc" id="L228">            __CLR4_5_273x73xm68iyh0s.R.inc(9271);img = pipeline.execute(info, hints, session);</span>
         }
-<span class="pc bpc" id="L230" title="1 of 2 branches missed.">        if (img == null) {</span>
-<span class="nc" id="L231">            throw new ImageException(</span>
+<span class="pc bpc" id="L230" title="7 of 10 branches missed.">        }__CLR4_5_273x73xm68iyh0s.R.inc(9272);if ((((img == null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9273)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9274)==0&amp;false))) {{</span>
+<span class="nc" id="L231">            __CLR4_5_273x73xm68iyh0s.R.inc(9275);throw new ImageException(</span>
                     &quot;Cannot load image (no suitable loader/converter combination available) for &quot;
                         + info);
         }
-<span class="fc" id="L235">        XmlSourceUtil.closeQuietly(session.getSource(info.getOriginalURI()));</span>
-<span class="fc" id="L236">        return img;</span>
-    }
+<span class="fc" id="L235">        }__CLR4_5_273x73xm68iyh0s.R.inc(9276);XmlSourceUtil.closeQuietly(session.getSource(info.getOriginalURI()));</span>
+<span class="fc" id="L236">        __CLR4_5_273x73xm68iyh0s.R.inc(9277);return img;</span>
+<span class="fc" id="L237">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Loads an image. The caller can indicate what kind of image flavors are requested. When this
@@ -257,25 +257,25 @@ public class ImageManager {
      */
     public Image getImage(ImageInfo info, ImageFlavor[] flavors, Map hints,
                         ImageSessionContext session)
-                throws ImageException, IOException {
-<span class="fc" id="L261">        hints = prepareHints(hints, session);</span>
+<span class="fc" id="L260">                throws ImageException, IOException {try{__CLR4_5_273x73xm68iyh0s.R.inc(9278);</span>
+<span class="fc" id="L261">        __CLR4_5_273x73xm68iyh0s.R.inc(9279);hints = prepareHints(hints, session);</span>
 
-<span class="fc" id="L263">        Image img = null;</span>
-<span class="fc" id="L264">        ImageProviderPipeline[] candidates = getPipelineFactory().determineCandidatePipelines(</span>
+<span class="fc" id="L263">        __CLR4_5_273x73xm68iyh0s.R.inc(9280);Image img = null;</span>
+<span class="fc" id="L264">        __CLR4_5_273x73xm68iyh0s.R.inc(9281);ImageProviderPipeline[] candidates = getPipelineFactory().determineCandidatePipelines(</span>
                 info, flavors);
-<span class="fc" id="L266">        ImageProviderPipeline pipeline = choosePipeline(candidates);</span>
+<span class="fc" id="L266">        __CLR4_5_273x73xm68iyh0s.R.inc(9282);ImageProviderPipeline pipeline = choosePipeline(candidates);</span>
 
-<span class="pc bpc" id="L268" title="1 of 2 branches missed.">        if (pipeline != null) {</span>
-<span class="fc" id="L269">            img = pipeline.execute(info, hints, session);</span>
+<span class="pc bpc" id="L268" title="7 of 10 branches missed.">        __CLR4_5_273x73xm68iyh0s.R.inc(9283);if ((((pipeline != null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9284)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9285)==0&amp;false))) {{</span>
+<span class="fc" id="L269">            __CLR4_5_273x73xm68iyh0s.R.inc(9286);img = pipeline.execute(info, hints, session);</span>
         }
-<span class="pc bpc" id="L271" title="1 of 2 branches missed.">        if (img == null) {</span>
-<span class="nc" id="L272">            throw new ImageException(</span>
+<span class="pc bpc" id="L271" title="7 of 10 branches missed.">        }__CLR4_5_273x73xm68iyh0s.R.inc(9287);if ((((img == null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9288)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9289)==0&amp;false))) {{</span>
+<span class="nc" id="L272">            __CLR4_5_273x73xm68iyh0s.R.inc(9290);throw new ImageException(</span>
                     &quot;Cannot load image (no suitable loader/converter combination available) for &quot;
                             + info);
         }
-<span class="fc" id="L276">        XmlSourceUtil.closeQuietly(session.getSource(info.getOriginalURI()));</span>
-<span class="fc" id="L277">        return img;</span>
-    }
+<span class="fc" id="L276">        }__CLR4_5_273x73xm68iyh0s.R.inc(9291);XmlSourceUtil.closeQuietly(session.getSource(info.getOriginalURI()));</span>
+<span class="fc" id="L277">        __CLR4_5_273x73xm68iyh0s.R.inc(9292);return img;</span>
+<span class="fc" id="L278">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Loads an image with no hints. See
@@ -291,9 +291,9 @@ public class ImageManager {
      * @throws IOException If an I/O error occurs
      */
     public Image getImage(ImageInfo info, ImageFlavor flavor, ImageSessionContext session)
-            throws ImageException, IOException {
-<span class="fc" id="L295">        return getImage(info, flavor, ImageUtil.getDefaultHints(session), session);</span>
-    }
+<span class="fc" id="L294">            throws ImageException, IOException {try{__CLR4_5_273x73xm68iyh0s.R.inc(9293);</span>
+<span class="fc" id="L295">        __CLR4_5_273x73xm68iyh0s.R.inc(9294);return getImage(info, flavor, ImageUtil.getDefaultHints(session), session);</span>
+<span class="fc" id="L296">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Loads an image with no hints. See
@@ -309,9 +309,9 @@ public class ImageManager {
      * @throws IOException If an I/O error occurs
      */
     public Image getImage(ImageInfo info, ImageFlavor[] flavors, ImageSessionContext session)
-            throws ImageException, IOException {
-<span class="fc" id="L313">        return getImage(info, flavors, ImageUtil.getDefaultHints(session), session);</span>
-    }
+<span class="fc" id="L312">            throws ImageException, IOException {try{__CLR4_5_273x73xm68iyh0s.R.inc(9295);</span>
+<span class="fc" id="L313">        __CLR4_5_273x73xm68iyh0s.R.inc(9296);return getImage(info, flavors, ImageUtil.getDefaultHints(session), session);</span>
+<span class="fc" id="L314">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Closes the resources associated to the given image. This method should be
@@ -321,9 +321,9 @@ public class ImageManager {
      * @param uri the URI of the image
      * @param session the session context that was used to resolve the URI
      */
-    public void closeImage(String uri, ImageSessionContext session) {
-<span class="nc" id="L325">        XmlSourceUtil.closeQuietly(session.getSource(uri));</span>
-<span class="nc" id="L326">    }</span>
+<span class="nc" id="L324">    public void closeImage(String uri, ImageSessionContext session) {try{__CLR4_5_273x73xm68iyh0s.R.inc(9297);</span>
+<span class="nc" id="L325">        __CLR4_5_273x73xm68iyh0s.R.inc(9298);XmlSourceUtil.closeQuietly(session.getSource(uri));</span>
+<span class="nc" id="L326">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Converts an image. The caller can indicate what kind of image flavors are requested. When
@@ -343,31 +343,31 @@ public class ImageManager {
      * @throws IOException If an I/O error occurs
      */
     public Image convertImage(Image image, ImageFlavor[] flavors, Map hints)
-                throws ImageException, IOException {
-<span class="fc" id="L347">        hints = prepareHints(hints, null);</span>
-<span class="fc" id="L348">        ImageInfo info = image.getInfo();</span>
+<span class="fc" id="L346">                throws ImageException, IOException {try{__CLR4_5_273x73xm68iyh0s.R.inc(9299);</span>
+<span class="fc" id="L347">        __CLR4_5_273x73xm68iyh0s.R.inc(9300);hints = prepareHints(hints, null);</span>
+<span class="fc" id="L348">        __CLR4_5_273x73xm68iyh0s.R.inc(9301);ImageInfo info = image.getInfo();</span>
 
-<span class="fc" id="L350">        Image img = null;</span>
-<span class="fc bfc" id="L351" title="All 2 branches covered.">        for (ImageFlavor flavor : flavors) {</span>
-<span class="pc bpc" id="L352" title="1 of 2 branches missed.">            if (image.getFlavor().equals(flavor)) {</span>
+<span class="fc" id="L350">        __CLR4_5_273x73xm68iyh0s.R.inc(9302);Image img = null;</span>
+<span class="fc bfc" id="L351" title="All 2 branches covered.">        __CLR4_5_273x73xm68iyh0s.R.inc(9303);for (ImageFlavor flavor : flavors) {{</span>
+<span class="pc bpc" id="L352" title="7 of 10 branches missed.">            __CLR4_5_273x73xm68iyh0s.R.inc(9304);if ((((image.getFlavor().equals(flavor))&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9305)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9306)==0&amp;false))) {{</span>
                 //Shortcut (the image is already in one of the requested formats)
-<span class="nc" id="L354">                return image;</span>
+<span class="nc" id="L354">                __CLR4_5_273x73xm68iyh0s.R.inc(9307);return image;</span>
             }
-        }
-<span class="fc" id="L357">        ImageProviderPipeline[] candidates = getPipelineFactory().determineCandidatePipelines(</span>
+        }}
+<span class="fc" id="L357">        }__CLR4_5_273x73xm68iyh0s.R.inc(9308);ImageProviderPipeline[] candidates = getPipelineFactory().determineCandidatePipelines(</span>
                 image, flavors);
-<span class="fc" id="L359">        ImageProviderPipeline pipeline = choosePipeline(candidates);</span>
+<span class="fc" id="L359">        __CLR4_5_273x73xm68iyh0s.R.inc(9309);ImageProviderPipeline pipeline = choosePipeline(candidates);</span>
 
-<span class="pc bpc" id="L361" title="1 of 2 branches missed.">        if (pipeline != null) {</span>
-<span class="fc" id="L362">            img = pipeline.execute(info, image, hints, null);</span>
+<span class="pc bpc" id="L361" title="7 of 10 branches missed.">        __CLR4_5_273x73xm68iyh0s.R.inc(9310);if ((((pipeline != null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9311)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9312)==0&amp;false))) {{</span>
+<span class="fc" id="L362">            __CLR4_5_273x73xm68iyh0s.R.inc(9313);img = pipeline.execute(info, image, hints, null);</span>
         }
-<span class="pc bpc" id="L364" title="1 of 2 branches missed.">        if (img == null) {</span>
-<span class="nc" id="L365">            throw new ImageException(</span>
+<span class="pc bpc" id="L364" title="7 of 10 branches missed.">        }__CLR4_5_273x73xm68iyh0s.R.inc(9314);if ((((img == null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9315)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9316)==0&amp;false))) {{</span>
+<span class="nc" id="L365">            __CLR4_5_273x73xm68iyh0s.R.inc(9317);throw new ImageException(</span>
                     &quot;Cannot convert image &quot; + image
                     + &quot; (no suitable converter combination available)&quot;);
         }
-<span class="fc" id="L369">        return img;</span>
-    }
+<span class="fc" id="L369">        }__CLR4_5_273x73xm68iyh0s.R.inc(9318);return img;</span>
+<span class="fc" id="L370">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Converts an image with no hints. See
@@ -381,47 +381,47 @@ public class ImageManager {
      * @throws IOException If an I/O error occurs
      */
     public Image convertImage(Image image, ImageFlavor[] flavors)
-                throws ImageException, IOException {
-<span class="fc" id="L385">        return convertImage(image, flavors, null);</span>
-    }
+<span class="fc" id="L384">                throws ImageException, IOException {try{__CLR4_5_273x73xm68iyh0s.R.inc(9319);</span>
+<span class="fc" id="L385">        __CLR4_5_273x73xm68iyh0s.R.inc(9320);return convertImage(image, flavors, null);</span>
+<span class="fc" id="L386">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
     /**
      * Chooses the best {@link ImageProviderPipeline} from a set of candidates.
      * @param candidates the candidates
      * @return the best pipeline
      */
-    public ImageProviderPipeline choosePipeline(ImageProviderPipeline[] candidates) {
-<span class="fc" id="L394">        ImageProviderPipeline pipeline = null;</span>
-<span class="fc" id="L395">        int minPenalty = Integer.MAX_VALUE;</span>
-<span class="fc" id="L396">        int count = candidates.length;</span>
-<span class="pc bpc" id="L397" title="1 of 2 branches missed.">        if (log.isTraceEnabled()) {</span>
-<span class="nc" id="L398">            log.trace(&quot;Candidate Pipelines:&quot;);</span>
-<span class="nc bnc" id="L399" title="All 2 branches missed.">            for (int i = 0; i &lt; count; i++) {</span>
-<span class="nc bnc" id="L400" title="All 2 branches missed.">                if (candidates[i] == null) {</span>
-<span class="nc" id="L401">                    continue;</span>
+<span class="fc" id="L393">    public ImageProviderPipeline choosePipeline(ImageProviderPipeline[] candidates) {try{__CLR4_5_273x73xm68iyh0s.R.inc(9321);</span>
+<span class="fc" id="L394">        __CLR4_5_273x73xm68iyh0s.R.inc(9322);ImageProviderPipeline pipeline = null;</span>
+<span class="fc" id="L395">        __CLR4_5_273x73xm68iyh0s.R.inc(9323);int minPenalty = Integer.MAX_VALUE;</span>
+<span class="fc" id="L396">        __CLR4_5_273x73xm68iyh0s.R.inc(9324);int count = candidates.length;</span>
+<span class="pc bpc" id="L397" title="7 of 10 branches missed.">        __CLR4_5_273x73xm68iyh0s.R.inc(9325);if ((((log.isTraceEnabled())&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9326)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9327)==0&amp;false))) {{</span>
+<span class="nc" id="L398">            __CLR4_5_273x73xm68iyh0s.R.inc(9328);log.trace(&quot;Candidate Pipelines:&quot;);</span>
+<span class="nc bnc" id="L399" title="All 10 branches missed.">            __CLR4_5_273x73xm68iyh0s.R.inc(9329);for (int i = 0; (((i &lt; count)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9330)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9331)==0&amp;false)); i++) {{</span>
+<span class="nc bnc" id="L400" title="All 10 branches missed.">                __CLR4_5_273x73xm68iyh0s.R.inc(9332);if ((((candidates[i] == null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9333)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9334)==0&amp;false))) {{</span>
+<span class="nc" id="L401">                    __CLR4_5_273x73xm68iyh0s.R.inc(9335);continue;</span>
                 }
-<span class="nc" id="L403">                log.trace(&quot;  &quot; + i + &quot;: &quot;</span>
+<span class="nc" id="L403">                }__CLR4_5_273x73xm68iyh0s.R.inc(9336);log.trace(&quot;  &quot; + i + &quot;: &quot;</span>
 <span class="nc" id="L404">                        + candidates[i].getConversionPenalty(getRegistry()) + &quot; for &quot; + candidates[i]);</span>
             }
-        }
-<span class="fc bfc" id="L407" title="All 2 branches covered.">        for (int i = count - 1; i &gt;= 0; i--) {</span>
-<span class="pc bpc" id="L408" title="1 of 2 branches missed.">            if (candidates[i] == null) {</span>
-<span class="nc" id="L409">                continue;</span>
+        }}
+<span class="pc bpc" id="L407" title="4 of 10 branches missed.">        }__CLR4_5_273x73xm68iyh0s.R.inc(9337);for (int i = count - 1; (((i &gt;= 0)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9338)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9339)==0&amp;false)); i--) {{</span>
+<span class="pc bpc" id="L408" title="7 of 10 branches missed.">            __CLR4_5_273x73xm68iyh0s.R.inc(9340);if ((((candidates[i] == null)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9341)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9342)==0&amp;false))) {{</span>
+<span class="nc" id="L409">                __CLR4_5_273x73xm68iyh0s.R.inc(9343);continue;</span>
             }
-<span class="fc" id="L411">            Penalty penalty = candidates[i].getConversionPenalty(getRegistry());</span>
-<span class="pc bpc" id="L412" title="1 of 2 branches missed.">            if (penalty.isInfinitePenalty()) {</span>
-<span class="nc" id="L413">                continue; //Exclude candidate on infinite penalty</span>
+<span class="fc" id="L411">            }__CLR4_5_273x73xm68iyh0s.R.inc(9344);Penalty penalty = candidates[i].getConversionPenalty(getRegistry());</span>
+<span class="pc bpc" id="L412" title="7 of 10 branches missed.">            __CLR4_5_273x73xm68iyh0s.R.inc(9345);if ((((penalty.isInfinitePenalty())&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9346)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9347)==0&amp;false))) {{</span>
+<span class="nc" id="L413">                __CLR4_5_273x73xm68iyh0s.R.inc(9348);continue; //Exclude candidate on infinite penalty</span>
             }
-<span class="fc bfc" id="L415" title="All 2 branches covered.">            if (penalty.getValue() &lt;= minPenalty) {</span>
-<span class="fc" id="L416">                pipeline = candidates[i];</span>
-<span class="fc" id="L417">                minPenalty = penalty.getValue();</span>
+<span class="pc bpc" id="L415" title="4 of 10 branches missed.">            }__CLR4_5_273x73xm68iyh0s.R.inc(9349);if ((((penalty.getValue() &lt;= minPenalty)&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9350)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9351)==0&amp;false))) {{</span>
+<span class="fc" id="L416">                __CLR4_5_273x73xm68iyh0s.R.inc(9352);pipeline = candidates[i];</span>
+<span class="fc" id="L417">                __CLR4_5_273x73xm68iyh0s.R.inc(9353);minPenalty = penalty.getValue();</span>
             }
+        }}
+<span class="pc bpc" id="L420" title="7 of 10 branches missed.">        }__CLR4_5_273x73xm68iyh0s.R.inc(9354);if ((((log.isDebugEnabled())&amp;&amp;(__CLR4_5_273x73xm68iyh0s.R.iget(9355)!=0|true))||(__CLR4_5_273x73xm68iyh0s.R.iget(9356)==0&amp;false))) {{</span>
+<span class="nc" id="L421">            __CLR4_5_273x73xm68iyh0s.R.inc(9357);log.debug(&quot;Chosen pipeline: &quot; + pipeline);</span>
         }
-<span class="pc bpc" id="L420" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
-<span class="nc" id="L421">            log.debug(&quot;Chosen pipeline: &quot; + pipeline);</span>
-        }
-<span class="fc" id="L423">        return pipeline;</span>
-    }
+<span class="fc" id="L423">        }__CLR4_5_273x73xm68iyh0s.R.inc(9358);return pipeline;</span>
+<span class="fc" id="L424">    }finally{__CLR4_5_273x73xm68iyh0s.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

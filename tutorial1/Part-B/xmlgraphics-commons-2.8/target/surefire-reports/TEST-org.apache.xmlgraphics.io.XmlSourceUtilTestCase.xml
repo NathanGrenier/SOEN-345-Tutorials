@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.158" tests="14" errors="0" skipped="1" failures="0">
+<testsuite name="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.169" tests="14" errors="0" skipped="1" failures="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="17.0.13+11-Ubuntu-2ubuntu122.04"/>
@@ -38,7 +38,7 @@
     <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean clover:setup test clover:aggregate clover:clover"/>
     <property name="java.home" value="/usr/lib/jvm/java-17-openjdk-amd64"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -56,20 +56,20 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.stdout.encoding" value="UTF-8"/>
   </properties>
-  <testcase name="testCloseQuietlyStreamSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.122"/>
+  <testcase name="testCloseQuietlyStreamSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.125"/>
   <testcase name="testNeedInputStreamFailureCaseStreamImage" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0">
     <skipped/>
   </testcase>
-  <testcase name="testHasInputStream" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.003"/>
-  <testcase name="testCloseQuietlyImageSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.002"/>
-  <testcase name="testCloseQuietlySaxSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.002"/>
-  <testcase name="testNeedInputStreamFailureCaseSAXSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.002"/>
-  <testcase name="testHasReader" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.002"/>
+  <testcase name="testHasInputStream" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.004"/>
+  <testcase name="testCloseQuietlyImageSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.005"/>
+  <testcase name="testCloseQuietlySaxSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.003"/>
+  <testcase name="testNeedInputStreamFailureCaseSAXSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.003"/>
+  <testcase name="testHasReader" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.003"/>
   <testcase name="testNeedInputStream" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.002"/>
   <testcase name="testNeedInputStreamFailureCaseNullArg" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.002"/>
-  <testcase name="testCloseQuietlyNull" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.002"/>
-  <testcase name="testRemoveStreams" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.002"/>
+  <testcase name="testCloseQuietlyNull" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.003"/>
+  <testcase name="testRemoveStreams" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.003"/>
   <testcase name="testNeedInputStreamFailureCaseSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.01"/>
-  <testcase name="testNeedInputStreamFailureCaseStreamSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.004"/>
+  <testcase name="testNeedInputStreamFailureCaseStreamSource" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.003"/>
   <testcase name="testGetInputStream" classname="org.apache.xmlgraphics.io.XmlSourceUtilTestCase" time="0.003"/>
 </testsuite>

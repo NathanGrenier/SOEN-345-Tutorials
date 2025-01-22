@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Dimension2DDouble.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">Dimension2DDouble.java</span></div><h1>Dimension2DDouble.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Dimension2DDouble.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">Dimension2DDouble.java</span></div><h1>Dimension2DDouble.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -25,7 +25,7 @@ import java.io.Serializable;
 /**
  * Subclass of Dimension2D which takes double values.
  */
-public class Dimension2DDouble extends Dimension2D implements Serializable {
+<span class="pc bpc" id="L28" title="3 of 4 branches missed.">public class Dimension2DDouble extends Dimension2D implements Serializable {public static class __CLR4_5_2bbtbbtm68iyhrf{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,14718,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private static final long serialVersionUID = 7909028357685520189L;
 
@@ -35,65 +35,65 @@ public class Dimension2DDouble extends Dimension2D implements Serializable {
     /**
      * Default constructor.
      */
-<span class="nc" id="L38">    public Dimension2DDouble() {</span>
-<span class="nc" id="L39">        this.width = 0;</span>
-<span class="nc" id="L40">        this.height = 0;</span>
-<span class="nc" id="L41">    }</span>
+<span class="nc" id="L38">    public Dimension2DDouble() {try{__CLR4_5_2bbtbbtm68iyhrf.R.inc(14681);</span>
+<span class="nc" id="L39">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14682);this.width = 0;</span>
+<span class="nc" id="L40">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14683);this.height = 0;</span>
+<span class="nc" id="L41">    }finally{__CLR4_5_2bbtbbtm68iyhrf.R.flushNeeded();}}</span>
 
     /**
      * Main constructor.
      * @param width initial width
      * @param height initial height
      */
-<span class="fc" id="L48">    public Dimension2DDouble(double width, double height) {</span>
-<span class="fc" id="L49">        this.width = width;</span>
-<span class="fc" id="L50">        this.height = height;</span>
-<span class="fc" id="L51">    }</span>
+<span class="fc" id="L48">    public Dimension2DDouble(double width, double height) {try{__CLR4_5_2bbtbbtm68iyhrf.R.inc(14684);</span>
+<span class="fc" id="L49">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14685);this.width = width;</span>
+<span class="fc" id="L50">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14686);this.height = height;</span>
+<span class="fc" id="L51">    }finally{__CLR4_5_2bbtbbtm68iyhrf.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public double getWidth() {
-<span class="fc" id="L55">        return width;</span>
-    }
+<span class="fc" id="L54">    public double getWidth() {try{__CLR4_5_2bbtbbtm68iyhrf.R.inc(14687);</span>
+<span class="fc" id="L55">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14688);return width;</span>
+<span class="fc" id="L56">    }finally{__CLR4_5_2bbtbbtm68iyhrf.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public double getHeight() {
-<span class="fc" id="L60">        return height;</span>
-    }
+<span class="fc" id="L59">    public double getHeight() {try{__CLR4_5_2bbtbbtm68iyhrf.R.inc(14689);</span>
+<span class="fc" id="L60">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14690);return height;</span>
+<span class="fc" id="L61">    }finally{__CLR4_5_2bbtbbtm68iyhrf.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public void setSize(double w, double h) {
-<span class="nc" id="L65">        this.width = w;</span>
-<span class="nc" id="L66">        this.height = h;</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L64">    public void setSize(double w, double h) {try{__CLR4_5_2bbtbbtm68iyhrf.R.inc(14691);</span>
+<span class="nc" id="L65">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14692);this.width = w;</span>
+<span class="nc" id="L66">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14693);this.height = h;</span>
+<span class="nc" id="L67">    }finally{__CLR4_5_2bbtbbtm68iyhrf.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public boolean equals(Object obj) {
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (this == obj) {</span>
-<span class="nc" id="L72">            return true;</span>
+<span class="nc" id="L70">    public boolean equals(Object obj) {try{__CLR4_5_2bbtbbtm68iyhrf.R.inc(14694);</span>
+<span class="nc bnc" id="L71" title="All 10 branches missed.">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14695);if ((((this == obj)&amp;&amp;(__CLR4_5_2bbtbbtm68iyhrf.R.iget(14696)!=0|true))||(__CLR4_5_2bbtbbtm68iyhrf.R.iget(14697)==0&amp;false))) {{</span>
+<span class="nc" id="L72">            __CLR4_5_2bbtbbtm68iyhrf.R.inc(14698);return true;</span>
         }
-<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (obj instanceof Dimension2DDouble) {</span>
-<span class="nc" id="L75">            final Dimension2DDouble other = (Dimension2DDouble)obj;</span>
-<span class="nc bnc" id="L76" title="All 2 branches missed.">            if (Double.doubleToLongBits(height) != Double.doubleToLongBits(other.height)) {</span>
-<span class="nc" id="L77">                return false;</span>
+<span class="nc bnc" id="L74" title="All 10 branches missed.">        }__CLR4_5_2bbtbbtm68iyhrf.R.inc(14699);if ((((obj instanceof Dimension2DDouble)&amp;&amp;(__CLR4_5_2bbtbbtm68iyhrf.R.iget(14700)!=0|true))||(__CLR4_5_2bbtbbtm68iyhrf.R.iget(14701)==0&amp;false))) {{</span>
+<span class="nc" id="L75">            __CLR4_5_2bbtbbtm68iyhrf.R.inc(14702);final Dimension2DDouble other = (Dimension2DDouble)obj;</span>
+<span class="nc bnc" id="L76" title="All 10 branches missed.">            __CLR4_5_2bbtbbtm68iyhrf.R.inc(14703);if ((((Double.doubleToLongBits(height) != Double.doubleToLongBits(other.height))&amp;&amp;(__CLR4_5_2bbtbbtm68iyhrf.R.iget(14704)!=0|true))||(__CLR4_5_2bbtbbtm68iyhrf.R.iget(14705)==0&amp;false))) {{</span>
+<span class="nc" id="L77">                __CLR4_5_2bbtbbtm68iyhrf.R.inc(14706);return false;</span>
             }
-<span class="nc bnc" id="L79" title="All 2 branches missed.">            if (Double.doubleToLongBits(width) != Double.doubleToLongBits(other.width)) {</span>
-<span class="nc" id="L80">                return false;</span>
+<span class="nc bnc" id="L79" title="All 10 branches missed.">            }__CLR4_5_2bbtbbtm68iyhrf.R.inc(14707);if ((((Double.doubleToLongBits(width) != Double.doubleToLongBits(other.width))&amp;&amp;(__CLR4_5_2bbtbbtm68iyhrf.R.iget(14708)!=0|true))||(__CLR4_5_2bbtbbtm68iyhrf.R.iget(14709)==0&amp;false))) {{</span>
+<span class="nc" id="L80">                __CLR4_5_2bbtbbtm68iyhrf.R.inc(14710);return false;</span>
             }
-<span class="nc" id="L82">            return true;</span>
-        } else {
-<span class="nc" id="L84">            return false;</span>
+<span class="nc" id="L82">            }__CLR4_5_2bbtbbtm68iyhrf.R.inc(14711);return true;</span>
+        } }else {{
+<span class="nc" id="L84">            __CLR4_5_2bbtbbtm68iyhrf.R.inc(14712);return false;</span>
         }
-    }
+<span class="nc" id="L86">    }}finally{__CLR4_5_2bbtbbtm68iyhrf.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public int hashCode() {
-<span class="nc" id="L90">        double sum = width + height;</span>
-<span class="nc" id="L91">        return (int)(sum * (sum + 1) / 2 + width);</span>
-    }
+<span class="nc" id="L89">    public int hashCode() {try{__CLR4_5_2bbtbbtm68iyhrf.R.inc(14713);</span>
+<span class="nc" id="L90">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14714);double sum = width + height;</span>
+<span class="nc" id="L91">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14715);return (int)(sum * (sum + 1) / 2 + width);</span>
+<span class="nc" id="L92">    }finally{__CLR4_5_2bbtbbtm68iyhrf.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String toString() {
-<span class="nc" id="L96">        return getClass().getName() + &quot;[width=&quot; + width + &quot;,height=&quot; + height + &quot;]&quot;;</span>
-    }
+<span class="nc" id="L95">    public String toString() {try{__CLR4_5_2bbtbbtm68iyhrf.R.inc(14716);</span>
+<span class="nc" id="L96">        __CLR4_5_2bbtbbtm68iyhrf.R.inc(14717);return getClass().getName() + &quot;[width=&quot; + width + &quot;,height=&quot; + height + &quot;]&quot;;</span>
+<span class="nc" id="L97">    }finally{__CLR4_5_2bbtbbtm68iyhrf.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGChunk.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.png</a> &gt; <span class="el_source">PNGChunk.java</span></div><h1>PNGChunk.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGChunk.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.png</a> &gt; <span class="el_source">PNGChunk.java</span></div><h1>PNGChunk.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -24,7 +24,7 @@ import java.io.DataInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class PNGChunk {
+<span class="pc bpc" id="L27" title="3 of 4 branches missed.">public class PNGChunk {public static class __CLR4_5_2r2r2m68iyfrb{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,1040,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
     int length;
     int type;
     byte[] data;
@@ -61,125 +61,125 @@ public class PNGChunk {
 <span class="fc" id="L61">        zTXt; // zTXt contains compressed text with the same limits as tEXt</span>
     }
 
-<span class="fc" id="L64">    public PNGChunk(int length, int type, byte[] data, int crc) {</span>
-<span class="fc" id="L65">        this.length = length;</span>
-<span class="fc" id="L66">        this.type = type;</span>
-<span class="fc" id="L67">        this.data = data;</span>
-<span class="fc" id="L68">        this.crc = crc;</span>
-<span class="fc" id="L69">        this.typeString = typeIntToString(this.type);</span>
-<span class="fc" id="L70">    }</span>
+<span class="fc" id="L64">    public PNGChunk(int length, int type, byte[] data, int crc) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(974);</span>
+<span class="fc" id="L65">        __CLR4_5_2r2r2m68iyfrb.R.inc(975);this.length = length;</span>
+<span class="fc" id="L66">        __CLR4_5_2r2r2m68iyfrb.R.inc(976);this.type = type;</span>
+<span class="fc" id="L67">        __CLR4_5_2r2r2m68iyfrb.R.inc(977);this.data = data;</span>
+<span class="fc" id="L68">        __CLR4_5_2r2r2m68iyfrb.R.inc(978);this.crc = crc;</span>
+<span class="fc" id="L69">        __CLR4_5_2r2r2m68iyfrb.R.inc(979);this.typeString = typeIntToString(this.type);</span>
+<span class="fc" id="L70">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public int getLength() {
-<span class="fc" id="L73">        return length;</span>
-    }
+<span class="fc" id="L72">    public int getLength() {try{__CLR4_5_2r2r2m68iyfrb.R.inc(980);</span>
+<span class="fc" id="L73">        __CLR4_5_2r2r2m68iyfrb.R.inc(981);return length;</span>
+<span class="fc" id="L74">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public int getType() {
-<span class="nc" id="L77">        return type;</span>
-    }
+<span class="nc" id="L76">    public int getType() {try{__CLR4_5_2r2r2m68iyfrb.R.inc(982);</span>
+<span class="nc" id="L77">        __CLR4_5_2r2r2m68iyfrb.R.inc(983);return type;</span>
+<span class="nc" id="L78">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public String getTypeString() {
-<span class="nc" id="L81">        return typeString;</span>
-    }
+<span class="nc" id="L80">    public String getTypeString() {try{__CLR4_5_2r2r2m68iyfrb.R.inc(984);</span>
+<span class="nc" id="L81">        __CLR4_5_2r2r2m68iyfrb.R.inc(985);return typeString;</span>
+<span class="nc" id="L82">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public byte[] getData() {
-<span class="fc" id="L85">        return data;</span>
-    }
+<span class="fc" id="L84">    public byte[] getData() {try{__CLR4_5_2r2r2m68iyfrb.R.inc(986);</span>
+<span class="fc" id="L85">        __CLR4_5_2r2r2m68iyfrb.R.inc(987);return data;</span>
+<span class="fc" id="L86">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public byte getByte(int offset) {
-<span class="fc" id="L89">        return data[offset];</span>
-    }
+<span class="fc" id="L88">    public byte getByte(int offset) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(988);</span>
+<span class="fc" id="L89">        __CLR4_5_2r2r2m68iyfrb.R.inc(989);return data[offset];</span>
+<span class="fc" id="L90">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public int getInt1(int offset) {
-<span class="fc" id="L93">        return data[offset] &amp; 0xff;</span>
-    }
+<span class="fc" id="L92">    public int getInt1(int offset) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(990);</span>
+<span class="fc" id="L93">        __CLR4_5_2r2r2m68iyfrb.R.inc(991);return data[offset] &amp; 0xff;</span>
+<span class="fc" id="L94">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public int getInt2(int offset) {
-<span class="fc" id="L97">        return ((data[offset] &amp; 0xff) &lt;&lt; 8) | (data[offset + 1] &amp; 0xff);</span>
-    }
+<span class="fc" id="L96">    public int getInt2(int offset) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(992);</span>
+<span class="fc" id="L97">        __CLR4_5_2r2r2m68iyfrb.R.inc(993);return ((data[offset] &amp; 0xff) &lt;&lt; 8) | (data[offset + 1] &amp; 0xff);</span>
+<span class="fc" id="L98">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public int getInt4(int offset) {
-<span class="fc" id="L101">        return ((data[offset] &amp; 0xff) &lt;&lt; 24) | ((data[offset + 1] &amp; 0xff) &lt;&lt; 16)</span>
+<span class="fc" id="L100">    public int getInt4(int offset) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(994);</span>
+<span class="fc" id="L101">        __CLR4_5_2r2r2m68iyfrb.R.inc(995);return ((data[offset] &amp; 0xff) &lt;&lt; 24) | ((data[offset + 1] &amp; 0xff) &lt;&lt; 16)</span>
                 | ((data[offset + 2] &amp; 0xff) &lt;&lt; 8) | (data[offset + 3] &amp; 0xff);
-    }
+<span class="fc" id="L103">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public String getString4(int offset) {
-<span class="nc" id="L106">        return &quot;&quot; + (char) data[offset] + (char) data[offset + 1] + (char) data[offset + 2]</span>
+<span class="nc" id="L105">    public String getString4(int offset) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(996);</span>
+<span class="nc" id="L106">        __CLR4_5_2r2r2m68iyfrb.R.inc(997);return &quot;&quot; + (char) data[offset] + (char) data[offset + 1] + (char) data[offset + 2]</span>
                 + (char) data[offset + 3];
-    }
+<span class="nc" id="L108">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    public boolean isType(String typeName) {
-<span class="nc" id="L111">        return typeString.equals(typeName);</span>
-    }
+<span class="nc" id="L110">    public boolean isType(String typeName) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(998);</span>
+<span class="nc" id="L111">        __CLR4_5_2r2r2m68iyfrb.R.inc(999);return typeString.equals(typeName);</span>
+<span class="nc" id="L112">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
     /**
      * Reads the next chunk from the input stream.
      * @param distream the input stream
      * @return the chunk
      */
-    public static PNGChunk readChunk(DataInputStream distream) {
-        try {
-<span class="fc" id="L121">            int length = distream.readInt();</span>
-<span class="fc" id="L122">            int type = distream.readInt();</span>
-<span class="fc" id="L123">            byte[] data = new byte[length];</span>
-<span class="fc" id="L124">            distream.readFully(data);</span>
-<span class="fc" id="L125">            int crc = distream.readInt();</span>
+<span class="fc" id="L119">    public static PNGChunk readChunk(DataInputStream distream) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(1000);</span>
+<span class="fc" id="L120">        __CLR4_5_2r2r2m68iyfrb.R.inc(1001);try {</span>
+<span class="fc" id="L121">            __CLR4_5_2r2r2m68iyfrb.R.inc(1002);int length = distream.readInt();</span>
+<span class="fc" id="L122">            __CLR4_5_2r2r2m68iyfrb.R.inc(1003);int type = distream.readInt();</span>
+<span class="fc" id="L123">            __CLR4_5_2r2r2m68iyfrb.R.inc(1004);byte[] data = new byte[length];</span>
+<span class="fc" id="L124">            __CLR4_5_2r2r2m68iyfrb.R.inc(1005);distream.readFully(data);</span>
+<span class="fc" id="L125">            __CLR4_5_2r2r2m68iyfrb.R.inc(1006);int crc = distream.readInt();</span>
 
-<span class="fc" id="L127">            return new PNGChunk(length, type, data, crc);</span>
+<span class="fc" id="L127">            __CLR4_5_2r2r2m68iyfrb.R.inc(1007);return new PNGChunk(length, type, data, crc);</span>
 <span class="nc" id="L128">        } catch (Exception e) {</span>
-<span class="nc" id="L129">            e.printStackTrace();</span>
-<span class="nc" id="L130">            return null;</span>
+<span class="nc" id="L129">            __CLR4_5_2r2r2m68iyfrb.R.inc(1008);e.printStackTrace();</span>
+<span class="nc" id="L130">            __CLR4_5_2r2r2m68iyfrb.R.inc(1009);return null;</span>
         }
-    }
+<span class="fc" id="L132">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
     /**
      * Returns the PNG chunk type, a four letter case sensitive ASCII type/name.
      * @param distream the input stream
      * @return a four letter case sensitive ASCII type/name
      */
-    public static String getChunkType(DataInputStream distream) {
-        try {
-<span class="fc" id="L141">            distream.mark(8);</span>
-<span class="fc" id="L142">            /* int length = */distream.readInt();</span>
-<span class="fc" id="L143">            int type = distream.readInt();</span>
-<span class="fc" id="L144">            distream.reset();</span>
+<span class="fc" id="L139">    public static String getChunkType(DataInputStream distream) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(1010);</span>
+<span class="fc" id="L140">        __CLR4_5_2r2r2m68iyfrb.R.inc(1011);try {</span>
+<span class="fc" id="L141">            __CLR4_5_2r2r2m68iyfrb.R.inc(1012);distream.mark(8);</span>
+<span class="fc" id="L142">            /* int length = */__CLR4_5_2r2r2m68iyfrb.R.inc(1013);distream.readInt();</span>
+<span class="fc" id="L143">            __CLR4_5_2r2r2m68iyfrb.R.inc(1014);int type = distream.readInt();</span>
+<span class="fc" id="L144">            __CLR4_5_2r2r2m68iyfrb.R.inc(1015);distream.reset();</span>
 
-<span class="fc" id="L146">            return typeIntToString(type);</span>
+<span class="fc" id="L146">            __CLR4_5_2r2r2m68iyfrb.R.inc(1016);return typeIntToString(type);</span>
 <span class="nc" id="L147">        } catch (Exception e) {</span>
-<span class="nc" id="L148">            e.printStackTrace();</span>
-<span class="nc" id="L149">            return null;</span>
+<span class="nc" id="L148">            __CLR4_5_2r2r2m68iyfrb.R.inc(1017);e.printStackTrace();</span>
+<span class="nc" id="L149">            __CLR4_5_2r2r2m68iyfrb.R.inc(1018);return null;</span>
         }
-    }
+<span class="fc" id="L151">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
-    private static String typeIntToString(int type) {
-<span class="fc" id="L154">        String typeString = &quot;&quot;;</span>
-<span class="fc" id="L155">        typeString += (char) (type &gt;&gt; 24);</span>
-<span class="fc" id="L156">        typeString += (char) ((type &gt;&gt; 16) &amp; 0xff);</span>
-<span class="fc" id="L157">        typeString += (char) ((type &gt;&gt; 8) &amp; 0xff);</span>
-<span class="fc" id="L158">        typeString += (char) (type &amp; 0xff);</span>
-<span class="fc" id="L159">        return typeString;</span>
-    }
+<span class="fc" id="L153">    private static String typeIntToString(int type) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(1019);</span>
+<span class="fc" id="L154">        __CLR4_5_2r2r2m68iyfrb.R.inc(1020);String typeString = &quot;&quot;;</span>
+<span class="fc" id="L155">        __CLR4_5_2r2r2m68iyfrb.R.inc(1021);typeString += (char) (type &gt;&gt; 24);</span>
+<span class="fc" id="L156">        __CLR4_5_2r2r2m68iyfrb.R.inc(1022);typeString += (char) ((type &gt;&gt; 16) &amp; 0xff);</span>
+<span class="fc" id="L157">        __CLR4_5_2r2r2m68iyfrb.R.inc(1023);typeString += (char) ((type &gt;&gt; 8) &amp; 0xff);</span>
+<span class="fc" id="L158">        __CLR4_5_2r2r2m68iyfrb.R.inc(1024);typeString += (char) (type &amp; 0xff);</span>
+<span class="fc" id="L159">        __CLR4_5_2r2r2m68iyfrb.R.inc(1025);return typeString;</span>
+<span class="fc" id="L160">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 
     /**
      * Skips the next chunk from the input stream.
      * @param distream the input stream
      * @return true if skipping successful, false otherwise
      */
-    public static boolean skipChunk(DataInputStream distream) {
-        try {
-<span class="fc" id="L169">            int length = distream.readInt();</span>
-<span class="fc" id="L170">            distream.readInt();</span>
+<span class="fc" id="L167">    public static boolean skipChunk(DataInputStream distream) {try{__CLR4_5_2r2r2m68iyfrb.R.inc(1026);</span>
+<span class="fc" id="L168">        __CLR4_5_2r2r2m68iyfrb.R.inc(1027);try {</span>
+<span class="fc" id="L169">            __CLR4_5_2r2r2m68iyfrb.R.inc(1028);int length = distream.readInt();</span>
+<span class="fc" id="L170">            __CLR4_5_2r2r2m68iyfrb.R.inc(1029);distream.readInt();</span>
             // is this really faster than reading?
-<span class="fc" id="L172">            int skipped = distream.skipBytes(length);</span>
-<span class="fc" id="L173">            distream.readInt();</span>
-<span class="pc bpc" id="L174" title="1 of 2 branches missed.">            if (skipped != length) {</span>
-<span class="nc" id="L175">                log.warn(&quot;Incorrect number of bytes skipped.&quot;);</span>
-<span class="nc" id="L176">                return false;</span>
+<span class="fc" id="L172">            __CLR4_5_2r2r2m68iyfrb.R.inc(1030);int skipped = distream.skipBytes(length);</span>
+<span class="fc" id="L173">            __CLR4_5_2r2r2m68iyfrb.R.inc(1031);distream.readInt();</span>
+<span class="pc bpc" id="L174" title="7 of 10 branches missed.">            __CLR4_5_2r2r2m68iyfrb.R.inc(1032);if ((((skipped != length)&amp;&amp;(__CLR4_5_2r2r2m68iyfrb.R.iget(1033)!=0|true))||(__CLR4_5_2r2r2m68iyfrb.R.iget(1034)==0&amp;false))) {{</span>
+<span class="nc" id="L175">                __CLR4_5_2r2r2m68iyfrb.R.inc(1035);log.warn(&quot;Incorrect number of bytes skipped.&quot;);</span>
+<span class="nc" id="L176">                __CLR4_5_2r2r2m68iyfrb.R.inc(1036);return false;</span>
             }
-<span class="fc" id="L178">            return true;</span>
+<span class="fc" id="L178">            }__CLR4_5_2r2r2m68iyfrb.R.inc(1037);return true;</span>
 <span class="nc" id="L179">        } catch (Exception e) {</span>
-<span class="nc" id="L180">            log.warn(e.getMessage());</span>
-<span class="nc" id="L181">            return false;</span>
+<span class="nc" id="L180">            __CLR4_5_2r2r2m68iyfrb.R.inc(1038);log.warn(e.getMessage());</span>
+<span class="nc" id="L181">            __CLR4_5_2r2r2m68iyfrb.R.inc(1039);return false;</span>
         }
-    }
+<span class="fc" id="L183">    }finally{__CLR4_5_2r2r2m68iyfrb.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

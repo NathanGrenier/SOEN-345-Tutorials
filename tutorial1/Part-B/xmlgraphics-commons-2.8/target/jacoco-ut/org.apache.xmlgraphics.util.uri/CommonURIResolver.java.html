@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommonURIResolver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.uri</a> &gt; <span class="el_source">CommonURIResolver.java</span></div><h1>CommonURIResolver.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommonURIResolver.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.uri</a> &gt; <span class="el_source">CommonURIResolver.java</span></div><h1>CommonURIResolver.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -37,7 +37,7 @@ import org.apache.xmlgraphics.util.Service;
  * class. For proper operation, the registers URIResolvers must return null if
  * they cannot handle the given URI and fail fast.
  */
-public class CommonURIResolver implements URIResolver {
+<span class="pc bpc" id="L40" title="3 of 4 branches missed.">public class CommonURIResolver implements URIResolver {public static class __CLR4_5_2gb6gb6m68iyiif{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,21164,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
 <span class="fc" id="L42">    private final List uriResolvers = new LinkedList();</span>
 
@@ -50,40 +50,40 @@ public class CommonURIResolver implements URIResolver {
      * resolvers in the current context.
      * @see CommonURIResolver#getDefaultURIResolver()
      */
-<span class="fc" id="L53">    public CommonURIResolver() {</span>
-<span class="fc" id="L54">        Iterator iter = Service.providers(URIResolver.class);</span>
-<span class="fc bfc" id="L55" title="All 2 branches covered.">        while (iter.hasNext()) {</span>
-<span class="fc" id="L56">            URIResolver resolver = (URIResolver) iter.next();</span>
-<span class="fc" id="L57">            register(resolver);</span>
+<span class="fc" id="L53">    public CommonURIResolver() {try{__CLR4_5_2gb6gb6m68iyiif.R.inc(21138);</span>
+<span class="fc" id="L54">        __CLR4_5_2gb6gb6m68iyiif.R.inc(21139);Iterator iter = Service.providers(URIResolver.class);</span>
+<span class="pc bpc" id="L55" title="4 of 10 branches missed.">        __CLR4_5_2gb6gb6m68iyiif.R.inc(21140);while ((((iter.hasNext())&amp;&amp;(__CLR4_5_2gb6gb6m68iyiif.R.iget(21141)!=0|true))||(__CLR4_5_2gb6gb6m68iyiif.R.iget(21142)==0&amp;false))) {{</span>
+<span class="fc" id="L56">            __CLR4_5_2gb6gb6m68iyiif.R.inc(21143);URIResolver resolver = (URIResolver) iter.next();</span>
+<span class="fc" id="L57">            __CLR4_5_2gb6gb6m68iyiif.R.inc(21144);register(resolver);</span>
 <span class="fc" id="L58">        }</span>
-<span class="fc" id="L59">    }</span>
+<span class="fc" id="L59">    }}finally{__CLR4_5_2gb6gb6m68iyiif.R.flushNeeded();}}</span>
 
     /**
      * Retrieve the default resolver instance.
      *
      * @return the default resolver instance.
      */
-    public static CommonURIResolver getDefaultURIResolver() {
-<span class="fc" id="L67">        return DefaultInstanceHolder.INSTANCE;</span>
-    }
+<span class="fc" id="L66">    public static CommonURIResolver getDefaultURIResolver() {try{__CLR4_5_2gb6gb6m68iyiif.R.inc(21145);</span>
+<span class="fc" id="L67">        __CLR4_5_2gb6gb6m68iyiif.R.inc(21146);return DefaultInstanceHolder.INSTANCE;</span>
+<span class="fc" id="L68">    }finally{__CLR4_5_2gb6gb6m68iyiif.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public Source resolve(String href, String base) {
-<span class="fc" id="L72">        synchronized (uriResolvers) {</span>
-<span class="pc bpc" id="L73" title="1 of 2 branches missed.">            for (Object uriResolver : uriResolvers) {</span>
-<span class="fc" id="L74">                final URIResolver currentResolver = (URIResolver) uriResolver;</span>
-                try {
-<span class="fc" id="L76">                    final Source result = currentResolver.resolve(href, base);</span>
-<span class="pc bpc" id="L77" title="1 of 2 branches missed.">                    if (result != null) {</span>
-<span class="fc" id="L78">                        return result;</span>
+<span class="fc" id="L71">    public Source resolve(String href, String base) {try{__CLR4_5_2gb6gb6m68iyiif.R.inc(21147);</span>
+<span class="fc" id="L72">        __CLR4_5_2gb6gb6m68iyiif.R.inc(21148);synchronized (uriResolvers) {</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">            __CLR4_5_2gb6gb6m68iyiif.R.inc(21149);for (Object uriResolver : uriResolvers) {{</span>
+<span class="fc" id="L74">                __CLR4_5_2gb6gb6m68iyiif.R.inc(21150);final URIResolver currentResolver = (URIResolver) uriResolver;</span>
+<span class="fc" id="L75">                __CLR4_5_2gb6gb6m68iyiif.R.inc(21151);try {</span>
+<span class="fc" id="L76">                    __CLR4_5_2gb6gb6m68iyiif.R.inc(21152);final Source result = currentResolver.resolve(href, base);</span>
+<span class="pc bpc" id="L77" title="7 of 10 branches missed.">                    __CLR4_5_2gb6gb6m68iyiif.R.inc(21153);if ((((result != null)&amp;&amp;(__CLR4_5_2gb6gb6m68iyiif.R.iget(21154)!=0|true))||(__CLR4_5_2gb6gb6m68iyiif.R.iget(21155)==0&amp;false))) {{</span>
+<span class="fc" id="L78">                        __CLR4_5_2gb6gb6m68iyiif.R.inc(21156);return result;</span>
                     }
-<span class="nc" id="L80">                } catch (TransformerException e) {</span>
+<span class="nc" id="L80">                }} catch (TransformerException e) {</span>
                     // Ignore.
 <span class="nc" id="L82">                }</span>
-<span class="nc" id="L83">            }</span>
-<span class="nc" id="L84">        }</span>
-<span class="nc" id="L85">        return null;</span>
-    }
+            }
+<span class="nc" id="L84">        }}</span>
+<span class="nc" id="L85">        __CLR4_5_2gb6gb6m68iyiif.R.inc(21157);return null;</span>
+<span class="fc" id="L86">    }finally{__CLR4_5_2gb6gb6m68iyiif.R.flushNeeded();}}</span>
 
     /**
      * Register a given {@link URIResolver} while the software is running.
@@ -91,11 +91,11 @@ public class CommonURIResolver implements URIResolver {
      * @param uriResolver
      *            the resolver to register.
      */
-    public void register(URIResolver uriResolver) {
-<span class="fc" id="L95">        synchronized (uriResolvers) {</span>
-<span class="fc" id="L96">            uriResolvers.add(uriResolver);</span>
+<span class="fc" id="L94">    public void register(URIResolver uriResolver) {try{__CLR4_5_2gb6gb6m68iyiif.R.inc(21158);</span>
+<span class="fc" id="L95">        __CLR4_5_2gb6gb6m68iyiif.R.inc(21159);synchronized (uriResolvers) {</span>
+<span class="fc" id="L96">            __CLR4_5_2gb6gb6m68iyiif.R.inc(21160);uriResolvers.add(uriResolver);</span>
 <span class="fc" id="L97">        }</span>
-<span class="fc" id="L98">    }</span>
+<span class="fc" id="L98">    }finally{__CLR4_5_2gb6gb6m68iyiif.R.flushNeeded();}}</span>
 
     /**
      * Unregister a given {@link URIResolver} while the software is running.
@@ -103,11 +103,11 @@ public class CommonURIResolver implements URIResolver {
      * @param uriResolver
      *            the resolver to unregister.
      */
-    public void unregister(URIResolver uriResolver) {
-<span class="nc" id="L107">        synchronized (uriResolvers) {</span>
-<span class="nc" id="L108">            uriResolvers.remove(uriResolver);</span>
+<span class="nc" id="L106">    public void unregister(URIResolver uriResolver) {try{__CLR4_5_2gb6gb6m68iyiif.R.inc(21161);</span>
+<span class="nc" id="L107">        __CLR4_5_2gb6gb6m68iyiif.R.inc(21162);synchronized (uriResolvers) {</span>
+<span class="nc" id="L108">            __CLR4_5_2gb6gb6m68iyiif.R.inc(21163);uriResolvers.remove(uriResolver);</span>
 <span class="nc" id="L109">        }</span>
-<span class="nc" id="L110">    }</span>
+<span class="nc" id="L110">    }finally{__CLR4_5_2gb6gb6m68iyiif.R.flushNeeded();}}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

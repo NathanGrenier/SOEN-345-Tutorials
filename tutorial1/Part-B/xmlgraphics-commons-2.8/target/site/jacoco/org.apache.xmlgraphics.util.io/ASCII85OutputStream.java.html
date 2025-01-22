@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ASCII85OutputStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.io</a> &gt; <span class="el_source">ASCII85OutputStream.java</span></div><h1>ASCII85OutputStream.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ASCII85OutputStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.io</a> &gt; <span class="el_source">ASCII85OutputStream.java</span></div><h1>ASCII85OutputStream.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -29,7 +29,7 @@ import java.io.OutputStream;
  * @version $Id: ASCII85OutputStream.java 1804124 2017-08-04 14:13:54Z ssteiner $
  */
 public class ASCII85OutputStream extends FilterOutputStream
-            implements ASCII85Constants, Finalizable {
+<span class="pc bpc" id="L32" title="3 of 4 branches missed.">            implements ASCII85Constants, Finalizable {public static class __CLR4_5_2fwjfwjm68iyifx{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,20712,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private static final boolean DEBUG = false;
 
@@ -40,28 +40,28 @@ public class ASCII85OutputStream extends FilterOutputStream
 
     /** @see java.io.FilterOutputStream **/
     public ASCII85OutputStream(OutputStream out) {
-<span class="fc" id="L43">        super(out);</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L43">        super(out);__CLR4_5_2fwjfwjm68iyifx.R.inc(20612);try{__CLR4_5_2fwjfwjm68iyifx.R.inc(20611);</span>
+<span class="fc" id="L44">    }finally{__CLR4_5_2fwjfwjm68iyifx.R.flushNeeded();}}</span>
 
     /** @see java.io.FilterOutputStream **/
-    public void write(int b) throws IOException {
-<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (pos == 0) {</span>
-<span class="fc" id="L49">            buffer += (b &lt;&lt; 24) &amp; 0xff000000L;</span>
-<span class="fc bfc" id="L50" title="All 2 branches covered.">        } else if (pos == 1) {</span>
-<span class="fc" id="L51">            buffer += (b &lt;&lt; 16) &amp; 0xff0000L;</span>
-<span class="fc bfc" id="L52" title="All 2 branches covered.">        } else if (pos == 2) {</span>
-<span class="fc" id="L53">            buffer += (b &lt;&lt; 8) &amp; 0xff00L;</span>
-        } else {
-<span class="fc" id="L55">            buffer += b &amp; 0xffL;</span>
+<span class="fc" id="L47">    public void write(int b) throws IOException {try{__CLR4_5_2fwjfwjm68iyifx.R.inc(20613);</span>
+<span class="pc bpc" id="L48" title="4 of 10 branches missed.">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20614);if ((((pos == 0)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20615)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20616)==0&amp;false))) {{</span>
+<span class="fc" id="L49">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20617);buffer += (b &lt;&lt; 24) &amp; 0xff000000L;</span>
+<span class="pc bpc" id="L50" title="4 of 10 branches missed.">        } }else {__CLR4_5_2fwjfwjm68iyifx.R.inc(20618);if ((((pos == 1)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20619)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20620)==0&amp;false))) {{</span>
+<span class="fc" id="L51">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20621);buffer += (b &lt;&lt; 16) &amp; 0xff0000L;</span>
+<span class="pc bpc" id="L52" title="4 of 10 branches missed.">        } }else {__CLR4_5_2fwjfwjm68iyifx.R.inc(20622);if ((((pos == 2)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20623)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20624)==0&amp;false))) {{</span>
+<span class="fc" id="L53">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20625);buffer += (b &lt;&lt; 8) &amp; 0xff00L;</span>
+        } }else {{
+<span class="fc" id="L55">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20626);buffer += b &amp; 0xffL;</span>
         }
-<span class="fc" id="L57">        pos++;</span>
+<span class="fc" id="L57">        }}}__CLR4_5_2fwjfwjm68iyifx.R.inc(20627);pos++;</span>
 
-<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (pos &gt; 3) {</span>
-<span class="fc" id="L60">            checkedWrite(convertWord(buffer));</span>
-<span class="fc" id="L61">            buffer = 0;</span>
-<span class="fc" id="L62">            pos = 0;</span>
+<span class="pc bpc" id="L59" title="4 of 10 branches missed.">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20628);if ((((pos &gt; 3)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20629)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20630)==0&amp;false))) {{</span>
+<span class="fc" id="L60">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20631);checkedWrite(convertWord(buffer));</span>
+<span class="fc" id="L61">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20632);buffer = 0;</span>
+<span class="fc" id="L62">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20633);pos = 0;</span>
         }
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L64">    }}finally{__CLR4_5_2fwjfwjm68iyifx.R.flushNeeded();}}</span>
 
     /* UNUSED ATM
     private void checkedWrite(int b) throws IOException {
@@ -74,37 +74,37 @@ public class ASCII85OutputStream extends FilterOutputStream
         bw++;
     }*/
 
-    private void checkedWrite(byte[] buf) throws IOException {
-<span class="fc" id="L78">        checkedWrite(buf, buf.length, false);</span>
-<span class="fc" id="L79">    }</span>
+<span class="fc" id="L77">    private void checkedWrite(byte[] buf) throws IOException {try{__CLR4_5_2fwjfwjm68iyifx.R.inc(20634);</span>
+<span class="fc" id="L78">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20635);checkedWrite(buf, buf.length, false);</span>
+<span class="fc" id="L79">    }finally{__CLR4_5_2fwjfwjm68iyifx.R.flushNeeded();}}</span>
 
-    private void checkedWrite(byte[] buf, boolean nosplit) throws IOException {
-<span class="fc" id="L82">        checkedWrite(buf, buf.length, nosplit);</span>
-<span class="fc" id="L83">    }</span>
+<span class="fc" id="L81">    private void checkedWrite(byte[] buf, boolean nosplit) throws IOException {try{__CLR4_5_2fwjfwjm68iyifx.R.inc(20636);</span>
+<span class="fc" id="L82">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20637);checkedWrite(buf, buf.length, nosplit);</span>
+<span class="fc" id="L83">    }finally{__CLR4_5_2fwjfwjm68iyifx.R.flushNeeded();}}</span>
 
-    private void checkedWrite(byte[] buf , int len) throws IOException {
-<span class="fc" id="L86">        checkedWrite(buf, len, false);</span>
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L85">    private void checkedWrite(byte[] buf , int len) throws IOException {try{__CLR4_5_2fwjfwjm68iyifx.R.inc(20638);</span>
+<span class="fc" id="L86">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20639);checkedWrite(buf, len, false);</span>
+<span class="fc" id="L87">    }finally{__CLR4_5_2fwjfwjm68iyifx.R.flushNeeded();}}</span>
 
-    private void checkedWrite(byte[] buf , int len, boolean nosplit) throws IOException {
-<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (posinline + len &gt; 80) {</span>
-<span class="fc bfc" id="L91" title="All 2 branches covered.">            int firstpart = (nosplit ? 0 : len - (posinline + len - 80));</span>
-<span class="pc bpc" id="L92" title="1 of 2 branches missed.">            if (firstpart &gt; 0) {</span>
-<span class="nc" id="L93">                out.write(buf, 0, firstpart);</span>
+<span class="fc" id="L89">    private void checkedWrite(byte[] buf , int len, boolean nosplit) throws IOException {try{__CLR4_5_2fwjfwjm68iyifx.R.inc(20640);</span>
+<span class="pc bpc" id="L90" title="4 of 10 branches missed.">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20641);if ((((posinline + len &gt; 80)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20642)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20643)==0&amp;false))) {{</span>
+<span class="pc bpc" id="L91" title="4 of 10 branches missed.">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20644);int firstpart = ((((nosplit )&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20645)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20646)==0&amp;false))? 0 : len - (posinline + len - 80));</span>
+<span class="pc bpc" id="L92" title="7 of 10 branches missed.">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20647);if ((((firstpart &gt; 0)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20648)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20649)==0&amp;false))) {{</span>
+<span class="nc" id="L93">                __CLR4_5_2fwjfwjm68iyifx.R.inc(20650);out.write(buf, 0, firstpart);</span>
             }
-<span class="fc" id="L95">            out.write(EOL);</span>
-<span class="fc" id="L96">            bw++;</span>
-<span class="fc" id="L97">            int rest = len - firstpart;</span>
-<span class="pc bpc" id="L98" title="1 of 2 branches missed.">            if (rest &gt; 0) {</span>
-<span class="fc" id="L99">                out.write(buf, firstpart, rest);</span>
+<span class="fc" id="L95">            }__CLR4_5_2fwjfwjm68iyifx.R.inc(20651);out.write(EOL);</span>
+<span class="fc" id="L96">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20652);bw++;</span>
+<span class="fc" id="L97">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20653);int rest = len - firstpart;</span>
+<span class="pc bpc" id="L98" title="7 of 10 branches missed.">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20654);if ((((rest &gt; 0)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20655)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20656)==0&amp;false))) {{</span>
+<span class="fc" id="L99">                __CLR4_5_2fwjfwjm68iyifx.R.inc(20657);out.write(buf, firstpart, rest);</span>
             }
-<span class="fc" id="L101">            posinline = rest;</span>
-<span class="fc" id="L102">        } else {</span>
-<span class="fc" id="L103">            out.write(buf, 0, len);</span>
-<span class="fc" id="L104">            posinline += len;</span>
+<span class="fc" id="L101">            }__CLR4_5_2fwjfwjm68iyifx.R.inc(20658);posinline = rest;</span>
+<span class="fc" id="L102">        } }else {{</span>
+<span class="fc" id="L103">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20659);out.write(buf, 0, len);</span>
+<span class="fc" id="L104">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20660);posinline += len;</span>
         }
-<span class="fc" id="L106">        bw += len;</span>
-<span class="fc" id="L107">    }</span>
+<span class="fc" id="L106">        }__CLR4_5_2fwjfwjm68iyifx.R.inc(20661);bw += len;</span>
+<span class="fc" id="L107">    }finally{__CLR4_5_2fwjfwjm68iyifx.R.flushNeeded();}}</span>
 
     /**
      * This converts a 32 bit value (4 bytes) into 5 bytes using base 85.
@@ -115,63 +115,63 @@ public class ASCII85OutputStream extends FilterOutputStream
      * @return 5 bytes (or a single byte of the 'z' character for word
      * values of 0)
      */
-    private byte[] convertWord(long word) {
-<span class="fc" id="L119">        word = word &amp; 0xffffffff;</span>
+<span class="fc" id="L118">    private byte[] convertWord(long word) {try{__CLR4_5_2fwjfwjm68iyifx.R.inc(20662);</span>
+<span class="fc" id="L119">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20663);word = word &amp; 0xffffffff;</span>
 
-<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (word == 0) {</span>
-<span class="fc" id="L122">            return ZERO_ARRAY;</span>
-        } else {
-<span class="pc bpc" id="L124" title="1 of 2 branches missed.">            if (word &lt; 0) {</span>
-<span class="nc" id="L125">                word = -word;</span>
+<span class="pc bpc" id="L121" title="4 of 10 branches missed.">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20664);if ((((word == 0)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20665)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20666)==0&amp;false))) {{</span>
+<span class="fc" id="L122">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20667);return ZERO_ARRAY;</span>
+        } }else {{
+<span class="pc bpc" id="L124" title="7 of 10 branches missed.">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20668);if ((((word &lt; 0)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20669)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20670)==0&amp;false))) {{</span>
+<span class="nc" id="L125">                __CLR4_5_2fwjfwjm68iyifx.R.inc(20671);word = -word;</span>
             }
-<span class="fc" id="L127">            byte c1 =</span>
+<span class="fc" id="L127">            }__CLR4_5_2fwjfwjm68iyifx.R.inc(20672);byte c1 =</span>
                 (byte)((word
                         / POW85[0]) &amp; 0xFF);
-<span class="fc" id="L130">            byte c2 =</span>
+<span class="fc" id="L130">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20673);byte c2 =</span>
                 (byte)(((word - (c1 * POW85[0]))
                         / POW85[1]) &amp; 0xFF);
-<span class="fc" id="L133">            byte c3 =</span>
+<span class="fc" id="L133">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20674);byte c3 =</span>
                 (byte)(((word - (c1 * POW85[0])
                               - (c2 * POW85[1]))
                         / POW85[2]) &amp; 0xFF);
-<span class="fc" id="L137">            byte c4 =</span>
+<span class="fc" id="L137">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20675);byte c4 =</span>
                 (byte)(((word - (c1 * POW85[0])
                               - (c2 * POW85[1])
                               - (c3 * POW85[2]))
                         / POW85[3]) &amp; 0xFF);
-<span class="fc" id="L142">            byte c5 =</span>
+<span class="fc" id="L142">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20676);byte c5 =</span>
                 (byte)(((word - (c1 * POW85[0])
                               - (c2 * POW85[1])
                               - (c3 * POW85[2])
                               - (c4 * POW85[3])))
                         &amp; 0xFF);
 
-<span class="fc" id="L149">            byte[] ret = {</span>
+<span class="fc" id="L149">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20677);byte[] ret = {</span>
                 (byte)(c1 + START), (byte)(c2 + START),
                 (byte)(c3 + START), (byte)(c4 + START),
                 (byte)(c5 + START)
             };
 
-            if (DEBUG) {
-                for (byte aRet : ret) {
-                    if (aRet &lt; 33 || aRet &gt; 117) {
-                        System.out.println(&quot;Illegal char value &quot;
+<span class="pc bpc" id="L155" title="2 of 4 branches missed.">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20678);if ((((DEBUG)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20679)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20680)==0&amp;false))) {{</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">                __CLR4_5_2fwjfwjm68iyifx.R.inc(20681);for (byte aRet : ret) {{</span>
+<span class="nc bnc" id="L157" title="All 12 branches missed.">                    __CLR4_5_2fwjfwjm68iyifx.R.inc(20682);if ((((aRet &lt; 33 || aRet &gt; 117)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20683)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20684)==0&amp;false))) {{</span>
+<span class="nc" id="L158">                        __CLR4_5_2fwjfwjm68iyifx.R.inc(20685);System.out.println(&quot;Illegal char value &quot;</span>
                                 + (int) aRet);
                     }
-                }
-            }
-<span class="fc" id="L163">            return ret;</span>
+                }}
+            }}
+<span class="fc" id="L163">            }__CLR4_5_2fwjfwjm68iyifx.R.inc(20686);return ret;</span>
         }
-    }
+<span class="fc" id="L165">    }}finally{__CLR4_5_2fwjfwjm68iyifx.R.flushNeeded();}}</span>
 
     /** @see Finalizable **/
-    public void finalizeStream() throws IOException {
+<span class="fc" id="L168">    public void finalizeStream() throws IOException {try{__CLR4_5_2fwjfwjm68iyifx.R.inc(20687);</span>
         // now take care of the trailing few bytes.
         // with n leftover bytes, we append 0 bytes to make a full group of 4
         // then convert like normal (except not applying the special zero rule)
         // and write out the first n+1 bytes from the result
-<span class="fc bfc" id="L173" title="All 2 branches covered.">        if (pos &gt; 0) {</span>
-<span class="fc" id="L174">            int rest = pos;</span>
+<span class="pc bpc" id="L173" title="4 of 10 branches missed.">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20688);if ((((pos &gt; 0)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20689)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20690)==0&amp;false))) {{</span>
+<span class="fc" id="L174">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20691);int rest = pos;</span>
             /*
             byte[] lastdata = new byte[4];
             int i = 0;
@@ -189,33 +189,33 @@ public class ASCII85OutputStream extends FilterOutputStream
                        + (lastdata[3] &amp; 0xffL);
             */
 
-            byte[] conv;
+<span class="fc" id="L192">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20692);byte[] conv;</span>
             // special rule for handling zeros at the end
-<span class="fc bfc" id="L194" title="All 2 branches covered.">            if (buffer != 0) {</span>
-<span class="fc" id="L195">                conv = convertWord(buffer);</span>
-            } else {
-<span class="fc" id="L197">                conv = new byte[5];</span>
-<span class="fc bfc" id="L198" title="All 2 branches covered.">                for (int j = 0; j &lt; 5; j++) {</span>
-<span class="fc" id="L199">                    conv[j] = (byte)'!';</span>
+<span class="pc bpc" id="L194" title="4 of 10 branches missed.">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20693);if ((((buffer != 0)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20694)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20695)==0&amp;false))) {{</span>
+<span class="fc" id="L195">                __CLR4_5_2fwjfwjm68iyifx.R.inc(20696);conv = convertWord(buffer);</span>
+            } }else {{
+<span class="fc" id="L197">                __CLR4_5_2fwjfwjm68iyifx.R.inc(20697);conv = new byte[5];</span>
+<span class="pc bpc" id="L198" title="4 of 10 branches missed.">                __CLR4_5_2fwjfwjm68iyifx.R.inc(20698);for (int j = 0; (((j &lt; 5)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20699)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20700)==0&amp;false)); j++) {{</span>
+<span class="fc" id="L199">                    __CLR4_5_2fwjfwjm68iyifx.R.inc(20701);conv[j] = (byte)'!';</span>
                 }
-            }
+            }}
             // assert rest+1 &lt;= 5
-<span class="fc" id="L203">            checkedWrite(conv, rest + 1);</span>
+<span class="fc" id="L203">            }__CLR4_5_2fwjfwjm68iyifx.R.inc(20702);checkedWrite(conv, rest + 1);</span>
         }
         // finally write the two character end of data marker
-<span class="fc" id="L206">        checkedWrite(EOD, true);</span>
+<span class="fc" id="L206">        }__CLR4_5_2fwjfwjm68iyifx.R.inc(20703);checkedWrite(EOD, true);</span>
 
-<span class="fc" id="L208">        flush();</span>
-<span class="pc bpc" id="L209" title="1 of 2 branches missed.">        if (out instanceof Finalizable) {</span>
-<span class="nc" id="L210">            ((Finalizable)out).finalizeStream();</span>
+<span class="fc" id="L208">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20704);flush();</span>
+<span class="pc bpc" id="L209" title="7 of 10 branches missed.">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20705);if ((((out instanceof Finalizable)&amp;&amp;(__CLR4_5_2fwjfwjm68iyifx.R.iget(20706)!=0|true))||(__CLR4_5_2fwjfwjm68iyifx.R.iget(20707)==0&amp;false))) {{</span>
+<span class="nc" id="L210">            __CLR4_5_2fwjfwjm68iyifx.R.inc(20708);((Finalizable)out).finalizeStream();</span>
         }
-<span class="fc" id="L212">    }</span>
+<span class="fc" id="L212">    }}finally{__CLR4_5_2fwjfwjm68iyifx.R.flushNeeded();}}</span>
 
     /** @see java.io.FilterOutputStream **/
-    public void close() throws IOException {
-<span class="fc" id="L216">        finalizeStream();</span>
-<span class="fc" id="L217">        super.close();</span>
-<span class="fc" id="L218">    }</span>
+<span class="fc" id="L215">    public void close() throws IOException {try{__CLR4_5_2fwjfwjm68iyifx.R.inc(20709);</span>
+<span class="fc" id="L216">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20710);finalizeStream();</span>
+<span class="fc" id="L217">        __CLR4_5_2fwjfwjm68iyifx.R.inc(20711);super.close();</span>
+<span class="fc" id="L218">    }finally{__CLR4_5_2fwjfwjm68iyifx.R.flushNeeded();}}</span>
 
 }
 

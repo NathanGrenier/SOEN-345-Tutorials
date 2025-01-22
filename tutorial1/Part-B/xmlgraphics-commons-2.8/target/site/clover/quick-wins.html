@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>org.apache.xmlgraphics:xmlgraphics-commons 2.8</title>
+    </head>
+
+<body  >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="http://xmlgraphics.apache.org/commons/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="http://xmlgraphics.apache.org/commons/" target="_top">
+                                        org.apache.xmlgraphics:xmlgraphics-commons 2.8
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database Wed Jan 22 2025 18:17:57 EST</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+            <ul class="tabs-menu">
+            <li class="menu-item ">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item active-tab">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+        
+
+
+                        <div style="text-align: right; margin-bottom: 10px">
+            
+            
+                                    <button class="aui-button aui-button-subtle" id="popupHelp">
+    <span class="aui-icon aui-icon-small aui-iconfont-help"></span>&#160;How to read this chart
+</button>
+<script>
+    AJS.InlineDialog(AJS.$("#popupHelp"), "helpDialog",
+            function (content, trigger, showPopup) {
+                var description = quickWinsDescription();
+                var title = 'Quick Wins';
+                content.css({"padding": "20px"}).html(
+                        '<h2>' + title + '</h2>' + description);
+                showPopup();
+                return false;
+            },
+            {
+                width: 600
+            }
+    );
+</script>
+        </div>
+
+        
+
+<div style="padding: 20px; border: 1px solid #cccccc; background-color: #f5f5f5; border-radius: 3px">
+          <div id="deepPackageCloud"  >
+                          
+    
+        
+    
+            <a href="org/apache/xmlgraphics/util/io/ASCII85InputStream.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="# Elements - 108 , # Elements Covered - 96 ">ASCII85InputStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/io/ASCII85OutputStream.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 101 , # Elements Covered - 88 ">ASCII85OutputStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/AbstractDSCComment.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 100 , # Elements Covered - 76 ">AbstractDSCComment</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/AbstractDeviceSpecificColorSpace.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">AbstractDeviceSpecificColorSpace</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/AbstractEvent.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 4 ">AbstractEvent</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/AbstractGraphics2D.html" class="tag"
+            style="font-size: 17px;color:#d5584c"
+            title="# Elements - 194 , # Elements Covered - 24 ">AbstractGraphics2D</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/AbstractImage.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 6 ">AbstractImage</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/AbstractImageConverter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 5 ">AbstractImageConverter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/AbstractImageLoader.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 8 ">AbstractImageLoader</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/AbstractImageLoaderFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 2 ">AbstractImageLoaderFactory</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/AbstractImagePreloader.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 10 ">AbstractImagePreloader</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/AbstractImageSessionContext.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 97 , # Elements Covered - 70 ">AbstractImageSessionContext</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/AbstractImageSessionContext.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 8 ">AbstractImageSessionContext.ObservingImageInputStreamInvocationHandler</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/AbstractImageSessionContext.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 72 , # Elements Covered - 47 ">AbstractImageSessionContext.UnrestrictedFallbackResolver</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/AbstractImageWriter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 2 ">AbstractImageWriter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/AbstractResourceDSCComment.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 46 , # Elements Covered - 13 ">AbstractResourceDSCComment</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/AbstractResourcesDSCComment.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 87 , # Elements Covered - 40 ">AbstractResourcesDSCComment</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/pdf/AdobePDFAdapter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 6 ">AdobePDFAdapter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/pdf/AdobePDFSchema.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 4 ">AdobePDFSchema</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/io/Base64DecodeStream.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="# Elements - 106 , # Elements Covered - 90 ">Base64DecodeStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/io/Base64EncodeStream.html" class="tag"
+            style="font-size: 15px;color:#de7b72"
+            title="# Elements - 129 , # Elements Covered - 108 ">Base64EncodeStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/CIELabColorSpace.html" class="tag"
+            style="font-size: 16px;color:#d9695f"
+            title="# Elements - 144 , # Elements Covered - 72 ">CIELabColorSpace</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGImageEncoder.html" class="tag"
+            style="font-size: 12px;color:#d5584c"
+            title="# Elements - 22 , # Elements Covered - 21 ">CRC</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGImageEncoder.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 60 , # Elements Covered - 34 ">ChunkStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/ClasspathResource.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 71 , # Elements Covered - 66 ">ClasspathResource</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/profile/ColorProfileUtil.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 47 , # Elements Covered - 16 ">ColorProfileUtil</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/ColorSpaces.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 31 , # Elements Covered - 15 ">ColorSpaces</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/ColorUtil.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 72 , # Elements Covered - 34 ">ColorUtil</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/ColorWithAlternatives.html" class="tag"
+            style="font-size: 14px;color:#d04437"
+            title="# Elements - 79 , # Elements Covered - 14 ">ColorWithAlternatives</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/uri/CommonURIResolver.html" class="tag"
+            style="font-size: 12px;color:#d5584c"
+            title="# Elements - 26 , # Elements Covered - 21 ">CommonURIResolver</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/CompositeImageLoader.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 49 , # Elements Covered - 19 ">CompositeImageLoader</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/tiff/CompressionValue.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 4 ">CompressionValue</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentBeginResource.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 21 , # Elements Covered - 2 ">DSCCommentBeginResource</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentBoundingBox.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 25 , # Elements Covered - 13 ">DSCCommentBoundingBox</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentDocumentSuppliedResources.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 2 ">DSCCommentDocumentSuppliedResources</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentEndComments.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 3 ">DSCCommentEndComments</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentEndOfFile.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 5 ">DSCCommentEndOfFile</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/DSCCommentFactory.html" class="tag"
+            style="font-size: 12px;color:#d5584c"
+            title="# Elements - 30 , # Elements Covered - 25 ">DSCCommentFactory</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentHiResBoundingBox.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 4 ">DSCCommentHiResBoundingBox</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentLanguageLevel.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 7 ">DSCCommentLanguageLevel</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentPages.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 19 , # Elements Covered - 4 ">DSCCommentPages</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCCommentTitle.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 5 ">DSCCommentTitle</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/DSCConstants.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">DSCConstants.AtendIndicator</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/DSCException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">DSCException</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/DSCHeaderComment.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 4 ">DSCHeaderComment</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/DSCParser.html" class="tag"
+            style="font-size: 19px;color:#de7b72"
+            title="# Elements - 250 , # Elements Covered - 139 ">DSCParser</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/tools/DSCTools.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 60 , # Elements Covered - 16 ">DSCTools</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/uri/DataURIResolver.html" class="tag"
+            style="font-size: 12px;color:#d5584c"
+            title="# Elements - 32 , # Elements Covered - 28 ">DataURIResolver</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/uri/DataURLUtil.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 14 ">DataURLUtil</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/DateFormatUtil.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 72 , # Elements Covered - 71 ">DateFormatUtil</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/dijkstra/DefaultEdgeDirectory.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 55 , # Elements Covered - 47 ">DefaultEdgeDirectory</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/cache/DefaultExpirationPolicy.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 13 ">DefaultExpirationPolicy</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/DefaultImageSessionContext.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 17 ">DefaultImageSessionContext</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/DeviceCMYKColorSpace.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 33 , # Elements Covered - 20 ">DeviceCMYKColorSpace</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/dijkstra/DijkstraAlgorithm.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 74 , # Elements Covered - 69 ">DijkstraAlgorithm</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/Dimension2DDouble.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 37 , # Elements Covered - 7 ">Dimension2DDouble</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/DoubleFormatUtil.html" class="tag"
+            style="font-size: 18px;color:#e7a19b"
+            title="# Elements - 234 , # Elements Covered - 220 ">DoubleFormatUtil</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/DublinCoreAdapter.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 89 , # Elements Covered - 42 ">DublinCoreAdapter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/DublinCoreSchema.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 7 ">DublinCoreSchema</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/tiff/ExtraSamplesType.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 6 ">ExtraSamplesType</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/FilteringEventListener.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">FilteringEventListener</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/io/FlateEncodeOutputStream.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 10 , # Elements Covered - 9 ">FlateEncodeOutputStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/FormGenerator.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 42 , # Elements Covered - 36 ">FormGenerator</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/util/ForwardSeekableStream.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 44 , # Elements Covered - 26 ">ForwardSeekableStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/fonts/Glyphs.html" class="tag"
+            style="font-size: 19px;color:#f6c342"
+            title="# Elements - 274 , # Elements Covered - 228 ">Glyphs</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/GraphicContext.html" class="tag"
+            style="font-size: 17px;color:#d5584c"
+            title="# Elements - 195 , # Elements Covered - 54 ">GraphicContext</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/GraphicsConfigurationWithTransparency.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 24 , # Elements Covered - 18 ">GraphicsConfigurationWithTransparency</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/GraphicsConfigurationWithoutTransparency.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 24 , # Elements Covered - 18 ">GraphicsConfigurationWithoutTransparency</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/GrayScaleColorConverter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">GrayScaleColorConverter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGImageEncoder.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 45 , # Elements Covered - 35 ">IDATOutputStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageBuffered.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 6 ">ImageBuffered</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/cache/ImageCache.html" class="tag"
+            style="font-size: 15px;color:#de7b72"
+            title="# Elements - 126 , # Elements Covered - 113 ">ImageCache</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/cache/ImageCacheStatistics.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 50 , # Elements Covered - 41 ">ImageCacheStatistics</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/pipeline/ImageConversionEdge.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 13 ">ImageConversionEdge</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageConverterBitmap2G2D.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 4 ">ImageConverterBitmap2G2D</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageConverterBuffered2Rendered.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 11 ">ImageConverterBuffered2Rendered</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageConverterG2D2Bitmap.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="# Elements - 106 , # Elements Covered - 69 ">ImageConverterG2D2Bitmap</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageConverterRendered2PNG.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 19 , # Elements Covered - 16 ">ImageConverterRendered2PNG</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/util/ImageDecoderImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 21 , # Elements Covered - 5 ">ImageDecoderImpl</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/util/ImageEncoderImpl.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 3 ">ImageEncoderImpl</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/ImageEncodingHelper.html" class="tag"
+            style="font-size: 20px;color:#e28e87"
+            title="# Elements - 290 , # Elements Covered - 167 ">ImageEncodingHelper</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/ImageEncodingHelper.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 16 ">ImageEncodingHelper.RenderedImageEncoder</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/ImageException.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 2 ">ImageException</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/ImageFlavor.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 45 , # Elements Covered - 37 ">ImageFlavor</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/ImageFormGenerator.html" class="tag"
+            style="font-size: 13px;color:#d9695f"
+            title="# Elements - 69 , # Elements Covered - 61 ">ImageFormGenerator</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageGraphics2D.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 9 ">ImageGraphics2D</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/imageio/ImageIOImageWriter.html" class="tag"
+            style="font-size: 15px;color:#de7b72"
+            title="# Elements - 128 , # Elements Covered - 106 ">ImageIOImageWriter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/imageio/ImageIOJPEGImageWriter.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 68 , # Elements Covered - 52 ">ImageIOJPEGImageWriter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/imageio/ImageIOPNGImageWriter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">ImageIOPNGImageWriter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/imageio/ImageIOTIFFImageWriter.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 96 , # Elements Covered - 62 ">ImageIOTIFFImageWriter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/imageio/ImageIOUtil.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 56 , # Elements Covered - 37 ">ImageIOUtil</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/spi/ImageImplRegistry.html" class="tag"
+            style="font-size: 17px;color:#e28e87"
+            title="# Elements - 190 , # Elements Covered - 165 ">ImageImplRegistry</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/spi/ImageImplRegistry.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 11 ">ImageImplRegistry.ImageLoaderFactoryComparator</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/spi/ImageImplRegistry.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 7 ">ImageImplRegistry.MyIterator</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/ImageInfo.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 15 ">ImageInfo</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/tiff/ImageInfo.html" class="tag"
+            style="font-size: 15px;color:#de7b72"
+            title="# Elements - 116 , # Elements Covered - 112 ">ImageInfo</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/tiff/ImageInfo.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">ImageInfo.ImageInfoBuilder</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/util/ImageInputStreamAdapter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 25 , # Elements Covered - 16 ">ImageInputStreamAdapter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/util/ImageInputStreamSeekableStreamAdapter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 15 ">ImageInputStreamSeekableStreamAdapter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/cache/ImageKey.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 46 , # Elements Covered - 28 ">ImageKey</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderEPS.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 18 ">ImageLoaderEPS</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderFactoryEPS.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 10 ">ImageLoaderFactoryEPS</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/imageio/ImageLoaderFactoryImageIO.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 8 ">ImageLoaderFactoryImageIO</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderFactoryInternalTIFF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 10 ">ImageLoaderFactoryInternalTIFF</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderFactoryPNG.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 13 ">ImageLoaderFactoryPNG</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderFactoryRaw.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 67 , # Elements Covered - 50 ">ImageLoaderFactoryRaw</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderFactoryRawCCITTFax.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 56 , # Elements Covered - 30 ">ImageLoaderFactoryRawCCITTFax</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/imageio/ImageLoaderImageIO.html" class="tag"
+            style="font-size: 18px;color:#e28e87"
+            title="# Elements - 224 , # Elements Covered - 150 ">ImageLoaderImageIO</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderInternalTIFF.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 3 ">ImageLoaderInternalTIFF</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderPNG.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 12 ">ImageLoaderPNG</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderRaw.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 3 ">ImageLoaderRaw</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderRawCCITTFax.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 73 , # Elements Covered - 53 ">ImageLoaderRawCCITTFax</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderRawJPEG.html" class="tag"
+            style="font-size: 16px;color:#d9695f"
+            title="# Elements - 163 , # Elements Covered - 93 ">ImageLoaderRawJPEG</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageLoaderRawPNG.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 15 , # Elements Covered - 15 ">ImageLoaderRawPNG</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/ImageManager.html" class="tag"
+            style="font-size: 16px;color:#de7b72"
+            title="# Elements - 146 , # Elements Covered - 106 ">ImageManager</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/pipeline/ImageProviderPipeline.html" class="tag"
+            style="font-size: 16px;color:#de7b72"
+            title="# Elements - 160 , # Elements Covered - 135 ">ImageProviderPipeline</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageRawCCITTFax.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 5 ">ImageRawCCITTFax</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageRawEPS.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 2 ">ImageRawEPS</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageRawJPEG.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 10 ">ImageRawJPEG</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageRawPNG.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 41 , # Elements Covered - 16 ">ImageRawPNG</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageRawStream.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 29 , # Elements Covered - 18 ">ImageRawStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageRawStream.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 6 ">ImageRawStream.ByteArrayStreamFactory</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageRawStream.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 15 ">ImageRawStream.SingleStreamFactory</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/ImageRendered.html" class="tag"
+            style="font-size: 12px;color:#d5584c"
+            title="# Elements - 23 , # Elements Covered - 23 ">ImageRendered</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/pipeline/ImageRepresentation.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 18 , # Elements Covered - 15 ">ImageRepresentation</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/ImageSize.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 62 , # Elements Covered - 40 ">ImageSize</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/ImageSource.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 26 , # Elements Covered - 13 ">ImageSource</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/tiff/ImageType.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 51 , # Elements Covered - 50 ">ImageType</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/util/ImageUtil.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="# Elements - 114 , # Elements Covered - 92 ">ImageUtil</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/ImageWriterParams.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 47 , # Elements Covered - 24 ">ImageWriterParams</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/ImageWriterRegistry.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 85 , # Elements Covered - 77 ">ImageWriterRegistry</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/JPEGFile.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 24 , # Elements Covered - 18 ">JPEGFile</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/i18n/LocaleGroup.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 2 ">LocaleGroup</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/i18n/LocalizableSupport.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 68 , # Elements Covered - 23 ">LocalizableSupport</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/util/MemoryCacheSeekableStream.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 75 , # Elements Covered - 43 ">MemoryCacheSeekableStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/merge/MergeRuleSet.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 3 ">MergeRuleSet</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/Metadata.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 84 , # Elements Covered - 62 ">Metadata</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/MimeEnabledImageFlavor.html" class="tag"
+            style="font-size: 12px;color:#d5584c"
+            title="# Elements - 32 , # Elements Covered - 22 ">MimeEnabledImageFlavor</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/profile/NamedColorProfile.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 30 , # Elements Covered - 15 ">NamedColorProfile</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/profile/NamedColorProfileParser.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="# Elements - 106 , # Elements Covered - 86 ">NamedColorProfileParser</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/NamedColorSpace.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 87 , # Elements Covered - 46 ">NamedColorSpace</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/pdf/PDFAXMPSchema.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 2 ">PDFAXMPSchema</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/pdf/PDFUAXMPSchema.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 2 ">PDFUAXMPSchema</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/pdf/PDFVTXMPSchema.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 2 ">PDFVTXMPSchema</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/pdf/PDFXXMPSchema.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 2 ">PDFXXMPSchema</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGChunk.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 66 , # Elements Covered - 49 ">PNGChunk</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGDecodeParam.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 45 , # Elements Covered - 17 ">PNGDecodeParam</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGEncodeParam.html" class="tag"
+            style="font-size: 22px;color:#de7b72"
+            title="# Elements - 360 , # Elements Covered - 107 ">PNGEncodeParam</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGEncodeParam.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 34 , # Elements Covered - 3 ">PNGEncodeParam.RGB</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/PNGFile.html" class="tag"
+            style="font-size: 18px;color:#e28e87"
+            title="# Elements - 212 , # Elements Covered - 150 ">PNGFile</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGImageDecoder.html" class="tag"
+            style="font-size: 48px;color:#89c495"
+            title="# Elements - 1,260 , # Elements Covered - 363 ">PNGImage</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGImageDecoder.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 28 , # Elements Covered - 17 ">PNGImageDecoder</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/png/PNGImageEncoder.html" class="tag"
+            style="font-size: 29px;color:#e7a19b"
+            title="# Elements - 626 , # Elements Covered - 205 ">PNGImageEncoder</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/internal/PNGImageWriter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 2 ">PNGImageWriter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSDictionary.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 52 , # Elements Covered - 15 ">PSDictionary</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSGenerator.html" class="tag"
+            style="font-size: 22px;color:#e28e87"
+            title="# Elements - 359 , # Elements Covered - 147 ">PSGenerator</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/ps/PSGraphics2D.html" class="tag"
+            style="font-size: 22px;color:#f6c342"
+            title="# Elements - 368 , # Elements Covered - 256 ">PSGraphics2D</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSImageUtils.html" class="tag"
+            style="font-size: 25px;color:#de7b72"
+            title="# Elements - 470 , # Elements Covered - 137 ">PSImageUtils</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSPageDeviceDictionary.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 41 , # Elements Covered - 24 ">PSPageDeviceDictionary</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSProcSet.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 4 ">PSProcSet</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSProcSets.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 4 ">PSProcSets</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSProcSets.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 30 , # Elements Covered - 2 ">PSProcSets.EPSProcSet</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSProcSets.html" class="tag"
+            style="font-size: 17px;color:#d5584c"
+            title="# Elements - 181 , # Elements Covered - 30 ">PSProcSets.StdProcSet</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSResource.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 38 , # Elements Covered - 26 ">PSResource</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/PSState.html" class="tag"
+            style="font-size: 14px;color:#d04437"
+            title="# Elements - 87 , # Elements Covered - 20 ">PSState</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/ps/PSTilingPattern.html" class="tag"
+            style="font-size: 19px;color:#de7b72"
+            title="# Elements - 273 , # Elements Covered - 122 ">PSTilingPattern</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/util/Penalty.html" class="tag"
+            style="font-size: 12px;color:#d5584c"
+            title="# Elements - 27 , # Elements Covered - 23 ">Penalty</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html" class="tag"
+            style="font-size: 15px;color:#de7b72"
+            title="# Elements - 131 , # Elements Covered - 120 ">PipelineFactory</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/pipeline/PipelineFactory.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 4 ">PipelineFactory.PipelineComparator</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/PostScriptComment.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 10 ">PostScriptComment</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/PostScriptLine.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 4 ">PostScriptLine</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/PreloaderBMP.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 43 , # Elements Covered - 41 ">PreloaderBMP</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/PreloaderEMF.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 39 , # Elements Covered - 37 ">PreloaderEMF</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/PreloaderEPS.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="# Elements - 105 , # Elements Covered - 94 ">PreloaderEPS</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/PreloaderEPS.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 4 ">PreloaderEPS.EPSBinaryFileHeader</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/PreloaderGIF.html" class="tag"
+            style="font-size: 12px;color:#d5584c"
+            title="# Elements - 30 , # Elements Covered - 28 ">PreloaderGIF</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/imageio/PreloaderImageIO.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 56 , # Elements Covered - 40 ">PreloaderImageIO</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/PreloaderJPEG.html" class="tag"
+            style="font-size: 17px;color:#de7b72"
+            title="# Elements - 183 , # Elements Covered - 140 ">PreloaderJPEG</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/PreloaderRawPNG.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 22 , # Elements Covered - 18 ">PreloaderRawPNG</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/impl/PreloaderTIFF.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="# Elements - 122 , # Elements Covered - 90 ">PreloaderTIFF</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/util/PropertyUtil.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 3 ">PropertyUtil</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/QName.html" class="tag"
+            style="font-size: 14px;color:#d5584c"
+            title="# Elements - 70 , # Elements Covered - 51 ">QName</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/RefinedImageFlavor.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 13 , # Elements Covered - 11 ">RefinedImageFlavor</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/color/RenderingIntent.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 16 , # Elements Covered - 6 ">RenderingIntent</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/ResolutionUnit.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 12 , # Elements Covered - 10 ">ResolutionUnit</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/ResourceTracker.html" class="tag"
+            style="font-size: 15px;color:#d04437"
+            title="# Elements - 110 , # Elements Covered - 7 ">ResourceTracker</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/util/SeekableStream.html" class="tag"
+            style="font-size: 17px;color:#d5584c"
+            title="# Elements - 196 , # Elements Covered - 49 ">SeekableStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/util/SeekableStreamAdapter.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 10 ">SeekableStreamAdapter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/Service.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 87 , # Elements Covered - 73 ">Service</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/SimpleRefinedImageFlavor.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">SimpleRefinedImageFlavor</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/util/SimpleRenderedImage.html" class="tag"
+            style="font-size: 16px;color:#d04437"
+            title="# Elements - 143 , # Elements Covered - 19 ">SimpleRenderedImage</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/util/SoftMapCache.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 45 , # Elements Covered - 32 ">SoftMapCache</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/util/SoftReferenceWithKey.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 5 , # Elements Covered - 3 ">SoftReferenceWithKey</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/StrokingTextHandler.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 7 , # Elements Covered - 7 ">StrokingTextHandler</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/io/SubInputStream.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 41 , # Elements Covered - 31 ">SubInputStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/tiff/TIFFDirectory.html" class="tag"
+            style="font-size: 20px;color:#de7b72"
+            title="# Elements - 305 , # Elements Covered - 132 ">TIFFDirectory</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/tiff/TIFFEncodeParam.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 47 , # Elements Covered - 13 ">TIFFEncodeParam</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/tiff/TIFFField.html" class="tag"
+            style="font-size: 15px;color:#d5584c"
+            title="# Elements - 135 , # Elements Covered - 43 ">TIFFField</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/codec/tiff/TIFFImageEncoder.html" class="tag"
+            style="font-size: 37px;color:#fae1a0"
+            title="# Elements - 882 , # Elements Covered - 300 ">TIFFImageEncoder</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/writer/internal/TIFFImageWriter.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 41 , # Elements Covered - 2 ">TIFFImageWriter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/io/TempResourceURIGenerator.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 9 , # Elements Covered - 9 ">TempResourceURIGenerator</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/cache/TimeStampProvider.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 2 , # Elements Covered - 2 ">TimeStampProvider</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/TransformStackElement.html" class="tag"
+            style="font-size: 14px;color:#d04437"
+            title="# Elements - 70 , # Elements Covered - 7 ">TransformStackElement</a>
+            
+    
+            <a href="org/apache/xmlgraphics/java2d/TransformType.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 21 , # Elements Covered - 3 ">TransformType</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/UnitConv.html" class="tag"
+            style="font-size: 14px;color:#d04437"
+            title="# Elements - 73 , # Elements Covered - 18 ">UnitConv</a>
+            
+    
+            <a href="org/apache/xmlgraphics/ps/dsc/events/UnparsedDSCComment.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 20 , # Elements Covered - 12 ">UnparsedDSCComment</a>
+            
+    
+            <a href="org/apache/xmlgraphics/util/WriterOutputStream.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 19 , # Elements Covered - 9 ">WriterOutputStream</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/pdf/XAPMMXMPSchema.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 4 , # Elements Covered - 2 ">XAPMMXMPSchema</a>
+            
+    
+            <a href="org/apache/xmlgraphics/image/loader/XMLNamespaceEnabledImageFlavor.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 32 , # Elements Covered - 5 ">XMLNamespaceEnabledImageFlavor</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPArray.html" class="tag"
+            style="font-size: 15px;color:#d9695f"
+            title="# Elements - 137 , # Elements Covered - 100 ">XMPArray</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPArrayType.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 6 , # Elements Covered - 4 ">XMPArrayType</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/XMPBasicAdapter.html" class="tag"
+            style="font-size: 13px;color:#d5584c"
+            title="# Elements - 41 , # Elements Covered - 26 ">XMPBasicAdapter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/schemas/XMPBasicSchema.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 8 , # Elements Covered - 6 ">XMPBasicSchema</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPHandler.html" class="tag"
+            style="font-size: 18px;color:#e7a19b"
+            title="# Elements - 225 , # Elements Covered - 188 ">XMPHandler</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPParser.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 14 , # Elements Covered - 13 ">XMPParser</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPProperty.html" class="tag"
+            style="font-size: 15px;color:#d5584c"
+            title="# Elements - 111 , # Elements Covered - 58 ">XMPProperty</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPSchema.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 11 , # Elements Covered - 7 ">XMPSchema</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPSchemaAdapter.html" class="tag"
+            style="font-size: 19px;color:#f6c342"
+            title="# Elements - 269 , # Elements Covered - 239 ">XMPSchemaAdapter</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPSchemaRegistry.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 17 , # Elements Covered - 17 ">XMPSchemaRegistry</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPSerializer.html" class="tag"
+            style="font-size: 13px;color:#d04437"
+            title="# Elements - 45 , # Elements Covered - 19 ">XMPSerializer</a>
+            
+    
+            <a href="org/apache/xmlgraphics/xmp/XMPStructure.html" class="tag"
+            style="font-size: 12px;color:#d04437"
+            title="# Elements - 28 , # Elements Covered - 20 ">XMPStructure</a>
+            
+    
+            <a href="org/apache/xmlgraphics/io/XmlSourceUtil.html" class="tag"
+            style="font-size: 14px;color:#d9695f"
+            title="# Elements - 92 , # Elements Covered - 87 ">XmlSourceUtil</a>
+           </div>
+   
+   </div>
+    </div> <!-- tabs-pane active-pane -->
+</div> <!-- aui-tabs horizontal-tabs -->
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Wed Jan 22 2025 18:18:18 EST using coverage data from Wed Jan 22 2025 18:18:14 EST.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>

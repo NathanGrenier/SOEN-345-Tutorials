@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSDictionary.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSDictionary.java</span></div><h1>PSDictionary.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSDictionary.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSDictionary.java</span></div><h1>PSDictionary.java</h1><pre class="source lang-java linenums">/* $$ This file has been instrumented by Clover 4.5.2#20240131180750 $$ *//*
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
 /**
  * This class is used to encapsulate postscript dictionary objects.
  */
-<span class="fc" id="L32">public class PSDictionary extends java.util.HashMap {</span>
+<span class="pc bpc" id="L32" title="3 of 4 branches missed.">public class PSDictionary extends java.util.HashMap {public static class __CLR4_5_2d3id3im68iyi0s{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings(&quot;unchecked&quot;) public static &lt;I, T extends I&gt; I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException(&quot;Clover failed to invoke instrumented lambda&quot;,e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static &lt;T&gt; T caseInc(int i,java.util.function.Supplier&lt;T&gt; s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.&quot;);com_atlassian_clover.Clover.l(&quot;[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime=&quot;+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+&quot;#&quot;+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder(&quot;\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062&quot;,1737587872955L,8589935092L,17139,profiles,new java.lang.String[]{&quot;clover.distributed.coverage&quot;,null});}catch(java.lang.SecurityException e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? (&quot;+e.getClass()+&quot;:&quot;+e.getMessage()+&quot;)&quot;);}catch(java.lang.Throwable t){java.lang.System.err.println(&quot;[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. (&quot;+t.getClass()+&quot;:&quot;+t.getMessage()+&quot;)&quot;);}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;</span>
 
     private static final long serialVersionUID = 815367222496219197L;
 
@@ -82,30 +82,30 @@ import java.util.StringTokenizer;
          *            search from index
          * @return Token containing the start, end index and value of the next token
          */
-        protected Token nextToken(String str, int fromIndex) {
-<span class="nc" id="L86">            Token t = null;</span>
-<span class="nc bnc" id="L87" title="All 2 branches missed.">            for (int i = fromIndex; i &lt; str.length(); i++) {</span>
-<span class="nc" id="L88">                boolean isWhitespace = Character.isWhitespace(str.charAt(i));</span>
+<span class="nc" id="L85">        protected Token nextToken(String str, int fromIndex) {try{__CLR4_5_2d3id3im68iyi0s.R.inc(16974);</span>
+<span class="nc" id="L86">            __CLR4_5_2d3id3im68iyi0s.R.inc(16975);Token t = null;</span>
+<span class="nc bnc" id="L87" title="All 10 branches missed.">            __CLR4_5_2d3id3im68iyi0s.R.inc(16976);for (int i = fromIndex; (((i &lt; str.length())&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(16977)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(16978)==0&amp;false)); i++) {{</span>
+<span class="nc" id="L88">                __CLR4_5_2d3id3im68iyi0s.R.inc(16979);boolean isWhitespace = Character.isWhitespace(str.charAt(i));</span>
                 // start index found
-<span class="nc bnc" id="L90" title="All 4 branches missed.">                if (t == null &amp;&amp; !isWhitespace) {</span>
-<span class="nc" id="L91">                    t = new Token();</span>
-<span class="nc" id="L92">                    t.startIndex = i;</span>
+<span class="nc bnc" id="L90" title="All 12 branches missed.">                __CLR4_5_2d3id3im68iyi0s.R.inc(16980);if ((((t == null &amp;&amp; !isWhitespace)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(16981)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(16982)==0&amp;false))) {{</span>
+<span class="nc" id="L91">                    __CLR4_5_2d3id3im68iyi0s.R.inc(16983);t = new Token();</span>
+<span class="nc" id="L92">                    __CLR4_5_2d3id3im68iyi0s.R.inc(16984);t.startIndex = i;</span>
                 // end index found
-<span class="nc bnc" id="L94" title="All 4 branches missed.">                } else if (t != null &amp;&amp; isWhitespace) {</span>
-<span class="nc" id="L95">                    t.endIndex = i;</span>
-<span class="nc" id="L96">                    break;</span>
+<span class="nc bnc" id="L94" title="All 12 branches missed.">                } }else {__CLR4_5_2d3id3im68iyi0s.R.inc(16985);if ((((t != null &amp;&amp; isWhitespace)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(16986)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(16987)==0&amp;false))) {{</span>
+<span class="nc" id="L95">                    __CLR4_5_2d3id3im68iyi0s.R.inc(16988);t.endIndex = i;</span>
+<span class="nc" id="L96">                    __CLR4_5_2d3id3im68iyi0s.R.inc(16989);break;</span>
                 }
-            }
+            }}}
             // start index found
-<span class="nc bnc" id="L100" title="All 2 branches missed.">            if (t != null) {</span>
+<span class="nc bnc" id="L100" title="All 10 branches missed.">            }__CLR4_5_2d3id3im68iyi0s.R.inc(16990);if ((((t != null)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(16991)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(16992)==0&amp;false))) {{</span>
                 // end index not found so take end of string
-<span class="nc bnc" id="L102" title="All 2 branches missed.">                if (t.endIndex == -1) {</span>
-<span class="nc" id="L103">                    t.endIndex = str.length();</span>
+<span class="nc bnc" id="L102" title="All 10 branches missed.">                __CLR4_5_2d3id3im68iyi0s.R.inc(16993);if ((((t.endIndex == -1)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(16994)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(16995)==0&amp;false))) {{</span>
+<span class="nc" id="L103">                    __CLR4_5_2d3id3im68iyi0s.R.inc(16996);t.endIndex = str.length();</span>
                 }
-<span class="nc" id="L105">                t.value = str.substring(t.startIndex, t.endIndex);</span>
+<span class="nc" id="L105">                }__CLR4_5_2d3id3im68iyi0s.R.inc(16997);t.value = str.substring(t.startIndex, t.endIndex);</span>
             }
-<span class="nc" id="L107">            return t;</span>
-        }
+<span class="nc" id="L107">            }__CLR4_5_2d3id3im68iyi0s.R.inc(16998);return t;</span>
+<span class="nc" id="L108">        }finally{__CLR4_5_2d3id3im68iyi0s.R.flushNeeded();}}</span>
 
         /**
          * Returns the closing brace index from a given string searches from a
@@ -122,23 +122,23 @@ import java.util.StringTokenizer;
          *            thrown in the event that a parsing error occurred
          */
         private int indexOfMatchingBrace(String str, String[] braces,
-                int fromIndex) throws PSDictionaryFormatException {
-<span class="nc" id="L126">            final int len = str.length();</span>
-<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (braces.length != 2) {</span>
-<span class="nc" id="L128">                throw new PSDictionaryFormatException(&quot;Wrong number of braces&quot;);</span>
+<span class="nc" id="L125">                int fromIndex) throws PSDictionaryFormatException {try{__CLR4_5_2d3id3im68iyi0s.R.inc(16999);</span>
+<span class="nc" id="L126">            __CLR4_5_2d3id3im68iyi0s.R.inc(17000);final int len = str.length();</span>
+<span class="nc bnc" id="L127" title="All 10 branches missed.">            __CLR4_5_2d3id3im68iyi0s.R.inc(17001);if ((((braces.length != 2)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17002)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17003)==0&amp;false))) {{</span>
+<span class="nc" id="L128">                __CLR4_5_2d3id3im68iyi0s.R.inc(17004);throw new PSDictionaryFormatException(&quot;Wrong number of braces&quot;);</span>
             }
-<span class="nc bnc" id="L130" title="All 2 branches missed.">            for (int openCnt = 0, closeCnt = 0; fromIndex &lt; len; fromIndex++) {</span>
-<span class="nc bnc" id="L131" title="All 2 branches missed.">                if (str.startsWith(braces[OPENING], fromIndex)) {</span>
-<span class="nc" id="L132">                    openCnt++;</span>
-<span class="nc bnc" id="L133" title="All 2 branches missed.">                } else if (str.startsWith(braces[CLOSING], fromIndex)) {</span>
-<span class="nc" id="L134">                    closeCnt++;</span>
-<span class="nc bnc" id="L135" title="All 4 branches missed.">                    if (openCnt &gt; 0 &amp;&amp; openCnt == closeCnt) {</span>
-<span class="nc" id="L136">                        return fromIndex; // found</span>
+<span class="nc bnc" id="L130" title="All 10 branches missed.">            }__CLR4_5_2d3id3im68iyi0s.R.inc(17005);for (int openCnt = 0, closeCnt = 0; (((fromIndex &lt; len)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17006)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17007)==0&amp;false)); fromIndex++) {{</span>
+<span class="nc bnc" id="L131" title="All 10 branches missed.">                __CLR4_5_2d3id3im68iyi0s.R.inc(17008);if ((((str.startsWith(braces[OPENING], fromIndex))&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17009)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17010)==0&amp;false))) {{</span>
+<span class="nc" id="L132">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17011);openCnt++;</span>
+<span class="nc bnc" id="L133" title="All 10 branches missed.">                } }else {__CLR4_5_2d3id3im68iyi0s.R.inc(17012);if ((((str.startsWith(braces[CLOSING], fromIndex))&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17013)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17014)==0&amp;false))) {{</span>
+<span class="nc" id="L134">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17015);closeCnt++;</span>
+<span class="nc bnc" id="L135" title="All 12 branches missed.">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17016);if ((((openCnt &gt; 0 &amp;&amp; openCnt == closeCnt)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17017)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17018)==0&amp;false))) {{</span>
+<span class="nc" id="L136">                        __CLR4_5_2d3id3im68iyi0s.R.inc(17019);return fromIndex; // found</span>
                     }
-                }
-            }
-<span class="nc" id="L140">            return -1; // not found</span>
-        }
+                }}
+            }}}
+<span class="nc" id="L140">            }__CLR4_5_2d3id3im68iyi0s.R.inc(17020);return -1; // not found</span>
+<span class="nc" id="L141">        }finally{__CLR4_5_2d3id3im68iyi0s.R.flushNeeded();}}</span>
 
         /**
          * Strips braces from complex object string
@@ -151,28 +151,28 @@ import java.util.StringTokenizer;
          * @throws org.apache.xmlgraphics.ps.PSDictionaryFormatException
          *            thrown in the event that a parsing error occurred
          */
-        private String stripBraces(String str, String[] braces) throws PSDictionaryFormatException {
+<span class="nc" id="L154">        private String stripBraces(String str, String[] braces) throws PSDictionaryFormatException {try{__CLR4_5_2d3id3im68iyi0s.R.inc(17021);</span>
             // find first opening brace
-<span class="nc" id="L156">            int firstIndex = str.indexOf(braces[OPENING]);</span>
-<span class="nc bnc" id="L157" title="All 2 branches missed.">            if (firstIndex == -1) {</span>
-<span class="nc" id="L158">                throw new PSDictionaryFormatException(</span>
+<span class="nc" id="L156">            __CLR4_5_2d3id3im68iyi0s.R.inc(17022);int firstIndex = str.indexOf(braces[OPENING]);</span>
+<span class="nc bnc" id="L157" title="All 10 branches missed.">            __CLR4_5_2d3id3im68iyi0s.R.inc(17023);if ((((firstIndex == -1)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17024)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17025)==0&amp;false))) {{</span>
+<span class="nc" id="L158">                __CLR4_5_2d3id3im68iyi0s.R.inc(17026);throw new PSDictionaryFormatException(</span>
                         &quot;Failed to find opening parameter '&quot; + braces[OPENING]
                                 + &quot;&quot;);
             }
 
             // find last matching brace
-<span class="nc" id="L164">            int lastIndex = indexOfMatchingBrace(str, braces, firstIndex);</span>
-<span class="nc bnc" id="L165" title="All 2 branches missed.">            if (lastIndex == -1) {</span>
-<span class="nc" id="L166">                throw new PSDictionaryFormatException(</span>
+<span class="nc" id="L164">            }__CLR4_5_2d3id3im68iyi0s.R.inc(17027);int lastIndex = indexOfMatchingBrace(str, braces, firstIndex);</span>
+<span class="nc bnc" id="L165" title="All 10 branches missed.">            __CLR4_5_2d3id3im68iyi0s.R.inc(17028);if ((((lastIndex == -1)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17029)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17030)==0&amp;false))) {{</span>
+<span class="nc" id="L166">                __CLR4_5_2d3id3im68iyi0s.R.inc(17031);throw new PSDictionaryFormatException(</span>
                         &quot;Failed to find matching closing parameter '&quot;
                                 + braces[CLOSING] + &quot;'&quot;);
             }
 
             // strip brace and trim
-<span class="nc" id="L172">            int braceLen = braces[OPENING].length();</span>
-<span class="nc" id="L173">            str = str.substring(firstIndex + braceLen, lastIndex).trim();</span>
-<span class="nc" id="L174">            return str;</span>
-        }
+<span class="nc" id="L172">            }__CLR4_5_2d3id3im68iyi0s.R.inc(17032);int braceLen = braces[OPENING].length();</span>
+<span class="nc" id="L173">            __CLR4_5_2d3id3im68iyi0s.R.inc(17033);str = str.substring(firstIndex + braceLen, lastIndex).trim();</span>
+<span class="nc" id="L174">            __CLR4_5_2d3id3im68iyi0s.R.inc(17034);return str;</span>
+<span class="nc" id="L175">        }finally{__CLR4_5_2d3id3im68iyi0s.R.flushNeeded();}}</span>
 
         /**
          * Parses a dictionary string and provides a dictionary object
@@ -182,57 +182,57 @@ import java.util.StringTokenizer;
          * @throws org.apache.xmlgraphics.ps.PSDictionaryFormatException
          *            thrown in the event that a parsing error occurred
          */
-        public PSDictionary parseDictionary(String str) throws PSDictionaryFormatException {
-<span class="nc" id="L186">            PSDictionary dictionary = new PSDictionary();</span>
-<span class="nc" id="L187">            str = stripBraces(str.trim(), BRACES[DICTIONARY]);</span>
+<span class="nc" id="L185">        public PSDictionary parseDictionary(String str) throws PSDictionaryFormatException {try{__CLR4_5_2d3id3im68iyi0s.R.inc(17035);</span>
+<span class="nc" id="L186">            __CLR4_5_2d3id3im68iyi0s.R.inc(17036);PSDictionary dictionary = new PSDictionary();</span>
+<span class="nc" id="L187">            __CLR4_5_2d3id3im68iyi0s.R.inc(17037);str = stripBraces(str.trim(), BRACES[DICTIONARY]);</span>
             // length of dictionary string
-<span class="nc" id="L189">            final int len = str.length();</span>
+<span class="nc" id="L189">            __CLR4_5_2d3id3im68iyi0s.R.inc(17038);final int len = str.length();</span>
 
-            Token keyToken;
-<span class="nc bnc" id="L192" title="All 4 branches missed.">            for (int currIndex = 0; (keyToken = nextToken(str, currIndex)) != null</span>
-<span class="nc" id="L193">                    &amp;&amp; currIndex &lt;= len;) {</span>
-<span class="nc bnc" id="L194" title="All 2 branches missed.">                if (keyToken.value == null) {</span>
-<span class="nc" id="L195">                    throw new PSDictionaryFormatException(&quot;Failed to parse object key&quot;);</span>
+<span class="nc" id="L191">            __CLR4_5_2d3id3im68iyi0s.R.inc(17039);Token keyToken;</span>
+<span class="nc bnc" id="L192" title="All 4 branches missed.">            __CLR4_5_2d3id3im68iyi0s.R.inc(17040);for (int currIndex = 0; (keyToken = nextToken(str, currIndex)) != null</span>
+<span class="nc" id="L193">                    &amp;&amp; currIndex &lt;= len;) {{</span>
+<span class="nc bnc" id="L194" title="All 10 branches missed.">                __CLR4_5_2d3id3im68iyi0s.R.inc(17043);if ((((keyToken.value == null)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17044)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17045)==0&amp;false))) {{</span>
+<span class="nc" id="L195">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17046);throw new PSDictionaryFormatException(&quot;Failed to parse object key&quot;);</span>
                 }
-<span class="nc" id="L197">                Token valueToken = nextToken(str, keyToken.endIndex + 1);</span>
-<span class="nc" id="L198">                String[] braces = null;</span>
-<span class="nc bnc" id="L199" title="All 2 branches missed.">                for (String[] brace : BRACES) {</span>
-<span class="nc bnc" id="L200" title="All 2 branches missed.">                    if (valueToken.value.startsWith(brace[OPENING])) {</span>
-<span class="nc" id="L201">                        braces = brace;</span>
-<span class="nc" id="L202">                        break;</span>
+<span class="nc" id="L197">                }__CLR4_5_2d3id3im68iyi0s.R.inc(17047);Token valueToken = nextToken(str, keyToken.endIndex + 1);</span>
+<span class="nc" id="L198">                __CLR4_5_2d3id3im68iyi0s.R.inc(17048);String[] braces = null;</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">                __CLR4_5_2d3id3im68iyi0s.R.inc(17049);for (String[] brace : BRACES) {{</span>
+<span class="nc bnc" id="L200" title="All 10 branches missed.">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17050);if ((((valueToken.value.startsWith(brace[OPENING]))&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17051)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17052)==0&amp;false))) {{</span>
+<span class="nc" id="L201">                        __CLR4_5_2d3id3im68iyi0s.R.inc(17053);braces = brace;</span>
+<span class="nc" id="L202">                        __CLR4_5_2d3id3im68iyi0s.R.inc(17054);break;</span>
                     }
-                }
-<span class="nc" id="L205">                Object obj = null;</span>
-<span class="nc bnc" id="L206" title="All 2 branches missed.">                if (braces != null) {</span>
+                }}
+<span class="nc" id="L205">                }__CLR4_5_2d3id3im68iyi0s.R.inc(17055);Object obj = null;</span>
+<span class="nc bnc" id="L206" title="All 10 branches missed.">                __CLR4_5_2d3id3im68iyi0s.R.inc(17056);if ((((braces != null)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17057)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17058)==0&amp;false))) {{</span>
                     // find closing brace
-<span class="nc" id="L208">                    valueToken.endIndex = indexOfMatchingBrace(str, braces,</span>
+<span class="nc" id="L208">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17059);valueToken.endIndex = indexOfMatchingBrace(str, braces,</span>
 <span class="nc" id="L209">                        valueToken.startIndex)</span>
 <span class="nc" id="L210">                        + braces[OPENING].length();</span>
-<span class="nc bnc" id="L211" title="All 2 branches missed.">                    if (valueToken.endIndex &lt; 0) {</span>
-<span class="nc" id="L212">                        throw new PSDictionaryFormatException(&quot;Closing value brace '&quot;</span>
+<span class="nc bnc" id="L211" title="All 10 branches missed.">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17060);if ((((valueToken.endIndex &lt; 0)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17061)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17062)==0&amp;false))) {{</span>
+<span class="nc" id="L212">                        __CLR4_5_2d3id3im68iyi0s.R.inc(17063);throw new PSDictionaryFormatException(&quot;Closing value brace '&quot;</span>
                             + braces[CLOSING] + &quot;' not found for key '&quot;
 <span class="nc" id="L214">                            + keyToken.value + &quot;'&quot;);</span>
                     }
-<span class="nc" id="L216">                    valueToken.value = str.substring(valueToken.startIndex, valueToken.endIndex);</span>
+<span class="nc" id="L216">                    }__CLR4_5_2d3id3im68iyi0s.R.inc(17064);valueToken.value = str.substring(valueToken.startIndex, valueToken.endIndex);</span>
                 }
-<span class="nc bnc" id="L218" title="All 6 branches missed.">                if (braces == null || braces == BRACES[PROCEDURE] || braces == BRACES[STRING]) {</span>
-<span class="nc" id="L219">                    obj = valueToken.value;</span>
-<span class="nc bnc" id="L220" title="All 2 branches missed.">                } else if (BRACES[ARRAY] == braces) {</span>
-<span class="nc" id="L221">                    List objList = new java.util.ArrayList();</span>
-<span class="nc" id="L222">                    String objString = stripBraces(valueToken.value, braces);</span>
-<span class="nc" id="L223">                    StringTokenizer tokenizer = new StringTokenizer(objString, &quot;,&quot;);</span>
-<span class="nc bnc" id="L224" title="All 2 branches missed.">                    while (tokenizer.hasMoreTokens()) {</span>
-<span class="nc" id="L225">                        objList.add(tokenizer.nextToken());</span>
+<span class="nc bnc" id="L218" title="All 14 branches missed.">                }__CLR4_5_2d3id3im68iyi0s.R.inc(17065);if ((((braces == null || braces == BRACES[PROCEDURE] || braces == BRACES[STRING])&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17066)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17067)==0&amp;false))) {{</span>
+<span class="nc" id="L219">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17068);obj = valueToken.value;</span>
+<span class="nc bnc" id="L220" title="All 10 branches missed.">                } }else {__CLR4_5_2d3id3im68iyi0s.R.inc(17069);if ((((BRACES[ARRAY] == braces)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17070)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17071)==0&amp;false))) {{</span>
+<span class="nc" id="L221">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17072);List objList = new java.util.ArrayList();</span>
+<span class="nc" id="L222">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17073);String objString = stripBraces(valueToken.value, braces);</span>
+<span class="nc" id="L223">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17074);StringTokenizer tokenizer = new StringTokenizer(objString, &quot;,&quot;);</span>
+<span class="nc bnc" id="L224" title="All 10 branches missed.">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17075);while ((((tokenizer.hasMoreTokens())&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17076)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17077)==0&amp;false))) {{</span>
+<span class="nc" id="L225">                        __CLR4_5_2d3id3im68iyi0s.R.inc(17078);objList.add(tokenizer.nextToken());</span>
                     }
-<span class="nc" id="L227">                    obj = objList;</span>
-<span class="nc bnc" id="L228" title="All 2 branches missed.">                } else if (BRACES[DICTIONARY] == braces) {</span>
-<span class="nc" id="L229">                    obj = parseDictionary(valueToken.value);</span>
+<span class="nc" id="L227">                    }__CLR4_5_2d3id3im68iyi0s.R.inc(17079);obj = objList;</span>
+<span class="nc bnc" id="L228" title="All 10 branches missed.">                } }else {__CLR4_5_2d3id3im68iyi0s.R.inc(17080);if ((((BRACES[DICTIONARY] == braces)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17081)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17082)==0&amp;false))) {{</span>
+<span class="nc" id="L229">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17083);obj = parseDictionary(valueToken.value);</span>
                 }
-<span class="nc" id="L231">                dictionary.put(keyToken.value, obj);</span>
-<span class="nc" id="L232">                currIndex = valueToken.endIndex + 1;</span>
+<span class="nc" id="L231">                }}}__CLR4_5_2d3id3im68iyi0s.R.inc(17084);dictionary.put(keyToken.value, obj);</span>
+<span class="nc" id="L232">                __CLR4_5_2d3id3im68iyi0s.R.inc(17085);currIndex = valueToken.endIndex + 1;</span>
 <span class="nc" id="L233">            }</span>
-<span class="nc" id="L234">            return dictionary;</span>
-        }
+<span class="nc" id="L234">            }__CLR4_5_2d3id3im68iyi0s.R.inc(17086);return dictionary;</span>
+<span class="nc" id="L235">        }finally{__CLR4_5_2d3id3im68iyi0s.R.flushNeeded();}}</span>
     }
 
     /**
@@ -243,70 +243,70 @@ import java.util.StringTokenizer;
      * @throws org.apache.xmlgraphics.ps.PSDictionaryFormatException
      *            thrown in the event that a parsing error occurred
      */
-    public static PSDictionary valueOf(String str) throws PSDictionaryFormatException {
-<span class="nc" id="L247">        return (new Maker()).parseDictionary(str);</span>
-    }
+<span class="nc" id="L246">    public static PSDictionary valueOf(String str) throws PSDictionaryFormatException {try{__CLR4_5_2d3id3im68iyi0s.R.inc(17087);</span>
+<span class="nc" id="L247">        __CLR4_5_2d3id3im68iyi0s.R.inc(17088);return (new Maker()).parseDictionary(str);</span>
+<span class="nc" id="L248">    }finally{__CLR4_5_2d3id3im68iyi0s.R.flushNeeded();}}</span>
 
     /**
      * @param obj object to test equality against
      * @return whether a given object is equal to this dictionary object
      * @see java.lang.Object#equals(Object)
      */
-    public boolean equals(Object obj) {
-<span class="nc bnc" id="L256" title="All 2 branches missed.">        if (!(obj instanceof PSDictionary)) {</span>
-<span class="nc" id="L257">            return false;</span>
+<span class="nc" id="L255">    public boolean equals(Object obj) {try{__CLR4_5_2d3id3im68iyi0s.R.inc(17089);</span>
+<span class="nc bnc" id="L256" title="All 10 branches missed.">        __CLR4_5_2d3id3im68iyi0s.R.inc(17090);if ((((!(obj instanceof PSDictionary))&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17091)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17092)==0&amp;false))) {{</span>
+<span class="nc" id="L257">            __CLR4_5_2d3id3im68iyi0s.R.inc(17093);return false;</span>
         }
-<span class="nc" id="L259">        PSDictionary dictionaryObj = (PSDictionary) obj;</span>
-<span class="nc bnc" id="L260" title="All 2 branches missed.">        if (dictionaryObj.size() != size()) {</span>
-<span class="nc" id="L261">            return false;</span>
+<span class="nc" id="L259">        }__CLR4_5_2d3id3im68iyi0s.R.inc(17094);PSDictionary dictionaryObj = (PSDictionary) obj;</span>
+<span class="nc bnc" id="L260" title="All 10 branches missed.">        __CLR4_5_2d3id3im68iyi0s.R.inc(17095);if ((((dictionaryObj.size() != size())&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17096)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17097)==0&amp;false))) {{</span>
+<span class="nc" id="L261">            __CLR4_5_2d3id3im68iyi0s.R.inc(17098);return false;</span>
         }
-<span class="nc bnc" id="L263" title="All 2 branches missed.">        for (Object e : entrySet()) {</span>
-<span class="nc" id="L264">            Map.Entry entry = (Map.Entry) e;</span>
-<span class="nc" id="L265">            String key = (String) entry.getKey();</span>
-<span class="nc bnc" id="L266" title="All 2 branches missed.">            if (!dictionaryObj.containsKey(key)) {</span>
-<span class="nc" id="L267">                return false;</span>
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        }__CLR4_5_2d3id3im68iyi0s.R.inc(17099);for (Object e : entrySet()) {{</span>
+<span class="nc" id="L264">            __CLR4_5_2d3id3im68iyi0s.R.inc(17100);Map.Entry entry = (Map.Entry) e;</span>
+<span class="nc" id="L265">            __CLR4_5_2d3id3im68iyi0s.R.inc(17101);String key = (String) entry.getKey();</span>
+<span class="nc bnc" id="L266" title="All 10 branches missed.">            __CLR4_5_2d3id3im68iyi0s.R.inc(17102);if ((((!dictionaryObj.containsKey(key))&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17103)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17104)==0&amp;false))) {{</span>
+<span class="nc" id="L267">                __CLR4_5_2d3id3im68iyi0s.R.inc(17105);return false;</span>
             }
-<span class="nc bnc" id="L269" title="All 2 branches missed.">            if (!dictionaryObj.get(key).equals(entry.getValue())) {</span>
-<span class="nc" id="L270">                return false;</span>
+<span class="nc bnc" id="L269" title="All 10 branches missed.">            }__CLR4_5_2d3id3im68iyi0s.R.inc(17106);if ((((!dictionaryObj.get(key).equals(entry.getValue()))&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17107)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17108)==0&amp;false))) {{</span>
+<span class="nc" id="L270">                __CLR4_5_2d3id3im68iyi0s.R.inc(17109);return false;</span>
             }
-<span class="nc" id="L272">        }</span>
-<span class="nc" id="L273">        return true;</span>
-    }
+        }}
+<span class="nc" id="L273">        }__CLR4_5_2d3id3im68iyi0s.R.inc(17110);return true;</span>
+<span class="nc" id="L274">    }finally{__CLR4_5_2d3id3im68iyi0s.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public int hashCode() {
-<span class="nc" id="L278">        int hashCode = 7;</span>
-<span class="nc bnc" id="L279" title="All 2 branches missed.">        for (Object value : values()) {</span>
-<span class="nc" id="L280">            hashCode += value.hashCode();</span>
-<span class="nc" id="L281">        }</span>
-<span class="nc" id="L282">        return hashCode;</span>
-    }
+<span class="nc" id="L277">    public int hashCode() {try{__CLR4_5_2d3id3im68iyi0s.R.inc(17111);</span>
+<span class="nc" id="L278">        __CLR4_5_2d3id3im68iyi0s.R.inc(17112);int hashCode = 7;</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">        __CLR4_5_2d3id3im68iyi0s.R.inc(17113);for (Object value : values()) {{</span>
+<span class="nc" id="L280">            __CLR4_5_2d3id3im68iyi0s.R.inc(17114);hashCode += value.hashCode();</span>
+        }
+<span class="nc" id="L282">        }__CLR4_5_2d3id3im68iyi0s.R.inc(17115);return hashCode;</span>
+<span class="nc" id="L283">    }finally{__CLR4_5_2d3id3im68iyi0s.R.flushNeeded();}}</span>
 
     /** {@inheritDoc} */
-    public String toString() {
-<span class="fc bfc" id="L287" title="All 2 branches covered.">        if (isEmpty()) {</span>
-<span class="fc" id="L288">            return &quot;&quot;;</span>
+<span class="fc" id="L286">    public String toString() {try{__CLR4_5_2d3id3im68iyi0s.R.inc(17116);</span>
+<span class="pc bpc" id="L287" title="4 of 10 branches missed.">        __CLR4_5_2d3id3im68iyi0s.R.inc(17117);if ((((isEmpty())&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17118)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17119)==0&amp;false))) {{</span>
+<span class="fc" id="L288">            __CLR4_5_2d3id3im68iyi0s.R.inc(17120);return &quot;&quot;;</span>
         }
-<span class="fc" id="L290">        StringBuffer sb = new StringBuffer(&quot;&lt;&lt;\n&quot;);</span>
-<span class="fc bfc" id="L291" title="All 2 branches covered.">        for (Object o : super.keySet()) {</span>
-<span class="fc" id="L292">            String key = (String) o;</span>
-<span class="fc" id="L293">            sb.append(&quot;  &quot; + key + &quot; &quot;);</span>
-<span class="fc" id="L294">            Object obj = super.get(key);</span>
-<span class="pc bpc" id="L295" title="1 of 2 branches missed.">            if (obj instanceof ArrayList) {</span>
-<span class="nc" id="L296">                List array = (List) obj;</span>
-<span class="nc" id="L297">                StringBuilder str = new StringBuilder(&quot;[&quot;);</span>
-<span class="nc bnc" id="L298" title="All 2 branches missed.">                for (Object element : array) {</span>
-<span class="nc" id="L299">                    str.append(element + &quot; &quot;);</span>
-<span class="nc" id="L300">                }</span>
-<span class="nc" id="L301">                String str2 = str.toString().trim();</span>
-<span class="nc" id="L302">                str2 += &quot;]&quot;;</span>
-<span class="nc" id="L303">                sb.append(str2 + &quot;\n&quot;);</span>
-<span class="nc" id="L304">            } else {</span>
-<span class="fc" id="L305">                sb.append(obj.toString() + &quot;\n&quot;);</span>
+<span class="fc" id="L290">        }__CLR4_5_2d3id3im68iyi0s.R.inc(17121);StringBuffer sb = new StringBuffer(&quot;&lt;&lt;\n&quot;);</span>
+<span class="fc bfc" id="L291" title="All 2 branches covered.">        __CLR4_5_2d3id3im68iyi0s.R.inc(17122);for (Object o : super.keySet()) {{</span>
+<span class="fc" id="L292">            __CLR4_5_2d3id3im68iyi0s.R.inc(17123);String key = (String) o;</span>
+<span class="fc" id="L293">            __CLR4_5_2d3id3im68iyi0s.R.inc(17124);sb.append(&quot;  &quot; + key + &quot; &quot;);</span>
+<span class="fc" id="L294">            __CLR4_5_2d3id3im68iyi0s.R.inc(17125);Object obj = super.get(key);</span>
+<span class="pc bpc" id="L295" title="7 of 10 branches missed.">            __CLR4_5_2d3id3im68iyi0s.R.inc(17126);if ((((obj instanceof ArrayList)&amp;&amp;(__CLR4_5_2d3id3im68iyi0s.R.iget(17127)!=0|true))||(__CLR4_5_2d3id3im68iyi0s.R.iget(17128)==0&amp;false))) {{</span>
+<span class="nc" id="L296">                __CLR4_5_2d3id3im68iyi0s.R.inc(17129);List array = (List) obj;</span>
+<span class="nc" id="L297">                __CLR4_5_2d3id3im68iyi0s.R.inc(17130);StringBuilder str = new StringBuilder(&quot;[&quot;);</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">                __CLR4_5_2d3id3im68iyi0s.R.inc(17131);for (Object element : array) {{</span>
+<span class="nc" id="L299">                    __CLR4_5_2d3id3im68iyi0s.R.inc(17132);str.append(element + &quot; &quot;);</span>
+                }
+<span class="nc" id="L301">                }__CLR4_5_2d3id3im68iyi0s.R.inc(17133);String str2 = str.toString().trim();</span>
+<span class="nc" id="L302">                __CLR4_5_2d3id3im68iyi0s.R.inc(17134);str2 += &quot;]&quot;;</span>
+<span class="nc" id="L303">                __CLR4_5_2d3id3im68iyi0s.R.inc(17135);sb.append(str2 + &quot;\n&quot;);</span>
+<span class="nc" id="L304">            } }else {{</span>
+<span class="fc" id="L305">                __CLR4_5_2d3id3im68iyi0s.R.inc(17136);sb.append(obj.toString() + &quot;\n&quot;);</span>
             }
-<span class="fc" id="L307">        }</span>
-<span class="fc" id="L308">        sb.append(&quot;&gt;&gt;&quot;);</span>
-<span class="fc" id="L309">        return sb.toString();</span>
-    }
+        }}
+<span class="fc" id="L308">        }__CLR4_5_2d3id3im68iyi0s.R.inc(17137);sb.append(&quot;&gt;&gt;&quot;);</span>
+<span class="fc" id="L309">        __CLR4_5_2d3id3im68iyi0s.R.inc(17138);return sb.toString();</span>
+<span class="fc" id="L310">    }finally{__CLR4_5_2d3id3im68iyi0s.R.flushNeeded();}}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
