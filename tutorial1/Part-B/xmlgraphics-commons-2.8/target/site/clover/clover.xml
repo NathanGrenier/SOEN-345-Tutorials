@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1737587902010" clover="4.5.2">
-   <project name="org.apache.xmlgraphics:xmlgraphics-commons 2.8" timestamp="1737587894294">
-      <metrics coveredelements="8918" complexity="5993" loc="57799" methods="2462" classes="352" statements="14656" packages="34" coveredconditionals="1754" coveredmethods="1204" elements="22486" ncloc="29776" files="314" conditionals="5368" coveredstatements="5960"/>
+<coverage generated="1738360846521" clover="4.5.2">
+   <project name="org.apache.xmlgraphics:xmlgraphics-commons 2.8" timestamp="1738360833253">
+      <metrics coveredelements="8910" complexity="5993" loc="57799" methods="2462" classes="352" statements="14656" packages="34" coveredconditionals="1753" coveredmethods="1202" elements="22486" ncloc="29776" files="314" conditionals="5368" coveredstatements="5955"/>
       <package name="org.apache.xmlgraphics.xmp.merge">
          <metrics coveredelements="3" complexity="12" loc="235" methods="6" classes="5" statements="18" coveredconditionals="0" coveredmethods="2" elements="36" ncloc="69" files="5" conditionals="12" coveredstatements="1"/>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/main/java/org/apache/xmlgraphics/xmp/merge/ArrayAddPropertyMerger.java" name="ArrayAddPropertyMerger.java">
@@ -1052,8 +1052,8 @@
             <line num="35" count="9" type="stmt"/>
             <line falsecount="9" truecount="0" num="35" type="cond"/>
             <line num="36" count="0" type="stmt"/>
-            <line complexity="1" visibility="public" signature="getConversionPenalty() : int" num="41" count="41" type="method"/>
-            <line num="42" count="41" type="stmt"/>
+            <line complexity="1" visibility="public" signature="getConversionPenalty() : int" num="41" count="37" type="method"/>
+            <line num="42" count="37" type="stmt"/>
          </file>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/main/java/org/apache/xmlgraphics/image/loader/impl/AbstractImageLoader.java" name="AbstractImageLoader.java">
             <metrics coveredelements="8" coveredconditionals="1" complexity="4" loc="62" coveredmethods="3" methods="3" elements="11" classes="1" ncloc="25" statements="6" conditionals="2" coveredstatements="4"/>
@@ -1062,8 +1062,8 @@
             </class>
             <line complexity="1" visibility="public" signature="loadImage(ImageInfo,ImageSessionContext) : Image" num="38" count="3" type="method"/>
             <line num="40" count="3" type="stmt"/>
-            <line complexity="1" visibility="public" signature="getUsagePenalty() : int" num="44" count="29" type="method"/>
-            <line num="45" count="29" type="stmt"/>
+            <line complexity="1" visibility="public" signature="getUsagePenalty() : int" num="44" count="26" type="method"/>
+            <line num="45" count="26" type="stmt"/>
             <line complexity="2" visibility="protected" signature="ignoreColorProfile(Map) : boolean" num="54" count="1" type="method"/>
             <line num="55" count="1" type="stmt"/>
             <line falsecount="0" truecount="1" num="55" type="cond"/>
@@ -1431,8 +1431,8 @@
             <line num="44" count="6" type="stmt"/>
             <line complexity="1" visibility="public" signature="getTargetFlavor() : ImageFlavor" num="48" count="6" type="method"/>
             <line num="49" count="6" type="stmt"/>
-            <line complexity="1" visibility="public" signature="getConversionPenalty() : int" num="53" count="12" type="method"/>
-            <line num="54" count="12" type="stmt"/>
+            <line complexity="1" visibility="public" signature="getConversionPenalty() : int" num="53" count="11" type="method"/>
+            <line num="54" count="11" type="stmt"/>
          </file>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/main/java/org/apache/xmlgraphics/image/loader/impl/ImageConverterG2D2Bitmap.java" name="ImageConverterG2D2Bitmap.java">
             <metrics coveredelements="69" coveredconditionals="12" complexity="19" loc="214" coveredmethods="5" methods="6" elements="106" classes="1" ncloc="147" statements="78" conditionals="22" coveredstatements="52"/>
@@ -1803,8 +1803,8 @@
             <line num="59" count="1" type="stmt"/>
             <line complexity="1" visibility="public" signature="getTargetFlavor() : ImageFlavor" num="63" count="3" type="method"/>
             <line num="64" count="3" type="stmt"/>
-            <line complexity="1" visibility="public" signature="getUsagePenalty() : int" num="68" count="5" type="method"/>
-            <line num="72" count="5" type="stmt"/>
+            <line complexity="1" visibility="public" signature="getUsagePenalty() : int" num="68" count="4" type="method"/>
+            <line num="72" count="4" type="stmt"/>
          </file>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/main/java/org/apache/xmlgraphics/image/loader/impl/ImageLoaderRaw.java" name="ImageLoaderRaw.java">
             <metrics coveredelements="3" coveredconditionals="0" complexity="4" loc="69" coveredmethods="1" methods="3" elements="13" classes="1" ncloc="32" statements="8" conditionals="2" coveredstatements="2"/>
@@ -3213,91 +3213,91 @@
             <line num="60" count="263478" type="stmt"/>
             <line falsecount="176724" truecount="86754" num="60" type="cond"/>
             <line num="61" count="263478" type="stmt"/>
-            <line falsecount="45435" truecount="218043" num="61" type="cond"/>
-            <line num="62" count="218043" type="stmt"/>
-            <line num="64" count="45435" type="stmt"/>
-            <line complexity="22" visibility="public" signature="formatDoublePrecise(double,int,int,StringBuffer) : void" num="80" count="248043" type="method"/>
-            <line num="81" count="248043" type="stmt"/>
-            <line falsecount="159990" truecount="88053" num="81" type="cond"/>
-            <line num="83" count="88053" type="stmt"/>
-            <line num="84" count="88053" type="stmt"/>
-            <line num="85" count="159990" type="stmt"/>
-            <line falsecount="158129" truecount="1861" num="85" type="cond"/>
+            <line falsecount="45441" truecount="218037" num="61" type="cond"/>
+            <line num="62" count="218037" type="stmt"/>
+            <line num="64" count="45441" type="stmt"/>
+            <line complexity="22" visibility="public" signature="formatDoublePrecise(double,int,int,StringBuffer) : void" num="80" count="248037" type="method"/>
+            <line num="81" count="248037" type="stmt"/>
+            <line falsecount="159964" truecount="88073" num="81" type="cond"/>
+            <line num="83" count="88073" type="stmt"/>
+            <line num="84" count="88073" type="stmt"/>
+            <line num="85" count="159964" type="stmt"/>
+            <line falsecount="158103" truecount="1861" num="85" type="cond"/>
             <line num="87" count="1861" type="stmt"/>
             <line num="88" count="1861" type="stmt"/>
-            <line num="91" count="158129" type="stmt"/>
-            <line num="92" count="158129" type="stmt"/>
-            <line falsecount="158116" truecount="13" num="92" type="cond"/>
+            <line num="91" count="158103" type="stmt"/>
+            <line num="92" count="158103" type="stmt"/>
+            <line falsecount="158090" truecount="13" num="92" type="cond"/>
             <line num="93" count="13" type="stmt"/>
             <line num="95" count="13" type="stmt"/>
-            <line num="97" count="158129" type="stmt"/>
-            <line falsecount="70279" truecount="87850" num="97" type="cond"/>
-            <line num="101" count="158129" type="stmt"/>
-            <line num="102" count="158129" type="stmt"/>
-            <line falsecount="139534" truecount="18595" num="102" type="cond"/>
-            <line num="104" count="18595" type="stmt"/>
-            <line num="105" count="18595" type="stmt"/>
-            <line num="106" count="18595" type="stmt"/>
-            <line num="107" count="18595" type="stmt"/>
-            <line falsecount="16239" truecount="2356" num="107" type="cond"/>
-            <line num="108" count="2356" type="stmt"/>
-            <line falsecount="1635" truecount="721" num="108" type="cond"/>
+            <line num="97" count="158103" type="stmt"/>
+            <line falsecount="70211" truecount="87892" num="97" type="cond"/>
+            <line num="101" count="158103" type="stmt"/>
+            <line num="102" count="158103" type="stmt"/>
+            <line falsecount="139593" truecount="18510" num="102" type="cond"/>
+            <line num="104" count="18510" type="stmt"/>
+            <line num="105" count="18510" type="stmt"/>
+            <line num="106" count="18510" type="stmt"/>
+            <line num="107" count="18510" type="stmt"/>
+            <line falsecount="16163" truecount="2347" num="107" type="cond"/>
+            <line num="108" count="2347" type="stmt"/>
+            <line falsecount="1626" truecount="721" num="108" type="cond"/>
             <line num="110" count="721" type="stmt"/>
-            <line num="112" count="1635" type="stmt"/>
-            <line num="114" count="1635" type="stmt"/>
-            <line falsecount="1635" truecount="0" num="114" type="cond"/>
+            <line num="112" count="1626" type="stmt"/>
+            <line num="114" count="1626" type="stmt"/>
+            <line falsecount="1626" truecount="0" num="114" type="cond"/>
             <line num="115" count="0" type="stmt"/>
-            <line num="118" count="2356" type="stmt"/>
-            <line num="119" count="16239" type="stmt"/>
-            <line falsecount="410" truecount="15829" num="119" type="cond"/>
-            <line num="121" count="15829" type="stmt"/>
-            <line num="122" count="15829" type="stmt"/>
-            <line num="124" count="16239" type="stmt"/>
-            <line num="125" count="16239" type="stmt"/>
-            <line num="126" count="16239" type="stmt"/>
-            <line num="129" count="139534" type="stmt"/>
-            <line falsecount="0" truecount="139534" num="130" type="cond"/>
-            <line num="131" count="139534" type="stmt"/>
-            <line falsecount="0" truecount="139534" num="132" type="cond"/>
-            <line num="133" count="139534" type="stmt"/>
-            <line num="134" count="139534" type="stmt"/>
-            <line num="135" count="139534" type="stmt"/>
-            <line num="136" count="139534" type="stmt"/>
-            <line num="137" count="139534" type="stmt"/>
-            <line falsecount="69718" truecount="69816" num="137" type="cond"/>
-            <line num="138" count="69816" type="stmt"/>
-            <line num="139" count="69816" type="stmt"/>
-            <line falsecount="6812" truecount="63004" num="139" type="cond"/>
+            <line num="118" count="2347" type="stmt"/>
+            <line num="119" count="16163" type="stmt"/>
+            <line falsecount="433" truecount="15730" num="119" type="cond"/>
+            <line num="121" count="15730" type="stmt"/>
+            <line num="122" count="15730" type="stmt"/>
+            <line num="124" count="16163" type="stmt"/>
+            <line num="125" count="16163" type="stmt"/>
+            <line num="126" count="16163" type="stmt"/>
+            <line num="129" count="139593" type="stmt"/>
+            <line falsecount="0" truecount="139593" num="130" type="cond"/>
+            <line num="131" count="139593" type="stmt"/>
+            <line falsecount="0" truecount="139593" num="132" type="cond"/>
+            <line num="133" count="139593" type="stmt"/>
+            <line num="134" count="139593" type="stmt"/>
+            <line num="135" count="139593" type="stmt"/>
+            <line num="136" count="139593" type="stmt"/>
+            <line num="137" count="139593" type="stmt"/>
+            <line falsecount="69647" truecount="69946" num="137" type="cond"/>
+            <line num="138" count="69946" type="stmt"/>
+            <line num="139" count="69946" type="stmt"/>
+            <line falsecount="6942" truecount="63004" num="139" type="cond"/>
             <line num="142" count="63004" type="stmt"/>
             <line num="143" count="63004" type="stmt"/>
             <line num="144" count="63004" type="stmt"/>
-            <line falsecount="63004" truecount="9452868" num="144" type="cond"/>
-            <line num="145" count="9452868" type="stmt"/>
-            <line num="147" count="6812" type="stmt"/>
-            <line falsecount="2913" truecount="3899" num="147" type="cond"/>
-            <line num="150" count="3899" type="stmt"/>
-            <line num="151" count="3899" type="stmt"/>
-            <line num="152" count="3899" type="stmt"/>
-            <line num="153" count="3899" type="stmt"/>
-            <line num="157" count="2913" type="stmt"/>
-            <line num="158" count="2913" type="stmt"/>
-            <line num="159" count="2913" type="stmt"/>
-            <line num="163" count="69718" type="stmt"/>
-            <line num="164" count="69718" type="stmt"/>
-            <line num="165" count="69718" type="stmt"/>
-            <line falsecount="69059" truecount="659" num="165" type="cond"/>
-            <line num="166" count="659" type="stmt"/>
-            <line num="167" count="69059" type="stmt"/>
-            <line falsecount="67930" truecount="1129" num="167" type="cond"/>
-            <line num="168" count="1129" type="stmt"/>
-            <line num="169" count="1129" type="stmt"/>
-            <line num="170" count="67930" type="stmt"/>
-            <line falsecount="15452" truecount="52478" num="170" type="cond"/>
-            <line num="171" count="52478" type="stmt"/>
-            <line num="172" count="52478" type="stmt"/>
-            <line num="174" count="15452" type="stmt"/>
-            <line num="175" count="15452" type="stmt"/>
-            <line num="176" count="15452" type="stmt"/>
+            <line falsecount="63004" truecount="9454008" num="144" type="cond"/>
+            <line num="145" count="9454008" type="stmt"/>
+            <line num="147" count="6942" type="stmt"/>
+            <line falsecount="3038" truecount="3904" num="147" type="cond"/>
+            <line num="150" count="3904" type="stmt"/>
+            <line num="151" count="3904" type="stmt"/>
+            <line num="152" count="3904" type="stmt"/>
+            <line num="153" count="3904" type="stmt"/>
+            <line num="157" count="3038" type="stmt"/>
+            <line num="158" count="3038" type="stmt"/>
+            <line num="159" count="3038" type="stmt"/>
+            <line num="163" count="69647" type="stmt"/>
+            <line num="164" count="69647" type="stmt"/>
+            <line num="165" count="69647" type="stmt"/>
+            <line falsecount="68984" truecount="663" num="165" type="cond"/>
+            <line num="166" count="663" type="stmt"/>
+            <line num="167" count="68984" type="stmt"/>
+            <line falsecount="67803" truecount="1181" num="167" type="cond"/>
+            <line num="168" count="1181" type="stmt"/>
+            <line num="169" count="1181" type="stmt"/>
+            <line num="170" count="67803" type="stmt"/>
+            <line falsecount="15324" truecount="52479" num="170" type="cond"/>
+            <line num="171" count="52479" type="stmt"/>
+            <line num="172" count="52479" type="stmt"/>
+            <line num="174" count="15324" type="stmt"/>
+            <line num="175" count="15324" type="stmt"/>
+            <line num="176" count="15324" type="stmt"/>
             <line complexity="1" visibility="private" signature="isRoundedToZero(double,int,int) : boolean" num="190" count="293478" type="method"/>
             <line num="192" count="293478" type="stmt"/>
             <line complexity="3" visibility="package" signature="&lt;clinit&gt;, line 200()" num="200" count="1" type="method"/>
@@ -3308,78 +3308,78 @@
             <line num="205" count="1" type="stmt"/>
             <line falsecount="1" truecount="30" num="205" type="cond"/>
             <line num="206" count="30" type="stmt"/>
-            <line complexity="3" visibility="public" signature="tenPow(int) : long" num="216" count="860883" type="method"/>
-            <line falsecount="0" truecount="860883" num="217" type="cond"/>
-            <line num="218" count="860883" type="stmt"/>
-            <line falsecount="0" truecount="860883" num="218" type="cond"/>
-            <line complexity="3" visibility="private" signature="tenPowDouble(int) : double" num="221" count="11716917" type="method"/>
-            <line falsecount="0" truecount="11716917" num="222" type="cond"/>
-            <line num="223" count="11716917" type="stmt"/>
-            <line falsecount="10397875" truecount="1319042" num="223" type="cond"/>
-            <line complexity="9" visibility="private" signature="format(StringBuffer,int,long,long) : void" num="234" count="88211" type="method"/>
-            <line num="235" count="88211" type="stmt"/>
-            <line falsecount="174" truecount="88037" num="235" type="cond"/>
-            <line num="238" count="88037" type="stmt"/>
-            <line num="239" count="88037" type="stmt"/>
-            <line num="240" count="88037" type="stmt"/>
-            <line falsecount="87180" truecount="857" num="240" type="cond"/>
-            <line num="241" count="857" type="stmt"/>
-            <line num="242" count="857" type="stmt"/>
-            <line num="244" count="88037" type="stmt"/>
-            <line falsecount="1695" truecount="86342" num="244" type="cond"/>
-            <line num="246" count="86342" type="stmt"/>
-            <line falsecount="86342" truecount="42305" num="246" type="cond"/>
-            <line num="247" count="42305" type="stmt"/>
-            <line num="248" count="42305" type="stmt"/>
-            <line num="252" count="88211" type="stmt"/>
-            <line num="253" count="88211" type="stmt"/>
-            <line falsecount="1869" truecount="86342" num="253" type="cond"/>
-            <line num="254" count="86342" type="stmt"/>
-            <line num="259" count="86342" type="stmt"/>
-            <line falsecount="769183" truecount="9110728" num="259" type="cond"/>
-            <line falsecount="86342" truecount="9793569" num="259" type="cond"/>
-            <line num="261" count="9793569" type="stmt"/>
-            <line num="263" count="86342" type="stmt"/>
-            <line complexity="14" visibility="public" signature="formatDoubleFast(double,int,int,StringBuffer) : void" num="279" count="45435" type="method"/>
-            <line num="280" count="45435" type="stmt"/>
-            <line falsecount="40227" truecount="5208" num="280" type="cond"/>
-            <line num="282" count="5208" type="stmt"/>
-            <line num="283" count="5208" type="stmt"/>
-            <line num="284" count="40227" type="stmt"/>
-            <line falsecount="40015" truecount="212" num="284" type="cond"/>
+            <line complexity="3" visibility="public" signature="tenPow(int) : long" num="216" count="860505" type="method"/>
+            <line falsecount="0" truecount="860505" num="217" type="cond"/>
+            <line num="218" count="860505" type="stmt"/>
+            <line falsecount="0" truecount="860505" num="218" type="cond"/>
+            <line complexity="3" visibility="private" signature="tenPowDouble(int) : double" num="221" count="11721629" type="method"/>
+            <line falsecount="0" truecount="11721629" num="222" type="cond"/>
+            <line num="223" count="11721629" type="stmt"/>
+            <line falsecount="10401797" truecount="1319832" num="223" type="cond"/>
+            <line complexity="9" visibility="private" signature="format(StringBuffer,int,long,long) : void" num="234" count="88185" type="method"/>
+            <line num="235" count="88185" type="stmt"/>
+            <line falsecount="204" truecount="87981" num="235" type="cond"/>
+            <line num="238" count="87981" type="stmt"/>
+            <line num="239" count="87981" type="stmt"/>
+            <line num="240" count="87981" type="stmt"/>
+            <line falsecount="87014" truecount="967" num="240" type="cond"/>
+            <line num="241" count="967" type="stmt"/>
+            <line num="242" count="967" type="stmt"/>
+            <line num="244" count="87981" type="stmt"/>
+            <line falsecount="1795" truecount="86186" num="244" type="cond"/>
+            <line num="246" count="86186" type="stmt"/>
+            <line falsecount="86186" truecount="42072" num="246" type="cond"/>
+            <line num="247" count="42072" type="stmt"/>
+            <line num="248" count="42072" type="stmt"/>
+            <line num="252" count="88185" type="stmt"/>
+            <line num="253" count="88185" type="stmt"/>
+            <line falsecount="1999" truecount="86186" num="253" type="cond"/>
+            <line num="254" count="86186" type="stmt"/>
+            <line num="259" count="86186" type="stmt"/>
+            <line falsecount="768697" truecount="9104977" num="259" type="cond"/>
+            <line falsecount="86186" truecount="9787488" num="259" type="cond"/>
+            <line num="261" count="9787488" type="stmt"/>
+            <line num="263" count="86186" type="stmt"/>
+            <line complexity="14" visibility="public" signature="formatDoubleFast(double,int,int,StringBuffer) : void" num="279" count="45441" type="method"/>
+            <line num="280" count="45441" type="stmt"/>
+            <line falsecount="40232" truecount="5209" num="280" type="cond"/>
+            <line num="282" count="5209" type="stmt"/>
+            <line num="283" count="5209" type="stmt"/>
+            <line num="284" count="40232" type="stmt"/>
+            <line falsecount="40020" truecount="212" num="284" type="cond"/>
             <line num="286" count="212" type="stmt"/>
             <line num="287" count="212" type="stmt"/>
-            <line num="290" count="40015" type="stmt"/>
-            <line num="291" count="40015" type="stmt"/>
-            <line num="292" count="40015" type="stmt"/>
-            <line falsecount="22973" truecount="17042" num="292" type="cond"/>
-            <line num="294" count="40015" type="stmt"/>
-            <line num="295" count="40015" type="stmt"/>
-            <line num="296" count="40015" type="stmt"/>
-            <line num="297" count="40015" type="stmt"/>
-            <line num="298" count="40015" type="stmt"/>
-            <line falsecount="39050" truecount="965" num="298" type="cond"/>
-            <line num="299" count="965" type="stmt"/>
-            <line num="300" count="965" type="stmt"/>
-            <line num="302" count="40015" type="stmt"/>
-            <line falsecount="1870" truecount="38145" num="302" type="cond"/>
-            <line num="304" count="38145" type="stmt"/>
-            <line falsecount="38145" truecount="26871" num="304" type="cond"/>
-            <line num="305" count="26871" type="stmt"/>
-            <line num="306" count="26871" type="stmt"/>
-            <line num="310" count="40015" type="stmt"/>
-            <line falsecount="0" truecount="40015" num="310" type="cond"/>
-            <line num="312" count="40015" type="stmt"/>
-            <line falsecount="39997" truecount="18" num="312" type="cond"/>
+            <line num="290" count="40020" type="stmt"/>
+            <line num="291" count="40020" type="stmt"/>
+            <line num="292" count="40020" type="stmt"/>
+            <line falsecount="23020" truecount="17000" num="292" type="cond"/>
+            <line num="294" count="40020" type="stmt"/>
+            <line num="295" count="40020" type="stmt"/>
+            <line num="296" count="40020" type="stmt"/>
+            <line num="297" count="40020" type="stmt"/>
+            <line num="298" count="40020" type="stmt"/>
+            <line falsecount="39097" truecount="923" num="298" type="cond"/>
+            <line num="299" count="923" type="stmt"/>
+            <line num="300" count="923" type="stmt"/>
+            <line num="302" count="40020" type="stmt"/>
+            <line falsecount="1870" truecount="38150" num="302" type="cond"/>
+            <line num="304" count="38150" type="stmt"/>
+            <line falsecount="38150" truecount="26848" num="304" type="cond"/>
+            <line num="305" count="26848" type="stmt"/>
+            <line num="306" count="26848" type="stmt"/>
+            <line num="310" count="40020" type="stmt"/>
+            <line falsecount="0" truecount="40020" num="310" type="cond"/>
+            <line num="312" count="40020" type="stmt"/>
+            <line falsecount="40002" truecount="18" num="312" type="cond"/>
             <line num="314" count="18" type="stmt"/>
-            <line num="317" count="40015" type="stmt"/>
-            <line num="318" count="40015" type="stmt"/>
-            <line falsecount="1870" truecount="38145" num="318" type="cond"/>
-            <line num="320" count="38145" type="stmt"/>
-            <line num="322" count="38145" type="stmt"/>
-            <line falsecount="38145" truecount="2030470" num="322" type="cond"/>
-            <line num="323" count="2030470" type="stmt"/>
-            <line num="325" count="38145" type="stmt"/>
+            <line num="317" count="40020" type="stmt"/>
+            <line num="318" count="40020" type="stmt"/>
+            <line falsecount="1870" truecount="38150" num="318" type="cond"/>
+            <line num="320" count="38150" type="stmt"/>
+            <line num="322" count="38150" type="stmt"/>
+            <line falsecount="38150" truecount="2041053" num="322" type="cond"/>
+            <line num="323" count="2041053" type="stmt"/>
+            <line num="325" count="38150" type="stmt"/>
             <line num="328" count="0" type="stmt"/>
             <line complexity="1" visibility="public" signature="getExponant(double) : int" num="338" count="0" type="method"/>
             <line num="341" count="0" type="stmt"/>
@@ -3388,16 +3388,16 @@
             <line complexity="1" visibility="private" signature="tooManyDigitsUsed(double,int) : boolean" num="354" count="263478" type="method"/>
             <line num="356" count="263478" type="stmt"/>
             <line num="357" count="263478" type="stmt"/>
-            <line complexity="2" visibility="private" signature="tooCloseToRound(double,int) : boolean" num="368" count="148153" type="method"/>
-            <line num="369" count="148153" type="stmt"/>
-            <line num="370" count="148153" type="stmt"/>
-            <line num="371" count="148153" type="stmt"/>
-            <line num="372" count="148153" type="stmt"/>
-            <line num="373" count="148153" type="stmt"/>
-            <line falsecount="141028" truecount="7125" num="373" type="cond"/>
-            <line num="374" count="148153" type="stmt"/>
-            <line num="375" count="148153" type="stmt"/>
-            <line num="376" count="148153" type="stmt"/>
+            <line complexity="2" visibility="private" signature="tooCloseToRound(double,int) : boolean" num="368" count="148079" type="method"/>
+            <line num="369" count="148079" type="stmt"/>
+            <line num="370" count="148079" type="stmt"/>
+            <line num="371" count="148079" type="stmt"/>
+            <line num="372" count="148079" type="stmt"/>
+            <line num="373" count="148079" type="stmt"/>
+            <line falsecount="141028" truecount="7051" num="373" type="cond"/>
+            <line num="374" count="148079" type="stmt"/>
+            <line num="375" count="148079" type="stmt"/>
+            <line num="376" count="148079" type="stmt"/>
          </file>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/main/java/org/apache/xmlgraphics/util/ImageIODebugUtil.java" name="ImageIODebugUtil.java">
             <metrics coveredelements="0" coveredconditionals="0" complexity="6" loc="72" coveredmethods="0" methods="3" elements="20" classes="1" ncloc="41" statements="15" conditionals="2" coveredstatements="0"/>
@@ -12114,32 +12114,32 @@
             <class name="Penalty">
                <metrics coveredelements="23" coveredconditionals="0" complexity="11" coveredmethods="7" methods="8" elements="27" statements="17" conditionals="2" coveredstatements="16"/>
             </class>
-            <line complexity="3" visibility="public" signature="toPenalty(int) : Penalty" num="39" count="136" type="method"/>
-            <line num="40" count="136" type="stmt"/>
-            <line num="41" count="41" type="stmt"/>
-            <line num="42" count="41" type="stmt"/>
+            <line complexity="3" visibility="public" signature="toPenalty(int) : Penalty" num="39" count="127" type="method"/>
+            <line num="40" count="127" type="stmt"/>
+            <line num="41" count="37" type="stmt"/>
+            <line num="42" count="37" type="stmt"/>
             <line num="43" count="2" type="stmt"/>
             <line num="44" count="2" type="stmt"/>
-            <line num="45" count="93" type="stmt"/>
-            <line num="46" count="93" type="stmt"/>
-            <line complexity="1" visibility="private" signature="Penalty(int)" num="50" count="95" type="method"/>
-            <line num="51" count="95" type="stmt"/>
+            <line num="45" count="88" type="stmt"/>
+            <line num="46" count="88" type="stmt"/>
+            <line complexity="1" visibility="private" signature="Penalty(int)" num="50" count="90" type="method"/>
+            <line num="51" count="90" type="stmt"/>
             <line complexity="1" visibility="public" signature="add(Penalty) : Penalty" num="59" count="43" type="method"/>
             <line num="60" count="43" type="stmt"/>
-            <line complexity="1" visibility="public" signature="add(int) : Penalty" num="68" count="119" type="method"/>
-            <line num="69" count="119" type="stmt"/>
-            <line num="70" count="119" type="stmt"/>
-            <line complexity="1" visibility="public" signature="getValue() : int" num="77" count="258" type="method"/>
-            <line num="78" count="258" type="stmt"/>
+            <line complexity="1" visibility="public" signature="add(int) : Penalty" num="68" count="110" type="method"/>
+            <line num="69" count="110" type="stmt"/>
+            <line num="70" count="110" type="stmt"/>
+            <line complexity="1" visibility="public" signature="getValue() : int" num="77" count="245" type="method"/>
+            <line num="78" count="245" type="stmt"/>
             <line complexity="1" visibility="public" signature="isInfinitePenalty() : boolean" num="86" count="18" type="method"/>
             <line num="87" count="18" type="stmt"/>
             <line complexity="2" visibility="public" signature="toString() : String" num="91" count="0" type="method"/>
             <line num="92" count="0" type="stmt"/>
             <line falsecount="0" truecount="0" num="92" type="cond"/>
-            <line complexity="1" visibility="public" signature="truncate(long) : int" num="100" count="146" type="method"/>
-            <line num="101" count="146" type="stmt"/>
-            <line num="102" count="146" type="stmt"/>
-            <line num="103" count="146" type="stmt"/>
+            <line complexity="1" visibility="public" signature="truncate(long) : int" num="100" count="137" type="method"/>
+            <line num="101" count="137" type="stmt"/>
+            <line num="102" count="137" type="stmt"/>
+            <line num="103" count="137" type="stmt"/>
          </file>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/main/java/org/apache/xmlgraphics/image/loader/util/SeekableStreamAdapter.java" name="SeekableStreamAdapter.java">
             <metrics coveredelements="10" coveredconditionals="0" complexity="7" loc="73" coveredmethods="5" methods="7" elements="14" classes="1" ncloc="28" statements="7" conditionals="0" coveredstatements="5"/>
@@ -13778,7 +13778,7 @@
          </file>
       </package>
       <package name="org.apache.xmlgraphics.image.codec.util">
-         <metrics coveredelements="163" complexity="195" loc="2875" methods="125" classes="15" statements="382" coveredconditionals="20" coveredmethods="42" elements="621" ncloc="898" files="15" conditionals="114" coveredstatements="101"/>
+         <metrics coveredelements="155" complexity="195" loc="2875" methods="125" classes="15" statements="382" coveredconditionals="19" coveredmethods="40" elements="621" ncloc="898" files="15" conditionals="114" coveredstatements="96"/>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/main/java/org/apache/xmlgraphics/image/codec/util/FileCacheSeekableStream.java" name="FileCacheSeekableStream.java">
             <metrics coveredelements="0" coveredconditionals="0" complexity="20" loc="262" coveredmethods="0" methods="8" elements="76" classes="1" ncloc="92" statements="48" conditionals="20" coveredstatements="0"/>
             <class name="FileCacheSeekableStream">
@@ -13852,24 +13852,24 @@
             <line num="260" count="0" type="stmt"/>
          </file>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/main/java/org/apache/xmlgraphics/image/codec/util/ForwardSeekableStream.java" name="ForwardSeekableStream.java">
-            <metrics coveredelements="26" coveredconditionals="3" complexity="16" loc="128" coveredmethods="7" methods="12" elements="44" classes="1" ncloc="59" statements="24" conditionals="8" coveredstatements="16"/>
+            <metrics coveredelements="20" coveredconditionals="2" complexity="16" loc="128" coveredmethods="6" methods="12" elements="44" classes="1" ncloc="59" statements="24" conditionals="8" coveredstatements="12"/>
             <class name="ForwardSeekableStream">
-               <metrics coveredelements="26" coveredconditionals="3" complexity="16" coveredmethods="7" methods="12" elements="44" statements="24" conditionals="8" coveredstatements="16"/>
+               <metrics coveredelements="20" coveredconditionals="2" complexity="16" coveredmethods="6" methods="12" elements="44" statements="24" conditionals="8" coveredstatements="12"/>
             </class>
             <line complexity="1" visibility="public" signature="ForwardSeekableStream(InputStream)" num="43" count="2" type="method"/>
             <line num="44" count="2" type="stmt"/>
-            <line complexity="2" visibility="public" signature="read() : int" num="48" count="140" type="method"/>
-            <line num="49" count="140" type="stmt"/>
-            <line num="50" count="140" type="stmt"/>
-            <line falsecount="0" truecount="140" num="50" type="cond"/>
-            <line num="51" count="140" type="stmt"/>
-            <line num="53" count="140" type="stmt"/>
-            <line complexity="2" visibility="public" signature="read(byte[],int,int) : int" num="57" count="7" type="method"/>
-            <line num="58" count="7" type="stmt"/>
-            <line num="59" count="7" type="stmt"/>
-            <line falsecount="0" truecount="7" num="59" type="cond"/>
-            <line num="60" count="7" type="stmt"/>
-            <line num="62" count="7" type="stmt"/>
+            <line complexity="2" visibility="public" signature="read() : int" num="48" count="0" type="method"/>
+            <line num="49" count="0" type="stmt"/>
+            <line num="50" count="0" type="stmt"/>
+            <line falsecount="0" truecount="0" num="50" type="cond"/>
+            <line num="51" count="0" type="stmt"/>
+            <line num="53" count="0" type="stmt"/>
+            <line complexity="2" visibility="public" signature="read(byte[],int,int) : int" num="57" count="42" type="method"/>
+            <line num="58" count="42" type="stmt"/>
+            <line num="59" count="42" type="stmt"/>
+            <line falsecount="0" truecount="42" num="59" type="cond"/>
+            <line num="60" count="42" type="stmt"/>
+            <line num="62" count="42" type="stmt"/>
             <line complexity="1" visibility="public" signature="skip(long) : long" num="66" count="0" type="method"/>
             <line num="67" count="0" type="stmt"/>
             <line num="68" count="0" type="stmt"/>
@@ -13967,9 +13967,9 @@
             <line num="87" count="0" type="stmt"/>
          </file>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/main/java/org/apache/xmlgraphics/image/codec/util/ImageInputStreamSeekableStreamAdapter.java" name="ImageInputStreamSeekableStreamAdapter.java">
-            <metrics coveredelements="15" coveredconditionals="0" complexity="7" loc="75" coveredmethods="7" methods="7" elements="15" classes="1" ncloc="29" statements="8" conditionals="0" coveredstatements="8"/>
+            <metrics coveredelements="13" coveredconditionals="0" complexity="7" loc="75" coveredmethods="6" methods="7" elements="15" classes="1" ncloc="29" statements="8" conditionals="0" coveredstatements="7"/>
             <class name="ImageInputStreamSeekableStreamAdapter">
-               <metrics coveredelements="15" coveredconditionals="0" complexity="7" coveredmethods="7" methods="7" elements="15" statements="8" conditionals="0" coveredstatements="8"/>
+               <metrics coveredelements="13" coveredconditionals="0" complexity="7" coveredmethods="6" methods="7" elements="15" statements="8" conditionals="0" coveredstatements="7"/>
             </class>
             <line complexity="1" visibility="public" signature="ImageInputStreamSeekableStreamAdapter(ImageInputStream)" num="40" count="11" type="method"/>
             <line num="42" count="11" type="stmt"/>
@@ -13979,10 +13979,10 @@
             <line num="52" count="53" type="stmt"/>
             <line complexity="1" visibility="public" signature="seek(long) : void" num="56" count="53" type="method"/>
             <line num="57" count="53" type="stmt"/>
-            <line complexity="1" visibility="public" signature="read() : int" num="61" count="1036" type="method"/>
-            <line num="62" count="1036" type="stmt"/>
-            <line complexity="1" visibility="public" signature="read(byte[],int,int) : int" num="66" count="53" type="method"/>
-            <line num="67" count="53" type="stmt"/>
+            <line complexity="1" visibility="public" signature="read() : int" num="61" count="0" type="method"/>
+            <line num="62" count="0" type="stmt"/>
+            <line complexity="1" visibility="public" signature="read(byte[],int,int) : int" num="66" count="312" type="method"/>
+            <line num="67" count="312" type="stmt"/>
             <line complexity="1" visibility="public" signature="close() : void" num="71" count="11" type="method"/>
             <line num="72" count="11" type="stmt"/>
             <line num="73" count="11" type="stmt"/>
@@ -17685,23 +17685,23 @@
             <line num="264" count="8" type="stmt"/>
             <line num="265" count="8" type="stmt"/>
             <line num="267" count="9" type="stmt"/>
-            <line complexity="1" visibility="public" signature="getConversionPenalty() : int" num="275" count="21" type="method"/>
-            <line num="276" count="21" type="stmt"/>
-            <line complexity="4" visibility="public" signature="getConversionPenalty(ImageImplRegistry) : Penalty" num="285" count="37" type="method"/>
-            <line num="286" count="37" type="stmt"/>
-            <line num="287" count="37" type="stmt"/>
-            <line falsecount="1" truecount="36" num="287" type="cond"/>
-            <line num="288" count="36" type="stmt"/>
-            <line num="289" count="36" type="stmt"/>
-            <line falsecount="21" truecount="15" num="289" type="cond"/>
+            <line complexity="1" visibility="public" signature="getConversionPenalty() : int" num="275" count="17" type="method"/>
+            <line num="276" count="17" type="stmt"/>
+            <line complexity="4" visibility="public" signature="getConversionPenalty(ImageImplRegistry) : Penalty" num="285" count="33" type="method"/>
+            <line num="286" count="33" type="stmt"/>
+            <line num="287" count="33" type="stmt"/>
+            <line falsecount="1" truecount="32" num="287" type="cond"/>
+            <line num="288" count="32" type="stmt"/>
+            <line num="289" count="32" type="stmt"/>
+            <line falsecount="17" truecount="15" num="289" type="cond"/>
             <line num="290" count="15" type="stmt"/>
-            <line num="294" count="37" type="stmt"/>
-            <line num="295" count="40" type="stmt"/>
-            <line num="296" count="40" type="stmt"/>
-            <line num="297" count="40" type="stmt"/>
-            <line falsecount="27" truecount="13" num="297" type="cond"/>
+            <line num="294" count="33" type="stmt"/>
+            <line num="295" count="35" type="stmt"/>
+            <line num="296" count="35" type="stmt"/>
+            <line num="297" count="35" type="stmt"/>
+            <line falsecount="22" truecount="13" num="297" type="cond"/>
             <line num="298" count="13" type="stmt"/>
-            <line num="302" count="37" type="stmt"/>
+            <line num="302" count="33" type="stmt"/>
             <line complexity="3" visibility="public" signature="getTargetFlavor() : ImageFlavor" num="309" count="7" type="method"/>
             <line num="310" count="7" type="stmt"/>
             <line falsecount="1" truecount="6" num="310" type="cond"/>
@@ -17810,10 +17810,10 @@
             <line num="184" count="15" type="stmt"/>
             <line num="185" count="15" type="stmt"/>
             <line num="191" count="21" type="stmt"/>
-            <line complexity="1" visibility="public" signature="compare(Object,Object) : int" num="200" count="8" type="method"/>
-            <line num="201" count="8" type="stmt"/>
-            <line num="202" count="8" type="stmt"/>
-            <line num="204" count="8" type="stmt"/>
+            <line complexity="1" visibility="public" signature="compare(Object,Object) : int" num="200" count="6" type="method"/>
+            <line num="201" count="6" type="stmt"/>
+            <line num="202" count="6" type="stmt"/>
+            <line num="204" count="6" type="stmt"/>
             <line complexity="5" visibility="private" signature="findPipeline(DefaultEdgeDirectory,ImageFlavor,ImageRepresentation) : ImageProviderPipeline" num="209" count="32" type="method"/>
             <line num="211" count="32" type="stmt"/>
             <line num="213" count="32" type="stmt"/>
@@ -21905,16 +21905,16 @@
          </file>
       </package>
    </project>
-   <testproject name="org.apache.xmlgraphics:xmlgraphics-commons 2.8" timestamp="1737587894294">
+   <testproject name="org.apache.xmlgraphics:xmlgraphics-commons 2.8" timestamp="1738360833253">
       <metrics coveredelements="3090" complexity="561" loc="8542" methods="358" classes="88" statements="2892" packages="23" coveredconditionals="206" coveredmethods="314" elements="3562" ncloc="5326" files="74" conditionals="312" coveredstatements="2570"/>
       <package name="org.apache.xmlgraphics.xmp">
          <metrics coveredelements="236" complexity="19" loc="455" methods="16" classes="2" statements="220" coveredconditionals="0" coveredmethods="16" elements="236" ncloc="333" files="2" conditionals="0" coveredstatements="220"/>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/xmp/XMPParserTestCase.java" name="XMPParserTestCase.java">
             <metrics coveredelements="117" coveredconditionals="0" complexity="10" loc="238" coveredmethods="9" methods="9" elements="117" classes="1" ncloc="173" statements="108" conditionals="0" coveredstatements="108"/>
             <class name="XMPParserTestCase">
-               <metrics coveredelements="117" complexity="10" methods="9" testruns="8" statements="108" coveredconditionals="0" coveredmethods="9" elements="117" testfailures="0" testduration="0.053000000000000005" conditionals="0" coveredstatements="108" testpasses="8"/>
+               <metrics coveredelements="117" complexity="10" methods="9" testruns="8" statements="108" coveredconditionals="0" coveredmethods="9" elements="117" testfailures="0" testduration="0.134" conditionals="0" coveredstatements="108" testpasses="8"/>
             </class>
-            <line complexity="1" visibility="public" signature="testParseBasics() : void" num="53" testsuccess="true" count="1" testduration="0.027" type="method"/>
+            <line complexity="1" visibility="public" signature="testParseBasics() : void" num="53" testsuccess="true" count="1" testduration="0.074" type="method"/>
             <line num="55" count="1" type="stmt"/>
             <line num="56" count="1" type="stmt"/>
             <line num="58" count="1" type="stmt"/>
@@ -21940,7 +21940,7 @@
             <line num="81" count="1" type="stmt"/>
             <line num="82" count="1" type="stmt"/>
             <line num="83" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testParse1() : void" num="86" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testParse1() : void" num="86" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="88" count="1" type="stmt"/>
             <line num="89" count="1" type="stmt"/>
             <line num="91" count="1" type="stmt"/>
@@ -21950,7 +21950,7 @@
             <line num="97" count="1" type="stmt"/>
             <line num="100" count="1" type="stmt"/>
             <line num="101" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testParseStructures() : void" num="104" testsuccess="true" count="1" testduration="0.004" type="method"/>
+            <line complexity="1" visibility="public" signature="testParseStructures() : void" num="104" testsuccess="true" count="1" testduration="0.009" type="method"/>
             <line num="106" count="1" type="stmt"/>
             <line num="107" count="1" type="stmt"/>
             <line num="109" count="1" type="stmt"/>
@@ -21977,13 +21977,13 @@
             <line num="135" count="1" type="stmt"/>
             <line num="136" count="1" type="stmt"/>
             <line num="137" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testAttributeValues() : void" num="141" testsuccess="true" count="1" testduration="0.003" type="method"/>
+            <line complexity="1" visibility="public" signature="testAttributeValues() : void" num="141" testsuccess="true" count="1" testduration="0.004" type="method"/>
             <line num="143" count="1" type="stmt"/>
             <line num="144" count="1" type="stmt"/>
             <line num="146" count="1" type="stmt"/>
             <line num="147" count="1" type="stmt"/>
             <line num="148" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testParseDates() : void" num="151" testsuccess="true" count="1" testduration="0.004" type="method"/>
+            <line complexity="1" visibility="public" signature="testParseDates() : void" num="151" testsuccess="true" count="1" testduration="0.008" type="method"/>
             <line num="153" count="1" type="stmt"/>
             <line num="154" count="1" type="stmt"/>
             <line num="155" count="1" type="stmt"/>
@@ -22005,7 +22005,7 @@
             <line num="179" count="1" type="stmt"/>
             <line num="180" count="1" type="stmt"/>
             <line num="181" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testParseEmptyValues() : void" num="184" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testParseEmptyValues() : void" num="184" testsuccess="true" count="1" testduration="0.005" type="method"/>
             <line num="186" count="1" type="stmt"/>
             <line num="187" count="1" type="stmt"/>
             <line num="189" count="1" type="stmt"/>
@@ -22015,7 +22015,7 @@
             <line num="194" count="1" type="stmt"/>
             <line num="196" count="1" type="stmt"/>
             <line num="197" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testSubproperty() : void" num="200" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testSubproperty() : void" num="200" testsuccess="true" count="1" testduration="0.007" type="method"/>
             <line num="202" count="1" type="stmt"/>
             <line num="203" count="1" type="stmt"/>
             <line num="204" count="1" type="stmt"/>
@@ -22023,7 +22023,7 @@
             <line complexity="1" visibility="public" signature="startElement(String,String,String,Attributes) : void" num="206" count="12" type="method"/>
             <line num="207" count="12" type="stmt"/>
             <line num="210" count="1" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testExternalDTD() : void" num="224" testsuccess="true" count="1" testduration="0.011" type="method"/>
+            <line complexity="2" visibility="public" signature="testExternalDTD() : void" num="224" testsuccess="true" count="1" testduration="0.024" type="method"/>
             <line num="226" count="1" type="stmt"/>
             <line num="229" count="1" type="stmt"/>
             <line num="230" count="1" type="stmt"/>
@@ -22035,7 +22035,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/xmp/XMPPropertyTestCase.java" name="XMPPropertyTestCase.java">
             <metrics coveredelements="119" coveredconditionals="0" complexity="9" loc="217" coveredmethods="7" methods="7" elements="119" classes="1" ncloc="160" statements="112" conditionals="0" coveredstatements="112"/>
             <class name="XMPPropertyTestCase">
-               <metrics coveredelements="119" complexity="9" methods="7" testruns="7" statements="112" coveredconditionals="0" coveredmethods="7" elements="119" testfailures="0" testduration="0.096" conditionals="0" coveredstatements="112" testpasses="7"/>
+               <metrics coveredelements="119" complexity="9" methods="7" testruns="7" statements="112" coveredconditionals="0" coveredmethods="7" elements="119" testfailures="0" testduration="0.091" conditionals="0" coveredstatements="112" testpasses="7"/>
             </class>
             <line complexity="1" visibility="public" signature="testPropertyAccess() : void" num="52" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="54" count="1" type="stmt"/>
@@ -22072,7 +22072,7 @@
             <line num="93" count="1" type="stmt"/>
             <line num="94" count="1" type="stmt"/>
             <line num="95" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testReplaceLangAlt() : void" num="98" testsuccess="true" count="1" testduration="0.095" type="method"/>
+            <line complexity="1" visibility="public" signature="testReplaceLangAlt() : void" num="98" testsuccess="true" count="1" testduration="0.087" type="method"/>
             <line num="100" count="1" type="stmt"/>
             <line num="101" count="1" type="stmt"/>
             <line num="102" count="1" type="stmt"/>
@@ -22088,7 +22088,7 @@
             <line num="112" count="1" type="stmt"/>
             <line num="115" count="1" type="stmt"/>
             <line num="116" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testPropertyValues() : void" num="119" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testPropertyValues() : void" num="119" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="121" count="1" type="stmt"/>
             <line num="122" count="1" type="stmt"/>
             <line num="124" count="1" type="stmt"/>
@@ -22117,7 +22117,7 @@
             <line num="155" count="1" type="stmt"/>
             <line num="156" count="1" type="stmt"/>
             <line num="157" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testDates() : void" num="160" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testDates() : void" num="160" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="162" count="1" type="stmt"/>
             <line num="163" count="1" type="stmt"/>
             <line num="165" count="1" type="stmt"/>
@@ -22128,7 +22128,7 @@
             <line num="171" count="1" type="stmt"/>
             <line num="172" count="1" type="stmt"/>
             <line num="173" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testQualifiers() : void" num="176" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testQualifiers() : void" num="176" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="178" count="1" type="stmt"/>
             <line num="179" count="1" type="stmt"/>
             <line num="181" count="1" type="stmt"/>
@@ -22163,12 +22163,12 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/impl/ImageConverterG2D2BitmapTestCase.java" name="ImageConverterG2D2BitmapTestCase.java">
             <metrics coveredelements="12" coveredconditionals="0" complexity="3" loc="59" coveredmethods="2" methods="3" elements="14" classes="2" ncloc="35" statements="11" conditionals="0" coveredstatements="10"/>
             <class name="ImageConverterG2D2BitmapTestCase">
-               <metrics coveredelements="11" complexity="1" methods="1" testruns="1" statements="10" coveredconditionals="0" coveredmethods="1" elements="11" testfailures="0" testduration="0.011" conditionals="0" coveredstatements="10" testpasses="1"/>
+               <metrics coveredelements="11" complexity="1" methods="1" testruns="1" statements="10" coveredconditionals="0" coveredmethods="1" elements="11" testfailures="0" testduration="0.021" conditionals="0" coveredstatements="10" testpasses="1"/>
             </class>
             <class name="ImageConverterG2D2BitmapTestCase.EmptyGraphics2DImagePainter">
                <metrics coveredelements="1" coveredconditionals="0" complexity="2" coveredmethods="1" methods="2" elements="3" statements="1" conditionals="0" coveredstatements="0"/>
             </class>
-            <line complexity="1" visibility="public" signature="testConvert() : void" num="36" testsuccess="true" count="1" testduration="0.011" type="method"/>
+            <line complexity="1" visibility="public" signature="testConvert() : void" num="36" testsuccess="true" count="1" testduration="0.021" type="method"/>
             <line num="38" count="1" type="stmt"/>
             <line num="39" count="1" type="stmt"/>
             <line num="40" count="1" type="stmt"/>
@@ -22188,14 +22188,14 @@
             <class name="ImageLoaderFactoryPNGTestCase">
                <metrics coveredelements="11" complexity="5" methods="4" testruns="4" statements="8" coveredconditionals="0" coveredmethods="4" elements="12" testfailures="0" testduration="0.002" conditionals="0" coveredstatements="7" testpasses="4"/>
             </class>
-            <line complexity="1" visibility="public" signature="testGetSupportedMIMETypes() : void" num="36" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testGetSupportedMIMETypes() : void" num="36" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="38" count="1" type="stmt"/>
             <line complexity="2" visibility="public" signature="testGetSupportedFlavors() : void" num="41" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="43" count="1" type="stmt"/>
             <line num="45" count="1" type="stmt"/>
             <line num="46" count="1" type="stmt"/>
             <line num="47" count="0" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testNewImageLoader() : void" num="53" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testNewImageLoader() : void" num="53" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="55" count="1" type="stmt"/>
             <line num="56" count="1" type="stmt"/>
             <line complexity="1" visibility="public" signature="testIsAvailable() : void" num="59" testsuccess="true" count="1" testduration="0.0" type="method"/>
@@ -22204,9 +22204,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/impl/ImageLoaderImageIOTestCase.java" name="ImageLoaderImageIOTestCase.java">
             <metrics coveredelements="10" coveredconditionals="0" complexity="1" loc="63" coveredmethods="1" methods="1" elements="10" classes="1" ncloc="28" statements="9" conditionals="0" coveredstatements="9"/>
             <class name="ImageLoaderImageIOTestCase">
-               <metrics coveredelements="10" complexity="1" methods="1" testruns="1" statements="9" coveredconditionals="0" coveredmethods="1" elements="10" testfailures="0" testduration="0.031" conditionals="0" coveredstatements="9" testpasses="1"/>
+               <metrics coveredelements="10" complexity="1" methods="1" testruns="1" statements="9" coveredconditionals="0" coveredmethods="1" elements="10" testfailures="0" testduration="0.062" conditionals="0" coveredstatements="9" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testGrayPNGWithCMYKProfile() : void" num="49" testsuccess="true" count="1" testduration="0.031" type="method"/>
+            <line complexity="1" visibility="public" signature="testGrayPNGWithCMYKProfile() : void" num="49" testsuccess="true" count="1" testduration="0.062" type="method"/>
             <line num="51" count="1" type="stmt"/>
             <line num="52" count="1" type="stmt"/>
             <line num="53" count="1" type="stmt"/>
@@ -22220,11 +22220,11 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/impl/ImageLoaderPNGTestCase.java" name="ImageLoaderPNGTestCase.java">
             <metrics coveredelements="10" coveredconditionals="0" complexity="3" loc="62" coveredmethods="3" methods="3" elements="10" classes="1" ncloc="33" statements="7" conditionals="0" coveredstatements="7"/>
             <class name="ImageLoaderPNGTestCase">
-               <metrics coveredelements="10" complexity="3" methods="3" testruns="3" statements="7" coveredconditionals="0" coveredmethods="3" elements="10" testfailures="0" testduration="0.004" conditionals="0" coveredstatements="7" testpasses="3"/>
+               <metrics coveredelements="10" complexity="3" methods="3" testruns="3" statements="7" coveredconditionals="0" coveredmethods="3" elements="10" testfailures="0" testduration="0.01" conditionals="0" coveredstatements="7" testpasses="3"/>
             </class>
             <line complexity="1" visibility="public" signature="testGetUsagePenalty() : void" num="43" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="45" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testLoadImageImageInfoMapImageSessionContext() : void" num="48" testsuccess="true" count="1" testduration="0.004" type="method"/>
+            <line complexity="1" visibility="public" signature="testLoadImageImageInfoMapImageSessionContext() : void" num="48" testsuccess="true" count="1" testduration="0.01" type="method"/>
             <line num="50" count="1" type="stmt"/>
             <line num="51" count="1" type="stmt"/>
             <line num="52" count="1" type="stmt"/>
@@ -22236,9 +22236,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/impl/ImageLoaderRawCCITTFaxTestCase.java" name="ImageLoaderRawCCITTFaxTestCase.java">
             <metrics coveredelements="12" coveredconditionals="0" complexity="1" loc="57" coveredmethods="1" methods="1" elements="12" classes="1" ncloc="27" statements="11" conditionals="0" coveredstatements="11"/>
             <class name="ImageLoaderRawCCITTFaxTestCase">
-               <metrics coveredelements="12" complexity="1" methods="1" testruns="1" statements="11" coveredconditionals="0" coveredmethods="1" elements="12" testfailures="0" testduration="0.012" conditionals="0" coveredstatements="11" testpasses="1"/>
+               <metrics coveredelements="12" complexity="1" methods="1" testruns="1" statements="11" coveredconditionals="0" coveredmethods="1" elements="12" testfailures="0" testduration="0.023" conditionals="0" coveredstatements="11" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testLoadImage() : void" num="40" testsuccess="true" count="1" testduration="0.012" type="method"/>
+            <line complexity="1" visibility="public" signature="testLoadImage() : void" num="40" testsuccess="true" count="1" testduration="0.023" type="method"/>
             <line num="42" count="1" type="stmt"/>
             <line num="43" count="1" type="stmt"/>
             <line num="45" count="1" type="stmt"/>
@@ -22254,7 +22254,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/impl/ImageLoaderRawPNGTestCase.java" name="ImageLoaderRawPNGTestCase.java">
             <metrics coveredelements="22" coveredconditionals="0" complexity="6" loc="89" coveredmethods="5" methods="5" elements="23" classes="1" ncloc="57" statements="18" conditionals="0" coveredstatements="17"/>
             <class name="ImageLoaderRawPNGTestCase">
-               <metrics coveredelements="22" complexity="6" methods="5" testruns="5" statements="18" coveredconditionals="0" coveredmethods="5" elements="23" testfailures="0" testduration="0.007" conditionals="0" coveredstatements="17" testpasses="5"/>
+               <metrics coveredelements="22" complexity="6" methods="5" testruns="5" statements="18" coveredconditionals="0" coveredmethods="5" elements="23" testfailures="0" testduration="0.017" conditionals="0" coveredstatements="17" testpasses="5"/>
             </class>
             <line complexity="1" visibility="public" signature="testGetUsagePenalty() : void" num="49" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="51" count="1" type="stmt"/>
@@ -22267,13 +22267,13 @@
             <line num="61" count="0" type="stmt"/>
             <line complexity="1" visibility="public" signature="testGetTargetFlavor() : void" num="67" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="69" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testLoadImageGoodMime() : void" num="72" testsuccess="true" count="1" testduration="0.005" type="method"/>
+            <line complexity="1" visibility="public" signature="testLoadImageGoodMime() : void" num="72" testsuccess="true" count="1" testduration="0.012" type="method"/>
             <line num="74" count="1" type="stmt"/>
             <line num="75" count="1" type="stmt"/>
             <line num="76" count="1" type="stmt"/>
             <line num="77" count="1" type="stmt"/>
             <line num="78" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testPreloaderRawPNG() : void" num="81" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testPreloaderRawPNG() : void" num="81" testsuccess="true" count="1" testduration="0.005" type="method"/>
             <line num="83" count="1" type="stmt"/>
             <line num="84" count="1" type="stmt"/>
             <line num="85" count="1" type="stmt"/>
@@ -22283,22 +22283,22 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/impl/PNGFileTestCase.java" name="PNGFileTestCase.java">
             <metrics coveredelements="55" coveredconditionals="10" complexity="15" loc="118" coveredmethods="9" methods="9" elements="55" classes="1" ncloc="85" statements="36" conditionals="10" coveredstatements="36"/>
             <class name="PNGFileTestCase">
-               <metrics coveredelements="55" complexity="15" methods="9" testruns="7" statements="36" coveredconditionals="10" coveredmethods="9" elements="55" testfailures="0" testduration="0.008" conditionals="10" coveredstatements="36" testpasses="7"/>
+               <metrics coveredelements="55" complexity="15" methods="9" testruns="7" statements="36" coveredconditionals="10" coveredmethods="9" elements="55" testfailures="0" testduration="0.014000000000000002" conditionals="10" coveredstatements="36" testpasses="7"/>
             </class>
-            <line complexity="1" visibility="public" signature="testColorTypeTwoPNG() : void" num="42" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testColorTypeTwoPNG() : void" num="42" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="44" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testColorTypeZeroPNG() : void" num="47" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testColorTypeZeroPNG() : void" num="47" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="49" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testColorTypeSixPNG() : void" num="52" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testColorTypeSixPNG() : void" num="52" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="54" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testColorTypeThreePNG() : void" num="57" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testColorTypeThreePNG() : void" num="57" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="59" count="1" type="stmt"/>
             <line complexity="1" visibility="public" signature="testColorTypeFourPNG() : void" num="62" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="64" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testTransparentPNG() : void" num="67" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testTransparentPNG() : void" num="67" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="69" count="1" type="stmt"/>
             <line num="70" count="1" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testCorruptPNG() : void" num="73" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="2" visibility="public" signature="testCorruptPNG() : void" num="73" testsuccess="true" count="1" testduration="0.004" type="method"/>
             <line num="75" count="1" type="stmt"/>
             <line num="76" count="1" type="stmt"/>
             <line num="77" count="1" type="stmt"/>
@@ -22339,9 +22339,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/impl/PreloaderJPEGTestCase.java" name="PreloaderJPEGTestCase.java">
             <metrics coveredelements="13" coveredconditionals="0" complexity="1" loc="77" coveredmethods="1" methods="1" elements="13" classes="1" ncloc="43" statements="12" conditionals="0" coveredstatements="12"/>
             <class name="PreloaderJPEGTestCase">
-               <metrics coveredelements="13" complexity="1" methods="1" testruns="1" statements="12" coveredconditionals="0" coveredmethods="1" elements="13" testfailures="0" testduration="0.035" conditionals="0" coveredstatements="12" testpasses="1"/>
+               <metrics coveredelements="13" complexity="1" methods="1" testruns="1" statements="12" coveredconditionals="0" coveredmethods="1" elements="13" testfailures="0" testduration="0.084" conditionals="0" coveredstatements="12" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testAPP1Segment() : void" num="42" testsuccess="true" count="1" testduration="0.035" type="method"/>
+            <line complexity="1" visibility="public" signature="testAPP1Segment() : void" num="42" testsuccess="true" count="1" testduration="0.084" type="method"/>
             <line num="48" count="1" type="stmt"/>
             <line num="61" count="1" type="stmt"/>
             <line num="62" count="1" type="stmt"/>
@@ -22361,7 +22361,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/util/ClasspathResourceTestCase.java" name="ClasspathResourceTestCase.java">
             <metrics coveredelements="15" coveredconditionals="3" complexity="4" loc="68" coveredmethods="2" methods="2" elements="16" classes="1" ncloc="28" statements="10" conditionals="4" coveredstatements="10"/>
             <class name="ClasspathResourceTestCase">
-               <metrics coveredelements="15" complexity="4" methods="2" testruns="2" statements="10" coveredconditionals="3" coveredmethods="2" elements="16" testfailures="0" testduration="0.014" conditionals="4" coveredstatements="10" testpasses="2"/>
+               <metrics coveredelements="15" complexity="4" methods="2" testruns="2" statements="10" coveredconditionals="3" coveredmethods="2" elements="16" testfailures="0" testduration="0.026" conditionals="4" coveredstatements="10" testpasses="2"/>
             </class>
             <line complexity="3" visibility="public" signature="testSampleResource() : void" num="41" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="43" count="1" type="stmt"/>
@@ -22374,16 +22374,16 @@
             <line falsecount="0" truecount="1" num="49" type="cond"/>
             <line num="50" count="1" type="stmt"/>
             <line num="53" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testNonexistingResource() : void" num="62" testsuccess="true" count="1" testduration="0.014" type="method"/>
+            <line complexity="1" visibility="public" signature="testNonexistingResource() : void" num="62" testsuccess="true" count="1" testduration="0.026" type="method"/>
             <line num="64" count="1" type="stmt"/>
             <line num="66" count="1" type="stmt"/>
          </file>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/util/DateFormatUtilTestCase.java" name="DateFormatUtilTestCase.java">
             <metrics coveredelements="44" coveredconditionals="0" complexity="8" loc="119" coveredmethods="7" methods="7" elements="45" classes="1" ncloc="70" statements="38" conditionals="0" coveredstatements="37"/>
             <class name="DateFormatUtilTestCase">
-               <metrics coveredelements="44" complexity="8" methods="7" testruns="5" statements="38" coveredconditionals="0" coveredmethods="7" elements="45" testfailures="0" testduration="0.022" conditionals="0" coveredstatements="37" testpasses="5"/>
+               <metrics coveredelements="44" complexity="8" methods="7" testruns="5" statements="38" coveredconditionals="0" coveredmethods="7" elements="45" testfailures="0" testduration="0.05600000000000001" conditionals="0" coveredstatements="37" testpasses="5"/>
             </class>
-            <line complexity="1" visibility="public" signature="testDateFormattingISO8601() : void" num="43" testsuccess="true" count="1" testduration="0.004" type="method"/>
+            <line complexity="1" visibility="public" signature="testDateFormattingISO8601() : void" num="43" testsuccess="true" count="1" testduration="0.011" type="method"/>
             <line num="45" count="1" type="stmt"/>
             <line num="47" count="1" type="stmt"/>
             <line num="48" count="1" type="stmt"/>
@@ -22406,7 +22406,7 @@
             <line num="71" count="2" type="stmt"/>
             <line num="72" count="2" type="stmt"/>
             <line num="73" count="2" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testDateFormattingPDF() : void" num="76" testsuccess="true" count="1" testduration="0.016" type="method"/>
+            <line complexity="1" visibility="public" signature="testDateFormattingPDF() : void" num="76" testsuccess="true" count="1" testduration="0.041" type="method"/>
             <line num="78" count="1" type="stmt"/>
             <line num="80" count="1" type="stmt"/>
             <line num="81" count="1" type="stmt"/>
@@ -22418,9 +22418,9 @@
             <line num="90" count="1" type="stmt"/>
             <line num="92" count="1" type="stmt"/>
             <line num="93" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testParseInvalidDateNoColonUTC() : void" num="96" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testParseInvalidDateNoColonUTC() : void" num="96" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="98" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testParseInvalidDateNoColonLocal() : void" num="101" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testParseInvalidDateNoColonLocal() : void" num="101" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="103" count="1" type="stmt"/>
             <line complexity="1" visibility="public" signature="testParseInvalidDateColonLast() : void" num="106" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="108" count="1" type="stmt"/>
@@ -22432,7 +22432,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/util/DoubleFormatUtilTestCase.java" name="DoubleFormatUtilTestCase.java">
             <metrics coveredelements="286" coveredconditionals="22" complexity="34" loc="610" coveredmethods="9" methods="13" elements="427" classes="1" ncloc="446" statements="376" conditionals="38" coveredstatements="255"/>
             <class name="DoubleFormatUtilTestCase">
-               <metrics coveredelements="286" complexity="34" methods="13" testruns="5" statements="376" coveredconditionals="22" coveredmethods="9" elements="427" testfailures="0" testduration="2.266" conditionals="38" coveredstatements="255" testpasses="5"/>
+               <metrics coveredelements="286" complexity="34" methods="13" testruns="5" statements="376" coveredconditionals="22" coveredmethods="9" elements="427" testfailures="0" testduration="5.615" conditionals="38" coveredstatements="255" testpasses="5"/>
             </class>
             <line complexity="1" visibility="public" signature="testSimple() : void" num="44" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="46" count="1" type="stmt"/>
@@ -22521,7 +22521,7 @@
             <line num="154" count="1" type="stmt"/>
             <line num="155" count="1" type="stmt"/>
             <line num="156" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testLimits() : void" num="159" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testLimits() : void" num="159" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="161" count="1" type="stmt"/>
             <line num="162" count="1" type="stmt"/>
             <line num="164" count="1" type="stmt"/>
@@ -22620,20 +22620,20 @@
             <line num="301" count="291093" type="stmt"/>
             <line num="303" count="291093" type="stmt"/>
             <line num="304" count="291093" type="stmt"/>
-            <line falsecount="3212" truecount="287881" num="304" type="cond"/>
-            <line num="305" count="287881" type="stmt"/>
-            <line falsecount="287881" truecount="15613394" num="305" type="cond"/>
-            <line num="306" count="15613394" type="stmt"/>
-            <line num="308" count="287881" type="stmt"/>
-            <line falsecount="129936" truecount="157945" num="308" type="cond"/>
-            <line num="309" count="157945" type="stmt"/>
+            <line falsecount="3390" truecount="287703" num="304" type="cond"/>
+            <line num="305" count="287703" type="stmt"/>
+            <line falsecount="287703" truecount="15608658" num="305" type="cond"/>
+            <line num="306" count="15608658" type="stmt"/>
+            <line num="308" count="287703" type="stmt"/>
+            <line falsecount="129781" truecount="157922" num="308" type="cond"/>
+            <line num="309" count="157922" type="stmt"/>
             <line num="312" count="291093" type="stmt"/>
             <line complexity="2" visibility="private" signature="formatDf(double,int,int) : String" num="323" count="0" type="method"/>
             <line num="324" count="0" type="stmt"/>
             <line falsecount="0" truecount="0" num="324" type="cond"/>
             <line num="325" count="0" type="stmt"/>
             <line num="326" count="0" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testPrecise() : void" num="337" testsuccess="true" count="1" testduration="0.163" type="method"/>
+            <line complexity="2" visibility="public" signature="testPrecise() : void" num="337" testsuccess="true" count="1" testduration="0.303" type="method"/>
             <line num="339" count="1" type="stmt"/>
             <line num="340" count="1" type="stmt"/>
             <line num="341" count="1" type="stmt"/>
@@ -22660,7 +22660,7 @@
             <line num="365" count="10000" type="stmt"/>
             <line num="366" count="10000" type="stmt"/>
             <line num="367" count="10000" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testFormat() : void" num="374" testsuccess="true" count="1" testduration="0.071" type="method"/>
+            <line complexity="2" visibility="public" signature="testFormat() : void" num="374" testsuccess="true" count="1" testduration="0.189" type="method"/>
             <line num="376" count="1" type="stmt"/>
             <line num="377" count="1" type="stmt"/>
             <line num="378" count="1" type="stmt"/>
@@ -22811,7 +22811,7 @@
             <line num="568" count="0" type="stmt"/>
             <line num="570" count="0" type="stmt"/>
             <line num="571" count="0" type="stmt"/>
-            <line complexity="5" visibility="public" signature="testAllDoubleRanges() : void" num="574" testsuccess="true" count="1" testduration="2.032" type="method"/>
+            <line complexity="5" visibility="public" signature="testAllDoubleRanges() : void" num="574" testsuccess="true" count="1" testduration="5.122" type="method"/>
             <line num="576" count="1" type="stmt"/>
             <line num="577" count="1" type="stmt"/>
             <line num="578" count="1" type="stmt"/>
@@ -22860,7 +22860,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/util/ServiceTestCase.java" name="ServiceTestCase.java">
             <metrics coveredelements="49" coveredconditionals="10" complexity="12" loc="112" coveredmethods="2" methods="2" elements="64" classes="1" ncloc="69" statements="44" conditionals="18" coveredstatements="37"/>
             <class name="ServiceTestCase">
-               <metrics coveredelements="49" complexity="12" methods="2" testruns="2" statements="44" coveredconditionals="10" coveredmethods="2" elements="64" testfailures="0" testduration="0.0" conditionals="18" coveredstatements="37" testpasses="2"/>
+               <metrics coveredelements="49" complexity="12" methods="2" testruns="2" statements="44" coveredconditionals="10" coveredmethods="2" elements="64" testfailures="0" testduration="0.001" conditionals="18" coveredstatements="37" testpasses="2"/>
             </class>
             <line complexity="7" visibility="public" signature="testWithInstances() : void" num="40" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="42" count="1" type="stmt"/>
@@ -22898,7 +22898,7 @@
             <line falsecount="0" truecount="0" num="75" type="cond"/>
             <line num="77" count="0" type="stmt"/>
             <line num="78" count="0" type="stmt"/>
-            <line complexity="5" visibility="public" signature="testWithClassNames() : void" num="87" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="5" visibility="public" signature="testWithClassNames() : void" num="87" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="89" count="1" type="stmt"/>
             <line num="90" count="1" type="stmt"/>
             <line num="91" count="1" type="stmt"/>
@@ -22958,7 +22958,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/writer/ImageWriterRegistryTestCase.java" name="ImageWriterRegistryTestCase.java">
             <metrics coveredelements="15" coveredconditionals="0" complexity="4" loc="79" coveredmethods="2" methods="4" elements="17" classes="3" ncloc="38" statements="13" conditionals="0" coveredstatements="13"/>
             <class name="ImageWriterRegistryTestCase">
-               <metrics coveredelements="13" complexity="1" methods="1" testruns="1" statements="12" coveredconditionals="0" coveredmethods="1" elements="13" testfailures="0" testduration="0.023" conditionals="0" coveredstatements="12" testpasses="1"/>
+               <metrics coveredelements="13" complexity="1" methods="1" testruns="1" statements="12" coveredconditionals="0" coveredmethods="1" elements="13" testfailures="0" testduration="0.05" conditionals="0" coveredstatements="12" testpasses="1"/>
             </class>
             <class name="ImageWriterRegistryTestCase.DummyPNGWriter">
                <metrics coveredelements="2" coveredconditionals="0" complexity="3" coveredmethods="1" methods="3" elements="4" statements="1" conditionals="0" coveredstatements="1"/>
@@ -22966,7 +22966,7 @@
             <class name="ImageWriterRegistryTestCase.OtherPNGWriter">
                <metrics coveredelements="0" coveredconditionals="0" complexity="0" coveredmethods="0" methods="0" elements="0" statements="0" conditionals="0" coveredstatements="0"/>
             </class>
-            <line complexity="1" visibility="public" signature="testRegistry() : void" num="39" testsuccess="true" count="1" testduration="0.023" type="method"/>
+            <line complexity="1" visibility="public" signature="testRegistry() : void" num="39" testsuccess="true" count="1" testduration="0.05" type="method"/>
             <line num="41" count="1" type="stmt"/>
             <line num="43" count="1" type="stmt"/>
             <line num="44" count="1" type="stmt"/>
@@ -22987,9 +22987,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/writer/ResolutionTestCase.java" name="ResolutionTestCase.java">
             <metrics coveredelements="76" coveredconditionals="6" complexity="12" loc="153" coveredmethods="6" methods="6" elements="84" classes="1" ncloc="117" statements="66" conditionals="12" coveredstatements="64"/>
             <class name="ResolutionTestCase">
-               <metrics coveredelements="76" complexity="12" methods="6" testruns="1" statements="66" coveredconditionals="6" coveredmethods="6" elements="84" testfailures="0" testduration="0.049" conditionals="12" coveredstatements="64" testpasses="1"/>
+               <metrics coveredelements="76" complexity="12" methods="6" testruns="1" statements="66" coveredconditionals="6" coveredmethods="6" elements="84" testfailures="0" testduration="0.122" conditionals="12" coveredstatements="64" testpasses="1"/>
             </class>
-            <line complexity="2" visibility="public" signature="testResolution() : void" num="52" testsuccess="true" count="1" testduration="0.049" type="method"/>
+            <line complexity="2" visibility="public" signature="testResolution() : void" num="52" testsuccess="true" count="1" testduration="0.122" type="method"/>
             <line num="54" count="1" type="stmt"/>
             <line num="55" count="1" type="stmt"/>
             <line num="56" count="1" type="stmt"/>
@@ -23074,9 +23074,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/ps/dsc/tools/DSCToolsTestCase.java" name="DSCToolsTestCase.java">
             <metrics coveredelements="16" coveredconditionals="0" complexity="1" loc="61" coveredmethods="1" methods="1" elements="16" classes="1" ncloc="29" statements="15" conditionals="0" coveredstatements="15"/>
             <class name="DSCToolsTestCase">
-               <metrics coveredelements="16" complexity="1" methods="1" testruns="1" statements="15" coveredconditionals="0" coveredmethods="1" elements="16" testfailures="0" testduration="0.002" conditionals="0" coveredstatements="15" testpasses="1"/>
+               <metrics coveredelements="16" complexity="1" methods="1" testruns="1" statements="15" coveredconditionals="0" coveredmethods="1" elements="16" testfailures="0" testduration="0.01" conditionals="0" coveredstatements="15" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testEndComment() : void" num="35" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testEndComment() : void" num="35" testsuccess="true" count="1" testduration="0.01" type="method"/>
             <line num="37" count="1" type="stmt"/>
             <line num="39" count="1" type="stmt"/>
             <line num="40" count="1" type="stmt"/>
@@ -23099,7 +23099,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/util/io/ASCII85InputStreamTestCase.java" name="ASCII85InputStreamTestCase.java">
             <metrics coveredelements="59" coveredconditionals="8" complexity="17" loc="164" coveredmethods="7" methods="7" elements="81" classes="1" ncloc="100" statements="56" conditionals="18" coveredstatements="44"/>
             <class name="ASCII85InputStreamTestCase">
-               <metrics coveredelements="59" complexity="17" methods="7" testruns="2" statements="56" coveredconditionals="8" coveredmethods="7" elements="81" testfailures="0" testduration="0.003" conditionals="18" coveredstatements="44" testpasses="2"/>
+               <metrics coveredelements="59" complexity="17" methods="7" testruns="2" statements="56" coveredconditionals="8" coveredmethods="7" elements="81" testfailures="0" testduration="0.008" conditionals="18" coveredstatements="44" testpasses="2"/>
             </class>
             <line complexity="1" visibility="private" signature="decode(String) : byte[]" num="47" count="15" type="method"/>
             <line num="48" count="15" type="stmt"/>
@@ -23133,7 +23133,7 @@
             <line num="83" count="0" type="stmt"/>
             <line num="85" count="0" type="stmt"/>
             <line num="89" count="12" type="stmt"/>
-            <line complexity="6" visibility="public" signature="testDecode() : void" num="96" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="6" visibility="public" signature="testDecode() : void" num="96" testsuccess="true" count="1" testduration="0.004" type="method"/>
             <line num="98" count="1" type="stmt"/>
             <line num="99" count="1" type="stmt"/>
             <line falsecount="1" truecount="0" num="99" type="cond"/>
@@ -23171,13 +23171,13 @@
             <line falsecount="1" truecount="2" num="149" type="cond"/>
             <line num="150" count="2" type="stmt"/>
             <line num="152" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testFullASCIIRange() : void" num="159" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testFullASCIIRange() : void" num="159" testsuccess="true" count="1" testduration="0.004" type="method"/>
             <line num="161" count="1" type="stmt"/>
          </file>
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/util/io/ASCII85OutputStreamTestCase.java" name="ASCII85OutputStreamTestCase.java">
             <metrics coveredelements="28" coveredconditionals="2" complexity="5" loc="96" coveredmethods="4" methods="4" elements="28" classes="1" ncloc="44" statements="22" conditionals="2" coveredstatements="22"/>
             <class name="ASCII85OutputStreamTestCase">
-               <metrics coveredelements="28" complexity="5" methods="4" testruns="1" statements="22" coveredconditionals="2" coveredmethods="4" elements="28" testfailures="0" testduration="0.0" conditionals="2" coveredstatements="22" testpasses="1"/>
+               <metrics coveredelements="28" complexity="5" methods="4" testruns="1" statements="22" coveredconditionals="2" coveredmethods="4" elements="28" testfailures="0" testduration="0.001" conditionals="2" coveredstatements="22" testpasses="1"/>
             </class>
             <line complexity="2" visibility="package" signature="&lt;clinit&gt;, line 38()" num="38" count="1" type="method"/>
             <line num="40" count="1" type="stmt"/>
@@ -23191,7 +23191,7 @@
             <line num="52" count="7" type="stmt"/>
             <line num="53" count="7" type="stmt"/>
             <line num="54" count="7" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testOutput() : void" num="61" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testOutput() : void" num="61" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="63" count="1" type="stmt"/>
             <line num="64" count="1" type="stmt"/>
             <line num="66" count="1" type="stmt"/>
@@ -23210,7 +23210,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/util/io/Base64TestCase.java" name="Base64TestCase.java">
             <metrics coveredelements="149" coveredconditionals="42" complexity="53" loc="268" coveredmethods="9" methods="9" elements="178" classes="2" ncloc="191" statements="113" conditionals="56" coveredstatements="98"/>
             <class name="Base64TestCase">
-               <metrics coveredelements="134" complexity="48" methods="7" testruns="1" statements="102" coveredconditionals="40" coveredmethods="7" elements="163" testfailures="0" testduration="0.134" conditionals="54" coveredstatements="87" testpasses="1"/>
+               <metrics coveredelements="134" complexity="48" methods="7" testruns="1" statements="102" coveredconditionals="40" coveredmethods="7" elements="163" testfailures="0" testduration="0.151" conditionals="54" coveredstatements="87" testpasses="1"/>
             </class>
             <class name="Base64TestCase.StreamCopier">
                <metrics coveredelements="15" coveredconditionals="2" complexity="5" coveredmethods="2" methods="2" elements="15" statements="11" conditionals="2" coveredstatements="11"/>
@@ -23259,7 +23259,7 @@
             <line num="106" count="8" type="stmt"/>
             <line num="107" count="8" type="stmt"/>
             <line num="108" count="8" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testBase64() : void" num="115" testsuccess="true" count="1" testduration="0.134" type="method"/>
+            <line complexity="1" visibility="public" signature="testBase64() : void" num="115" testsuccess="true" count="1" testduration="0.151" type="method"/>
             <line num="117" count="1" type="stmt"/>
             <line num="118" count="1" type="stmt"/>
             <line num="119" count="1" type="stmt"/>
@@ -23369,9 +23369,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/util/io/SubInputStreamTestCase.java" name="SubInputStreamTestCase.java">
             <metrics coveredelements="31" coveredconditionals="2" complexity="2" loc="77" coveredmethods="1" methods="1" elements="31" classes="1" ncloc="39" statements="28" conditionals="2" coveredstatements="28"/>
             <class name="SubInputStreamTestCase">
-               <metrics coveredelements="31" complexity="2" methods="1" testruns="1" statements="28" coveredconditionals="2" coveredmethods="1" elements="31" testfailures="0" testduration="0.001" conditionals="2" coveredstatements="28" testpasses="1"/>
+               <metrics coveredelements="31" complexity="2" methods="1" testruns="1" statements="28" coveredconditionals="2" coveredmethods="1" elements="31" testfailures="0" testduration="0.0" conditionals="2" coveredstatements="28" testpasses="1"/>
             </class>
-            <line complexity="2" visibility="public" signature="testMain() : void" num="38" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="2" visibility="public" signature="testMain() : void" num="38" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="41" count="1" type="stmt"/>
             <line num="42" count="1" type="stmt"/>
             <line falsecount="1" truecount="256" num="42" type="cond"/>
@@ -23408,7 +23408,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/writer/imageio/ImageIOTIFFImageWriterTestCase.java" name="ImageIOTIFFImageWriterTestCase.java">
             <metrics coveredelements="22" coveredconditionals="1" complexity="19" loc="212" coveredmethods="6" methods="17" elements="90" classes="5" ncloc="152" statements="69" conditionals="4" coveredstatements="15"/>
             <class name="ImageIOTIFFImageWriterTestCase">
-               <metrics coveredelements="14" complexity="6" methods="4" testruns="2" statements="52" coveredconditionals="1" coveredmethods="3" elements="60" testfailures="0" testduration="0.006" conditionals="4" coveredstatements="10" testpasses="2"/>
+               <metrics coveredelements="14" complexity="6" methods="4" testruns="2" statements="52" coveredconditionals="1" coveredmethods="3" elements="60" testfailures="0" testduration="0.013000000000000001" conditionals="4" coveredstatements="10" testpasses="2"/>
             </class>
             <class name="ImageIOTIFFImageWriterTestCase.ImageWriterHelper">
                <metrics coveredelements="0" coveredconditionals="0" complexity="0" coveredmethods="0" methods="0" elements="0" statements="0" conditionals="0" coveredstatements="0"/>
@@ -23422,7 +23422,7 @@
             <class name="ImageIOTIFFImageWriterTestCase.MyIIOMetadata">
                <metrics coveredelements="8" coveredconditionals="0" complexity="5" coveredmethods="3" methods="5" elements="11" statements="6" conditionals="0" coveredstatements="5"/>
             </class>
-            <line complexity="1" visibility="public" signature="testEndianess() : void" num="58" testsuccess="true" count="1" testduration="0.003" type="method"/>
+            <line complexity="1" visibility="public" signature="testEndianess() : void" num="58" testsuccess="true" count="1" testduration="0.006" type="method"/>
             <line num="60" count="1" type="stmt"/>
             <line num="61" count="1" type="stmt"/>
             <line complexity="3" visibility="private" signature="runEndiannessTest(ImageWriterHelper,int) : void" num="64" count="2" type="method"/>
@@ -23493,7 +23493,7 @@
             <line complexity="1" visibility="public" signature="writeImageNoParams(BufferedImage) : void" num="175" count="0" type="method"/>
             <line complexity="1" visibility="public" signature="getByteArrayOutput() : ByteArrayOutputStream" num="179" count="0" type="method"/>
             <line num="180" count="0" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testNewMetadataFormat() : void" num="184" testsuccess="true" count="1" testduration="0.003" type="method"/>
+            <line complexity="1" visibility="public" signature="testNewMetadataFormat() : void" num="184" testsuccess="true" count="1" testduration="0.007" type="method"/>
             <line num="186" count="1" type="stmt"/>
             <line num="187" count="1" type="stmt"/>
             <line num="188" count="1" type="stmt"/>
@@ -23517,9 +23517,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/java2d/color/ColorConverterTestCase.java" name="ColorConverterTestCase.java">
             <metrics coveredelements="15" coveredconditionals="0" complexity="1" loc="51" coveredmethods="1" methods="1" elements="15" classes="1" ncloc="25" statements="14" conditionals="0" coveredstatements="14"/>
             <class name="ColorConverterTestCase">
-               <metrics coveredelements="15" complexity="1" methods="1" testruns="1" statements="14" coveredconditionals="0" coveredmethods="1" elements="15" testfailures="0" testduration="0.003" conditionals="0" coveredstatements="14" testpasses="1"/>
+               <metrics coveredelements="15" complexity="1" methods="1" testruns="1" statements="14" coveredconditionals="0" coveredmethods="1" elements="15" testfailures="0" testduration="0.007" conditionals="0" coveredstatements="14" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testToGray() : void" num="32" testsuccess="true" count="1" testduration="0.003" type="method"/>
+            <line complexity="1" visibility="public" signature="testToGray() : void" num="32" testsuccess="true" count="1" testduration="0.007" type="method"/>
             <line num="34" count="1" type="stmt"/>
             <line num="35" count="1" type="stmt"/>
             <line num="36" count="1" type="stmt"/>
@@ -23538,9 +23538,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/java2d/color/ColorWithAlternativesTestCase.java" name="ColorWithAlternativesTestCase.java">
             <metrics coveredelements="20" coveredconditionals="0" complexity="2" loc="73" coveredmethods="2" methods="2" elements="20" classes="1" ncloc="32" statements="18" conditionals="0" coveredstatements="18"/>
             <class name="ColorWithAlternativesTestCase">
-               <metrics coveredelements="20" complexity="2" methods="2" testruns="2" statements="18" coveredconditionals="0" coveredmethods="2" elements="20" testfailures="0" testduration="0.001" conditionals="0" coveredstatements="18" testpasses="2"/>
+               <metrics coveredelements="20" complexity="2" methods="2" testruns="2" statements="18" coveredconditionals="0" coveredmethods="2" elements="20" testfailures="0" testduration="0.0" conditionals="0" coveredstatements="18" testpasses="2"/>
             </class>
-            <line complexity="1" visibility="public" signature="testEquals() : void" num="35" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testEquals() : void" num="35" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="37" count="1" type="stmt"/>
             <line num="38" count="1" type="stmt"/>
             <line num="40" count="1" type="stmt"/>
@@ -23564,9 +23564,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/java2d/color/NamedColorTestCase.java" name="NamedColorTestCase.java">
             <metrics coveredelements="36" coveredconditionals="2" complexity="3" loc="96" coveredmethods="2" methods="2" elements="36" classes="1" ncloc="51" statements="32" conditionals="2" coveredstatements="32"/>
             <class name="NamedColorTestCase">
-               <metrics coveredelements="36" complexity="3" methods="2" testruns="2" statements="32" coveredconditionals="2" coveredmethods="2" elements="36" testfailures="0" testduration="0.014" conditionals="2" coveredstatements="32" testpasses="2"/>
+               <metrics coveredelements="36" complexity="3" methods="2" testruns="2" statements="32" coveredconditionals="2" coveredmethods="2" elements="36" testfailures="0" testduration="0.032" conditionals="2" coveredstatements="32" testpasses="2"/>
             </class>
-            <line complexity="2" visibility="public" signature="testNamedColorWithCIELab() : void" num="38" testsuccess="true" count="1" testduration="0.012" type="method"/>
+            <line complexity="2" visibility="public" signature="testNamedColorWithCIELab() : void" num="38" testsuccess="true" count="1" testduration="0.028" type="method"/>
             <line num="40" count="1" type="stmt"/>
             <line num="44" count="1" type="stmt"/>
             <line num="46" count="1" type="stmt"/>
@@ -23585,7 +23585,7 @@
             <line num="65" count="1" type="stmt"/>
             <line num="66" count="1" type="stmt"/>
             <line num="67" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testEquals() : void" num="70" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testEquals() : void" num="70" testsuccess="true" count="1" testduration="0.004" type="method"/>
             <line num="72" count="1" type="stmt"/>
             <line num="75" count="1" type="stmt"/>
             <line num="78" count="1" type="stmt"/>
@@ -23608,9 +23608,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/codec/png/CodecResourcesTestCase.java" name="CodecResourcesTestCase.java">
             <metrics coveredelements="12" coveredconditionals="2" complexity="4" loc="59" coveredmethods="1" methods="1" elements="18" classes="1" ncloc="29" statements="13" conditionals="4" coveredstatements="9"/>
             <class name="CodecResourcesTestCase">
-               <metrics coveredelements="12" complexity="4" methods="1" testruns="1" statements="13" coveredconditionals="2" coveredmethods="1" elements="18" testfailures="0" testduration="0.001" conditionals="4" coveredstatements="9" testpasses="1"/>
+               <metrics coveredelements="12" complexity="4" methods="1" testruns="1" statements="13" coveredconditionals="2" coveredmethods="1" elements="18" testfailures="0" testduration="0.003" conditionals="4" coveredstatements="9" testpasses="1"/>
             </class>
-            <line complexity="4" visibility="public" signature="testResources() : void" num="38" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="4" visibility="public" signature="testResources() : void" num="38" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="41" count="1" type="stmt"/>
             <line num="42" count="1" type="stmt"/>
             <line num="43" count="1" type="stmt"/>
@@ -23630,9 +23630,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/codec/png/PNGEncoderTestCase.java" name="PNGEncoderTestCase.java">
             <metrics coveredelements="59" coveredconditionals="9" complexity="12" loc="155" coveredmethods="4" methods="4" elements="69" classes="1" ncloc="92" statements="51" conditionals="14" coveredstatements="46"/>
             <class name="PNGEncoderTestCase">
-               <metrics coveredelements="59" complexity="12" methods="4" testruns="1" statements="51" coveredconditionals="9" coveredmethods="4" elements="69" testfailures="0" testduration="0.053" conditionals="14" coveredstatements="46" testpasses="1"/>
+               <metrics coveredelements="59" complexity="12" methods="4" testruns="1" statements="51" coveredconditionals="9" coveredmethods="4" elements="69" testfailures="0" testduration="0.137" conditionals="14" coveredstatements="46" testpasses="1"/>
             </class>
-            <line complexity="3" visibility="public" signature="testPNGEncoding() : void" num="46" testsuccess="true" count="1" testduration="0.053" type="method"/>
+            <line complexity="3" visibility="public" signature="testPNGEncoding() : void" num="46" testsuccess="true" count="1" testduration="0.137" type="method"/>
             <line num="49" count="1" type="stmt"/>
             <line num="50" count="1" type="stmt"/>
             <line num="51" count="1" type="stmt"/>
@@ -23701,9 +23701,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/io/TempResourceURIGeneratorTestCase.java" name="TempResourceURIGeneratorTestCase.java">
             <metrics coveredelements="23" coveredconditionals="2" complexity="4" loc="68" coveredmethods="3" methods="3" elements="23" classes="1" ncloc="40" statements="18" conditionals="2" coveredstatements="18"/>
             <class name="TempResourceURIGeneratorTestCase">
-               <metrics coveredelements="23" complexity="4" methods="3" testruns="2" statements="18" coveredconditionals="2" coveredmethods="3" elements="23" testfailures="0" testduration="0.005" conditionals="2" coveredstatements="18" testpasses="2"/>
+               <metrics coveredelements="23" complexity="4" methods="3" testruns="2" statements="18" coveredconditionals="2" coveredmethods="3" elements="23" testfailures="0" testduration="0.011" conditionals="2" coveredstatements="18" testpasses="2"/>
             </class>
-            <line complexity="2" visibility="public" signature="testGenerate() : void" num="36" testsuccess="true" count="1" testduration="0.005" type="method"/>
+            <line complexity="2" visibility="public" signature="testGenerate() : void" num="36" testsuccess="true" count="1" testduration="0.01" type="method"/>
             <line num="38" count="1" type="stmt"/>
             <line num="39" count="1" type="stmt"/>
             <line num="40" count="1" type="stmt"/>
@@ -23716,7 +23716,7 @@
             <line falsecount="1" truecount="1000" num="48" type="cond"/>
             <line num="49" count="1000" type="stmt"/>
             <line num="51" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testIsTemURI() : void" num="54" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testIsTemURI() : void" num="54" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="56" count="1" type="stmt"/>
             <line num="57" count="1" type="stmt"/>
             <line num="58" count="1" type="stmt"/>
@@ -23729,7 +23729,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/io/URIResolverAdapterTestCase.java" name="URIResolverAdapterTestCase.java">
             <metrics coveredelements="7" coveredconditionals="0" complexity="6" loc="81" coveredmethods="2" methods="5" elements="21" classes="1" ncloc="52" statements="14" conditionals="2" coveredstatements="5"/>
             <class name="URIResolverAdapterTestCase">
-               <metrics coveredelements="7" complexity="6" methods="5" testruns="1" statements="14" coveredconditionals="0" coveredmethods="2" elements="21" testfailures="0" testduration="0.013" conditionals="2" coveredstatements="5" testpasses="1"/>
+               <metrics coveredelements="7" complexity="6" methods="5" testruns="1" statements="14" coveredconditionals="0" coveredmethods="2" elements="21" testfailures="0" testduration="0.031" conditionals="2" coveredstatements="5" testpasses="1"/>
             </class>
             <line complexity="1" visibility="public" signature="setUp() : void" num="46" count="1" type="method"/>
             <line num="48" count="1" type="stmt"/>
@@ -23746,7 +23746,7 @@
             <line num="69" count="0" type="stmt"/>
             <line num="70" count="0" type="stmt"/>
             <line num="71" count="0" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testHttpProtocol() : void" num="74" testsuccess="true" count="1" testduration="0.013" type="method"/>
+            <line complexity="1" visibility="public" signature="testHttpProtocol() : void" num="74" testsuccess="true" count="1" testduration="0.031" type="method"/>
             <line num="76" count="1" type="stmt"/>
             <line num="77" count="1" type="stmt"/>
             <line num="78" count="1" type="stmt"/>
@@ -23755,7 +23755,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/io/XmlSourceUtilTestCase.java" name="XmlSourceUtilTestCase.java">
             <metrics coveredelements="91" coveredconditionals="0" complexity="16" loc="240" coveredmethods="14" methods="16" elements="98" classes="1" ncloc="174" statements="82" conditionals="0" coveredstatements="77"/>
             <class name="XmlSourceUtilTestCase">
-               <metrics coveredelements="91" complexity="16" methods="16" testruns="13" statements="82" coveredconditionals="0" coveredmethods="14" elements="98" testfailures="0" testduration="0.015000000000000003" conditionals="0" coveredstatements="77" testpasses="13"/>
+               <metrics coveredelements="91" complexity="16" methods="16" testruns="13" statements="82" coveredconditionals="0" coveredmethods="14" elements="98" testfailures="0" testduration="0.027999999999999997" conditionals="0" coveredstatements="77" testpasses="13"/>
             </class>
             <line complexity="1" visibility="public" signature="setUp() : void" num="71" count="13" type="method"/>
             <line num="73" count="13" type="stmt"/>
@@ -23777,7 +23777,7 @@
             <line num="94" count="13" type="stmt"/>
             <line num="95" count="13" type="stmt"/>
             <line num="96" count="13" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testGetInputStream() : void" num="99" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testGetInputStream() : void" num="99" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="101" count="1" type="stmt"/>
             <line num="102" count="1" type="stmt"/>
             <line num="104" count="1" type="stmt"/>
@@ -23788,13 +23788,13 @@
             <line num="113" count="1" type="stmt"/>
             <line num="114" count="1" type="stmt"/>
             <line num="116" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testNeedInputStream() : void" num="119" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testNeedInputStream() : void" num="119" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="121" count="1" type="stmt"/>
             <line num="123" count="1" type="stmt"/>
             <line num="125" count="1" type="stmt"/>
             <line num="126" count="1" type="stmt"/>
             <line num="128" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testNeedInputStreamFailureCaseSource() : void" num="131" testsuccess="true" count="1" testduration="0.008" type="method"/>
+            <line complexity="1" visibility="public" signature="testNeedInputStreamFailureCaseSource() : void" num="131" testsuccess="true" count="1" testduration="0.013" type="method"/>
             <line num="133" count="1" type="stmt"/>
             <line num="134" count="1" type="stmt"/>
             <line complexity="1" visibility="public" signature="testNeedInputStreamFailureCaseStreamSource() : void" num="137" testsuccess="true" count="1" testduration="0.0" type="method"/>
@@ -23810,7 +23810,7 @@
             <line num="157" count="0" type="stmt"/>
             <line complexity="1" visibility="public" signature="testNeedInputStreamFailureCaseNullArg() : void" num="160" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="162" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testHasReader() : void" num="165" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testHasReader() : void" num="165" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="167" count="1" type="stmt"/>
             <line num="169" count="1" type="stmt"/>
             <line num="171" count="1" type="stmt"/>
@@ -23820,7 +23820,7 @@
             <line num="176" count="1" type="stmt"/>
             <line num="177" count="1" type="stmt"/>
             <line num="179" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testRemoveStreams() : void" num="182" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testRemoveStreams() : void" num="182" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="184" count="1" type="stmt"/>
             <line num="185" count="1" type="stmt"/>
             <line num="186" count="1" type="stmt"/>
@@ -23830,18 +23830,18 @@
             <line num="192" count="1" type="stmt"/>
             <line num="193" count="1" type="stmt"/>
             <line num="195" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testCloseQuietlyStreamSource() : void" num="198" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testCloseQuietlyStreamSource() : void" num="198" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="200" count="1" type="stmt"/>
             <line num="201" count="1" type="stmt"/>
             <line num="202" count="1" type="stmt"/>
             <line num="203" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testCloseQuietlySaxSource() : void" num="206" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testCloseQuietlySaxSource() : void" num="206" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="208" count="1" type="stmt"/>
             <line num="209" count="1" type="stmt"/>
             <line num="210" count="1" type="stmt"/>
             <line num="211" count="1" type="stmt"/>
             <line num="212" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testCloseQuietlyImageSource() : void" num="215" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testCloseQuietlyImageSource() : void" num="215" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="217" count="1" type="stmt"/>
             <line num="218" count="1" type="stmt"/>
             <line num="219" count="1" type="stmt"/>
@@ -23862,13 +23862,13 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/ps/dsc/DSCParserTestCase.java" name="DSCParserTestCase.java">
             <metrics coveredelements="15" coveredconditionals="2" complexity="6" loc="67" coveredmethods="5" methods="5" elements="15" classes="1" ncloc="37" statements="8" conditionals="2" coveredstatements="8"/>
             <class name="DSCParserTestCase">
-               <metrics coveredelements="15" complexity="6" methods="5" testruns="4" statements="8" coveredconditionals="2" coveredmethods="5" elements="15" testfailures="0" testduration="0.002" conditionals="2" coveredstatements="8" testpasses="4"/>
+               <metrics coveredelements="15" complexity="6" methods="5" testruns="4" statements="8" coveredconditionals="2" coveredmethods="5" elements="15" testfailures="0" testduration="0.004" conditionals="2" coveredstatements="8" testpasses="4"/>
             </class>
             <line complexity="1" visibility="public" signature="eofDetectedWhenCheckEOFEnabled() : void" num="39" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="41" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="eofDetectedWhenCheckEOFDisabled() : void" num="44" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="eofDetectedWhenCheckEOFDisabled() : void" num="44" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="46" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="spuriousContentDetected() : void" num="49" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="spuriousContentDetected() : void" num="49" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="51" count="1" type="stmt"/>
             <line complexity="1" visibility="public" signature="spuriousContentIgnored() : void" num="54" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="56" count="1" type="stmt"/>
@@ -23882,9 +23882,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/ps/dsc/ListenerTestCase.java" name="ListenerTestCase.java">
             <metrics coveredelements="55" coveredconditionals="15" complexity="14" loc="130" coveredmethods="5" methods="5" elements="59" classes="1" ncloc="81" statements="36" conditionals="18" coveredstatements="35"/>
             <class name="ListenerTestCase">
-               <metrics coveredelements="55" complexity="14" methods="5" testruns="2" statements="36" coveredconditionals="15" coveredmethods="5" elements="59" testfailures="0" testduration="0.004" conditionals="18" coveredstatements="35" testpasses="2"/>
+               <metrics coveredelements="55" complexity="14" methods="5" testruns="2" statements="36" coveredconditionals="15" coveredmethods="5" elements="59" testfailures="0" testduration="0.013" conditionals="18" coveredstatements="35" testpasses="2"/>
             </class>
-            <line complexity="3" visibility="public" signature="testFilter() : void" num="47" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="3" visibility="public" signature="testFilter() : void" num="47" testsuccess="true" count="1" testduration="0.004" type="method"/>
             <line num="49" count="1" type="stmt"/>
             <line num="50" count="1" type="stmt"/>
             <line num="51" count="1" type="stmt"/>
@@ -23898,7 +23898,7 @@
             <line falsecount="13" truecount="0" num="63" type="cond"/>
             <line num="64" count="0" type="stmt"/>
             <line num="68" count="1" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testListeners() : void" num="76" testsuccess="true" count="1" testduration="0.003" type="method"/>
+            <line complexity="2" visibility="public" signature="testListeners() : void" num="76" testsuccess="true" count="1" testduration="0.009" type="method"/>
             <line num="78" count="1" type="stmt"/>
             <line num="79" count="1" type="stmt"/>
             <line num="80" count="1" type="stmt"/>
@@ -23941,7 +23941,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/java2d/ps/PSGraphics2DTestCase.java" name="PSGraphics2DTestCase.java">
             <metrics coveredelements="82" coveredconditionals="0" complexity="8" loc="190" coveredmethods="8" methods="8" elements="82" classes="1" ncloc="146" statements="74" conditionals="0" coveredstatements="74"/>
             <class name="PSGraphics2DTestCase">
-               <metrics coveredelements="82" complexity="8" methods="8" testruns="6" statements="74" coveredconditionals="0" coveredmethods="8" elements="82" testfailures="0" testduration="0.28500000000000003" conditionals="0" coveredstatements="74" testpasses="6"/>
+               <metrics coveredelements="82" complexity="8" methods="8" testruns="6" statements="74" coveredconditionals="0" coveredmethods="8" elements="82" testfailures="0" testduration="0.373" conditionals="0" coveredstatements="74" testpasses="6"/>
             </class>
             <line complexity="1" visibility="public" signature="setup() : void" num="55" count="6" type="method"/>
             <line num="57" count="6" type="stmt"/>
@@ -23952,17 +23952,17 @@
             <line num="64" count="6" type="stmt"/>
             <line num="65" count="6" type="stmt"/>
             <line num="66" count="6" type="stmt"/>
-            <line complexity="1" visibility="public" signature="draw() : void" num="69" testsuccess="true" count="1" testduration="0.012" type="method"/>
+            <line complexity="1" visibility="public" signature="draw() : void" num="69" testsuccess="true" count="1" testduration="0.02" type="method"/>
             <line num="71" count="1" type="stmt"/>
             <line num="72" count="1" type="stmt"/>
             <line num="73" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testShouldBeClipped() : void" num="76" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testShouldBeClipped() : void" num="76" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="78" count="1" type="stmt"/>
             <line num="79" count="1" type="stmt"/>
             <line num="80" count="1" type="stmt"/>
             <line num="81" count="1" type="stmt"/>
             <line num="82" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testFill() : void" num="85" testsuccess="true" count="1" testduration="0.268" type="method"/>
+            <line complexity="1" visibility="public" signature="testFill() : void" num="85" testsuccess="true" count="1" testduration="0.345" type="method"/>
             <line num="87" count="1" type="stmt"/>
             <line num="88" count="1" type="stmt"/>
             <line num="89" count="1" type="stmt"/>
@@ -23991,7 +23991,7 @@
             <line num="141" count="1" type="stmt"/>
             <line num="142" count="1" type="stmt"/>
             <line num="144" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testAcrobatDownsample() : void" num="147" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testAcrobatDownsample() : void" num="147" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="149" count="1" type="stmt"/>
             <line num="150" count="1" type="stmt"/>
             <line num="151" count="1" type="stmt"/>
@@ -24006,7 +24006,7 @@
             <line num="161" count="1" type="stmt"/>
             <line num="162" count="1" type="stmt"/>
             <line num="163" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testFillAlpha() : void" num="166" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testFillAlpha() : void" num="166" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="168" count="1" type="stmt"/>
             <line num="169" count="1" type="stmt"/>
             <line num="170" count="1" type="stmt"/>
@@ -24032,9 +24032,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/java2d/color/profile/ColorProfileUtilTestCase.java" name="ColorProfileUtilTestCase.java">
             <metrics coveredelements="7" coveredconditionals="0" complexity="1" loc="44" coveredmethods="1" methods="1" elements="7" classes="1" ncloc="19" statements="6" conditionals="0" coveredstatements="6"/>
             <class name="ColorProfileUtilTestCase">
-               <metrics coveredelements="7" complexity="1" methods="1" testruns="1" statements="6" coveredconditionals="0" coveredmethods="1" elements="7" testfailures="0" testduration="0.002" conditionals="0" coveredstatements="6" testpasses="1"/>
+               <metrics coveredelements="7" complexity="1" methods="1" testruns="1" statements="6" coveredconditionals="0" coveredmethods="1" elements="7" testfailures="0" testduration="0.003" conditionals="0" coveredstatements="6" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testIsDefaultsRGB() : void" num="34" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testIsDefaultsRGB() : void" num="34" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="36" count="1" type="stmt"/>
             <line num="37" count="1" type="stmt"/>
             <line num="38" count="1" type="stmt"/>
@@ -24045,9 +24045,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/java2d/color/profile/NamedColorProfileParserTestCase.java" name="NamedColorProfileParserTestCase.java">
             <metrics coveredelements="23" coveredconditionals="0" complexity="1" loc="70" coveredmethods="1" methods="1" elements="23" classes="1" ncloc="39" statements="22" conditionals="0" coveredstatements="22"/>
             <class name="NamedColorProfileParserTestCase">
-               <metrics coveredelements="23" complexity="1" methods="1" testruns="1" statements="22" coveredconditionals="0" coveredmethods="1" elements="23" testfailures="0" testduration="0.016" conditionals="0" coveredstatements="22" testpasses="1"/>
+               <metrics coveredelements="23" complexity="1" methods="1" testruns="1" statements="22" coveredconditionals="0" coveredmethods="1" elements="23" testfailures="0" testduration="0.028" conditionals="0" coveredstatements="22" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testParser() : void" num="42" testsuccess="true" count="1" testduration="0.016" type="method"/>
+            <line complexity="1" visibility="public" signature="testParser() : void" num="42" testsuccess="true" count="1" testduration="0.028" type="method"/>
             <line num="44" count="1" type="stmt"/>
             <line num="45" count="1" type="stmt"/>
             <line num="46" count="1" type="stmt"/>
@@ -24077,9 +24077,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/util/uri/CommonURIResolverTestCase.java" name="CommonURIResolverTestCase.java">
             <metrics coveredelements="3" coveredconditionals="0" complexity="1" loc="44" coveredmethods="1" methods="1" elements="3" classes="1" ncloc="10" statements="2" conditionals="0" coveredstatements="2"/>
             <class name="CommonURIResolverTestCase">
-               <metrics coveredelements="3" complexity="1" methods="1" testruns="1" statements="2" coveredconditionals="0" coveredmethods="1" elements="3" testfailures="0" testduration="0.005" conditionals="0" coveredstatements="2" testpasses="1"/>
+               <metrics coveredelements="3" complexity="1" methods="1" testruns="1" statements="2" coveredconditionals="0" coveredmethods="1" elements="3" testfailures="0" testduration="0.011" conditionals="0" coveredstatements="2" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testDataURLHandling() : void" num="38" testsuccess="true" count="1" testduration="0.005" type="method"/>
+            <line complexity="1" visibility="public" signature="testDataURLHandling() : void" num="38" testsuccess="true" count="1" testduration="0.011" type="method"/>
             <line num="40" count="1" type="stmt"/>
             <line num="41" count="1" type="stmt"/>
          </file>
@@ -24154,7 +24154,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/cache/DefaultExpirationPolicyTestCase.java" name="DefaultExpirationPolicyTestCase.java">
             <metrics coveredelements="21" coveredconditionals="0" complexity="2" loc="73" coveredmethods="2" methods="2" elements="21" classes="1" ncloc="31" statements="19" conditionals="0" coveredstatements="19"/>
             <class name="DefaultExpirationPolicyTestCase">
-               <metrics coveredelements="21" complexity="2" methods="2" testruns="2" statements="19" coveredconditionals="0" coveredmethods="2" elements="21" testfailures="0" testduration="0.0" conditionals="0" coveredstatements="19" testpasses="2"/>
+               <metrics coveredelements="21" complexity="2" methods="2" testruns="2" statements="19" coveredconditionals="0" coveredmethods="2" elements="21" testfailures="0" testduration="0.001" conditionals="0" coveredstatements="19" testpasses="2"/>
             </class>
             <line complexity="1" visibility="public" signature="testNeverExpire() : void" num="37" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="39" count="1" type="stmt"/>
@@ -24164,7 +24164,7 @@
             <line num="45" count="1" type="stmt"/>
             <line num="46" count="1" type="stmt"/>
             <line num="47" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testNormalExpiration() : void" num="54" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testNormalExpiration() : void" num="54" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="56" count="1" type="stmt"/>
             <line num="57" count="1" type="stmt"/>
             <line num="59" count="1" type="stmt"/>
@@ -24204,13 +24204,13 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/cache/ImageCacheTestCase.java" name="ImageCacheTestCase.java">
             <metrics coveredelements="79" coveredconditionals="0" complexity="9" loc="208" coveredmethods="5" methods="5" elements="83" classes="1" ncloc="128" statements="78" conditionals="0" coveredstatements="74"/>
             <class name="ImageCacheTestCase">
-               <metrics coveredelements="79" complexity="9" methods="5" testruns="4" statements="78" coveredconditionals="0" coveredmethods="5" elements="83" testfailures="0" testduration="1.224" conditionals="0" coveredstatements="74" testpasses="4"/>
+               <metrics coveredelements="79" complexity="9" methods="5" testruns="4" statements="78" coveredconditionals="0" coveredmethods="5" elements="83" testfailures="0" testduration="1.257" conditionals="0" coveredstatements="74" testpasses="4"/>
             </class>
             <line complexity="1" visibility="public" signature="setUp() : void" num="54" count="4" type="method"/>
             <line num="56" count="4" type="stmt"/>
             <line num="57" count="4" type="stmt"/>
             <line num="58" count="4" type="stmt"/>
-            <line complexity="4" visibility="public" signature="testImageInfoCache() : void" num="65" testsuccess="true" count="1" testduration="0.012" type="method"/>
+            <line complexity="4" visibility="public" signature="testImageInfoCache() : void" num="65" testsuccess="true" count="1" testduration="0.033" type="method"/>
             <line num="67" count="1" type="stmt"/>
             <line num="68" count="1" type="stmt"/>
             <line num="69" count="1" type="stmt"/>
@@ -24270,7 +24270,7 @@
             <line num="158" count="1" type="stmt"/>
             <line num="159" count="1" type="stmt"/>
             <line num="160" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testImageCache1() : void" num="167" testsuccess="true" count="1" testduration="0.011" type="method"/>
+            <line complexity="1" visibility="public" signature="testImageCache1() : void" num="167" testsuccess="true" count="1" testduration="0.022" type="method"/>
             <line num="169" count="1" type="stmt"/>
             <line num="171" count="1" type="stmt"/>
             <line num="172" count="1" type="stmt"/>
@@ -24281,7 +24281,7 @@
             <line num="183" count="1" type="stmt"/>
             <line num="186" count="1" type="stmt"/>
             <line num="187" count="1" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testImageCacheHouseKeeping() : void" num="195" testsuccess="true" count="1" testduration="1.2" type="method"/>
+            <line complexity="2" visibility="public" signature="testImageCacheHouseKeeping() : void" num="195" testsuccess="true" count="1" testduration="1.201" type="method"/>
             <line num="197" count="1" type="stmt"/>
             <line num="199" count="1" type="stmt"/>
             <line num="200" count="1" type="stmt"/>
@@ -24310,9 +24310,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/java2d/GraphicContextTestCase.java" name="GraphicContextTestCase.java">
             <metrics coveredelements="10" coveredconditionals="0" complexity="1" loc="44" coveredmethods="1" methods="1" elements="10" classes="1" ncloc="20" statements="9" conditionals="0" coveredstatements="9"/>
             <class name="GraphicContextTestCase">
-               <metrics coveredelements="10" complexity="1" methods="1" testruns="1" statements="9" coveredconditionals="0" coveredmethods="1" elements="10" testfailures="0" testduration="0.0" conditionals="0" coveredstatements="9" testpasses="1"/>
+               <metrics coveredelements="10" complexity="1" methods="1" testruns="1" statements="9" coveredconditionals="0" coveredmethods="1" elements="10" testfailures="0" testduration="0.001" conditionals="0" coveredstatements="9" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testSetPaint() : void" num="32" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testSetPaint() : void" num="32" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="34" count="1" type="stmt"/>
             <line num="35" count="1" type="stmt"/>
             <line num="36" count="1" type="stmt"/>
@@ -24326,7 +24326,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/java2d/GraphicsConfigurationWithTransparencyTestCase.java" name="GraphicsConfigurationWithTransparencyTestCase.java">
             <metrics coveredelements="22" coveredconditionals="0" complexity="5" loc="78" coveredmethods="5" methods="5" elements="22" classes="1" ncloc="45" statements="17" conditionals="0" coveredstatements="17"/>
             <class name="GraphicsConfigurationWithTransparencyTestCase">
-               <metrics coveredelements="22" complexity="5" methods="5" testruns="3" statements="17" coveredconditionals="0" coveredmethods="5" elements="22" testfailures="0" testduration="0.008" conditionals="0" coveredstatements="17" testpasses="3"/>
+               <metrics coveredelements="22" complexity="5" methods="5" testruns="3" statements="17" coveredconditionals="0" coveredmethods="5" elements="22" testfailures="0" testduration="0.016" conditionals="0" coveredstatements="17" testpasses="3"/>
             </class>
             <line complexity="1" visibility="public" signature="setUp() : void" num="40" count="3" type="method"/>
             <line num="42" count="3" type="stmt"/>
@@ -24339,14 +24339,14 @@
             <line num="54" count="6" type="stmt"/>
             <line num="55" count="6" type="stmt"/>
             <line num="56" count="6" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testCreateCompatibleImage() : void" num="59" testsuccess="true" count="1" testduration="0.007" type="method"/>
+            <line complexity="1" visibility="public" signature="testCreateCompatibleImage() : void" num="59" testsuccess="true" count="1" testduration="0.014" type="method"/>
             <line num="61" count="1" type="stmt"/>
             <line num="62" count="1" type="stmt"/>
             <line num="63" count="1" type="stmt"/>
             <line num="64" count="1" type="stmt"/>
             <line num="67" count="1" type="stmt"/>
             <line num="68" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testGetColorModel() : void" num="71" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testGetColorModel() : void" num="71" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="73" count="1" type="stmt"/>
             <line num="75" count="1" type="stmt"/>
             <line num="76" count="1" type="stmt"/>
@@ -24354,7 +24354,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/java2d/GraphicsConfigurationWithoutTransparencyTestCase.java" name="GraphicsConfigurationWithoutTransparencyTestCase.java">
             <metrics coveredelements="21" coveredconditionals="0" complexity="5" loc="73" coveredmethods="5" methods="5" elements="21" classes="1" ncloc="43" statements="16" conditionals="0" coveredstatements="16"/>
             <class name="GraphicsConfigurationWithoutTransparencyTestCase">
-               <metrics coveredelements="21" complexity="5" methods="5" testruns="3" statements="16" coveredconditionals="0" coveredmethods="5" elements="21" testfailures="0" testduration="0.032" conditionals="0" coveredstatements="16" testpasses="3"/>
+               <metrics coveredelements="21" complexity="5" methods="5" testruns="3" statements="16" coveredconditionals="0" coveredmethods="5" elements="21" testfailures="0" testduration="0.059" conditionals="0" coveredstatements="16" testpasses="3"/>
             </class>
             <line complexity="1" visibility="public" signature="setUp() : void" num="36" count="3" type="method"/>
             <line num="38" count="3" type="stmt"/>
@@ -24366,14 +24366,14 @@
             <line num="49" count="6" type="stmt"/>
             <line num="50" count="6" type="stmt"/>
             <line num="51" count="6" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testCreateCompatibleImage() : void" num="54" testsuccess="true" count="1" testduration="0.008" type="method"/>
+            <line complexity="1" visibility="public" signature="testCreateCompatibleImage() : void" num="54" testsuccess="true" count="1" testduration="0.016" type="method"/>
             <line num="56" count="1" type="stmt"/>
             <line num="57" count="1" type="stmt"/>
             <line num="58" count="1" type="stmt"/>
             <line num="59" count="1" type="stmt"/>
             <line num="62" count="1" type="stmt"/>
             <line num="63" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testGetColorModel() : void" num="66" testsuccess="true" count="1" testduration="0.024" type="method"/>
+            <line complexity="1" visibility="public" signature="testGetColorModel() : void" num="66" testsuccess="true" count="1" testduration="0.043" type="method"/>
             <line num="68" count="1" type="stmt"/>
             <line num="70" count="1" type="stmt"/>
             <line num="71" count="1" type="stmt"/>
@@ -24384,9 +24384,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/ps/dsc/events/DSCCommentBoundingBoxTestCase.java" name="DSCCommentBoundingBoxTestCase.java">
             <metrics coveredelements="16" coveredconditionals="0" complexity="1" loc="56" coveredmethods="1" methods="1" elements="16" classes="1" ncloc="28" statements="15" conditionals="0" coveredstatements="15"/>
             <class name="DSCCommentBoundingBoxTestCase">
-               <metrics coveredelements="16" complexity="1" methods="1" testruns="1" statements="15" coveredconditionals="0" coveredmethods="1" elements="16" testfailures="0" testduration="0.0" conditionals="0" coveredstatements="15" testpasses="1"/>
+               <metrics coveredelements="16" complexity="1" methods="1" testruns="1" statements="15" coveredconditionals="0" coveredmethods="1" elements="16" testfailures="0" testduration="0.001" conditionals="0" coveredstatements="15" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testBoundingBox() : void" num="33" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testBoundingBox() : void" num="33" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="35" count="1" type="stmt"/>
             <line num="36" count="1" type="stmt"/>
             <line num="37" count="1" type="stmt"/>
@@ -24446,9 +24446,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/ps/FormGeneratorTestCase.java" name="FormGeneratorTestCase.java">
             <metrics coveredelements="67" coveredconditionals="2" complexity="5" loc="127" coveredmethods="4" methods="4" elements="67" classes="1" ncloc="95" statements="61" conditionals="2" coveredstatements="61"/>
             <class name="FormGeneratorTestCase">
-               <metrics coveredelements="67" complexity="5" methods="4" testruns="3" statements="61" coveredconditionals="2" coveredmethods="4" elements="67" testfailures="0" testduration="0.006" conditionals="2" coveredstatements="61" testpasses="3"/>
+               <metrics coveredelements="67" complexity="5" methods="4" testruns="3" statements="61" coveredconditionals="2" coveredmethods="4" elements="67" testfailures="0" testduration="0.017" conditionals="2" coveredstatements="61" testpasses="3"/>
             </class>
-            <line complexity="1" visibility="public" signature="testGeneratePaintProc() : void" num="41" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testGeneratePaintProc() : void" num="41" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="43" count="1" type="stmt"/>
             <line num="44" count="1" type="stmt"/>
             <line num="45" count="1" type="stmt"/>
@@ -24486,7 +24486,7 @@
             <line num="85" count="1" type="stmt"/>
             <line num="86" count="1" type="stmt"/>
             <line num="87" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testFlateDecodeCommand() : void" num="90" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testFlateDecodeCommand() : void" num="90" testsuccess="true" count="1" testduration="0.006" type="method"/>
             <line num="92" count="1" type="stmt"/>
             <line num="93" count="1" type="stmt"/>
             <line num="94" count="1" type="stmt"/>
@@ -24496,7 +24496,7 @@
             <line num="98" count="1" type="stmt"/>
             <line num="99" count="1" type="stmt"/>
             <line num="101" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testAlphaImage() : void" num="104" testsuccess="true" count="1" testduration="0.004" type="method"/>
+            <line complexity="1" visibility="public" signature="testAlphaImage() : void" num="104" testsuccess="true" count="1" testduration="0.01" type="method"/>
             <line num="106" count="1" type="stmt"/>
             <line complexity="2" visibility="private" signature="buildPSImage(int) : String" num="109" count="2" type="method"/>
             <line num="110" count="2" type="stmt"/>
@@ -24518,7 +24518,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/ps/ImageEncodingHelperTestCase.java" name="ImageEncodingHelperTestCase.java">
             <metrics coveredelements="62" coveredconditionals="0" complexity="5" loc="153" coveredmethods="5" methods="5" elements="62" classes="1" ncloc="95" statements="57" conditionals="0" coveredstatements="57"/>
             <class name="ImageEncodingHelperTestCase">
-               <metrics coveredelements="62" complexity="5" methods="5" testruns="3" statements="57" coveredconditionals="0" coveredmethods="5" elements="62" testfailures="0" testduration="0.196" conditionals="0" coveredstatements="57" testpasses="3"/>
+               <metrics coveredelements="62" complexity="5" methods="5" testruns="3" statements="57" coveredconditionals="0" coveredmethods="5" elements="62" testfailures="0" testduration="0.506" conditionals="0" coveredstatements="57" testpasses="3"/>
             </class>
             <line complexity="1" visibility="private" signature="prepareImage(BufferedImage) : BufferedImage" num="46" count="3" type="method"/>
             <line num="47" count="3" type="stmt"/>
@@ -24537,7 +24537,7 @@
             <line num="60" count="3" type="stmt"/>
             <line num="61" count="3" type="stmt"/>
             <line num="62" count="3" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testEncodeRenderedImageWithDirectColorModelAsRGB() : void" num="71" testsuccess="true" count="1" testduration="0.004" type="method"/>
+            <line complexity="1" visibility="public" signature="testEncodeRenderedImageWithDirectColorModelAsRGB() : void" num="71" testsuccess="true" count="1" testduration="0.013" type="method"/>
             <line num="73" count="1" type="stmt"/>
             <line num="74" count="1" type="stmt"/>
             <line num="76" count="1" type="stmt"/>
@@ -24545,7 +24545,7 @@
             <line num="79" count="1" type="stmt"/>
             <line num="80" count="1" type="stmt"/>
             <line num="82" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testRGBAndBGRImages() : void" num="93" testsuccess="true" count="1" testduration="0.004" type="method"/>
+            <line complexity="1" visibility="public" signature="testRGBAndBGRImages() : void" num="93" testsuccess="true" count="1" testduration="0.011" type="method"/>
             <line num="95" count="1" type="stmt"/>
             <line num="96" count="1" type="stmt"/>
             <line num="97" count="1" type="stmt"/>
@@ -24557,7 +24557,7 @@
             <line num="106" count="1" type="stmt"/>
             <line num="107" count="1" type="stmt"/>
             <line num="109" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testMockedEncodeRenderedImageWithDirectColorModelAsRGB() : void" num="117" testsuccess="true" count="1" testduration="0.188" type="method"/>
+            <line complexity="1" visibility="public" signature="testMockedEncodeRenderedImageWithDirectColorModelAsRGB() : void" num="117" testsuccess="true" count="1" testduration="0.482" type="method"/>
             <line num="119" count="1" type="stmt"/>
             <line num="120" count="1" type="stmt"/>
             <line num="122" count="1" type="stmt"/>
@@ -24586,9 +24586,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/ps/PSEscapeTestCase.java" name="PSEscapeTestCase.java">
             <metrics coveredelements="26" coveredconditionals="0" complexity="2" loc="65" coveredmethods="2" methods="2" elements="26" classes="1" ncloc="35" statements="24" conditionals="0" coveredstatements="24"/>
             <class name="PSEscapeTestCase">
-               <metrics coveredelements="26" complexity="2" methods="2" testruns="2" statements="24" coveredconditionals="0" coveredmethods="2" elements="26" testfailures="0" testduration="0.0" conditionals="0" coveredstatements="24" testpasses="2"/>
+               <metrics coveredelements="26" complexity="2" methods="2" testruns="2" statements="24" coveredconditionals="0" coveredmethods="2" elements="26" testfailures="0" testduration="0.002" conditionals="0" coveredstatements="24" testpasses="2"/>
             </class>
-            <line complexity="1" visibility="public" signature="testBasics() : void" num="31" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testBasics() : void" num="31" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="33" count="1" type="stmt"/>
             <line num="35" count="1" type="stmt"/>
             <line num="36" count="1" type="stmt"/>
@@ -24606,7 +24606,7 @@
             <line num="49" count="1" type="stmt"/>
             <line num="50" count="1" type="stmt"/>
             <line num="51" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testStringToDSC() : void" num="54" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testStringToDSC() : void" num="54" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="56" count="1" type="stmt"/>
             <line num="57" count="1" type="stmt"/>
             <line num="58" count="1" type="stmt"/>
@@ -24618,9 +24618,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/ps/PSPageDeviceDictionaryTestCase.java" name="PSPageDeviceDictionaryTestCase.java">
             <metrics coveredelements="8" coveredconditionals="0" complexity="1" loc="36" coveredmethods="1" methods="1" elements="8" classes="1" ncloc="17" statements="7" conditionals="0" coveredstatements="7"/>
             <class name="PSPageDeviceDictionaryTestCase">
-               <metrics coveredelements="8" complexity="1" methods="1" testruns="1" statements="7" coveredconditionals="0" coveredmethods="1" elements="8" testfailures="0" testduration="0.002" conditionals="0" coveredstatements="7" testpasses="1"/>
+               <metrics coveredelements="8" complexity="1" methods="1" testruns="1" statements="7" coveredconditionals="0" coveredmethods="1" elements="8" testfailures="0" testduration="0.004" conditionals="0" coveredstatements="7" testpasses="1"/>
             </class>
-            <line complexity="1" visibility="public" signature="testPSPageDeviceDictionary() : void" num="26" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testPSPageDeviceDictionary() : void" num="26" testsuccess="true" count="1" testduration="0.004" type="method"/>
             <line num="28" count="1" type="stmt"/>
             <line num="29" count="1" type="stmt"/>
             <line num="30" count="1" type="stmt"/>
@@ -24669,7 +24669,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/ImageFlavorTestCase.java" name="ImageFlavorTestCase.java">
             <metrics coveredelements="36" coveredconditionals="0" complexity="2" loc="84" coveredmethods="2" methods="2" elements="36" classes="1" ncloc="49" statements="34" conditionals="0" coveredstatements="34"/>
             <class name="ImageFlavorTestCase">
-               <metrics coveredelements="36" complexity="2" methods="2" testruns="2" statements="34" coveredconditionals="0" coveredmethods="2" elements="36" testfailures="0" testduration="0.001" conditionals="0" coveredstatements="34" testpasses="2"/>
+               <metrics coveredelements="36" complexity="2" methods="2" testruns="2" statements="34" coveredconditionals="0" coveredmethods="2" elements="36" testfailures="0" testduration="0.002" conditionals="0" coveredstatements="34" testpasses="2"/>
             </class>
             <line complexity="1" visibility="public" signature="testBasicFlavors() : void" num="36" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="38" count="1" type="stmt"/>
@@ -24686,7 +24686,7 @@
             <line num="51" count="1" type="stmt"/>
             <line num="52" count="1" type="stmt"/>
             <line num="53" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testRefinedFlavors() : void" num="56" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testRefinedFlavors() : void" num="56" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="58" count="1" type="stmt"/>
             <line num="59" count="1" type="stmt"/>
             <line num="61" count="1" type="stmt"/>
@@ -24711,14 +24711,14 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/ImageLoaderTestCase.java" name="ImageLoaderTestCase.java">
             <metrics coveredelements="162" coveredconditionals="18" complexity="28" loc="300" coveredmethods="12" methods="12" elements="176" classes="2" ncloc="225" statements="138" conditionals="26" coveredstatements="132"/>
             <class name="ImageLoaderTestCase">
-               <metrics coveredelements="133" complexity="19" methods="8" testruns="6" statements="115" coveredconditionals="12" coveredmethods="8" elements="139" testfailures="0" testduration="0.061" conditionals="16" coveredstatements="113" testpasses="6"/>
+               <metrics coveredelements="133" complexity="19" methods="8" testruns="6" statements="115" coveredconditionals="12" coveredmethods="8" elements="139" testfailures="0" testduration="0.162" conditionals="16" coveredstatements="113" testpasses="6"/>
             </class>
             <class name="ImageLoaderTestCase.MyImageSessionContext">
                <metrics coveredelements="29" coveredconditionals="6" complexity="9" coveredmethods="4" methods="4" elements="37" statements="23" conditionals="10" coveredstatements="19"/>
             </class>
             <line complexity="1" visibility="private" signature="createImageSessionContext() : MyImageSessionContext" num="57" count="6" type="method"/>
             <line num="58" count="6" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testPNG() : void" num="61" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testPNG() : void" num="61" testsuccess="true" count="1" testduration="0.005" type="method"/>
             <line num="63" count="1" type="stmt"/>
             <line num="65" count="1" type="stmt"/>
             <line num="66" count="1" type="stmt"/>
@@ -24752,7 +24752,7 @@
             <line num="103" count="1" type="stmt"/>
             <line num="104" count="1" type="stmt"/>
             <line num="106" count="1" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testEPSASCII() : void" num="109" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="2" visibility="public" signature="testEPSASCII() : void" num="109" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="111" count="1" type="stmt"/>
             <line num="113" count="1" type="stmt"/>
             <line num="114" count="1" type="stmt"/>
@@ -24773,7 +24773,7 @@
             <line num="130" count="0" type="stmt"/>
             <line num="133" count="1" type="stmt"/>
             <line num="136" count="1" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testEPSBinary() : void" num="139" testsuccess="true" count="1" testduration="0.003" type="method"/>
+            <line complexity="2" visibility="public" signature="testEPSBinary() : void" num="139" testsuccess="true" count="1" testduration="0.013" type="method"/>
             <line num="141" count="1" type="stmt"/>
             <line num="143" count="1" type="stmt"/>
             <line num="144" count="1" type="stmt"/>
@@ -24794,7 +24794,7 @@
             <line num="160" count="0" type="stmt"/>
             <line num="163" count="1" type="stmt"/>
             <line num="166" count="1" type="stmt"/>
-            <line complexity="3" visibility="public" signature="testICCProfiles() : void" num="169" testsuccess="true" count="1" testduration="0.036" type="method"/>
+            <line complexity="3" visibility="public" signature="testICCProfiles() : void" num="169" testsuccess="true" count="1" testduration="0.095" type="method"/>
             <line num="171" count="1" type="stmt"/>
             <line num="172" count="1" type="stmt"/>
             <line num="174" count="1" type="stmt"/>
@@ -24833,7 +24833,7 @@
             <line num="220" count="2" type="stmt"/>
             <line num="221" count="2" type="stmt"/>
             <line num="222" count="2" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testBrokenIccPng() : void" num="230" testsuccess="true" count="1" testduration="0.018" type="method"/>
+            <line complexity="1" visibility="public" signature="testBrokenIccPng() : void" num="230" testsuccess="true" count="1" testduration="0.045" type="method"/>
             <line num="232" count="1" type="stmt"/>
             <line num="234" count="1" type="stmt"/>
             <line num="235" count="1" type="stmt"/>
@@ -24883,9 +24883,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/ImagePipelineTestCase.java" name="ImagePipelineTestCase.java">
             <metrics coveredelements="59" coveredconditionals="0" complexity="5" loc="149" coveredmethods="5" methods="5" elements="59" classes="1" ncloc="93" statements="54" conditionals="0" coveredstatements="54"/>
             <class name="ImagePipelineTestCase">
-               <metrics coveredelements="59" complexity="5" methods="5" testruns="4" statements="54" coveredconditionals="0" coveredmethods="5" elements="59" testfailures="0" testduration="0.03" conditionals="0" coveredstatements="54" testpasses="4"/>
+               <metrics coveredelements="59" complexity="5" methods="5" testruns="4" statements="54" coveredconditionals="0" coveredmethods="5" elements="59" testfailures="0" testduration="0.087" conditionals="0" coveredstatements="54" testpasses="4"/>
             </class>
-            <line complexity="1" visibility="public" signature="testPipelineWithLoader() : void" num="49" testsuccess="true" count="1" testduration="0.015" type="method"/>
+            <line complexity="1" visibility="public" signature="testPipelineWithLoader() : void" num="49" testsuccess="true" count="1" testduration="0.036" type="method"/>
             <line num="51" count="1" type="stmt"/>
             <line num="53" count="1" type="stmt"/>
             <line num="54" count="1" type="stmt"/>
@@ -24900,7 +24900,7 @@
             <line num="66" count="1" type="stmt"/>
             <line num="69" count="1" type="stmt"/>
             <line num="70" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testPipelineWithoutLoader() : void" num="73" testsuccess="true" count="1" testduration="0.004" type="method"/>
+            <line complexity="1" visibility="public" signature="testPipelineWithoutLoader() : void" num="73" testsuccess="true" count="1" testduration="0.008" type="method"/>
             <line num="76" count="1" type="stmt"/>
             <line num="77" count="1" type="stmt"/>
             <line num="79" count="1" type="stmt"/>
@@ -24925,7 +24925,7 @@
             <line num="108" count="2" type="stmt"/>
             <line num="109" count="2" type="stmt"/>
             <line num="110" count="2" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testPipelineFromURIThroughManager() : void" num="113" testsuccess="true" count="1" testduration="0.008" type="method"/>
+            <line complexity="1" visibility="public" signature="testPipelineFromURIThroughManager() : void" num="113" testsuccess="true" count="1" testduration="0.037" type="method"/>
             <line num="115" count="1" type="stmt"/>
             <line num="117" count="1" type="stmt"/>
             <line num="118" count="1" type="stmt"/>
@@ -24936,7 +24936,7 @@
             <line num="128" count="1" type="stmt"/>
             <line num="129" count="1" type="stmt"/>
             <line num="130" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testPipelineWithoutURIThroughManager() : void" num="133" testsuccess="true" count="1" testduration="0.003" type="method"/>
+            <line complexity="1" visibility="public" signature="testPipelineWithoutURIThroughManager() : void" num="133" testsuccess="true" count="1" testduration="0.006" type="method"/>
             <line num="135" count="1" type="stmt"/>
             <line num="137" count="1" type="stmt"/>
             <line num="139" count="1" type="stmt"/>
@@ -24948,21 +24948,21 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/ImagePreloaderTestCase.java" name="ImagePreloaderTestCase.java">
             <metrics coveredelements="206" coveredconditionals="2" complexity="24" loc="357" coveredmethods="20" methods="20" elements="212" classes="1" ncloc="277" statements="188" conditionals="4" coveredstatements="184"/>
             <class name="ImagePreloaderTestCase">
-               <metrics coveredelements="206" complexity="24" methods="20" testruns="17" statements="188" coveredconditionals="2" coveredmethods="20" elements="212" testfailures="0" testduration="0.029" conditionals="4" coveredstatements="184" testpasses="17"/>
+               <metrics coveredelements="206" complexity="24" methods="20" testruns="17" statements="188" coveredconditionals="2" coveredmethods="20" elements="212" testfailures="0" testduration="0.063" conditionals="4" coveredstatements="184" testpasses="17"/>
             </class>
             <line complexity="1" visibility="public" signature="testImageLoaderFactory() : void" num="48" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="50" count="1" type="stmt"/>
             <line num="51" count="1" type="stmt"/>
             <line num="52" count="1" type="stmt"/>
             <line num="54" count="1" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testFileNotFound() : void" num="57" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="2" visibility="public" signature="testFileNotFound() : void" num="57" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="59" count="1" type="stmt"/>
             <line num="61" count="1" type="stmt"/>
             <line num="62" count="1" type="stmt"/>
             <line num="63" count="1" type="stmt"/>
             <line num="64" count="1" type="stmt"/>
             <line num="65" count="0" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testPNG() : void" num="71" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testPNG() : void" num="71" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="73" count="1" type="stmt"/>
             <line num="75" count="1" type="stmt"/>
             <line num="76" count="1" type="stmt"/>
@@ -24975,7 +24975,7 @@
             <line num="84" count="1" type="stmt"/>
             <line num="85" count="1" type="stmt"/>
             <line num="86" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testPNGNoResolution() : void" num="89" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testPNGNoResolution() : void" num="89" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="91" count="1" type="stmt"/>
             <line num="95" count="1" type="stmt"/>
             <line num="96" count="1" type="stmt"/>
@@ -24988,7 +24988,7 @@
             <line num="105" count="1" type="stmt"/>
             <line num="106" count="1" type="stmt"/>
             <line num="107" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testTIFF() : void" num="110" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testTIFF() : void" num="110" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="112" count="1" type="stmt"/>
             <line num="114" count="1" type="stmt"/>
             <line num="115" count="1" type="stmt"/>
@@ -25001,7 +25001,7 @@
             <line num="123" count="1" type="stmt"/>
             <line num="124" count="1" type="stmt"/>
             <line num="125" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testTIFFNoResolution() : void" num="128" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testTIFFNoResolution() : void" num="128" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="130" count="1" type="stmt"/>
             <line num="132" count="1" type="stmt"/>
             <line num="133" count="1" type="stmt"/>
@@ -25040,7 +25040,7 @@
             <line num="177" count="1" type="stmt"/>
             <line num="178" count="1" type="stmt"/>
             <line num="179" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testJPEG1() : void" num="182" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testJPEG1() : void" num="182" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="184" count="1" type="stmt"/>
             <line num="186" count="1" type="stmt"/>
             <line num="187" count="1" type="stmt"/>
@@ -25053,7 +25053,7 @@
             <line num="195" count="1" type="stmt"/>
             <line num="196" count="1" type="stmt"/>
             <line num="197" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testJPEG2() : void" num="200" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testJPEG2() : void" num="200" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="202" count="1" type="stmt"/>
             <line num="204" count="1" type="stmt"/>
             <line num="205" count="1" type="stmt"/>
@@ -25066,7 +25066,7 @@
             <line num="213" count="1" type="stmt"/>
             <line num="214" count="1" type="stmt"/>
             <line num="215" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testJPEG3() : void" num="218" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testJPEG3() : void" num="218" testsuccess="true" count="1" testduration="0.0" type="method"/>
             <line num="220" count="1" type="stmt"/>
             <line num="222" count="1" type="stmt"/>
             <line num="223" count="1" type="stmt"/>
@@ -25105,7 +25105,7 @@
             <line num="267" count="1" type="stmt"/>
             <line num="268" count="1" type="stmt"/>
             <line num="269" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testEPSAscii() : void" num="272" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testEPSAscii() : void" num="272" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="274" count="1" type="stmt"/>
             <line num="276" count="1" type="stmt"/>
             <line num="277" count="1" type="stmt"/>
@@ -25118,7 +25118,7 @@
             <line num="285" count="1" type="stmt"/>
             <line num="286" count="1" type="stmt"/>
             <line num="287" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testEPSBinary() : void" num="290" testsuccess="true" count="1" testduration="0.015" type="method"/>
+            <line complexity="1" visibility="public" signature="testEPSBinary() : void" num="290" testsuccess="true" count="1" testduration="0.032" type="method"/>
             <line num="292" count="1" type="stmt"/>
             <line num="294" count="1" type="stmt"/>
             <line num="295" count="1" type="stmt"/>
@@ -25131,7 +25131,7 @@
             <line num="303" count="1" type="stmt"/>
             <line num="304" count="1" type="stmt"/>
             <line num="305" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testSAXSourceWithSystemID() : void" num="308" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testSAXSourceWithSystemID() : void" num="308" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="310" count="1" type="stmt"/>
             <line complexity="2" visibility="public" signature="resolve(String,String) : Source" num="311" count="1" type="method"/>
             <line num="312" count="1" type="stmt"/>
@@ -25141,7 +25141,7 @@
             <line num="315" count="1" type="stmt"/>
             <line num="317" count="0" type="stmt"/>
             <line num="321" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testSAXSourceWithInputStream() : void" num="324" testsuccess="true" count="1" testduration="0.003" type="method"/>
+            <line complexity="1" visibility="public" signature="testSAXSourceWithInputStream() : void" num="324" testsuccess="true" count="1" testduration="0.01" type="method"/>
             <line num="326" count="1" type="stmt"/>
             <line complexity="3" visibility="public" signature="resolve(String,String) : Source" num="327" count="1" type="method"/>
             <line num="328" count="1" type="stmt"/>
@@ -25164,9 +25164,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/ImageSessionContextTestCase.java" name="ImageSessionContextTestCase.java">
             <metrics coveredelements="140" coveredconditionals="10" complexity="37" loc="305" coveredmethods="23" methods="23" elements="165" classes="1" ncloc="247" statements="122" conditionals="20" coveredstatements="107"/>
             <class name="ImageSessionContextTestCase">
-               <metrics coveredelements="140" complexity="37" methods="23" testruns="10" statements="122" coveredconditionals="10" coveredmethods="23" elements="165" testfailures="0" testduration="0.062" conditionals="20" coveredstatements="107" testpasses="10"/>
+               <metrics coveredelements="140" complexity="37" methods="23" testruns="10" statements="122" coveredconditionals="10" coveredmethods="23" elements="165" testfailures="0" testduration="0.142" conditionals="20" coveredstatements="107" testpasses="10"/>
             </class>
-            <line complexity="1" visibility="public" signature="testStreamSourceWithSystemID() : void" num="55" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testStreamSourceWithSystemID() : void" num="55" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="57" count="1" type="stmt"/>
             <line complexity="2" visibility="public" signature="resolve(String,String) : Source" num="58" count="1" type="method"/>
             <line num="59" count="1" type="stmt"/>
@@ -25177,7 +25177,7 @@
             <line num="67" count="1" type="stmt"/>
             <line num="69" count="1" type="stmt"/>
             <line num="70" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testStreamSourceWithInputStream() : void" num="73" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testStreamSourceWithInputStream() : void" num="73" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="75" count="1" type="stmt"/>
             <line complexity="3" visibility="public" signature="resolve(String,String) : Source" num="76" count="1" type="method"/>
             <line num="77" count="1" type="stmt"/>
@@ -25190,7 +25190,7 @@
             <line num="90" count="1" type="stmt"/>
             <line num="92" count="1" type="stmt"/>
             <line num="94" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testStreamSourceWithFile() : void" num="97" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="1" visibility="public" signature="testStreamSourceWithFile() : void" num="97" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="99" count="1" type="stmt"/>
             <line complexity="2" visibility="public" signature="resolve(String,String) : Source" num="100" count="1" type="method"/>
             <line num="101" count="1" type="stmt"/>
@@ -25202,7 +25202,7 @@
             <line num="110" count="1" type="stmt"/>
             <line num="112" count="1" type="stmt"/>
             <line num="113" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testStreamSourceWithInputStreamAndSystemID() : void" num="116" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testStreamSourceWithInputStreamAndSystemID() : void" num="116" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="118" count="1" type="stmt"/>
             <line complexity="3" visibility="public" signature="resolve(String,String) : Source" num="119" count="1" type="method"/>
             <line num="120" count="1" type="stmt"/>
@@ -25216,7 +25216,7 @@
             <line num="135" count="1" type="stmt"/>
             <line num="137" count="1" type="stmt"/>
             <line num="138" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testStreamSourceWithReader() : void" num="142" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testStreamSourceWithReader() : void" num="142" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="144" count="1" type="stmt"/>
             <line complexity="2" visibility="public" signature="resolve(String,String) : Source" num="145" count="1" type="method"/>
             <line num="146" count="1" type="stmt"/>
@@ -25239,7 +25239,7 @@
             <line num="171" count="10" type="stmt"/>
             <line num="173" count="10" type="stmt"/>
             <line num="174" count="10" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testSAXSourceWithSystemID() : void" num="177" testsuccess="true" count="1" testduration="0.01" type="method"/>
+            <line complexity="1" visibility="public" signature="testSAXSourceWithSystemID() : void" num="177" testsuccess="true" count="1" testduration="0.02" type="method"/>
             <line num="179" count="1" type="stmt"/>
             <line complexity="2" visibility="public" signature="resolve(String,String) : Source" num="180" count="1" type="method"/>
             <line num="181" count="1" type="stmt"/>
@@ -25251,7 +25251,7 @@
             <line num="190" count="1" type="stmt"/>
             <line num="192" count="1" type="stmt"/>
             <line num="193" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testSAXSourceWithInputStream() : void" num="196" testsuccess="true" count="1" testduration="0.007" type="method"/>
+            <line complexity="1" visibility="public" signature="testSAXSourceWithInputStream() : void" num="196" testsuccess="true" count="1" testduration="0.015" type="method"/>
             <line num="198" count="1" type="stmt"/>
             <line complexity="3" visibility="public" signature="resolve(String,String) : Source" num="199" count="1" type="method"/>
             <line num="200" count="1" type="stmt"/>
@@ -25265,7 +25265,7 @@
             <line num="211" count="0" type="stmt"/>
             <line num="215" count="1" type="stmt"/>
             <line num="217" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testSAXSourceWithReader() : void" num="220" testsuccess="true" count="1" testduration="0.004" type="method"/>
+            <line complexity="1" visibility="public" signature="testSAXSourceWithReader() : void" num="220" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="222" count="1" type="stmt"/>
             <line complexity="2" visibility="public" signature="resolve(String,String) : Source" num="223" count="1" type="method"/>
             <line num="224" count="1" type="stmt"/>
@@ -25279,7 +25279,7 @@
             <line num="236" count="1" type="stmt"/>
             <line num="237" count="1" type="stmt"/>
             <line num="238" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testSAXSourceWithXMLReader() : void" num="243" testsuccess="true" count="1" testduration="0.008" type="method"/>
+            <line complexity="1" visibility="public" signature="testSAXSourceWithXMLReader() : void" num="243" testsuccess="true" count="1" testduration="0.003" type="method"/>
             <line num="245" count="1" type="stmt"/>
             <line complexity="2" visibility="public" signature="resolve(String,String) : Source" num="246" count="1" type="method"/>
             <line num="247" count="1" type="stmt"/>
@@ -25294,7 +25294,7 @@
             <line num="260" count="1" type="stmt"/>
             <line num="261" count="1" type="stmt"/>
             <line num="262" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testDOMSource() : void" num="265" testsuccess="true" count="1" testduration="0.031" type="method"/>
+            <line complexity="1" visibility="public" signature="testDOMSource() : void" num="265" testsuccess="true" count="1" testduration="0.094" type="method"/>
             <line num="267" count="1" type="stmt"/>
             <line complexity="2" visibility="public" signature="resolve(String,String) : Source" num="268" count="1" type="method"/>
             <line num="269" count="1" type="stmt"/>
@@ -25325,9 +25325,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/ImageUtilTestCase.java" name="ImageUtilTestCase.java">
             <metrics coveredelements="28" coveredconditionals="0" complexity="3" loc="89" coveredmethods="2" methods="2" elements="29" classes="1" ncloc="43" statements="27" conditionals="0" coveredstatements="26"/>
             <class name="ImageUtilTestCase">
-               <metrics coveredelements="28" complexity="3" methods="2" testruns="2" statements="27" coveredconditionals="0" coveredmethods="2" elements="29" testfailures="0" testduration="0.0" conditionals="0" coveredstatements="26" testpasses="2"/>
+               <metrics coveredelements="28" complexity="3" methods="2" testruns="2" statements="27" coveredconditionals="0" coveredmethods="2" elements="29" testfailures="0" testduration="0.001" conditionals="0" coveredstatements="26" testpasses="2"/>
             </class>
-            <line complexity="2" visibility="public" signature="testNeedPageIndex() : void" num="39" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="2" visibility="public" signature="testNeedPageIndex() : void" num="39" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="41" count="1" type="stmt"/>
             <line num="43" count="1" type="stmt"/>
             <line num="44" count="1" type="stmt"/>
@@ -25491,9 +25491,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/loader/PipelineFactoryTestCase.java" name="PipelineFactoryTestCase.java">
             <metrics coveredelements="80" coveredconditionals="9" complexity="12" loc="206" coveredmethods="3" methods="3" elements="98" classes="1" ncloc="120" statements="77" conditionals="18" coveredstatements="68"/>
             <class name="PipelineFactoryTestCase">
-               <metrics coveredelements="80" complexity="12" methods="3" testruns="3" statements="77" coveredconditionals="9" coveredmethods="3" elements="98" testfailures="0" testduration="0.047" conditionals="18" coveredstatements="68" testpasses="3"/>
+               <metrics coveredelements="80" complexity="12" methods="3" testruns="3" statements="77" coveredconditionals="9" coveredmethods="3" elements="98" testfailures="0" testduration="0.123" conditionals="18" coveredstatements="68" testpasses="3"/>
             </class>
-            <line complexity="5" visibility="public" signature="testPipelineFactoryPlain() : void" num="45" testsuccess="true" count="1" testduration="0.003" type="method"/>
+            <line complexity="5" visibility="public" signature="testPipelineFactoryPlain() : void" num="45" testsuccess="true" count="1" testduration="0.008" type="method"/>
             <line num="47" count="1" type="stmt"/>
             <line num="48" count="1" type="stmt"/>
             <line num="49" count="1" type="stmt"/>
@@ -25526,7 +25526,7 @@
             <line num="95" count="1" type="stmt"/>
             <line falsecount="1" truecount="0" num="95" type="cond"/>
             <line num="96" count="0" type="stmt"/>
-            <line complexity="4" visibility="public" signature="testPipelineFactoryImageInfoDependency() : void" num="104" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="4" visibility="public" signature="testPipelineFactoryImageInfoDependency() : void" num="104" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="106" count="1" type="stmt"/>
             <line num="107" count="1" type="stmt"/>
             <line num="108" count="1" type="stmt"/>
@@ -25556,7 +25556,7 @@
             <line num="149" count="1" type="stmt"/>
             <line falsecount="1" truecount="0" num="149" type="cond"/>
             <line num="150" count="0" type="stmt"/>
-            <line complexity="3" visibility="public" signature="testPipelineFactoryAdditionalPenalty() : void" num="158" testsuccess="true" count="1" testduration="0.043" type="method"/>
+            <line complexity="3" visibility="public" signature="testPipelineFactoryAdditionalPenalty() : void" num="158" testsuccess="true" count="1" testduration="0.113" type="method"/>
             <line num="160" count="1" type="stmt"/>
             <line num="161" count="1" type="stmt"/>
             <line num="162" count="1" type="stmt"/>
@@ -25603,7 +25603,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/codec/tiff/ImageInfoTestCase.java" name="ImageInfoTestCase.java">
             <metrics coveredelements="69" coveredconditionals="4" complexity="18" loc="188" coveredmethods="12" methods="16" elements="77" classes="2" ncloc="141" statements="57" conditionals="4" coveredstatements="53"/>
             <class name="ImageInfoTestCase">
-               <metrics coveredelements="67" complexity="13" methods="11" testruns="6" statements="52" coveredconditionals="4" coveredmethods="11" elements="67" testfailures="0" testduration="0.049" conditionals="4" coveredstatements="52" testpasses="6"/>
+               <metrics coveredelements="67" complexity="13" methods="11" testruns="6" statements="52" coveredconditionals="4" coveredmethods="11" elements="67" testfailures="0" testduration="0.126" conditionals="4" coveredstatements="52" testpasses="6"/>
             </class>
             <class name="ImageInfoTestCase.TestColorModel">
                <metrics coveredelements="2" coveredconditionals="0" complexity="5" coveredmethods="1" methods="5" elements="10" statements="5" conditionals="0" coveredstatements="1"/>
@@ -25613,12 +25613,12 @@
             <line num="53" count="6" type="stmt"/>
             <line num="54" count="6" type="stmt"/>
             <line num="55" count="6" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testNullColorModel() : void" num="58" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="2" visibility="public" signature="testNullColorModel() : void" num="58" testsuccess="true" count="1" testduration="0.004" type="method"/>
             <line num="60" count="1" type="stmt"/>
             <line num="63" count="1" type="stmt"/>
             <line falsecount="1" truecount="4" num="63" type="cond"/>
             <line num="64" count="4" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testNonIndexColorModel() : void" num="69" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testNonIndexColorModel() : void" num="69" testsuccess="true" count="1" testduration="0.005" type="method"/>
             <line num="71" count="1" type="stmt"/>
             <line num="72" count="1" type="stmt"/>
             <line num="73" count="1" type="stmt"/>
@@ -25628,7 +25628,7 @@
             <line num="79" count="4" type="stmt"/>
             <line num="80" count="4" type="stmt"/>
             <line num="82" count="4" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testNonIndexColorModelWithNumBandsGreaterThan1() : void" num="86" testsuccess="true" count="1" testduration="0.007" type="method"/>
+            <line complexity="1" visibility="public" signature="testNonIndexColorModelWithNumBandsGreaterThan1() : void" num="86" testsuccess="true" count="1" testduration="0.024" type="method"/>
             <line num="88" count="1" type="stmt"/>
             <line num="89" count="1" type="stmt"/>
             <line num="90" count="1" type="stmt"/>
@@ -25642,14 +25642,14 @@
             <line num="105" count="14" type="stmt"/>
             <line num="106" count="14" type="stmt"/>
             <line num="107" count="14" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testIndexColorModel() : void" num="110" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testIndexColorModel() : void" num="110" testsuccess="true" count="1" testduration="0.002" type="method"/>
             <line num="112" count="1" type="stmt"/>
             <line num="113" count="1" type="stmt"/>
             <line num="114" count="1" type="stmt"/>
             <line num="117" count="1" type="stmt"/>
             <line num="118" count="1" type="stmt"/>
             <line num="119" count="1" type="stmt"/>
-            <line complexity="2" visibility="public" signature="testTileWidthHeight() : void" num="123" testsuccess="true" count="1" testduration="0.038" type="method"/>
+            <line complexity="2" visibility="public" signature="testTileWidthHeight() : void" num="123" testsuccess="true" count="1" testduration="0.09" type="method"/>
             <line num="125" count="1" type="stmt"/>
             <line num="127" count="1" type="stmt"/>
             <line num="128" count="1" type="stmt"/>
@@ -25667,7 +25667,7 @@
             <line num="146" count="50" type="stmt"/>
             <line num="147" count="50" type="stmt"/>
             <line num="148" count="50" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testGetColormap() : void" num="151" testsuccess="true" count="1" testduration="0.0" type="method"/>
+            <line complexity="1" visibility="public" signature="testGetColormap() : void" num="151" testsuccess="true" count="1" testduration="0.001" type="method"/>
             <line num="153" count="1" type="stmt"/>
             <line num="155" count="1" type="stmt"/>
             <line num="156" count="1" type="stmt"/>
@@ -25687,7 +25687,7 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/codec/tiff/ImageTypeTestCase.java" name="ImageTypeTestCase.java">
             <metrics coveredelements="48" coveredconditionals="4" complexity="10" loc="122" coveredmethods="8" methods="8" elements="48" classes="2" ncloc="89" statements="36" conditionals="4" coveredstatements="36"/>
             <class name="ImageTypeTestCase">
-               <metrics coveredelements="44" complexity="9" methods="7" testruns="4" statements="33" coveredconditionals="4" coveredmethods="7" elements="44" testfailures="0" testduration="0.01" conditionals="4" coveredstatements="33" testpasses="4"/>
+               <metrics coveredelements="44" complexity="9" methods="7" testruns="4" statements="33" coveredconditionals="4" coveredmethods="7" elements="44" testfailures="0" testduration="0.025" conditionals="4" coveredstatements="33" testpasses="4"/>
             </class>
             <class name="ImageTypeTestCase.ColorContainer">
                <metrics coveredelements="4" coveredconditionals="0" complexity="1" coveredmethods="1" methods="1" elements="4" statements="3" conditionals="0" coveredstatements="3"/>
@@ -25711,7 +25711,7 @@
             <line num="72" count="1" type="stmt"/>
             <line num="73" count="1" type="stmt"/>
             <line num="74" count="1" type="stmt"/>
-            <line complexity="3" visibility="public" signature="testGetTypeFromRGB() : void" num="77" testsuccess="true" count="1" testduration="0.001" type="method"/>
+            <line complexity="3" visibility="public" signature="testGetTypeFromRGB() : void" num="77" testsuccess="true" count="1" testduration="0.004" type="method"/>
             <line num="79" count="1" type="stmt"/>
             <line num="81" count="1" type="stmt"/>
             <line num="84" count="1" type="stmt"/>
@@ -25723,9 +25723,9 @@
             <line num="90" count="254" type="stmt"/>
             <line complexity="1" visibility="private" signature="make2ByteArray(int,int) : byte[]" num="95" count="1530" type="method"/>
             <line num="96" count="1530" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testException() : void" num="99" testsuccess="true" count="1" testduration="0.007" type="method"/>
+            <line complexity="1" visibility="public" signature="testException() : void" num="99" testsuccess="true" count="1" testduration="0.015" type="method"/>
             <line num="101" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testGetTypeFromColorSpace() : void" num="104" testsuccess="true" count="1" testduration="0.002" type="method"/>
+            <line complexity="1" visibility="public" signature="testGetTypeFromColorSpace() : void" num="104" testsuccess="true" count="1" testduration="0.006" type="method"/>
             <line num="106" count="1" type="stmt"/>
             <line num="107" count="1" type="stmt"/>
             <line num="108" count="1" type="stmt"/>
@@ -25742,11 +25742,11 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/image/codec/tiff/TIFFImageEncoderTestCase.java" name="TIFFImageEncoderTestCase.java">
             <metrics coveredelements="19" coveredconditionals="0" complexity="4" loc="63" coveredmethods="4" methods="4" elements="19" classes="1" ncloc="37" statements="15" conditionals="0" coveredstatements="15"/>
             <class name="TIFFImageEncoderTestCase">
-               <metrics coveredelements="19" complexity="4" methods="4" testruns="2" statements="15" coveredconditionals="0" coveredmethods="4" elements="19" testfailures="0" testduration="0.063" conditionals="0" coveredstatements="15" testpasses="2"/>
+               <metrics coveredelements="19" complexity="4" methods="4" testruns="2" statements="15" coveredconditionals="0" coveredmethods="4" elements="19" testfailures="0" testduration="0.157" conditionals="0" coveredstatements="15" testpasses="2"/>
             </class>
-            <line complexity="1" visibility="public" signature="testGrayImage() : void" num="35" testsuccess="true" count="1" testduration="0.055" type="method"/>
+            <line complexity="1" visibility="public" signature="testGrayImage() : void" num="35" testsuccess="true" count="1" testduration="0.134" type="method"/>
             <line num="37" count="1" type="stmt"/>
-            <line complexity="1" visibility="public" signature="testBilevelImage() : void" num="40" testsuccess="true" count="1" testduration="0.008" type="method"/>
+            <line complexity="1" visibility="public" signature="testBilevelImage() : void" num="40" testsuccess="true" count="1" testduration="0.023" type="method"/>
             <line num="42" count="1" type="stmt"/>
             <line complexity="1" visibility="private" signature="testImage(int,String) : void" num="45" count="2" type="method"/>
             <line num="46" count="2" type="stmt"/>
@@ -25770,9 +25770,9 @@
          <file path="/code/concordia/SOEN-345-Tutorials/tutorial1/Part-B/xmlgraphics-commons-2.8/src/test/java/org/apache/xmlgraphics/fonts/GlyphsTestCase.java" name="GlyphsTestCase.java">
             <metrics coveredelements="42" coveredconditionals="0" complexity="2" loc="98" coveredmethods="2" methods="2" elements="42" classes="1" ncloc="63" statements="40" conditionals="0" coveredstatements="40"/>
             <class name="GlyphsTestCase">
-               <metrics coveredelements="42" complexity="2" methods="2" testruns="2" statements="40" coveredconditionals="0" coveredmethods="2" elements="42" testfailures="0" testduration="0.019" conditionals="0" coveredstatements="40" testpasses="2"/>
+               <metrics coveredelements="42" complexity="2" methods="2" testruns="2" statements="40" coveredconditionals="0" coveredmethods="2" elements="42" testfailures="0" testduration="0.06" conditionals="0" coveredstatements="40" testpasses="2"/>
             </class>
-            <line complexity="1" visibility="public" signature="testGetUnicodeSequenceForGlyphName() : void" num="32" testsuccess="true" count="1" testduration="0.019" type="method"/>
+            <line complexity="1" visibility="public" signature="testGetUnicodeSequenceForGlyphName() : void" num="32" testsuccess="true" count="1" testduration="0.06" type="method"/>
             <line num="34" count="1" type="stmt"/>
             <line num="35" count="1" type="stmt"/>
             <line num="37" count="1" type="stmt"/>

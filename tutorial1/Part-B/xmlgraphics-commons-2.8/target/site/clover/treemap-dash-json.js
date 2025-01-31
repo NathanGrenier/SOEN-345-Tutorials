@@ -1,6 +1,6 @@
-var treeMapJson = {"id":"Clover database Wed Jan 22 2025 18:17:57 EST0","name":"","data":{
-    "$area":22486.0,"$color":39.660233,"title":
-    " 22486 Elements, 39.7% Coverage"},"children":[{"id":
+var treeMapJson = {"id":"Clover database Fri Jan 31 2025 17:00:05 EST0","name":"","data":{
+    "$area":22486.0,"$color":39.624657,"title":
+    " 22486 Elements, 39.6% Coverage"},"children":[{"id":
       "org.apache.xmlgraphics.xmp.merge22217","name":
       "org.apache.xmlgraphics.xmp.merge","data":{"$area":36.0,"$color":
         8.333334,"title":
@@ -105,8 +105,8 @@ var treeMapJson = {"id":"Clover database Wed Jan 22 2025 18:17:57 EST0","name":"
         "org.apache.xmlgraphics.java2d 642 Elements, 21.5% Coverage"},
       "children":[]},{"id":"org.apache.xmlgraphics.image.codec.util8526",
       "name":"org.apache.xmlgraphics.image.codec.util","data":{"$area":
-        621.0,"$color":26.247988,"title":
-        "org.apache.xmlgraphics.image.codec.util 621 Elements, 26.2% Coverage"},
+        621.0,"$color":24.959743,"title":
+        "org.apache.xmlgraphics.image.codec.util 621 Elements, 25% Coverage"},
       "children":[]},{"id":"org.apache.xmlgraphics.xmp.schemas.pdf22400",
       "name":"org.apache.xmlgraphics.xmp.schemas.pdf","data":{"$area":86.0,
         "$color":23.255816,"title":

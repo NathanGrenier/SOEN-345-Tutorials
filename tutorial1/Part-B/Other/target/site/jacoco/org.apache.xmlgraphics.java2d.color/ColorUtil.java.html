@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ColorUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color</a> &gt; <span class="el_source">ColorUtil.java</span></div><h1>ColorUtil.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ColorUtil.java 1051421 2010-12-21 08:54:25Z jeremias $ */
+
+package org.apache.xmlgraphics.java2d.color;
+
+import java.awt.Color;
+
+
+/**
+ * Generic Color helper class.
+ * &lt;p&gt;
+ * This class supports parsing string values into color values and creating
+ * color values for strings. It provides a list of standard color names.
+ */
+public final class ColorUtil {
+
+    /**
+     * Private constructor since this is an utility class.
+     */
+    private ColorUtil() {
+    }
+
+
+    /**
+     * Lightens up a color for groove, ridge, inset and outset border effects.
+     * @param col the color to lighten up
+     * @param factor factor by which to lighten up (negative values darken the color)
+     * @return the modified color
+     */
+    public static Color lightenColor(Color col, float factor) {
+        // TODO: This function converts the color into the sRGB namespace.
+        // This should be avoided if possible.
+<span class="nc" id="L49">        float[] cols = new float[4];</span>
+<span class="nc" id="L50">        cols = col.getRGBComponents(cols);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (factor &gt; 0) {</span>
+<span class="nc" id="L52">            cols[0] += (1.0 - cols[0]) * factor;</span>
+<span class="nc" id="L53">            cols[1] += (1.0 - cols[1]) * factor;</span>
+<span class="nc" id="L54">            cols[2] += (1.0 - cols[2]) * factor;</span>
+        } else {
+<span class="nc" id="L56">            cols[0] -= cols[0] * -factor;</span>
+<span class="nc" id="L57">            cols[1] -= cols[1] * -factor;</span>
+<span class="nc" id="L58">            cols[2] -= cols[2] * -factor;</span>
+        }
+<span class="nc" id="L60">        return new Color(cols[0], cols[1], cols[2], cols[3]);</span>
+    }
+
+
+
+    /**
+     * Indicates whether the color is a gray value.
+     * @param col the color
+     * @return true if it is a gray value
+     */
+    public static boolean isGray(Color col) {
+<span class="nc bnc" id="L71" title="All 4 branches missed.">        return (col.getRed() == col.getBlue() &amp;&amp; col.getRed() == col.getGreen());</span>
+    }
+
+    /**
+     * Creates an uncalibrated CMYK color with the given gray value.
+     * @param black the gray component (0 - 1)
+     * @return the CMYK color
+     */
+    public static Color toCMYKGrayColor(float black) {
+        //Calculated color components
+<span class="fc" id="L81">        float[] cmyk = new float[] {0f, 0f, 0f, 1.0f - black};</span>
+        //Create native color
+<span class="fc" id="L83">        return DeviceCMYKColorSpace.createCMYKColor(cmyk);</span>
+    }
+
+    /**
+     * Converts an arbitrary {@link Color} to a plain sRGB color doing the conversion at the
+     * best possible conversion quality.
+     * @param col the original color
+     * @return the sRGB equivalent
+     */
+    public static Color toSRGBColor(Color col) {
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (col.getColorSpace().isCS_sRGB()) {</span>
+<span class="nc" id="L94">            return col; //Don't convert if already sRGB to avoid conversion differences</span>
+        }
+<span class="nc" id="L96">        float[] comps = col.getColorComponents(null);</span>
+<span class="nc" id="L97">        float[] srgb = col.getColorSpace().toRGB(comps);</span>
+<span class="nc" id="L98">        comps = col.getComponents(null);</span>
+<span class="nc" id="L99">        float alpha = comps[comps.length - 1];</span>
+<span class="nc" id="L100">        return new Color(srgb[0], srgb[1], srgb[2], alpha);</span>
+    }
+
+    /**
+     * Checks if two colors are the same color. This check is much more restrictive than
+     * {@link Color#equals(Object)} in that it doesn't only check if both colors result in the
+     * same sRGB value. For example, if two colors not of the same exact class are compared,
+     * they are treated as not the same.
+     * &lt;p&gt;
+     * Note: At the moment, this method only supports {@link Color} and
+     * {@link ColorWithAlternatives} only. Other subclasses of {@link Color} are checked only using
+     * the {@link Color#equals(Object)} method.
+     * @param col1 the first color
+     * @param col2 the second color
+     * @return true if both colors are the same color
+     */
+    public static boolean isSameColor(Color col1, Color col2) {
+        //Check fallback sRGB values first, then go into details
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (!col1.equals(col2)) {</span>
+<span class="fc" id="L119">            return false;</span>
+        }
+
+        //Consider same-ness only between colors of the same class (not subclasses)
+        //but consider a ColorWithAlternatives without alternatives to be the same as a Color.
+<span class="fc" id="L124">        Class&lt;?&gt; cl1 = col1.getClass();</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        if (col1 instanceof ColorWithAlternatives</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">                &amp;&amp; !((ColorWithAlternatives) col1).hasAlternativeColors()) {</span>
+<span class="fc" id="L127">            cl1 = Color.class;</span>
+        }
+<span class="fc" id="L129">        Class&lt;?&gt; cl2 = col2.getClass();</span>
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">        if (col2 instanceof ColorWithAlternatives</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">                &amp;&amp; !((ColorWithAlternatives) col2).hasAlternativeColors()) {</span>
+<span class="nc" id="L132">            cl2 = Color.class;</span>
+        }
+<span class="fc bfc" id="L134" title="All 2 branches covered.">        if (cl1 != cl2) {</span>
+<span class="fc" id="L135">            return false;</span>
+        }
+
+        //Check color space
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">        if (!col1.getColorSpace().equals(col2.getColorSpace())) {</span>
+<span class="nc" id="L140">            return false;</span>
+        }
+
+        //Check native components
+<span class="fc" id="L144">        float[] comps1 = col1.getComponents(null);</span>
+<span class="fc" id="L145">        float[] comps2 = col2.getComponents(null);</span>
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">        if (comps1.length != comps2.length) {</span>
+<span class="nc" id="L147">            return false;</span>
+        }
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        for (int i = 0, c = comps1.length; i &lt; c; i++) {</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">            if (comps1[i] != comps2[i]) {</span>
+<span class="nc" id="L151">                return false;</span>
+            }
+        }
+
+        //Compare alternative colors, order is relevant
+<span class="pc bpc" id="L156" title="1 of 4 branches missed.">        if (col1 instanceof ColorWithAlternatives &amp;&amp; col2 instanceof ColorWithAlternatives) {</span>
+<span class="nc" id="L157">            ColorWithAlternatives ca1 = (ColorWithAlternatives) col1;</span>
+<span class="nc" id="L158">            ColorWithAlternatives ca2 = (ColorWithAlternatives) col2;</span>
+<span class="nc" id="L159">            return ca1.hasSameAlternativeColors(ca2);</span>
+        }
+
+<span class="fc" id="L162">        return true;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

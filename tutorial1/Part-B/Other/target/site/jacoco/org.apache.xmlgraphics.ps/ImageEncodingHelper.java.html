@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageEncodingHelper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">ImageEncodingHelper.java</span></div><h1>ImageEncodingHelper.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageEncodingHelper.java 1896317 2021-12-23 14:30:49Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.color.ColorSpace;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.DirectColorModel;
+import java.awt.image.IndexColorModel;
+import java.awt.image.PixelInterleavedSampleModel;
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.awt.image.SampleModel;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Arrays;
+
+import org.apache.xmlgraphics.image.GraphicsUtil;
+
+/**
+ * Helper class for encoding bitmap images.
+ */
+public class ImageEncodingHelper {
+
+<span class="fc" id="L47">    private static final ColorModel DEFAULT_RGB_COLOR_MODEL = new ComponentColorModel(</span>
+<span class="fc" id="L48">            ColorSpace.getInstance(ColorSpace.CS_sRGB),</span>
+            false, false, ColorModel.OPAQUE, DataBuffer.TYPE_BYTE);
+
+    private final RenderedImage image;
+    private ColorModel encodedColorModel;
+    private boolean firstTileDump;
+    private boolean enableCMYK;
+    private boolean isBGR;
+    private boolean isKMYC;
+    private boolean outputbw;
+    private boolean bwinvert;
+
+    /**
+     * Main constructor
+     * @param image the image
+     */
+    public ImageEncodingHelper(RenderedImage image) {
+<span class="fc" id="L65">        this(image, true);</span>
+<span class="fc" id="L66">        outputbw = true;</span>
+<span class="fc" id="L67">    }</span>
+
+    /**
+     * Main constructor
+     * @param image the image
+     * @param enableCMYK true to enable CMYK, false to disable
+     */
+<span class="fc" id="L74">    public ImageEncodingHelper(RenderedImage image, boolean enableCMYK) {</span>
+<span class="fc" id="L75">        this.image = image;</span>
+<span class="fc" id="L76">        this.enableCMYK = enableCMYK;</span>
+<span class="fc" id="L77">        determineEncodedColorModel();</span>
+<span class="fc" id="L78">    }</span>
+
+    /**
+     * Returns the associated image.
+     * @return the image
+     */
+    public RenderedImage getImage() {
+<span class="fc" id="L85">        return this.image;</span>
+    }
+
+    /**
+     * Returns the native {@link ColorModel} used by the image.
+     * @return the native color model
+     */
+    public ColorModel getNativeColorModel() {
+<span class="fc" id="L93">        return getImage().getColorModel();</span>
+    }
+
+    /**
+     * Returns the effective {@link ColorModel} used to encode the image. If this is different
+     * from the value returned by {@link #getNativeColorModel()} this means that the image
+     * is converted in order to encode it because no native encoding is currently possible.
+     * @return the effective color model
+     */
+    public ColorModel getEncodedColorModel() {
+<span class="fc" id="L103">        return this.encodedColorModel;</span>
+    }
+
+    /**
+     * Indicates whether the image has an alpha channel.
+     * @return true if the image has an alpha channel
+     */
+    public boolean hasAlpha() {
+<span class="nc" id="L111">        return image.getColorModel().hasAlpha();</span>
+    }
+
+    /**
+     * Indicates whether the image is converted during encodation.
+     * @return true if the image cannot be encoded in its native format
+     */
+    public boolean isConverted() {
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        return getNativeColorModel() != getEncodedColorModel();</span>
+    }
+
+    private void writeRGBTo(OutputStream out) throws IOException {
+<span class="fc" id="L123">        boolean encoded = encodeRenderedImageWithDirectColorModelAsRGB(image, out);</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        if (encoded) {</span>
+<span class="fc" id="L125">            return;</span>
+        }
+<span class="fc" id="L127">        encodeRenderedImageAsRGB(image, out, outputbw, bwinvert);</span>
+<span class="fc" id="L128">    }</span>
+
+    public static void encodeRenderedImageAsRGB(RenderedImage image, OutputStream out)
+            throws IOException {
+<span class="fc" id="L132">        encodeRenderedImageAsRGB(image, out, false, false);</span>
+<span class="fc" id="L133">    }</span>
+
+    /**
+     * Writes a RenderedImage to an OutputStream by converting it to RGB.
+     * @param image the image
+     * @param out the OutputStream to write the pixels to
+     * @throws IOException if an I/O error occurs
+     */
+    public static void encodeRenderedImageAsRGB(RenderedImage image, OutputStream out,
+            boolean outputbw, boolean bwinvert) throws IOException {
+<span class="fc" id="L143">        Raster raster = getRaster(image);</span>
+        Object data;
+<span class="fc" id="L145">        int nbands = raster.getNumBands();</span>
+<span class="fc" id="L146">        int dataType = raster.getDataBuffer().getDataType();</span>
+<span class="pc bpc" id="L147" title="5 of 6 branches missed.">        switch (dataType) {</span>
+        case DataBuffer.TYPE_BYTE:
+<span class="nc" id="L149">            data = new byte[nbands];</span>
+<span class="nc" id="L150">            break;</span>
+        case DataBuffer.TYPE_USHORT:
+<span class="nc" id="L152">            data = null;</span>
+<span class="nc" id="L153">            break;</span>
+        case DataBuffer.TYPE_INT:
+<span class="fc" id="L155">            data = new int[nbands];</span>
+<span class="fc" id="L156">            break;</span>
+        case DataBuffer.TYPE_FLOAT:
+<span class="nc" id="L158">            data = new float[nbands];</span>
+<span class="nc" id="L159">            break;</span>
+        case DataBuffer.TYPE_DOUBLE:
+<span class="nc" id="L161">            data = new double[nbands];</span>
+<span class="nc" id="L162">            break;</span>
+        default:
+<span class="nc" id="L164">            throw new IllegalArgumentException(&quot;Unknown data buffer type: &quot; + dataType);</span>
+        }
+
+<span class="fc" id="L167">        ColorModel colorModel = image.getColorModel();</span>
+<span class="fc" id="L168">        int w = image.getWidth();</span>
+<span class="fc" id="L169">        int h = image.getHeight();</span>
+<span class="fc" id="L170">        int numDataElements = 3;</span>
+<span class="pc bpc" id="L171" title="3 of 4 branches missed.">        if (colorModel.getPixelSize() == 1 &amp;&amp; outputbw) {</span>
+<span class="nc" id="L172">            numDataElements = 1;</span>
+        }
+
+<span class="fc" id="L175">        byte[] buf = new byte[w * numDataElements];</span>
+
+<span class="fc bfc" id="L177" title="All 2 branches covered.">        for (int y = 0; y &lt; h; y++) {</span>
+<span class="fc" id="L178">            int idx = -1;</span>
+<span class="fc bfc" id="L179" title="All 2 branches covered.">            for (int x = 0; x &lt; w; x++) {</span>
+<span class="fc" id="L180">                int rgb = colorModel.getRGB(raster.getDataElements(x, y, data));</span>
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">                if (numDataElements &gt; 1) {</span>
+<span class="fc" id="L182">                    buf[++idx] = (byte)(rgb &gt;&gt; 16);</span>
+<span class="fc" id="L183">                    buf[++idx] = (byte)(rgb &gt;&gt; 8);</span>
+<span class="nc bnc" id="L184" title="All 4 branches missed.">                } else if (bwinvert &amp;&amp; rgb == -1) {</span>
+<span class="nc" id="L185">                    rgb = 1;</span>
+                }
+<span class="fc" id="L187">                buf[++idx] = (byte)(rgb);</span>
+            }
+<span class="fc" id="L189">            out.write(buf);</span>
+        }
+<span class="fc" id="L191">    }</span>
+
+    /**
+     * Writes a RenderedImage to an OutputStream. This method optimizes the encoding
+     * of the {@link DirectColorModel} as it is returned by {@link ColorModel#getRGBdefault}.
+     * @param image the image
+     * @param out the OutputStream to write the pixels to
+     * @return true if this method encoded this image, false if the image is incompatible
+     * @throws IOException if an I/O error occurs
+     */
+    public static boolean encodeRenderedImageWithDirectColorModelAsRGB(
+            RenderedImage image, OutputStream out) throws IOException {
+<span class="fc" id="L203">        ColorModel cm = image.getColorModel();</span>
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">        if (cm.getColorSpace() != ColorSpace.getInstance(ColorSpace.CS_sRGB)) {</span>
+<span class="nc" id="L205">            return false; //Need to go through color management</span>
+        }
+<span class="pc bpc" id="L207" title="1 of 2 branches missed.">        if (!(cm instanceof DirectColorModel)) {</span>
+<span class="nc" id="L208">            return false; //Only DirectColorModel is supported here</span>
+        }
+<span class="fc" id="L210">        DirectColorModel dcm = (DirectColorModel)cm;</span>
+<span class="fc" id="L211">        final int[] templateMasks = new int[]</span>
+                {0x00ff0000 /*R*/, 0x0000ff00 /*G*/, 0x000000ff /*B*/, 0xff000000 /*A*/};
+<span class="fc" id="L213">        int[] masks = dcm.getMasks();</span>
+<span class="fc bfc" id="L214" title="All 2 branches covered.">        if (!Arrays.equals(templateMasks, masks)) {</span>
+<span class="fc" id="L215">            return false; //no flexibility here right now, might never be used anyway</span>
+        }
+
+<span class="fc" id="L218">        Raster raster = getRaster(image);</span>
+<span class="fc" id="L219">        int dataType = raster.getDataBuffer().getDataType();</span>
+<span class="pc bpc" id="L220" title="1 of 2 branches missed.">        if (dataType != DataBuffer.TYPE_INT) {</span>
+<span class="nc" id="L221">            return false; //not supported</span>
+        }
+
+<span class="fc" id="L224">        int w = image.getWidth();</span>
+<span class="fc" id="L225">        int h = image.getHeight();</span>
+
+<span class="fc" id="L227">        int[] data = new int[w];</span>
+<span class="fc" id="L228">        byte[] buf = new byte[w * 3];</span>
+<span class="fc bfc" id="L229" title="All 2 branches covered.">        for (int y = 0; y &lt; h; y++) {</span>
+<span class="fc" id="L230">            int idx = -1;</span>
+<span class="fc" id="L231">            raster.getDataElements(0, y, w, 1, data);</span>
+<span class="fc bfc" id="L232" title="All 2 branches covered.">            for (int x = 0; x &lt; w; x++) {</span>
+<span class="fc" id="L233">                int rgb = data[x];</span>
+<span class="fc" id="L234">                buf[++idx] = (byte)(rgb &gt;&gt; 16);</span>
+<span class="fc" id="L235">                buf[++idx] = (byte)(rgb &gt;&gt; 8);</span>
+<span class="fc" id="L236">                buf[++idx] = (byte)(rgb);</span>
+            }
+<span class="fc" id="L238">            out.write(buf);</span>
+        }
+
+<span class="fc" id="L241">        return true;</span>
+    }
+
+    private static Raster getRaster(RenderedImage image) {
+<span class="pc bpc" id="L245" title="1 of 2 branches missed.">        if (image instanceof BufferedImage) {</span>
+<span class="fc" id="L246">            return ((BufferedImage)image).getRaster();</span>
+        } else {
+            //Note: this copies the image data (double memory consumption)
+            //TODO Investigate encoding in stripes: RenderedImage.copyData(WritableRaster)
+<span class="nc" id="L250">            return image.getData();</span>
+        }
+    }
+
+    /**
+     * Converts a byte array containing 24 bit RGB image data to a grayscale
+     * image.
+     *
+     * @param raw
+     *            the buffer containing the RGB image data
+     * @param width
+     *            the width of the image in pixels
+     * @param height
+     *            the height of the image in pixels
+     * @param bitsPerPixel
+     *            the number of bits to use per pixel
+     * @param out the OutputStream to write the pixels to
+     *
+     * @throws IOException if an I/O error occurs
+     */
+    public static void encodeRGBAsGrayScale(
+            byte[] raw, int width, int height, int bitsPerPixel, OutputStream out)
+    throws IOException {
+<span class="nc" id="L273">        int pixelsPerByte = 8 / bitsPerPixel;</span>
+<span class="nc" id="L274">        int bytewidth = (width / pixelsPerByte);</span>
+<span class="nc bnc" id="L275" title="All 2 branches missed.">        if ((width % pixelsPerByte) != 0) {</span>
+<span class="nc" id="L276">            bytewidth++;</span>
+        }
+
+        //TODO Rewrite to encode directly from a RenderedImage to avoid buffering the whole RGB
+        //image in memory
+<span class="nc" id="L281">        byte[] linedata = new byte[bytewidth];</span>
+        byte ib;
+<span class="nc bnc" id="L283" title="All 2 branches missed.">        for (int y = 0; y &lt; height; y++) {</span>
+<span class="nc" id="L284">            ib = 0;</span>
+<span class="nc" id="L285">            int i = 3 * y * width;</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">            for (int x = 0; x &lt; width; x++, i += 3) {</span>
+
+                // see http://www.jguru.com/faq/view.jsp?EID=221919
+<span class="nc" id="L289">                double greyVal = 0.212671d * (raw[i] &amp; 0xff) + 0.715160d</span>
+                        * (raw[i + 1] &amp; 0xff) + 0.072169d
+                        * (raw[i + 2] &amp; 0xff);
+<span class="nc bnc" id="L292" title="All 4 branches missed.">                switch (bitsPerPixel) {</span>
+                case 1:
+<span class="nc bnc" id="L294" title="All 2 branches missed.">                    if (greyVal &lt; 128) {</span>
+<span class="nc" id="L295">                        ib |= (byte) (1 &lt;&lt; (7 - (x % 8)));</span>
+                    }
+                    break;
+                case 4:
+<span class="nc" id="L299">                    greyVal /= 16;</span>
+<span class="nc" id="L300">                    ib |= (byte) ((byte) greyVal &lt;&lt; ((1 - (x % 2)) * 4));</span>
+<span class="nc" id="L301">                    break;</span>
+                case 8:
+<span class="nc" id="L303">                    ib = (byte) greyVal;</span>
+<span class="nc" id="L304">                    break;</span>
+                default:
+<span class="nc" id="L306">                    throw new UnsupportedOperationException(</span>
+                            &quot;Unsupported bits per pixel: &quot; + bitsPerPixel);
+                }
+
+<span class="nc bnc" id="L310" title="All 4 branches missed.">                if ((x % pixelsPerByte) == (pixelsPerByte - 1)</span>
+                        || ((x + 1) == width)) {
+<span class="nc" id="L312">                    linedata[(x / pixelsPerByte)] = ib;</span>
+<span class="nc" id="L313">                    ib = 0;</span>
+                }
+            }
+<span class="nc" id="L316">            out.write(linedata);</span>
+        }
+<span class="nc" id="L318">    }</span>
+
+    private boolean optimizedWriteTo(OutputStream out)
+            throws IOException {
+<span class="pc bpc" id="L322" title="1 of 2 branches missed.">        if (this.firstTileDump) {</span>
+<span class="fc" id="L323">            Raster raster = image.getTile(0, 0);</span>
+<span class="fc" id="L324">            DataBuffer buffer = raster.getDataBuffer();</span>
+<span class="pc bpc" id="L325" title="1 of 2 branches missed.">            if (buffer instanceof DataBufferByte) {</span>
+<span class="fc" id="L326">                byte[] bytes = ((DataBufferByte) buffer).getData();</span>
+                // see determineEncodingColorModel() to see why we permute B and R here
+<span class="pc bpc" id="L328" title="1 of 2 branches missed.">                if (isBGR) {</span>
+<span class="fc" id="L329">                    byte[] bytesPermutated = new byte[bytes.length];</span>
+<span class="fc bfc" id="L330" title="All 2 branches covered.">                    for (int i = 0; i &lt; bytes.length; i += 3) {</span>
+<span class="fc" id="L331">                        bytesPermutated[i] = bytes[i + 2];</span>
+<span class="fc" id="L332">                        bytesPermutated[i + 1] = bytes[i + 1];</span>
+<span class="fc" id="L333">                        bytesPermutated[i + 2] = bytes[i];</span>
+                    }
+<span class="fc" id="L335">                    out.write(bytesPermutated);</span>
+<span class="pc bnc" id="L336" title="All 2 branches missed.">                } else if (isKMYC) {</span>
+<span class="nc" id="L337">                    byte[] bytesPermutated = new byte[bytes.length];</span>
+<span class="nc bnc" id="L338" title="All 2 branches missed.">                    for (int i = 0; i &lt; bytes.length; i += 4) {</span>
+<span class="nc" id="L339">                        bytesPermutated[i] = bytes[i + 3];</span>
+<span class="nc" id="L340">                        bytesPermutated[i + 1] = bytes[i + 2];</span>
+<span class="nc" id="L341">                        bytesPermutated[i + 2] = bytes[i + 1];</span>
+<span class="nc" id="L342">                        bytesPermutated[i + 3] = bytes[i];</span>
+                    }
+<span class="nc" id="L344">                    out.write(bytesPermutated);</span>
+<span class="nc" id="L345">                } else {</span>
+<span class="nc" id="L346">                    out.write(bytes);</span>
+                }
+<span class="fc" id="L348">                return true;</span>
+            }
+        }
+<span class="nc" id="L351">        return false;</span>
+    }
+
+    /**
+     * Indicates whether the image consists of multiple tiles.
+     * @return true if there are multiple tiles
+     */
+    protected boolean isMultiTile() {
+<span class="fc" id="L359">        int tilesX = image.getNumXTiles();</span>
+<span class="fc" id="L360">        int tilesY = image.getNumYTiles();</span>
+<span class="pc bpc" id="L361" title="2 of 4 branches missed.">        return (tilesX != 1 || tilesY != 1);</span>
+    }
+
+    /**
+     * Determines the color model used for encoding the image.
+     */
+    protected void determineEncodedColorModel() {
+<span class="fc" id="L368">        this.firstTileDump = false;</span>
+<span class="fc" id="L369">        this.encodedColorModel = DEFAULT_RGB_COLOR_MODEL;</span>
+
+<span class="fc" id="L371">        ColorModel cm = image.getColorModel();</span>
+<span class="fc" id="L372">        ColorSpace cs = cm.getColorSpace();</span>
+
+<span class="fc" id="L374">        int numComponents = cm.getNumComponents();</span>
+
+<span class="pc bpc" id="L376" title="1 of 2 branches missed.">        if (!isMultiTile()) {</span>
+<span class="pc bpc" id="L377" title="3 of 4 branches missed.">            if (numComponents == 1 &amp;&amp; cs.getType() == ColorSpace.TYPE_GRAY) {</span>
+<span class="nc bnc" id="L378" title="All 2 branches missed.">                if (cm.getTransferType() == DataBuffer.TYPE_BYTE) {</span>
+<span class="nc" id="L379">                    this.firstTileDump = true;</span>
+<span class="nc" id="L380">                    this.encodedColorModel = cm;</span>
+                }
+<span class="pc bpc" id="L382" title="1 of 2 branches missed.">            } else if (cm instanceof IndexColorModel) {</span>
+<span class="nc bnc" id="L383" title="All 2 branches missed.">                if (cm.getTransferType() == DataBuffer.TYPE_BYTE) {</span>
+<span class="nc" id="L384">                    this.firstTileDump = true;</span>
+<span class="nc" id="L385">                    this.encodedColorModel = cm;</span>
+                }
+<span class="pc bpc" id="L387" title="2 of 8 branches missed.">            } else if (cm instanceof ComponentColorModel</span>
+                    &amp;&amp; (numComponents == 3 || (enableCMYK &amp;&amp; numComponents == 4))
+<span class="fc bfc" id="L389" title="All 2 branches covered.">                    &amp;&amp; !cm.hasAlpha()) {</span>
+<span class="fc" id="L390">                Raster raster = image.getTile(0, 0);</span>
+<span class="fc" id="L391">                DataBuffer buffer = raster.getDataBuffer();</span>
+<span class="fc" id="L392">                SampleModel sampleModel = raster.getSampleModel();</span>
+<span class="pc bpc" id="L393" title="1 of 2 branches missed.">                if (sampleModel instanceof PixelInterleavedSampleModel) {</span>
+                    PixelInterleavedSampleModel piSampleModel;
+<span class="fc" id="L395">                    piSampleModel = (PixelInterleavedSampleModel)sampleModel;</span>
+<span class="fc" id="L396">                    int[] offsets = piSampleModel.getBandOffsets();</span>
+<span class="fc bfc" id="L397" title="All 2 branches covered.">                    for (int i = 0; i &lt; offsets.length; i++) {</span>
+<span class="pc bpc" id="L398" title="1 of 4 branches missed.">                        if (offsets[i] != i &amp;&amp; offsets[i] != offsets.length - 1 - i) {</span>
+                            //Don't encode directly as samples are not next to each other
+                            //i.e. offsets are not 012 (RGB) or 0123 (CMYK)
+                            // let also pass 210 BGR and 3210 (KYMC); 3210 will be skipped below
+                            // if 210 (BGR) the B and R bytes will be permuted later in optimizeWriteTo()
+<span class="nc" id="L403">                            return;</span>
+                        }
+                    }
+                    // check if we are in a BGR case; this is added here as a workaround for bug fix
+                    // http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6549882 that causes some PNG
+                    // images to be loaded as BGR with the consequence that performance was being impacted
+<span class="fc" id="L409">                    this.isBGR = false;</span>
+<span class="pc bpc" id="L410" title="4 of 8 branches missed.">                    if (offsets.length == 3 &amp;&amp; offsets[0] == 2 &amp;&amp; offsets[1] == 1 &amp;&amp; offsets[2] == 0) {</span>
+<span class="fc" id="L411">                        this.isBGR = true;</span>
+                    }
+                    // make sure we did not get here due to a KMYC image
+<span class="pc bpc" id="L414" title="9 of 10 branches missed.">                    if (offsets.length == 4 &amp;&amp; offsets[0] == 3 &amp;&amp; offsets[1] == 2 &amp;&amp; offsets[2] == 1</span>
+                            &amp;&amp; offsets[3] == 0) {
+<span class="nc" id="L416">                        isKMYC = true;</span>
+                    }
+                }
+<span class="pc bpc" id="L419" title="1 of 2 branches missed.">                if (cm.getTransferType() == DataBuffer.TYPE_BYTE</span>
+<span class="pc bpc" id="L420" title="1 of 2 branches missed.">                        &amp;&amp; buffer.getOffset() == 0</span>
+<span class="pc bpc" id="L421" title="1 of 2 branches missed.">                        &amp;&amp; buffer.getNumBanks() == 1) {</span>
+<span class="fc" id="L422">                    this.firstTileDump = true;</span>
+<span class="fc" id="L423">                    this.encodedColorModel = cm;</span>
+                }
+            }
+        }
+
+<span class="fc" id="L428">    }</span>
+
+    /**
+     * Encodes the image and writes everything to the given OutputStream.
+     * @param out the OutputStream
+     * @throws IOException if an I/O error occurs
+     */
+    public void encode(OutputStream out) throws IOException {
+<span class="fc bfc" id="L436" title="All 2 branches covered.">        if (!isConverted()) {</span>
+<span class="pc bpc" id="L437" title="1 of 2 branches missed.">            if (optimizedWriteTo(out)) {</span>
+<span class="fc" id="L438">                return;</span>
+            }
+        }
+<span class="fc" id="L441">        writeRGBTo(out);</span>
+<span class="fc" id="L442">    }</span>
+
+    /**
+     * Encodes the image's alpha channel. If it doesn't have an alpha channel, an
+     * {@link IllegalStateException} is thrown.
+     * @param out the OutputStream
+     * @throws IOException if an I/O error occurs
+     */
+    public void encodeAlpha(OutputStream out) throws IOException {
+<span class="nc bnc" id="L451" title="All 2 branches missed.">        if (!hasAlpha()) {</span>
+<span class="nc" id="L452">            throw new IllegalStateException(&quot;Image doesn't have an alpha channel&quot;);</span>
+        }
+<span class="nc" id="L454">        Raster alpha = GraphicsUtil.getAlphaRaster(image);</span>
+<span class="nc" id="L455">        DataBuffer buffer = alpha.getDataBuffer();</span>
+<span class="nc bnc" id="L456" title="All 2 branches missed.">        if (buffer instanceof DataBufferByte) {</span>
+<span class="nc" id="L457">            out.write(((DataBufferByte)buffer).getData());</span>
+        } else {
+<span class="nc" id="L459">            throw new UnsupportedOperationException(</span>
+<span class="nc" id="L460">                    &quot;Alpha raster not supported: &quot; + buffer.getClass().getName());</span>
+        }
+<span class="nc" id="L462">    }</span>
+
+    /**
+     * Writes all pixels (color components only) of a RenderedImage to an OutputStream.
+     * @param image the image to be encoded
+     * @param out the OutputStream to write to
+     * @throws IOException if an I/O error occurs
+     */
+    public static void encodePackedColorComponents(RenderedImage image, OutputStream out)
+                throws IOException {
+<span class="fc" id="L472">        ImageEncodingHelper helper = new ImageEncodingHelper(image);</span>
+<span class="fc" id="L473">        helper.encode(out);</span>
+<span class="fc" id="L474">    }</span>
+
+    /**
+     * Create an ImageEncoder for the given RenderImage instance.
+     * @param img the image
+     * @return the requested ImageEncoder
+     */
+    public static ImageEncoder createRenderedImageEncoder(RenderedImage img) {
+<span class="fc" id="L482">        return new RenderedImageEncoder(img);</span>
+    }
+
+    /**
+     * ImageEncoder implementation for RenderedImage instances.
+     */
+    private static class RenderedImageEncoder implements ImageEncoder {
+
+        private final RenderedImage img;
+
+<span class="fc" id="L492">        public RenderedImageEncoder(RenderedImage ri) {</span>
+<span class="fc bfc" id="L493" title="All 4 branches covered.">            if (ri instanceof BufferedImage &amp;&amp; ((BufferedImage) ri).getType() == BufferedImage.TYPE_4BYTE_ABGR) {</span>
+<span class="fc" id="L494">                BufferedImage convertedImg =</span>
+<span class="fc" id="L495">                        new BufferedImage(ri.getWidth(), ri.getHeight(), BufferedImage.TYPE_INT_RGB);</span>
+<span class="fc" id="L496">                Graphics2D g = (Graphics2D) convertedImg.getGraphics();</span>
+<span class="fc" id="L497">                g.setBackground(Color.WHITE);</span>
+<span class="fc" id="L498">                g.clearRect(0, 0, ri.getWidth(), ri.getHeight());</span>
+<span class="fc" id="L499">                g.drawImage((BufferedImage)ri, 0, 0, null);</span>
+<span class="fc" id="L500">                g.dispose();</span>
+<span class="fc" id="L501">                ri = convertedImg;</span>
+            }
+<span class="fc" id="L503">            img = ri;</span>
+<span class="fc" id="L504">        }</span>
+
+        public void writeTo(OutputStream out) throws IOException {
+<span class="fc" id="L507">            ImageEncodingHelper.encodePackedColorComponents(img, out);</span>
+<span class="fc" id="L508">        }</span>
+
+        public String getImplicitFilter() {
+<span class="fc" id="L511">            return null; //No implicit filters with RenderedImage instances</span>
+        }
+    }
+
+    public void setBWInvert(boolean v) {
+<span class="nc" id="L516">        bwinvert = v;</span>
+<span class="nc" id="L517">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

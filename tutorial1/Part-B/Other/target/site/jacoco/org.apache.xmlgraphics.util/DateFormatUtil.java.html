@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateFormatUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util</a> &gt; <span class="el_source">DateFormatUtil.java</span></div><h1>DateFormatUtil.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.xmlgraphics.util;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
+public final class DateFormatUtil {
+
+    private static final String ISO_8601_DATE_PATTERN = &quot;yyyy-MM-dd'T'HH:mm:ss&quot;;
+
+    private DateFormatUtil() {
+    }
+
+    /**
+     * Formats the date according to PDF format. See section 3.8.2 of the PDF 1.4 specification.
+     * @param date The date time to format
+     * @param timeZone The time zone used to format the date
+     * @return a formatted date according to PDF format (based on ISO 8824)
+     */
+    public static String formatPDFDate(Date date, TimeZone timeZone) {
+<span class="fc" id="L41">        DateFormat dateFormat = createDateFormat(&quot;'D:'yyyyMMddHHmmss&quot;, timeZone);</span>
+<span class="fc" id="L42">        return formatDate(date, dateFormat, '\'', true);</span>
+    }
+
+    /**
+     * Formats the date according to ISO 8601 standard.
+     * @param date The date time to format
+     * @param timeZone The time zone used to format the date
+     * @return a formatted date according to ISO 8601
+     */
+    public static String formatISO8601(Date date, TimeZone timeZone) {
+<span class="fc" id="L52">        DateFormat dateFormat = createDateFormat(ISO_8601_DATE_PATTERN, timeZone);</span>
+<span class="fc" id="L53">        return formatDate(date, dateFormat, ':', false);</span>
+    }
+
+    private static DateFormat createDateFormat(String format, TimeZone timeZone) {
+<span class="fc" id="L57">        DateFormat dateFormat = new SimpleDateFormat(format, Locale.ENGLISH);</span>
+<span class="fc" id="L58">        dateFormat.setTimeZone(timeZone);</span>
+<span class="fc" id="L59">        return dateFormat;</span>
+    }
+
+    /**
+     * Formats the date according to the specified format and returns as a string.
+     * @param date The date / time object to format
+     * @param dateFormat The date format to use when outputting the date
+     * @param delimiter The character used to separate the time zone difference hours and minutes
+     * @param endWithDelimiter Determines whether the date string will end with the delimiter character
+     * @return the formatted date string
+     */
+    private static String formatDate(Date date, DateFormat dateFormat, char delimiter,
+            boolean endWithDelimiter) {
+<span class="fc" id="L72">        Calendar cal = Calendar.getInstance(dateFormat.getTimeZone(), Locale.ENGLISH);</span>
+<span class="fc" id="L73">        cal.setTime(date);</span>
+<span class="fc" id="L74">        int offset = getOffsetInMinutes(cal);</span>
+<span class="fc" id="L75">        StringBuilder sb = new StringBuilder(dateFormat.format(date));</span>
+<span class="fc" id="L76">        appendOffset(sb, delimiter, offset, endWithDelimiter);</span>
+<span class="fc" id="L77">        return sb.toString();</span>
+    }
+
+    private static int getOffsetInMinutes(Calendar cal) {
+<span class="fc" id="L81">        int offset = cal.get(Calendar.ZONE_OFFSET);</span>
+<span class="fc" id="L82">        offset += cal.get(Calendar.DST_OFFSET);</span>
+<span class="fc" id="L83">        offset /= (1000 * 60);</span>
+<span class="fc" id="L84">        return offset;</span>
+    }
+
+    private static void appendOffset(StringBuilder sb, char delimiter, int offset, boolean endWithDelimiter) {
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (offset == 0) {</span>
+<span class="fc" id="L89">            appendOffsetUTC(sb);</span>
+        } else {
+<span class="fc" id="L91">            appendOffsetNoUTC(sb, delimiter, offset, endWithDelimiter);</span>
+        }
+<span class="fc" id="L93">    }</span>
+
+    private static void appendOffsetUTC(StringBuilder sb) {
+<span class="fc" id="L96">        sb.append('Z');</span>
+<span class="fc" id="L97">    }</span>
+
+    private static void appendOffsetNoUTC(StringBuilder sb, char delimiter, int offset,
+            boolean endWithDelimiter) {
+<span class="fc" id="L101">        int zoneOffsetHours = offset / 60;</span>
+<span class="fc" id="L102">        appendOffsetSign(sb, zoneOffsetHours);</span>
+<span class="fc" id="L103">        appendPaddedNumber(sb, Math.abs(zoneOffsetHours));</span>
+<span class="fc" id="L104">        sb.append(delimiter);</span>
+<span class="fc" id="L105">        appendPaddedNumber(sb, Math.abs(offset % 60));</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        if (endWithDelimiter) {</span>
+<span class="fc" id="L107">            sb.append(delimiter);</span>
+        }
+<span class="fc" id="L109">    }</span>
+
+    private static void appendOffsetSign(StringBuilder sb, int zoneOffsetHours) {
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        if (zoneOffsetHours &gt;= 0) {</span>
+<span class="fc" id="L113">            sb.append('+');</span>
+        } else {
+<span class="fc" id="L115">            sb.append('-');</span>
+        }
+<span class="fc" id="L117">    }</span>
+
+    private static void appendPaddedNumber(StringBuilder sb, int number) {
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (number &lt; 10) {</span>
+<span class="fc" id="L121">            sb.append('0');</span>
+        }
+<span class="fc" id="L123">        sb.append(number);</span>
+<span class="fc" id="L124">    }</span>
+
+    /**
+     * Parses an ISO 8601 date and time value.
+     * @param date the date and time value as an ISO 8601 string
+     * @return the parsed date/time
+     */
+    public static Date parseISO8601Date(String date) {
+<span class="fc" id="L132">        final String errorMessage = &quot;Invalid ISO 8601 date format: &quot;;</span>
+<span class="fc" id="L133">        date = formatDateToParse(date, errorMessage);</span>
+<span class="fc" id="L134">        DateFormat dateFormat = new SimpleDateFormat(ISO_8601_DATE_PATTERN + &quot;Z&quot;);</span>
+        try {
+<span class="fc" id="L136">            return dateFormat.parse(date);</span>
+<span class="fc" id="L137">        } catch (ParseException ex) {</span>
+<span class="fc" id="L138">            throw new IllegalArgumentException(errorMessage + date);</span>
+        }
+    }
+
+    private static String formatDateToParse(String date, String errorMessage) {
+        /* Remove the colon from the time zone difference (+08:00) so that it can be parsed
+         * by the SimpleDateFormat string.
+         */
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        if (!date.contains(&quot;Z&quot;)) {</span>
+<span class="fc" id="L147">            int lastColonIndex = date.lastIndexOf(&quot;:&quot;);</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">            if (lastColonIndex &lt; 0) {</span>
+<span class="fc" id="L149">                throw new IllegalArgumentException(errorMessage + date);</span>
+            }
+<span class="fc" id="L151">            date = date.substring(0, lastColonIndex) + date.substring(lastColonIndex + 1, date.length());</span>
+<span class="fc" id="L152">        } else {</span>
+<span class="fc" id="L153">            date = date.replace(&quot;Z&quot;, &quot;+0000&quot;);</span>
+        }
+<span class="fc" id="L155">        return date;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

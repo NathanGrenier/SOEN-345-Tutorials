@@ -50,7 +50,7 @@ import org.apache.xmlgraphics.util.io.SubInputStream;
  * ImageLoader for CCITT group 3 and 4 images consumed "raw" (undecoded). Provides a
  * raw/undecoded stream.
  */
-@java.lang.SuppressWarnings({"fallthrough"}) public class ImageLoaderRawCCITTFax extends AbstractImageLoader implements JPEGConstants {public static class __CLR4_5_283m83mm68iyh8l{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static <T> T caseInc(int i,java.util.function.Supplier<T> s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1737587872955L,8589935092L,10591,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
+@java.lang.SuppressWarnings({"fallthrough"}) public class ImageLoaderRawCCITTFax extends AbstractImageLoader implements JPEGConstants {public static class __CLR4_5_283m83mm6lb501b{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static <T> T caseInc(int i,java.util.function.Supplier<T> s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1738360798893L,8589935092L,10591,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
 
     private static final int COMPRESSION_CCITT_1D = 2;
     private static final int COMPRESSION_FAX_GROUP3 = 3;
@@ -62,124 +62,124 @@ import org.apache.xmlgraphics.util.io.SubInputStream;
     /**
      * Main constructor.
      */
-    public ImageLoaderRawCCITTFax() {try{__CLR4_5_283m83mm68iyh8l.R.inc(10498);
-    }finally{__CLR4_5_283m83mm68iyh8l.R.flushNeeded();}}
+    public ImageLoaderRawCCITTFax() {try{__CLR4_5_283m83mm6lb501b.R.inc(10498);
+    }finally{__CLR4_5_283m83mm6lb501b.R.flushNeeded();}}
 
     /** {@inheritDoc} */
-    public ImageFlavor getTargetFlavor() {try{__CLR4_5_283m83mm68iyh8l.R.inc(10499);
-        __CLR4_5_283m83mm68iyh8l.R.inc(10500);return ImageFlavor.RAW_CCITTFAX;
-    }finally{__CLR4_5_283m83mm68iyh8l.R.flushNeeded();}}
+    public ImageFlavor getTargetFlavor() {try{__CLR4_5_283m83mm6lb501b.R.inc(10499);
+        __CLR4_5_283m83mm6lb501b.R.inc(10500);return ImageFlavor.RAW_CCITTFAX;
+    }finally{__CLR4_5_283m83mm6lb501b.R.flushNeeded();}}
 
     /** {@inheritDoc} */
     public Image loadImage(ImageInfo info, Map hints, ImageSessionContext session)
-                throws ImageException, IOException {try{__CLR4_5_283m83mm68iyh8l.R.inc(10501);
-        __CLR4_5_283m83mm68iyh8l.R.inc(10502);if ((((!MimeConstants.MIME_TIFF.equals(info.getMimeType()))&&(__CLR4_5_283m83mm68iyh8l.R.iget(10503)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10504)==0&false))) {{
-            __CLR4_5_283m83mm68iyh8l.R.inc(10505);throw new IllegalArgumentException("ImageInfo must be from a image with MIME type: "
+                throws ImageException, IOException {try{__CLR4_5_283m83mm6lb501b.R.inc(10501);
+        __CLR4_5_283m83mm6lb501b.R.inc(10502);if ((((!MimeConstants.MIME_TIFF.equals(info.getMimeType()))&&(__CLR4_5_283m83mm6lb501b.R.iget(10503)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10504)==0&false))) {{
+            __CLR4_5_283m83mm6lb501b.R.inc(10505);throw new IllegalArgumentException("ImageInfo must be from a image with MIME type: "
                     + MimeConstants.MIME_TIFF);
         }
-        }__CLR4_5_283m83mm68iyh8l.R.inc(10506);int fillOrder = 1;
-        __CLR4_5_283m83mm68iyh8l.R.inc(10507);int compression = TIFFImage.COMP_NONE;
-        __CLR4_5_283m83mm68iyh8l.R.inc(10508);long stripOffset;
-        __CLR4_5_283m83mm68iyh8l.R.inc(10509);long stripLength;
-        __CLR4_5_283m83mm68iyh8l.R.inc(10510);TIFFDirectory dir;
+        }__CLR4_5_283m83mm6lb501b.R.inc(10506);int fillOrder = 1;
+        __CLR4_5_283m83mm6lb501b.R.inc(10507);int compression = TIFFImage.COMP_NONE;
+        __CLR4_5_283m83mm6lb501b.R.inc(10508);long stripOffset;
+        __CLR4_5_283m83mm6lb501b.R.inc(10509);long stripLength;
+        __CLR4_5_283m83mm6lb501b.R.inc(10510);TIFFDirectory dir;
 
-        __CLR4_5_283m83mm68iyh8l.R.inc(10511);Source src = session.needSource(info.getOriginalURI());
-        __CLR4_5_283m83mm68iyh8l.R.inc(10512);ImageInputStream in = ImageUtil.needImageInputStream(src);
-        __CLR4_5_283m83mm68iyh8l.R.inc(10513);in.mark();
-        __CLR4_5_283m83mm68iyh8l.R.inc(10514);try {
-            __CLR4_5_283m83mm68iyh8l.R.inc(10515);SeekableStream seekable = new SeekableStreamAdapter(in);
-            __CLR4_5_283m83mm68iyh8l.R.inc(10516);dir = new TIFFDirectory(seekable, 0);
-            __CLR4_5_283m83mm68iyh8l.R.inc(10517);TIFFField fld;
+        __CLR4_5_283m83mm6lb501b.R.inc(10511);Source src = session.needSource(info.getOriginalURI());
+        __CLR4_5_283m83mm6lb501b.R.inc(10512);ImageInputStream in = ImageUtil.needImageInputStream(src);
+        __CLR4_5_283m83mm6lb501b.R.inc(10513);in.mark();
+        __CLR4_5_283m83mm6lb501b.R.inc(10514);try {
+            __CLR4_5_283m83mm6lb501b.R.inc(10515);SeekableStream seekable = new SeekableStreamAdapter(in);
+            __CLR4_5_283m83mm6lb501b.R.inc(10516);dir = new TIFFDirectory(seekable, 0);
+            __CLR4_5_283m83mm6lb501b.R.inc(10517);TIFFField fld;
 
-            __CLR4_5_283m83mm68iyh8l.R.inc(10518);fld = dir.getField(TIFFImageDecoder.TIFF_COMPRESSION);
-            __CLR4_5_283m83mm68iyh8l.R.inc(10519);if ((((fld != null)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10520)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10521)==0&false))) {{
-                __CLR4_5_283m83mm68iyh8l.R.inc(10522);compression = fld.getAsInt(0);
-                boolean __CLB4_5_2_bool0=false;__CLR4_5_283m83mm68iyh8l.R.inc(10523);switch (compression) {
-                case COMPRESSION_CCITT_1D:if (!__CLB4_5_2_bool0) {__CLR4_5_283m83mm68iyh8l.R.inc(10524);__CLB4_5_2_bool0=true;}
-                case COMPRESSION_FAX_GROUP4:if (!__CLB4_5_2_bool0) {__CLR4_5_283m83mm68iyh8l.R.inc(10525);__CLB4_5_2_bool0=true;}
-                    __CLR4_5_283m83mm68iyh8l.R.inc(10526);break;
-                case COMPRESSION_FAX_GROUP3:if (!__CLB4_5_2_bool0) {__CLR4_5_283m83mm68iyh8l.R.inc(10527);__CLB4_5_2_bool0=true;}
+            __CLR4_5_283m83mm6lb501b.R.inc(10518);fld = dir.getField(TIFFImageDecoder.TIFF_COMPRESSION);
+            __CLR4_5_283m83mm6lb501b.R.inc(10519);if ((((fld != null)&&(__CLR4_5_283m83mm6lb501b.R.iget(10520)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10521)==0&false))) {{
+                __CLR4_5_283m83mm6lb501b.R.inc(10522);compression = fld.getAsInt(0);
+                boolean __CLB4_5_2_bool0=false;__CLR4_5_283m83mm6lb501b.R.inc(10523);switch (compression) {
+                case COMPRESSION_CCITT_1D:if (!__CLB4_5_2_bool0) {__CLR4_5_283m83mm6lb501b.R.inc(10524);__CLB4_5_2_bool0=true;}
+                case COMPRESSION_FAX_GROUP4:if (!__CLB4_5_2_bool0) {__CLR4_5_283m83mm6lb501b.R.inc(10525);__CLB4_5_2_bool0=true;}
+                    __CLR4_5_283m83mm6lb501b.R.inc(10526);break;
+                case COMPRESSION_FAX_GROUP3:if (!__CLB4_5_2_bool0) {__CLR4_5_283m83mm6lb501b.R.inc(10527);__CLB4_5_2_bool0=true;}
                     //Note: the TIFFImage compression constants seem to be a bit misleading!
-                    __CLR4_5_283m83mm68iyh8l.R.inc(10528);compression = TIFFImage.COMP_FAX_G3_1D; //1D is the default for Group3
-                    __CLR4_5_283m83mm68iyh8l.R.inc(10529);fld = dir.getField(TIFFImageDecoder.TIFF_T4_OPTIONS);
-                    __CLR4_5_283m83mm68iyh8l.R.inc(10530);if ((((fld != null)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10531)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10532)==0&false))) {{
-                        __CLR4_5_283m83mm68iyh8l.R.inc(10533);long t4Options = fld.getAsLong(0);
-                        __CLR4_5_283m83mm68iyh8l.R.inc(10534);if (((((t4Options & 0x01) != 0)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10535)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10536)==0&false))) {{
-                            __CLR4_5_283m83mm68iyh8l.R.inc(10537);compression = TIFFImage.COMP_FAX_G3_2D; //"Abusing" for 2D signalling
+                    __CLR4_5_283m83mm6lb501b.R.inc(10528);compression = TIFFImage.COMP_FAX_G3_1D; //1D is the default for Group3
+                    __CLR4_5_283m83mm6lb501b.R.inc(10529);fld = dir.getField(TIFFImageDecoder.TIFF_T4_OPTIONS);
+                    __CLR4_5_283m83mm6lb501b.R.inc(10530);if ((((fld != null)&&(__CLR4_5_283m83mm6lb501b.R.iget(10531)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10532)==0&false))) {{
+                        __CLR4_5_283m83mm6lb501b.R.inc(10533);long t4Options = fld.getAsLong(0);
+                        __CLR4_5_283m83mm6lb501b.R.inc(10534);if (((((t4Options & 0x01) != 0)&&(__CLR4_5_283m83mm6lb501b.R.iget(10535)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10536)==0&false))) {{
+                            __CLR4_5_283m83mm6lb501b.R.inc(10537);compression = TIFFImage.COMP_FAX_G3_2D; //"Abusing" for 2D signalling
                         }
                     }}
-                    }__CLR4_5_283m83mm68iyh8l.R.inc(10538);break;
-                default:if (!__CLB4_5_2_bool0) {__CLR4_5_283m83mm68iyh8l.R.inc(10539);__CLB4_5_2_bool0=true;}
-                    __CLR4_5_283m83mm68iyh8l.R.inc(10540);log.debug("Unsupported compression " + compression);
-                    __CLR4_5_283m83mm68iyh8l.R.inc(10541);throw new ImageException(
+                    }__CLR4_5_283m83mm6lb501b.R.inc(10538);break;
+                default:if (!__CLB4_5_2_bool0) {__CLR4_5_283m83mm6lb501b.R.inc(10539);__CLB4_5_2_bool0=true;}
+                    __CLR4_5_283m83mm6lb501b.R.inc(10540);log.debug("Unsupported compression " + compression);
+                    __CLR4_5_283m83mm6lb501b.R.inc(10541);throw new ImageException(
                             "ImageLoader doesn't support TIFF compression: " + compression);
                 }
             }
             //Read information used for raw embedding
-            }__CLR4_5_283m83mm68iyh8l.R.inc(10542);fld = dir.getField(TIFFImageDecoder.TIFF_FILL_ORDER);
-            __CLR4_5_283m83mm68iyh8l.R.inc(10543);if ((((fld != null)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10544)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10545)==0&false))) {{
-                __CLR4_5_283m83mm68iyh8l.R.inc(10546);fillOrder = fld.getAsInt(0);
+            }__CLR4_5_283m83mm6lb501b.R.inc(10542);fld = dir.getField(TIFFImageDecoder.TIFF_FILL_ORDER);
+            __CLR4_5_283m83mm6lb501b.R.inc(10543);if ((((fld != null)&&(__CLR4_5_283m83mm6lb501b.R.iget(10544)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10545)==0&false))) {{
+                __CLR4_5_283m83mm6lb501b.R.inc(10546);fillOrder = fld.getAsInt(0);
             }
 
-            }__CLR4_5_283m83mm68iyh8l.R.inc(10547);int stripCount;
-            __CLR4_5_283m83mm68iyh8l.R.inc(10548);fld = dir.getField(TIFFImageDecoder.TIFF_ROWS_PER_STRIP);
-            __CLR4_5_283m83mm68iyh8l.R.inc(10549);if ((((fld == null)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10550)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10551)==0&false))) {{
-                __CLR4_5_283m83mm68iyh8l.R.inc(10552);stripCount = 1;
+            }__CLR4_5_283m83mm6lb501b.R.inc(10547);int stripCount;
+            __CLR4_5_283m83mm6lb501b.R.inc(10548);fld = dir.getField(TIFFImageDecoder.TIFF_ROWS_PER_STRIP);
+            __CLR4_5_283m83mm6lb501b.R.inc(10549);if ((((fld == null)&&(__CLR4_5_283m83mm6lb501b.R.iget(10550)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10551)==0&false))) {{
+                __CLR4_5_283m83mm6lb501b.R.inc(10552);stripCount = 1;
             } }else {{
-                __CLR4_5_283m83mm68iyh8l.R.inc(10553);stripCount = (int)(info.getSize().getHeightPx() / fld.getAsLong(0));
+                __CLR4_5_283m83mm6lb501b.R.inc(10553);stripCount = (int)(info.getSize().getHeightPx() / fld.getAsLong(0));
             }
-            }__CLR4_5_283m83mm68iyh8l.R.inc(10554);if ((((stripCount > 1)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10555)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10556)==0&false))) {{
-                __CLR4_5_283m83mm68iyh8l.R.inc(10557);log.debug("More than one strip found in TIFF image.");
-                __CLR4_5_283m83mm68iyh8l.R.inc(10558);throw new ImageException(
+            }__CLR4_5_283m83mm6lb501b.R.inc(10554);if ((((stripCount > 1)&&(__CLR4_5_283m83mm6lb501b.R.iget(10555)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10556)==0&false))) {{
+                __CLR4_5_283m83mm6lb501b.R.inc(10557);log.debug("More than one strip found in TIFF image.");
+                __CLR4_5_283m83mm6lb501b.R.inc(10558);throw new ImageException(
                         "ImageLoader doesn't support multiple strips");
             }
-            }__CLR4_5_283m83mm68iyh8l.R.inc(10559);stripOffset = dir.getField(TIFFImageDecoder.TIFF_STRIP_OFFSETS).getAsLong(0);
-            __CLR4_5_283m83mm68iyh8l.R.inc(10560);stripLength = dir.getField(TIFFImageDecoder.TIFF_STRIP_BYTE_COUNTS).getAsLong(0);
+            }__CLR4_5_283m83mm6lb501b.R.inc(10559);stripOffset = dir.getField(TIFFImageDecoder.TIFF_STRIP_OFFSETS).getAsLong(0);
+            __CLR4_5_283m83mm6lb501b.R.inc(10560);stripLength = dir.getField(TIFFImageDecoder.TIFF_STRIP_BYTE_COUNTS).getAsLong(0);
         } finally {
-            __CLR4_5_283m83mm68iyh8l.R.inc(10561);in.reset();
+            __CLR4_5_283m83mm6lb501b.R.inc(10561);in.reset();
         }
 
-        __CLR4_5_283m83mm68iyh8l.R.inc(10562);in.seek(stripOffset);
-        __CLR4_5_283m83mm68iyh8l.R.inc(10563);InputStream subin = new SubInputStream(XmlSourceUtil.needInputStream(src), stripLength, true);
-        __CLR4_5_283m83mm68iyh8l.R.inc(10564);if ((((fillOrder == 2)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10565)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10566)==0&false))) {{
+        __CLR4_5_283m83mm6lb501b.R.inc(10562);in.seek(stripOffset);
+        __CLR4_5_283m83mm6lb501b.R.inc(10563);InputStream subin = new SubInputStream(XmlSourceUtil.needInputStream(src), stripLength, true);
+        __CLR4_5_283m83mm6lb501b.R.inc(10564);if ((((fillOrder == 2)&&(__CLR4_5_283m83mm6lb501b.R.iget(10565)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10566)==0&false))) {{
             //Decorate to flip bit order
-            __CLR4_5_283m83mm68iyh8l.R.inc(10567);subin = new FillOrderChangeInputStream(subin);
+            __CLR4_5_283m83mm6lb501b.R.inc(10567);subin = new FillOrderChangeInputStream(subin);
         }
-        }__CLR4_5_283m83mm68iyh8l.R.inc(10568);ImageRawCCITTFax rawImage = new ImageRawCCITTFax(info, subin, compression);
+        }__CLR4_5_283m83mm6lb501b.R.inc(10568);ImageRawCCITTFax rawImage = new ImageRawCCITTFax(info, subin, compression);
         //Strip stream from source as we pass it on internally
-        __CLR4_5_283m83mm68iyh8l.R.inc(10569);XmlSourceUtil.removeStreams(src);
-        __CLR4_5_283m83mm68iyh8l.R.inc(10570);return rawImage;
-    }finally{__CLR4_5_283m83mm68iyh8l.R.flushNeeded();}}
+        __CLR4_5_283m83mm6lb501b.R.inc(10569);XmlSourceUtil.removeStreams(src);
+        __CLR4_5_283m83mm6lb501b.R.inc(10570);return rawImage;
+    }finally{__CLR4_5_283m83mm6lb501b.R.flushNeeded();}}
 
     private static class FillOrderChangeInputStream extends FilterInputStream {
 
         protected FillOrderChangeInputStream(InputStream in) {
-            super(in);__CLR4_5_283m83mm68iyh8l.R.inc(10572);try{__CLR4_5_283m83mm68iyh8l.R.inc(10571);
-        }finally{__CLR4_5_283m83mm68iyh8l.R.flushNeeded();}}
+            super(in);__CLR4_5_283m83mm6lb501b.R.inc(10572);try{__CLR4_5_283m83mm6lb501b.R.inc(10571);
+        }finally{__CLR4_5_283m83mm6lb501b.R.flushNeeded();}}
 
         /** {@inheritDoc} */
         @Override
-        public int read(byte[] b, int off, int len) throws IOException {try{__CLR4_5_283m83mm68iyh8l.R.inc(10573);
-            __CLR4_5_283m83mm68iyh8l.R.inc(10574);int result = super.read(b, off, len);
-            __CLR4_5_283m83mm68iyh8l.R.inc(10575);if ((((result > 0)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10576)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10577)==0&false))) {{
-                __CLR4_5_283m83mm68iyh8l.R.inc(10578);int endpos = off + result;
-                __CLR4_5_283m83mm68iyh8l.R.inc(10579);for (int i = off; (((i < endpos)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10580)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10581)==0&false)); i++) {{
-                    __CLR4_5_283m83mm68iyh8l.R.inc(10582);b[i] = FLIP_TABLE[b[i] & 0xff];
+        public int read(byte[] b, int off, int len) throws IOException {try{__CLR4_5_283m83mm6lb501b.R.inc(10573);
+            __CLR4_5_283m83mm6lb501b.R.inc(10574);int result = super.read(b, off, len);
+            __CLR4_5_283m83mm6lb501b.R.inc(10575);if ((((result > 0)&&(__CLR4_5_283m83mm6lb501b.R.iget(10576)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10577)==0&false))) {{
+                __CLR4_5_283m83mm6lb501b.R.inc(10578);int endpos = off + result;
+                __CLR4_5_283m83mm6lb501b.R.inc(10579);for (int i = off; (((i < endpos)&&(__CLR4_5_283m83mm6lb501b.R.iget(10580)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10581)==0&false)); i++) {{
+                    __CLR4_5_283m83mm6lb501b.R.inc(10582);b[i] = FLIP_TABLE[b[i] & 0xff];
                 }
             }}
-            }__CLR4_5_283m83mm68iyh8l.R.inc(10583);return result;
-        }finally{__CLR4_5_283m83mm68iyh8l.R.flushNeeded();}}
+            }__CLR4_5_283m83mm6lb501b.R.inc(10583);return result;
+        }finally{__CLR4_5_283m83mm6lb501b.R.flushNeeded();}}
 
         /** {@inheritDoc} */
         @Override
-        public int read() throws IOException {try{__CLR4_5_283m83mm68iyh8l.R.inc(10584);
-            __CLR4_5_283m83mm68iyh8l.R.inc(10585);int b = super.read();
-            __CLR4_5_283m83mm68iyh8l.R.inc(10586);if ((((b < 0)&&(__CLR4_5_283m83mm68iyh8l.R.iget(10587)!=0|true))||(__CLR4_5_283m83mm68iyh8l.R.iget(10588)==0&false))) {{
-                __CLR4_5_283m83mm68iyh8l.R.inc(10589);return b;
+        public int read() throws IOException {try{__CLR4_5_283m83mm6lb501b.R.inc(10584);
+            __CLR4_5_283m83mm6lb501b.R.inc(10585);int b = super.read();
+            __CLR4_5_283m83mm6lb501b.R.inc(10586);if ((((b < 0)&&(__CLR4_5_283m83mm6lb501b.R.iget(10587)!=0|true))||(__CLR4_5_283m83mm6lb501b.R.iget(10588)==0&false))) {{
+                __CLR4_5_283m83mm6lb501b.R.inc(10589);return b;
             } }else {{
-                __CLR4_5_283m83mm68iyh8l.R.inc(10590);return FLIP_TABLE[b] & 0xff;
+                __CLR4_5_283m83mm6lb501b.R.inc(10590);return FLIP_TABLE[b] & 0xff;
             }
-        }}finally{__CLR4_5_283m83mm68iyh8l.R.flushNeeded();}}
+        }}finally{__CLR4_5_283m83mm6lb501b.R.flushNeeded();}}
 
         // Table to be used when fillOrder = 2, for flipping bytes.
         // Copied from XML Graphics Commons' TIFFFaxDecoder class

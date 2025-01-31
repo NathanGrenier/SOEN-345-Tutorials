@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractResourceDSCComment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps.dsc.events</a> &gt; <span class="el_source">AbstractResourceDSCComment.java</span></div><h1>AbstractResourceDSCComment.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: AbstractResourceDSCComment.java 727407 2008-12-17 15:05:45Z jeremias $ */
+
+package org.apache.xmlgraphics.ps.dsc.events;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.xmlgraphics.ps.PSGenerator;
+import org.apache.xmlgraphics.ps.PSProcSet;
+import org.apache.xmlgraphics.ps.PSResource;
+
+/**
+ * Abstract base class for resource comments.
+ */
+public abstract class AbstractResourceDSCComment extends AbstractDSCComment {
+
+    private PSResource resource;
+
+    /**
+     * Creates a new instance
+     */
+<span class="fc" id="L40">    public AbstractResourceDSCComment() {</span>
+<span class="fc" id="L41">    }</span>
+
+    /**
+     * Creates a new instance for a given PSResource instance
+     * @param resource the resource
+     */
+<span class="nc" id="L47">    public AbstractResourceDSCComment(PSResource resource) {</span>
+<span class="nc" id="L48">        this.resource = resource;</span>
+<span class="nc" id="L49">    }</span>
+
+    /**
+     * Returns the associated PSResource.
+     * @return the resource
+     */
+    public PSResource getResource() {
+<span class="nc" id="L56">        return this.resource;</span>
+    }
+
+    /** {@inheritDoc} */
+    public boolean hasValues() {
+<span class="nc" id="L61">        return true;</span>
+    }
+
+    /** {@inheritDoc} */
+    public void parseValue(String value) {
+<span class="fc" id="L66">        List params = splitParams(value);</span>
+<span class="fc" id="L67">        Iterator iter = params.iterator();</span>
+<span class="fc" id="L68">        String name = (String)iter.next();</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (PSResource.TYPE_FONT.equals(name)) {</span>
+<span class="nc" id="L70">            String fontname = (String)iter.next();</span>
+<span class="nc" id="L71">            this.resource = new PSResource(name, fontname);</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        } else if (PSResource.TYPE_PROCSET.equals(name)) {</span>
+<span class="fc" id="L73">            String procname = (String)iter.next();</span>
+<span class="fc" id="L74">            String version = (String)iter.next();</span>
+<span class="fc" id="L75">            String revision = (String)iter.next();</span>
+<span class="fc" id="L76">            this.resource = new PSProcSet(procname,</span>
+<span class="fc" id="L77">                    Float.parseFloat(version), Integer.parseInt(revision));</span>
+<span class="pc bnc" id="L78" title="All 2 branches missed.">        } else if (PSResource.TYPE_FILE.equals(name)) {</span>
+<span class="nc" id="L79">            String filename = (String)iter.next();</span>
+<span class="nc" id="L80">            this.resource = new PSResource(name, filename);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        } else if (PSResource.TYPE_FORM.equals(name)) {</span>
+<span class="nc" id="L82">            String formname = (String)iter.next();</span>
+<span class="nc" id="L83">            this.resource = new PSResource(name, formname);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        } else if (PSResource.TYPE_PATTERN.equals(name)) {</span>
+<span class="nc" id="L85">            String patternname = (String)iter.next();</span>
+<span class="nc" id="L86">            this.resource = new PSResource(name, patternname);</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        } else if (PSResource.TYPE_ENCODING.equals(name)) {</span>
+<span class="nc" id="L88">            String encodingname = (String)iter.next();</span>
+<span class="nc" id="L89">            this.resource = new PSResource(name, encodingname);</span>
+<span class="nc" id="L90">        } else {</span>
+<span class="nc" id="L91">            throw new IllegalArgumentException(&quot;Invalid resource type: &quot; + name);</span>
+        }
+<span class="fc" id="L93">    }</span>
+
+    /** {@inheritDoc} */
+    public void generate(PSGenerator gen) throws IOException {
+<span class="nc" id="L97">        gen.writeDSCComment(getName(), getResource());</span>
+<span class="nc" id="L98">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

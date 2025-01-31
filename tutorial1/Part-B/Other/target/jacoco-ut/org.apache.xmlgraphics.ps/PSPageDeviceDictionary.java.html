@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSPageDeviceDictionary.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSPageDeviceDictionary.java</span></div><h1>PSPageDeviceDictionary.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSPageDeviceDictionary.java 1715211 2015-11-19 16:35:44Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+import java.util.Map;
+
+/**
+ * Postscript page device dictionary object
+ *
+ * This object is used by the postscript renderer to hold postscript page device
+ * values.  It can also be used to minimize the number of setpagedevice calls when
+ * DSC compliance is false.
+ */
+<span class="fc" id="L31">public class PSPageDeviceDictionary extends PSDictionary {</span>
+
+    private static final long serialVersionUID = 845943256485806509L;
+
+    /**
+     * Whether or not the contents of the dictionary are flushed on retrieval
+     */
+    private boolean flushOnRetrieval;
+
+    /**
+     * Dictionary content that has not been output/written yet
+     */
+    private PSDictionary unRetrievedContentDictionary;
+
+    /**
+     * @param key key with which the specified value is to be associated.
+     * @param value value to be associated with the specified key.
+     * @return the previous value associated with the key or null
+     * @see java.util.Map#put(Object, Object)
+     */
+    public Object put(Object key, Object value) {
+<span class="fc" id="L52">        Object previousValue = super.put(key, value);</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (flushOnRetrieval) {</span>
+<span class="pc bpc" id="L54" title="3 of 4 branches missed.">            if (previousValue == null || !previousValue.equals(value)) {</span>
+<span class="fc" id="L55">                unRetrievedContentDictionary.put(key, value);</span>
+            }
+        }
+<span class="fc" id="L58">        return previousValue;</span>
+    }
+
+    public void putAll(Map m) {
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        for (Object x : m.entrySet()) {</span>
+<span class="fc" id="L63">            Map.Entry e = (Map.Entry) x;</span>
+<span class="fc" id="L64">            put(e.getKey(), e.getValue());</span>
+<span class="fc" id="L65">        }</span>
+<span class="fc" id="L66">    }</span>
+
+    /**
+     * @see java.util.Map#clear()
+     */
+    public void clear() {
+<span class="nc" id="L72">        super.clear();</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (unRetrievedContentDictionary != null) {</span>
+<span class="nc" id="L74">            unRetrievedContentDictionary.clear();</span>
+        }
+<span class="nc" id="L76">    }</span>
+
+    /**
+     * Returns &lt;tt&gt;true&lt;/tt&gt; if this map contains no key-value mappings.
+     *
+     * @return &lt;tt&gt;true&lt;/tt&gt; if this map contains no key-value mappings.
+     */
+    public boolean isEmpty() {
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        if (flushOnRetrieval) {</span>
+<span class="nc" id="L85">            return unRetrievedContentDictionary.isEmpty();</span>
+        }
+<span class="nc" id="L87">        return super.isEmpty();</span>
+    }
+
+    /**
+     * The contents of the dictionary are flushed when written
+     * @param flushOnRetrieval boolean value
+     */
+    public void setFlushOnRetrieval(boolean flushOnRetrieval) {
+<span class="fc" id="L95">        this.flushOnRetrieval = flushOnRetrieval;</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        if (flushOnRetrieval) {</span>
+<span class="fc" id="L97">            unRetrievedContentDictionary = new PSDictionary();</span>
+        }
+<span class="fc" id="L99">    }</span>
+
+    /**
+     * Returns a dictionary string with containing all unwritten content note:
+     * unnecessary writes are important as there is a device specific
+     * initgraphics call by the underlying postscript interpreter on every
+     * setpagedevice call which can result in blank pages etc.
+     *
+     * @return unwritten content dictionary string
+     */
+    public String getContent() {
+        String content;
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if (flushOnRetrieval) {</span>
+<span class="fc" id="L112">            content = unRetrievedContentDictionary.toString();</span>
+<span class="fc" id="L113">            unRetrievedContentDictionary.clear();</span>
+        } else {
+<span class="nc" id="L115">            content = super.toString();</span>
+        }
+<span class="fc" id="L117">        return content;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

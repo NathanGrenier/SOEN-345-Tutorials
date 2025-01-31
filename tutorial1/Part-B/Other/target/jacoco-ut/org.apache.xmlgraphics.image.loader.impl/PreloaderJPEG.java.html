@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreloaderJPEG.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">PreloaderJPEG.java</span></div><h1>PreloaderJPEG.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PreloaderJPEG.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.io.IOException;
+import java.nio.ByteOrder;
+
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+
+import org.apache.xmlgraphics.image.loader.ImageContext;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.ImageSize;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+import org.apache.xmlgraphics.util.MimeConstants;
+import org.apache.xmlgraphics.util.UnitConv;
+
+/**
+ * Image preloader for JPEG images.
+ */
+<span class="fc" id="L39">public class PreloaderJPEG extends AbstractImagePreloader implements JPEGConstants {</span>
+
+    private static final int JPG_SIG_LENGTH = 3;
+<span class="fc" id="L42">    private static final int[] BYTES_PER_COMPONENT = {0, 1, 1, 2, 4, 8, 1, 1, 2, 4, 8, 4, 8}; // ignore 0</span>
+    private static final int EXIF = 0x45786966;
+    private static final int II = 0x4949; // Intel
+    private static final int MM = 0x4d4d; // Motorola
+    private static final int X_RESOLUTION = 0x011a;
+    private static final int Y_RESOLUTION = 0x011b;
+    private static final int RESOLUTION_UNIT = 0x0128;
+
+    /** {@inheritDoc}
+     * @throws ImageException */
+    public ImageInfo preloadImage(String uri, Source src, ImageContext context)
+                throws IOException, ImageException {
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (!ImageUtil.hasImageInputStream(src)) {</span>
+<span class="nc" id="L55">            return null;</span>
+        }
+<span class="fc" id="L57">        ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
+<span class="fc" id="L58">        byte[] header = getHeader(in, JPG_SIG_LENGTH);</span>
+<span class="pc bpc" id="L59" title="2 of 6 branches missed.">        boolean supported = ((header[0] == (byte)MARK)</span>
+                &amp;&amp; (header[1] == (byte)SOI)
+                &amp;&amp; (header[2] == (byte)MARK));
+
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (supported) {</span>
+<span class="fc" id="L64">            ImageInfo info = new ImageInfo(uri, MimeConstants.MIME_JPEG);</span>
+<span class="fc" id="L65">            info.setSize(determineSize(in, context));</span>
+<span class="fc" id="L66">            return info;</span>
+        } else {
+<span class="fc" id="L68">            return null;</span>
+        }
+    }
+
+    private ImageSize determineSize(ImageInputStream in, ImageContext context)
+            throws IOException, ImageException {
+<span class="fc" id="L74">        in.mark();</span>
+        try {
+<span class="fc" id="L76">            ImageSize size = new ImageSize();</span>
+<span class="fc" id="L77">            JPEGFile jpeg = new JPEGFile(in);</span>
+
+            while (true) {
+<span class="fc" id="L80">                int segID = jpeg.readMarkerSegment();</span>
+                //System.out.println(&quot;Segment: &quot; + Integer.toHexString(segID));
+<span class="pc bpc" id="L82" title="1 of 6 branches missed.">                switch (segID) {</span>
+                case SOI:
+                case NULL:
+<span class="fc" id="L85">                    break;</span>
+                case APP0:
+<span class="fc" id="L87">                    int reclen = jpeg.readSegmentLength();</span>
+<span class="fc" id="L88">                    in.skipBytes(7);</span>
+<span class="fc" id="L89">                    int densityUnits = in.read();</span>
+<span class="fc" id="L90">                    int xdensity = in.readUnsignedShort();</span>
+<span class="fc" id="L91">                    int ydensity = in.readUnsignedShort();</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">                    if (size.getDpiHorizontal() == 0) {</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">                        if (densityUnits == 2) {</span>
+                            //dots per centimeter
+<span class="fc" id="L95">                            size.setResolution(</span>
+                                    xdensity * UnitConv.IN2CM,
+                                    ydensity * UnitConv.IN2CM);
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">                        } else if (densityUnits == 1) {</span>
+                            //dots per inch
+<span class="fc" id="L100">                            size.setResolution(xdensity, ydensity);</span>
+                        } else {
+                            //resolution not specified
+<span class="nc" id="L103">                            size.setResolution(context.getSourceResolution());</span>
+                        }
+                    }
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">                    if (size.getWidthPx() != 0) {</span>
+<span class="nc" id="L107">                        size.calcSizeFromPixels();</span>
+<span class="nc" id="L108">                        return size;</span>
+                    }
+<span class="fc" id="L110">                    in.skipBytes(reclen - 14);</span>
+<span class="fc" id="L111">                    break;</span>
+                case APP1:
+                    // see http://www.media.mit.edu/pia/Research/deepview/exif.html
+<span class="fc" id="L114">                    reclen = jpeg.readSegmentLength();</span>
+<span class="fc" id="L115">                    int bytesToEnd = reclen - 2;</span>
+                    // read Exif Header: 0x.45.78.69.66.00.00
+<span class="fc" id="L117">                    int exif = in.readInt(); // 0x.45.78.69.66</span>
+<span class="fc" id="L118">                    in.readUnsignedShort(); // 0x.00.00</span>
+                    // in.skipBytes(6);
+<span class="fc" id="L120">                    bytesToEnd -= 6;</span>
+<span class="pc bpc" id="L121" title="1 of 2 branches missed.">                    if (exif != EXIF) {</span>
+                        // there may be multiple APP1 segments but we want the Exif one
+<span class="nc" id="L123">                        in.skipBytes(bytesToEnd);</span>
+<span class="nc" id="L124">                        break;</span>
+                    }
+                    // start TIFF data
+<span class="fc" id="L127">                    int currentTIFFOffset = 0;</span>
+                    // byte align: 0x.49.49 (19789) means Intel, 0x.4D.4D means Motorola
+<span class="fc" id="L129">                    int align = in.readUnsignedShort();</span>
+<span class="fc" id="L130">                    bytesToEnd -= 2;</span>
+<span class="fc" id="L131">                    currentTIFFOffset += 2;</span>
+<span class="fc" id="L132">                    ByteOrder originalByteOrder = in.getByteOrder();</span>
+                    // Intel = little, Motorola = big
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">                    in.setByteOrder(align == MM ? ByteOrder.BIG_ENDIAN : ByteOrder.LITTLE_ENDIAN);</span>
+<span class="fc" id="L135">                    in.skipBytes(2); // 0x.2A.00 (Intel) or 0x.00.2A (Motorola)</span>
+<span class="fc" id="L136">                    bytesToEnd -= 2;</span>
+<span class="fc" id="L137">                    currentTIFFOffset += 2;</span>
+<span class="fc" id="L138">                    int firstIFDOffset = in.readInt();</span>
+<span class="fc" id="L139">                    bytesToEnd -= 4;</span>
+<span class="fc" id="L140">                    currentTIFFOffset += 4;</span>
+<span class="fc" id="L141">                    in.skipBytes(firstIFDOffset - 8);</span>
+<span class="fc" id="L142">                    bytesToEnd -= firstIFDOffset - 8;</span>
+<span class="fc" id="L143">                    currentTIFFOffset += firstIFDOffset - 8;</span>
+<span class="fc" id="L144">                    int directoryEntries = in.readUnsignedShort();</span>
+<span class="fc" id="L145">                    bytesToEnd -= 2;</span>
+<span class="fc" id="L146">                    currentTIFFOffset += 2;</span>
+<span class="fc" id="L147">                    int resolutionOffset = 0;</span>
+<span class="fc" id="L148">                    int resolutionFormat = 0;</span>
+<span class="fc" id="L149">                    int resolutionUnits = 0;</span>
+<span class="fc" id="L150">                    int resolution = 0;</span>
+<span class="fc" id="L151">                    boolean foundResolution = false;</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">                    for (int j = 0; j &lt; directoryEntries; j++) {</span>
+<span class="fc" id="L153">                        int tag = in.readUnsignedShort();</span>
+<span class="pc bpc" id="L154" title="2 of 6 branches missed.">                        if ((tag == X_RESOLUTION || tag == Y_RESOLUTION) &amp;&amp; !foundResolution) {</span>
+                            // 0x011A (XResolution), 0x011B (YResolution)
+<span class="fc" id="L156">                            int format = in.readUnsignedShort();</span>
+<span class="fc" id="L157">                            int components = in.readInt();</span>
+<span class="fc" id="L158">                            int dataByteLength = components * BYTES_PER_COMPONENT[format];</span>
+<span class="fc" id="L159">                            int value = in.readInt();</span>
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">                            if (dataByteLength &gt; 4) {</span>
+                                // value is offset to data value
+<span class="fc" id="L162">                                resolutionOffset = value;</span>
+                            } else {
+                                // value is data value
+<span class="nc" id="L165">                                resolution = value;</span>
+                            }
+<span class="fc" id="L167">                            resolutionFormat = format;</span>
+<span class="fc" id="L168">                            foundResolution = true;</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">                        } else if (tag == RESOLUTION_UNIT) {</span>
+                            // 0x0128 (ResolutionUnit)
+<span class="fc" id="L171">                            int format = in.readUnsignedShort();</span>
+<span class="fc" id="L172">                            int components = in.readInt();</span>
+<span class="fc" id="L173">                            int dataByteLength = components * BYTES_PER_COMPONENT[format];</span>
+<span class="pc bpc" id="L174" title="2 of 4 branches missed.">                            if (dataByteLength &lt; 5 &amp;&amp; format == 3) {</span>
+<span class="fc" id="L175">                                int value = in.readUnsignedShort();</span>
+<span class="fc" id="L176">                                in.skipBytes(2);</span>
+<span class="fc" id="L177">                                resolutionUnits = value;</span>
+<span class="fc" id="L178">                            } else {</span>
+<span class="nc" id="L179">                                in.skipBytes(4);</span>
+                            }
+<span class="fc" id="L181">                        } else {</span>
+<span class="fc" id="L182">                            in.skipBytes(10);</span>
+                        }
+<span class="fc" id="L184">                        bytesToEnd -= 12;</span>
+<span class="fc" id="L185">                        currentTIFFOffset += 12;</span>
+                    }
+<span class="fc" id="L187">                    in.readInt(); // not needed, but has thumbnail info</span>
+<span class="fc" id="L188">                    bytesToEnd -= 4;</span>
+<span class="fc" id="L189">                    currentTIFFOffset += 4;</span>
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">                    if (resolutionOffset != 0) {</span>
+<span class="fc" id="L191">                        in.skipBytes(resolutionOffset - currentTIFFOffset);</span>
+<span class="fc" id="L192">                        bytesToEnd -= resolutionOffset - currentTIFFOffset;</span>
+<span class="pc bpc" id="L193" title="3 of 4 branches missed.">                        if (resolutionFormat == 5 || resolutionFormat == 10) {</span>
+<span class="fc" id="L194">                            int numerator = in.readInt();</span>
+<span class="fc" id="L195">                            int denominator = in.readInt();</span>
+<span class="fc" id="L196">                            resolution = numerator / denominator;</span>
+<span class="fc" id="L197">                            bytesToEnd -= 8;</span>
+                        }
+                    }
+<span class="fc" id="L200">                    in.skipBytes(bytesToEnd);</span>
+<span class="fc" id="L201">                    in.setByteOrder(originalByteOrder);</span>
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">                    if (resolutionUnits == 3) {</span>
+                        // dots per centimeter
+<span class="nc" id="L204">                        size.setResolution(resolution * UnitConv.IN2CM, resolution * UnitConv.IN2CM);</span>
+<span class="pc bpc" id="L205" title="1 of 2 branches missed.">                    } else if (resolutionUnits == 2) {</span>
+                        // dots per inch
+<span class="fc" id="L207">                        size.setResolution(resolution, resolution);</span>
+                    } else {
+                        // resolution not specified; set default if not set yet
+<span class="nc bnc" id="L210" title="All 2 branches missed.">                        if (size.getDpiHorizontal() == 0) {</span>
+<span class="nc" id="L211">                            size.setResolution(context.getSourceResolution());</span>
+                        }
+                    }
+<span class="pc bpc" id="L214" title="1 of 2 branches missed.">                    if (size.getWidthPx() != 0) {</span>
+<span class="nc" id="L215">                        size.calcSizeFromPixels();</span>
+<span class="nc" id="L216">                        return size;</span>
+                    }
+                    break;
+                case SOF0:
+                case SOF1:
+                case SOF2: // SOF2 and SOFA are only supported by PDF 1.3
+                case SOFA:
+<span class="fc" id="L223">                    reclen = jpeg.readSegmentLength();</span>
+<span class="fc" id="L224">                    in.skipBytes(1);</span>
+<span class="fc" id="L225">                    int height = in.readUnsignedShort();</span>
+<span class="fc" id="L226">                    int width = in.readUnsignedShort();</span>
+<span class="fc" id="L227">                    size.setSizeInPixels(width, height);</span>
+<span class="pc bpc" id="L228" title="1 of 2 branches missed.">                    if (size.getDpiHorizontal() != 0) {</span>
+<span class="fc" id="L229">                        size.calcSizeFromPixels();</span>
+<span class="fc" id="L230">                        return size;</span>
+                    }
+<span class="nc" id="L232">                    in.skipBytes(reclen - 7);</span>
+<span class="nc" id="L233">                    break;</span>
+                case SOS:
+                case EOI:
+                    // Break as early as possible (we don't want to read the whole file here)
+<span class="nc bnc" id="L237" title="All 2 branches missed.">                    if (size.getDpiHorizontal() == 0) {</span>
+<span class="nc" id="L238">                        size.setResolution(context.getSourceResolution());</span>
+<span class="nc" id="L239">                        size.calcSizeFromPixels();</span>
+                    }
+<span class="nc" id="L241">                    return size;</span>
+                default:
+<span class="fc" id="L243">                    jpeg.skipCurrentMarkerSegment();</span>
+                }
+<span class="fc" id="L245">            }</span>
+        } finally {
+<span class="fc" id="L247">            in.reset();</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

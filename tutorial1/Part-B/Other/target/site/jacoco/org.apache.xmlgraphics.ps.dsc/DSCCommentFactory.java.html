@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DSCCommentFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps.dsc</a> &gt; <span class="el_source">DSCCommentFactory.java</span></div><h1>DSCCommentFactory.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DSCCommentFactory.java 1780540 2017-01-27 11:10:50Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps.dsc;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+
+import org.apache.xmlgraphics.ps.DSCConstants;
+import org.apache.xmlgraphics.ps.dsc.events.DSCComment;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentBeginDocument;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentBeginResource;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentBoundingBox;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentDocumentNeededResources;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentDocumentSuppliedResources;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentEndComments;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentEndOfFile;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentHiResBoundingBox;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentIncludeResource;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentLanguageLevel;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentPage;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentPageBoundingBox;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentPageHiResBoundingBox;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentPageResources;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentPages;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentTitle;
+
+/**
+ * Factory for DSCComment subclasses.
+ */
+public final class DSCCommentFactory {
+
+    private DSCCommentFactory() {
+    }
+
+<span class="fc" id="L52">    private static final Map DSC_FACTORIES = new java.util.HashMap();</span>
+
+    static {
+<span class="fc" id="L55">        DSC_FACTORIES.put(DSCConstants.END_COMMENTS,</span>
+                DSCCommentEndComments.class);
+<span class="fc" id="L57">        DSC_FACTORIES.put(DSCConstants.BEGIN_RESOURCE,</span>
+                DSCCommentBeginResource.class);
+<span class="fc" id="L59">        DSC_FACTORIES.put(DSCConstants.INCLUDE_RESOURCE,</span>
+                DSCCommentIncludeResource.class);
+<span class="fc" id="L61">        DSC_FACTORIES.put(DSCConstants.PAGE_RESOURCES,</span>
+                DSCCommentPageResources.class);
+<span class="fc" id="L63">        DSC_FACTORIES.put(DSCConstants.BEGIN_DOCUMENT,</span>
+                DSCCommentBeginDocument.class);
+<span class="fc" id="L65">        DSC_FACTORIES.put(DSCConstants.PAGE,</span>
+                DSCCommentPage.class);
+<span class="fc" id="L67">        DSC_FACTORIES.put(DSCConstants.PAGES,</span>
+                DSCCommentPages.class);
+<span class="fc" id="L69">        DSC_FACTORIES.put(DSCConstants.BBOX,</span>
+                DSCCommentBoundingBox.class);
+<span class="fc" id="L71">        DSC_FACTORIES.put(DSCConstants.HIRES_BBOX,</span>
+                DSCCommentHiResBoundingBox.class);
+<span class="fc" id="L73">        DSC_FACTORIES.put(DSCConstants.PAGE_BBOX,</span>
+                DSCCommentPageBoundingBox.class);
+<span class="fc" id="L75">        DSC_FACTORIES.put(DSCConstants.PAGE_HIRES_BBOX,</span>
+                DSCCommentPageHiResBoundingBox.class);
+<span class="fc" id="L77">        DSC_FACTORIES.put(DSCConstants.LANGUAGE_LEVEL,</span>
+                DSCCommentLanguageLevel.class);
+<span class="fc" id="L79">        DSC_FACTORIES.put(DSCConstants.DOCUMENT_NEEDED_RESOURCES,</span>
+                DSCCommentDocumentNeededResources.class);
+<span class="fc" id="L81">        DSC_FACTORIES.put(DSCConstants.DOCUMENT_SUPPLIED_RESOURCES,</span>
+                DSCCommentDocumentSuppliedResources.class);
+<span class="fc" id="L83">        DSC_FACTORIES.put(DSCConstants.TITLE,</span>
+                DSCCommentTitle.class);
+<span class="fc" id="L85">        DSC_FACTORIES.put(DSCConstants.EOF,</span>
+                DSCCommentEndOfFile.class);
+        //TODO Add additional implementations as needed
+<span class="fc" id="L88">    }</span>
+
+    /**
+     * Creates and returns new instances for DSC comments with a given name.
+     * @param name the name of the DSCComment (without the &quot;%%&quot; prefix)
+     * @return the new instance or null if no particular subclass registered for the given
+     *          DSC comment.
+     */
+    public static DSCComment createDSCCommentFor(String name) {
+<span class="fc" id="L97">        Class clazz = (Class)DSC_FACTORIES.get(name);</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        if (clazz == null) {</span>
+<span class="fc" id="L99">            return null;</span>
+        }
+        try {
+<span class="fc" id="L102">            return (DSCComment)clazz.getDeclaredConstructor().newInstance();</span>
+<span class="nc" id="L103">        } catch (InstantiationException e) {</span>
+<span class="nc" id="L104">            throw new RuntimeException(&quot;Error instantiating instance for '&quot; + name + &quot;': &quot;</span>
+<span class="nc" id="L105">                    + e.getMessage());</span>
+<span class="nc" id="L106">        } catch (IllegalAccessException e) {</span>
+<span class="nc" id="L107">            throw new RuntimeException(&quot;Illegal Access error while instantiating instance for '&quot;</span>
+<span class="nc" id="L108">                    + name + &quot;': &quot; + e.getMessage());</span>
+<span class="nc" id="L109">        } catch (NoSuchMethodException e) {</span>
+<span class="nc" id="L110">            throw new RuntimeException(e);</span>
+<span class="nc" id="L111">        } catch (InvocationTargetException e) {</span>
+<span class="nc" id="L112">            throw new RuntimeException(e);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

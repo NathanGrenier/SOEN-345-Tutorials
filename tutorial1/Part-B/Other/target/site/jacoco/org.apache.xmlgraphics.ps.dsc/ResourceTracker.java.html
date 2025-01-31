@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ResourceTracker.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps.dsc</a> &gt; <span class="el_source">ResourceTracker.java</span></div><h1>ResourceTracker.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ResourceTracker.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps.dsc;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.xmlgraphics.ps.PSGenerator;
+import org.apache.xmlgraphics.ps.PSResource;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentDocumentNeededResources;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentDocumentSuppliedResources;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentPageResources;
+
+/**
+ * This class is used to track resources in a DSC-compliant PostScript file. The distinction is
+ * made between supplied and needed resources. For the details of this distinction, please see
+ * the DSC specification.
+ */
+<span class="fc" id="L39">public class ResourceTracker {</span>
+
+    private Set documentSuppliedResources;
+    private Set documentNeededResources;
+    private Set usedResources;
+    private Set pageResources;
+
+    //Map&lt;PSResource, Integer&gt;
+    private Map resourceUsageCounts;
+
+    /**
+     * Returns the set of supplied resources.
+     * @return the set of supplied resources
+     */
+    public Set getDocumentSuppliedResources() {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (documentSuppliedResources != null) {</span>
+<span class="nc" id="L55">            return Collections.unmodifiableSet(documentSuppliedResources);</span>
+        } else {
+<span class="nc" id="L57">            return Collections.EMPTY_SET;</span>
+        }
+    }
+
+    /**
+     * Returns the set of needed resources.
+     * @return the set of needed resources
+     */
+    public Set getDocumentNeededResources() {
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (documentNeededResources != null) {</span>
+<span class="nc" id="L67">            return Collections.unmodifiableSet(documentNeededResources);</span>
+        } else {
+<span class="nc" id="L69">            return Collections.EMPTY_SET;</span>
+        }
+    }
+
+    /**
+     * Notifies the resource tracker that a new page has been started and that the page resource
+     * set can be cleared.
+     */
+    public void notifyStartNewPage() {
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (pageResources != null) {</span>
+<span class="nc" id="L79">            pageResources.clear();</span>
+        }
+<span class="nc" id="L81">    }</span>
+
+    /**
+     * Registers a supplied resource. If the same resources is already in the set of needed
+     * resources, it is removed there.
+     * @param res the resource
+     */
+    public void registerSuppliedResource(PSResource res) {
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if (documentSuppliedResources == null) {</span>
+<span class="fc" id="L90">            documentSuppliedResources = new java.util.HashSet();</span>
+        }
+<span class="fc" id="L92">        documentSuppliedResources.add(res);</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (documentNeededResources != null) {</span>
+<span class="nc" id="L94">            documentNeededResources.remove(res);</span>
+        }
+<span class="fc" id="L96">    }</span>
+
+    /**
+     * Registers a needed resource. If the same resources is already in the set of supplied
+     * resources, it is ignored, i.e. it is assumed to be supplied.
+     * @param res the resource
+     */
+    public void registerNeededResource(PSResource res) {
+<span class="nc bnc" id="L104" title="All 4 branches missed.">        if (documentSuppliedResources == null || !documentSuppliedResources.contains(res)) {</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">            if (documentNeededResources == null) {</span>
+<span class="nc" id="L106">                documentNeededResources = new java.util.HashSet();</span>
+            }
+<span class="nc" id="L108">            documentNeededResources.add(res);</span>
+        }
+<span class="nc" id="L110">    }</span>
+
+    private void preparePageResources() {
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        if (pageResources == null) {</span>
+<span class="nc" id="L114">            pageResources = new java.util.HashSet();</span>
+        }
+<span class="nc" id="L116">    }</span>
+
+    private void prepareUsageCounts() {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if (resourceUsageCounts == null) {</span>
+<span class="nc" id="L120">            resourceUsageCounts = new java.util.HashMap();</span>
+        }
+<span class="nc" id="L122">    }</span>
+
+    /**
+     * Notifies the resource tracker about the usage of a resource on the current page.
+     * @param res the resource being used
+     */
+    public void notifyResourceUsageOnPage(PSResource res) {
+<span class="nc" id="L129">        preparePageResources();</span>
+<span class="nc" id="L130">        pageResources.add(res);</span>
+
+<span class="nc" id="L132">        prepareUsageCounts();</span>
+<span class="nc" id="L133">        Counter counter = (Counter)resourceUsageCounts.get(res);</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if (counter == null) {</span>
+<span class="nc" id="L135">            resourceUsageCounts.put(res, new Counter());</span>
+        } else {
+<span class="nc" id="L137">            counter.inc();</span>
+        }
+<span class="nc" id="L139">    }</span>
+
+    /**
+     * Notifies the resource tracker about the usage of resources on the current page.
+     * @param resources the resources being used
+     */
+    public void notifyResourceUsageOnPage(Collection resources) {
+<span class="nc" id="L146">        preparePageResources();</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        for (Object resource : resources) {</span>
+<span class="nc" id="L148">            PSResource res = (PSResource) resource;</span>
+<span class="nc" id="L149">            notifyResourceUsageOnPage(res);</span>
+<span class="nc" id="L150">        }</span>
+<span class="nc" id="L151">    }</span>
+
+    /**
+     * Indicates whether a particular resource is supplied, rather than needed.
+     * @param res the resource
+     * @return true if the resource is registered as being supplied.
+     */
+    public boolean isResourceSupplied(PSResource res) {
+<span class="nc bnc" id="L159" title="All 4 branches missed.">        return (documentSuppliedResources != null) &amp;&amp; documentSuppliedResources.contains(res);</span>
+    }
+
+    /**
+     * Writes a DSC comment for the accumulated used resources, either at page level or
+     * at document level.
+     * @param pageLevel true if the DSC comment for the page level should be generated,
+     *                  false for the document level (in the trailer)
+     * @param gen the PSGenerator to write the DSC comments with
+     * @exception IOException In case of an I/O problem
+     */
+    public void writeResources(boolean pageLevel, PSGenerator gen) throws IOException {
+<span class="nc bnc" id="L171" title="All 2 branches missed.">        if (pageLevel) {</span>
+<span class="nc" id="L172">            writePageResources(gen);</span>
+        } else {
+<span class="nc" id="L174">            writeDocumentResources(gen);</span>
+        }
+<span class="nc" id="L176">    }</span>
+
+    /**
+     * Writes a DSC comment for the accumulated used resources on the current page. Then it commits
+     * all those resources to the used resources on document level.
+     * @param gen the PSGenerator to write the DSC comments with
+     * @exception IOException In case of an I/O problem
+     */
+    public void writePageResources(PSGenerator gen) throws IOException {
+<span class="nc" id="L185">        new DSCCommentPageResources(pageResources).generate(gen);</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">        if (usedResources == null) {</span>
+<span class="nc" id="L187">            usedResources = new java.util.HashSet();</span>
+        }
+<span class="nc" id="L189">        usedResources.addAll(pageResources);</span>
+<span class="nc" id="L190">    }</span>
+
+    /**
+     * Writes a DSC comment for the needed and supplied resourced for the current DSC document.
+     * @param gen the PSGenerator to write the DSC comments with
+     * @exception IOException In case of an I/O problem
+     */
+    public void writeDocumentResources(PSGenerator gen) throws IOException {
+<span class="nc bnc" id="L198" title="All 2 branches missed.">        if (usedResources != null) {</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">            for (Object usedResource : usedResources) {</span>
+<span class="nc" id="L200">                PSResource res = (PSResource) usedResource;</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">                if (documentSuppliedResources == null</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">                        || !documentSuppliedResources.contains(res)) {</span>
+<span class="nc" id="L203">                    registerNeededResource(res);</span>
+                }
+<span class="nc" id="L205">            }</span>
+        }
+<span class="nc" id="L207">        new DSCCommentDocumentNeededResources(documentNeededResources).generate(gen);</span>
+<span class="nc" id="L208">        new DSCCommentDocumentSuppliedResources(documentSuppliedResources).generate(gen);</span>
+<span class="nc" id="L209">    }</span>
+
+    /**
+     * This method declares that the given resource will be inlined and can therefore
+     * be removed from resource tracking. This is useful when you don't know beforehand
+     * if a resource will be used multiple times. If it's only used once it's better
+     * to inline the resource to lower the maximum memory needed inside the PostScript
+     * interpreter.
+     * @param res the resource
+     */
+    public void declareInlined(PSResource res) {
+<span class="nc bnc" id="L220" title="All 2 branches missed.">        if (this.documentNeededResources != null) {</span>
+<span class="nc" id="L221">            this.documentNeededResources.remove(res);</span>
+        }
+<span class="nc bnc" id="L223" title="All 2 branches missed.">        if (this.documentSuppliedResources != null) {</span>
+<span class="nc" id="L224">            this.documentSuppliedResources.remove(res);</span>
+        }
+<span class="nc bnc" id="L226" title="All 2 branches missed.">        if (this.pageResources != null) {</span>
+<span class="nc" id="L227">            this.pageResources.remove(res);</span>
+        }
+<span class="nc bnc" id="L229" title="All 2 branches missed.">        if (this.usedResources != null) {</span>
+<span class="nc" id="L230">            this.usedResources.remove(res);</span>
+        }
+<span class="nc" id="L232">    }</span>
+
+    /**
+     * Returns the number of times a resource has been used inside the current DSC document.
+     * @param res the resource
+     * @return the number of times the resource has been used
+     */
+    public long getUsageCount(PSResource res) {
+<span class="nc" id="L240">        Counter counter = (Counter)resourceUsageCounts.get(res);</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">        return (counter != null ? counter.getCount() : 0);</span>
+    }
+
+<span class="nc" id="L244">    private static class Counter {</span>
+
+<span class="nc" id="L246">        private long count = 1;</span>
+
+        public void inc() {
+<span class="nc" id="L249">            this.count++;</span>
+<span class="nc" id="L250">        }</span>
+
+        public long getCount() {
+<span class="nc" id="L253">            return this.count;</span>
+        }
+
+        public String toString() {
+<span class="nc" id="L257">            return Long.toString(this.count);</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

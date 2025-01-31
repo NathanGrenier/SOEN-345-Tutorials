@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Metadata.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp</a> &gt; <span class="el_source">Metadata.java</span></div><h1>Metadata.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: Metadata.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.xmp;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.xml.sax.ContentHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
+
+import org.apache.xmlgraphics.util.QName;
+import org.apache.xmlgraphics.util.XMLizable;
+import org.apache.xmlgraphics.xmp.merge.MergeRuleSet;
+import org.apache.xmlgraphics.xmp.merge.PropertyMerger;
+
+/**
+ * This class represents the root of an XMP metadata tree. It's more or less equivalent to the
+ * x:xmpmeta element together with its nested rdf:RDF element.
+ */
+<span class="fc" id="L40">public class Metadata implements XMLizable, PropertyAccess {</span>
+
+<span class="fc" id="L42">    private Map properties = new java.util.HashMap();</span>
+
+    /** {@inheritDoc} */
+    public void setProperty(XMPProperty prop) {
+<span class="fc" id="L46">        properties.put(prop.getName(), prop);</span>
+<span class="fc" id="L47">    }</span>
+
+    /** {@inheritDoc} */
+    public XMPProperty getProperty(String uri, String localName) {
+<span class="fc" id="L51">        return getProperty(new QName(uri, localName));</span>
+    }
+
+    /** {@inheritDoc} */
+    public XMPProperty getProperty(QName name) {
+<span class="fc" id="L56">        XMPProperty prop = (XMPProperty)properties.get(name);</span>
+<span class="fc" id="L57">        return prop;</span>
+    }
+
+    /** {@inheritDoc} */
+    public XMPProperty removeProperty(QName name) {
+<span class="fc" id="L62">        return (XMPProperty)properties.remove(name);</span>
+    }
+
+    /** {@inheritDoc} */
+    public XMPProperty getValueProperty() {
+<span class="nc" id="L67">        return getProperty(XMPConstants.RDF_VALUE);</span>
+    }
+
+    /** {@inheritDoc} */
+    public int getPropertyCount() {
+<span class="nc" id="L72">        return this.properties.size();</span>
+    }
+
+    /** {@inheritDoc} */
+    public Iterator iterator() {
+<span class="nc" id="L77">        return this.properties.keySet().iterator();</span>
+    }
+
+    /**
+     * Merges this metadata object into a given target metadata object. The merge rule set provided
+     * by each schema is used for the merge.
+     * @param target the target metadata to merge the local metadata into
+     */
+    public void mergeInto(Metadata target, List&lt;Class&gt; exclude) {
+<span class="nc" id="L86">        XMPSchemaRegistry registry = XMPSchemaRegistry.getInstance();</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        for (Object o : properties.values()) {</span>
+<span class="nc" id="L88">            XMPProperty prop = (XMPProperty) o;</span>
+<span class="nc" id="L89">            XMPSchema schema = registry.getSchema(prop.getNamespace());</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">            if (!exclude.contains(schema.getClass())) {</span>
+<span class="nc" id="L91">                MergeRuleSet rules = schema.getDefaultMergeRuleSet();</span>
+<span class="nc" id="L92">                PropertyMerger merger = rules.getPropertyMergerFor(prop);</span>
+<span class="nc" id="L93">                merger.merge(prop, target);</span>
+            }
+<span class="nc" id="L95">        }</span>
+<span class="nc" id="L96">    }</span>
+
+    /** {@inheritDoc} */
+    public void toSAX(ContentHandler handler) throws SAXException {
+<span class="fc" id="L100">        AttributesImpl atts = new AttributesImpl();</span>
+<span class="fc" id="L101">        handler.startPrefixMapping(&quot;x&quot;, XMPConstants.XMP_NAMESPACE);</span>
+<span class="fc" id="L102">        handler.startElement(XMPConstants.XMP_NAMESPACE, &quot;xmpmeta&quot;, &quot;x:xmpmeta&quot;, atts);</span>
+<span class="fc" id="L103">        handler.startPrefixMapping(&quot;rdf&quot;, XMPConstants.RDF_NAMESPACE);</span>
+<span class="fc" id="L104">        handler.startElement(XMPConstants.RDF_NAMESPACE, &quot;RDF&quot;, &quot;rdf:RDF&quot;, atts);</span>
+        //Get all property namespaces
+<span class="fc" id="L106">        Set namespaces = new java.util.HashSet();</span>
+<span class="fc" id="L107">        Iterator iter = properties.keySet().iterator();</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        while (iter.hasNext()) {</span>
+<span class="fc" id="L109">            QName n = ((QName)iter.next());</span>
+<span class="fc" id="L110">            namespaces.add(n.getNamespaceURI());</span>
+<span class="fc" id="L111">        }</span>
+        //One Description element per namespace
+<span class="fc" id="L113">        iter = namespaces.iterator();</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        while (iter.hasNext()) {</span>
+<span class="fc" id="L115">            String ns = (String)iter.next();</span>
+<span class="fc" id="L116">            XMPSchema schema = XMPSchemaRegistry.getInstance().getSchema(ns);</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">            String prefix = (schema != null ? schema.getPreferredPrefix() : null);</span>
+
+<span class="fc" id="L119">            boolean first = true;</span>
+<span class="fc" id="L120">            boolean empty = true;</span>
+
+<span class="fc bfc" id="L122" title="All 2 branches covered.">            for (Object o : properties.values()) {</span>
+<span class="fc" id="L123">                XMPProperty prop = (XMPProperty) o;</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">                if (prop.getName().getNamespaceURI().equals(ns)) {</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">                    if (first) {</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">                        if (prefix == null) {</span>
+<span class="fc" id="L127">                            prefix = prop.getName().getPrefix();</span>
+                        }
+<span class="fc" id="L129">                        atts.clear();</span>
+<span class="fc" id="L130">                        atts.addAttribute(XMPConstants.RDF_NAMESPACE,</span>
+                                &quot;about&quot;, &quot;rdf:about&quot;, &quot;CDATA&quot;, &quot;&quot;);
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">                        if (prefix != null) {</span>
+<span class="fc" id="L133">                            handler.startPrefixMapping(prefix, ns);</span>
+                        }
+<span class="fc" id="L135">                        handler.startElement(XMPConstants.RDF_NAMESPACE,</span>
+                                &quot;Description&quot;, &quot;rdf:Description&quot;, atts);
+<span class="fc" id="L137">                        empty = false;</span>
+<span class="fc" id="L138">                        first = false;</span>
+                    }
+<span class="fc" id="L140">                    prop.toSAX(handler);</span>
+                }
+<span class="fc" id="L142">            }</span>
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">            if (!empty) {</span>
+<span class="fc" id="L144">                handler.endElement(XMPConstants.RDF_NAMESPACE, &quot;Description&quot;, &quot;rdf:Description&quot;);</span>
+<span class="pc bpc" id="L145" title="1 of 2 branches missed.">                if (prefix != null) {</span>
+<span class="fc" id="L146">                    handler.endPrefixMapping(prefix);</span>
+                }
+            }
+<span class="fc" id="L149">        }</span>
+
+<span class="fc" id="L151">        handler.endElement(XMPConstants.RDF_NAMESPACE, &quot;RDF&quot;, &quot;rdf:RDF&quot;);</span>
+<span class="fc" id="L152">        handler.endPrefixMapping(&quot;rdf&quot;);</span>
+<span class="fc" id="L153">        handler.endElement(XMPConstants.XMP_NAMESPACE, &quot;xmpmeta&quot;, &quot;x:xmpmeta&quot;);</span>
+<span class="fc" id="L154">        handler.endPrefixMapping(&quot;x&quot;);</span>
+<span class="fc" id="L155">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

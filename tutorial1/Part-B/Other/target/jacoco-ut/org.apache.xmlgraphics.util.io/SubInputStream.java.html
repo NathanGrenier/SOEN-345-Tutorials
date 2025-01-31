@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SubInputStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.io</a> &gt; <span class="el_source">SubInputStream.java</span></div><h1>SubInputStream.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: SubInputStream.java 1610846 2014-07-15 20:44:18Z vhennebert $ */
+
+package org.apache.xmlgraphics.util.io;
+
+import java.io.FilterInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * This class is a FilterInputStream descendant that reads from an underlying InputStream
+ * up to a defined number of bytes or the end of the underlying stream. Closing this InputStream
+ * will not result in the underlying InputStream to be closed, too.
+ * &lt;p&gt;
+ * This InputStream can be used to read chunks from a larger file of which the length is
+ * known in advance.
+ */
+public class SubInputStream extends FilterInputStream {
+
+    /** Indicates the number of bytes remaining to be read from the underlying InputStream. */
+    private long bytesToRead;
+
+    /**
+     * Indicates whether the underlying stream should be closed when the {@link #close()} method
+     * is called.
+     */
+    private boolean closeUnderlying;
+
+    /**
+     * Creates a new SubInputStream.
+     * @param in the InputStream to read from
+     * @param maxLen the maximum number of bytes to read from the underlying InputStream until
+     *               the end-of-file is signalled.
+     * @param closeUnderlying true if the underlying stream should be closed when the
+     *               {@link #close()} method is called.
+     */
+    public SubInputStream(InputStream in, long maxLen, boolean closeUnderlying) {
+<span class="fc" id="L54">        super(in);</span>
+<span class="fc" id="L55">        this.bytesToRead = maxLen;</span>
+<span class="fc" id="L56">        this.closeUnderlying = closeUnderlying;</span>
+<span class="fc" id="L57">    }</span>
+
+    /**
+     * Creates a new SubInputStream. The underlying stream is not closed, when close() is called.
+     * @param in the InputStream to read from
+     * @param maxLen the maximum number of bytes to read from the underlying InputStream until
+     *               the end-of-file is signalled.
+     */
+    public SubInputStream(InputStream in, long maxLen) {
+<span class="fc" id="L66">        this(in, maxLen, false);</span>
+<span class="fc" id="L67">    }</span>
+
+    /** {@inheritDoc} */
+    public int read() throws IOException {
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (bytesToRead &gt; 0) {</span>
+<span class="fc" id="L72">            int result = super.read();</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">            if (result &gt;= 0) {</span>
+<span class="fc" id="L74">                bytesToRead--;</span>
+<span class="fc" id="L75">                return result;</span>
+            } else {
+<span class="nc" id="L77">                return -1;</span>
+            }
+        } else {
+<span class="nc" id="L80">            return -1;</span>
+        }
+    }
+
+    /** {@inheritDoc} */
+    public int read(byte[] b, int off, int len) throws IOException {
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        if (bytesToRead == 0) {</span>
+<span class="fc" id="L87">            return -1;</span>
+        }
+<span class="fc" id="L89">        int effRead = (int)Math.min(bytesToRead, len);</span>
+        //cast to int is safe because len can never be bigger than Integer.MAX_VALUE
+
+<span class="fc" id="L92">        int result = super.read(b, off, effRead);</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (result &gt;= 0) {</span>
+<span class="fc" id="L94">            bytesToRead -= result;</span>
+        }
+<span class="fc" id="L96">        return result;</span>
+    }
+
+    /** {@inheritDoc} */
+    public long skip(long n) throws IOException {
+<span class="nc" id="L101">        long effRead = Math.min(bytesToRead, n);</span>
+<span class="nc" id="L102">        long result = super.skip(effRead);</span>
+<span class="nc" id="L103">        bytesToRead -= result;</span>
+<span class="nc" id="L104">        return result;</span>
+    }
+
+    /** {@inheritDoc} */
+    public void close() throws IOException {
+<span class="fc" id="L109">        this.bytesToRead = 0;</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        if (this.closeUnderlying) {</span>
+<span class="fc" id="L111">            super.close();</span>
+        }
+<span class="fc" id="L113">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

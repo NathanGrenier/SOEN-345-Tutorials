@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageRawCCITTFax.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">ImageRawCCITTFax.java</span></div><h1>ImageRawCCITTFax.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageRawCCITTFax.java 750418 2009-03-05 11:03:54Z vhennebert $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.awt.color.ColorSpace;
+
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+
+/**
+ * This class is an implementation of the Image interface exposing a 1-bit bitmap image stream
+ * that can be decoded by the PostScript or PDF CCITTFaxDecode filter.
+ */
+public class ImageRawCCITTFax extends ImageRawStream {
+
+    private int compression;
+
+    /**
+     * Main constructor.
+     * @param info the image info object
+     * @param in the ImageInputStream with the raw content
+     * @param compression the integer value of the TIFF compression scheme
+     */
+    public ImageRawCCITTFax(ImageInfo info, java.io.InputStream in, int compression) {
+<span class="fc" id="L42">        super(info, ImageFlavor.RAW_CCITTFAX, in);</span>
+<span class="fc" id="L43">        this.compression = compression;</span>
+<span class="fc" id="L44">    }</span>
+
+    /**
+     * Returns the image's color space
+     * @return the color space
+     */
+    public ColorSpace getColorSpace() {
+<span class="nc" id="L51">        return ColorSpace.getInstance(ColorSpace.CS_GRAY);</span>
+    }
+
+    /**
+     * Returns the TIFF compression scheme.
+     * @return the TIFF compression scheme
+     */
+    public int getCompression() {
+<span class="fc" id="L59">        return this.compression;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

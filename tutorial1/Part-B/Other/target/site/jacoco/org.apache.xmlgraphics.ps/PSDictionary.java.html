@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSDictionary.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSDictionary.java</span></div><h1>PSDictionary.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSDictionary.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+// CSOFF: InnerAssignment
+
+/**
+ * This class is used to encapsulate postscript dictionary objects.
+ */
+<span class="fc" id="L32">public class PSDictionary extends java.util.HashMap {</span>
+
+    private static final long serialVersionUID = 815367222496219197L;
+
+    /**
+     * This class is used to parse dictionary strings.
+     */
+    private static class Maker {
+
+        /**
+         * Simple token holding class
+         */
+<span class="nc" id="L44">        private static class Token {</span>
+            /**
+             * start index in string
+             */
+<span class="nc" id="L48">            private int startIndex = -1;</span>
+
+            /**
+             * end index in string
+             */
+<span class="nc" id="L53">            private int endIndex = -1;</span>
+
+            /**
+             * token string value
+             */
+            private String value;
+        }
+
+<span class="nc" id="L61">        private static final String[][] BRACES = {</span>
+            {&quot;&lt;&lt;&quot;, &quot;&gt;&gt;&quot;},
+            {&quot;[&quot;, &quot;]&quot;},
+            {&quot;{&quot;, &quot;}&quot;},
+            {&quot;(&quot;, &quot;)&quot;}
+        };
+
+        private static final int OPENING = 0;
+        private static final int CLOSING = 1;
+        private static final int DICTIONARY = 0;
+        private static final int ARRAY = 1;
+        private static final int PROCEDURE = 2;
+        private static final int STRING = 3;
+
+        /**
+         * Returns a Token containing the start, end index and value of the next token
+         * found in a given string
+         *
+         * @param str
+         *            string to search
+         * @param fromIndex
+         *            search from index
+         * @return Token containing the start, end index and value of the next token
+         */
+        protected Token nextToken(String str, int fromIndex) {
+<span class="nc" id="L86">            Token t = null;</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            for (int i = fromIndex; i &lt; str.length(); i++) {</span>
+<span class="nc" id="L88">                boolean isWhitespace = Character.isWhitespace(str.charAt(i));</span>
+                // start index found
+<span class="nc bnc" id="L90" title="All 4 branches missed.">                if (t == null &amp;&amp; !isWhitespace) {</span>
+<span class="nc" id="L91">                    t = new Token();</span>
+<span class="nc" id="L92">                    t.startIndex = i;</span>
+                // end index found
+<span class="nc bnc" id="L94" title="All 4 branches missed.">                } else if (t != null &amp;&amp; isWhitespace) {</span>
+<span class="nc" id="L95">                    t.endIndex = i;</span>
+<span class="nc" id="L96">                    break;</span>
+                }
+            }
+            // start index found
+<span class="nc bnc" id="L100" title="All 2 branches missed.">            if (t != null) {</span>
+                // end index not found so take end of string
+<span class="nc bnc" id="L102" title="All 2 branches missed.">                if (t.endIndex == -1) {</span>
+<span class="nc" id="L103">                    t.endIndex = str.length();</span>
+                }
+<span class="nc" id="L105">                t.value = str.substring(t.startIndex, t.endIndex);</span>
+            }
+<span class="nc" id="L107">            return t;</span>
+        }
+
+        /**
+         * Returns the closing brace index from a given string searches from a
+         * given index
+         *
+         * @param str
+         *            string to search
+         * @param braces
+         *            string array of opening and closing brace
+         * @param fromIndex
+         *            searches from index
+         * @return matching brace index
+         * @throws org.apache.xmlgraphics.ps.PSDictionaryFormatException
+         *            thrown in the event that a parsing error occurred
+         */
+        private int indexOfMatchingBrace(String str, String[] braces,
+                int fromIndex) throws PSDictionaryFormatException {
+<span class="nc" id="L126">            final int len = str.length();</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (braces.length != 2) {</span>
+<span class="nc" id="L128">                throw new PSDictionaryFormatException(&quot;Wrong number of braces&quot;);</span>
+            }
+<span class="nc bnc" id="L130" title="All 2 branches missed.">            for (int openCnt = 0, closeCnt = 0; fromIndex &lt; len; fromIndex++) {</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">                if (str.startsWith(braces[OPENING], fromIndex)) {</span>
+<span class="nc" id="L132">                    openCnt++;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">                } else if (str.startsWith(braces[CLOSING], fromIndex)) {</span>
+<span class="nc" id="L134">                    closeCnt++;</span>
+<span class="nc bnc" id="L135" title="All 4 branches missed.">                    if (openCnt &gt; 0 &amp;&amp; openCnt == closeCnt) {</span>
+<span class="nc" id="L136">                        return fromIndex; // found</span>
+                    }
+                }
+            }
+<span class="nc" id="L140">            return -1; // not found</span>
+        }
+
+        /**
+         * Strips braces from complex object string
+         *
+         * @param str
+         *            String to parse
+         * @param braces
+         *            String array containing opening and closing braces
+         * @return String with braces stripped
+         * @throws org.apache.xmlgraphics.ps.PSDictionaryFormatException
+         *            thrown in the event that a parsing error occurred
+         */
+        private String stripBraces(String str, String[] braces) throws PSDictionaryFormatException {
+            // find first opening brace
+<span class="nc" id="L156">            int firstIndex = str.indexOf(braces[OPENING]);</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">            if (firstIndex == -1) {</span>
+<span class="nc" id="L158">                throw new PSDictionaryFormatException(</span>
+                        &quot;Failed to find opening parameter '&quot; + braces[OPENING]
+                                + &quot;&quot;);
+            }
+
+            // find last matching brace
+<span class="nc" id="L164">            int lastIndex = indexOfMatchingBrace(str, braces, firstIndex);</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">            if (lastIndex == -1) {</span>
+<span class="nc" id="L166">                throw new PSDictionaryFormatException(</span>
+                        &quot;Failed to find matching closing parameter '&quot;
+                                + braces[CLOSING] + &quot;'&quot;);
+            }
+
+            // strip brace and trim
+<span class="nc" id="L172">            int braceLen = braces[OPENING].length();</span>
+<span class="nc" id="L173">            str = str.substring(firstIndex + braceLen, lastIndex).trim();</span>
+<span class="nc" id="L174">            return str;</span>
+        }
+
+        /**
+         * Parses a dictionary string and provides a dictionary object
+         *
+         * @param str a dictionary string
+         * @return A postscript dictionary object
+         * @throws org.apache.xmlgraphics.ps.PSDictionaryFormatException
+         *            thrown in the event that a parsing error occurred
+         */
+        public PSDictionary parseDictionary(String str) throws PSDictionaryFormatException {
+<span class="nc" id="L186">            PSDictionary dictionary = new PSDictionary();</span>
+<span class="nc" id="L187">            str = stripBraces(str.trim(), BRACES[DICTIONARY]);</span>
+            // length of dictionary string
+<span class="nc" id="L189">            final int len = str.length();</span>
+
+            Token keyToken;
+<span class="nc bnc" id="L192" title="All 4 branches missed.">            for (int currIndex = 0; (keyToken = nextToken(str, currIndex)) != null</span>
+<span class="nc" id="L193">                    &amp;&amp; currIndex &lt;= len;) {</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">                if (keyToken.value == null) {</span>
+<span class="nc" id="L195">                    throw new PSDictionaryFormatException(&quot;Failed to parse object key&quot;);</span>
+                }
+<span class="nc" id="L197">                Token valueToken = nextToken(str, keyToken.endIndex + 1);</span>
+<span class="nc" id="L198">                String[] braces = null;</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">                for (String[] brace : BRACES) {</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">                    if (valueToken.value.startsWith(brace[OPENING])) {</span>
+<span class="nc" id="L201">                        braces = brace;</span>
+<span class="nc" id="L202">                        break;</span>
+                    }
+                }
+<span class="nc" id="L205">                Object obj = null;</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">                if (braces != null) {</span>
+                    // find closing brace
+<span class="nc" id="L208">                    valueToken.endIndex = indexOfMatchingBrace(str, braces,</span>
+<span class="nc" id="L209">                        valueToken.startIndex)</span>
+<span class="nc" id="L210">                        + braces[OPENING].length();</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">                    if (valueToken.endIndex &lt; 0) {</span>
+<span class="nc" id="L212">                        throw new PSDictionaryFormatException(&quot;Closing value brace '&quot;</span>
+                            + braces[CLOSING] + &quot;' not found for key '&quot;
+<span class="nc" id="L214">                            + keyToken.value + &quot;'&quot;);</span>
+                    }
+<span class="nc" id="L216">                    valueToken.value = str.substring(valueToken.startIndex, valueToken.endIndex);</span>
+                }
+<span class="nc bnc" id="L218" title="All 6 branches missed.">                if (braces == null || braces == BRACES[PROCEDURE] || braces == BRACES[STRING]) {</span>
+<span class="nc" id="L219">                    obj = valueToken.value;</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">                } else if (BRACES[ARRAY] == braces) {</span>
+<span class="nc" id="L221">                    List objList = new java.util.ArrayList();</span>
+<span class="nc" id="L222">                    String objString = stripBraces(valueToken.value, braces);</span>
+<span class="nc" id="L223">                    StringTokenizer tokenizer = new StringTokenizer(objString, &quot;,&quot;);</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">                    while (tokenizer.hasMoreTokens()) {</span>
+<span class="nc" id="L225">                        objList.add(tokenizer.nextToken());</span>
+                    }
+<span class="nc" id="L227">                    obj = objList;</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">                } else if (BRACES[DICTIONARY] == braces) {</span>
+<span class="nc" id="L229">                    obj = parseDictionary(valueToken.value);</span>
+                }
+<span class="nc" id="L231">                dictionary.put(keyToken.value, obj);</span>
+<span class="nc" id="L232">                currIndex = valueToken.endIndex + 1;</span>
+<span class="nc" id="L233">            }</span>
+<span class="nc" id="L234">            return dictionary;</span>
+        }
+    }
+
+    /**
+     * Parses a given a dictionary string and returns an object
+     *
+     * @param str dictionary string
+     * @return dictionary object
+     * @throws org.apache.xmlgraphics.ps.PSDictionaryFormatException
+     *            thrown in the event that a parsing error occurred
+     */
+    public static PSDictionary valueOf(String str) throws PSDictionaryFormatException {
+<span class="nc" id="L247">        return (new Maker()).parseDictionary(str);</span>
+    }
+
+    /**
+     * @param obj object to test equality against
+     * @return whether a given object is equal to this dictionary object
+     * @see java.lang.Object#equals(Object)
+     */
+    public boolean equals(Object obj) {
+<span class="nc bnc" id="L256" title="All 2 branches missed.">        if (!(obj instanceof PSDictionary)) {</span>
+<span class="nc" id="L257">            return false;</span>
+        }
+<span class="nc" id="L259">        PSDictionary dictionaryObj = (PSDictionary) obj;</span>
+<span class="nc bnc" id="L260" title="All 2 branches missed.">        if (dictionaryObj.size() != size()) {</span>
+<span class="nc" id="L261">            return false;</span>
+        }
+<span class="nc bnc" id="L263" title="All 2 branches missed.">        for (Object e : entrySet()) {</span>
+<span class="nc" id="L264">            Map.Entry entry = (Map.Entry) e;</span>
+<span class="nc" id="L265">            String key = (String) entry.getKey();</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">            if (!dictionaryObj.containsKey(key)) {</span>
+<span class="nc" id="L267">                return false;</span>
+            }
+<span class="nc bnc" id="L269" title="All 2 branches missed.">            if (!dictionaryObj.get(key).equals(entry.getValue())) {</span>
+<span class="nc" id="L270">                return false;</span>
+            }
+<span class="nc" id="L272">        }</span>
+<span class="nc" id="L273">        return true;</span>
+    }
+
+    /** {@inheritDoc} */
+    public int hashCode() {
+<span class="nc" id="L278">        int hashCode = 7;</span>
+<span class="nc bnc" id="L279" title="All 2 branches missed.">        for (Object value : values()) {</span>
+<span class="nc" id="L280">            hashCode += value.hashCode();</span>
+<span class="nc" id="L281">        }</span>
+<span class="nc" id="L282">        return hashCode;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String toString() {
+<span class="fc bfc" id="L287" title="All 2 branches covered.">        if (isEmpty()) {</span>
+<span class="fc" id="L288">            return &quot;&quot;;</span>
+        }
+<span class="fc" id="L290">        StringBuffer sb = new StringBuffer(&quot;&lt;&lt;\n&quot;);</span>
+<span class="fc bfc" id="L291" title="All 2 branches covered.">        for (Object o : super.keySet()) {</span>
+<span class="fc" id="L292">            String key = (String) o;</span>
+<span class="fc" id="L293">            sb.append(&quot;  &quot; + key + &quot; &quot;);</span>
+<span class="fc" id="L294">            Object obj = super.get(key);</span>
+<span class="pc bpc" id="L295" title="1 of 2 branches missed.">            if (obj instanceof ArrayList) {</span>
+<span class="nc" id="L296">                List array = (List) obj;</span>
+<span class="nc" id="L297">                StringBuilder str = new StringBuilder(&quot;[&quot;);</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">                for (Object element : array) {</span>
+<span class="nc" id="L299">                    str.append(element + &quot; &quot;);</span>
+<span class="nc" id="L300">                }</span>
+<span class="nc" id="L301">                String str2 = str.toString().trim();</span>
+<span class="nc" id="L302">                str2 += &quot;]&quot;;</span>
+<span class="nc" id="L303">                sb.append(str2 + &quot;\n&quot;);</span>
+<span class="nc" id="L304">            } else {</span>
+<span class="fc" id="L305">                sb.append(obj.toString() + &quot;\n&quot;);</span>
+            }
+<span class="fc" id="L307">        }</span>
+<span class="fc" id="L308">        sb.append(&quot;&gt;&gt;&quot;);</span>
+<span class="fc" id="L309">        return sb.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

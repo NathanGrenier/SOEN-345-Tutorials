@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractRed.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.rendered</a> &gt; <span class="el_source">AbstractRed.java</span></div><h1>AbstractRed.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: AbstractRed.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.rendered;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Transparency;
+import java.awt.color.ColorSpace;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.awt.image.SampleModel;
+import java.awt.image.WritableRaster;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
+
+import org.apache.xmlgraphics.image.GraphicsUtil;
+
+// CSOFF: LocalVariableName
+// CSOFF: MultipleVariableDeclarations
+// CSOFF: NeedBraces
+// CSOFF: NoWhitespaceAfter
+// CSOFF: WhitespaceAround
+
+/**
+ * This is an abstract base class that takes care of most of the
+ * normal issues surrounding the implementation of the CachableRed
+ * (RenderedImage) interface.  It tries to make no assumptions about
+ * the subclass implementation.
+ *
+ * @version $Id: AbstractRed.java 1804124 2017-08-04 14:13:54Z ssteiner $
+ *
+ * Originally authored by Thomas DeWeese.
+ */
+public abstract class AbstractRed implements CachableRed {
+
+    protected Rectangle   bounds;
+    protected Vector      srcs;
+    protected Map         props;
+    protected SampleModel sm;
+    protected ColorModel  cm;
+    protected int tileGridXOff;
+    protected int tileGridYOff;
+    protected int tileWidth;
+    protected int tileHeight;
+    protected int minTileX;
+    protected int minTileY;
+    protected int numXTiles;
+    protected int numYTiles;
+
+    /**
+     * void constructor. The subclass must call one of the
+     * flavors of init before the object becomes usable.
+     * This is useful when the proper parameters to the init
+     * method need to be computed in the subclasses constructor.
+     */
+<span class="nc" id="L80">    protected AbstractRed() {</span>
+<span class="nc" id="L81">    }</span>
+
+
+    /**
+     * Construct an Abstract RenderedImage from a bounds rect and props
+     * (may be null).  The srcs Vector will be empty.
+     * @param bounds this defines the extent of the rable in the
+     * user coordinate system.
+     * @param props this initializes the props Map (may be null)
+     */
+<span class="nc" id="L91">    protected AbstractRed(Rectangle bounds, Map props) {</span>
+<span class="nc" id="L92">        init((CachableRed)null, bounds, null, null,</span>
+             bounds.x, bounds.y, props);
+<span class="nc" id="L94">    }</span>
+
+    /**
+     * Construct an Abstract RenderedImage from a source image and
+     * props (may be null).
+     * @param src will be the first (and only) member of the srcs
+     * Vector. Src is also used to set the bounds, ColorModel,
+     * SampleModel, and tile grid offsets.
+     * @param props this initializes the props Map.  */
+<span class="nc" id="L103">    protected AbstractRed(CachableRed src, Map props) {</span>
+<span class="nc" id="L104">        init(src, src.getBounds(), src.getColorModel(), src.getSampleModel(),</span>
+<span class="nc" id="L105">             src.getTileGridXOffset(),</span>
+<span class="nc" id="L106">             src.getTileGridYOffset(),</span>
+             props);
+<span class="nc" id="L108">    }</span>
+
+    /**
+     * Construct an Abstract RenderedImage from a source image, bounds
+     * rect and props (may be null).
+     * @param src will be the first (and only) member of the srcs
+     * Vector. Src is also used to set the ColorModel, SampleModel,
+     * and tile grid offsets.
+     * @param bounds The bounds of this image.
+     * @param props this initializes the props Map.  */
+<span class="nc" id="L118">    protected AbstractRed(CachableRed src, Rectangle bounds, Map props) {</span>
+<span class="nc" id="L119">        init(src, bounds, src.getColorModel(), src.getSampleModel(),</span>
+<span class="nc" id="L120">             src.getTileGridXOffset(),</span>
+<span class="nc" id="L121">             src.getTileGridYOffset(),</span>
+             props);
+<span class="nc" id="L123">    }</span>
+
+    /**
+     * Construct an Abstract RenderedImage from a source image, bounds
+     * rect and props (may be null).
+     * @param src if not null, will be the first (and only) member
+     * of the srcs Vector. Also if it is not null it provides the
+     * tile grid offsets, otherwise they are zero.
+     * @param bounds The bounds of this image.
+     * @param cm The ColorModel to use. If null it will default to
+     * ComponentColorModel.
+     * @param sm The sample model to use. If null it will construct
+     * a sample model the matches the given/generated ColorModel and is
+     * the size of bounds.
+     * @param props this initializes the props Map.  */
+    protected AbstractRed(CachableRed src, Rectangle bounds,
+                          ColorModel cm, SampleModel sm,
+<span class="nc" id="L140">                          Map props) {</span>
+<span class="nc" id="L141">        init(src, bounds, cm, sm,</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">             (src == null) ? 0 : src.getTileGridXOffset(),</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">             (src == null) ? 0 : src.getTileGridYOffset(),</span>
+             props);
+<span class="nc" id="L145">    }</span>
+
+    /**
+     * Construct an Abstract Rable from a bounds rect and props
+     * (may be null).  The srcs Vector will be empty.
+     * @param src will be the first (and only) member of the srcs
+     * Vector. Src is also used to set the ColorModel, SampleModel,
+     * and tile grid offsets.
+     * @param bounds this defines the extent of the rable in the
+     * user coordinate system.
+     * @param cm The ColorModel to use. If null it will default to
+     * ComponentColorModel.
+     * @param sm The sample model to use. If null it will construct
+     * a sample model the matches the given/generated ColorModel and is
+     * the size of bounds.
+     * @param tileGridXOff The x location of tile 0,0.
+     * @param tileGridYOff The y location of tile 0,0.
+     * @param props this initializes the props Map.
+     */
+    protected AbstractRed(CachableRed src, Rectangle bounds,
+                          ColorModel cm, SampleModel sm,
+                          int tileGridXOff, int tileGridYOff,
+<span class="nc" id="L167">                          Map props) {</span>
+<span class="nc" id="L168">        init(src, bounds, cm, sm, tileGridXOff, tileGridYOff, props);</span>
+<span class="nc" id="L169">    }</span>
+
+    /**
+     * This is one of two basic init function (this is for single
+     * source rendereds).
+     * It is provided so subclasses can compute various values
+     * before initializing all the state in the base class.
+     * You really should call this method before returning from
+     * your subclass constructor.
+     *
+     * @param src    The source for the filter
+     * @param bounds The bounds of the image
+     * @param cm     The ColorModel to use. If null it defaults to
+     *               ComponentColorModel/ src's ColorModel.
+     * @param sm     The Sample modle to use. If this is null it will
+     *               use the src's sample model if that is null it will
+     *               construct a sample model that matches the ColorModel
+     *               and is the size of the whole image.
+     * @param tileGridXOff The x location of tile 0,0.
+     * @param tileGridYOff The y location of tile 0,0.
+     * @param props  Any properties you want to associate with the image.
+     */
+    protected void init(CachableRed src, Rectangle   bounds,
+                        ColorModel  cm,   SampleModel sm,
+                        int tileGridXOff, int tileGridYOff,
+                        Map props) {
+<span class="nc" id="L195">        this.srcs         = new Vector(1);</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">        if (src != null) {</span>
+<span class="nc" id="L197">            this.srcs.add(src);</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">            if (bounds == null) {</span>
+<span class="nc" id="L199">                bounds = src.getBounds();</span>
+            }
+<span class="nc bnc" id="L201" title="All 2 branches missed.">            if (cm     == null) {</span>
+<span class="nc" id="L202">                cm     = src.getColorModel();</span>
+            }
+<span class="nc bnc" id="L204" title="All 2 branches missed.">            if (sm     == null) {</span>
+<span class="nc" id="L205">                sm     = src.getSampleModel();</span>
+            }
+        }
+
+<span class="nc" id="L209">        this.bounds       = bounds;</span>
+<span class="nc" id="L210">        this.tileGridXOff = tileGridXOff;</span>
+<span class="nc" id="L211">        this.tileGridYOff = tileGridYOff;</span>
+
+<span class="nc" id="L213">        this.props        = new HashMap();</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">        if (props != null) {</span>
+<span class="nc" id="L215">            this.props.putAll(props);</span>
+        }
+
+<span class="nc bnc" id="L218" title="All 2 branches missed.">        if (cm == null) {</span>
+<span class="nc" id="L219">            cm = new ComponentColorModel(</span>
+<span class="nc" id="L220">                ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                 new int [] { 8 }, false, false, Transparency.OPAQUE,
+                 DataBuffer.TYPE_BYTE);
+        }
+
+<span class="nc" id="L225">        this.cm = cm;</span>
+
+<span class="nc bnc" id="L227" title="All 2 branches missed.">        if (sm == null) {</span>
+<span class="nc" id="L228">            sm = cm.createCompatibleSampleModel(bounds.width, bounds.height);</span>
+        }
+<span class="nc" id="L230">        this.sm = sm;</span>
+
+        // Recompute tileWidth/Height, minTileX/Y, numX/YTiles.
+<span class="nc" id="L233">        updateTileGridInfo();</span>
+<span class="nc" id="L234">    }</span>
+
+    /**
+     * Construct an Abstract Rable from a List of sources a bounds rect
+     * and props (may be null).
+     * @param srcs This is used to initialize the srcs Vector.  All
+     * the members of srcs must be CachableRed otherwise an error
+     * will be thrown.
+     * @param bounds this defines the extent of the rendered in pixels
+     * @param props this initializes the props Map.
+     */
+<span class="nc" id="L245">    protected AbstractRed(List srcs, Rectangle bounds, Map props) {</span>
+<span class="nc" id="L246">        init(srcs, bounds, null, null, bounds.x, bounds.y, props);</span>
+<span class="nc" id="L247">    }</span>
+
+    /**
+     * Construct an Abstract RenderedImage from a bounds rect,
+     * ColorModel (may be null), SampleModel (may be null) and props
+     * (may be null).  The srcs Vector will be empty.
+     * @param srcs This is used to initialize the srcs Vector.  All
+     * the members of srcs must be CachableRed otherwise an error
+     * will be thrown.
+     * @param bounds this defines the extent of the rendered in pixels
+     * @param cm The ColorModel to use. If null it will default to
+     * ComponentColorModel.
+     * @param sm The sample model to use. If null it will construct
+     * a sample model the matches the given/generated ColorModel and is
+     * the size of bounds.
+     * @param props this initializes the props Map.
+     */
+    protected AbstractRed(List srcs, Rectangle bounds,
+                          ColorModel cm, SampleModel sm,
+<span class="nc" id="L266">                          Map props) {</span>
+<span class="nc" id="L267">        init(srcs, bounds, cm, sm, bounds.x, bounds.y, props);</span>
+<span class="nc" id="L268">    }</span>
+
+    /**
+     * Construct an Abstract RenderedImage from a bounds rect,
+     * ColorModel (may be null), SampleModel (may be null), tile grid
+     * offsets and props (may be null).  The srcs Vector will be
+     * empty.
+     * @param srcs This is used to initialize the srcs Vector.  All
+     * the members of srcs must be CachableRed otherwise an error
+     * will be thrown.
+     * @param bounds this defines the extent of the rable in the
+     * user coordinate system.
+     * @param cm The ColorModel to use. If null it will default to
+     * ComponentColorModel.
+     * @param sm The sample model to use. If null it will construct
+     * a sample model the matches the given/generated ColorModel and is
+     * the size of bounds.
+     * @param tileGridXOff The x location of tile 0,0.
+     * @param tileGridYOff The y location of tile 0,0.
+     * @param props this initializes the props Map.
+     */
+    protected AbstractRed(List srcs, Rectangle bounds,
+                          ColorModel cm, SampleModel sm,
+                          int tileGridXOff, int tileGridYOff,
+<span class="nc" id="L292">                          Map props) {</span>
+<span class="nc" id="L293">        init(srcs, bounds, cm, sm, tileGridXOff, tileGridYOff, props);</span>
+<span class="nc" id="L294">    }</span>
+
+    /**
+     * This is the basic init function.
+     * It is provided so subclasses can compute various values
+     * before initializing all the state in the base class.
+     * You really should call this method before returning from
+     * your subclass constructor.
+     *
+     * @param srcs   The list of sources
+     * @param bounds The bounds of the image
+     * @param cm     The ColorModel to use. If null it defaults to
+     *               ComponentColorModel.
+     * @param sm     The Sample modle to use. If this is null it will
+     *               construct a sample model that matches the ColorModel
+     *               and is the size of the whole image.
+     * @param tileGridXOff The x location of tile 0,0.
+     * @param tileGridYOff The y location of tile 0,0.
+     * @param props  Any properties you want to associate with the image.
+     */
+    protected void init(List srcs, Rectangle bounds,
+                        ColorModel cm, SampleModel sm,
+                        int tileGridXOff, int tileGridYOff,
+                        Map props) {
+<span class="nc" id="L318">        this.srcs = new Vector();</span>
+<span class="nc bnc" id="L319" title="All 2 branches missed.">        if (srcs != null) {</span>
+<span class="nc" id="L320">            this.srcs.addAll(srcs);</span>
+<span class="nc bnc" id="L321" title="All 2 branches missed.">            if (srcs.size() != 0) {</span>
+<span class="nc" id="L322">                CachableRed src = (CachableRed)srcs.get(0);</span>
+<span class="nc bnc" id="L323" title="All 2 branches missed.">                if (bounds == null) {</span>
+<span class="nc" id="L324">                    bounds = src.getBounds();</span>
+                }
+<span class="nc bnc" id="L326" title="All 2 branches missed.">                if (cm     == null) {</span>
+<span class="nc" id="L327">                    cm     = src.getColorModel();</span>
+                }
+<span class="nc bnc" id="L329" title="All 2 branches missed.">                if (sm     == null) {</span>
+<span class="nc" id="L330">                    sm     = src.getSampleModel();</span>
+                }
+            }
+        }
+
+<span class="nc" id="L335">        this.bounds       = bounds;</span>
+<span class="nc" id="L336">        this.tileGridXOff = tileGridXOff;</span>
+<span class="nc" id="L337">        this.tileGridYOff = tileGridYOff;</span>
+<span class="nc" id="L338">        this.props        = new HashMap();</span>
+<span class="nc bnc" id="L339" title="All 2 branches missed.">        if (props != null) {</span>
+<span class="nc" id="L340">            this.props.putAll(props);</span>
+        }
+
+<span class="nc bnc" id="L343" title="All 2 branches missed.">        if (cm == null) {</span>
+<span class="nc" id="L344">            cm = new ComponentColorModel(</span>
+<span class="nc" id="L345">                ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                 new int [] { 8 }, false, false, Transparency.OPAQUE,
+                 DataBuffer.TYPE_BYTE);
+        }
+
+<span class="nc" id="L350">        this.cm = cm;</span>
+
+<span class="nc bnc" id="L352" title="All 2 branches missed.">        if (sm == null) {</span>
+<span class="nc" id="L353">            sm = cm.createCompatibleSampleModel(bounds.width, bounds.height);</span>
+        }
+<span class="nc" id="L355">        this.sm = sm;</span>
+
+        // Recompute tileWidth/Height, minTileX/Y, numX/YTiles.
+<span class="nc" id="L358">        updateTileGridInfo();</span>
+<span class="nc" id="L359">    }</span>
+
+    /**
+     * This function computes all the basic information about the tile
+     * grid based on the data stored in sm, and tileGridX/YOff.
+     * It is responsible for updating tileWidth, tileHeight,
+     * minTileX/Y, and numX/YTiles.
+     */
+    protected void updateTileGridInfo() {
+<span class="nc" id="L368">        this.tileWidth  = sm.getWidth();</span>
+<span class="nc" id="L369">        this.tileHeight = sm.getHeight();</span>
+
+        int x1;
+        int y1;
+        int maxTileX;
+        int maxTileY;
+
+        // This computes and caches important information about the
+        // structure of the tile grid in general.
+<span class="nc" id="L378">        minTileX = getXTile(bounds.x);</span>
+<span class="nc" id="L379">        minTileY = getYTile(bounds.y);</span>
+
+<span class="nc" id="L381">        x1       = bounds.x + bounds.width - 1;     // Xloc of right edge</span>
+<span class="nc" id="L382">        maxTileX = getXTile(x1);</span>
+<span class="nc" id="L383">        numXTiles = maxTileX - minTileX + 1;</span>
+
+<span class="nc" id="L385">        y1       = bounds.y + bounds.height - 1;     // Yloc of right edge</span>
+<span class="nc" id="L386">        maxTileY = getYTile(y1);</span>
+<span class="nc" id="L387">        numYTiles = maxTileY - minTileY + 1;</span>
+<span class="nc" id="L388">    }</span>
+
+
+    public Rectangle getBounds() {
+<span class="nc" id="L392">        return new Rectangle(getMinX(),</span>
+<span class="nc" id="L393">                             getMinY(),</span>
+<span class="nc" id="L394">                             getWidth(),</span>
+<span class="nc" id="L395">                             getHeight());</span>
+    }
+
+    public Vector getSources() {
+<span class="nc" id="L399">        return srcs;</span>
+    }
+
+    public ColorModel getColorModel() {
+<span class="nc" id="L403">        return cm;</span>
+    }
+
+    public SampleModel getSampleModel() {
+<span class="nc" id="L407">        return sm;</span>
+    }
+
+    public int getMinX() {
+<span class="nc" id="L411">        return bounds.x;</span>
+    }
+    public int getMinY() {
+<span class="nc" id="L414">        return bounds.y;</span>
+    }
+
+    public int getWidth() {
+<span class="nc" id="L418">        return bounds.width;</span>
+    }
+
+    public int getHeight() {
+<span class="nc" id="L422">        return bounds.height;</span>
+    }
+
+    public int getTileWidth() {
+<span class="nc" id="L426">        return tileWidth;</span>
+    }
+
+    public int getTileHeight() {
+<span class="nc" id="L430">        return tileHeight;</span>
+    }
+
+    public int getTileGridXOffset() {
+<span class="nc" id="L434">        return tileGridXOff;</span>
+    }
+
+    public int getTileGridYOffset() {
+<span class="nc" id="L438">        return tileGridYOff;</span>
+    }
+
+    public int getMinTileX() {
+<span class="nc" id="L442">        return minTileX;</span>
+    }
+
+    public int getMinTileY() {
+<span class="nc" id="L446">        return minTileY;</span>
+    }
+
+    public int getNumXTiles() {
+<span class="nc" id="L450">        return numXTiles;</span>
+    }
+
+    public int getNumYTiles() {
+<span class="nc" id="L454">        return numYTiles;</span>
+    }
+
+    public Object getProperty(String name) {
+<span class="nc" id="L458">        Object ret = props.get(name);</span>
+<span class="nc bnc" id="L459" title="All 2 branches missed.">        if (ret != null) {</span>
+<span class="nc" id="L460">            return ret;</span>
+        }
+<span class="nc bnc" id="L462" title="All 2 branches missed.">        for (Object src : srcs) {</span>
+<span class="nc" id="L463">            RenderedImage ri = (RenderedImage) src;</span>
+<span class="nc" id="L464">            ret = ri.getProperty(name);</span>
+<span class="nc bnc" id="L465" title="All 2 branches missed.">            if (ret != null) {</span>
+<span class="nc" id="L466">                return ret;</span>
+            }
+<span class="nc" id="L468">        }</span>
+<span class="nc" id="L469">        return null;</span>
+    }
+
+    public String [] getPropertyNames() {
+<span class="nc" id="L473">        Set keys = props.keySet();</span>
+<span class="nc" id="L474">        String[] ret  = new String[keys.size()];</span>
+<span class="nc" id="L475">        keys.toArray(ret);</span>
+
+<span class="nc bnc" id="L477" title="All 2 branches missed.">        for (Object src : srcs) {</span>
+<span class="nc" id="L478">            RenderedImage ri = (RenderedImage) src;</span>
+<span class="nc" id="L479">            String[] srcProps = ri.getPropertyNames();</span>
+<span class="nc bnc" id="L480" title="All 2 branches missed.">            if (srcProps.length != 0) {</span>
+<span class="nc" id="L481">                String[] tmp = new String[ret.length + srcProps.length];</span>
+<span class="nc" id="L482">                System.arraycopy(ret, 0, tmp, 0, ret.length);</span>
+<span class="nc" id="L483">                System.arraycopy(srcProps, 0, tmp, ret.length, srcProps.length);</span>
+<span class="nc" id="L484">                ret = tmp;</span>
+            }
+<span class="nc" id="L486">        }</span>
+
+<span class="nc" id="L488">        return ret;</span>
+    }
+
+    public Shape getDependencyRegion(int srcIndex, Rectangle outputRgn) {
+<span class="nc bnc" id="L492" title="All 4 branches missed.">        if ((srcIndex &lt; 0) || (srcIndex &gt; srcs.size())) {</span>
+<span class="nc" id="L493">            throw new IndexOutOfBoundsException(</span>
+                &quot;Nonexistent source requested.&quot;);
+        }
+
+        // Return empty rect if they don't intersect.
+<span class="nc bnc" id="L498" title="All 2 branches missed.">        if (!outputRgn.intersects(bounds)) {</span>
+<span class="nc" id="L499">            return new Rectangle();</span>
+        }
+
+        // We only depend on our source for stuff that is inside
+        // our bounds...
+<span class="nc" id="L504">        return outputRgn.intersection(bounds);</span>
+    }
+
+    public Shape getDirtyRegion(int srcIndex, Rectangle inputRgn) {
+<span class="nc bnc" id="L508" title="All 2 branches missed.">        if (srcIndex != 0) {</span>
+<span class="nc" id="L509">            throw new IndexOutOfBoundsException(</span>
+                &quot;Nonexistent source requested.&quot;);
+        }
+
+        // Return empty rect if they don't intersect.
+<span class="nc bnc" id="L514" title="All 2 branches missed.">        if (!inputRgn.intersects(bounds)) {</span>
+<span class="nc" id="L515">            return new Rectangle();</span>
+        }
+
+        // Changes in the input region don't propogate outside our
+        // bounds.
+<span class="nc" id="L520">        return inputRgn.intersection(bounds);</span>
+    }
+
+
+    // This is not included but can be implemented by the following.
+    // In which case you _must_ reimplement getTile.
+    // public WritableRaster copyData(WritableRaster wr) {
+    //     copyToRaster(wr);
+    //     return wr;
+    // }
+
+    public Raster getTile(int tileX, int tileY) {
+<span class="nc" id="L532">        WritableRaster wr = makeTile(tileX, tileY);</span>
+<span class="nc" id="L533">        return copyData(wr);</span>
+    }
+
+    public Raster getData() {
+<span class="nc" id="L537">        return getData(bounds);</span>
+    }
+
+    public Raster getData(Rectangle rect) {
+<span class="nc" id="L541">        SampleModel smRet = sm.createCompatibleSampleModel(</span>
+            rect.width, rect.height);
+
+<span class="nc" id="L544">        Point pt = new Point(rect.x, rect.y);</span>
+<span class="nc" id="L545">        WritableRaster wr = Raster.createWritableRaster(smRet, pt);</span>
+
+        // System.out.println(&quot;GD DB: &quot; + wr.getDataBuffer().getSize());
+<span class="nc" id="L548">        return copyData(wr);</span>
+    }
+
+    /**
+     * Returns the x index of tile under xloc.
+     * @param  xloc the x location (in pixels) to get tile for.
+     * @return The tile index under xloc (may be outside tile grid).
+     */
+    public final int getXTile(int xloc) {
+<span class="nc" id="L557">        int tgx = xloc - tileGridXOff;</span>
+        // We need to round to -infinity...
+<span class="nc bnc" id="L559" title="All 2 branches missed.">        if (tgx &gt;= 0) {</span>
+<span class="nc" id="L560">            return tgx / tileWidth;</span>
+        } else {
+<span class="nc" id="L562">            return (tgx - tileWidth + 1) / tileWidth;</span>
+        }
+    }
+
+    /**
+     * Returns the y index of tile under yloc.
+     * @param  yloc the y location (in pixels) to get tile for.
+     * @return The tile index under yloc (may be outside tile grid).
+     */
+    public final int getYTile(int yloc) {
+<span class="nc" id="L572">        int tgy = yloc - tileGridYOff;</span>
+        // We need to round to -infinity...
+<span class="nc bnc" id="L574" title="All 2 branches missed.">        if (tgy &gt;= 0) {</span>
+<span class="nc" id="L575">            return tgy / tileHeight;</span>
+        } else {
+<span class="nc" id="L577">            return (tgy - tileHeight + 1) / tileHeight;</span>
+        }
+    }
+
+    /**
+     * Copies data from this images tile grid into wr.  wr may
+     * extend outside the bounds of this image in which case the
+     * data in wr outside the bounds will not be touched.
+     * @param wr Raster to fill with image data.
+     */
+    public void copyToRaster(WritableRaster wr) {
+<span class="nc" id="L588">        int tx0 = getXTile(wr.getMinX());</span>
+<span class="nc" id="L589">        int ty0 = getYTile(wr.getMinY());</span>
+<span class="nc" id="L590">        int tx1 = getXTile(wr.getMinX() + wr.getWidth() - 1);</span>
+<span class="nc" id="L591">        int ty1 = getYTile(wr.getMinY() + wr.getHeight() - 1);</span>
+
+<span class="nc bnc" id="L593" title="All 2 branches missed.">        if (tx0 &lt; minTileX) {</span>
+<span class="nc" id="L594">            tx0 = minTileX;</span>
+        }
+<span class="nc bnc" id="L596" title="All 2 branches missed.">        if (ty0 &lt; minTileY) {</span>
+<span class="nc" id="L597">            ty0 = minTileY;</span>
+        }
+
+<span class="nc bnc" id="L600" title="All 2 branches missed.">        if (tx1 &gt;= minTileX + numXTiles) {</span>
+<span class="nc" id="L601">            tx1 = minTileX + numXTiles - 1;</span>
+        }
+<span class="nc bnc" id="L603" title="All 2 branches missed.">        if (ty1 &gt;= minTileY + numYTiles) {</span>
+<span class="nc" id="L604">            ty1 = minTileY + numYTiles - 1;</span>
+        }
+
+<span class="nc" id="L607">        final boolean isIntPack =</span>
+<span class="nc" id="L608">            GraphicsUtil.is_INT_PACK_Data(getSampleModel(), false);</span>
+
+<span class="nc bnc" id="L610" title="All 2 branches missed.">        for (int y = ty0; y &lt;= ty1; y++) {</span>
+<span class="nc bnc" id="L611" title="All 2 branches missed.">            for (int x = tx0; x &lt;= tx1; x++) {</span>
+<span class="nc" id="L612">                Raster r = getTile(x, y);</span>
+<span class="nc bnc" id="L613" title="All 2 branches missed.">                if (isIntPack) {</span>
+<span class="nc" id="L614">                    GraphicsUtil.copyData_INT_PACK(r, wr);</span>
+                } else {
+<span class="nc" id="L616">                    GraphicsUtil.copyData_FALLBACK(r, wr);</span>
+                }
+            }
+        }
+<span class="nc" id="L620">    }</span>
+
+
+    // static DataBufferReclaimer reclaim = new DataBufferReclaimer();
+
+    /**
+     * This is a helper function that will create the tile requested
+     * Including properly subsetting the bounds of the tile to the
+     * bounds of the current image.
+     * @param tileX The x index of the tile to be built
+     * @param tileY The y index of the tile to be built
+     * @return The tile requested
+     * @exception IndexOutOfBoundsException if the requested tile index
+     *   falles outside of the bounds of the tile grid for the image.
+     */
+    public WritableRaster makeTile(int tileX, int tileY) {
+<span class="nc bnc" id="L636" title="All 8 branches missed.">        if ((tileX &lt; minTileX) || (tileX &gt;= minTileX + numXTiles)</span>
+            || (tileY &lt; minTileY) || (tileY &gt;= minTileY + numYTiles)) {
+<span class="nc" id="L638">            throw new IndexOutOfBoundsException(</span>
+                &quot;Requested Tile (&quot; + tileX + ',' + tileY
+                 + &quot;) lies outside the bounds of image&quot;);
+        }
+
+<span class="nc" id="L643">        Point pt = new Point(tileGridXOff + tileX * tileWidth,</span>
+                             tileGridYOff + tileY * tileHeight);
+
+        WritableRaster wr;
+<span class="nc" id="L647">        wr = Raster.createWritableRaster(sm, pt);</span>
+        // if (!(sm instanceof SinglePixelPackedSampleModel))
+        //     wr = Raster.createWritableRaster(sm, pt);
+        // else {
+        //     SinglePixelPackedSampleModel sppsm;
+        //     sppsm = (SinglePixelPackedSampleModel)sm;
+        //     int stride = sppsm.getScanlineStride();
+        //     int sz = stride*sppsm.getHeight();
+        //
+        //     int [] data = reclaim.request(sz);
+        //     DataBuffer db = new DataBufferInt(data, sz);
+        //
+        //     reclaim.register(db);
+        //
+        //     wr = Raster.createWritableRaster(sm, db, pt);
+        // }
+
+        // System.out.println(&quot;MT DB: &quot; + wr.getDataBuffer().getSize());
+
+<span class="nc" id="L666">        int x0 = wr.getMinX();</span>
+<span class="nc" id="L667">        int y0 = wr.getMinY();</span>
+<span class="nc" id="L668">        int x1 = x0 + wr.getWidth() - 1;</span>
+<span class="nc" id="L669">        int y1 = y0 + wr.getHeight() - 1;</span>
+
+<span class="nc bnc" id="L671" title="All 8 branches missed.">        if ((x0 &lt; bounds.x) || (x1 &gt;= (bounds.x + bounds.width))</span>
+            || (y0 &lt; bounds.y) || (y1 &gt;= (bounds.y + bounds.height))) {
+            // Part of this raster lies outside our bounds so subset
+            // it so it only advertises the stuff inside our bounds.
+<span class="nc bnc" id="L675" title="All 2 branches missed.">            if (x0 &lt; bounds.x) {</span>
+<span class="nc" id="L676">                x0 = bounds.x;</span>
+            }
+<span class="nc bnc" id="L678" title="All 2 branches missed.">            if (y0 &lt; bounds.y) {</span>
+<span class="nc" id="L679">                y0 = bounds.y;</span>
+            }
+<span class="nc bnc" id="L681" title="All 2 branches missed.">            if (x1 &gt;= (bounds.x + bounds.width)) {</span>
+<span class="nc" id="L682">                x1 = bounds.x + bounds.width - 1;</span>
+            }
+<span class="nc bnc" id="L684" title="All 2 branches missed.">            if (y1 &gt;= (bounds.y + bounds.height)) {</span>
+<span class="nc" id="L685">                y1 = bounds.y + bounds.height - 1;</span>
+            }
+
+<span class="nc" id="L688">            wr = wr.createWritableChild(x0, y0, x1 - x0 + 1, y1 - y0 + 1,</span>
+                                        x0, y0, null);
+        }
+<span class="nc" id="L691">        return wr;</span>
+    }
+
+    public static void copyBand(Raster         src, int srcBand,
+                                WritableRaster dst, int dstBand) {
+<span class="nc" id="L696">        Rectangle srcR = new Rectangle(src.getMinX(),  src.getMinY(),</span>
+<span class="nc" id="L697">                                       src.getWidth(), src.getHeight());</span>
+<span class="nc" id="L698">        Rectangle dstR = new Rectangle(dst.getMinX(),  dst.getMinY(),</span>
+<span class="nc" id="L699">                                       dst.getWidth(), dst.getHeight());</span>
+
+<span class="nc" id="L701">        Rectangle cpR  = srcR.intersection(dstR);</span>
+
+<span class="nc" id="L703">        int [] samples = null;</span>
+<span class="nc bnc" id="L704" title="All 2 branches missed.">        for (int y = cpR.y; y &lt; cpR.y + cpR.height; y++) {</span>
+<span class="nc" id="L705">            samples = src.getSamples(cpR.x, y, cpR.width, 1, srcBand, samples);</span>
+<span class="nc" id="L706">            dst.setSamples(cpR.x, y, cpR.width, 1, dstBand, samples);</span>
+        }
+<span class="nc" id="L708">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

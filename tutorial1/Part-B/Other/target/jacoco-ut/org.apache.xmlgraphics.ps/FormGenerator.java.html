@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FormGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">FormGenerator.java</span></div><h1>FormGenerator.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: FormGenerator.java 1898073 2022-02-14 14:54:16Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Dimension2D;
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+
+/**
+ * Abstract helper class for generating PostScript forms.
+ */
+public abstract class FormGenerator {
+
+    private String formName;
+    private String title;
+    private Dimension2D dimensions;
+
+    /**
+     * Main constructor.
+     * @param formName the form's name
+     * @param title the form's title or null
+     * @param dimensions the form's dimensions
+     */
+<span class="fc" id="L42">    public FormGenerator(String formName, String title, Dimension2D dimensions) {</span>
+<span class="fc" id="L43">        this.formName = formName;</span>
+<span class="fc" id="L44">        this.title = title;</span>
+<span class="fc" id="L45">        this.dimensions = dimensions;</span>
+<span class="fc" id="L46">    }</span>
+
+    /**
+     * Returns the form's name.
+     * @return the form's name
+     */
+    public String getFormName() {
+<span class="fc" id="L53">        return this.formName;</span>
+    }
+
+    /**
+     * Returns the form's title.
+     * @return the form's title or null if there's no title
+     */
+    public String getTitle() {
+<span class="nc" id="L61">        return this.title;</span>
+    }
+
+    /**
+     * returns the form's dimensions.
+     * @return the form's dimensions
+     */
+    public Dimension2D getDimensions() {
+<span class="fc" id="L69">        return this.dimensions;</span>
+    }
+
+    /**
+     * Generates the PostScript code for the PaintProc of the form.
+     * @param gen the PostScript generator
+     * @throws IOException if an I/O error occurs
+     */
+    protected abstract void generatePaintProc(PSGenerator gen) throws IOException;
+
+    /**
+     * Generates some PostScript code right after the form definition (used primarily for
+     * bitmap data).
+     * @param gen the PostScript generator
+     * @throws IOException if an I/O error occurs
+     */
+    protected void generateAdditionalDataStream(PSGenerator gen) throws IOException {
+        //nop
+<span class="nc" id="L87">    }</span>
+
+    /**
+     * Returns the matrix for use in the form.
+     * @return the matrix
+     */
+    protected AffineTransform getMatrix() {
+<span class="fc" id="L94">        return new AffineTransform();</span>
+    }
+
+    /**
+     * Returns the form's bounding box.
+     * @return the form's bounding box
+     */
+    protected Rectangle2D getBBox() {
+<span class="fc" id="L102">        return new Rectangle2D.Double(0, 0, dimensions.getWidth(), dimensions.getHeight());</span>
+    }
+
+    /**
+     * Generates the PostScript form.
+     * @param gen the PostScript generator
+     * @return a PSResource instance representing the form
+     * @throws IOException if an I/O error occurs
+     */
+    public PSResource generate(PSGenerator gen) throws IOException {
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (gen.getPSLevel() &lt; 2) {</span>
+<span class="nc" id="L113">            throw new UnsupportedOperationException(</span>
+                    &quot;Forms require at least Level 2 PostScript&quot;);
+        }
+<span class="fc" id="L116">        gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE,</span>
+<span class="fc" id="L117">                new Object[] {PSResource.TYPE_FORM, getFormName()});</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        if (title != null) {</span>
+<span class="fc" id="L119">            gen.writeDSCComment(DSCConstants.TITLE, title);</span>
+        }
+<span class="fc" id="L121">        gen.writeln(&quot;/&quot; + formName);</span>
+<span class="fc" id="L122">        gen.writeln(&quot;&lt;&lt; /FormType 1&quot;);</span>
+<span class="fc" id="L123">        gen.writeln(&quot;  /BBox &quot; + gen.formatRectangleToArray(getBBox()));</span>
+<span class="fc" id="L124">        gen.writeln(&quot;  /Matrix &quot; + gen.formatMatrix(getMatrix()));</span>
+<span class="fc" id="L125">        gen.writeln(&quot;  /PaintProc {&quot;);</span>
+<span class="fc" id="L126">        gen.writeln(&quot;    pop&quot;);</span>
+<span class="fc" id="L127">        gen.writeln(&quot;    gsave&quot;);</span>
+<span class="fc" id="L128">        generatePaintProc(gen);</span>
+<span class="fc" id="L129">        gen.writeln(&quot;    grestore&quot;);</span>
+<span class="fc" id="L130">        gen.writeln(&quot;  } bind&quot;);</span>
+<span class="fc" id="L131">        gen.writeln(&quot;&gt;&gt; def&quot;);</span>
+<span class="fc" id="L132">        PSResource res = new PSResource(PSResource.TYPE_FORM, formName);</span>
+        try {
+<span class="fc" id="L134">            generateAdditionalDataStream(gen);</span>
+        } finally {
+<span class="fc" id="L136">            gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
+<span class="fc" id="L137">            gen.getResourceTracker().registerSuppliedResource(res);</span>
+        }
+<span class="fc" id="L139">        return res;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

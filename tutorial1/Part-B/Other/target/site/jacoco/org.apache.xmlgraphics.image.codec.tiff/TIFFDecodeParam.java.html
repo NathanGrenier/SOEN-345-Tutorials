@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TIFFDecodeParam.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.tiff</a> &gt; <span class="el_source">TIFFDecodeParam.java</span></div><h1>TIFFDecodeParam.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: TIFFDecodeParam.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.tiff;
+
+import  org.apache.xmlgraphics.image.codec.util.ImageDecodeParam;
+
+/**
+ * An instance of &lt;code&gt;ImageDecodeParam&lt;/code&gt; for decoding images in
+ * the TIFF format.
+ *
+ * &lt;p&gt; To determine the number of images present in a TIFF file, use
+ * the &lt;code&gt;getNumPages()&lt;/code&gt; method on the
+ * &lt;code&gt;ImageDecoder&lt;/code&gt; object that will be used to perform the
+ * decoding.  The desired page number may be passed as an argument to
+ * the &lt;code&gt;ImageDecoder.decodeAsRaster)()&lt;/code&gt; or
+ * &lt;code&gt;decodeAsRenderedImage()&lt;/code&gt; methods.
+ *
+ * &lt;p&gt; For TIFF Palette color images, the colorMap always has entries
+ * of short data type, the color Black being represented by 0,0,0 and
+ * White by 65536,65536,65536. In order to display these images, the
+ * default behavior is to dither the short values down to 8 bits.
+ * The dithering is done by calling the &lt;code&gt;decode16BitsTo8Bits&lt;/code&gt;
+ * method for each short value that needs to be dithered. The method has
+ * the following implementation:
+ * &lt;code&gt;
+ *       byte b;
+ *       short s;
+ *       s = s &amp;amp; 0xffff;
+ *       b = (byte)((s &amp;gt;&amp;gt; 8) &amp;amp; 0xff);
+ * &lt;/code&gt;
+ * If a different algorithm is to be used for the dithering, this class
+ * should be subclassed and an appropriate implementation should be
+ * provided for the &lt;code&gt;decode16BitsTo8Bits&lt;/code&gt; method in the subclass.
+ *
+ * &lt;p&gt;If the palette contains image data that is signed short, as specified
+ * by the SampleFormat tag, the dithering is done by calling
+ * &lt;code&gt;decodeSigned16BitsTo8Bits&lt;/code&gt; instead. The method has the
+ * following implementation:
+ * &lt;code&gt;
+ *       byte b;
+ *       short s;
+ *       b = (byte)((s + Short.MIN_VALUE) &amp;gt;&amp;gt; 8);
+ * &lt;/code&gt;
+ * In order to use a different algorithm for the dithering, this class
+ * should be subclassed and the method overridden.
+ *
+ * &lt;p&gt; If it is desired that the Palette be decoded such that the output
+ * image is of short data type and no dithering is performed, the
+ * &lt;code&gt;setDecodePaletteAsShorts&lt;/code&gt; method should be used.
+ *
+ * &lt;p&gt;&lt;b&gt; This class is not a committed part of the JAI API.  It may
+ * be removed or changed in future releases of JAI.&lt;/b&gt;
+ *
+ * @see TIFFDirectory
+ */
+public class TIFFDecodeParam implements ImageDecodeParam {
+
+    private static final long serialVersionUID = -2371665950056848358L;
+    private boolean decodePaletteAsShorts;
+    private Long ifdOffset;
+<span class="nc" id="L78">    private boolean convertJPEGYCbCrToRGB = true;</span>
+
+    /** Constructs a default instance of &lt;code&gt;TIFFDecodeParam&lt;/code&gt;. */
+<span class="nc" id="L81">    public TIFFDecodeParam() {</span>
+<span class="nc" id="L82">    }</span>
+
+    /**
+     * If set, the entries in the palette will be decoded as shorts
+     * and no short to byte lookup will be applied to them.
+     */
+    public void setDecodePaletteAsShorts(boolean decodePaletteAsShorts) {
+<span class="nc" id="L89">        this.decodePaletteAsShorts = decodePaletteAsShorts;</span>
+<span class="nc" id="L90">    }</span>
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if palette entries will be decoded as
+     * shorts, resulting in an output image with short datatype.
+     */
+    public boolean getDecodePaletteAsShorts() {
+<span class="nc" id="L97">        return decodePaletteAsShorts;</span>
+    }
+
+    /**
+     * Returns an unsigned 8 bit value computed by dithering the unsigned
+     * 16 bit value. Note that the TIFF specified short datatype is an
+     * unsigned value, while Java's &lt;code&gt;short&lt;/code&gt; datatype is a
+     * signed value. Therefore the Java &lt;code&gt;short&lt;/code&gt; datatype cannot
+     * be used to store the TIFF specified short value. A Java
+     * &lt;code&gt;int&lt;/code&gt; is used as input instead to this method. The method
+     * deals correctly only with 16 bit unsigned values.
+     */
+    public byte decode16BitsTo8Bits(int s) {
+<span class="nc" id="L110">        return (byte)((s &gt;&gt; 8) &amp; 0xffff);</span>
+    }
+
+    /**
+     * Returns an unsigned 8 bit value computed by dithering the signed
+     * 16 bit value. This method deals correctly only with values in the
+     * 16 bit signed range.
+     */
+    public byte decodeSigned16BitsTo8Bits(short s) {
+<span class="nc" id="L119">        return (byte)((s + Short.MIN_VALUE) &gt;&gt; 8);</span>
+    }
+
+    /**
+     * Sets the offset in the stream from which to read the image.  There
+     * must be an Image File Directory (IFD) at that position or an error
+     * will occur.  If &lt;code&gt;setIFDOffset()&lt;/code&gt; is never invoked then
+     * the decoder will assume that the TIFF stream is at the beginning of
+     * the 8-byte image header.  If the directory offset is set and a page
+     * number is supplied to the TIFF &lt;code&gt;ImageDecoder&lt;/code&gt; then the
+     * page will be the zero-relative index of the IFD in linked list of
+     * IFDs beginning at the specified offset with a page of zero indicating
+     * the directory at that offset.
+     */
+    public void setIFDOffset(long offset) {
+<span class="nc" id="L134">        ifdOffset = offset;</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * Returns the value set by &lt;code&gt;setIFDOffset()&lt;/code&gt; or
+     * &lt;code&gt;null&lt;/code&gt; if no value has been set.
+     */
+    public Long getIFDOffset() {
+<span class="nc" id="L142">        return ifdOffset;</span>
+    }
+
+    /**
+     * Sets a flag indicating whether to convert JPEG-compressed YCbCr data
+     * to RGB.  The default value is &lt;code&gt;true&lt;/code&gt;.  This flag is
+     * ignored if the image data are not JPEG-compressed.
+     */
+    public void setJPEGDecompressYCbCrToRGB(boolean convertJPEGYCbCrToRGB) {
+<span class="nc" id="L151">        this.convertJPEGYCbCrToRGB = convertJPEGYCbCrToRGB;</span>
+<span class="nc" id="L152">    }</span>
+
+    /**
+     * Whether JPEG-compressed YCbCr data will be converted to RGB.
+     */
+    public boolean getJPEGDecompressYCbCrToRGB() {
+<span class="nc" id="L158">        return convertJPEGYCbCrToRGB;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NamedColorProfile.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color.profile</a> &gt; <span class="el_source">NamedColorProfile.java</span></div><h1>NamedColorProfile.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: NamedColorProfile.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.java2d.color.profile;
+
+import org.apache.xmlgraphics.java2d.color.NamedColorSpace;
+import org.apache.xmlgraphics.java2d.color.RenderingIntent;
+
+/**
+ * Simplified in-memory representation of an ICC named color profile.
+ */
+public class NamedColorProfile {
+
+    private String profileName;
+    private String copyright;
+    private NamedColorSpace[] namedColors;
+<span class="fc" id="L33">    private RenderingIntent renderingIntent = RenderingIntent.PERCEPTUAL;</span>
+
+    /**
+     * Creates a new named color profile.
+     * @param profileName the profile name
+     * @param copyright the copyright
+     * @param namedColors the array of named colors
+     * @param intent the rendering intent
+     */
+    public NamedColorProfile(String profileName, String copyright, NamedColorSpace[] namedColors,
+<span class="fc" id="L43">            RenderingIntent intent) {</span>
+<span class="fc" id="L44">        this.profileName = profileName;</span>
+<span class="fc" id="L45">        this.copyright = copyright;</span>
+<span class="fc" id="L46">        this.namedColors = namedColors;</span>
+<span class="fc" id="L47">        this.renderingIntent = intent;</span>
+<span class="fc" id="L48">    }</span>
+
+    /**
+     * Returns the color profile's rendering intent.
+     * @return the rendering intent
+     * (See {@link java.awt.color.ICC_Profile}.ic*)
+     */
+    public RenderingIntent getRenderingIntent() {
+<span class="fc" id="L56">        return this.renderingIntent;</span>
+    }
+
+    /**
+     * Returns the array of named colors.
+     * @return the array of named colors
+     */
+    public NamedColorSpace[] getNamedColors() {
+<span class="fc" id="L64">        NamedColorSpace[] copy = new NamedColorSpace[this.namedColors.length];</span>
+<span class="fc" id="L65">        System.arraycopy(this.namedColors, 0, copy, 0, this.namedColors.length);</span>
+<span class="fc" id="L66">        return copy;</span>
+    }
+
+    /**
+     * Returns a named color.
+     * @param name the color name
+     * @return the named color (or null if it is not available)
+     */
+    public NamedColorSpace getNamedColor(String name) {
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (this.namedColors != null) {</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">            for (NamedColorSpace namedColor : this.namedColors) {</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">                if (namedColor.getColorName().equals(name)) {</span>
+<span class="nc" id="L78">                    return namedColor;</span>
+                }
+            }
+        }
+<span class="nc" id="L82">        return null;</span>
+    }
+
+    /**
+     * Returns the profile name.
+     * @return the profile name
+     */
+    public String getProfileName() {
+<span class="fc" id="L90">        return this.profileName;</span>
+    }
+
+    /**
+     * Returns the profile copyright.
+     * @return the profile copyright
+     */
+    public String getCopyright() {
+<span class="fc" id="L98">        return this.copyright;</span>
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String toString() {
+<span class="nc" id="L104">        StringBuffer sb = new StringBuffer(&quot;Named color profile: &quot;);</span>
+<span class="nc" id="L105">        sb.append(getProfileName());</span>
+<span class="nc" id="L106">        sb.append(&quot;, &quot;).append(namedColors.length).append(&quot; colors&quot;);</span>
+<span class="nc" id="L107">        return sb.toString();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

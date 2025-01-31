@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ColorWithAlternatives.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color</a> &gt; <span class="el_source">ColorWithAlternatives.java</span></div><h1>ColorWithAlternatives.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ColorWithAlternatives.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.java2d.color;
+
+import java.awt.Color;
+import java.awt.color.ColorSpace;
+import java.util.Arrays;
+
+/**
+ * Extended {@link Color} class allowing to specify a prioritized list of alternative colors.
+ * The alternative colors shall be the ones that are preferred if an output format supports them.
+ * This is normally used for passing device-specific colors through to the output format.
+ * &lt;p&gt;
+ * This class only adds a single reference to a color array which should not increase memory
+ * consumption by much if no alternative colors are specified.
+ * &lt;p&gt;
+ * &lt;b&gt;Important:&lt;/b&gt; Due to a flaw in {@link Color#equals(Object)}, the &lt;code&gt;equals()&lt;/code&gt;
+ * method should not be used to compare two colors, especially when used to update the current
+ * color for some output format. {@link Color} only takes the sRGB values into account but not
+ * more the advanced facets of this class. Use {@link ColorUtil#isSameColor(Color, Color)} for
+ * such a check.
+ */
+public class ColorWithAlternatives extends Color {
+
+    private static final long serialVersionUID = -6125884937776779150L;
+
+    private Color[] alternativeColors;
+
+    /**
+     * Constructor for RGBA colors.
+     * @param r the red component
+     * @param g the green component
+     * @param b the blue component
+     * @param a the alpha component
+     * @param alternativeColors the prioritized list of alternative colors.
+     * @see Color#Color(float, float, float, float)
+     */
+    public ColorWithAlternatives(float r, float g, float b, float a, Color[] alternativeColors) {
+<span class="nc" id="L56">        super(r, g, b, a);</span>
+<span class="nc" id="L57">        initAlternativeColors(alternativeColors);</span>
+<span class="nc" id="L58">    }</span>
+
+    /**
+     * Constructor for RGB colors.
+     * @param r the red component
+     * @param g the green component
+     * @param b the blue component
+     * @param alternativeColors the prioritized list of alternative colors.
+     * @see Color#Color(float, float, float)
+     */
+    public ColorWithAlternatives(float r, float g, float b, Color[] alternativeColors) {
+<span class="nc" id="L69">        super(r, g, b);</span>
+<span class="nc" id="L70">        initAlternativeColors(alternativeColors);</span>
+<span class="nc" id="L71">    }</span>
+
+    /**
+     * Constructor for RGBA colors.
+     * @param rgba the combined RGBA value
+     * @param hasalpha true if the alpha bits are valid, false otherwise
+     * @param alternativeColors the prioritized list of alternative colors.
+     * @see Color#Color(int, boolean)
+     */
+    public ColorWithAlternatives(int rgba, boolean hasalpha, Color[] alternativeColors) {
+<span class="nc" id="L81">        super(rgba, hasalpha);</span>
+<span class="nc" id="L82">        initAlternativeColors(alternativeColors);</span>
+<span class="nc" id="L83">    }</span>
+
+    /**
+     * Constructor for RGBA colors.
+     * @param r the red component
+     * @param g the green component
+     * @param b the blue component
+     * @param a the alpha component
+     * @param alternativeColors the prioritized list of alternative colors.
+     * @see Color#Color(int, int, int, int)
+     */
+    public ColorWithAlternatives(int r, int g, int b, int a, Color[] alternativeColors) {
+<span class="nc" id="L95">        super(r, g, b, a);</span>
+<span class="nc" id="L96">        initAlternativeColors(alternativeColors);</span>
+<span class="nc" id="L97">    }</span>
+
+    /**
+     * Constructor for RGB colors.
+     * @param r the red component
+     * @param g the green component
+     * @param b the blue component
+     * @param alternativeColors the prioritized list of alternative colors.
+     * @see Color#Color(int, int, int)
+     */
+    public ColorWithAlternatives(int r, int g, int b, Color[] alternativeColors) {
+<span class="fc" id="L108">        super(r, g, b);</span>
+<span class="fc" id="L109">        initAlternativeColors(alternativeColors);</span>
+<span class="fc" id="L110">    }</span>
+
+    /**
+     * Constructor for RGB colors.
+     * @param rgb the combined RGB components
+     * @param alternativeColors the prioritized list of alternative colors.
+     * @see Color#Color(int)
+     */
+    public ColorWithAlternatives(int rgb, Color[] alternativeColors) {
+<span class="nc" id="L119">        super(rgb);</span>
+<span class="nc" id="L120">        initAlternativeColors(alternativeColors);</span>
+<span class="nc" id="L121">    }</span>
+
+    /**
+     * Constructor for colors with an arbitrary color space.
+     * @param cspace the color space
+     * @param components the color components
+     * @param alpha the alpha component
+     * @param alternativeColors the prioritized list of alternative colors.
+     * @see Color#Color(ColorSpace, float[], float)
+     */
+    public ColorWithAlternatives(ColorSpace cspace, float[] components, float alpha,
+            Color[] alternativeColors) {
+<span class="fc" id="L133">        super(cspace, components, alpha);</span>
+<span class="fc" id="L134">        initAlternativeColors(alternativeColors);</span>
+<span class="fc" id="L135">    }</span>
+
+    private void initAlternativeColors(Color[] colors) {
+<span class="fc bfc" id="L138" title="All 2 branches covered.">        if (colors != null) {</span>
+            //Colors are immutable but array are not, so copy
+<span class="fc" id="L140">            this.alternativeColors = new Color[colors.length];</span>
+<span class="fc" id="L141">            System.arraycopy(colors, 0, this.alternativeColors, 0, colors.length);</span>
+        }
+<span class="fc" id="L143">    }</span>
+
+    /**
+     * Returns the list of alternative colors. An empty array will be returned if no alternative
+     * colors are available.
+     * @return the list of alternative colors
+     */
+    public Color[] getAlternativeColors() {
+<span class="nc bnc" id="L151" title="All 2 branches missed.">        if (this.alternativeColors != null) {</span>
+<span class="nc" id="L152">            Color[] cols = new Color[this.alternativeColors.length];</span>
+<span class="nc" id="L153">            System.arraycopy(this.alternativeColors, 0, cols, 0, this.alternativeColors.length);</span>
+<span class="nc" id="L154">            return cols;</span>
+        } else {
+<span class="nc" id="L156">            return new Color[0];</span>
+        }
+    }
+
+    /**
+     * Indicates whether alternative colors are available.
+     * @return true if alternative colors are available.
+     */
+    public boolean hasAlternativeColors() {
+<span class="pc bpc" id="L165" title="1 of 4 branches missed.">        return this.alternativeColors != null &amp;&amp; this.alternativeColors.length &gt; 0;</span>
+    }
+
+    /**
+     * Indicates whether another instance has the same alternative colors.
+     * @param col the color to compare the alternatives to
+     * @return true if the same alternative colors are present
+     */
+    public boolean hasSameAlternativeColors(ColorWithAlternatives col) {
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        if (!hasAlternativeColors()) {</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">            return !col.hasAlternativeColors();</span>
+        }
+        // this.hasAlternativeColors()
+<span class="nc bnc" id="L178" title="All 2 branches missed.">        if (!col.hasAlternativeColors()) {</span>
+<span class="nc" id="L179">            return false;</span>
+        }
+        // this.hasAlternativeColors() &amp;&amp; col.hasAlternativeColors()
+<span class="nc" id="L182">        Color[] alt1 = getAlternativeColors();</span>
+<span class="nc" id="L183">        Color[] alt2 = col.getAlternativeColors();</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        if (alt1.length != alt2.length) {</span>
+<span class="nc" id="L185">            return false;</span>
+        }
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        for (int i = 0, c = alt1.length; i &lt; c; i++) {</span>
+<span class="nc" id="L188">            Color c1 = alt1[i];</span>
+<span class="nc" id="L189">            Color c2 = alt2[i];</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">            if (!ColorUtil.isSameColor(c1, c2)) {</span>
+<span class="nc" id="L191">                return false;</span>
+            }
+        }
+<span class="nc" id="L194">        return true;</span>
+    }
+
+    /**
+     * Returns the first alternative color found with the given color space type.
+     * @param colorSpaceType the color space type ({@link ColorSpace}.TYPE_*).
+     * @return the requested alternative color or null, if no match was found
+     */
+    public Color getFirstAlternativeOfType(int colorSpaceType) {
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        if (hasAlternativeColors()) {</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">            for (Color alternativeColor : this.alternativeColors) {</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">                if (alternativeColor.getColorSpace().getType() == colorSpaceType) {</span>
+<span class="nc" id="L206">                    return alternativeColor;</span>
+                }
+            }
+        }
+<span class="nc" id="L210">        return null;</span>
+    }
+
+    public int hashCode() {
+<span class="nc" id="L214">        int hash = super.hashCode();</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">        if (alternativeColors != null) {</span>
+<span class="nc" id="L216">            hash = 37 * hash + Arrays.hashCode(alternativeColors);</span>
+        }
+<span class="nc" id="L218">        return hash;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

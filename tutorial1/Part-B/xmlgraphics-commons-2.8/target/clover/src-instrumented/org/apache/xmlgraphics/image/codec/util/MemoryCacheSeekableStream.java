@@ -37,7 +37,7 @@ import java.util.List;
  * <p><b> This class is not a committed part of the JAI API.  It may
  * be removed or changed in future releases of JAI.</b>
  */
-public final class MemoryCacheSeekableStream extends SeekableStream {public static class __CLR4_5_26pi6pim68iygxk{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static <T> T caseInc(int i,java.util.function.Supplier<T> s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1737587872955L,8589935092L,8769,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
+public final class MemoryCacheSeekableStream extends SeekableStream {public static class __CLR4_5_26pi6pim6lb4zjk{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static <T> T caseInc(int i,java.util.function.Supplier<T> s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1738360798893L,8589935092L,8769,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
 
     /** The source input stream. */
     private InputStream src;
@@ -71,9 +71,9 @@ public final class MemoryCacheSeekableStream extends SeekableStream {public stat
      * its source data from a regular <code>InputStream</code>.
      * Seeking backwards is supported by means of an in-memory cache.
      */
-    public MemoryCacheSeekableStream(InputStream src) {try{__CLR4_5_26pi6pim68iygxk.R.inc(8694);
-        __CLR4_5_26pi6pim68iygxk.R.inc(8695);this.src = src;
-    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}
+    public MemoryCacheSeekableStream(InputStream src) {try{__CLR4_5_26pi6pim6lb4zjk.R.inc(8694);
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8695);this.src = src;
+    }finally{__CLR4_5_26pi6pim6lb4zjk.R.flushNeeded();}}
 
     /**
      * Ensures that at least <code>pos</code> bytes are cached,
@@ -81,55 +81,55 @@ public final class MemoryCacheSeekableStream extends SeekableStream {public stat
      * is equal to the smaller of <code>pos</code> and the
      * length of the source stream.
      */
-    private long readUntil(long pos) throws IOException {try{__CLR4_5_26pi6pim68iygxk.R.inc(8696);
+    private long readUntil(long pos) throws IOException {try{__CLR4_5_26pi6pim6lb4zjk.R.inc(8696);
         // We've already got enough data cached
-        __CLR4_5_26pi6pim68iygxk.R.inc(8697);if ((((pos < length)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8698)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8699)==0&false))) {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8700);return pos;
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8697);if ((((pos < length)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8698)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8699)==0&false))) {{
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8700);return pos;
         }
         // pos >= length but length isn't getting any bigger, so return it
-        }__CLR4_5_26pi6pim68iygxk.R.inc(8701);if ((((foundEOS)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8702)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8703)==0&false))) {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8704);return length;
+        }__CLR4_5_26pi6pim6lb4zjk.R.inc(8701);if ((((foundEOS)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8702)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8703)==0&false))) {{
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8704);return length;
         }
 
-        }__CLR4_5_26pi6pim68iygxk.R.inc(8705);int sector = (int)(pos >> SECTOR_SHIFT);
+        }__CLR4_5_26pi6pim6lb4zjk.R.inc(8705);int sector = (int)(pos >> SECTOR_SHIFT);
 
         // First unread sector
-        __CLR4_5_26pi6pim68iygxk.R.inc(8706);int startSector = length >> SECTOR_SHIFT;
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8706);int startSector = length >> SECTOR_SHIFT;
 
         // Read sectors until the desired sector
-        __CLR4_5_26pi6pim68iygxk.R.inc(8707);for (int i = startSector; (((i <= sector)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8708)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8709)==0&false)); i++) {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8710);byte[] buf = new byte[SECTOR_SIZE];
-            __CLR4_5_26pi6pim68iygxk.R.inc(8711);data.add(buf);
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8707);for (int i = startSector; (((i <= sector)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8708)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8709)==0&false)); i++) {{
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8710);byte[] buf = new byte[SECTOR_SIZE];
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8711);data.add(buf);
 
             // Read up to SECTOR_SIZE bytes
-            __CLR4_5_26pi6pim68iygxk.R.inc(8712);int len = SECTOR_SIZE;
-            __CLR4_5_26pi6pim68iygxk.R.inc(8713);int off = 0;
-            __CLR4_5_26pi6pim68iygxk.R.inc(8714);while ((((len > 0)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8715)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8716)==0&false))) {{
-                __CLR4_5_26pi6pim68iygxk.R.inc(8717);int nbytes = src.read(buf, off, len);
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8712);int len = SECTOR_SIZE;
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8713);int off = 0;
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8714);while ((((len > 0)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8715)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8716)==0&false))) {{
+                __CLR4_5_26pi6pim6lb4zjk.R.inc(8717);int nbytes = src.read(buf, off, len);
                 // Found the end-of-stream
-                __CLR4_5_26pi6pim68iygxk.R.inc(8718);if ((((nbytes == -1)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8719)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8720)==0&false))) {{
-                    __CLR4_5_26pi6pim68iygxk.R.inc(8721);foundEOS = true;
-                    __CLR4_5_26pi6pim68iygxk.R.inc(8722);return length;
+                __CLR4_5_26pi6pim6lb4zjk.R.inc(8718);if ((((nbytes == -1)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8719)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8720)==0&false))) {{
+                    __CLR4_5_26pi6pim6lb4zjk.R.inc(8721);foundEOS = true;
+                    __CLR4_5_26pi6pim6lb4zjk.R.inc(8722);return length;
                 }
-                }__CLR4_5_26pi6pim68iygxk.R.inc(8723);off += nbytes;
-                __CLR4_5_26pi6pim68iygxk.R.inc(8724);len -= nbytes;
+                }__CLR4_5_26pi6pim6lb4zjk.R.inc(8723);off += nbytes;
+                __CLR4_5_26pi6pim6lb4zjk.R.inc(8724);len -= nbytes;
 
                 // Record new data length
-                __CLR4_5_26pi6pim68iygxk.R.inc(8725);length += nbytes;
+                __CLR4_5_26pi6pim6lb4zjk.R.inc(8725);length += nbytes;
             }
         }}
 
-        }__CLR4_5_26pi6pim68iygxk.R.inc(8726);return length;
-    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}
+        }__CLR4_5_26pi6pim6lb4zjk.R.inc(8726);return length;
+    }finally{__CLR4_5_26pi6pim6lb4zjk.R.flushNeeded();}}
 
     /**
      * Returns <code>true</code> since all
      * <code>MemoryCacheSeekableStream</code> instances support seeking
      * backwards.
      */
-    public boolean canSeekBackwards() {try{__CLR4_5_26pi6pim68iygxk.R.inc(8727);
-        __CLR4_5_26pi6pim68iygxk.R.inc(8728);return true;
-    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}
+    public boolean canSeekBackwards() {try{__CLR4_5_26pi6pim6lb4zjk.R.inc(8727);
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8728);return true;
+    }finally{__CLR4_5_26pi6pim6lb4zjk.R.flushNeeded();}}
 
     /**
      * Returns the current offset in this file.
@@ -137,9 +137,9 @@ public final class MemoryCacheSeekableStream extends SeekableStream {public stat
      * @return     the offset from the beginning of the file, in bytes,
      *             at which the next read occurs.
      */
-    public long getFilePointer() {try{__CLR4_5_26pi6pim68iygxk.R.inc(8729);
-        __CLR4_5_26pi6pim68iygxk.R.inc(8730);return pointer;
-    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}
+    public long getFilePointer() {try{__CLR4_5_26pi6pim6lb4zjk.R.inc(8729);
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8730);return pointer;
+    }finally{__CLR4_5_26pi6pim6lb4zjk.R.flushNeeded();}}
 
     /**
      * Sets the file-pointer offset, measured from the beginning of this
@@ -151,12 +151,12 @@ public final class MemoryCacheSeekableStream extends SeekableStream {public stat
      * @exception  IOException  if <code>pos</code> is less than
      *                          <code>0</code> or if an I/O error occurs.
      */
-    public void seek(long pos) throws IOException {try{__CLR4_5_26pi6pim68iygxk.R.inc(8731);
-        __CLR4_5_26pi6pim68iygxk.R.inc(8732);if ((((pos < 0)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8733)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8734)==0&false))) {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8735);throw new IOException(PropertyUtil.getString("MemoryCacheSeekableStream0"));
+    public void seek(long pos) throws IOException {try{__CLR4_5_26pi6pim6lb4zjk.R.inc(8731);
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8732);if ((((pos < 0)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8733)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8734)==0&false))) {{
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8735);throw new IOException(PropertyUtil.getString("MemoryCacheSeekableStream0"));
         }
-        }__CLR4_5_26pi6pim68iygxk.R.inc(8736);pointer = pos;
-    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}
+        }__CLR4_5_26pi6pim6lb4zjk.R.inc(8736);pointer = pos;
+    }finally{__CLR4_5_26pi6pim6lb4zjk.R.flushNeeded();}}
 
     /**
      * Reads the next byte of data from the input stream. The value byte is
@@ -169,17 +169,17 @@ public final class MemoryCacheSeekableStream extends SeekableStream {public stat
      * @return     the next byte of data, or <code>-1</code> if the end of the
      *             stream is reached.
      */
-    public int read() throws IOException {try{__CLR4_5_26pi6pim68iygxk.R.inc(8737);
-        __CLR4_5_26pi6pim68iygxk.R.inc(8738);long next = pointer + 1;
-        __CLR4_5_26pi6pim68iygxk.R.inc(8739);long pos = readUntil(next);
-        __CLR4_5_26pi6pim68iygxk.R.inc(8740);if ((((pos >= next)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8741)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8742)==0&false))) {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8743);byte[] buf =
+    public int read() throws IOException {try{__CLR4_5_26pi6pim6lb4zjk.R.inc(8737);
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8738);long next = pointer + 1;
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8739);long pos = readUntil(next);
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8740);if ((((pos >= next)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8741)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8742)==0&false))) {{
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8743);byte[] buf =
                 (byte[])data.get((int)(pointer >> SECTOR_SHIFT));
-            __CLR4_5_26pi6pim68iygxk.R.inc(8744);return buf[(int)(pointer++ & SECTOR_MASK)] & 0xff;
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8744);return buf[(int)(pointer++ & SECTOR_MASK)] & 0xff;
         } }else {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8745);return -1;
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8745);return -1;
         }
-    }}finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}
+    }}finally{__CLR4_5_26pi6pim6lb4zjk.R.flushNeeded();}}
 
     /**
      * Reads up to <code>len</code> bytes of data from the input stream into
@@ -228,28 +228,28 @@ public final class MemoryCacheSeekableStream extends SeekableStream {public stat
      *             <code>-1</code> if there is no more data because the end of
      *             the stream has been reached.
      */
-    public int read(byte[] b, int off, int len) throws IOException {try{__CLR4_5_26pi6pim68iygxk.R.inc(8746);
-        __CLR4_5_26pi6pim68iygxk.R.inc(8747);if ((((b == null)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8748)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8749)==0&false))) {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8750);throw new NullPointerException();
+    public int read(byte[] b, int off, int len) throws IOException {try{__CLR4_5_26pi6pim6lb4zjk.R.inc(8746);
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8747);if ((((b == null)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8748)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8749)==0&false))) {{
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8750);throw new NullPointerException();
         }
-        }__CLR4_5_26pi6pim68iygxk.R.inc(8751);if (((((off < 0) || (len < 0) || (off + len > b.length))&&(__CLR4_5_26pi6pim68iygxk.R.iget(8752)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8753)==0&false))) {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8754);throw new IndexOutOfBoundsException();
+        }__CLR4_5_26pi6pim6lb4zjk.R.inc(8751);if (((((off < 0) || (len < 0) || (off + len > b.length))&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8752)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8753)==0&false))) {{
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8754);throw new IndexOutOfBoundsException();
         }
-        }__CLR4_5_26pi6pim68iygxk.R.inc(8755);if ((((len == 0)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8756)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8757)==0&false))) {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8758);return 0;
+        }__CLR4_5_26pi6pim6lb4zjk.R.inc(8755);if ((((len == 0)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8756)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8757)==0&false))) {{
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8758);return 0;
         }
 
-        }__CLR4_5_26pi6pim68iygxk.R.inc(8759);long pos = readUntil(pointer + len);
+        }__CLR4_5_26pi6pim6lb4zjk.R.inc(8759);long pos = readUntil(pointer + len);
         // End-of-stream
-        __CLR4_5_26pi6pim68iygxk.R.inc(8760);if ((((pos <= pointer)&&(__CLR4_5_26pi6pim68iygxk.R.iget(8761)!=0|true))||(__CLR4_5_26pi6pim68iygxk.R.iget(8762)==0&false))) {{
-            __CLR4_5_26pi6pim68iygxk.R.inc(8763);return -1;
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8760);if ((((pos <= pointer)&&(__CLR4_5_26pi6pim6lb4zjk.R.iget(8761)!=0|true))||(__CLR4_5_26pi6pim6lb4zjk.R.iget(8762)==0&false))) {{
+            __CLR4_5_26pi6pim6lb4zjk.R.inc(8763);return -1;
         }
 
-        }__CLR4_5_26pi6pim68iygxk.R.inc(8764);byte[] buf = (byte[])data.get((int)(pointer >> SECTOR_SHIFT));
-        __CLR4_5_26pi6pim68iygxk.R.inc(8765);int nbytes = Math.min(len, SECTOR_SIZE - (int)(pointer & SECTOR_MASK));
-        __CLR4_5_26pi6pim68iygxk.R.inc(8766);System.arraycopy(buf, (int)(pointer & SECTOR_MASK),
+        }__CLR4_5_26pi6pim6lb4zjk.R.inc(8764);byte[] buf = (byte[])data.get((int)(pointer >> SECTOR_SHIFT));
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8765);int nbytes = Math.min(len, SECTOR_SIZE - (int)(pointer & SECTOR_MASK));
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8766);System.arraycopy(buf, (int)(pointer & SECTOR_MASK),
                          b, off, nbytes);
-        __CLR4_5_26pi6pim68iygxk.R.inc(8767);pointer += nbytes;
-        __CLR4_5_26pi6pim68iygxk.R.inc(8768);return nbytes;
-    }finally{__CLR4_5_26pi6pim68iygxk.R.flushNeeded();}}
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8767);pointer += nbytes;
+        __CLR4_5_26pi6pim6lb4zjk.R.inc(8768);return nbytes;
+    }finally{__CLR4_5_26pi6pim6lb4zjk.R.flushNeeded();}}
 }

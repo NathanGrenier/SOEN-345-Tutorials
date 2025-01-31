@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NamedColorSpace.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color</a> &gt; <span class="el_source">NamedColorSpace.java</span></div><h1>NamedColorSpace.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: NamedColorSpace.java 1051421 2010-12-21 08:54:25Z jeremias $ */
+
+package org.apache.xmlgraphics.java2d.color;
+
+import java.awt.Color;
+import java.awt.color.ColorSpace;
+
+/**
+ * Implements a pseudo color space for a named color which is defined in the CIE XYZ color space.
+ * At the moment, this color space always returns the fully opaque color regardless of the single
+ * component value (tint) given to its conversion methods.
+ */
+public class NamedColorSpace extends ColorSpace implements ColorSpaceOrigin {
+
+    private static final long serialVersionUID = -8957543225908514658L;
+
+    private final String name;
+    private final float[] xyz;
+
+    private final String profileName;
+    private final String profileURI;
+
+    /**
+     * Creates a new named color.
+     * @param name the color name
+     * @param xyz the CIE XYZ coordinates (valid values: 0.0f to 1.0f, although
+     *                  values slightly larger than 1.0f are common)
+     */
+    public NamedColorSpace(String name, float[] xyz) {
+<span class="fc" id="L47">        this(name, xyz, null, null);</span>
+<span class="fc" id="L48">    }</span>
+
+    /**
+     * Creates a new named color.
+     * @param name the color name
+     * @param xyz the CIE XYZ coordinates (valid values: 0.0f to 1.0f, although
+     *                  values slightly larger than 1.0f are common)
+     * @param profileName Optional profile name associated with this color space
+     * @param profileURI Optional profile URI associated with this color space
+     */
+    public NamedColorSpace(String name, float[] xyz, String profileName, String profileURI) {
+<span class="fc" id="L59">        super(ColorSpace.TYPE_GRAY, 1);</span>
+<span class="fc" id="L60">        checkNumComponents(xyz, 3);</span>
+<span class="pc bpc" id="L61" title="2 of 4 branches missed.">        if (name == null || name.trim().length() == 0) {</span>
+<span class="nc" id="L62">            throw new IllegalArgumentException(&quot;No name provided for named color space&quot;);</span>
+        }
+<span class="fc" id="L64">        this.name = name.trim();</span>
+<span class="fc" id="L65">        this.xyz = new float[3];</span>
+<span class="fc" id="L66">        System.arraycopy(xyz, 0, this.xyz, 0, 3);</span>
+<span class="fc" id="L67">        this.profileName = profileName;</span>
+<span class="fc" id="L68">        this.profileURI = profileURI;</span>
+<span class="fc" id="L69">    }</span>
+
+    /**
+     * Creates a new named color.
+     * @param name the color name
+     * @param color the color to use when the named color's specific color properties are not
+     *                  available.
+     * @param profileName Optional profile name associated with this color space
+     * @param profileURI Optional profile URI associated with this color space
+     */
+    public NamedColorSpace(String name, Color color, String profileName, String profileURI) {
+<span class="nc" id="L80">        this(name, color.getColorSpace().toCIEXYZ(color.getColorComponents(null)),</span>
+                profileName, profileURI);
+<span class="nc" id="L82">    }</span>
+
+    /**
+     * Creates a new named color.
+     * @param name the color name
+     * @param color the color to use when the named color's specific color properties are not
+     *                  available.
+     */
+    public NamedColorSpace(String name, Color color) {
+<span class="fc" id="L91">        this(name, color.getColorSpace().toCIEXYZ(color.getColorComponents(null)), null, null);</span>
+<span class="fc" id="L92">    }</span>
+
+    private void checkNumComponents(float[] colorvalue, int expected) {
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if (colorvalue == null) {</span>
+<span class="nc" id="L96">            throw new NullPointerException(&quot;color value may not be null&quot;);</span>
+        }
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (colorvalue.length != expected) {</span>
+<span class="nc" id="L99">            throw new IllegalArgumentException(&quot;Expected &quot; + expected</span>
+                    + &quot; components, but got &quot; + colorvalue.length);
+        }
+<span class="fc" id="L102">    }</span>
+
+    /**
+     * Returns the color name.
+     * @return the color name
+     */
+    public String getColorName() {
+<span class="fc" id="L109">        return this.name;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String getProfileName() {
+<span class="nc" id="L114">        return this.profileName;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String getProfileURI() {
+<span class="nc" id="L119">        return this.profileURI;</span>
+    }
+
+    /**
+     * Returns the XYZ coordinates of the named color.
+     * @return the XYZ coordinates of the named color
+     */
+    public float[] getXYZ() {
+<span class="fc" id="L127">        float[] result = new float[this.xyz.length];</span>
+<span class="fc" id="L128">        System.arraycopy(this.xyz, 0, result, 0, this.xyz.length);</span>
+<span class="fc" id="L129">        return result;</span>
+    }
+
+    /**
+     * Returns an sRGB-based color representing the full-tint color defined by this named color
+     * space.
+     * @return the sRGB color
+     */
+    public Color getRGBColor() {
+<span class="nc" id="L138">        float[] comps = toRGB(this.xyz);</span>
+<span class="nc" id="L139">        return new Color(comps[0], comps[1], comps[2]);</span>
+    }
+
+    /** {@inheritDoc} */
+    public float getMinValue(int component) {
+<span class="nc" id="L144">        return getMaxValue(component); //same as min, i.e. always 1.0</span>
+    }
+
+    /** {@inheritDoc} */
+    public float getMaxValue(int component) {
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        switch (component) {</span>
+        case 0:
+<span class="nc" id="L151">            return 1f;</span>
+        default:
+<span class="nc" id="L153">            throw new IllegalArgumentException(&quot;A named color space only has 1 component!&quot;);</span>
+        }
+    }
+
+    /** {@inheritDoc} */
+    public String getName(int component) {
+<span class="nc bnc" id="L159" title="All 2 branches missed.">        switch (component) {</span>
+        case 0:
+<span class="nc" id="L161">            return &quot;Tint&quot;;</span>
+        default:
+<span class="nc" id="L163">            throw new IllegalArgumentException(&quot;A named color space only has 1 component!&quot;);</span>
+        }
+    }
+
+    /** {@inheritDoc} */
+    public float[] fromCIEXYZ(float[] colorvalue) {
+        //ignore the given color values as this is a fixed color.
+<span class="nc" id="L170">        return new float[] {1.0f}; //Return value for full tint</span>
+    }
+
+    /** {@inheritDoc} */
+    public float[] fromRGB(float[] rgbvalue) {
+        //ignore the given color values as this is a fixed color.
+<span class="nc" id="L176">        return new float[] {1.0f}; //Return value for full tint</span>
+    }
+
+    /** {@inheritDoc} */
+    public float[] toCIEXYZ(float[] colorvalue) {
+<span class="fc" id="L181">        float[] ret = new float[3];</span>
+<span class="fc" id="L182">        System.arraycopy(this.xyz, 0, ret, 0, this.xyz.length);</span>
+<span class="fc" id="L183">        return ret;</span>
+    }
+
+    /** {@inheritDoc} */
+    public float[] toRGB(float[] colorvalue) {
+<span class="fc" id="L188">        ColorSpace sRGB = ColorSpace.getInstance(ColorSpace.CS_sRGB);</span>
+<span class="fc" id="L189">        return sRGB.fromCIEXYZ(this.xyz);</span>
+    }
+
+    /** {@inheritDoc} */
+    public boolean equals(Object obj) {
+<span class="pc bpc" id="L194" title="1 of 2 branches missed.">        if (!(obj instanceof NamedColorSpace)) {</span>
+<span class="nc" id="L195">            return false;</span>
+        }
+<span class="fc" id="L197">        NamedColorSpace other = (NamedColorSpace)obj;</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        if (!this.name.equals(other.name)) {</span>
+<span class="fc" id="L199">            return false;</span>
+        }
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        for (int i = 0, c = this.xyz.length; i &lt; c; i++) {</span>
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">            if (this.xyz[i] != other.xyz[i]) {</span>
+<span class="nc" id="L203">                return false;</span>
+            }
+        }
+<span class="fc" id="L206">        return true;</span>
+    }
+
+    /** {@inheritDoc} */
+    public int hashCode() {
+<span class="nc" id="L211">        return (this.profileName + name).hashCode();</span>
+    }
+
+    /** {@inheritDoc} */
+    public String toString() {
+<span class="nc" id="L216">        return &quot;Named Color Space: &quot; + getColorName();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

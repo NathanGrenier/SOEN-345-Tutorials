@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGDecodeParam.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.png</a> &gt; <span class="el_source">PNGDecodeParam.java</span></div><h1>PNGDecodeParam.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PNGDecodeParam.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.png;
+
+import org.apache.xmlgraphics.image.codec.util.ImageDecodeParam;
+import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
+
+// CSOFF: WhitespaceAround
+
+/**
+ * An instance of &lt;code&gt;ImageDecodeParam&lt;/code&gt; for decoding images in
+ * the PNG format.
+ *
+ * &lt;code&gt;PNGDecodeParam&lt;/code&gt; allows several aspects of the decoding
+ * process for PNG images to be controlled.  By default, decoding produces
+ * output images with the following properties:
+ *
+ * &lt;p&gt; Images with a bit depth of 8 or less use a
+ * &lt;code&gt;DataBufferByte&lt;/code&gt; to hold the pixel data.  16-bit images
+ * use a &lt;code&gt;DataBufferUShort&lt;/code&gt;.
+ *
+ * &lt;p&gt; Palette color images and non-transparent grayscale images with
+ * bit depths of 1, 2, or 4 will have a
+ * &lt;code&gt;MultiPixelPackedSampleModel&lt;/code&gt; and an
+ * &lt;code&gt;IndexColorModel&lt;/code&gt;.  For palette color images, the
+ * &lt;code&gt;ColorModel&lt;/code&gt; palette contains the red, green, blue, and
+ * optionally alpha palette information.  For grayscale images, the
+ * palette is used to expand the pixel data to cover the range 0-255.
+ * The pixels are stored packed 8, 4, or 2 to the byte.
+ *
+ * &lt;p&gt; All other images are stored using a
+ * &lt;code&gt;PixelInterleavedSampleModel&lt;/code&gt; with each sample of a pixel
+ * occupying its own &lt;code&gt;byte&lt;/code&gt; or &lt;code&gt;short&lt;/code&gt; within
+ * the &lt;code&gt;DataBuffer&lt;/code&gt;.  A &lt;code&gt;ComponentColorModel&lt;/code&gt; is
+ * used which simply extracts the red, green, blue, gray, and/or alpha
+ * information from separate &lt;code&gt;DataBuffer&lt;/code&gt; entries.
+ *
+ * &lt;p&gt; Five aspects of this process may be altered by means of methods
+ * in this class.
+ *
+ * &lt;p&gt; &lt;code&gt;setSuppressAlpha()&lt;/code&gt; prevents an alpha channel
+ * from appearing in the output.
+ *
+ * &lt;p&gt; &lt;code&gt;setExpandPalette()&lt;/code&gt; turns palette-color images into
+ * 3-or 4-channel full-color images.
+ *
+ * &lt;p&gt; &lt;code&gt;setOutput8BitGray()&lt;/code&gt; causes 1, 2, or 4 bit
+ * grayscale images to be output in 8-bit form, using a
+ * &lt;code&gt;ComponentSampleModel&lt;/code&gt; and
+ * &lt;code&gt;ComponentColorModel&lt;/code&gt;.
+ *
+ * &lt;p&gt; &lt;code&gt;setDecodingExponent()&lt;/code&gt; causes the output image to be
+ * gamma-corrected using a supplied output gamma value.
+ *
+ * &lt;p&gt; &lt;code&gt;setExpandGrayAlpha()&lt;/code&gt; causes 2-channel gray/alpha
+ * (GA) images to be output as full-color (GGGA) images, which may
+ * simplify further processing and display.
+ *
+ * &lt;p&gt;&lt;b&gt; This class is not a committed part of the JAI API.  It may
+ * be removed or changed in future releases of JAI.&lt;/b&gt;
+ */
+public class PNGDecodeParam implements ImageDecodeParam {
+
+    private static final long serialVersionUID = 3957265194926624623L;
+
+    /**
+     * Constructs a default instance of &lt;code&gt;PNGDecodeParam&lt;/code&gt;.
+     */
+<span class="fc" id="L86">    public PNGDecodeParam() { }</span>
+
+    private boolean suppressAlpha;
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if alpha (transparency) will
+     * be prevented from appearing in the output.
+     */
+    public boolean getSuppressAlpha() {
+<span class="fc" id="L95">        return suppressAlpha;</span>
+    }
+
+    /**
+     * If set, no alpha (transparency) channel will appear in the
+     * output image.
+     *
+     * &lt;p&gt; The default is to allow transparency to appear in the
+     * output image.
+     */
+    public void setSuppressAlpha(boolean suppressAlpha) {
+<span class="nc" id="L106">        this.suppressAlpha = suppressAlpha;</span>
+<span class="nc" id="L107">    }</span>
+
+    private boolean expandPalette;
+
+    /**
+     * Returns true if palette-color images will be expanded to
+     * produce full-color output.
+     */
+    public boolean getExpandPalette() {
+<span class="fc" id="L116">        return expandPalette;</span>
+    }
+
+    /**
+     * If set, palette color images (PNG color type 3) will
+     * be decoded into full-color (RGB) output images.  The output
+     * image may have 3 or 4 channels, depending on the presence of
+     * transparency information.
+     *
+     * &lt;p&gt; The default is to output palette images using a single
+     * channel.  The palette information is used to construct the
+     * output image's &lt;code&gt;ColorModel&lt;/code&gt;.
+     */
+    public void setExpandPalette(boolean expandPalette) {
+<span class="nc" id="L130">        this.expandPalette = expandPalette;</span>
+<span class="nc" id="L131">    }</span>
+
+    private boolean output8BitGray;
+
+    /**
+     * Returns the current value of the 8-bit gray output parameter.
+     */
+    public boolean getOutput8BitGray() {
+<span class="fc" id="L139">        return output8BitGray;</span>
+    }
+
+    /**
+     * If set, grayscale images with a bit depth less than 8
+     * (1, 2, or 4) will be output in 8 bit form.  The output values
+     * will occupy the full 8-bit range.  For example, gray values
+     * 0, 1, 2, and 3 of a 2-bit image will be output as
+     * 0, 85, 170, and 255.
+     *
+     * &lt;p&gt; The decoding of non-grayscale images and grayscale images
+     * with a bit depth of 8 or 16 are unaffected by this setting.
+     *
+     * &lt;p&gt; The default is not to perform expansion.  Grayscale images
+     * with a depth of 1, 2, or 4 bits will be represented using
+     * a &lt;code&gt;MultiPixelPackedSampleModel&lt;/code&gt; and an
+     * &lt;code&gt;IndexColorModel&lt;/code&gt;.
+     */
+    public void setOutput8BitGray(boolean output8BitGray) {
+<span class="nc" id="L158">        this.output8BitGray = output8BitGray;</span>
+<span class="nc" id="L159">    }</span>
+
+<span class="fc" id="L161">    private boolean performGammaCorrection = true;</span>
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if gamma correction is to be performed
+     * on the image data.  The default is &lt;code&gt;true&lt;/code&gt;.
+     *
+     * &lt;p&gt; If gamma correction is to be performed, the
+     * &lt;code&gt;getUserExponent()&lt;/code&gt; and
+     * &lt;code&gt;getDisplayExponent()&lt;/code&gt; methods are used in addition to
+     * the gamma value stored within the file (or the default value of
+     * 1/2.2 used if no value is found) to produce a single exponent
+     * using the formula:
+     * &lt;pre&gt;
+     * decoding_exponent = user_exponent/(gamma_from_file * display_exponent)
+     * &lt;/pre&gt;
+     */
+    public boolean getPerformGammaCorrection() {
+<span class="fc" id="L178">        return performGammaCorrection;</span>
+    }
+
+    /**
+     * Turns gamma corection of the image data on or off.
+     */
+    public void setPerformGammaCorrection(boolean performGammaCorrection) {
+<span class="nc" id="L185">        this.performGammaCorrection = performGammaCorrection;</span>
+<span class="nc" id="L186">    }</span>
+
+<span class="fc" id="L188">    private float userExponent = 1.0F;</span>
+
+    /**
+     * Returns the current value of the user exponent parameter.
+     * By default, the user exponent is equal to 1.0F.
+     */
+    public float getUserExponent() {
+<span class="fc" id="L195">        return userExponent;</span>
+    }
+
+    /**
+     * Sets the user exponent to a given value.  The exponent
+     * must be positive.  If not, an
+     * &lt;code&gt;IllegalArgumentException&lt;/code&gt; will be thrown.
+     *
+     * &lt;p&gt; The output image pixels will be placed through a transformation
+     * of the form:
+     *
+     * &lt;pre&gt;
+     * sample = integer_sample / (2^bitdepth - 1.0)
+     * decoding_exponent = user_exponent/(gamma_from_file * display_exponent)
+     * output = sample ^ decoding_exponent
+     * &lt;/pre&gt;
+     *
+     * where &lt;code&gt;gamma_from_file&lt;/code&gt; is the gamma of the file
+     * data, as determined by the &lt;code&gt;gAMA&lt;/code&gt;, &lt;code&gt;sRGB&lt;/code&gt;,
+     * and/or &lt;code&gt;iCCP&lt;/code&gt; chunks, and &lt;code&gt;display_exponent&lt;/code&gt;
+     * is the exponent of the intrinsic transfer curve of the display,
+     * generally 2.2.
+     *
+     * &lt;p&gt; Input files which do not specify any gamma are assumed to
+     * have a gamma of &lt;code&gt;1/2.2&lt;/code&gt;; such images may be displayed
+     * on a CRT with an exponent of 2.2 using the default user
+     * exponent of 1.0.
+     *
+     * &lt;p&gt; The user exponent may be used in order to change the
+     * effective gamma of a file.  If a file has a stored gamma of
+     * X, but the decoder believes that the true file gamma is Y,
+     * setting a user exponent of Y/X will produce the same result
+     * as changing the file gamma.
+     *
+     * &lt;p&gt; This parameter affects the decoding of all image types.
+     *
+     * @throws IllegalArgumentException if &lt;code&gt;userExponent&lt;/code&gt; is
+     * negative.
+     */
+    public void setUserExponent(float userExponent) {
+<span class="nc bnc" id="L235" title="All 2 branches missed.">        if (userExponent &lt;= 0.0F) {</span>
+<span class="nc" id="L236">            throw new IllegalArgumentException(PropertyUtil.getString(&quot;PNGDecodeParam0&quot;));</span>
+        }
+<span class="nc" id="L238">        this.userExponent = userExponent;</span>
+<span class="nc" id="L239">    }</span>
+
+<span class="fc" id="L241">    private float displayExponent = 2.2F;</span>
+
+    /**
+     * Returns the current value of the display exponent parameter.
+     * By default, the display exponent is equal to 2.2F.
+     */
+    public float getDisplayExponent() {
+<span class="fc" id="L248">        return displayExponent;</span>
+    }
+
+    /**
+     * Sets the display exponent to a given value.  The exponent
+     * must be positive.  If not, an
+     * &lt;code&gt;IllegalArgumentException&lt;/code&gt; will be thrown.
+     *
+     * &lt;p&gt; The output image pixels will be placed through a transformation
+     * of the form:
+     *
+     * &lt;pre&gt;
+     * sample = integer_sample / (2^bitdepth - 1.0)
+     * decoding_exponent = user_exponent/(gamma_from_file * display_exponent)
+     * output = sample ^ decoding_exponent
+     * &lt;/pre&gt;
+     *
+     * where &lt;code&gt;gamma_from_file&lt;/code&gt; is the gamma of the file
+     * data, as determined by the &lt;code&gt;gAMA&lt;/code&gt;, &lt;code&gt;sRGB&lt;/code&gt;,
+     * and/or &lt;code&gt;iCCP&lt;/code&gt; chunks, and &lt;code&gt;user_exponent&lt;/code&gt;
+     * is an additional user-supplied parameter.
+     *
+     * &lt;p&gt; Input files which do not specify any gamma are assumed to
+     * have a gamma of &lt;code&gt;1/2.2&lt;/code&gt;; such images should be
+     * decoding using the default display exponent of 2.2.
+     *
+     * &lt;p&gt; If an image is to be processed further before being displayed,
+     * it may be preferable to set the display exponent to 1.0 in order
+     * to produce a linear output image.
+     *
+     * &lt;p&gt; This parameter affects the decoding of all image types.
+     *
+     * @throws IllegalArgumentException if &lt;code&gt;userExponent&lt;/code&gt; is
+     * negative.
+     */
+    public void setDisplayExponent(float displayExponent) {
+<span class="nc bnc" id="L284" title="All 2 branches missed.">        if (displayExponent &lt;= 0.0F) {</span>
+<span class="nc" id="L285">            throw new IllegalArgumentException(PropertyUtil.getString(&quot;PNGDecodeParam1&quot;));</span>
+        }
+<span class="nc" id="L287">        this.displayExponent = displayExponent;</span>
+<span class="nc" id="L288">    }</span>
+
+    private boolean expandGrayAlpha;
+
+    /**
+     * Returns the current setting of the gray/alpha expansion.
+     */
+    public boolean getExpandGrayAlpha() {
+<span class="fc" id="L296">        return expandGrayAlpha;</span>
+    }
+
+    /**
+     * If set, images containing one channel of gray and one channel of
+     * alpha (GA) will be output in a 4-channel format (GGGA).  This
+     * produces output that may be simpler to process and display.
+     *
+     * &lt;p&gt; This setting affects both images of color type 4 (explicit
+     * alpha) and images of color type 0 (grayscale) that contain
+     * transparency information.
+     *
+     * &lt;p&gt; By default, no expansion is performed.
+     */
+    public void setExpandGrayAlpha(boolean expandGrayAlpha) {
+<span class="nc" id="L311">        this.expandGrayAlpha = expandGrayAlpha;</span>
+<span class="nc" id="L312">    }</span>
+
+    private boolean generateEncodeParam;
+
+    private PNGEncodeParam encodeParam;
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; if an instance of
+     * &lt;code&gt;PNGEncodeParam&lt;/code&gt; will be available after an image
+     * has been decoded via the &lt;code&gt;getEncodeParam&lt;/code&gt; method.
+     */
+    public boolean getGenerateEncodeParam() {
+<span class="fc" id="L324">        return generateEncodeParam;</span>
+    }
+
+    /**
+     * If set, an instance of &lt;code&gt;PNGEncodeParam&lt;/code&gt; will be
+     * available after an image has been decoded via the
+     * &lt;code&gt;getEncodeParam&lt;/code&gt; method that encapsulates information
+     * about the contents of the PNG file.  If not set, this information
+     * will not be recorded and &lt;code&gt;getEncodeParam()&lt;/code&gt; will
+     * return &lt;code&gt;null&lt;/code&gt;.
+     */
+    public void setGenerateEncodeParam(boolean generateEncodeParam) {
+<span class="nc" id="L336">        this.generateEncodeParam = generateEncodeParam;</span>
+<span class="nc" id="L337">    }</span>
+
+    /**
+     * If &lt;code&gt;getGenerateEncodeParam()&lt;/code&gt; is &lt;code&gt;true&lt;/code&gt;,
+     * this method may be called after decoding has completed, and
+     * will return an instance of &lt;code&gt;PNGEncodeParam&lt;/code&gt; containing
+     * information about the contents of the PNG file just decoded.
+     */
+    public PNGEncodeParam getEncodeParam() {
+<span class="nc" id="L346">        return encodeParam;</span>
+    }
+
+    /**
+     * Sets the current encoder param instance.  This method is
+     * intended to be called by the PNG decoder and will overwrite the
+     * current instance returned by &lt;code&gt;getEncodeParam&lt;/code&gt;.
+     */
+    public void setEncodeParam(PNGEncodeParam encodeParam) {
+<span class="nc" id="L355">        this.encodeParam = encodeParam;</span>
+<span class="nc" id="L356">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

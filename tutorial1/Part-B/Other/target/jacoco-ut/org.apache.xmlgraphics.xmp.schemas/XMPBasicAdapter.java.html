@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMPBasicAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp.schemas</a> &gt; <span class="el_source">XMPBasicAdapter.java</span></div><h1>XMPBasicAdapter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: XMPBasicAdapter.java 893190 2009-12-22 14:41:02Z jeremias $ */
+
+package org.apache.xmlgraphics.xmp.schemas;
+
+import java.util.Date;
+
+import org.apache.xmlgraphics.xmp.Metadata;
+import org.apache.xmlgraphics.xmp.PropertyAccess;
+import org.apache.xmlgraphics.xmp.XMPArrayType;
+import org.apache.xmlgraphics.xmp.XMPConstants;
+import org.apache.xmlgraphics.xmp.XMPProperty;
+import org.apache.xmlgraphics.xmp.XMPSchemaAdapter;
+import org.apache.xmlgraphics.xmp.XMPSchemaRegistry;
+import org.apache.xmlgraphics.xmp.XMPStructure;
+
+/**
+ * Schema adapter implementation for the XMP Basic schema.
+ */
+public class XMPBasicAdapter extends XMPSchemaAdapter {
+
+    private static final String ADVISORY = &quot;Advisory&quot;;
+    private static final String BASE_URL = &quot;BaseURL&quot;;
+    private static final String CREATE_DATE = &quot;CreateDate&quot;;
+    private static final String CREATOR_TOOL = &quot;CreatorTool&quot;;
+    private static final String IDENTIFIER = &quot;Identifier&quot;;
+    private static final String LABEL = &quot;Label&quot;;
+    private static final String METADATA_DATE = &quot;MetadataDate&quot;;
+    private static final String MODIFY_DATE = &quot;ModifyDate&quot;;
+    private static final String NICKNAME = &quot;Nickname&quot;;
+    private static final String RATING = &quot;Rating&quot;;
+    private static final String THUMBNAILS = &quot;Thumbnails&quot;;
+
+    /**
+     * Constructs a new adapter for XMP Basic around the given metadata object.
+     * @param meta the underlying metadata
+     */
+    public XMPBasicAdapter(Metadata meta, String namespace) {
+<span class="fc" id="L55">        super(meta, XMPSchemaRegistry.getInstance().getSchema(namespace));</span>
+<span class="fc" id="L56">    }</span>
+
+    /**
+     * Sets the base URL for relative URLs in the document content.
+     * @param value the base URL
+     */
+    public void setBaseUrl(String value) {
+<span class="nc" id="L63">        setValue(BASE_URL, value);</span>
+<span class="nc" id="L64">    }</span>
+
+    /**
+     * Returns the base URL for relative URLs in the document content.
+     * @return the base URL
+     */
+    public String getBaseUrl() {
+<span class="nc" id="L71">        return getValue(BASE_URL);</span>
+    }
+
+    /**
+     * Sets the date and time the resource was originally created.
+     * @param creationDate the creation date
+     */
+    public void setCreateDate(Date creationDate) {
+<span class="fc" id="L79">        setDateValue(CREATE_DATE, creationDate);</span>
+<span class="fc" id="L80">    }</span>
+
+    /** @return the date and time the resource was originally created */
+    public Date getCreateDate() {
+<span class="fc" id="L84">        return getDateValue(CREATE_DATE);</span>
+    }
+
+    /**
+     * Sets the first known tool used to create the resource.
+     * @param value the creator tool
+     */
+    public void setCreatorTool(String value) {
+<span class="nc" id="L92">        setValue(CREATOR_TOOL, value);</span>
+<span class="nc" id="L93">    }</span>
+
+    /** @return the first known tool used to create the resource */
+    public String getCreatorTool() {
+<span class="fc" id="L97">        return getValue(CREATOR_TOOL);</span>
+    }
+
+    /**
+     * Adds an identifier that unambiguously identify the resource within a given context.
+     * @param value the identifier value
+     */
+    public void addIdentifier(String value) {
+<span class="fc" id="L105">        addStringToBag(IDENTIFIER, value);</span>
+<span class="fc" id="L106">    }</span>
+
+    /**
+     * Sets a qualified identifier that unambiguously identify the resource within a given context.
+     * As qualifier, &lt;code&gt;xmpidq:Scheme&lt;/code&gt; is used.
+     * @param value the identifier value
+     * @param qualifier the qualifier value (for xmpidq:Scheme)
+     */
+    public void setIdentifier(String value, String qualifier) {
+<span class="fc" id="L115">        PropertyAccess pa = findQualifiedStructure(IDENTIFIER,</span>
+                XMPBasicSchema.SCHEME_QUALIFIER, qualifier);
+<span class="fc bfc" id="L117" title="All 2 branches covered.">        if (pa != null) {</span>
+<span class="fc" id="L118">            pa.setProperty(new XMPProperty(XMPConstants.RDF_VALUE, value));</span>
+        } else {
+<span class="fc" id="L120">            XMPStructure struct = new XMPStructure();</span>
+<span class="fc" id="L121">            struct.setProperty(new XMPProperty(XMPConstants.RDF_VALUE, value));</span>
+<span class="fc" id="L122">            struct.setProperty(new XMPProperty(XMPBasicSchema.SCHEME_QUALIFIER, qualifier));</span>
+<span class="fc" id="L123">            addObjectToArray(IDENTIFIER, struct, XMPArrayType.BAG);</span>
+        }
+<span class="fc" id="L125">    }</span>
+
+    /**
+     * Returns an array of all identifiers that unambiguously identify the resource within a
+     * given context.
+     * @return a String array of all identifiers (or null if not set)
+     */
+    public String[] getIdentifiers() {
+<span class="fc" id="L133">        return getStringArray(IDENTIFIER);</span>
+    }
+
+    /**
+     * Returns an identifier that matches a given qualifier.
+     * As qualifier, &lt;code&gt;xmpidq:Scheme&lt;/code&gt; is used.
+     * @param qualifier the qualifier
+     * @return the identifier (or null if no matching value was found)
+     */
+    public String getIdentifier(String qualifier) {
+<span class="fc" id="L143">        Object value = findQualifiedValue(IDENTIFIER, XMPBasicSchema.SCHEME_QUALIFIER, qualifier);</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">        return (value != null ? value.toString() : null);</span>
+    }
+
+    /**
+     * Sets the date and time the resource was last modified.
+     * @param modifyDate the modification date
+     */
+    public void setModifyDate(Date modifyDate) {
+<span class="nc" id="L152">        setDateValue(MODIFY_DATE, modifyDate);</span>
+<span class="nc" id="L153">    }</span>
+
+    /** @return the date and time the resource was last modified */
+    public Date getModifyDate() {
+<span class="nc" id="L157">        return getDateValue(MODIFY_DATE);</span>
+    }
+
+    /**
+     * Sets the date and time any metadata for this resource was last changed.
+     * @param metadataDate the modification date for the metadata
+     */
+    public void setMetadataDate(Date metadataDate) {
+<span class="nc" id="L165">        setDateValue(METADATA_DATE, metadataDate);</span>
+<span class="nc" id="L166">    }</span>
+
+    /** @return the date and time the resource was originally created */
+    public Date getMetadataDate() {
+<span class="nc" id="L170">        return getDateValue(METADATA_DATE);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

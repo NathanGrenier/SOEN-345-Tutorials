@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Endianness.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.writer</a> &gt; <span class="el_source">Endianness.java</span></div><h1>Endianness.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: Endianness.java 1732019 2016-02-24 05:01:10Z gadams $ */
+
+package org.apache.xmlgraphics.image.writer;
+
+
+/**
+ * Enumeration for specifying the endianness of the image.
+ *
+ * @see &lt;a href=&quot;http://en.wikipedia.org/wiki/Endianness&quot;&gt;Wikipedia on Endianness&lt;/a&gt;
+ */
+<span class="fc" id="L28">public enum Endianness {</span>
+
+    /**
+     * Default endianness. This can be different depending on the output format or is used
+     * when the image format doesn't allow to specify the endianness.
+     */
+<span class="fc" id="L34">    DEFAULT,</span>
+
+    /** Little endian, least significant byte first, LSB, Intel Format. */
+<span class="fc" id="L37">    LITTLE_ENDIAN,</span>
+
+    /** Big endian, most significant byte first, MSB, Motorola Format. */
+<span class="fc" id="L40">    BIG_ENDIAN;</span>
+
+    /**
+     * Translates an endian type specified in the configuration file into the
+     * equivalent type should one exist.
+     * @param value The value specified in the configration file
+     * @return Returns the Endianess object of the found type. If no type matches
+     * it returns null.
+     */
+    public static Endianness getEndianType(String value) {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (value != null) {</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            for (Endianness endianValue : Endianness.values()) {</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                if (endianValue.toString().equalsIgnoreCase(value)) {</span>
+<span class="nc" id="L53">                    return endianValue;</span>
+                }
+            }
+        }
+<span class="nc" id="L57">        return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

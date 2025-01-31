@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TIFFEncodeParam.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.tiff</a> &gt; <span class="el_source">TIFFEncodeParam.java</span></div><h1>TIFFEncodeParam.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: TIFFEncodeParam.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.tiff;
+
+import java.util.Iterator;
+import java.util.zip.Deflater;
+
+import org.apache.xmlgraphics.image.codec.util.ImageEncodeParam;
+import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
+
+/**
+ * An instance of &lt;code&gt;ImageEncodeParam&lt;/code&gt; for encoding images in
+ * the TIFF format.
+ *
+ * &lt;p&gt; This class allows for the specification of encoding parameters. By
+ * default, the image is encoded without any compression, and is written
+ * out consisting of strips, not tiles. The particular compression scheme
+ * to be used can be specified by using the &lt;code&gt;setCompression()&lt;/code&gt;
+ * method. The compression scheme specified will be honored only if it is
+ * compatible with the type of image being written out. For example,
+ * Group3 and Group4 compressions can only be used with Bilevel images.
+ * Writing of tiled TIFF images can be enabled by calling the
+ * &lt;code&gt;setWriteTiled()&lt;/code&gt; method.
+ *
+ * &lt;p&gt;&lt;b&gt; This class is not a committed part of the JAI API.  It may
+ * be removed or changed in future releases of JAI.&lt;/b&gt;
+ *
+ */
+public class TIFFEncodeParam implements ImageEncodeParam {
+
+    private static final long serialVersionUID = 2471949735040024055L;
+<span class="fc" id="L49">    private CompressionValue compression = CompressionValue.NONE;</span>
+
+    private boolean writeTiled;
+    private int tileWidth;
+    private int tileHeight;
+
+    private Iterator extraImages;
+
+    private TIFFField[] extraFields;
+
+<span class="fc" id="L59">    private boolean convertJPEGRGBToYCbCr = true;</span>
+
+<span class="fc" id="L61">    private int deflateLevel = Deflater.DEFAULT_COMPRESSION;</span>
+
+    /**
+     * Constructs a TIFFEncodeParam object with default values for
+     * all parameters.
+     */
+<span class="fc" id="L67">    public TIFFEncodeParam() {</span>
+        //nop
+<span class="fc" id="L69">    }</span>
+
+    /** Returns the value of the compression parameter. */
+    public CompressionValue getCompression() {
+<span class="fc" id="L73">        return compression;</span>
+    }
+
+    /**
+     * Specifies the type of compression to be used.  The compression type
+     * specified will be honored only if it is compatible with the image
+     * being written out.  Currently only PackBits, JPEG, and DEFLATE
+     * compression schemes are supported.
+     *
+     * &lt;p&gt; If &lt;code&gt;compression&lt;/code&gt; is set to any value but
+     * &lt;code&gt;COMPRESSION_NONE&lt;/code&gt; and the &lt;code&gt;OutputStream&lt;/code&gt;
+     * supplied to the &lt;code&gt;ImageEncoder&lt;/code&gt; is not a
+     * &lt;code&gt;SeekableOutputStream&lt;/code&gt;, then the encoder will use either
+     * a temporary file or a memory cache when compressing the data
+     * depending on whether the file system is accessible.  Compression
+     * will therefore be more efficient if a &lt;code&gt;SeekableOutputStream&lt;/code&gt;
+     * is supplied.
+     *
+     * @param compression    The compression type.
+     */
+    public void setCompression(CompressionValue compression) {
+
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        switch(compression) {</span>
+        case NONE:
+        case PACKBITS:
+        case DEFLATE:
+            // Do nothing.
+<span class="nc" id="L100">            break;</span>
+        default:
+<span class="nc" id="L102">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFEncodeParam0&quot;));</span>
+        }
+
+<span class="nc" id="L105">        this.compression = compression;</span>
+<span class="nc" id="L106">    }</span>
+
+    /**
+     * Returns the value of the writeTiled parameter.
+     */
+    public boolean getWriteTiled() {
+<span class="fc" id="L112">        return writeTiled;</span>
+    }
+
+    /**
+     * If set, the data will be written out in tiled format, instead of
+     * in strips.
+     *
+     * @param writeTiled     Specifies whether the image data should be
+     *                       wriiten out in tiled format.
+     */
+    public void setWriteTiled(boolean writeTiled) {
+<span class="nc" id="L123">        this.writeTiled = writeTiled;</span>
+<span class="nc" id="L124">    }</span>
+
+    /**
+     * Sets the dimensions of the tiles to be written.  If either
+     * value is non-positive, the encoder will use a default value.
+     *
+     * &lt;p&gt; If the data are being written as tiles, i.e.,
+     * &lt;code&gt;getWriteTiled()&lt;/code&gt; returns &lt;code&gt;true&lt;/code&gt;, then the
+     * default tile dimensions used by the encoder are those of the tiles
+     * of the image being encoded.
+     *
+     * &lt;p&gt; If the data are being written as strips, i.e.,
+     * &lt;code&gt;getWriteTiled()&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;, the width
+     * of each strip is always the width of the image and the default
+     * number of rows per strip is 8.
+     *
+     * @param tileWidth The tile width; ignored if strips are used.
+     * @param tileHeight The tile height or number of rows per strip.
+     */
+    public void setTileSize(int tileWidth, int tileHeight) {
+<span class="nc" id="L144">        this.tileWidth = tileWidth;</span>
+<span class="nc" id="L145">        this.tileHeight = tileHeight;</span>
+<span class="nc" id="L146">    }</span>
+
+    /**
+     * Retrieves the tile width set via &lt;code&gt;setTileSize()&lt;/code&gt;.
+     */
+    public int getTileWidth() {
+<span class="nc" id="L152">        return tileWidth;</span>
+    }
+
+    /**
+     * Retrieves the tile height set via &lt;code&gt;setTileSize()&lt;/code&gt;.
+     */
+    public int getTileHeight() {
+<span class="fc" id="L159">        return tileHeight;</span>
+    }
+
+    /**
+     * Sets an &lt;code&gt;Iterator&lt;/code&gt; of additional images to be written
+     * after the image passed as an argument to the &lt;code&gt;ImageEncoder&lt;/code&gt;.
+     * The methods on the supplied &lt;code&gt;Iterator&lt;/code&gt; must only be invoked
+     * by the &lt;code&gt;ImageEncoder&lt;/code&gt; which will exhaust the available
+     * values unless an error occurs.
+     *
+     * &lt;p&gt; The value returned by an invocation of &lt;code&gt;next()&lt;/code&gt; on the
+     * &lt;code&gt;Iterator&lt;/code&gt; must return either a &lt;code&gt;RenderedImage&lt;/code&gt;
+     * or an &lt;code&gt;Object[]&lt;/code&gt; of length 2 wherein the element at index
+     * zero is a &lt;code&gt;RenderedImage&lt;/code&gt; amd the other element is a
+     * &lt;code&gt;TIFFEncodeParam&lt;/code&gt;.  If no &lt;code&gt;TIFFEncodeParam&lt;/code&gt; is
+     * supplied in this manner for an additional image, the parameters used
+     * to create the &lt;code&gt;ImageEncoder&lt;/code&gt; will be used.  The extra
+     * image &lt;code&gt;Iterator&lt;/code&gt; set on any &lt;code&gt;TIFFEncodeParam&lt;/code&gt;
+     * of an additional image will in all cases be ignored.
+     */
+    public synchronized void setExtraImages(Iterator extraImages) {
+<span class="nc" id="L180">        this.extraImages = extraImages;</span>
+<span class="nc" id="L181">    }</span>
+
+    /**
+     * Returns the additional image &lt;code&gt;Iterator&lt;/code&gt; specified via
+     * &lt;code&gt;setExtraImages()&lt;/code&gt; or &lt;code&gt;null&lt;/code&gt; if none was
+     * supplied or if a &lt;code&gt;null&lt;/code&gt; value was supplied.
+     */
+    public synchronized Iterator getExtraImages() {
+<span class="fc" id="L189">        return extraImages;</span>
+    }
+
+    /**
+     * Sets the compression level for DEFLATE-compressed data which should
+     * either be &lt;code&gt;java.util.Deflater.DEFAULT_COMPRESSION&lt;/code&gt; or a
+     * value in the range [1,9] where larger values indicate more compression.
+     * The default setting is &lt;code&gt;Deflater.DEFAULT_COMPRESSION&lt;/code&gt;.  This
+     * setting is ignored if the compression type is not DEFLATE.
+     */
+    public void setDeflateLevel(int deflateLevel) {
+<span class="nc bnc" id="L200" title="All 2 branches missed.">        if (deflateLevel != Deflater.DEFAULT_COMPRESSION) {</span>
+<span class="nc" id="L201">            throw new RuntimeException(PropertyUtil.getString(&quot;TIFFEncodeParam1&quot;));</span>
+        }
+
+<span class="nc" id="L204">        this.deflateLevel = deflateLevel;</span>
+<span class="nc" id="L205">    }</span>
+
+    /**
+     * Gets the compression level for DEFLATE compression.
+     */
+    public int getDeflateLevel() {
+<span class="nc" id="L211">        return deflateLevel;</span>
+    }
+
+    /**
+     * Sets flag indicating whether to convert RGB data to YCbCr when the
+     * compression type is JPEG.  The default value is &lt;code&gt;true&lt;/code&gt;.
+     * This flag is ignored if the compression type is not JPEG.
+     */
+    public void setJPEGCompressRGBToYCbCr(boolean convertJPEGRGBToYCbCr) {
+<span class="nc" id="L220">        this.convertJPEGRGBToYCbCr = convertJPEGRGBToYCbCr;</span>
+<span class="nc" id="L221">    }</span>
+
+    /**
+     * Whether RGB data will be converted to YCbCr when using JPEG compression.
+     */
+    public boolean getJPEGCompressRGBToYCbCr() {
+<span class="nc" id="L227">        return convertJPEGRGBToYCbCr;</span>
+    }
+
+    /**
+     * Sets an array of extra fields to be written to the TIFF Image File
+     * Directory (IFD).  Fields with tags equal to the tag of any
+     * automatically generated fields are ignored.  No error checking is
+     * performed with respect to the validity of the field contents or
+     * the appropriateness of the field for the image being encoded.
+     *
+     * @param extraFields An array of extra fields; the parameter is
+     * copied by reference.
+     */
+    public void setExtraFields(TIFFField[] extraFields) {
+<span class="nc" id="L241">        this.extraFields = extraFields;</span>
+<span class="nc" id="L242">    }</span>
+
+    /**
+     * Returns the value set by &lt;code&gt;setExtraFields()&lt;/code&gt;.
+     */
+    public TIFFField[] getExtraFields() {
+<span class="pc bpc" id="L248" title="1 of 2 branches missed.">        if (extraFields == null) {</span>
+<span class="fc" id="L249">            return new TIFFField[0];</span>
+        }
+<span class="nc" id="L251">        return extraFields;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

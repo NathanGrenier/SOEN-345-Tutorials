@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.ps</a> &gt; <span class="el_source">PSGraphics2D.java</span></div><h1>PSGraphics2D.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSGraphics2D.java 1903802 2022-09-01 09:35:58Z ssteiner $ */
+
+package org.apache.xmlgraphics.java2d.ps;
+
+//Java
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
+import java.awt.Paint;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Stroke;
+import java.awt.TexturePaint;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+import java.awt.geom.Line2D;
+import java.awt.geom.PathIterator;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.RenderedImage;
+import java.awt.image.renderable.RenderableImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.xmlgraphics.java2d.AbstractGraphics2D;
+import org.apache.xmlgraphics.java2d.GraphicContext;
+import org.apache.xmlgraphics.java2d.GraphicsConfigurationWithoutTransparency;
+import org.apache.xmlgraphics.java2d.StrokingTextHandler;
+import org.apache.xmlgraphics.java2d.TextHandler;
+import org.apache.xmlgraphics.ps.PSGenerator;
+import org.apache.xmlgraphics.ps.PSImageUtils;
+
+/**
+ * This is a concrete implementation of &lt;tt&gt;AbstractGraphics2D&lt;/tt&gt; (and
+ * therefore of &lt;tt&gt;Graphics2D&lt;/tt&gt;) which is able to generate PostScript
+ * code.
+ *
+ * @version $Id: PSGraphics2D.java 1903802 2022-09-01 09:35:58Z ssteiner $
+ * @see org.apache.xmlgraphics.java2d.AbstractGraphics2D
+ *
+ * Originally authored by Keiron Liddle.
+ */
+public class PSGraphics2D extends AbstractGraphics2D {
+
+<span class="fc" id="L71">    private static final AffineTransform IDENTITY_TRANSFORM = new AffineTransform();</span>
+
+    private static final boolean DEBUG = false;
+
+<span class="pc" id="L75">    protected List&lt;Integer&gt; pathHashCache = new ArrayList&lt;Integer&gt;();</span>
+    protected boolean startCache;
+    /**
+     * The G2D instance that represents the root instance
+     * (used in context with create()/dispose()). Null if this instance is the root instance.
+     */
+    protected PSGraphics2D rootG2D;
+
+    /** the PostScript generator being created */
+    protected PSGenerator gen;
+
+    /** Disable or enable clipping */
+    protected boolean clippingDisabled;
+
+    /** Fallback text handler */
+
+<span class="pc" id="L91">    protected TextHandler fallbackTextHandler = new StrokingTextHandler();</span>
+
+    /** Custom text handler */
+    protected TextHandler customTextHandler;
+
+    /**
+     * the current colour for use in svg
+     */
+<span class="pc" id="L99">    protected Color currentColour = new Color(0, 0, 0);</span>
+
+    /**
+     * Create a new Graphics2D that generates PostScript code.
+     * @param textAsShapes True if text should be rendered as graphics
+     * @see org.apache.xmlgraphics.java2d.AbstractGraphics2D#AbstractGraphics2D(boolean)
+     */
+    public PSGraphics2D(boolean textAsShapes) {
+<span class="fc" id="L107">        super(textAsShapes);</span>
+<span class="fc" id="L108">    }</span>
+
+    /**
+     * Create a new Graphics2D that generates PostScript code.
+     * @param textAsShapes True if text should be rendered as graphics
+     * @param gen PostScript generator to use for output
+     * @see org.apache.xmlgraphics.java2d.AbstractGraphics2D#AbstractGraphics2D(boolean)
+     */
+    public PSGraphics2D(boolean textAsShapes, PSGenerator gen) {
+<span class="fc" id="L117">        this(textAsShapes);</span>
+<span class="fc" id="L118">        setPSGenerator(gen);</span>
+<span class="fc" id="L119">    }</span>
+
+    /**
+     * Constructor for creating copies
+     * @param g parent PostScript Graphics2D
+     */
+    public PSGraphics2D(PSGraphics2D g) {
+<span class="nc" id="L126">        super(g);</span>
+
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        this.rootG2D = (g.rootG2D != null ? g.rootG2D : g);</span>
+<span class="nc" id="L129">        setPSGenerator(g.gen);</span>
+<span class="nc" id="L130">        this.clippingDisabled = g.clippingDisabled;</span>
+        //this.fallbackTextHandler is not copied
+        //TODO The customTextHandler should probably not be passed over just like that
+        //fallbackTextHandler, for example, has to be recreated to point to the sub-Graphics2D
+        //to get the text positioning right. This might require changes in the TextHandler interface
+<span class="nc" id="L135">        this.customTextHandler = g.customTextHandler;</span>
+<span class="nc" id="L136">        this.currentColour    = g.currentColour;</span>
+<span class="nc" id="L137">    }</span>
+
+    /**
+     * Sets the PostScript generator
+     * @param gen the PostScript generator
+     */
+    public void setPSGenerator(PSGenerator gen) {
+<span class="fc" id="L144">        this.gen = gen;</span>
+<span class="fc" id="L145">    }</span>
+
+    /** @return the PostScript generator used by this instance. */
+    public PSGenerator getPSGenerator() {
+<span class="nc" id="L149">        return this.gen;</span>
+    }
+
+    /**
+     * Sets the GraphicContext
+     * @param c GraphicContext to use
+     */
+    public void setGraphicContext(GraphicContext c) {
+<span class="fc" id="L157">        gc = c;</span>
+        //setPrivateHints();
+<span class="fc" id="L159">    }</span>
+
+    /** @return the fallback TextHandler implementation */
+    public TextHandler getFallbackTextHandler() {
+<span class="nc" id="L163">        return this.fallbackTextHandler;</span>
+    }
+
+    /** @return the custom TextHandler implementation */
+    public TextHandler getCustomTextHandler() {
+<span class="nc" id="L168">        return this.customTextHandler;</span>
+    }
+
+    /**
+     * Sets a custom TextHandler implementation that is responsible for painting text. The default
+     * TextHandler paints all text as shapes. A custom implementation can implement text painting
+     * using text painting operators.
+     * @param handler the custom TextHandler implementation
+     */
+    public void setCustomTextHandler(TextHandler handler) {
+<span class="nc" id="L178">        this.customTextHandler = handler;</span>
+<span class="nc" id="L179">    }</span>
+
+    /* TODO Add me back at the right place!!!
+    private void setPrivateHints() {
+        setRenderingHint(RenderingHintsKeyExt.KEY_AVOID_TILE_PAINTING,
+                RenderingHintsKeyExt.VALUE_AVOID_TILE_PAINTING_ON);
+    }*/
+
+    /**
+     * Disable clipping on each draw command.
+     *
+     * @param b set to true to disable all clipping.
+     */
+    public void disableClipping(boolean b) {
+<span class="nc" id="L193">        this.clippingDisabled = b;</span>
+<span class="nc" id="L194">    }</span>
+
+    /**
+     * Creates a new &lt;code&gt;Graphics&lt;/code&gt; object that is
+     * a copy of this &lt;code&gt;Graphics&lt;/code&gt; object.
+     * @return     a new graphics context that is a copy of
+     * this graphics context.
+     */
+    public Graphics create() {
+<span class="nc" id="L203">        preparePainting();</span>
+<span class="nc" id="L204">        return new PSGraphics2D(this);</span>
+    }
+
+    /**
+     * Central handler for IOExceptions for this class.
+     * @param ioe IOException to handle
+     */
+    public void handleIOException(IOException ioe) {
+        //TODO Surely, there's a better way to do this.
+<span class="nc" id="L213">        ioe.printStackTrace();</span>
+<span class="nc" id="L214">    }</span>
+
+    /**
+     * This method is used by AbstractPSDocumentGraphics2D to prepare a new page if
+     * necessary.
+     */
+    public void preparePainting() {
+        //nop, used by AbstractPSDocumentGraphics2D
+<span class="pc bpc" id="L222" title="1 of 2 branches missed.">        if (rootG2D != null) {</span>
+<span class="nc" id="L223">            rootG2D.preparePainting();</span>
+        }
+<span class="fc" id="L225">    }</span>
+
+    /**
+     * Draws as much of the specified image as is currently available.
+     * The image is drawn with its top-left corner at
+     * (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in this graphics context's coordinate
+     * space. Transparent pixels in the image do not affect whatever
+     * pixels are already there.
+     * &lt;p&gt;
+     * This method returns immediately in all cases, even if the
+     * complete image has not yet been loaded, and it has not been dithered
+     * and converted for the current output device.
+     * &lt;p&gt;
+     * If the image has not yet been completely loaded, then
+     * &lt;code&gt;drawImage&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;. As more of
+     * the image becomes available, the process that draws the image notifies
+     * the specified image observer.
+     * @param    img the specified image to be drawn.
+     * @param    x   the &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param    y   the &lt;i&gt;y&lt;/i&gt; coordinate.
+     * @param    observer    object to be notified as more of
+     * the image is converted.
+     * @return True if the image has been fully drawn/loaded
+     * @see      java.awt.Image
+     * @see      java.awt.image.ImageObserver
+     * @see      java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
+     */
+    public boolean drawImage(Image img, int x, int y, ImageObserver observer) {
+<span class="fc" id="L253">        return drawImage(img, x, y, observer, null);</span>
+    }
+
+    public boolean drawImage(Image img, int x, int y, ImageObserver observer, Color mask) {
+<span class="fc" id="L257">        return drawImage(img, x, y, observer, mask, null);</span>
+    }
+
+    public boolean drawImage(Image img, int x, int y, ImageObserver observer, Color mask, RenderedImage imageMask) {
+<span class="fc" id="L261">        preparePainting();</span>
+        if (DEBUG) {
+            System.out.println(&quot;drawImage: &quot; + x + &quot;, &quot; + y + &quot; &quot; + img.getClass().getName());
+        }
+
+<span class="fc" id="L266">        final int width = img.getWidth(observer);</span>
+<span class="fc" id="L267">        final int height = img.getHeight(observer);</span>
+<span class="pc bpc" id="L268" title="2 of 4 branches missed.">        if (width == -1 || height == -1) {</span>
+<span class="nc" id="L269">            return false;</span>
+        }
+
+<span class="fc" id="L272">        Dimension size = new Dimension(width, height);</span>
+<span class="fc" id="L273">        BufferedImage buf = buildBufferedImage(size);</span>
+
+<span class="fc" id="L275">        java.awt.Graphics2D g = buf.createGraphics();</span>
+<span class="fc" id="L276">        g.setComposite(AlphaComposite.SrcOver);</span>
+<span class="fc" id="L277">        g.setBackground(new Color(1, 1, 1, 0));</span>
+<span class="fc" id="L278">        g.fillRect(0, 0, width, height);</span>
+<span class="fc" id="L279">        g.clip(new Rectangle(0, 0, buf.getWidth(), buf.getHeight()));</span>
+
+<span class="pc bpc" id="L281" title="1 of 2 branches missed.">        if (!g.drawImage(img, 0, 0, observer)) {</span>
+<span class="nc" id="L282">            return false;</span>
+        }
+<span class="fc" id="L284">        g.dispose();</span>
+
+        try {
+<span class="fc" id="L287">            AffineTransform at = getTransform();</span>
+<span class="fc" id="L288">            gen.saveGraphicsState();</span>
+<span class="fc" id="L289">            gen.concatMatrix(at);</span>
+<span class="fc" id="L290">            Shape imclip = getClip();</span>
+<span class="fc" id="L291">            writeClip(imclip);</span>
+<span class="fc bfc" id="L292" title="All 2 branches covered.">            if (imageMask == null) {</span>
+<span class="fc" id="L293">                PSImageUtils.renderBitmapImage(buf, x, y, width, height, gen, mask, false);</span>
+            } else {
+<span class="fc" id="L295">                PSImageUtils.renderBitmapImage(imageMask, x, y, width, height, gen, mask, true);</span>
+            }
+<span class="fc" id="L297">            gen.restoreGraphicsState();</span>
+<span class="nc" id="L298">        } catch (IOException ioe) {</span>
+<span class="nc" id="L299">            handleIOException(ioe);</span>
+<span class="fc" id="L300">        }</span>
+
+<span class="fc" id="L302">        return true;</span>
+    }
+
+    /**
+     * Creates a buffered image.
+     * @param size dimensions of the image to be created
+     * @return the buffered image
+     */
+    public BufferedImage buildBufferedImage(Dimension size) {
+<span class="fc" id="L311">        return new BufferedImage(size.width, size.height,</span>
+                                 BufferedImage.TYPE_INT_ARGB);
+    }
+
+    /**
+     * Draws as much of the specified image as has already been scaled
+     * to fit inside the specified rectangle.
+     * &lt;p&gt;
+     * The image is drawn inside the specified rectangle of this
+     * graphics context's coordinate space, and is scaled if
+     * necessary. Transparent pixels do not affect whatever pixels
+     * are already there.
+     * &lt;p&gt;
+     * This method returns immediately in all cases, even if the
+     * entire image has not yet been scaled, dithered, and converted
+     * for the current output device.
+     * If the current output representation is not yet complete, then
+     * &lt;code&gt;drawImage&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;. As more of
+     * the image becomes available, the process that draws the image notifies
+     * the image observer by calling its &lt;code&gt;imageUpdate&lt;/code&gt; method.
+     * &lt;p&gt;
+     * A scaled version of an image will not necessarily be
+     * available immediately just because an unscaled version of the
+     * image has been constructed for this output device.  Each size of
+     * the image may be cached separately and generated from the original
+     * data in a separate image production sequence.
+     * @param    img    the specified image to be drawn.
+     * @param    x      the &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param    y      the &lt;i&gt;y&lt;/i&gt; coordinate.
+     * @param    width  the width of the rectangle.
+     * @param    height the height of the rectangle.
+     * @param    observer    object to be notified as more of
+     * the image is converted.
+     * @return   True if the image has been fully loaded/drawn
+     * @see      java.awt.Image
+     * @see      java.awt.image.ImageObserver
+     * @see      java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
+     */
+    public boolean drawImage(Image img, int x, int y, int width, int height,
+                             ImageObserver observer) {
+<span class="nc" id="L351">        preparePainting();</span>
+<span class="nc" id="L352">        System.err.println(&quot;NYI: drawImage&quot;);</span>
+<span class="nc" id="L353">        return true;</span>
+    }
+
+    /**
+     * Disposes of this graphics context and releases
+     * any system resources that it is using.
+     * A &lt;code&gt;Graphics&lt;/code&gt; object cannot be used after
+     * &lt;code&gt;dispose&lt;/code&gt;has been called.
+     * &lt;p&gt;
+     * When a Java program runs, a large number of &lt;code&gt;Graphics&lt;/code&gt;
+     * objects can be created within a short time frame.
+     * Although the finalization process of the garbage collector
+     * also disposes of the same system resources, it is preferable
+     * to manually free the associated resources by calling this
+     * method rather than to rely on a finalization process which
+     * may not run to completion for a long period of time.
+     * &lt;p&gt;
+     * Graphics objects which are provided as arguments to the
+     * &lt;code&gt;paint&lt;/code&gt; and &lt;code&gt;update&lt;/code&gt; methods
+     * of components are automatically released by the system when
+     * those methods return. For efficiency, programmers should
+     * call &lt;code&gt;dispose&lt;/code&gt; when finished using
+     * a &lt;code&gt;Graphics&lt;/code&gt; object only if it was created
+     * directly from a component or another &lt;code&gt;Graphics&lt;/code&gt; object.
+     * @see         java.awt.Graphics#finalize
+     * @see         java.awt.Component#paint
+     * @see         java.awt.Component#update
+     * @see         java.awt.Component#getGraphics
+     * @see         java.awt.Graphics#create
+     */
+    public void dispose() {
+<span class="fc" id="L384">        this.gen = null;</span>
+<span class="fc" id="L385">        this.fallbackTextHandler = null;</span>
+<span class="fc" id="L386">        this.customTextHandler = null;</span>
+<span class="fc" id="L387">        this.currentColour = null;</span>
+<span class="fc" id="L388">    }</span>
+
+    /**
+     * Processes a Shape generating the necessary painting operations.
+     * @param s Shape to process
+     * @return the winding rule of the path defining the shape
+     * @throws IOException In case of an I/O problem.
+     */
+    public int processShape(Shape s, boolean cached) throws IOException {
+<span class="fc bfc" id="L397" title="All 2 branches covered.">        if (s instanceof Rectangle2D) {</span>
+            // Special optimization in case of Rectangle Shape
+<span class="fc" id="L399">            Rectangle2D r = (Rectangle2D) s;</span>
+<span class="fc" id="L400">            gen.defineRect(r.getX(), r.getY(), r.getWidth(), r.getHeight());</span>
+<span class="fc" id="L401">            return PathIterator.WIND_NON_ZERO;</span>
+        } else {
+<span class="fc" id="L403">            PathIterator iter = s.getPathIterator(IDENTITY_TRANSFORM);</span>
+<span class="fc bfc" id="L404" title="All 2 branches covered.">            if (cached) {</span>
+<span class="fc" id="L405">                processPathIteratorCached(s);</span>
+            } else {
+<span class="fc" id="L407">                processPathIterator(iter);</span>
+            }
+<span class="fc" id="L409">            return iter.getWindingRule();</span>
+        }
+    }
+
+    protected String processPathIteratorToString(PathIterator iter) throws IOException {
+<span class="fc" id="L414">        StringBuilder cmd = new StringBuilder();</span>
+<span class="fc" id="L415">        double[] vals = new double[6];</span>
+<span class="fc bfc" id="L416" title="All 2 branches covered.">        while (!iter.isDone()) {</span>
+<span class="fc" id="L417">            int type = iter.currentSegment(vals);</span>
+<span class="pc bpc" id="L418" title="1 of 6 branches missed.">            switch (type) {</span>
+            case PathIterator.SEG_CUBICTO:
+<span class="fc" id="L420">                cmd.append(gen.formatDouble(vals[0])).append(&quot; &quot;).append(gen.formatDouble(vals[1])).append(&quot; &quot;)</span>
+<span class="fc" id="L421">                        .append(gen.formatDouble(vals[2])).append(&quot; &quot;).append(gen.formatDouble(vals[3])).append(&quot; &quot;)</span>
+<span class="fc" id="L422">                        .append(gen.formatDouble(vals[4])).append(&quot; &quot;).append(gen.formatDouble(vals[5])).append(&quot; &quot;)</span>
+<span class="fc" id="L423">                        .append(gen.mapCommand(&quot;curveto&quot;)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L424">                break;</span>
+            case PathIterator.SEG_LINETO:
+<span class="fc" id="L426">                cmd.append(gen.formatDouble(vals[0])).append(&quot; &quot;).append(gen.formatDouble(vals[1])).append(&quot; &quot;)</span>
+<span class="fc" id="L427">                        .append(gen.mapCommand(&quot;lineto&quot;)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L428">                break;</span>
+            case PathIterator.SEG_MOVETO:
+<span class="fc" id="L430">                cmd.append(gen.formatDouble(vals[0])).append(&quot; &quot;).append(gen.formatDouble(vals[1])).append(&quot; &quot;)</span>
+<span class="fc" id="L431">                        .append(gen.mapCommand(&quot;moveto&quot;)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L432">                break;</span>
+            case PathIterator.SEG_QUADTO:
+<span class="fc" id="L434">                cmd.append(gen.formatDouble(vals[0])).append(&quot; &quot;).append(gen.formatDouble(vals[1])).append(&quot; &quot;)</span>
+<span class="fc" id="L435">                        .append(gen.formatDouble(vals[2])).append(&quot; &quot;).append(gen.formatDouble(vals[3])).append(&quot; QT&quot;)</span>
+<span class="fc" id="L436">                        .append(&quot;\n&quot;);</span>
+<span class="fc" id="L437">                break;</span>
+            case PathIterator.SEG_CLOSE:
+<span class="fc" id="L439">                cmd.append(gen.mapCommand(&quot;closepath&quot;)).append(&quot;\n&quot;);</span>
+<span class="fc" id="L440">                break;</span>
+            default:
+                break;
+            }
+<span class="fc" id="L444">            iter.next();</span>
+<span class="fc" id="L445">        }</span>
+<span class="fc" id="L446">        return cmd.toString().trim();</span>
+    }
+
+    protected void processPathIteratorCached(Shape s) throws IOException {
+<span class="fc" id="L450">        String cmd = processPathIteratorToString(s.getPathIterator(IDENTITY_TRANSFORM));</span>
+<span class="fc" id="L451">        int hash = cmd.hashCode();</span>
+<span class="fc bfc" id="L452" title="All 2 branches covered.">        if (!startCache) {</span>
+<span class="fc bfc" id="L453" title="All 2 branches covered.">            if (pathHashCache.contains(hash)) {</span>
+<span class="fc" id="L454">                startCache = true;</span>
+<span class="fc" id="L455">                pathHashCache.clear();</span>
+            } else {
+<span class="fc" id="L457">                gen.writeln(cmd);</span>
+<span class="fc" id="L458">                pathHashCache.add(hash);</span>
+            }
+        }
+<span class="fc bfc" id="L461" title="All 2 branches covered.">        if (startCache) {</span>
+<span class="pc bpc" id="L462" title="1 of 2 branches missed.">            if (!pathHashCache.contains(hash)) {</span>
+<span class="fc" id="L463">                gen.writeln(&quot;/f&quot; + hash + &quot;{&quot; + cmd + &quot;}def&quot;);</span>
+<span class="fc" id="L464">                pathHashCache.add(hash);</span>
+            }
+<span class="fc" id="L466">            gen.writeln(&quot;f&quot; + hash);</span>
+        }
+<span class="fc" id="L468">    }</span>
+
+    /**
+     * Processes a path iterator generating the nexessary painting operations.
+     * @param iter PathIterator to process
+     * @throws IOException In case of an I/O problem.
+     */
+    public void processPathIterator(PathIterator iter) throws IOException {
+<span class="fc" id="L476">        gen.writeln(processPathIteratorToString(iter));</span>
+<span class="fc" id="L477">    }</span>
+
+    /**
+     * Strokes the outline of a &lt;code&gt;Shape&lt;/code&gt; using the settings of the
+     * current &lt;code&gt;Graphics2D&lt;/code&gt; context.  The rendering attributes
+     * applied include the &lt;code&gt;Clip&lt;/code&gt;, &lt;code&gt;Transform&lt;/code&gt;,
+     * &lt;code&gt;Paint&lt;/code&gt;, &lt;code&gt;Composite&lt;/code&gt; and
+     * &lt;code&gt;Stroke&lt;/code&gt; attributes.
+     * @param s the &lt;code&gt;Shape&lt;/code&gt; to be rendered
+     * @see #setStroke
+     * @see #setPaint
+     * @see java.awt.Graphics#setColor
+     * @see #transform
+     * @see #setTransform
+     * @see #clip
+     * @see #setClip
+     * @see #setComposite
+     */
+    public void draw(Shape s) {
+<span class="fc" id="L496">        preparePainting();</span>
+        try {
+<span class="fc" id="L498">            gen.saveGraphicsState();</span>
+
+<span class="fc" id="L500">            AffineTransform trans = getTransform();</span>
+<span class="pc bpc" id="L501" title="1 of 2 branches missed.">            boolean newTransform = !trans.isIdentity();</span>
+
+<span class="pc bpc" id="L503" title="1 of 2 branches missed.">            if (newTransform) {</span>
+<span class="fc" id="L504">                gen.concatMatrix(trans);</span>
+            }
+<span class="fc" id="L506">            Shape imclip = getClip();</span>
+<span class="pc bpc" id="L507" title="1 of 2 branches missed.">            if (shouldBeClipped(imclip, s)) {</span>
+<span class="nc" id="L508">                writeClip(imclip);</span>
+            }
+<span class="fc" id="L510">            establishColor(getColor());</span>
+
+<span class="fc" id="L512">            applyPaint(getPaint(), false);</span>
+<span class="fc" id="L513">            applyStroke(getStroke());</span>
+
+<span class="fc" id="L515">            gen.writeln(gen.mapCommand(&quot;newpath&quot;));</span>
+<span class="fc" id="L516">            processShape(s, false);</span>
+<span class="fc" id="L517">            doDrawing(false, true, false);</span>
+<span class="fc" id="L518">            gen.restoreGraphicsState();</span>
+<span class="nc" id="L519">        } catch (IOException ioe) {</span>
+<span class="nc" id="L520">            handleIOException(ioe);</span>
+<span class="fc" id="L521">        }</span>
+<span class="fc" id="L522">    }</span>
+
+    /**
+     * Determines if a shape interacts with a clipping region.
+     * @param clip Shape defining the clipping region
+     * @param s Shape to be drawn
+     * @return true if code for a clipping region needs to be generated.
+     */
+    public boolean shouldBeClipped(Shape clip, Shape s) {
+<span class="pc bpc" id="L531" title="1 of 4 branches missed.">        if (clip == null || s == null) {</span>
+<span class="fc" id="L532">            return false;</span>
+        }
+<span class="fc bfc" id="L534" title="All 2 branches covered.">        if (s instanceof Line2D) {</span>
+            //Line shapes don't work with intersections so always clip
+<span class="fc" id="L536">            return true;</span>
+        }
+<span class="fc" id="L538">        Area as = new Area(s);</span>
+<span class="fc" id="L539">        Area imclip = new Area(clip);</span>
+<span class="fc" id="L540">        imclip.intersect(as);</span>
+<span class="pc bpc" id="L541" title="1 of 2 branches missed.">        return !imclip.equals(as);</span>
+    }
+
+    /**
+     * Establishes a clipping region
+     * @param s Shape defining the clipping region
+     */
+    public void writeClip(Shape s) {
+<span class="fc bfc" id="L549" title="All 2 branches covered.">        if (s == null) {</span>
+<span class="fc" id="L550">            return;</span>
+        }
+<span class="pc bpc" id="L552" title="1 of 2 branches missed.">        if (!this.clippingDisabled) {</span>
+<span class="fc" id="L553">            preparePainting();</span>
+            try {
+<span class="fc" id="L555">                gen.writeln(gen.mapCommand(&quot;newpath&quot;));</span>
+<span class="fc" id="L556">                processShape(s, false);</span>
+                // clip area
+<span class="fc" id="L558">                gen.writeln(gen.mapCommand(&quot;clip&quot;));</span>
+<span class="nc" id="L559">            } catch (IOException ioe) {</span>
+<span class="nc" id="L560">                handleIOException(ioe);</span>
+<span class="fc" id="L561">            }</span>
+        }
+<span class="fc" id="L563">    }</span>
+
+    /**
+     * Applies a new Paint object.
+     * @param paint Paint object to use
+     * @param fill True if to be applied for filling
+     */
+    protected void applyPaint(Paint paint, boolean fill) {
+<span class="fc" id="L571">        preparePainting();</span>
+<span class="pc bpc" id="L572" title="1 of 2 branches missed.">        if (paint instanceof GradientPaint) {</span>
+<span class="nc" id="L573">            System.err.println(&quot;NYI: Gradient paint&quot;);</span>
+<span class="fc bfc" id="L574" title="All 2 branches covered.">        } else if (paint instanceof TexturePaint) {</span>
+<span class="pc bpc" id="L575" title="1 of 2 branches missed.">            if (fill) {</span>
+                try {
+                    // create pattern with texture and use it for filling of a graphics object
+<span class="fc" id="L578">                    PSTilingPattern psTilingPattern = new PSTilingPattern(&quot;Pattern1&quot;,</span>
+                            (TexturePaint)paint, 0, 0, 3, null);
+<span class="fc" id="L580">                    gen.write(psTilingPattern.toString(gen.isAcrobatDownsample()));</span>
+<span class="fc" id="L581">                    gen.writeln(&quot;/Pattern &quot; + gen.mapCommand(&quot;setcolorspace&quot;));</span>
+<span class="fc" id="L582">                    gen.writeln(psTilingPattern.getName() + &quot; &quot; + gen.mapCommand(&quot;setcolor&quot;));</span>
+<span class="nc" id="L583">                } catch (IOException ioe) {</span>
+<span class="nc" id="L584">                    handleIOException(ioe);</span>
+<span class="fc" id="L585">                }</span>
+            }
+        }
+<span class="fc" id="L588">    }</span>
+
+    /**
+     * Applies a new Stroke object.
+     * @param stroke Stroke object to use
+     */
+    protected void applyStroke(Stroke stroke) {
+<span class="fc" id="L595">        preparePainting();</span>
+        try {
+<span class="fc" id="L597">            applyStroke(stroke, gen);</span>
+<span class="nc" id="L598">        } catch (IOException ioe) {</span>
+<span class="nc" id="L599">            handleIOException(ioe);</span>
+<span class="fc" id="L600">        }</span>
+<span class="fc" id="L601">    }</span>
+
+    /**
+     * Applies a new Stroke object.
+     * @param stroke the Stroke instance
+     * @param gen the PS generator
+     * @throws IOException if an I/O error occurs
+     */
+    public static void applyStroke(Stroke stroke, final PSGenerator gen)
+            throws IOException {
+<span class="pc bpc" id="L611" title="1 of 2 branches missed.">        if (stroke instanceof BasicStroke) {</span>
+<span class="fc" id="L612">            BasicStroke basicStroke = (BasicStroke)stroke;</span>
+
+<span class="fc" id="L614">            float[] da = basicStroke.getDashArray();</span>
+<span class="pc bpc" id="L615" title="1 of 2 branches missed.">            if (da != null) {</span>
+<span class="nc" id="L616">                StringBuffer sb = new StringBuffer(&quot;[&quot;);</span>
+<span class="nc bnc" id="L617" title="All 2 branches missed.">                for (int count = 0; count &lt; da.length; count++) {</span>
+<span class="nc" id="L618">                    sb.append(gen.formatDouble(da[count]));</span>
+<span class="nc bnc" id="L619" title="All 2 branches missed.">                    if (count &lt; da.length - 1) {</span>
+<span class="nc" id="L620">                        sb.append(&quot; &quot;);</span>
+                    }
+                }
+<span class="nc" id="L623">                sb.append(&quot;] &quot;);</span>
+<span class="nc" id="L624">                float offset = basicStroke.getDashPhase();</span>
+<span class="nc" id="L625">                sb.append(gen.formatDouble(offset));</span>
+<span class="nc" id="L626">                gen.useDash(sb.toString());</span>
+<span class="nc" id="L627">            } else {</span>
+<span class="fc" id="L628">                gen.useDash(null);</span>
+            }
+<span class="fc" id="L630">            int ec = basicStroke.getEndCap();</span>
+<span class="pc bpc" id="L631" title="3 of 4 branches missed.">            switch (ec) {</span>
+            case BasicStroke.CAP_BUTT:
+<span class="nc" id="L633">                gen.useLineCap(0);</span>
+<span class="nc" id="L634">                break;</span>
+            case BasicStroke.CAP_ROUND:
+<span class="nc" id="L636">                gen.useLineCap(1);</span>
+<span class="nc" id="L637">                break;</span>
+            case BasicStroke.CAP_SQUARE:
+<span class="fc" id="L639">                gen.useLineCap(2);</span>
+<span class="fc" id="L640">                break;</span>
+<span class="nc" id="L641">            default: System.err.println(&quot;Unsupported line cap: &quot; + ec);</span>
+            }
+
+<span class="fc" id="L644">            int lj = basicStroke.getLineJoin();</span>
+<span class="pc bpc" id="L645" title="3 of 4 branches missed.">            switch (lj) {</span>
+            case BasicStroke.JOIN_MITER:
+<span class="fc" id="L647">                gen.useLineJoin(0);</span>
+<span class="fc" id="L648">                float ml = basicStroke.getMiterLimit();</span>
+<span class="pc bpc" id="L649" title="1 of 2 branches missed.">                gen.useMiterLimit(ml &gt;= -1 ? ml : 1);</span>
+<span class="fc" id="L650">                break;</span>
+            case BasicStroke.JOIN_ROUND:
+<span class="nc" id="L652">                gen.useLineJoin(1);</span>
+<span class="nc" id="L653">                break;</span>
+            case BasicStroke.JOIN_BEVEL:
+<span class="nc" id="L655">                gen.useLineJoin(2);</span>
+<span class="nc" id="L656">                break;</span>
+<span class="nc" id="L657">            default: System.err.println(&quot;Unsupported line join: &quot; + lj);</span>
+            }
+<span class="fc" id="L659">            float lw = basicStroke.getLineWidth();</span>
+<span class="fc" id="L660">            gen.useLineWidth(lw);</span>
+<span class="fc" id="L661">        } else {</span>
+<span class="nc" id="L662">            System.err.println(&quot;Stroke not supported: &quot; + stroke.toString());</span>
+        }
+<span class="fc" id="L664">    }</span>
+
+    /**
+     * Renders a {@link RenderedImage},
+     * applying a transform from image
+     * space into user space before drawing.
+     * The transformation from user space into device space is done with
+     * the current &lt;code&gt;Transform&lt;/code&gt; in the &lt;code&gt;Graphics2D&lt;/code&gt;.
+     * The specified transformation is applied to the image before the
+     * transform attribute in the &lt;code&gt;Graphics2D&lt;/code&gt; context is applied.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;, and &lt;code&gt;Composite&lt;/code&gt; attributes. Note
+     * that no rendering is done if the specified transform is
+     * noninvertible.
+     * @param img the image to be rendered
+     * @param xform the transformation from image space into user space
+     * @see #transform
+     * @see #setTransform
+     * @see #setComposite
+     * @see #clip
+     * @see #setClip
+     */
+    public void drawRenderedImage(RenderedImage img, AffineTransform xform) {
+<span class="fc" id="L687">        preparePainting();</span>
+        try {
+<span class="fc" id="L689">            AffineTransform at = getTransform();</span>
+<span class="fc" id="L690">            gen.saveGraphicsState();</span>
+<span class="fc" id="L691">            gen.concatMatrix(at);</span>
+<span class="fc" id="L692">            gen.concatMatrix(xform);</span>
+<span class="fc" id="L693">            Shape imclip = getClip();</span>
+<span class="fc" id="L694">            writeClip(imclip);</span>
+<span class="fc" id="L695">            PSImageUtils.renderBitmapImage(img,</span>
+<span class="fc" id="L696">                0, 0, img.getWidth(), img.getHeight(), gen, null, false);</span>
+<span class="fc" id="L697">            gen.restoreGraphicsState();</span>
+<span class="nc" id="L698">        } catch (IOException ioe) {</span>
+<span class="nc" id="L699">            handleIOException(ioe);</span>
+<span class="fc" id="L700">        }</span>
+<span class="fc" id="L701">    }</span>
+
+    /**
+     * Renders a
+     * {@link RenderableImage},
+     * applying a transform from image space into user space before drawing.
+     * The transformation from user space into device space is done with
+     * the current &lt;code&gt;Transform&lt;/code&gt; in the &lt;code&gt;Graphics2D&lt;/code&gt;.
+     * The specified transformation is applied to the image before the
+     * transform attribute in the &lt;code&gt;Graphics2D&lt;/code&gt; context is applied.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;, and &lt;code&gt;Composite&lt;/code&gt; attributes. Note
+     * that no rendering is done if the specified transform is
+     * noninvertible.
+     * &lt;p&gt;
+     * Rendering hints set on the &lt;code&gt;Graphics2D&lt;/code&gt; object might
+     * be used in rendering the &lt;code&gt;RenderableImage&lt;/code&gt;.
+     * If explicit control is required over specific hints recognized by a
+     * specific &lt;code&gt;RenderableImage&lt;/code&gt;, or if knowledge of which hints
+     * are used is required, then a &lt;code&gt;RenderedImage&lt;/code&gt; should be
+     * obtained directly from the &lt;code&gt;RenderableImage&lt;/code&gt;
+     * and rendered using
+     * {@link #drawRenderedImage(RenderedImage, AffineTransform) drawRenderedImage}.
+     * @param img the image to be rendered
+     * @param xform the transformation from image space into user space
+     * @see #transform
+     * @see #setTransform
+     * @see #setComposite
+     * @see #clip
+     * @see #setClip
+     * @see #drawRenderedImage
+     */
+    public void drawRenderableImage(RenderableImage img,
+                                    AffineTransform xform) {
+<span class="nc" id="L735">        preparePainting();</span>
+<span class="nc" id="L736">        System.err.println(&quot;NYI: drawRenderableImage&quot;);</span>
+<span class="nc" id="L737">    }</span>
+
+    /**
+     * Establishes the given color in the PostScript interpreter.
+     * @param c the color to set
+     * @throws IOException In case of an I/O problem
+     */
+    public void establishColor(Color c) throws IOException {
+<span class="fc" id="L745">        gen.useColor(c);</span>
+<span class="fc" id="L746">    }</span>
+
+    /**
+     * Renders the text specified by the specified &lt;code&gt;String&lt;/code&gt;,
+     * using the current &lt;code&gt;Font&lt;/code&gt; and &lt;code&gt;Paint&lt;/code&gt; attributes
+     * in the &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * The baseline of the first character is at position
+     * (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in the User Space.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;, &lt;code&gt;Paint&lt;/code&gt;, &lt;code&gt;Font&lt;/code&gt; and
+     * &lt;code&gt;Composite&lt;/code&gt; attributes. For characters in script systems
+     * such as Hebrew and Arabic, the glyphs can be rendered from right to
+     * left, in which case the coordinate supplied is the location of the
+     * leftmost character on the baseline.
+     * @param s the &lt;code&gt;String&lt;/code&gt; to be rendered
+     * @param x the x-coordinate where the &lt;code&gt;String&lt;/code&gt;
+     * should be rendered
+     * @param y the y-coordinate where the &lt;code&gt;String&lt;/code&gt;
+     * should be rendered
+     * @see #setPaint
+     * @see java.awt.Graphics#setColor
+     * @see java.awt.Graphics#setFont
+     * @see #setTransform
+     * @see #setComposite
+     * @see #setClip
+     */
+    public void drawString(String s, float x, float y) {
+        try {
+<span class="pc bpc" id="L774" title="3 of 4 branches missed.">            if (customTextHandler != null &amp;&amp; !textAsShapes) {</span>
+<span class="nc" id="L775">                customTextHandler.drawString(this, s, x, y);</span>
+            } else {
+<span class="fc" id="L777">                fallbackTextHandler.drawString(this, s, x, y);</span>
+            }
+<span class="nc" id="L779">        } catch (IOException ioe) {</span>
+<span class="nc" id="L780">            handleIOException(ioe);</span>
+<span class="fc" id="L781">        }</span>
+<span class="fc" id="L782">    }</span>
+
+    /**
+     * Fills the interior of a &lt;code&gt;Shape&lt;/code&gt; using the settings of the
+     * &lt;code&gt;Graphics2D&lt;/code&gt; context. The rendering attributes applied
+     * include the &lt;code&gt;Clip&lt;/code&gt;, &lt;code&gt;Transform&lt;/code&gt;,
+     * &lt;code&gt;Paint&lt;/code&gt;, and &lt;code&gt;Composite&lt;/code&gt;.
+     * @param s the &lt;code&gt;Shape&lt;/code&gt; to be filled
+     * @see #setPaint
+     * @see java.awt.Graphics#setColor
+     * @see #transform
+     * @see #setTransform
+     * @see #setComposite
+     * @see #clip
+     * @see #setClip
+     */
+    public void fill(Shape s) {
+<span class="fc bfc" id="L799" title="All 2 branches covered.">        if (!hasAlpha()) {</span>
+<span class="fc" id="L800">            preparePainting();</span>
+            try {
+<span class="fc" id="L802">                gen.saveGraphicsState();</span>
+
+<span class="fc" id="L804">                AffineTransform trans = getTransform();</span>
+<span class="pc bpc" id="L805" title="1 of 2 branches missed.">                boolean newTransform = !trans.isIdentity();</span>
+
+<span class="pc bpc" id="L807" title="1 of 2 branches missed.">                if (newTransform) {</span>
+<span class="nc" id="L808">                    gen.concatMatrix(trans);</span>
+                }
+<span class="fc" id="L810">                Shape imclip = getClip();</span>
+<span class="pc bpc" id="L811" title="1 of 2 branches missed.">                if (shouldBeClipped(imclip, s)) {</span>
+<span class="nc" id="L812">                    writeClip(imclip);</span>
+                }
+
+<span class="fc" id="L815">                establishColor(getColor());</span>
+
+<span class="fc" id="L817">                applyPaint(getPaint(), true);</span>
+
+<span class="fc" id="L819">                gen.writeln(gen.mapCommand(&quot;newpath&quot;));</span>
+<span class="fc" id="L820">                int windingRule = processShape(s, true);</span>
+<span class="pc bpc" id="L821" title="1 of 2 branches missed.">                doDrawing(true, false,</span>
+                    windingRule == PathIterator.WIND_EVEN_ODD);
+<span class="fc" id="L823">                gen.restoreGraphicsState();</span>
+<span class="nc" id="L824">            } catch (IOException ioe) {</span>
+<span class="nc" id="L825">                handleIOException(ioe);</span>
+<span class="fc" id="L826">            }</span>
+        }
+<span class="fc" id="L828">    }</span>
+
+    private boolean hasAlpha() {
+<span class="fc" id="L831">        Composite composite = getComposite();</span>
+<span class="pc bpc" id="L832" title="1 of 4 branches missed.">        return composite instanceof AlphaComposite &amp;&amp; ((AlphaComposite) composite).getAlpha() == 0f;</span>
+    }
+
+    /**
+     * Commits a painting operation.
+     * @param fill filling
+     * @param stroke stroking
+     * @param nonzero true if the non-zero winding rule should be used when filling
+     * @exception IOException In case of an I/O problem
+     */
+    protected void doDrawing(boolean fill, boolean stroke, boolean nonzero)
+                throws IOException {
+<span class="fc" id="L844">        preparePainting();</span>
+<span class="fc bfc" id="L845" title="All 2 branches covered.">        if (fill) {</span>
+<span class="pc bpc" id="L846" title="1 of 2 branches missed.">            if (stroke) {</span>
+<span class="nc bnc" id="L847" title="All 2 branches missed.">                if (!nonzero) {</span>
+<span class="nc" id="L848">                    gen.writeln(gen.mapCommand(&quot;gsave&quot;) + &quot; &quot;</span>
+<span class="nc" id="L849">                            + gen.mapCommand(&quot;fill&quot;) + &quot; &quot;</span>
+<span class="nc" id="L850">                            + gen.mapCommand(&quot;grestore&quot;) + &quot; &quot;</span>
+<span class="nc" id="L851">                            + gen.mapCommand(&quot;stroke&quot;));</span>
+                } else {
+<span class="nc" id="L853">                    gen.writeln(gen.mapCommand(&quot;gsave&quot;) + &quot; &quot;</span>
+<span class="nc" id="L854">                            + gen.mapCommand(&quot;eofill&quot;) + &quot; &quot;</span>
+<span class="nc" id="L855">                            + gen.mapCommand(&quot;grestore&quot;) + &quot; &quot;</span>
+<span class="nc" id="L856">                            + gen.mapCommand(&quot;stroke&quot;));</span>
+                }
+            } else {
+<span class="pc bpc" id="L859" title="1 of 2 branches missed.">                if (!nonzero) {</span>
+<span class="fc" id="L860">                    gen.writeln(gen.mapCommand(&quot;fill&quot;));</span>
+                } else {
+<span class="nc" id="L862">                    gen.writeln(gen.mapCommand(&quot;eofill&quot;));</span>
+                }
+            }
+        } else {
+            // if(stroke)
+<span class="fc" id="L867">            gen.writeln(gen.mapCommand(&quot;stroke&quot;));</span>
+        }
+<span class="fc" id="L869">    }</span>
+
+    /**
+     * Returns the device configuration associated with this
+     * &lt;code&gt;Graphics2D&lt;/code&gt;.
+     * @return the device configuration
+     */
+    public GraphicsConfiguration getDeviceConfiguration() {
+<span class="nc" id="L877">        return new GraphicsConfigurationWithoutTransparency();</span>
+    }
+
+    /**
+     * Used to create proper font metrics
+     */
+    private Graphics2D fmg;
+
+    {
+<span class="pc" id="L886">        BufferedImage bi = new BufferedImage(1, 1,</span>
+                                             BufferedImage.TYPE_INT_ARGB);
+
+<span class="pc" id="L889">        fmg = bi.createGraphics();</span>
+    }
+
+    /**
+     * Gets the font metrics for the specified font.
+     * @return    the font metrics for the specified font.
+     * @param     f the specified font
+     * @see       java.awt.Graphics#getFont
+     * @see       java.awt.FontMetrics
+     * @see       java.awt.Graphics#getFontMetrics()
+     */
+    public java.awt.FontMetrics getFontMetrics(java.awt.Font f) {
+<span class="nc" id="L901">        return fmg.getFontMetrics(f);</span>
+    }
+
+    /**
+     * Sets the paint mode of this graphics context to alternate between
+     * this graphics context's current color and the new specified color.
+     * This specifies that logical pixel operations are performed in the
+     * XOR mode, which alternates pixels between the current color and
+     * a specified XOR color.
+     * &lt;p&gt;
+     * When drawing operations are performed, pixels which are the
+     * current color are changed to the specified color, and vice versa.
+     * &lt;p&gt;
+     * Pixels that are of colors other than those two colors are changed
+     * in an unpredictable but reversible manner; if the same figure is
+     * drawn twice, then all pixels are restored to their original values.
+     * @param     c1 the XOR alternation color
+     */
+    public void setXORMode(Color c1) {
+<span class="nc" id="L920">        System.err.println(&quot;NYI: setXORMode&quot;);</span>
+<span class="nc" id="L921">    }</span>
+
+
+    /**
+     * Copies an area of the component by a distance specified by
+     * &lt;code&gt;dx&lt;/code&gt; and &lt;code&gt;dy&lt;/code&gt;. From the point specified
+     * by &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;, this method
+     * copies downwards and to the right.  To copy an area of the
+     * component to the left or upwards, specify a negative value for
+     * &lt;code&gt;dx&lt;/code&gt; or &lt;code&gt;dy&lt;/code&gt;.
+     * If a portion of the source rectangle lies outside the bounds
+     * of the component, or is obscured by another window or component,
+     * &lt;code&gt;copyArea&lt;/code&gt; will be unable to copy the associated
+     * pixels. The area that is omitted can be refreshed by calling
+     * the component's &lt;code&gt;paint&lt;/code&gt; method.
+     * @param       x the &lt;i&gt;x&lt;/i&gt; coordinate of the source rectangle.
+     * @param       y the &lt;i&gt;y&lt;/i&gt; coordinate of the source rectangle.
+     * @param       width the width of the source rectangle.
+     * @param       height the height of the source rectangle.
+     * @param       dx the horizontal distance to copy the pixels.
+     * @param       dy the vertical distance to copy the pixels.
+     */
+    public void copyArea(int x, int y, int width, int height, int dx,
+                         int dy) {
+<span class="nc" id="L945">        System.err.println(&quot;NYI: copyArea&quot;);</span>
+<span class="nc" id="L946">    }</span>
+
+    /* --- for debugging
+    public void transform(AffineTransform tx) {
+        System.out.println(&quot;transform(&quot; + toArray(tx) + &quot;)&quot;);
+        super.transform(zx);
+    }
+
+    public void scale(double sx, double sy) {
+        System.out.println(&quot;scale(&quot; + sx + &quot;, &quot; + sy + &quot;)&quot;);
+        super.scale(sx, sy);
+    }
+
+    public void translate(double tx, double ty) {
+        System.out.println(&quot;translate(double &quot; + tx + &quot;, &quot; + ty + &quot;)&quot;);
+        super.translate(tx, ty);
+    }
+
+    public void translate(int tx, int ty) {
+        System.out.println(&quot;translate(int &quot; + tx + &quot;, &quot; + ty + &quot;)&quot;);
+        super.translate(tx, ty);
+    }
+    */
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

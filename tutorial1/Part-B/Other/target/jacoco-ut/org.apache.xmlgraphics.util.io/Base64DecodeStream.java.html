@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Base64DecodeStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.io</a> &gt; <span class="el_source">Base64DecodeStream.java</span></div><h1>Base64DecodeStream.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: Base64DecodeStream.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.util.io;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+// CSOFF: ConstantName
+// CSOFF: MemberName
+// CSOFF: MultipleVariableDeclarations
+// CSOFF: NeedBraces
+// CSOFF: OperatorWrap
+// CSOFF: WhitespaceAround
+
+/**
+ * This class implements a Base64 Character decoder as specified in RFC1113.
+ * Unlike some other encoding schemes there is nothing in this encoding that
+ * tells the decoder where a buffer starts or stops, so to use it you will need
+ * to isolate your encoded data into a single chunk and then feed them
+ * this decoder. The simplest way to do that is to read all of the encoded
+ * data into a string and then use:
+ * &lt;pre&gt;
+ *      byte    data[];
+ *      InputStream is = new ByteArrayInputStream(data);
+ *      is = new Base64DecodeStream(is);
+ * &lt;/pre&gt;
+ *
+ * On errors, this class throws a IOException with the following detail
+ * strings:
+ * &lt;pre&gt;
+ *    &quot;Base64DecodeStream: Bad Padding byte (2).&quot;
+ *    &quot;Base64DecodeStream: Bad Padding byte (1).&quot;
+ * &lt;/pre&gt;
+ *
+ * @version $Id: Base64DecodeStream.java 1732018 2016-02-24 04:51:06Z gadams $
+ *
+ * Originally authored by Thomas DeWeese, Vincent Hardy, and Chuck McManis.
+ */
+
+public class Base64DecodeStream extends InputStream {
+
+    InputStream src;
+
+<span class="fc" id="L61">    public Base64DecodeStream(InputStream src) {</span>
+<span class="fc" id="L62">        this.src = src;</span>
+<span class="fc" id="L63">    }</span>
+
+<span class="fc" id="L65">    private static final byte[] PEM_ARRAY = new byte[256];</span>
+    static {
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        for (int i = 0; i &lt; PEM_ARRAY.length; i++) {</span>
+<span class="fc" id="L68">            PEM_ARRAY[i] = -1;</span>
+        }
+
+<span class="fc" id="L71">        int idx = 0;</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        for (char c = 'A'; c &lt;= 'Z'; c++) {</span>
+<span class="fc" id="L73">            PEM_ARRAY[c] = (byte)idx++;</span>
+        }
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (char c = 'a'; c &lt;= 'z'; c++) {</span>
+<span class="fc" id="L76">            PEM_ARRAY[c] = (byte)idx++;</span>
+        }
+
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        for (char c = '0'; c &lt;= '9'; c++) {</span>
+<span class="fc" id="L80">            PEM_ARRAY[c] = (byte)idx++;</span>
+        }
+
+<span class="fc" id="L83">        PEM_ARRAY['+'] = (byte)idx++;</span>
+<span class="fc" id="L84">        PEM_ARRAY['/'] = (byte)idx++;</span>
+<span class="fc" id="L85">    }</span>
+
+    public boolean markSupported() {
+<span class="nc" id="L88">        return false;</span>
+    }
+
+    public void close()
+        throws IOException {
+<span class="nc" id="L93">        eof = true;</span>
+<span class="nc" id="L94">    }</span>
+
+    public int available()
+        throws IOException {
+<span class="nc" id="L98">        return 3 - outOffset;</span>
+    }
+
+<span class="fc" id="L101">    byte[] decodeBuffer = new byte[4];</span>
+<span class="fc" id="L102">    byte[] outBuffer = new byte[3];</span>
+<span class="fc" id="L103">    int  outOffset = 3;</span>
+    boolean eof;
+
+    public int read() throws IOException {
+
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (outOffset == 3) {</span>
+<span class="nc bnc" id="L109" title="All 4 branches missed.">            if (eof || getNextAtom()) {</span>
+<span class="nc" id="L110">                eof = true;</span>
+<span class="nc" id="L111">                return -1;</span>
+            }
+        }
+
+<span class="nc" id="L115">        return ((int)outBuffer[outOffset++]) &amp; 0xFF;</span>
+    }
+
+    public int read(byte []out, int offset, int len)
+        throws IOException {
+
+<span class="fc" id="L121">        int idx = 0;</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        while (idx &lt; len) {</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">            if (outOffset == 3) {</span>
+<span class="fc bfc" id="L124" title="All 4 branches covered.">                if (eof || getNextAtom()) {</span>
+<span class="fc" id="L125">                    eof = true;</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">                    if (idx == 0) {</span>
+<span class="fc" id="L127">                        return -1;</span>
+                    } else {
+<span class="fc" id="L129">                        return idx;</span>
+                    }
+                }
+            }
+
+<span class="fc" id="L134">            out[offset + idx] = outBuffer[outOffset++];</span>
+
+<span class="fc" id="L136">            idx++;</span>
+        }
+<span class="fc" id="L138">        return idx;</span>
+    }
+
+    final boolean getNextAtom() throws IOException {
+        int count;
+        int a;
+        int b;
+        int c;
+        int d;
+
+<span class="fc" id="L148">        int off = 0;</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        while (off != 4) {</span>
+<span class="fc" id="L150">            count = src.read(decodeBuffer, off, 4 - off);</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">            if (count == -1) {</span>
+<span class="fc" id="L152">                return true;</span>
+            }
+
+<span class="fc" id="L155">            int in = off;</span>
+<span class="fc" id="L156">            int out = off;</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">            while (in &lt; off + count) {</span>
+<span class="pc bpc" id="L158" title="2 of 6 branches missed.">                if ((decodeBuffer[in] != '\n')</span>
+                    &amp;&amp; (decodeBuffer[in] != '\r')
+                    &amp;&amp; (decodeBuffer[in] != ' ')) {
+<span class="fc" id="L161">                    decodeBuffer[out++] = decodeBuffer[in];</span>
+                }
+<span class="fc" id="L163">                in++;</span>
+            }
+
+<span class="fc" id="L166">            off = out;</span>
+<span class="fc" id="L167">        }</span>
+
+<span class="fc" id="L169">        a = PEM_ARRAY[((int)decodeBuffer[0]) &amp; 0xFF];</span>
+<span class="fc" id="L170">        b = PEM_ARRAY[((int)decodeBuffer[1]) &amp; 0xFF];</span>
+<span class="fc" id="L171">        c = PEM_ARRAY[((int)decodeBuffer[2]) &amp; 0xFF];</span>
+<span class="fc" id="L172">        d = PEM_ARRAY[((int)decodeBuffer[3]) &amp; 0xFF];</span>
+
+<span class="fc" id="L174">        outBuffer[0] = (byte)((a &lt;&lt; 2) | (b &gt;&gt;&gt; 4));</span>
+<span class="fc" id="L175">        outBuffer[1] = (byte)((b &lt;&lt; 4) | (c &gt;&gt;&gt; 2));</span>
+<span class="fc" id="L176">        outBuffer[2] = (byte)((c &lt;&lt; 6) |  d);</span>
+
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (decodeBuffer[3] != '=') {</span>
+            // All three bytes are good.
+<span class="fc" id="L180">            outOffset = 0;</span>
+<span class="fc bfc" id="L181" title="All 2 branches covered.">        } else if (decodeBuffer[2] == '=') {</span>
+            // Only one byte of output.
+<span class="fc" id="L183">            outBuffer[2] = outBuffer[0];</span>
+<span class="fc" id="L184">            outOffset = 2;</span>
+<span class="fc" id="L185">            eof = true;</span>
+        } else {
+            // Only two bytes of output.
+<span class="fc" id="L188">            outBuffer[2] = outBuffer[1];</span>
+<span class="fc" id="L189">            outBuffer[1] = outBuffer[0];</span>
+<span class="fc" id="L190">            outOffset = 1;</span>
+<span class="fc" id="L191">            eof = true;</span>
+        }
+
+<span class="fc" id="L194">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

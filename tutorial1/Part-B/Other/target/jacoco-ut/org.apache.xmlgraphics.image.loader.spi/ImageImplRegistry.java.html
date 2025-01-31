@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageImplRegistry.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.spi</a> &gt; <span class="el_source">ImageImplRegistry.java</span></div><h1>ImageImplRegistry.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageImplRegistry.java 1904425 2022-10-06 12:37:37Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.spi;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.util.Penalty;
+import org.apache.xmlgraphics.util.Service;
+
+/**
+ * This class is the registry for all implementations of the various service provider interfaces
+ * for the image package.
+ */
+public class ImageImplRegistry {
+
+    /** logger */
+<span class="fc" id="L47">    protected static final Log log = LogFactory.getLog(ImageImplRegistry.class);</span>
+
+    /** Infinite penalty value which shall force any implementation to become ineligible. */
+    public static final int INFINITE_PENALTY = Integer.MAX_VALUE;
+
+    /** Holds the list of preloaders */
+<span class="fc" id="L53">    private List preloaders = new java.util.ArrayList();</span>
+    //Content: List&lt;ImagePreloader&gt;
+    private int lastPreloaderIdentifier;
+    private int lastPreloaderSort;
+
+    /** Holds the list of ImageLoaderFactories */
+<span class="fc" id="L59">    private Map loaders = new java.util.HashMap();</span>
+    //Content: Map&lt;String,Map&lt;ImageFlavor,ImageLoaderFactory&gt;&gt;
+
+    /** Holds the list of ImageConverters */
+<span class="fc" id="L63">    private List converters = new java.util.ArrayList();</span>
+    //Content: List&lt;ImageConverter&gt;
+
+    private int converterModifications;
+
+    /** A Map (key: implementation classes) with additional penalties to fine-tune the registry. */
+<span class="fc" id="L69">    private Map additionalPenalties = new java.util.HashMap(); //&lt;String, Penalty&gt;</span>
+    //Note: String as key chosen to avoid possible class-unloading leaks
+
+    /** Singleton instance */
+<span class="fc" id="L73">    private static ImageImplRegistry defaultInstance = new ImageImplRegistry();</span>
+
+    /**
+     * Main constructor. This constructor allows to disable plug-in discovery for testing purposes.
+     * @param discover true if implementation classes shall automatically be discovered.
+     */
+<span class="fc" id="L79">    public ImageImplRegistry(boolean discover) {</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (discover) {</span>
+<span class="fc" id="L81">            discoverClasspathImplementations();</span>
+        }
+<span class="fc" id="L83">    }</span>
+
+    /**
+     * Main constructor.
+     */
+    public ImageImplRegistry() {
+<span class="fc" id="L89">        this(true);</span>
+<span class="fc" id="L90">    }</span>
+
+    /**
+     * Returns the default instance of the Image implementation registry.
+     * @return the default instance
+     */
+    public static ImageImplRegistry getDefaultInstance() {
+<span class="fc" id="L97">        return defaultInstance;</span>
+    }
+
+    /**
+     * Discovers all implementations in the application's classpath.
+     */
+    public void discoverClasspathImplementations() {
+        //Dynamic registration of ImagePreloaders
+<span class="fc" id="L105">        Iterator iter = Service.providers(ImagePreloader.class);</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        while (iter.hasNext()) {</span>
+<span class="fc" id="L107">            registerPreloader((ImagePreloader)iter.next());</span>
+        }
+
+        //Dynamic registration of ImageLoaderFactories
+<span class="fc" id="L111">        iter = Service.providers(ImageLoaderFactory.class);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        while (iter.hasNext()) {</span>
+<span class="fc" id="L113">            registerLoaderFactory((ImageLoaderFactory)iter.next());</span>
+        }
+
+        //Dynamic registration of ImageConverters
+<span class="fc" id="L117">        iter = Service.providers(ImageConverter.class);</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        while (iter.hasNext()) {</span>
+<span class="fc" id="L119">            registerConverter((ImageConverter)iter.next());</span>
+        }
+<span class="fc" id="L121">    }</span>
+
+    /**
+     * Registers a new ImagePreloader.
+     * @param preloader An ImagePreloader instance
+     */
+    public void registerPreloader(ImagePreloader preloader) {
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L129">            log.debug(&quot;Registered &quot; + preloader.getClass().getName()</span>
+<span class="nc" id="L130">                    + &quot; with priority &quot; + preloader.getPriority());</span>
+        }
+<span class="fc" id="L132">        preloaders.add(newPreloaderHolder(preloader));</span>
+<span class="fc" id="L133">    }</span>
+
+    private synchronized PreloaderHolder newPreloaderHolder(ImagePreloader preloader) {
+<span class="fc" id="L136">        PreloaderHolder holder = new PreloaderHolder();</span>
+<span class="fc" id="L137">        holder.preloader = preloader;</span>
+<span class="fc" id="L138">        holder.identifier = ++lastPreloaderIdentifier;</span>
+<span class="fc" id="L139">        return holder;</span>
+    }
+
+    /** Holder class for registered {@link ImagePreloader} instances. */
+    private static class PreloaderHolder {
+        private ImagePreloader preloader;
+        private int identifier;
+
+        public String toString() {
+<span class="nc" id="L148">            return preloader + &quot; &quot; + identifier;</span>
+        }
+    }
+
+    private synchronized void sortPreloaders() {
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        if (this.lastPreloaderIdentifier != this.lastPreloaderSort) {</span>
+<span class="fc" id="L154">            Collections.sort(this.preloaders, new Comparator() {</span>
+
+                public int compare(Object o1, Object o2) {
+<span class="fc" id="L157">                    PreloaderHolder h1 = (PreloaderHolder)o1;</span>
+<span class="fc" id="L158">                    long p1 = h1.preloader.getPriority();</span>
+<span class="fc" id="L159">                    p1 += getAdditionalPenalty(h1.preloader.getClass().getName()).getValue();</span>
+
+<span class="fc" id="L161">                    PreloaderHolder h2 = (PreloaderHolder)o2;</span>
+<span class="fc" id="L162">                    int p2 = h2.preloader.getPriority();</span>
+<span class="fc" id="L163">                    p2 += getAdditionalPenalty(h2.preloader.getClass().getName()).getValue();</span>
+
+<span class="fc" id="L165">                    int diff = Penalty.truncate(p1 - p2);</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">                    if (diff != 0) {</span>
+<span class="fc" id="L167">                        return diff;</span>
+                    } else {
+<span class="fc" id="L169">                        diff = h1.identifier - h2.identifier;</span>
+<span class="fc" id="L170">                        return diff;</span>
+                    }
+                }
+
+            });
+<span class="fc" id="L175">            this.lastPreloaderSort = lastPreloaderIdentifier;</span>
+        }
+<span class="fc" id="L177">    }</span>
+
+    /**
+     * Registers a new ImageLoaderFactory.
+     * @param loaderFactory An ImageLoaderFactory instance
+     */
+    public void registerLoaderFactory(ImageLoaderFactory loaderFactory) {
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">        if (!loaderFactory.isAvailable()) {</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L186">                log.debug(&quot;ImageLoaderFactory reports not available: &quot;</span>
+<span class="nc" id="L187">                        + loaderFactory.getClass().getName());</span>
+            }
+<span class="nc" id="L189">            return;</span>
+        }
+<span class="fc" id="L191">        String[] mimes = loaderFactory.getSupportedMIMETypes();</span>
+<span class="fc bfc" id="L192" title="All 2 branches covered.">        for (String mime : mimes) {</span>
+<span class="fc" id="L193">            synchronized (loaders) {</span>
+<span class="fc" id="L194">                Map flavorMap = (Map) loaders.get(mime);</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">                if (flavorMap == null) {</span>
+<span class="fc" id="L196">                    flavorMap = new HashMap();</span>
+<span class="fc" id="L197">                    loaders.put(mime, flavorMap);</span>
+                }
+
+<span class="fc" id="L200">                ImageFlavor[] flavors = loaderFactory.getSupportedFlavors(mime);</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">                for (ImageFlavor flavor : flavors) {</span>
+<span class="fc" id="L202">                    List factoryList = (List) flavorMap.get(flavor);</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">                    if (factoryList == null) {</span>
+<span class="fc" id="L204">                        factoryList = new ArrayList();</span>
+<span class="fc" id="L205">                        flavorMap.put(flavor, factoryList);</span>
+                    }
+<span class="fc" id="L207">                    factoryList.add(loaderFactory);</span>
+
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">                    if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L210">                        log.debug(&quot;Registered &quot; + loaderFactory.getClass().getName()</span>
+                                + &quot;: MIME = &quot; + mime + &quot;, Flavor = &quot; + flavor);
+                    }
+                }
+<span class="fc" id="L214">            }</span>
+        }
+<span class="fc" id="L216">    }</span>
+
+    /**
+     * Returns the Collection of registered ImageConverter instances.
+     * @return a Collection&amp;lt;ImageConverter&amp;gt;
+     */
+    public Collection getImageConverters() {
+<span class="fc" id="L223">        return Collections.unmodifiableList(this.converters);</span>
+    }
+
+    /**
+     * Returns the number of modifications to the collection of registered ImageConverter instances.
+     * This is used to detect changes in the registry concerning ImageConverters.
+     * @return the number of modifications
+     */
+    public int getImageConverterModifications() {
+<span class="fc" id="L232">        return this.converterModifications;</span>
+    }
+
+    /**
+     * Registers a new ImageConverter.
+     * @param converter An ImageConverter instance
+     */
+    public void registerConverter(ImageConverter converter) {
+<span class="fc" id="L240">        converters.add(converter);</span>
+<span class="fc" id="L241">        converterModifications++;</span>
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">        if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L243">            log.debug(&quot;Registered: &quot; + converter.getClass().getName());</span>
+        }
+<span class="fc" id="L245">    }</span>
+
+    /**
+     * Returns an iterator over all registered ImagePreloader instances.
+     * @return an iterator over ImagePreloader instances.
+     */
+    public Iterator getPreloaderIterator() {
+<span class="fc" id="L252">        sortPreloaders();</span>
+<span class="fc" id="L253">        final Iterator iter = this.preloaders.iterator();</span>
+        //Unpack the holders
+<span class="fc" id="L255">        MyIterator i = new MyIterator();</span>
+<span class="fc" id="L256">        i.iter = iter;</span>
+<span class="fc" id="L257">        return i;</span>
+    }
+
+<span class="fc" id="L260">    static class MyIterator implements Iterator {</span>
+        Iterator iter;
+        public boolean hasNext() {
+<span class="fc" id="L263">            return iter.hasNext();</span>
+        }
+
+        public Object next() {
+<span class="fc" id="L267">            Object obj = iter.next();</span>
+<span class="pc bpc" id="L268" title="1 of 2 branches missed.">            if (obj != null) {</span>
+<span class="fc" id="L269">                return ((PreloaderHolder)obj).preloader;</span>
+            } else {
+<span class="nc" id="L271">                return null;</span>
+            }
+        }
+
+        public void remove() {
+<span class="nc" id="L276">            iter.remove();</span>
+<span class="nc" id="L277">        }</span>
+
+    }
+
+    /**
+     * Returns the best ImageLoaderFactory supporting the {@link ImageInfo} and image flavor.
+     * If there are multiple ImageLoaderFactories the one with the least usage penalty is selected.
+     * @param imageInfo the image info object
+     * @param flavor the image flavor.
+     * @return an ImageLoaderFactory instance or null, if no suitable implementation was found
+     */
+    public ImageLoaderFactory getImageLoaderFactory(ImageInfo imageInfo, ImageFlavor flavor) {
+<span class="fc" id="L289">        String mime = imageInfo.getMimeType();</span>
+<span class="fc" id="L290">        Map flavorMap = (Map)loaders.get(mime);</span>
+<span class="pc bpc" id="L291" title="1 of 2 branches missed.">        if (flavorMap != null) {</span>
+<span class="fc" id="L292">            List factoryList = (List)flavorMap.get(flavor);</span>
+<span class="pc bpc" id="L293" title="2 of 4 branches missed.">            if (factoryList != null &amp;&amp; factoryList.size() &gt; 0) {</span>
+<span class="fc" id="L294">                Iterator iter = factoryList.iterator();</span>
+<span class="fc" id="L295">                int bestPenalty = Integer.MAX_VALUE;</span>
+<span class="fc" id="L296">                ImageLoaderFactory bestFactory = null;</span>
+<span class="fc bfc" id="L297" title="All 2 branches covered.">                while (iter.hasNext()) {</span>
+<span class="fc" id="L298">                    ImageLoaderFactory factory = (ImageLoaderFactory)iter.next();</span>
+<span class="pc bpc" id="L299" title="1 of 2 branches missed.">                    if (!factory.isSupported(imageInfo)) {</span>
+<span class="nc" id="L300">                        continue;</span>
+                    }
+<span class="fc" id="L302">                    ImageLoader loader = factory.newImageLoader(flavor);</span>
+<span class="fc" id="L303">                    int penalty = loader.getUsagePenalty();</span>
+<span class="pc bpc" id="L304" title="1 of 2 branches missed.">                    if (penalty &lt; bestPenalty) {</span>
+<span class="fc" id="L305">                        bestPenalty = penalty;</span>
+<span class="fc" id="L306">                        bestFactory = factory;</span>
+                    }
+<span class="fc" id="L308">                }</span>
+<span class="fc" id="L309">                return bestFactory;</span>
+            }
+        }
+<span class="nc" id="L312">        return null;</span>
+    }
+
+    /**
+     * Returns an array of {@link ImageLoaderFactory} instances that support the MIME type
+     * indicated by an {@link ImageInfo} object and can generate the given image flavor.
+     * @param imageInfo the image info object
+     * @param flavor the target image flavor
+     * @return the array of image loader factories
+     */
+    public ImageLoaderFactory[] getImageLoaderFactories(ImageInfo imageInfo, ImageFlavor flavor) {
+<span class="fc" id="L323">        String mime = imageInfo.getMimeType();</span>
+<span class="fc" id="L324">        Collection matches = new java.util.TreeSet(new ImageLoaderFactoryComparator(flavor));</span>
+<span class="fc" id="L325">        imageInfo.getCustomObjects().put(&quot;additionalPenalties&quot;, additionalPenalties);</span>
+<span class="fc" id="L326">        Map flavorMap = (Map) loaders.get(mime);</span>
+<span class="pc bpc" id="L327" title="1 of 2 branches missed.">        if (flavorMap != null) {</span>
+<span class="fc bfc" id="L328" title="All 2 branches covered.">            for (Object i : flavorMap.entrySet()) {</span>
+<span class="fc" id="L329">                Map.Entry e = (Map.Entry) i;</span>
+<span class="fc" id="L330">                ImageFlavor checkFlavor = (ImageFlavor) e.getKey();</span>
+<span class="fc bfc" id="L331" title="All 2 branches covered.">                if (checkFlavor.isCompatible(flavor)) {</span>
+<span class="fc" id="L332">                    List factoryList = (List)e.getValue();</span>
+<span class="pc bpc" id="L333" title="2 of 4 branches missed.">                    if (factoryList != null &amp;&amp; factoryList.size() &gt; 0) {</span>
+<span class="fc bfc" id="L334" title="All 2 branches covered.">                        for (Object aFactoryList : factoryList) {</span>
+<span class="fc" id="L335">                            ImageLoaderFactory factory = (ImageLoaderFactory) aFactoryList;</span>
+<span class="fc bfc" id="L336" title="All 2 branches covered.">                            if (factory.isSupported(imageInfo)) {</span>
+<span class="fc" id="L337">                                matches.add(factory);</span>
+                            }
+<span class="fc" id="L339">                        }</span>
+                    }
+                }
+<span class="fc" id="L342">            }</span>
+        }
+<span class="fc bfc" id="L344" title="All 2 branches covered.">        if (matches.size() == 0) {</span>
+<span class="fc" id="L345">            return null;</span>
+        } else {
+<span class="fc" id="L347">            return (ImageLoaderFactory[])matches.toArray(new ImageLoaderFactory[matches.size()]);</span>
+        }
+    }
+
+    /** Comparator for {@link ImageLoaderFactory} classes. */
+    private class ImageLoaderFactoryComparator implements Comparator {
+
+        private ImageFlavor targetFlavor;
+
+<span class="fc" id="L356">        public ImageLoaderFactoryComparator(ImageFlavor targetFlavor) {</span>
+<span class="fc" id="L357">            this.targetFlavor = targetFlavor;</span>
+<span class="fc" id="L358">        }</span>
+
+        public int compare(Object o1, Object o2) {
+<span class="fc" id="L361">            ImageLoaderFactory f1 = (ImageLoaderFactory)o1;</span>
+<span class="fc" id="L362">            ImageLoader l1 = f1.newImageLoader(targetFlavor);</span>
+<span class="fc" id="L363">            long p1 = l1.getUsagePenalty();</span>
+<span class="fc" id="L364">            p1 += getAdditionalPenalty(l1.getClass().getName()).getValue();</span>
+
+<span class="fc" id="L366">            ImageLoaderFactory f2 = (ImageLoaderFactory)o2;</span>
+<span class="fc" id="L367">            ImageLoader l2 = f2.newImageLoader(targetFlavor);</span>
+//            long p2 = l2.getUsagePenalty();
+<span class="fc" id="L369">            long p2 = getAdditionalPenalty(l2.getClass().getName()).getValue();</span>
+
+            //Lowest penalty first
+<span class="fc" id="L372">            return Penalty.truncate(p1 - p2);</span>
+        }
+
+    }
+
+
+    /**
+     * Returns an array of ImageLoaderFactory instances which support the given MIME type. The
+     * instances are returned in no particular order.
+     * @param mime the MIME type to find ImageLoaderFactories for
+     * @return the array of ImageLoaderFactory instances
+     */
+    public ImageLoaderFactory[] getImageLoaderFactories(String mime) {
+<span class="fc" id="L385">        Map flavorMap = (Map)loaders.get(mime);</span>
+<span class="pc bpc" id="L386" title="1 of 2 branches missed.">        if (flavorMap != null) {</span>
+<span class="fc" id="L387">            Set factories = new java.util.HashSet();</span>
+<span class="fc bfc" id="L388" title="All 2 branches covered.">            for (Object o : flavorMap.values()) {</span>
+<span class="fc" id="L389">                List factoryList = (List) o;</span>
+<span class="fc" id="L390">                factories.addAll(factoryList);</span>
+<span class="fc" id="L391">            }</span>
+<span class="fc" id="L392">            int factoryCount = factories.size();</span>
+<span class="pc bpc" id="L393" title="1 of 2 branches missed.">            if (factoryCount &gt; 0) {</span>
+<span class="fc" id="L394">                return (ImageLoaderFactory[])factories.toArray(</span>
+                        new ImageLoaderFactory[factoryCount]);
+            }
+        }
+<span class="nc" id="L398">        return new ImageLoaderFactory[0];</span>
+    }
+
+    /**
+     * Sets an additional penalty for a particular implementation class for any of the interface
+     * administered by this registry class. No checking is performed to verify if the className
+     * parameter is valid.
+     * @param className the fully qualified class name of the implementation class
+     * @param penalty the additional penalty or null to clear any existing value
+     */
+    public void setAdditionalPenalty(String className, Penalty penalty) {
+<span class="pc bpc" id="L409" title="1 of 2 branches missed.">        if (penalty != null) {</span>
+<span class="fc" id="L410">            this.additionalPenalties.put(className, penalty);</span>
+        } else {
+<span class="nc" id="L412">            this.additionalPenalties.remove(className);</span>
+        }
+<span class="fc" id="L414">        this.lastPreloaderSort = -1; //Force resort, just in case this was a preloader</span>
+<span class="fc" id="L415">    }</span>
+
+    /**
+     * Returns the additional penalty value set for a particular implementation class.
+     * If no such value is set, 0 is returned.
+     * @param className the fully qualified class name of the implementation class
+     * @return the additional penalty value
+     */
+    public Penalty getAdditionalPenalty(String className) {
+<span class="fc" id="L424">        Penalty p = (Penalty)this.additionalPenalties.get(className);</span>
+<span class="fc bfc" id="L425" title="All 2 branches covered.">        return (p != null ? p : Penalty.ZERO_PENALTY);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

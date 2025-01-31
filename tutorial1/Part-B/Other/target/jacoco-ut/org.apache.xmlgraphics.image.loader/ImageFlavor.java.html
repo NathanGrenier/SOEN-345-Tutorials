@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageFlavor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader</a> &gt; <span class="el_source">ImageFlavor.java</span></div><h1>ImageFlavor.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageFlavor.java 1894758 2021-11-05 13:34:47Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader;
+
+import org.apache.xmlgraphics.util.MimeConstants;
+
+/**
+ * The flavor of an image indicates in which form it is available. A bitmap image loaded into
+ * memory might be represented as a BufferedImage (indicated by ImageFlavor.BUFFERED_IMAGE).
+ * It is mostly used by consuming code to indicate what kind of flavors can be processed so a
+ * processing pipeline can do the necessary loading operations and conversions.
+ */
+public class ImageFlavor {
+
+    /** An image in form of a RenderedImage instance */
+<span class="fc" id="L33">    public static final ImageFlavor RENDERED_IMAGE = new ImageFlavor(&quot;RenderedImage&quot;);</span>
+    /** An image in form of a BufferedImage instance */
+<span class="fc" id="L35">    public static final ImageFlavor BUFFERED_IMAGE = new SimpleRefinedImageFlavor(</span>
+                                                            RENDERED_IMAGE, &quot;BufferedImage&quot;);
+    /** An image in form of a W3C DOM instance */
+<span class="fc" id="L38">    private static final ImageFlavor DOM = new ImageFlavor(&quot;DOM&quot;);</span>
+    /** An XML-based image in form of a W3C DOM instance */
+<span class="fc" id="L40">    public static final ImageFlavor XML_DOM = new MimeEnabledImageFlavor(DOM, &quot;text/xml&quot;);</span>
+    /** An image in form of a raw PNG file/stream */
+<span class="fc" id="L42">    public static final ImageFlavor RAW = new ImageFlavor(&quot;Raw&quot;);</span>
+    /** An image in form of a raw PNG file/stream */
+<span class="fc" id="L44">    public static final ImageFlavor RAW_PNG = new MimeEnabledImageFlavor(RAW,</span>
+                                                        MimeConstants.MIME_PNG);
+    /** An image in form of a raw JPEG/JFIF file/stream */
+<span class="fc" id="L47">    public static final ImageFlavor RAW_JPEG = new MimeEnabledImageFlavor(RAW,</span>
+                                                        MimeConstants.MIME_JPEG);
+    /** An image in form of a raw TIFF file/stream */
+<span class="fc" id="L50">    public static final ImageFlavor RAW_TIFF = new MimeEnabledImageFlavor(RAW,</span>
+                                                        MimeConstants.MIME_TIFF);
+    /** An image in form of a raw EMF (Windows Enhanced Metafile) file/stream */
+<span class="fc" id="L53">    public static final ImageFlavor RAW_EMF = new MimeEnabledImageFlavor(RAW,</span>
+                                                        MimeConstants.MIME_EMF);
+    /** An image in form of a raw EPS (Encapsulated PostScript) file/stream */
+<span class="fc" id="L56">    public static final ImageFlavor RAW_EPS = new MimeEnabledImageFlavor(RAW,</span>
+                                                        MimeConstants.MIME_EPS);
+<span class="fc" id="L58">    public static final ImageFlavor RAW_PDF = new MimeEnabledImageFlavor(RAW, MimeConstants.MIME_PDF);</span>
+
+    /** An image in form of a raw LZW file/stream */
+<span class="fc" id="L61">    public static final ImageFlavor RAW_LZW = new ImageFlavor(&quot;RawLZW&quot;);</span>
+    /** An image in form of a raw CCITTFax stream */
+<span class="fc" id="L63">    public static final ImageFlavor RAW_CCITTFAX = new ImageFlavor(&quot;RawCCITTFax&quot;);</span>
+    /** An image in form of a Graphics2DImage (can be painted on a Graphics2D interface) */
+<span class="fc" id="L65">    public static final ImageFlavor GRAPHICS2D = new ImageFlavor(&quot;Graphics2DImage&quot;);</span>
+
+    private String name;
+
+    /**
+     * Constructs a new ImageFlavor. Please reuse existing constants wherever possible!
+     * @param name the name of the flavor (must be unique)
+     */
+<span class="fc" id="L73">    public ImageFlavor(String name) {</span>
+<span class="fc" id="L74">        this.name = name;</span>
+<span class="fc" id="L75">    }</span>
+
+    /**
+     * Returns the name of the ImageFlavor.
+     * @return the flavor name
+     */
+    public String getName() {
+<span class="fc" id="L82">        return this.name;</span>
+    }
+
+    /**
+     * Returns the MIME type that the image flavor represents if a MIME type is available. This
+     * is only applicable to images which can also exist as files. For images flavors like
+     * decoded in-memory images (Rendered/BufferedImage), this method will return null.
+     * @return the MIME type or null if no MIME type can be provided (like for in-memory images)
+     */
+    public String getMimeType() {
+<span class="fc" id="L92">        return null;</span>
+    }
+
+    /**
+     * Returns the XML namespace URI that the image flavor represents if such a namespace URI
+     * is available. This is only applicable to images in XML form. Other image types will return
+     * null.
+     * @return the XML or null if no MIME type can be provided (like for in-memory images)
+     */
+    public String getNamespace() {
+<span class="fc" id="L102">        return null;</span>
+    }
+
+    /**
+     * Indicates whether a particular image flavor is compatible with this one.
+     * @param flavor the other image flavor
+     * @return true if the two are compatible
+     */
+    public boolean isCompatible(ImageFlavor flavor) {
+<span class="fc" id="L111">        return this.equals(flavor);</span>
+    }
+
+    /** {@inheritDoc} */
+    public int hashCode() {
+<span class="fc" id="L116">        final int prime = 31;</span>
+<span class="fc" id="L117">        int result = 1;</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        result = prime * result + ((name == null) ? 0 : name.hashCode());</span>
+<span class="fc" id="L119">        return result;</span>
+    }
+
+    /** {@inheritDoc} */
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L125">            return true;</span>
+        }
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L128">            return false;</span>
+        }
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        if (getClass() != obj.getClass()) {</span>
+<span class="fc" id="L131">            return false;</span>
+        }
+<span class="fc" id="L133">        final ImageFlavor other = (ImageFlavor)obj;</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">        if (name == null) {</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">            if (other.name != null) {</span>
+<span class="nc" id="L136">                return false;</span>
+            }
+<span class="fc bfc" id="L138" title="All 2 branches covered.">        } else if (!name.equals(other.name)) {</span>
+<span class="fc" id="L139">            return false;</span>
+        }
+<span class="fc" id="L141">        return true;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String toString() {
+<span class="fc" id="L146">        return getName();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TIFFField.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.tiff</a> &gt; <span class="el_source">TIFFField.java</span></div><h1>TIFFField.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: TIFFField.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.tiff;
+
+import java.io.Serializable;
+
+// CSOFF: WhitespaceAround
+
+/**
+ * A class representing a field in a TIFF 6.0 Image File Directory.
+ *
+ * &lt;p&gt; The TIFF file format is described in more detail in the
+ * comments for the TIFFDescriptor class.
+ *
+ * &lt;p&gt; A field in a TIFF Image File Directory (IFD).  A field is defined
+ * as a sequence of values of identical data type.  TIFF 6.0 defines
+ * 12 data types, which are mapped internally onto the Java datatypes
+ * byte, int, long, float, and double.
+ *
+ * &lt;p&gt;&lt;b&gt; This class is not a committed part of the JAI API.  It may
+ * be removed or changed in future releases of JAI.&lt;/b&gt;
+ *
+ * @see TIFFDirectory
+ */
+public class TIFFField implements Comparable, Serializable {
+
+    /** Flag for 8 bit unsigned integers. */
+    public static final int TIFF_BYTE      =  1;
+
+    /** Flag for null-terminated ASCII strings. */
+    public static final int TIFF_ASCII     =  2;
+
+    /** Flag for 16 bit unsigned integers. */
+    public static final int TIFF_SHORT     =  3;
+
+    /** Flag for 32 bit unsigned integers. */
+    public static final int TIFF_LONG      =  4;
+
+    /** Flag for pairs of 32 bit unsigned integers. */
+    public static final int TIFF_RATIONAL  =  5;
+
+    /** Flag for 8 bit signed integers. */
+    public static final int TIFF_SBYTE     =  6;
+
+    /** Flag for 8 bit uninterpreted bytes. */
+    public static final int TIFF_UNDEFINED =  7;
+
+    /** Flag for 16 bit signed integers. */
+    public static final int TIFF_SSHORT    =  8;
+
+    /** Flag for 32 bit signed integers. */
+    public static final int TIFF_SLONG     =  9;
+
+    /** Flag for pairs of 32 bit signed integers. */
+    public static final int TIFF_SRATIONAL = 10;
+
+    /** Flag for 32 bit IEEE floats. */
+    public static final int TIFF_FLOAT     = 11;
+
+    /** Flag for 64 bit IEEE doubles. */
+    public static final int TIFF_DOUBLE    = 12;
+    private static final long serialVersionUID = 207783128222415437L;
+
+    /** The tag number. */
+    int tag;
+
+    /** The tag type. */
+    int type;
+
+    /** The number of data items present in the field. */
+    int count;
+
+    /** The field data. */
+    Object data;
+
+    /** The default constructor. */
+<span class="nc" id="L94">    TIFFField() { }</span>
+
+    /**
+     * Constructs a TIFFField with arbitrary data.  The data
+     * parameter must be an array of a Java type appropriate for the
+     * type of the TIFF field.  Since there is no available 32-bit
+     * unsigned datatype, long is used. The mapping between types is
+     * as follows:
+     *
+     * &lt;table border=1 summary=&quot;TIFF&quot;&gt;
+     * &lt;tr&gt;
+     * &lt;th&gt; TIFF type &lt;/th&gt; &lt;th&gt; Java type &lt;/th&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_BYTE&lt;/tt&gt;&lt;/td&gt;      &lt;td&gt;&lt;tt&gt;byte&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_ASCII&lt;/tt&gt;&lt;/td&gt;     &lt;td&gt;&lt;tt&gt;String&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_SHORT&lt;/tt&gt;&lt;/td&gt;     &lt;td&gt;&lt;tt&gt;char&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_LONG&lt;/tt&gt;&lt;/td&gt;      &lt;td&gt;&lt;tt&gt;long&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_RATIONAL&lt;/tt&gt;&lt;/td&gt;  &lt;td&gt;&lt;tt&gt;long[2]&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_SBYTE&lt;/tt&gt;&lt;/td&gt;     &lt;td&gt;&lt;tt&gt;byte&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_UNDEFINED&lt;/tt&gt;&lt;/td&gt; &lt;td&gt;&lt;tt&gt;byte&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_SSHORT&lt;/tt&gt;&lt;/td&gt;    &lt;td&gt;&lt;tt&gt;short&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_SLONG&lt;/tt&gt;&lt;/td&gt;     &lt;td&gt;&lt;tt&gt;int&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_SRATIONAL&lt;/tt&gt;&lt;/td&gt; &lt;td&gt;&lt;tt&gt;int[2]&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_FLOAT&lt;/tt&gt;&lt;/td&gt;     &lt;td&gt;&lt;tt&gt;float&lt;/tt&gt;&lt;/td&gt;
+     * &lt;tr&gt;
+     * &lt;td&gt;&lt;tt&gt;TIFF_DOUBLE&lt;/tt&gt;&lt;/td&gt;    &lt;td&gt;&lt;tt&gt;double&lt;/tt&gt;&lt;/td&gt;
+     * &lt;/table&gt;
+     */
+<span class="fc" id="L132">    public TIFFField(int tag, int type, int count, Object data) {</span>
+<span class="fc" id="L133">        this.tag = tag;</span>
+<span class="fc" id="L134">        this.type = type;</span>
+<span class="fc" id="L135">        this.count = count;</span>
+<span class="fc" id="L136">        this.data = data;</span>
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * Returns the tag number, between 0 and 65535.
+     */
+    public int getTag() {
+<span class="fc" id="L143">        return tag;</span>
+    }
+
+    /**
+     * Returns the type of the data stored in the IFD.
+     * For a TIFF6.0 file, the value will equal one of the
+     * TIFF_ constants defined in this class.  For future
+     * revisions of TIFF, higher values are possible.
+     *
+     */
+    public int getType() {
+<span class="fc" id="L154">        return type;</span>
+    }
+
+    /**
+     * Returns the number of elements in the IFD.
+     */
+    public int getCount() {
+<span class="fc" id="L161">        return count;</span>
+    }
+
+    /**
+     * Returns the data as an uninterpreted array of bytes.
+     * The type of the field must be one of TIFF_BYTE, TIFF_SBYTE,
+     * or TIFF_UNDEFINED;
+     *
+     * &lt;p&gt; For data in TIFF_BYTE format, the application must take
+     * care when promoting the data to longer integral types
+     * to avoid sign extension.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_BYTE, TIFF_SBYTE, or TIFF_UNDEFINED.
+     */
+    public byte[] getAsBytes() {
+<span class="nc" id="L177">        return (byte[])data;</span>
+    }
+
+    /**
+     * Returns TIFF_SHORT data as an array of chars (unsigned 16-bit
+     * integers).
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_SHORT.
+     */
+    public char[] getAsChars() {
+<span class="fc" id="L188">        return (char[])data;</span>
+    }
+
+    /**
+     * Returns TIFF_SSHORT data as an array of shorts (signed 16-bit
+     * integers).
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_SSHORT.
+     */
+    public short[] getAsShorts() {
+<span class="nc" id="L199">        return (short[])data;</span>
+    }
+
+    /**
+     * Returns TIFF_SLONG data as an array of ints (signed 32-bit
+     * integers).
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_SLONG.
+     */
+    public int[] getAsInts() {
+<span class="nc" id="L210">        return (int[])data;</span>
+    }
+
+    /**
+     * Returns TIFF_LONG data as an array of longs (signed 64-bit
+     * integers).
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_LONG.
+     */
+    public long[] getAsLongs() {
+<span class="fc" id="L221">        return (long[])data;</span>
+    }
+
+    /**
+     * Returns TIFF_FLOAT data as an array of floats.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_FLOAT.
+     */
+    public float[] getAsFloats() {
+<span class="nc" id="L231">        return (float[])data;</span>
+    }
+
+    /**
+     * Returns TIFF_DOUBLE data as an array of doubles.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_DOUBLE.
+     */
+    public double[] getAsDoubles() {
+<span class="nc" id="L241">        return (double[])data;</span>
+    }
+
+    /**
+     * Returns TIFF_SRATIONAL data as an array of 2-element arrays of ints.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_SRATIONAL.
+     */
+    public int[][] getAsSRationals() {
+<span class="nc" id="L251">        return (int[][])data;</span>
+    }
+
+    /**
+     * Returns TIFF_RATIONAL data as an array of 2-element arrays of longs.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_RATTIONAL.
+     */
+    public long[][] getAsRationals() {
+<span class="nc" id="L261">        return (long[][])data;</span>
+    }
+
+    /**
+     * Returns data in TIFF_BYTE, TIFF_SBYTE, TIFF_UNDEFINED, TIFF_SHORT,
+     * TIFF_SSHORT, or TIFF_SLONG format as an int.
+     *
+     * &lt;p&gt; TIFF_BYTE and TIFF_UNDEFINED data are treated as unsigned;
+     * that is, no sign extension will take place and the returned
+     * value will be in the range [0, 255].  TIFF_SBYTE data will
+     * be returned in the range [-128, 127].
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not of
+     * type TIFF_BYTE, TIFF_SBYTE, TIFF_UNDEFINED, TIFF_SHORT,
+     * TIFF_SSHORT, or TIFF_SLONG.
+     */
+    public int getAsInt(int index) {
+<span class="pc bpc" id="L278" title="5 of 6 branches missed.">        switch (type) {</span>
+        case TIFF_BYTE: case TIFF_UNDEFINED:
+<span class="nc" id="L280">            return ((byte[])data)[index] &amp; 0xff;</span>
+        case TIFF_SBYTE:
+<span class="nc" id="L282">            return ((byte[])data)[index];</span>
+        case TIFF_SHORT:
+<span class="fc" id="L284">            return ((char[])data)[index] &amp; 0xffff;</span>
+        case TIFF_SSHORT:
+<span class="nc" id="L286">            return ((short[])data)[index];</span>
+        case TIFF_SLONG:
+<span class="nc" id="L288">            return ((int[])data)[index];</span>
+        default:
+<span class="nc" id="L290">            throw new ClassCastException();</span>
+        }
+    }
+
+    /**
+     * Returns data in TIFF_BYTE, TIFF_SBYTE, TIFF_UNDEFINED, TIFF_SHORT,
+     * TIFF_SSHORT, TIFF_SLONG, or TIFF_LONG format as a long.
+     *
+     * &lt;p&gt; TIFF_BYTE and TIFF_UNDEFINED data are treated as unsigned;
+     * that is, no sign extension will take place and the returned
+     * value will be in the range [0, 255].  TIFF_SBYTE data will
+     * be returned in the range [-128, 127].
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not of
+     * type TIFF_BYTE, TIFF_SBYTE, TIFF_UNDEFINED, TIFF_SHORT,
+     * TIFF_SSHORT, TIFF_SLONG, or TIFF_LONG.
+     */
+    public long getAsLong(int index) {
+<span class="pc bpc" id="L308" title="5 of 7 branches missed.">        switch (type) {</span>
+        case TIFF_BYTE: case TIFF_UNDEFINED:
+<span class="nc" id="L310">            return ((byte[])data)[index] &amp; 0xff;</span>
+        case TIFF_SBYTE:
+<span class="nc" id="L312">            return ((byte[])data)[index];</span>
+        case TIFF_SHORT:
+<span class="fc" id="L314">            return ((char[])data)[index] &amp; 0xffff;</span>
+        case TIFF_SSHORT:
+<span class="nc" id="L316">            return ((short[])data)[index];</span>
+        case TIFF_SLONG:
+<span class="nc" id="L318">            return ((int[])data)[index];</span>
+        case TIFF_LONG:
+<span class="fc" id="L320">            return ((long[])data)[index];</span>
+        default:
+<span class="nc" id="L322">            throw new ClassCastException();</span>
+        }
+    }
+
+    /**
+     * Returns data in any numerical format as a float.  Data in
+     * TIFF_SRATIONAL or TIFF_RATIONAL format are evaluated by
+     * dividing the numerator into the denominator using
+     * double-precision arithmetic and then truncating to single
+     * precision.  Data in TIFF_SLONG, TIFF_LONG, or TIFF_DOUBLE
+     * format may suffer from truncation.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is
+     * of type TIFF_UNDEFINED or TIFF_ASCII.
+     */
+    public float getAsFloat(int index) {
+<span class="pc bpc" id="L338" title="10 of 11 branches missed.">        switch (type) {</span>
+        case TIFF_BYTE:
+<span class="nc" id="L340">            return ((byte[])data)[index] &amp; 0xff;</span>
+        case TIFF_SBYTE:
+<span class="nc" id="L342">            return ((byte[])data)[index];</span>
+        case TIFF_SHORT:
+<span class="nc" id="L344">            return ((char[])data)[index] &amp; 0xffff;</span>
+        case TIFF_SSHORT:
+<span class="nc" id="L346">            return ((short[])data)[index];</span>
+        case TIFF_SLONG:
+<span class="nc" id="L348">            return ((int[])data)[index];</span>
+        case TIFF_LONG:
+<span class="nc" id="L350">            return ((long[])data)[index];</span>
+        case TIFF_FLOAT:
+<span class="nc" id="L352">            return ((float[])data)[index];</span>
+        case TIFF_DOUBLE:
+<span class="nc" id="L354">            return (float)((double[])data)[index];</span>
+        case TIFF_SRATIONAL:
+<span class="nc" id="L356">            int[] ivalue = getAsSRational(index);</span>
+<span class="nc" id="L357">            return (float)((double)ivalue[0] / ivalue[1]);</span>
+        case TIFF_RATIONAL:
+<span class="fc" id="L359">            long[] lvalue = getAsRational(index);</span>
+<span class="fc" id="L360">            return (float)((double)lvalue[0] / lvalue[1]);</span>
+        default:
+<span class="nc" id="L362">            throw new ClassCastException();</span>
+        }
+    }
+
+    /**
+     * Returns data in any numerical format as a float.  Data in
+     * TIFF_SRATIONAL or TIFF_RATIONAL format are evaluated by
+     * dividing the numerator into the denominator using
+     * double-precision arithmetic.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is of
+     * type TIFF_UNDEFINED or TIFF_ASCII.
+     */
+    public double getAsDouble(int index) {
+<span class="nc bnc" id="L376" title="All 11 branches missed.">        switch (type) {</span>
+        case TIFF_BYTE:
+<span class="nc" id="L378">            return ((byte[])data)[index] &amp; 0xff;</span>
+        case TIFF_SBYTE:
+<span class="nc" id="L380">            return ((byte[])data)[index];</span>
+        case TIFF_SHORT:
+<span class="nc" id="L382">            return ((char[])data)[index] &amp; 0xffff;</span>
+        case TIFF_SSHORT:
+<span class="nc" id="L384">            return ((short[])data)[index];</span>
+        case TIFF_SLONG:
+<span class="nc" id="L386">            return ((int[])data)[index];</span>
+        case TIFF_LONG:
+<span class="nc" id="L388">            return ((long[])data)[index];</span>
+        case TIFF_FLOAT:
+<span class="nc" id="L390">            return ((float[])data)[index];</span>
+        case TIFF_DOUBLE:
+<span class="nc" id="L392">            return ((double[])data)[index];</span>
+        case TIFF_SRATIONAL:
+<span class="nc" id="L394">            int[] ivalue = getAsSRational(index);</span>
+<span class="nc" id="L395">            return (double)ivalue[0] / ivalue[1];</span>
+        case TIFF_RATIONAL:
+<span class="nc" id="L397">            long[] lvalue = getAsRational(index);</span>
+<span class="nc" id="L398">            return (double)lvalue[0] / lvalue[1];</span>
+        default:
+<span class="nc" id="L400">            throw new ClassCastException();</span>
+        }
+    }
+
+    /**
+     * Returns a TIFF_ASCII data item as a String.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_ASCII.
+     */
+    public String getAsString(int index) {
+<span class="nc" id="L411">        return ((String[])data)[index];</span>
+    }
+
+    /**
+     * Returns a TIFF_SRATIONAL data item as a two-element array
+     * of ints.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_SRATIONAL.
+     */
+    public int[] getAsSRational(int index) {
+<span class="nc" id="L422">        return ((int[][])data)[index];</span>
+    }
+
+    /**
+     * Returns a TIFF_RATIONAL data item as a two-element array
+     * of ints.
+     *
+     * &lt;p&gt; A ClassCastException will be thrown if the field is not
+     * of type TIFF_RATIONAL.
+     */
+    public long[] getAsRational(int index) {
+<span class="fc" id="L433">        return ((long[][])data)[index];</span>
+    }
+
+    /**
+     * Compares this &lt;code&gt;TIFFField&lt;/code&gt; with another
+     * &lt;code&gt;TIFFField&lt;/code&gt; by comparing the tags.
+     *
+     * &lt;p&gt;&lt;b&gt;Note: this class has a natural ordering that is inconsistent
+     * with &lt;code&gt;equals()&lt;/code&gt;.&lt;/b&gt;
+     *
+     * @throws NullPointerException if the parameter is &lt;code&gt;null&lt;/code&gt;.
+     * @throws ClassCastException if the parameter is not a
+     *         &lt;code&gt;TIFFField&lt;/code&gt;.
+     */
+    public int compareTo(Object o) {
+<span class="pc bpc" id="L448" title="1 of 2 branches missed.">        if (o == null) {</span>
+<span class="nc" id="L449">            throw new NullPointerException();</span>
+        }
+
+<span class="fc" id="L452">        int oTag = ((TIFFField)o).getTag();</span>
+
+<span class="pc bpc" id="L454" title="1 of 2 branches missed.">        if (tag &lt; oTag) {</span>
+<span class="nc" id="L455">            return -1;</span>
+<span class="fc bfc" id="L456" title="All 2 branches covered.">        } else if (tag &gt; oTag) {</span>
+<span class="fc" id="L457">            return 1;</span>
+        } else {
+<span class="fc" id="L459">            return 0;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

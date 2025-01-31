@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Penalty.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.util</a> &gt; <span class="el_source">Penalty.java</span></div><h1>Penalty.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: Penalty.java 1345683 2012-06-03 14:50:33Z gadams $ */
+
+package org.apache.xmlgraphics.image.loader.util;
+
+/**
+ * Immutable class representing a penalty value. It's valid value range is that of an
+ * {@link Integer}, but giving {@link Integer#MAX_VALUE} a special meaning: it means infinite
+ * penalty, i.e. a candidate with this penalty will be excluded from any choice.
+ */
+public final class Penalty {
+
+<span class="fc" id="L29">    public static final Penalty ZERO_PENALTY = new Penalty(0);</span>
+<span class="fc" id="L30">    public static final Penalty INFINITE_PENALTY = new Penalty(Integer.MAX_VALUE);</span>
+
+    private final int value;
+
+    /**
+     * Turns a penalty value into a penaly object.
+     * @param value the penalty value
+     * @return the penalty object
+     */
+    public static Penalty toPenalty(int value) {
+<span class="fc bfc" id="L40" title="All 3 branches covered.">        switch (value) {</span>
+        case 0:
+<span class="fc" id="L42">            return ZERO_PENALTY;</span>
+        case Integer.MAX_VALUE:
+<span class="fc" id="L44">            return INFINITE_PENALTY;</span>
+        default:
+<span class="fc" id="L46">            return new Penalty(value);</span>
+        }
+    }
+
+<span class="fc" id="L50">    private Penalty(int value) {</span>
+<span class="fc" id="L51">        this.value = value;</span>
+<span class="fc" id="L52">    }</span>
+
+    /**
+     * Adds a penalty to this one and returns the combined penalty.
+     * @param value the penalty value to add
+     * @return the resulting penalty
+     */
+    public Penalty add(Penalty value) {
+<span class="fc" id="L60">        return add(value.getValue());</span>
+    }
+
+    /**
+     * Adds a penalty to this one and returns the combined penalty.
+     * @param value the penalty value to add
+     * @return the resulting penalty
+     */
+    public Penalty add(int value) {
+<span class="fc" id="L69">        long p = (long)getValue() + value;</span>
+<span class="fc" id="L70">        return toPenalty(truncate(p));</span>
+    }
+
+    /**
+     * Returns the penalty value.
+     * @return the penalty value
+     */
+    public int getValue() {
+<span class="fc" id="L78">        return this.value;</span>
+    }
+
+    /**
+     * Indicates whether this is an infinite penalty, meaning that a solution with this penalty
+     * is effectively ineligible.
+     * @return true if this is an infinite penalty
+     */
+    public boolean isInfinitePenalty() {
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        return (value == Integer.MAX_VALUE);</span>
+    }
+
+    /** {@inheritDoc} */
+    public String toString() {
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        return &quot;Penalty: &quot; + (isInfinitePenalty() ? &quot;INF&quot; : Integer.toString(getValue()));</span>
+    }
+
+    /**
+     * Truncates the long penalty value to an integer without sign side-effects.
+     * @param penalty the penalty value as a long
+     * @return the penalty value as an int
+     */
+    public static int truncate(long penalty) {
+<span class="fc" id="L101">        penalty = Math.min(Integer.MAX_VALUE, penalty);</span>
+<span class="fc" id="L102">        penalty = Math.max(Integer.MIN_VALUE, penalty);</span>
+<span class="fc" id="L103">        return (int)penalty;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

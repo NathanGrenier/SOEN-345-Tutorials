@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSProcSets.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSProcSets.java</span></div><h1>PSProcSets.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSProcSets.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+
+/**
+ * This class defines the basic resources (procsets) used by the Apache XML Graphics project.
+ *
+ * @version $Id: PSProcSets.java 1804124 2017-08-04 14:13:54Z ssteiner $
+ */
+public final class PSProcSets {
+
+    private PSProcSets() {
+    }
+
+    /** the standard procset for the XML Graphics project */
+    public static final PSResource STD_PROCSET;
+    /** the EPS procset for the XML Graphics project */
+<span class="fc" id="L39">    public static final PSResource EPS_PROCSET = new EPSProcSet();</span>
+
+    /** the standard command map matching the {@link #STD_PROCSET}. */
+    public static final PSCommandMap STD_COMMAND_MAP;
+
+    static {
+<span class="fc" id="L45">        StdProcSet stdProcSet = new StdProcSet();</span>
+<span class="fc" id="L46">        STD_PROCSET = stdProcSet;</span>
+<span class="fc" id="L47">        STD_COMMAND_MAP = stdProcSet;</span>
+<span class="fc" id="L48">    }</span>
+
+    /**
+     * The standard procset used by XML Graphics Commons.
+     */
+    private static class StdProcSet extends PSProcSet implements PSCommandMap {
+
+        /** A Map&lt;String, String&gt; of standard shorthand macros defined in the {@link StdProcSet}. */
+        private static final Map STANDARD_MACROS;
+
+        static {
+<span class="fc" id="L59">            Map macros = new java.util.HashMap();</span>
+<span class="fc" id="L60">            macros.put(&quot;moveto&quot;, &quot;M&quot;);</span>
+<span class="fc" id="L61">            macros.put(&quot;rmoveto&quot;, &quot;RM&quot;);</span>
+<span class="fc" id="L62">            macros.put(&quot;curveto&quot;, &quot;C&quot;);</span>
+<span class="fc" id="L63">            macros.put(&quot;lineto&quot;, &quot;L&quot;);</span>
+<span class="fc" id="L64">            macros.put(&quot;show&quot;, &quot;t&quot;);</span>
+<span class="fc" id="L65">            macros.put(&quot;ashow&quot;, &quot;A&quot;);</span>
+<span class="fc" id="L66">            macros.put(&quot;closepath&quot;, &quot;cp&quot;);</span>
+<span class="fc" id="L67">            macros.put(&quot;setrgbcolor&quot;, &quot;RC&quot;);</span>
+<span class="fc" id="L68">            macros.put(&quot;setgray&quot;, &quot;GC&quot;);</span>
+<span class="fc" id="L69">            macros.put(&quot;setcmykcolor&quot;, &quot;CC&quot;);</span>
+<span class="fc" id="L70">            macros.put(&quot;newpath&quot;, &quot;N&quot;);</span>
+<span class="fc" id="L71">            macros.put(&quot;setmiterlimit&quot;, &quot;ML&quot;);</span>
+<span class="fc" id="L72">            macros.put(&quot;setlinewidth&quot;, &quot;LC&quot;);</span>
+<span class="fc" id="L73">            macros.put(&quot;setlinewidth&quot;, &quot;LW&quot;);</span>
+<span class="fc" id="L74">            macros.put(&quot;setlinejoin&quot;, &quot;LJ&quot;);</span>
+<span class="fc" id="L75">            macros.put(&quot;grestore&quot;, &quot;GR&quot;);</span>
+<span class="fc" id="L76">            macros.put(&quot;gsave&quot;, &quot;GS&quot;);</span>
+<span class="fc" id="L77">            macros.put(&quot;fill&quot;, &quot;f&quot;);</span>
+<span class="fc" id="L78">            macros.put(&quot;stroke&quot;, &quot;S&quot;);</span>
+<span class="fc" id="L79">            macros.put(&quot;concat&quot;, &quot;CT&quot;);</span>
+<span class="fc" id="L80">            STANDARD_MACROS = Collections.unmodifiableMap(macros);</span>
+<span class="fc" id="L81">        }</span>
+
+        public StdProcSet() {
+<span class="fc" id="L84">            super(&quot;Apache XML Graphics Std ProcSet&quot;, 1.2f, 0);</span>
+<span class="fc" id="L85">        }</span>
+
+        public void writeTo(PSGenerator gen) throws IOException {
+<span class="nc" id="L88">            gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE,</span>
+<span class="nc" id="L89">                    new Object[] {TYPE_PROCSET, getName(),</span>
+<span class="nc" id="L90">                        Float.toString(getVersion()), Integer.toString(getRevision())});</span>
+<span class="nc" id="L91">            gen.writeDSCComment(DSCConstants.VERSION,</span>
+<span class="nc" id="L92">                    new Object[] {Float.toString(getVersion()), Integer.toString(getRevision())});</span>
+<span class="nc" id="L93">            gen.writeDSCComment(DSCConstants.COPYRIGHT, &quot;Copyright 2001-2003,2010 &quot;</span>
+                        + &quot;The Apache Software Foundation. &quot;
+                        + &quot;License terms: http://www.apache.org/licenses/LICENSE-2.0&quot;);
+<span class="nc" id="L96">            gen.writeDSCComment(DSCConstants.TITLE,</span>
+                    &quot;Basic set of procedures used by the XML Graphics project (Batik and FOP)&quot;);
+
+<span class="nc" id="L99">            gen.writeln(&quot;/bd{bind def}bind def&quot;);</span>
+<span class="nc" id="L100">            gen.writeln(&quot;/ld{load def}bd&quot;);</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            for (Object o : STANDARD_MACROS.entrySet()) {</span>
+<span class="nc" id="L102">                Map.Entry entry = (Map.Entry) o;</span>
+<span class="nc" id="L103">                gen.writeln(&quot;/&quot; + entry.getValue() + &quot;/&quot; + entry.getKey() + &quot; ld&quot;);</span>
+<span class="nc" id="L104">            }</span>
+
+<span class="nc" id="L106">            gen.writeln(&quot;/re {4 2 roll M&quot;); //define rectangle</span>
+<span class="nc" id="L107">            gen.writeln(&quot;1 index 0 rlineto&quot;);</span>
+<span class="nc" id="L108">            gen.writeln(&quot;0 exch rlineto&quot;);</span>
+<span class="nc" id="L109">            gen.writeln(&quot;neg 0 rlineto&quot;);</span>
+<span class="nc" id="L110">            gen.writeln(&quot;cp } bd&quot;);</span>
+
+<span class="nc" id="L112">            gen.writeln(&quot;/_ctm matrix def&quot;); //Holds the current matrix</span>
+<span class="nc" id="L113">            gen.writeln(&quot;/_tm matrix def&quot;);</span>
+            //BT: save currentmatrix, set _tm to identitymatrix and move to 0/0
+<span class="nc" id="L115">            gen.writeln(&quot;/BT { _ctm currentmatrix pop matrix _tm copy pop 0 0 moveto } bd&quot;);</span>
+            //ET: restore last currentmatrix
+<span class="nc" id="L117">            gen.writeln(&quot;/ET { _ctm setmatrix } bd&quot;);</span>
+<span class="nc" id="L118">            gen.writeln(&quot;/iTm { _ctm setmatrix _tm concat } bd&quot;);</span>
+<span class="nc" id="L119">            gen.writeln(&quot;/Tm { _tm astore pop iTm 0 0 moveto } bd&quot;);</span>
+
+<span class="nc" id="L121">            gen.writeln(&quot;/ux 0.0 def&quot;);</span>
+<span class="nc" id="L122">            gen.writeln(&quot;/uy 0.0 def&quot;);</span>
+
+            // &lt;font&gt; &lt;size&gt; F
+<span class="nc" id="L125">            gen.writeln(&quot;/F {&quot;);</span>
+<span class="nc" id="L126">            gen.writeln(&quot;  /Tp exch def&quot;);</span>
+            // gen.writeln(&quot;  currentdict exch get&quot;);
+<span class="nc" id="L128">            gen.writeln(&quot;  /Tf exch def&quot;);</span>
+<span class="nc" id="L129">            gen.writeln(&quot;  Tf findfont Tp scalefont setfont&quot;);</span>
+<span class="nc" id="L130">            gen.writeln(&quot;  /cf Tf def  /cs Tp def&quot;);</span>
+<span class="nc" id="L131">            gen.writeln(&quot;} bd&quot;);</span>
+
+<span class="nc" id="L133">            gen.writeln(&quot;/ULS {currentpoint /uy exch def /ux exch def} bd&quot;);</span>
+<span class="nc" id="L134">            gen.writeln(&quot;/ULE {&quot;);</span>
+<span class="nc" id="L135">            gen.writeln(&quot;  /Tcx currentpoint pop def&quot;);</span>
+<span class="nc" id="L136">            gen.writeln(&quot;  gsave&quot;);</span>
+<span class="nc" id="L137">            gen.writeln(&quot;  newpath&quot;);</span>
+<span class="nc" id="L138">            gen.writeln(&quot;  cf findfont cs scalefont dup&quot;);</span>
+<span class="nc" id="L139">            gen.writeln(&quot;  /FontMatrix get 0 get /Ts exch def /FontInfo get dup&quot;);</span>
+<span class="nc" id="L140">            gen.writeln(&quot;  /UnderlinePosition get Ts mul /To exch def&quot;);</span>
+<span class="nc" id="L141">            gen.writeln(&quot;  /UnderlineThickness get Ts mul /Tt exch def&quot;);</span>
+<span class="nc" id="L142">            gen.writeln(&quot;  ux uy To add moveto  Tcx uy To add lineto&quot;);</span>
+<span class="nc" id="L143">            gen.writeln(&quot;  Tt setlinewidth stroke&quot;);</span>
+<span class="nc" id="L144">            gen.writeln(&quot;  grestore&quot;);</span>
+<span class="nc" id="L145">            gen.writeln(&quot;} bd&quot;);</span>
+
+<span class="nc" id="L147">            gen.writeln(&quot;/OLE {&quot;);</span>
+<span class="nc" id="L148">            gen.writeln(&quot;  /Tcx currentpoint pop def&quot;);</span>
+<span class="nc" id="L149">            gen.writeln(&quot;  gsave&quot;);</span>
+<span class="nc" id="L150">            gen.writeln(&quot;  newpath&quot;);</span>
+<span class="nc" id="L151">            gen.writeln(&quot;  cf findfont cs scalefont dup&quot;);</span>
+<span class="nc" id="L152">            gen.writeln(&quot;  /FontMatrix get 0 get /Ts exch def /FontInfo get dup&quot;);</span>
+<span class="nc" id="L153">            gen.writeln(&quot;  /UnderlinePosition get Ts mul /To exch def&quot;);</span>
+<span class="nc" id="L154">            gen.writeln(&quot;  /UnderlineThickness get Ts mul /Tt exch def&quot;);</span>
+<span class="nc" id="L155">            gen.writeln(&quot;  ux uy To add cs add moveto Tcx uy To add cs add lineto&quot;);</span>
+<span class="nc" id="L156">            gen.writeln(&quot;  Tt setlinewidth stroke&quot;);</span>
+<span class="nc" id="L157">            gen.writeln(&quot;  grestore&quot;);</span>
+<span class="nc" id="L158">            gen.writeln(&quot;} bd&quot;);</span>
+
+<span class="nc" id="L160">            gen.writeln(&quot;/SOE {&quot;);</span>
+<span class="nc" id="L161">            gen.writeln(&quot;  /Tcx currentpoint pop def&quot;);</span>
+<span class="nc" id="L162">            gen.writeln(&quot;  gsave&quot;);</span>
+<span class="nc" id="L163">            gen.writeln(&quot;  newpath&quot;);</span>
+<span class="nc" id="L164">            gen.writeln(&quot;  cf findfont cs scalefont dup&quot;);</span>
+<span class="nc" id="L165">            gen.writeln(&quot;  /FontMatrix get 0 get /Ts exch def /FontInfo get dup&quot;);</span>
+<span class="nc" id="L166">            gen.writeln(&quot;  /UnderlinePosition get Ts mul /To exch def&quot;);</span>
+<span class="nc" id="L167">            gen.writeln(&quot;  /UnderlineThickness get Ts mul /Tt exch def&quot;);</span>
+<span class="nc" id="L168">            gen.writeln(&quot;  ux uy To add cs 10 mul 26 idiv add moveto &quot;</span>
+                        + &quot;Tcx uy To add cs 10 mul 26 idiv add lineto&quot;);
+<span class="nc" id="L170">            gen.writeln(&quot;  Tt setlinewidth stroke&quot;);</span>
+<span class="nc" id="L171">            gen.writeln(&quot;  grestore&quot;);</span>
+<span class="nc" id="L172">            gen.writeln(&quot;} bd&quot;);</span>
+
+<span class="nc" id="L174">            gen.writeln(&quot;/QT {&quot;);</span>
+<span class="nc" id="L175">            gen.writeln(&quot;/Y22 exch store&quot;);</span>
+<span class="nc" id="L176">            gen.writeln(&quot;/X22 exch store&quot;);</span>
+<span class="nc" id="L177">            gen.writeln(&quot;/Y21 exch store&quot;);</span>
+<span class="nc" id="L178">            gen.writeln(&quot;/X21 exch store&quot;);</span>
+<span class="nc" id="L179">            gen.writeln(&quot;currentpoint&quot;);</span>
+<span class="nc" id="L180">            gen.writeln(&quot;/Y21 load 2 mul add 3 div exch&quot;);</span>
+<span class="nc" id="L181">            gen.writeln(&quot;/X21 load 2 mul add 3 div exch&quot;);</span>
+<span class="nc" id="L182">            gen.writeln(&quot;/X21 load 2 mul /X22 load add 3 div&quot;);</span>
+<span class="nc" id="L183">            gen.writeln(&quot;/Y21 load 2 mul /Y22 load add 3 div&quot;);</span>
+<span class="nc" id="L184">            gen.writeln(&quot;/X22 load /Y22 load curveto&quot;);</span>
+<span class="nc" id="L185">            gen.writeln(&quot;} bd&quot;);</span>
+
+<span class="nc" id="L187">            gen.writeln(&quot;/SSPD {&quot;);</span>
+<span class="nc" id="L188">            gen.writeln(&quot;dup length /d exch dict def&quot;);</span>
+<span class="nc" id="L189">            gen.writeln(&quot;{&quot;);</span>
+<span class="nc" id="L190">            gen.writeln(&quot;/v exch def&quot;);</span>
+<span class="nc" id="L191">            gen.writeln(&quot;/k exch def&quot;);</span>
+<span class="nc" id="L192">            gen.writeln(&quot;currentpagedevice k known {&quot;);</span>
+<span class="nc" id="L193">            gen.writeln(&quot;/cpdv currentpagedevice k get def&quot;);</span>
+<span class="nc" id="L194">            gen.writeln(&quot;v cpdv ne {&quot;);</span>
+<span class="nc" id="L195">            gen.writeln(&quot;/upd false def&quot;);</span>
+<span class="nc" id="L196">            gen.writeln(&quot;/nullv v type /nulltype eq def&quot;);</span>
+<span class="nc" id="L197">            gen.writeln(&quot;/nullcpdv cpdv type /nulltype eq def&quot;);</span>
+<span class="nc" id="L198">            gen.writeln(&quot;nullv nullcpdv or&quot;);</span>
+<span class="nc" id="L199">            gen.writeln(&quot;{&quot;);</span>
+<span class="nc" id="L200">            gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L201">            gen.writeln(&quot;} {&quot;);</span>
+<span class="nc" id="L202">            gen.writeln(&quot;/sametype v type cpdv type eq def&quot;);</span>
+<span class="nc" id="L203">            gen.writeln(&quot;sametype {&quot;);</span>
+<span class="nc" id="L204">            gen.writeln(&quot;v type /arraytype eq {&quot;);</span>
+<span class="nc" id="L205">            gen.writeln(&quot;/vlen v length def&quot;);</span>
+<span class="nc" id="L206">            gen.writeln(&quot;/cpdvlen cpdv length def&quot;);</span>
+<span class="nc" id="L207">            gen.writeln(&quot;vlen cpdvlen eq {&quot;);</span>
+<span class="nc" id="L208">            gen.writeln(&quot;0 1 vlen 1 sub {&quot;);</span>
+<span class="nc" id="L209">            gen.writeln(&quot;/i exch def&quot;);</span>
+<span class="nc" id="L210">            gen.writeln(&quot;/obj v i get def&quot;);</span>
+<span class="nc" id="L211">            gen.writeln(&quot;/cpdobj cpdv i get def&quot;);</span>
+<span class="nc" id="L212">            gen.writeln(&quot;obj cpdobj ne {&quot;);</span>
+<span class="nc" id="L213">            gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L214">            gen.writeln(&quot;exit&quot;);</span>
+<span class="nc" id="L215">            gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L216">            gen.writeln(&quot;} for&quot;);</span>
+<span class="nc" id="L217">            gen.writeln(&quot;} {&quot;);</span>
+<span class="nc" id="L218">            gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L219">            gen.writeln(&quot;} ifelse&quot;);</span>
+<span class="nc" id="L220">            gen.writeln(&quot;} {&quot;);</span>
+<span class="nc" id="L221">            gen.writeln(&quot;v type /dicttype eq {&quot;);</span>
+<span class="nc" id="L222">            gen.writeln(&quot;v {&quot;);</span>
+<span class="nc" id="L223">            gen.writeln(&quot;/dv exch def&quot;);</span>
+<span class="nc" id="L224">            gen.writeln(&quot;/dk exch def&quot;);</span>
+<span class="nc" id="L225">            gen.writeln(&quot;/cpddv cpdv dk get def&quot;);</span>
+<span class="nc" id="L226">            gen.writeln(&quot;dv cpddv ne {&quot;);</span>
+<span class="nc" id="L227">            gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L228">            gen.writeln(&quot;exit&quot;);</span>
+<span class="nc" id="L229">            gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L230">            gen.writeln(&quot;} forall&quot;);</span>
+<span class="nc" id="L231">            gen.writeln(&quot;} {&quot;);</span>
+<span class="nc" id="L232">            gen.writeln(&quot;/upd true def&quot;);</span>
+<span class="nc" id="L233">            gen.writeln(&quot;} ifelse&quot;);</span>
+<span class="nc" id="L234">            gen.writeln(&quot;} ifelse&quot;);</span>
+<span class="nc" id="L235">            gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L236">            gen.writeln(&quot;} ifelse&quot;);</span>
+<span class="nc" id="L237">            gen.writeln(&quot;upd true eq {&quot;);</span>
+<span class="nc" id="L238">            gen.writeln(&quot;d k v put&quot;);</span>
+<span class="nc" id="L239">            gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L240">            gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L241">            gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L242">            gen.writeln(&quot;} forall&quot;);</span>
+<span class="nc" id="L243">            gen.writeln(&quot;d length 0 gt {&quot;);</span>
+<span class="nc" id="L244">            gen.writeln(&quot;d setpagedevice&quot;);</span>
+<span class="nc" id="L245">            gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L246">            gen.writeln(&quot;} bd&quot;);</span>
+
+<span class="nc" id="L248">            gen.writeln(&quot;/RE { % /NewFontName [NewEncodingArray] /FontName RE -&quot;);</span>
+<span class="nc" id="L249">            gen.writeln(&quot;  findfont dup length dict begin&quot;);</span>
+<span class="nc" id="L250">            gen.writeln(&quot;  {&quot;);</span>
+<span class="nc" id="L251">            gen.writeln(&quot;    1 index /FID ne&quot;);</span>
+<span class="nc" id="L252">            gen.writeln(&quot;    {def} {pop pop} ifelse&quot;);</span>
+<span class="nc" id="L253">            gen.writeln(&quot;  } forall&quot;);</span>
+<span class="nc" id="L254">            gen.writeln(&quot;  /Encoding exch def&quot;);</span>
+<span class="nc" id="L255">            gen.writeln(&quot;  /FontName 1 index def&quot;);</span>
+<span class="nc" id="L256">            gen.writeln(&quot;  currentdict definefont pop&quot;);</span>
+<span class="nc" id="L257">            gen.writeln(&quot;  end&quot;);</span>
+<span class="nc" id="L258">            gen.writeln(&quot;} bind def&quot;);</span>
+
+<span class="nc" id="L260">            gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
+<span class="nc" id="L261">            gen.getResourceTracker().registerSuppliedResource(this);</span>
+<span class="nc" id="L262">        }</span>
+
+        /** {@inheritDoc} */
+        public String mapCommand(String command) {
+<span class="fc" id="L266">            String mapped = (String)STANDARD_MACROS.get(command);</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">            return (mapped != null ? mapped : command);</span>
+        }
+
+    }
+
+    private static class EPSProcSet extends PSProcSet {
+
+        public EPSProcSet() {
+<span class="fc" id="L275">            super(&quot;Apache XML Graphics EPS ProcSet&quot;, 1.0f, 0);</span>
+<span class="fc" id="L276">        }</span>
+
+        public void writeTo(PSGenerator gen) throws IOException {
+<span class="nc" id="L279">            gen.writeDSCComment(DSCConstants.BEGIN_RESOURCE,</span>
+<span class="nc" id="L280">                    new Object[] {TYPE_PROCSET, getName(),</span>
+<span class="nc" id="L281">                        Float.toString(getVersion()), Integer.toString(getRevision())});</span>
+<span class="nc" id="L282">            gen.writeDSCComment(DSCConstants.VERSION,</span>
+<span class="nc" id="L283">                    new Object[] {Float.toString(getVersion()), Integer.toString(getRevision())});</span>
+<span class="nc" id="L284">            gen.writeDSCComment(DSCConstants.COPYRIGHT, &quot;Copyright 2002-2003 &quot;</span>
+                    + &quot;The Apache Software Foundation. &quot;
+                    + &quot;License terms: http://www.apache.org/licenses/LICENSE-2.0&quot;);
+<span class="nc" id="L287">            gen.writeDSCComment(DSCConstants.TITLE,</span>
+                    &quot;EPS procedures used by the Apache XML Graphics project (Batik and FOP)&quot;);
+
+<span class="nc" id="L290">            gen.writeln(&quot;/BeginEPSF { %def&quot;);</span>
+<span class="nc" id="L291">            gen.writeln(&quot;/b4_Inc_state save def         % Save state for cleanup&quot;);</span>
+<span class="nc" id="L292">            gen.writeln(&quot;/dict_count countdictstack def % Count objects on dict stack&quot;);</span>
+<span class="nc" id="L293">            gen.writeln(&quot;/op_count count 1 sub def      % Count objects on operand stack&quot;);</span>
+<span class="nc" id="L294">            gen.writeln(&quot;userdict begin                 % Push userdict on dict stack&quot;);</span>
+<span class="nc" id="L295">            gen.writeln(&quot;/showpage { } def              % Redefine showpage, { } = null proc&quot;);</span>
+<span class="nc" id="L296">            gen.writeln(&quot;0 setgray 0 setlinecap         % Prepare graphics state&quot;);</span>
+<span class="nc" id="L297">            gen.writeln(&quot;1 setlinewidth 0 setlinejoin&quot;);</span>
+<span class="nc" id="L298">            gen.writeln(&quot;10 setmiterlimit [ ] 0 setdash newpath&quot;);</span>
+<span class="nc" id="L299">            gen.writeln(&quot;/languagelevel where           % If level not equal to 1 then&quot;);</span>
+<span class="nc" id="L300">            gen.writeln(&quot;{pop languagelevel             % set strokeadjust and&quot;);</span>
+<span class="nc" id="L301">            gen.writeln(&quot;1 ne                           % overprint to their defaults.&quot;);</span>
+<span class="nc" id="L302">            gen.writeln(&quot;{false setstrokeadjust false setoverprint&quot;);</span>
+<span class="nc" id="L303">            gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L304">            gen.writeln(&quot;} if&quot;);</span>
+<span class="nc" id="L305">            gen.writeln(&quot;} bd&quot;);</span>
+
+<span class="nc" id="L307">            gen.writeln(&quot;/EndEPSF { %def&quot;);</span>
+<span class="nc" id="L308">            gen.writeln(&quot;count op_count sub {pop} repeat            % Clean up stacks&quot;);</span>
+<span class="nc" id="L309">            gen.writeln(&quot;countdictstack dict_count sub {end} repeat&quot;);</span>
+<span class="nc" id="L310">            gen.writeln(&quot;b4_Inc_state restore&quot;);</span>
+<span class="nc" id="L311">            gen.writeln(&quot;} bd&quot;);</span>
+
+<span class="nc" id="L313">            gen.writeDSCComment(DSCConstants.END_RESOURCE);</span>
+<span class="nc" id="L314">            gen.getResourceTracker().registerSuppliedResource(this);</span>
+<span class="nc" id="L315">        }</span>
+
+    }
+
+    /**
+     * Generates a resource defining standard procset with operations used by the XML Graphics
+     * project.
+     * @param gen PSGenerator to use for output
+     * @throws IOException In case of an I/O problem
+     */
+    public static void writeStdProcSet(PSGenerator gen) throws IOException {
+<span class="nc" id="L326">        ((StdProcSet)STD_PROCSET).writeTo(gen);</span>
+<span class="nc" id="L327">    }</span>
+
+    /**
+     * Generates a resource defining standard procset with operations used by the XML Graphics
+     * project.
+     * @param gen PSGenerator to use for output
+     * @throws IOException In case of an I/O problem
+     * @deprecated Use writeStdProcSet() instead.
+     */
+    public static void writeFOPStdProcSet(PSGenerator gen) throws IOException {
+<span class="nc" id="L337">        writeStdProcSet(gen);</span>
+<span class="nc" id="L338">    }</span>
+
+
+    /**
+     * Generates a resource defining a procset for including EPS graphics.
+     * @param gen PSGenerator to use for output
+     * @throws IOException In case of an I/O problem
+     */
+    public static void writeEPSProcSet(PSGenerator gen) throws IOException {
+<span class="nc" id="L347">        ((EPSProcSet)EPS_PROCSET).writeTo(gen);</span>
+<span class="nc" id="L348">    }</span>
+
+    /**
+     * Generates a resource defining a procset for including EPS graphics.
+     * @param gen PSGenerator to use for output
+     * @throws IOException In case of an I/O problem
+     * @deprecated Use writeEPSProcSet() instead.
+     */
+    public static void writeFOPEPSProcSet(PSGenerator gen) throws IOException {
+<span class="nc" id="L357">        writeEPSProcSet(gen);</span>
+<span class="nc" id="L358">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,1864 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGRed.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.png</a> &gt; <span class="el_source">PNGRed.java</span></div><h1>PNGRed.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PNGRed.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.png;
+
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Transparency;
+import java.awt.color.ColorSpace;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.DataBufferUShort;
+import java.awt.image.IndexColorModel;
+import java.awt.image.Raster;
+import java.awt.image.SampleModel;
+import java.awt.image.WritableRaster;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.SequenceInputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TimeZone;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
+
+import org.apache.xmlgraphics.image.GraphicsUtil;
+import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
+import org.apache.xmlgraphics.image.rendered.AbstractRed;
+import org.apache.xmlgraphics.image.rendered.CachableRed;
+
+// CSOFF: ConstantName
+// CSOFF: InnerAssignment
+// CSOFF: MethodName
+// CSOFF: MissingSwitchDefault
+// CSOFF: MultipleVariableDeclarations
+// CSOFF: NoWhitespaceAfter
+// CSOFF: OperatorWrap
+// CSOFF: WhitespaceAround
+
+/**
+ * @version $Id: PNGRed.java 1732018 2016-02-24 04:51:06Z gadams $
+ */
+public class PNGRed extends AbstractRed {
+
+    static class PNGChunk {
+        int length;
+        int type;
+        byte[] data;
+
+        String typeString;
+
+<span class="nc" id="L80">        public PNGChunk(int length, int type, byte[] data, int crc) {</span>
+<span class="nc" id="L81">            this.length = length;</span>
+<span class="nc" id="L82">            this.type = type;</span>
+<span class="nc" id="L83">            this.data = data;</span>
+
+<span class="nc" id="L85">            typeString = &quot;&quot;;</span>
+<span class="nc" id="L86">            typeString += (char)(type &gt;&gt; 24);</span>
+<span class="nc" id="L87">            typeString += (char)((type &gt;&gt; 16) &amp; 0xff);</span>
+<span class="nc" id="L88">            typeString += (char)((type &gt;&gt; 8) &amp; 0xff);</span>
+<span class="nc" id="L89">            typeString += (char)(type &amp; 0xff);</span>
+<span class="nc" id="L90">        }</span>
+
+        public int getLength() {
+<span class="nc" id="L93">            return length;</span>
+        }
+
+        public int getType() {
+<span class="nc" id="L97">            return type;</span>
+        }
+
+        public String getTypeString() {
+<span class="nc" id="L101">            return typeString;</span>
+        }
+
+        public byte[] getData() {
+<span class="nc" id="L105">            return data;</span>
+        }
+
+        public byte getByte(int offset) {
+<span class="nc" id="L109">            return data[offset];</span>
+        }
+
+        public int getInt1(int offset) {
+<span class="nc" id="L113">            return data[offset] &amp; 0xff;</span>
+        }
+
+        public int getInt2(int offset) {
+<span class="nc" id="L117">            return ((data[offset] &amp; 0xff) &lt;&lt; 8)</span>
+                | (data[offset + 1] &amp; 0xff);
+        }
+
+        public int getInt4(int offset) {
+<span class="nc" id="L122">            return ((data[offset] &amp; 0xff) &lt;&lt; 24)</span>
+                | ((data[offset + 1] &amp; 0xff) &lt;&lt; 16)
+                | ((data[offset + 2] &amp; 0xff) &lt;&lt; 8)
+                | (data[offset + 3] &amp; 0xff);
+        }
+
+        public String getString4(int offset) {
+<span class="nc" id="L129">            String s = &quot;&quot;;</span>
+<span class="nc" id="L130">            s += (char)data[offset];</span>
+<span class="nc" id="L131">            s += (char)data[offset + 1];</span>
+<span class="nc" id="L132">            s += (char)data[offset + 2];</span>
+<span class="nc" id="L133">            s += (char)data[offset + 3];</span>
+<span class="nc" id="L134">            return s;</span>
+        }
+
+        public boolean isType(String typeName) {
+<span class="nc" id="L138">            return typeString.equals(typeName);</span>
+        }
+    }
+
+    public static final int PNG_COLOR_GRAY = 0;
+    public static final int PNG_COLOR_RGB = 2;
+    public static final int PNG_COLOR_PALETTE = 3;
+    public static final int PNG_COLOR_GRAY_ALPHA = 4;
+    public static final int PNG_COLOR_RGB_ALPHA = 6;
+
+<span class="nc" id="L148">    private static final String[] colorTypeNames = {</span>
+        &quot;Grayscale&quot;, &quot;Error&quot;, &quot;Truecolor&quot;, &quot;Index&quot;,
+        &quot;Grayscale with alpha&quot;, &quot;Error&quot;, &quot;Truecolor with alpha&quot;
+    };
+
+    public static final int PNG_FILTER_NONE = 0;
+    public static final int PNG_FILTER_SUB = 1;
+    public static final int PNG_FILTER_UP = 2;
+    public static final int PNG_FILTER_AVERAGE = 3;
+    public static final int PNG_FILTER_PAETH = 4;
+
+<span class="nc" id="L159">    private int[][] bandOffsets = {</span>
+        null,
+        { 0 }, // G
+        { 0, 1 }, // GA in GA order
+        { 0, 1, 2 }, // RGB in RGB order
+        { 0, 1, 2, 3 } // RGBA in RGBA order
+    };
+
+    private int bitDepth;
+    private int colorType;
+
+    private int compressionMethod;
+    private int filterMethod;
+    private int interlaceMethod;
+
+    private int paletteEntries;
+    private byte[] redPalette;
+    private byte[] greenPalette;
+    private byte[] bluePalette;
+    private byte[] alphaPalette;
+
+    private int bkgdRed;
+    private int bkgdGreen;
+    private int bkgdBlue;
+
+    private int grayTransparentAlpha;
+    private int redTransparentAlpha;
+    private int greenTransparentAlpha;
+    private int blueTransparentAlpha;
+
+    private int maxOpacity;
+
+    private int[] significantBits;
+
+    // Parameter information
+
+    // If true, the user wants destination alpha where applicable.
+    private boolean suppressAlpha;
+
+    // If true, perform palette lookup internally
+    private boolean expandPalette;
+
+    // If true, output &lt; 8 bit gray images in 8 bit components format
+    private boolean output8BitGray;
+
+    // Create an alpha channel in the destination color model.
+    private boolean outputHasAlphaPalette;
+
+    // Perform gamma correction on the image
+    private boolean performGammaCorrection;
+
+    // Expand GA to GGGA for compatbility with Java2D
+    private boolean expandGrayAlpha;
+
+    // Produce an instance of PNGEncodeParam
+    private boolean generateEncodeParam;
+
+    // PNGDecodeParam controlling decode process
+    private PNGDecodeParam decodeParam;
+
+    // PNGEncodeParam to store file details in
+    private PNGEncodeParam encodeParam;
+
+<span class="nc" id="L222">    private boolean emitProperties = true;</span>
+
+<span class="nc" id="L224">    private float fileGamma = 45455 / 100000.0F;</span>
+
+<span class="nc" id="L226">    private float userExponent = 1.0F;</span>
+
+<span class="nc" id="L228">    private float displayExponent = 2.2F;</span>
+
+    private float[] chromaticity;
+
+<span class="nc" id="L232">    private int sRGBRenderingIntent = -1;</span>
+
+    // Post-processing step implied by above parameters
+<span class="nc" id="L235">    private int postProcess = POST_NONE;</span>
+
+    // Possible post-processing steps
+
+    // Do nothing
+    private static final int POST_NONE = 0;
+
+    // Gamma correct only
+    private static final int POST_GAMMA = 1;
+
+    // Push gray values through grayLut to expand to 8 bits
+    private static final int POST_GRAY_LUT = 2;
+
+    // Push gray values through grayLut to expand to 8 bits, add alpha
+    private static final int POST_GRAY_LUT_ADD_TRANS = 3;
+
+    // Push palette value through R,G,B lookup tables
+    private static final int POST_PALETTE_TO_RGB = 4;
+
+    // Push palette value through R,G,B,A lookup tables
+    private static final int POST_PALETTE_TO_RGBA = 5;
+
+    // Add transparency to a given gray value (w/ optional gamma)
+    private static final int POST_ADD_GRAY_TRANS = 6;
+
+    // Add transparency to a given RGB value (w/ optional gamma)
+    private static final int POST_ADD_RGB_TRANS = 7;
+
+    // Remove the alpha channel from a gray image (w/ optional gamma)
+    private static final int POST_REMOVE_GRAY_TRANS = 8;
+
+    // Remove the alpha channel from an RGB image (w/optional gamma)
+    private static final int POST_REMOVE_RGB_TRANS = 9;
+
+    // Mask to add expansion of GA -&gt; GGGA
+    private static final int POST_EXP_MASK = 16;
+
+    // Expand gray to G/G/G
+    private static final int POST_GRAY_ALPHA_EXP =
+        POST_NONE | POST_EXP_MASK;
+
+    // Expand gray to G/G/G through a gamma lut
+    private static final int POST_GAMMA_EXP =
+        POST_GAMMA | POST_EXP_MASK;
+
+    // Push gray values through grayLut to expand to 8 bits, expand, add alpha
+    private static final int POST_GRAY_LUT_ADD_TRANS_EXP =
+        POST_GRAY_LUT_ADD_TRANS | POST_EXP_MASK;
+
+    // Add transparency to a given gray value, expand
+    private static final int POST_ADD_GRAY_TRANS_EXP =
+        POST_ADD_GRAY_TRANS | POST_EXP_MASK;
+
+<span class="nc" id="L288">    private List&lt;InputStream&gt; streamVec = new ArrayList&lt;InputStream&gt;();</span>
+    private DataInputStream dataStream;
+
+    private int bytesPerPixel; // number of bytes per input pixel
+    private int inputBands;
+    private int outputBands;
+
+    // Number of private chunks
+    private int chunkIndex;
+
+<span class="nc" id="L298">    private List textKeys = new ArrayList();</span>
+<span class="nc" id="L299">    private List textStrings = new ArrayList();</span>
+
+<span class="nc" id="L301">    private List ztextKeys = new ArrayList();</span>
+<span class="nc" id="L302">    private List ztextStrings = new ArrayList();</span>
+
+    private WritableRaster theTile;
+    private Rectangle bounds;
+
+    /** A Hashtable containing the image properties. */
+<span class="nc" id="L308">    private Map&lt;String, Object&gt; properties = new HashMap&lt;String, Object&gt;();</span>
+
+
+    private int[] gammaLut;
+
+    private void initGammaLut(int bits) {
+<span class="nc" id="L314">        double exp = (double)userExponent / (fileGamma * displayExponent);</span>
+<span class="nc" id="L315">        int numSamples = 1 &lt;&lt; bits;</span>
+<span class="nc bnc" id="L316" title="All 2 branches missed.">        int maxOutSample = (bits == 16) ? 65535 : 255;</span>
+
+<span class="nc" id="L318">        gammaLut = new int[numSamples];</span>
+<span class="nc bnc" id="L319" title="All 2 branches missed.">        for (int i = 0; i &lt; numSamples; i++) {</span>
+<span class="nc" id="L320">            double gbright = (double)i / (numSamples - 1);</span>
+<span class="nc" id="L321">            double gamma = Math.pow(gbright, exp);</span>
+<span class="nc" id="L322">            int igamma = (int)(gamma * maxOutSample + 0.5);</span>
+<span class="nc bnc" id="L323" title="All 2 branches missed.">            if (igamma &gt; maxOutSample) {</span>
+<span class="nc" id="L324">                igamma = maxOutSample;</span>
+            }
+<span class="nc" id="L326">            gammaLut[i] = igamma;</span>
+        }
+<span class="nc" id="L328">    }</span>
+
+<span class="nc" id="L330">    private final byte[][] expandBits = {</span>
+        null,
+        { (byte)0x00, (byte)0xff },
+        { (byte)0x00, (byte)0x55, (byte)0xaa, (byte)0xff },
+        null,
+        { (byte)0x00, (byte)0x11, (byte)0x22, (byte)0x33,
+          (byte)0x44, (byte)0x55, (byte)0x66, (byte)0x77,
+          (byte)0x88, (byte)0x99, (byte)0xaa, (byte)0xbb,
+          (byte)0xcc, (byte)0xdd, (byte)0xee, (byte)0xff }
+    };
+
+    private int[] grayLut;
+
+    private void initGrayLut(int bits) {
+<span class="nc" id="L344">        int len = 1 &lt;&lt; bits;</span>
+<span class="nc" id="L345">        grayLut = new int[len];</span>
+
+<span class="nc bnc" id="L347" title="All 2 branches missed.">        if (performGammaCorrection) {</span>
+<span class="nc" id="L348">            System.arraycopy(gammaLut, 0, grayLut, 0, len);</span>
+        } else {
+<span class="nc bnc" id="L350" title="All 2 branches missed.">            for (int i = 0; i &lt; len; i++) {</span>
+<span class="nc" id="L351">                grayLut[i] = expandBits[bits][i];</span>
+            }
+        }
+<span class="nc" id="L354">    }</span>
+
+    public PNGRed(InputStream stream) throws IOException {
+<span class="nc" id="L357">        this(stream, null);</span>
+<span class="nc" id="L358">    }</span>
+
+    public PNGRed(InputStream stream, PNGDecodeParam decodeParam)
+<span class="nc" id="L361">        throws IOException {</span>
+
+<span class="nc bnc" id="L363" title="All 2 branches missed.">        if (!stream.markSupported()) {</span>
+<span class="nc" id="L364">            stream = new BufferedInputStream(stream);</span>
+        }
+<span class="nc" id="L366">        DataInputStream distream = new DataInputStream(stream);</span>
+
+<span class="nc bnc" id="L368" title="All 2 branches missed.">        if (decodeParam == null) {</span>
+<span class="nc" id="L369">            decodeParam = new PNGDecodeParam();</span>
+        }
+<span class="nc" id="L371">        this.decodeParam = decodeParam;</span>
+
+        // Get parameter values
+<span class="nc" id="L374">        this.suppressAlpha = decodeParam.getSuppressAlpha();</span>
+<span class="nc" id="L375">        this.expandPalette = decodeParam.getExpandPalette();</span>
+<span class="nc" id="L376">        this.output8BitGray = decodeParam.getOutput8BitGray();</span>
+<span class="nc" id="L377">        this.expandGrayAlpha = decodeParam.getExpandGrayAlpha();</span>
+<span class="nc bnc" id="L378" title="All 2 branches missed.">        if (decodeParam.getPerformGammaCorrection()) {</span>
+<span class="nc" id="L379">            this.userExponent = decodeParam.getUserExponent();</span>
+<span class="nc" id="L380">            this.displayExponent = decodeParam.getDisplayExponent();</span>
+<span class="nc" id="L381">            performGammaCorrection = true;</span>
+<span class="nc" id="L382">            output8BitGray = true;</span>
+        }
+<span class="nc" id="L384">        this.generateEncodeParam = decodeParam.getGenerateEncodeParam();</span>
+
+<span class="nc bnc" id="L386" title="All 2 branches missed.">        if (emitProperties) {</span>
+<span class="nc" id="L387">            properties.put(&quot;file_type&quot;, &quot;PNG v. 1.0&quot;);</span>
+        }
+
+<span class="nc" id="L390">        long magic = distream.readLong();</span>
+<span class="nc bnc" id="L391" title="All 2 branches missed.">        if (magic != 0x89504e470d0a1a0aL) {</span>
+<span class="nc" id="L392">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder0&quot;);</span>
+<span class="nc" id="L393">            throw new RuntimeException(msg);</span>
+        }
+
+        do {
+            PNGChunk chunk;
+
+<span class="nc" id="L399">            String chunkType = getChunkType(distream);</span>
+<span class="nc bnc" id="L400" title="All 2 branches missed.">            if (chunkType.equals(&quot;IHDR&quot;)) {</span>
+<span class="nc" id="L401">                chunk = readChunk(distream);</span>
+<span class="nc" id="L402">                parse_IHDR_chunk(chunk);</span>
+<span class="nc bnc" id="L403" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;PLTE&quot;)) {</span>
+<span class="nc" id="L404">                chunk = readChunk(distream);</span>
+<span class="nc" id="L405">                parse_PLTE_chunk(chunk);</span>
+<span class="nc bnc" id="L406" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;IDAT&quot;)) {</span>
+<span class="nc" id="L407">                chunk = readChunk(distream);</span>
+<span class="nc" id="L408">                streamVec.add(new ByteArrayInputStream(chunk.getData()));</span>
+<span class="nc bnc" id="L409" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;IEND&quot;)) {</span>
+<span class="nc" id="L410">                chunk = readChunk(distream);</span>
+                try {
+<span class="nc" id="L412">                    parse_IEND_chunk(chunk);</span>
+<span class="nc" id="L413">                } catch (Exception e) {</span>
+<span class="nc" id="L414">                    e.printStackTrace();</span>
+<span class="nc" id="L415">                    String msg = PropertyUtil.getString(&quot;PNGImageDecoder2&quot;);</span>
+<span class="nc" id="L416">                    throw new RuntimeException(msg);</span>
+<span class="nc" id="L417">                }</span>
+                break; // fall through to the bottom
+<span class="nc bnc" id="L419" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;bKGD&quot;)) {</span>
+<span class="nc" id="L420">                chunk = readChunk(distream);</span>
+<span class="nc" id="L421">                parse_bKGD_chunk(chunk);</span>
+<span class="nc bnc" id="L422" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;cHRM&quot;)) {</span>
+<span class="nc" id="L423">                chunk = readChunk(distream);</span>
+<span class="nc" id="L424">                parse_cHRM_chunk(chunk);</span>
+<span class="nc bnc" id="L425" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;gAMA&quot;)) {</span>
+<span class="nc" id="L426">                chunk = readChunk(distream);</span>
+<span class="nc" id="L427">                parse_gAMA_chunk(chunk);</span>
+<span class="nc bnc" id="L428" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;hIST&quot;)) {</span>
+<span class="nc" id="L429">                chunk = readChunk(distream);</span>
+<span class="nc" id="L430">                parse_hIST_chunk(chunk);</span>
+<span class="nc bnc" id="L431" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;iCCP&quot;)) {</span>
+<span class="nc" id="L432">                chunk = readChunk(distream);</span>
+<span class="nc bnc" id="L433" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;pHYs&quot;)) {</span>
+<span class="nc" id="L434">                chunk = readChunk(distream);</span>
+<span class="nc" id="L435">                parse_pHYs_chunk(chunk);</span>
+<span class="nc bnc" id="L436" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;sBIT&quot;)) {</span>
+<span class="nc" id="L437">                chunk = readChunk(distream);</span>
+<span class="nc" id="L438">                parse_sBIT_chunk(chunk);</span>
+<span class="nc bnc" id="L439" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;sRGB&quot;)) {</span>
+<span class="nc" id="L440">                chunk = readChunk(distream);</span>
+<span class="nc" id="L441">                parse_sRGB_chunk(chunk);</span>
+<span class="nc bnc" id="L442" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;tEXt&quot;)) {</span>
+<span class="nc" id="L443">                chunk = readChunk(distream);</span>
+<span class="nc" id="L444">                parse_tEXt_chunk(chunk);</span>
+<span class="nc bnc" id="L445" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;tIME&quot;)) {</span>
+<span class="nc" id="L446">                chunk = readChunk(distream);</span>
+<span class="nc" id="L447">                parse_tIME_chunk(chunk);</span>
+<span class="nc bnc" id="L448" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;tRNS&quot;)) {</span>
+<span class="nc" id="L449">                chunk = readChunk(distream);</span>
+<span class="nc" id="L450">                parse_tRNS_chunk(chunk);</span>
+<span class="nc bnc" id="L451" title="All 2 branches missed.">            } else if (chunkType.equals(&quot;zTXt&quot;)) {</span>
+<span class="nc" id="L452">                chunk = readChunk(distream);</span>
+<span class="nc" id="L453">                parse_zTXt_chunk(chunk);</span>
+            } else {
+<span class="nc" id="L455">                chunk = readChunk(distream);</span>
+                // Output the chunk data in raw form
+
+<span class="nc" id="L458">                String type = chunk.getTypeString();</span>
+<span class="nc" id="L459">                byte[] data = chunk.getData();</span>
+<span class="nc bnc" id="L460" title="All 2 branches missed.">                if (encodeParam != null) {</span>
+<span class="nc" id="L461">                    encodeParam.addPrivateChunk(type, data);</span>
+                }
+<span class="nc bnc" id="L463" title="All 2 branches missed.">                if (emitProperties) {</span>
+<span class="nc" id="L464">                    String key = &quot;chunk_&quot; + chunkIndex++ + ':' + type;</span>
+<span class="nc" id="L465">                    properties.put(key.toLowerCase(Locale.getDefault()), data);</span>
+                }
+            }
+<span class="nc" id="L468">        } while (true);</span>
+
+        // Final post-processing
+
+<span class="nc bnc" id="L472" title="All 2 branches missed.">        if (significantBits == null) {</span>
+<span class="nc" id="L473">            significantBits = new int[inputBands];</span>
+<span class="nc bnc" id="L474" title="All 2 branches missed.">            for (int i = 0; i &lt; inputBands; i++) {</span>
+<span class="nc" id="L475">                significantBits[i] = bitDepth;</span>
+            }
+
+<span class="nc bnc" id="L478" title="All 2 branches missed.">            if (emitProperties) {</span>
+<span class="nc" id="L479">                properties.put(&quot;significant_bits&quot;, significantBits);</span>
+            }
+        }
+<span class="nc" id="L482">        distream.close();</span>
+<span class="nc" id="L483">        stream.close();</span>
+<span class="nc" id="L484">    }</span>
+
+    private static String getChunkType(DataInputStream distream) {
+        try {
+<span class="nc" id="L488">            distream.mark(8);</span>
+<span class="nc" id="L489">            /* int length = */ distream.readInt();</span>
+<span class="nc" id="L490">            int type      =    distream.readInt();</span>
+<span class="nc" id="L491">            distream.reset();</span>
+
+<span class="nc" id="L493">            String typeString = &quot;&quot;</span>
+                              + (char)((type &gt;&gt; 24) &amp; 0xff)
+                              + (char)((type &gt;&gt; 16) &amp; 0xff)
+                              + (char)((type &gt;&gt;  8) &amp; 0xff)
+                              + (char)(type        &amp; 0xff);
+<span class="nc" id="L498">            return typeString;</span>
+<span class="nc" id="L499">        } catch (Exception e) {</span>
+<span class="nc" id="L500">            e.printStackTrace();</span>
+<span class="nc" id="L501">            return null;</span>
+        }
+    }
+
+    private static PNGChunk readChunk(DataInputStream distream) {
+        try {
+<span class="nc" id="L507">            int length = distream.readInt();</span>
+<span class="nc" id="L508">            int type = distream.readInt();</span>
+<span class="nc" id="L509">            byte[] data = new byte[length];</span>
+<span class="nc" id="L510">            distream.readFully(data);</span>
+<span class="nc" id="L511">            int crc = distream.readInt();</span>
+
+<span class="nc" id="L513">            return new PNGChunk(length, type, data, crc);</span>
+<span class="nc" id="L514">        } catch (Exception e) {</span>
+<span class="nc" id="L515">            e.printStackTrace();</span>
+<span class="nc" id="L516">            return null;</span>
+        }
+    }
+
+    private void parse_IHDR_chunk(PNGChunk chunk) {
+<span class="nc" id="L521">        int width  = chunk.getInt4(0);</span>
+<span class="nc" id="L522">        int height = chunk.getInt4(4);</span>
+
+<span class="nc" id="L524">        bounds = new Rectangle(0, 0, width, height);</span>
+
+<span class="nc" id="L526">        bitDepth = chunk.getInt1(8);</span>
+
+<span class="nc" id="L528">        int validMask = (1 &lt;&lt; 1) | (1 &lt;&lt; 2) | (1 &lt;&lt; 4) | (1 &lt;&lt; 8) | (1 &lt;&lt; 16);</span>
+<span class="nc bnc" id="L529" title="All 2 branches missed.">        if (((1 &lt;&lt; bitDepth) &amp; validMask) == 0) {</span>
+            // bitDepth is not one of { 1, 2, 4, 8, 16 }: Error -- bad bit depth
+<span class="nc" id="L531">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder3&quot;);</span>
+<span class="nc" id="L532">            throw new RuntimeException(msg);</span>
+        }
+<span class="nc" id="L534">        maxOpacity = (1 &lt;&lt; bitDepth) - 1;</span>
+
+<span class="nc" id="L536">        colorType = chunk.getInt1(9);</span>
+<span class="nc bnc" id="L537" title="All 10 branches missed.">        if ((colorType != PNG_COLOR_GRAY)</span>
+            &amp;&amp; (colorType != PNG_COLOR_RGB)
+            &amp;&amp; (colorType != PNG_COLOR_PALETTE)
+            &amp;&amp; (colorType != PNG_COLOR_GRAY_ALPHA)
+            &amp;&amp; (colorType != PNG_COLOR_RGB_ALPHA)) {
+<span class="nc" id="L542">            System.out.println(PropertyUtil.getString(&quot;PNGImageDecoder4&quot;));</span>
+        }
+
+<span class="nc bnc" id="L545" title="All 4 branches missed.">        if ((colorType == PNG_COLOR_RGB) &amp;&amp; (bitDepth &lt; 8)) {</span>
+            // Error -- RGB images must have 8 or 16 bits
+<span class="nc" id="L547">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder5&quot;);</span>
+<span class="nc" id="L548">            throw new RuntimeException(msg);</span>
+        }
+
+<span class="nc bnc" id="L551" title="All 4 branches missed.">        if ((colorType == PNG_COLOR_PALETTE) &amp;&amp; (bitDepth == 16)) {</span>
+            // Error -- palette images must have &lt; 16 bits
+<span class="nc" id="L553">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder6&quot;);</span>
+<span class="nc" id="L554">            throw new RuntimeException(msg);</span>
+        }
+
+<span class="nc bnc" id="L557" title="All 4 branches missed.">        if ((colorType == PNG_COLOR_GRAY_ALPHA) &amp;&amp; (bitDepth &lt; 8)) {</span>
+            // Error -- gray/alpha images must have &gt;= 8 bits
+<span class="nc" id="L559">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder7&quot;);</span>
+<span class="nc" id="L560">            throw new RuntimeException(msg);</span>
+        }
+
+<span class="nc bnc" id="L563" title="All 4 branches missed.">        if ((colorType == PNG_COLOR_RGB_ALPHA) &amp;&amp; (bitDepth &lt; 8)) {</span>
+            // Error -- RGB/alpha images must have &gt;= 8 bits
+<span class="nc" id="L565">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder8&quot;);</span>
+<span class="nc" id="L566">            throw new RuntimeException(msg);</span>
+        }
+
+<span class="nc bnc" id="L569" title="All 2 branches missed.">        if (emitProperties) {</span>
+<span class="nc" id="L570">            properties.put(&quot;color_type&quot;, colorTypeNames[colorType]);</span>
+        }
+
+<span class="nc bnc" id="L573" title="All 2 branches missed.">        if (generateEncodeParam) {</span>
+<span class="nc bnc" id="L574" title="All 2 branches missed.">            if (colorType == PNG_COLOR_PALETTE) {</span>
+<span class="nc" id="L575">                encodeParam = new PNGEncodeParam.Palette();</span>
+<span class="nc bnc" id="L576" title="All 4 branches missed.">            } else if (colorType == PNG_COLOR_GRAY</span>
+                       || colorType == PNG_COLOR_GRAY_ALPHA) {
+<span class="nc" id="L578">                encodeParam = new PNGEncodeParam.Gray();</span>
+            } else {
+<span class="nc" id="L580">                encodeParam = new PNGEncodeParam.RGB();</span>
+            }
+<span class="nc" id="L582">            decodeParam.setEncodeParam(encodeParam);</span>
+        }
+
+<span class="nc bnc" id="L585" title="All 2 branches missed.">        if (encodeParam != null) {</span>
+<span class="nc" id="L586">            encodeParam.setBitDepth(bitDepth);</span>
+        }
+<span class="nc bnc" id="L588" title="All 2 branches missed.">        if (emitProperties) {</span>
+<span class="nc" id="L589">            properties.put(&quot;bit_depth&quot;, bitDepth);</span>
+        }
+
+<span class="nc bnc" id="L592" title="All 2 branches missed.">        if (performGammaCorrection) {</span>
+            // Assume file gamma is 1/2.2 unless we get a gAMA chunk
+<span class="nc" id="L594">            float gamma = (1.0F / 2.2F) * (displayExponent / userExponent);</span>
+<span class="nc bnc" id="L595" title="All 2 branches missed.">            if (encodeParam != null) {</span>
+<span class="nc" id="L596">                encodeParam.setGamma(gamma);</span>
+            }
+<span class="nc bnc" id="L598" title="All 2 branches missed.">            if (emitProperties) {</span>
+<span class="nc" id="L599">                properties.put(&quot;gamma&quot;, gamma);</span>
+            }
+        }
+
+<span class="nc" id="L603">        compressionMethod = chunk.getInt1(10);</span>
+<span class="nc bnc" id="L604" title="All 2 branches missed.">        if (compressionMethod != 0) {</span>
+            // Error -- only know about compression method 0
+<span class="nc" id="L606">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder9&quot;);</span>
+<span class="nc" id="L607">            throw new RuntimeException(msg);</span>
+        }
+
+<span class="nc" id="L610">        filterMethod = chunk.getInt1(11);</span>
+<span class="nc bnc" id="L611" title="All 2 branches missed.">        if (filterMethod != 0) {</span>
+            // Error -- only know about filter method 0
+<span class="nc" id="L613">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder10&quot;);</span>
+<span class="nc" id="L614">            throw new RuntimeException(msg);</span>
+        }
+
+<span class="nc" id="L617">        interlaceMethod = chunk.getInt1(12);</span>
+<span class="nc bnc" id="L618" title="All 2 branches missed.">        if (interlaceMethod == 0) {</span>
+<span class="nc bnc" id="L619" title="All 2 branches missed.">            if (encodeParam != null) {</span>
+<span class="nc" id="L620">                encodeParam.setInterlacing(false);</span>
+            }
+<span class="nc bnc" id="L622" title="All 2 branches missed.">            if (emitProperties) {</span>
+<span class="nc" id="L623">                properties.put(&quot;interlace_method&quot;, &quot;None&quot;);</span>
+            }
+<span class="nc bnc" id="L625" title="All 2 branches missed.">        } else if (interlaceMethod == 1) {</span>
+<span class="nc bnc" id="L626" title="All 2 branches missed.">            if (encodeParam != null) {</span>
+<span class="nc" id="L627">                encodeParam.setInterlacing(true);</span>
+            }
+<span class="nc bnc" id="L629" title="All 2 branches missed.">            if (emitProperties) {</span>
+<span class="nc" id="L630">                properties.put(&quot;interlace_method&quot;, &quot;Adam7&quot;);</span>
+            }
+        } else {
+            // Error -- only know about Adam7 interlacing
+<span class="nc" id="L634">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder11&quot;);</span>
+<span class="nc" id="L635">            throw new RuntimeException(msg);</span>
+        }
+
+<span class="nc bnc" id="L638" title="All 2 branches missed.">        bytesPerPixel = (bitDepth == 16) ? 2 : 1;</span>
+
+<span class="nc bnc" id="L640" title="All 6 branches missed.">        switch (colorType) {</span>
+        case PNG_COLOR_GRAY:
+<span class="nc" id="L642">            inputBands = 1;</span>
+<span class="nc" id="L643">            outputBands = 1;</span>
+
+<span class="nc bnc" id="L645" title="All 4 branches missed.">            if (output8BitGray &amp;&amp; (bitDepth &lt; 8)) {</span>
+<span class="nc" id="L646">                postProcess = POST_GRAY_LUT;</span>
+<span class="nc bnc" id="L647" title="All 2 branches missed.">            } else if (performGammaCorrection) {</span>
+<span class="nc" id="L648">                postProcess = POST_GAMMA;</span>
+            } else {
+<span class="nc" id="L650">                postProcess = POST_NONE;</span>
+            }
+<span class="nc" id="L652">            break;</span>
+
+        case PNG_COLOR_RGB:
+<span class="nc" id="L655">            inputBands = 3;</span>
+<span class="nc" id="L656">            bytesPerPixel *= 3;</span>
+<span class="nc" id="L657">            outputBands = 3;</span>
+
+<span class="nc bnc" id="L659" title="All 2 branches missed.">            if (performGammaCorrection) {</span>
+<span class="nc" id="L660">                postProcess = POST_GAMMA;</span>
+            } else {
+<span class="nc" id="L662">                postProcess = POST_NONE;</span>
+            }
+<span class="nc" id="L664">            break;</span>
+
+        case PNG_COLOR_PALETTE:
+<span class="nc" id="L667">            inputBands = 1;</span>
+<span class="nc" id="L668">            bytesPerPixel = 1;</span>
+<span class="nc bnc" id="L669" title="All 2 branches missed.">            outputBands = expandPalette ? 3 : 1;</span>
+
+<span class="nc bnc" id="L671" title="All 2 branches missed.">            if (expandPalette) {</span>
+<span class="nc" id="L672">                postProcess = POST_PALETTE_TO_RGB;</span>
+            } else {
+<span class="nc" id="L674">                postProcess = POST_NONE;</span>
+            }
+<span class="nc" id="L676">            break;</span>
+
+        case PNG_COLOR_GRAY_ALPHA:
+<span class="nc" id="L679">            inputBands = 2;</span>
+<span class="nc" id="L680">            bytesPerPixel *= 2;</span>
+
+<span class="nc bnc" id="L682" title="All 2 branches missed.">            if (suppressAlpha) {</span>
+<span class="nc" id="L683">                outputBands = 1;</span>
+<span class="nc" id="L684">                postProcess = POST_REMOVE_GRAY_TRANS;</span>
+            } else {
+<span class="nc bnc" id="L686" title="All 2 branches missed.">                if (performGammaCorrection) {</span>
+<span class="nc" id="L687">                    postProcess = POST_GAMMA;</span>
+                } else {
+<span class="nc" id="L689">                    postProcess = POST_NONE;</span>
+                }
+<span class="nc bnc" id="L691" title="All 2 branches missed.">                if (expandGrayAlpha) {</span>
+<span class="nc" id="L692">                    postProcess |= POST_EXP_MASK;</span>
+<span class="nc" id="L693">                    outputBands = 4;</span>
+                } else {
+<span class="nc" id="L695">                    outputBands = 2;</span>
+                }
+            }
+<span class="nc" id="L698">            break;</span>
+
+        case PNG_COLOR_RGB_ALPHA:
+<span class="nc" id="L701">            inputBands = 4;</span>
+<span class="nc" id="L702">            bytesPerPixel *= 4;</span>
+<span class="nc bnc" id="L703" title="All 2 branches missed.">            outputBands = (!suppressAlpha) ? 4 : 3;</span>
+
+<span class="nc bnc" id="L705" title="All 2 branches missed.">            if (suppressAlpha) {</span>
+<span class="nc" id="L706">                postProcess = POST_REMOVE_RGB_TRANS;</span>
+<span class="nc bnc" id="L707" title="All 2 branches missed.">            } else if (performGammaCorrection) {</span>
+<span class="nc" id="L708">                postProcess = POST_GAMMA;</span>
+            } else {
+<span class="nc" id="L710">                postProcess = POST_NONE;</span>
+            }
+            break;
+        }
+<span class="nc" id="L714">    }</span>
+
+    private void parse_IEND_chunk(PNGChunk chunk) throws Exception {
+        // Store text strings
+<span class="nc" id="L718">        int textLen = textKeys.size();</span>
+<span class="nc" id="L719">        String[] textArray = new String[2 * textLen];</span>
+<span class="nc bnc" id="L720" title="All 2 branches missed.">        for (int i = 0; i &lt; textLen; i++) {</span>
+<span class="nc" id="L721">            String key = (String)textKeys.get(i);</span>
+<span class="nc" id="L722">            String val = (String)textStrings.get(i);</span>
+<span class="nc" id="L723">            textArray[2 * i] = key;</span>
+<span class="nc" id="L724">            textArray[2 * i + 1] = val;</span>
+<span class="nc bnc" id="L725" title="All 2 branches missed.">            if (emitProperties) {</span>
+<span class="nc" id="L726">                String uniqueKey = &quot;text_&quot; + i + ':' + key;</span>
+<span class="nc" id="L727">                properties.put(uniqueKey.toLowerCase(Locale.getDefault()), val);</span>
+            }
+        }
+<span class="nc bnc" id="L730" title="All 2 branches missed.">        if (encodeParam != null) {</span>
+<span class="nc" id="L731">            encodeParam.setText(textArray);</span>
+        }
+
+        // Store compressed text strings
+<span class="nc" id="L735">        int ztextLen = ztextKeys.size();</span>
+<span class="nc" id="L736">        String[] ztextArray = new String[2 * ztextLen];</span>
+<span class="nc bnc" id="L737" title="All 2 branches missed.">        for (int i = 0; i &lt; ztextLen; i++) {</span>
+<span class="nc" id="L738">            String key = (String)ztextKeys.get(i);</span>
+<span class="nc" id="L739">            String val = (String)ztextStrings.get(i);</span>
+<span class="nc" id="L740">            ztextArray[2 * i] = key;</span>
+<span class="nc" id="L741">            ztextArray[2 * i + 1] = val;</span>
+<span class="nc bnc" id="L742" title="All 2 branches missed.">            if (emitProperties) {</span>
+<span class="nc" id="L743">                String uniqueKey = &quot;ztext_&quot; + i + ':' + key;</span>
+<span class="nc" id="L744">                properties.put(uniqueKey.toLowerCase(Locale.getDefault()), val);</span>
+            }
+        }
+<span class="nc bnc" id="L747" title="All 2 branches missed.">        if (encodeParam != null) {</span>
+<span class="nc" id="L748">            encodeParam.setCompressedText(ztextArray);</span>
+        }
+
+        // Parse prior IDAT chunks
+<span class="nc" id="L752">        InputStream seqStream =</span>
+<span class="nc" id="L753">            new SequenceInputStream(Collections.enumeration(streamVec));</span>
+<span class="nc" id="L754">        InputStream infStream =</span>
+            new InflaterInputStream(seqStream, new Inflater());
+<span class="nc" id="L756">        dataStream = new DataInputStream(infStream);</span>
+
+        // Create an empty WritableRaster
+<span class="nc" id="L759">        int depth = bitDepth;</span>
+<span class="nc bnc" id="L760" title="All 6 branches missed.">        if ((colorType == PNG_COLOR_GRAY)</span>
+            &amp;&amp; (bitDepth &lt; 8) &amp;&amp; output8BitGray) {
+<span class="nc" id="L762">            depth = 8;</span>
+        }
+<span class="nc bnc" id="L764" title="All 4 branches missed.">        if ((colorType == PNG_COLOR_PALETTE) &amp;&amp; expandPalette) {</span>
+<span class="nc" id="L765">            depth = 8;</span>
+        }
+<span class="nc" id="L767">        int width  = bounds.width;</span>
+<span class="nc" id="L768">        int height = bounds.height;</span>
+
+<span class="nc" id="L770">        int bytesPerRow = (outputBands * width * depth + 7) / 8;</span>
+        int scanlineStride =
+<span class="nc bnc" id="L772" title="All 2 branches missed.">            (depth == 16) ? (bytesPerRow / 2) : bytesPerRow;</span>
+
+<span class="nc" id="L774">        theTile = createRaster(width, height, outputBands,</span>
+                               scanlineStride,
+                               depth);
+
+<span class="nc bnc" id="L778" title="All 4 branches missed.">        if (performGammaCorrection &amp;&amp; (gammaLut == null)) {</span>
+<span class="nc" id="L779">            initGammaLut(bitDepth);</span>
+        }
+<span class="nc bnc" id="L781" title="All 6 branches missed.">        if ((postProcess == POST_GRAY_LUT)</span>
+            || (postProcess == POST_GRAY_LUT_ADD_TRANS)
+            || (postProcess == POST_GRAY_LUT_ADD_TRANS_EXP)) {
+<span class="nc" id="L784">            initGrayLut(bitDepth);</span>
+        }
+
+<span class="nc bnc" id="L787" title="All 2 branches missed.">        decodeImage(interlaceMethod == 1);</span>
+
+        // Free resources associated with compressed data.
+<span class="nc" id="L790">        dataStream.close();</span>
+<span class="nc" id="L791">        infStream.close();</span>
+<span class="nc" id="L792">        seqStream.close();</span>
+<span class="nc" id="L793">        streamVec = null;</span>
+
+<span class="nc" id="L795">        SampleModel sm = theTile.getSampleModel();</span>
+        ColorModel  cm;
+
+<span class="nc bnc" id="L798" title="All 4 branches missed.">        if ((colorType == PNG_COLOR_PALETTE) &amp;&amp; !expandPalette) {</span>
+<span class="nc bnc" id="L799" title="All 2 branches missed.">            if (outputHasAlphaPalette) {</span>
+<span class="nc" id="L800">                cm = new IndexColorModel(bitDepth,</span>
+                                                 paletteEntries,
+                                                 redPalette,
+                                                 greenPalette,
+                                                 bluePalette,
+                                                 alphaPalette);
+            } else {
+<span class="nc" id="L807">                cm = new IndexColorModel(bitDepth,</span>
+                                                 paletteEntries,
+                                                 redPalette,
+                                                 greenPalette,
+                                                 bluePalette);
+            }
+<span class="nc bnc" id="L813" title="All 6 branches missed.">        } else if ((colorType == PNG_COLOR_GRAY)</span>
+                   &amp;&amp; (bitDepth &lt; 8) &amp;&amp; !output8BitGray) {
+<span class="nc" id="L815">            byte[] palette = expandBits[bitDepth];</span>
+<span class="nc" id="L816">            cm = new IndexColorModel(bitDepth,</span>
+                                             palette.length,
+                                             palette,
+                                             palette,
+                                             palette);
+<span class="nc" id="L821">        } else {</span>
+<span class="nc" id="L822">            cm =</span>
+<span class="nc" id="L823">                createComponentColorModel(sm);</span>
+        }
+
+<span class="nc" id="L826">        init((CachableRed)null, bounds, cm, sm, 0, 0, properties);</span>
+<span class="nc" id="L827">    }</span>
+
+<span class="nc" id="L829">    private static final int[] GrayBits8 = { 8 };</span>
+<span class="nc" id="L830">    private static final ComponentColorModel colorModelGray8 =</span>
+<span class="nc" id="L831">        new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                                GrayBits8, false, false,
+                                Transparency.OPAQUE,
+                                DataBuffer.TYPE_BYTE);
+
+<span class="nc" id="L836">    private static final int[] GrayAlphaBits8 = { 8, 8 };</span>
+<span class="nc" id="L837">    private static final ComponentColorModel colorModelGrayAlpha8 =</span>
+<span class="nc" id="L838">        new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                                GrayAlphaBits8, true, false,
+                                Transparency.TRANSLUCENT,
+                                DataBuffer.TYPE_BYTE);
+
+<span class="nc" id="L843">    private static final int[] GrayBits16 = { 16 };</span>
+<span class="nc" id="L844">    private static final ComponentColorModel colorModelGray16 =</span>
+<span class="nc" id="L845">        new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                                GrayBits16, false, false,
+                                Transparency.OPAQUE,
+                                DataBuffer.TYPE_USHORT);
+
+<span class="nc" id="L850">    private static final int[] GrayAlphaBits16 = { 16, 16 };</span>
+<span class="nc" id="L851">    private static final ComponentColorModel colorModelGrayAlpha16 =</span>
+<span class="nc" id="L852">        new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                                GrayAlphaBits16, true, false,
+                                Transparency.TRANSLUCENT,
+                                DataBuffer.TYPE_USHORT);
+
+<span class="nc" id="L857">    private static final int[] GrayBits32 = { 32 };</span>
+<span class="nc" id="L858">    private static final ComponentColorModel colorModelGray32 =</span>
+<span class="nc" id="L859">        new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                                GrayBits32, false, false,
+                                Transparency.OPAQUE,
+                                DataBuffer.TYPE_INT);
+
+<span class="nc" id="L864">    private static final int[] GrayAlphaBits32 = { 32, 32 };</span>
+<span class="nc" id="L865">    private static final ComponentColorModel colorModelGrayAlpha32 =</span>
+<span class="nc" id="L866">        new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY),</span>
+                                GrayAlphaBits32, true, false,
+                                Transparency.TRANSLUCENT,
+                                DataBuffer.TYPE_INT);
+
+<span class="nc" id="L871">    private static final int[] RGBBits8 = { 8, 8, 8 };</span>
+<span class="nc" id="L872">    private static final ComponentColorModel colorModelRGB8 =</span>
+<span class="nc" id="L873">      new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_sRGB),</span>
+                              RGBBits8, false, false,
+                              Transparency.OPAQUE,
+                              DataBuffer.TYPE_BYTE);
+
+<span class="nc" id="L878">    private static final int[] RGBABits8 = { 8, 8, 8, 8 };</span>
+<span class="nc" id="L879">    private static final ComponentColorModel colorModelRGBA8 =</span>
+<span class="nc" id="L880">      new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_sRGB),</span>
+                              RGBABits8, true, false,
+                              Transparency.TRANSLUCENT,
+                              DataBuffer.TYPE_BYTE);
+
+<span class="nc" id="L885">    private static final int[] RGBBits16 = { 16, 16, 16 };</span>
+<span class="nc" id="L886">    private static final ComponentColorModel colorModelRGB16 =</span>
+<span class="nc" id="L887">      new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_sRGB),</span>
+                              RGBBits16, false, false,
+                              Transparency.OPAQUE,
+                              DataBuffer.TYPE_USHORT);
+
+<span class="nc" id="L892">    private static final int[] RGBABits16 = { 16, 16, 16, 16 };</span>
+<span class="nc" id="L893">    private static final ComponentColorModel colorModelRGBA16 =</span>
+<span class="nc" id="L894">      new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_sRGB),</span>
+                              RGBABits16, true, false,
+                              Transparency.TRANSLUCENT,
+                              DataBuffer.TYPE_USHORT);
+
+<span class="nc" id="L899">    private static final int[] RGBBits32 = { 32, 32, 32 };</span>
+<span class="nc" id="L900">    private static final ComponentColorModel colorModelRGB32 =</span>
+<span class="nc" id="L901">      new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_sRGB),</span>
+                              RGBBits32, false, false,
+                              Transparency.OPAQUE,
+                              DataBuffer.TYPE_INT);
+
+<span class="nc" id="L906">    private static final int[] RGBABits32 = { 32, 32, 32, 32 };</span>
+<span class="nc" id="L907">    private static final ComponentColorModel colorModelRGBA32 =</span>
+<span class="nc" id="L908">      new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_sRGB),</span>
+                              RGBABits32, true, false,
+                              Transparency.TRANSLUCENT,
+                              DataBuffer.TYPE_INT);
+    /**
+     * A convenience method to create an instance of
+     * &lt;code&gt;ComponentColorModel&lt;/code&gt; suitable for use with the
+     * given &lt;code&gt;SampleModel&lt;/code&gt;.  The &lt;code&gt;SampleModel&lt;/code&gt;
+     * should have a data type of &lt;code&gt;DataBuffer.TYPE_BYTE&lt;/code&gt;,
+     * &lt;code&gt;TYPE_USHORT&lt;/code&gt;, or &lt;code&gt;TYPE_INT&lt;/code&gt; and between
+     * 1 and 4 bands.  Depending on the number of bands of the
+     * &lt;code&gt;SampleModel&lt;/code&gt;, either a gray, gray+alpha, rgb, or
+     * rgb+alpha &lt;code&gt;ColorModel&lt;/code&gt; is returned.
+     */
+    public static ColorModel createComponentColorModel(SampleModel sm) {
+<span class="nc" id="L923">        int type = sm.getDataType();</span>
+<span class="nc" id="L924">        int bands = sm.getNumBands();</span>
+<span class="nc" id="L925">        ComponentColorModel cm = null;</span>
+
+<span class="nc bnc" id="L927" title="All 2 branches missed.">        if (type == DataBuffer.TYPE_BYTE) {</span>
+<span class="nc bnc" id="L928" title="All 5 branches missed.">            switch (bands) {</span>
+            case 1:
+<span class="nc" id="L930">                cm = colorModelGray8;</span>
+<span class="nc" id="L931">                break;</span>
+            case 2:
+<span class="nc" id="L933">                cm = colorModelGrayAlpha8;</span>
+<span class="nc" id="L934">                break;</span>
+            case 3:
+<span class="nc" id="L936">                cm = colorModelRGB8;</span>
+<span class="nc" id="L937">                break;</span>
+            case 4:
+<span class="nc" id="L939">                cm = colorModelRGBA8;</span>
+<span class="nc" id="L940">                break;</span>
+            }
+<span class="nc bnc" id="L942" title="All 2 branches missed.">        } else if (type == DataBuffer.TYPE_USHORT) {</span>
+<span class="nc bnc" id="L943" title="All 5 branches missed.">            switch (bands) {</span>
+            case 1:
+<span class="nc" id="L945">                cm = colorModelGray16;</span>
+<span class="nc" id="L946">                break;</span>
+            case 2:
+<span class="nc" id="L948">                cm = colorModelGrayAlpha16;</span>
+<span class="nc" id="L949">                break;</span>
+            case 3:
+<span class="nc" id="L951">                cm = colorModelRGB16;</span>
+<span class="nc" id="L952">                break;</span>
+            case 4:
+<span class="nc" id="L954">                cm = colorModelRGBA16;</span>
+<span class="nc" id="L955">                break;</span>
+            }
+<span class="nc bnc" id="L957" title="All 2 branches missed.">        } else if (type == DataBuffer.TYPE_INT) {</span>
+<span class="nc bnc" id="L958" title="All 5 branches missed.">            switch (bands) {</span>
+            case 1:
+<span class="nc" id="L960">                cm = colorModelGray32;</span>
+<span class="nc" id="L961">                break;</span>
+            case 2:
+<span class="nc" id="L963">                cm = colorModelGrayAlpha32;</span>
+<span class="nc" id="L964">                break;</span>
+            case 3:
+<span class="nc" id="L966">                cm = colorModelRGB32;</span>
+<span class="nc" id="L967">                break;</span>
+            case 4:
+<span class="nc" id="L969">                cm = colorModelRGBA32;</span>
+                break;
+            }
+        }
+
+<span class="nc" id="L974">        return cm;</span>
+    }
+
+    private void parse_PLTE_chunk(PNGChunk chunk) {
+<span class="nc" id="L978">        paletteEntries = chunk.getLength() / 3;</span>
+<span class="nc" id="L979">        redPalette = new byte[paletteEntries];</span>
+<span class="nc" id="L980">        greenPalette = new byte[paletteEntries];</span>
+<span class="nc" id="L981">        bluePalette = new byte[paletteEntries];</span>
+
+<span class="nc" id="L983">        int pltIndex = 0;</span>
+
+        // gAMA chunk must precede PLTE chunk
+<span class="nc bnc" id="L986" title="All 2 branches missed.">        if (performGammaCorrection) {</span>
+<span class="nc bnc" id="L987" title="All 2 branches missed.">            if (gammaLut == null) {</span>
+<span class="nc bnc" id="L988" title="All 2 branches missed.">                initGammaLut(bitDepth == 16 ? 16 : 8);</span>
+            }
+
+<span class="nc bnc" id="L991" title="All 2 branches missed.">            for (int i = 0; i &lt; paletteEntries; i++) {</span>
+<span class="nc" id="L992">                byte r = chunk.getByte(pltIndex++);</span>
+<span class="nc" id="L993">                byte g = chunk.getByte(pltIndex++);</span>
+<span class="nc" id="L994">                byte b = chunk.getByte(pltIndex++);</span>
+
+<span class="nc" id="L996">                redPalette[i]   = (byte)gammaLut[r &amp; 0xff];</span>
+<span class="nc" id="L997">                greenPalette[i] = (byte)gammaLut[g &amp; 0xff];</span>
+<span class="nc" id="L998">                bluePalette[i]  = (byte)gammaLut[b &amp; 0xff];</span>
+            }
+        } else {
+<span class="nc bnc" id="L1001" title="All 2 branches missed.">            for (int i = 0; i &lt; paletteEntries; i++) {</span>
+<span class="nc" id="L1002">                redPalette[i] = chunk.getByte(pltIndex++);</span>
+<span class="nc" id="L1003">                greenPalette[i] = chunk.getByte(pltIndex++);</span>
+<span class="nc" id="L1004">                bluePalette[i] = chunk.getByte(pltIndex++);</span>
+            }
+        }
+<span class="nc" id="L1007">    }</span>
+
+    private void parse_bKGD_chunk(PNGChunk chunk) {
+<span class="nc bnc" id="L1010" title="All 4 branches missed.">        switch (colorType) {</span>
+        case PNG_COLOR_PALETTE:
+<span class="nc" id="L1012">            int bkgdIndex = chunk.getByte(0) &amp; 0xff;</span>
+
+<span class="nc" id="L1014">            bkgdRed   = redPalette[bkgdIndex]   &amp; 0xff;</span>
+<span class="nc" id="L1015">            bkgdGreen = greenPalette[bkgdIndex] &amp; 0xff;</span>
+<span class="nc" id="L1016">            bkgdBlue  = bluePalette[bkgdIndex]  &amp; 0xff;</span>
+
+<span class="nc bnc" id="L1018" title="All 2 branches missed.">            if (encodeParam != null) {</span>
+<span class="nc" id="L1019">                ((PNGEncodeParam.Palette)encodeParam).setBackgroundPaletteIndex(bkgdIndex);</span>
+            }
+            break;
+        case PNG_COLOR_GRAY: case PNG_COLOR_GRAY_ALPHA:
+<span class="nc" id="L1023">            int bkgdGray = chunk.getInt2(0);</span>
+<span class="nc" id="L1024">            bkgdRed = bkgdGreen = bkgdBlue = bkgdGray;</span>
+
+<span class="nc bnc" id="L1026" title="All 2 branches missed.">            if (encodeParam != null) {</span>
+<span class="nc" id="L1027">                ((PNGEncodeParam.Gray)encodeParam).setBackgroundGray(bkgdGray);</span>
+            }
+            break;
+        case PNG_COLOR_RGB: case PNG_COLOR_RGB_ALPHA:
+<span class="nc" id="L1031">            bkgdRed = chunk.getInt2(0);</span>
+<span class="nc" id="L1032">            bkgdGreen = chunk.getInt2(2);</span>
+<span class="nc" id="L1033">            bkgdBlue = chunk.getInt2(4);</span>
+
+<span class="nc" id="L1035">            int[] bkgdRGB = new int[3];</span>
+<span class="nc" id="L1036">            bkgdRGB[0] = bkgdRed;</span>
+<span class="nc" id="L1037">            bkgdRGB[1] = bkgdGreen;</span>
+<span class="nc" id="L1038">            bkgdRGB[2] = bkgdBlue;</span>
+<span class="nc bnc" id="L1039" title="All 2 branches missed.">            if (encodeParam != null) {</span>
+<span class="nc" id="L1040">                ((PNGEncodeParam.RGB)encodeParam).setBackgroundRGB(bkgdRGB);</span>
+            }
+            break;
+        }
+
+<span class="nc bnc" id="L1045" title="All 2 branches missed.">        if (emitProperties) {</span>
+<span class="nc" id="L1046">            int r = 0;</span>
+<span class="nc" id="L1047">            int g = 0;</span>
+<span class="nc" id="L1048">            int b = 0;</span>
+<span class="nc bnc" id="L1049" title="All 4 branches missed.">            if ((colorType == PNG_COLOR_PALETTE) || (bitDepth == 8)) {</span>
+<span class="nc" id="L1050">                r = bkgdRed;</span>
+<span class="nc" id="L1051">                g = bkgdGreen;</span>
+<span class="nc" id="L1052">                b = bkgdBlue;</span>
+<span class="nc bnc" id="L1053" title="All 2 branches missed.">            } else if (bitDepth &lt; 8) {</span>
+<span class="nc" id="L1054">                r = expandBits[bitDepth][bkgdRed];</span>
+<span class="nc" id="L1055">                g = expandBits[bitDepth][bkgdGreen];</span>
+<span class="nc" id="L1056">                b = expandBits[bitDepth][bkgdBlue];</span>
+<span class="nc bnc" id="L1057" title="All 2 branches missed.">            } else if (bitDepth == 16) {</span>
+<span class="nc" id="L1058">                r = bkgdRed &gt;&gt; 8;</span>
+<span class="nc" id="L1059">                g = bkgdGreen &gt;&gt; 8;</span>
+<span class="nc" id="L1060">                b = bkgdBlue &gt;&gt; 8;</span>
+            }
+<span class="nc" id="L1062">            properties.put(&quot;background_color&quot;, new Color(r, g, b));</span>
+        }
+<span class="nc" id="L1064">    }</span>
+
+    private void parse_cHRM_chunk(PNGChunk chunk) {
+        // If an sRGB chunk exists, ignore cHRM chunks
+<span class="nc bnc" id="L1068" title="All 2 branches missed.">        if (sRGBRenderingIntent != -1) {</span>
+<span class="nc" id="L1069">            return;</span>
+        }
+
+<span class="nc" id="L1072">        chromaticity = new float[8];</span>
+<span class="nc" id="L1073">        chromaticity[0] = chunk.getInt4(0) / 100000.0F;</span>
+<span class="nc" id="L1074">        chromaticity[1] = chunk.getInt4(4) / 100000.0F;</span>
+<span class="nc" id="L1075">        chromaticity[2] = chunk.getInt4(8) / 100000.0F;</span>
+<span class="nc" id="L1076">        chromaticity[3] = chunk.getInt4(12) / 100000.0F;</span>
+<span class="nc" id="L1077">        chromaticity[4] = chunk.getInt4(16) / 100000.0F;</span>
+<span class="nc" id="L1078">        chromaticity[5] = chunk.getInt4(20) / 100000.0F;</span>
+<span class="nc" id="L1079">        chromaticity[6] = chunk.getInt4(24) / 100000.0F;</span>
+<span class="nc" id="L1080">        chromaticity[7] = chunk.getInt4(28) / 100000.0F;</span>
+
+<span class="nc bnc" id="L1082" title="All 2 branches missed.">        if (encodeParam != null) {</span>
+<span class="nc" id="L1083">            encodeParam.setChromaticity(chromaticity);</span>
+        }
+<span class="nc bnc" id="L1085" title="All 2 branches missed.">        if (emitProperties) {</span>
+<span class="nc" id="L1086">            properties.put(&quot;white_point_x&quot;, chromaticity[0]);</span>
+<span class="nc" id="L1087">            properties.put(&quot;white_point_y&quot;, chromaticity[1]);</span>
+<span class="nc" id="L1088">            properties.put(&quot;red_x&quot;, chromaticity[2]);</span>
+<span class="nc" id="L1089">            properties.put(&quot;red_y&quot;, chromaticity[3]);</span>
+<span class="nc" id="L1090">            properties.put(&quot;green_x&quot;, chromaticity[4]);</span>
+<span class="nc" id="L1091">            properties.put(&quot;green_y&quot;, chromaticity[5]);</span>
+<span class="nc" id="L1092">            properties.put(&quot;blue_x&quot;, chromaticity[6]);</span>
+<span class="nc" id="L1093">            properties.put(&quot;blue_y&quot;, chromaticity[7]);</span>
+        }
+<span class="nc" id="L1095">    }</span>
+
+    private void parse_gAMA_chunk(PNGChunk chunk) {
+        // If an sRGB chunk exists, ignore gAMA chunks
+<span class="nc bnc" id="L1099" title="All 2 branches missed.">        if (sRGBRenderingIntent != -1) {</span>
+<span class="nc" id="L1100">            return;</span>
+        }
+
+<span class="nc" id="L1103">        fileGamma = chunk.getInt4(0) / 100000.0F;</span>
+        // System.out.println(&quot;Gamma: &quot; + fileGamma);
+        float exp =
+<span class="nc bnc" id="L1106" title="All 2 branches missed.">            performGammaCorrection ? displayExponent / userExponent : 1.0F;</span>
+<span class="nc bnc" id="L1107" title="All 2 branches missed.">        if (encodeParam != null) {</span>
+<span class="nc" id="L1108">            encodeParam.setGamma(fileGamma * exp);</span>
+        }
+<span class="nc bnc" id="L1110" title="All 2 branches missed.">        if (emitProperties) {</span>
+<span class="nc" id="L1111">            properties.put(&quot;gamma&quot;, fileGamma * exp);</span>
+        }
+<span class="nc" id="L1113">    }</span>
+
+    private void parse_hIST_chunk(PNGChunk chunk) {
+<span class="nc bnc" id="L1116" title="All 2 branches missed.">        if (redPalette == null) {</span>
+<span class="nc" id="L1117">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder18&quot;);</span>
+<span class="nc" id="L1118">            throw new RuntimeException(msg);</span>
+        }
+
+<span class="nc" id="L1121">        int length = redPalette.length;</span>
+<span class="nc" id="L1122">        int[] hist = new int[length];</span>
+<span class="nc bnc" id="L1123" title="All 2 branches missed.">        for (int i = 0; i &lt; length; i++) {</span>
+<span class="nc" id="L1124">            hist[i] = chunk.getInt2(2 * i);</span>
+        }
+
+<span class="nc bnc" id="L1127" title="All 2 branches missed.">        if (encodeParam != null) {</span>
+<span class="nc" id="L1128">            encodeParam.setPaletteHistogram(hist);</span>
+        }
+<span class="nc" id="L1130">    }</span>
+
+    private void parse_pHYs_chunk(PNGChunk chunk) {
+<span class="nc" id="L1133">        int xPixelsPerUnit = chunk.getInt4(0);</span>
+<span class="nc" id="L1134">        int yPixelsPerUnit = chunk.getInt4(4);</span>
+<span class="nc" id="L1135">        int unitSpecifier = chunk.getInt1(8);</span>
+
+<span class="nc bnc" id="L1137" title="All 2 branches missed.">        if (encodeParam != null) {</span>
+<span class="nc" id="L1138">            encodeParam.setPhysicalDimension(xPixelsPerUnit,</span>
+                                             yPixelsPerUnit,
+                                             unitSpecifier);
+        }
+<span class="nc bnc" id="L1142" title="All 2 branches missed.">        if (emitProperties) {</span>
+<span class="nc" id="L1143">            properties.put(&quot;x_pixels_per_unit&quot;, xPixelsPerUnit);</span>
+<span class="nc" id="L1144">            properties.put(&quot;y_pixels_per_unit&quot;, yPixelsPerUnit);</span>
+<span class="nc" id="L1145">            properties.put(&quot;pixel_aspect_ratio&quot;,</span>
+<span class="nc" id="L1146">                    (float) xPixelsPerUnit / yPixelsPerUnit);</span>
+<span class="nc bnc" id="L1147" title="All 2 branches missed.">            if (unitSpecifier == 1) {</span>
+<span class="nc" id="L1148">                properties.put(&quot;pixel_units&quot;, &quot;Meters&quot;);</span>
+<span class="nc bnc" id="L1149" title="All 2 branches missed.">            } else if (unitSpecifier != 0) {</span>
+                // Error -- unit specifier must be 0 or 1
+<span class="nc" id="L1151">                String msg = PropertyUtil.getString(&quot;PNGImageDecoder12&quot;);</span>
+<span class="nc" id="L1152">                throw new RuntimeException(msg);</span>
+            }
+        }
+<span class="nc" id="L1155">    }</span>
+
+    private void parse_sBIT_chunk(PNGChunk chunk) {
+<span class="nc bnc" id="L1158" title="All 2 branches missed.">        if (colorType == PNG_COLOR_PALETTE) {</span>
+<span class="nc" id="L1159">            significantBits = new int[3];</span>
+        } else {
+<span class="nc" id="L1161">            significantBits = new int[inputBands];</span>
+        }
+<span class="nc bnc" id="L1163" title="All 2 branches missed.">        for (int i = 0; i &lt; significantBits.length; i++) {</span>
+<span class="nc" id="L1164">            int bits = chunk.getByte(i);</span>
+<span class="nc bnc" id="L1165" title="All 2 branches missed.">            int depth = (colorType == PNG_COLOR_PALETTE) ? 8 : bitDepth;</span>
+<span class="nc bnc" id="L1166" title="All 4 branches missed.">            if (bits &lt;= 0 || bits &gt; depth) {</span>
+                // Error -- significant bits must be between 0 and
+                // image bit depth.
+<span class="nc" id="L1169">                String msg = PropertyUtil.getString(&quot;PNGImageDecoder13&quot;);</span>
+<span class="nc" id="L1170">                throw new RuntimeException(msg);</span>
+            }
+<span class="nc" id="L1172">            significantBits[i] = bits;</span>
+        }
+
+<span class="nc bnc" id="L1175" title="All 2 branches missed.">        if (encodeParam != null) {</span>
+<span class="nc" id="L1176">            encodeParam.setSignificantBits(significantBits);</span>
+        }
+<span class="nc bnc" id="L1178" title="All 2 branches missed.">        if (emitProperties) {</span>
+<span class="nc" id="L1179">            properties.put(&quot;significant_bits&quot;, significantBits);</span>
+        }
+<span class="nc" id="L1181">    }</span>
+
+    private void parse_sRGB_chunk(PNGChunk chunk) {
+<span class="nc" id="L1184">        sRGBRenderingIntent = chunk.getByte(0);</span>
+
+        // The presence of an sRGB chunk implies particular
+        // settings for gamma and chroma.
+<span class="nc" id="L1188">        fileGamma = 45455 / 100000.0F;</span>
+
+<span class="nc" id="L1190">        chromaticity = new float[8];</span>
+<span class="nc" id="L1191">        chromaticity[0] = 31270 / 10000.0F;</span>
+<span class="nc" id="L1192">        chromaticity[1] = 32900 / 10000.0F;</span>
+<span class="nc" id="L1193">        chromaticity[2] = 64000 / 10000.0F;</span>
+<span class="nc" id="L1194">        chromaticity[3] = 33000 / 10000.0F;</span>
+<span class="nc" id="L1195">        chromaticity[4] = 30000 / 10000.0F;</span>
+<span class="nc" id="L1196">        chromaticity[5] = 60000 / 10000.0F;</span>
+<span class="nc" id="L1197">        chromaticity[6] = 15000 / 10000.0F;</span>
+<span class="nc" id="L1198">        chromaticity[7] =  6000 / 10000.0F;</span>
+
+<span class="nc bnc" id="L1200" title="All 2 branches missed.">        if (performGammaCorrection) {</span>
+            // File gamma is 1/2.2
+<span class="nc" id="L1202">            float gamma = fileGamma * (displayExponent / userExponent);</span>
+<span class="nc bnc" id="L1203" title="All 2 branches missed.">            if (encodeParam != null) {</span>
+<span class="nc" id="L1204">                encodeParam.setGamma(gamma);</span>
+<span class="nc" id="L1205">                encodeParam.setChromaticity(chromaticity);</span>
+            }
+<span class="nc bnc" id="L1207" title="All 2 branches missed.">            if (emitProperties) {</span>
+<span class="nc" id="L1208">                properties.put(&quot;gamma&quot;, gamma);</span>
+<span class="nc" id="L1209">                properties.put(&quot;white_point_x&quot;, chromaticity[0]);</span>
+<span class="nc" id="L1210">                properties.put(&quot;white_point_y&quot;, chromaticity[1]);</span>
+<span class="nc" id="L1211">                properties.put(&quot;red_x&quot;, chromaticity[2]);</span>
+<span class="nc" id="L1212">                properties.put(&quot;red_y&quot;, chromaticity[3]);</span>
+<span class="nc" id="L1213">                properties.put(&quot;green_x&quot;, chromaticity[4]);</span>
+<span class="nc" id="L1214">                properties.put(&quot;green_y&quot;, chromaticity[5]);</span>
+<span class="nc" id="L1215">                properties.put(&quot;blue_x&quot;, chromaticity[6]);</span>
+<span class="nc" id="L1216">                properties.put(&quot;blue_y&quot;, chromaticity[7]);</span>
+            }
+        }
+<span class="nc" id="L1219">    }</span>
+
+    private void parse_tEXt_chunk(PNGChunk chunk) {
+<span class="nc" id="L1222">        StringBuffer key = new StringBuffer();</span>
+<span class="nc" id="L1223">        StringBuffer value = new StringBuffer();</span>
+        byte b;
+
+<span class="nc" id="L1226">        int textIndex = 0;</span>
+<span class="nc bnc" id="L1227" title="All 2 branches missed.">        while ((b = chunk.getByte(textIndex++)) != 0) {</span>
+<span class="nc" id="L1228">            key.append((char)b);</span>
+        }
+
+<span class="nc bnc" id="L1231" title="All 2 branches missed.">        for (int i = textIndex; i &lt; chunk.getLength(); i++) {</span>
+<span class="nc" id="L1232">            value.append((char)chunk.getByte(i));</span>
+        }
+
+<span class="nc" id="L1235">        textKeys.add(key.toString());</span>
+<span class="nc" id="L1236">        textStrings.add(value.toString());</span>
+<span class="nc" id="L1237">    }</span>
+
+    private void parse_tIME_chunk(PNGChunk chunk) {
+<span class="nc" id="L1240">        int year = chunk.getInt2(0);</span>
+<span class="nc" id="L1241">        int month = chunk.getInt1(2) - 1;</span>
+<span class="nc" id="L1242">        int day = chunk.getInt1(3);</span>
+<span class="nc" id="L1243">        int hour = chunk.getInt1(4);</span>
+<span class="nc" id="L1244">        int minute = chunk.getInt1(5);</span>
+<span class="nc" id="L1245">        int second = chunk.getInt1(6);</span>
+
+<span class="nc" id="L1247">        TimeZone gmt = TimeZone.getTimeZone(&quot;GMT&quot;);</span>
+
+<span class="nc" id="L1249">        GregorianCalendar cal = new GregorianCalendar(gmt);</span>
+<span class="nc" id="L1250">        cal.set(year, month, day,</span>
+                hour, minute, second);
+<span class="nc" id="L1252">        Date date = cal.getTime();</span>
+
+<span class="nc bnc" id="L1254" title="All 2 branches missed.">        if (encodeParam != null) {</span>
+<span class="nc" id="L1255">            encodeParam.setModificationTime(date);</span>
+        }
+<span class="nc bnc" id="L1257" title="All 2 branches missed.">        if (emitProperties) {</span>
+<span class="nc" id="L1258">            properties.put(&quot;timestamp&quot;, date);</span>
+        }
+<span class="nc" id="L1260">    }</span>
+
+    private void parse_tRNS_chunk(PNGChunk chunk) {
+<span class="nc bnc" id="L1263" title="All 2 branches missed.">        if (colorType == PNG_COLOR_PALETTE) {</span>
+<span class="nc" id="L1264">            int entries = chunk.getLength();</span>
+<span class="nc bnc" id="L1265" title="All 2 branches missed.">            if (entries &gt; paletteEntries) {</span>
+                // Error -- mustn't have more alpha than RGB palette entries
+<span class="nc" id="L1267">                String msg = PropertyUtil.getString(&quot;PNGImageDecoder14&quot;);</span>
+<span class="nc" id="L1268">                throw new RuntimeException(msg);</span>
+            }
+
+            // Load beginning of palette from the chunk
+<span class="nc" id="L1272">            alphaPalette = new byte[paletteEntries];</span>
+<span class="nc bnc" id="L1273" title="All 2 branches missed.">            for (int i = 0; i &lt; entries; i++) {</span>
+<span class="nc" id="L1274">                alphaPalette[i] = chunk.getByte(i);</span>
+            }
+
+            // Fill rest of palette with 255
+<span class="nc bnc" id="L1278" title="All 2 branches missed.">            for (int i = entries; i &lt; paletteEntries; i++) {</span>
+<span class="nc" id="L1279">                alphaPalette[i] = (byte)255;</span>
+            }
+
+<span class="nc bnc" id="L1282" title="All 2 branches missed.">            if (!suppressAlpha) {</span>
+<span class="nc bnc" id="L1283" title="All 2 branches missed.">                if (expandPalette) {</span>
+<span class="nc" id="L1284">                    postProcess = POST_PALETTE_TO_RGBA;</span>
+<span class="nc" id="L1285">                    outputBands = 4;</span>
+                } else {
+<span class="nc" id="L1287">                    outputHasAlphaPalette = true;</span>
+                }
+            }
+<span class="nc bnc" id="L1290" title="All 2 branches missed.">        } else if (colorType == PNG_COLOR_GRAY) {</span>
+<span class="nc" id="L1291">            grayTransparentAlpha = chunk.getInt2(0);</span>
+
+<span class="nc bnc" id="L1293" title="All 2 branches missed.">            if (!suppressAlpha) {</span>
+<span class="nc bnc" id="L1294" title="All 2 branches missed.">                if (bitDepth &lt; 8) {</span>
+<span class="nc" id="L1295">                    output8BitGray = true;</span>
+<span class="nc" id="L1296">                    maxOpacity = 255;</span>
+<span class="nc" id="L1297">                    postProcess = POST_GRAY_LUT_ADD_TRANS;</span>
+                } else {
+<span class="nc" id="L1299">                    postProcess = POST_ADD_GRAY_TRANS;</span>
+                }
+
+<span class="nc bnc" id="L1302" title="All 2 branches missed.">                if (expandGrayAlpha) {</span>
+<span class="nc" id="L1303">                    outputBands = 4;</span>
+<span class="nc" id="L1304">                    postProcess |= POST_EXP_MASK;</span>
+                } else {
+<span class="nc" id="L1306">                    outputBands = 2;</span>
+                }
+
+<span class="nc bnc" id="L1309" title="All 2 branches missed.">                if (encodeParam != null) {</span>
+<span class="nc" id="L1310">                    ((PNGEncodeParam.Gray)encodeParam).setTransparentGray(grayTransparentAlpha);</span>
+                }
+            }
+<span class="nc bnc" id="L1313" title="All 2 branches missed.">        } else if (colorType == PNG_COLOR_RGB) {</span>
+<span class="nc" id="L1314">            redTransparentAlpha = chunk.getInt2(0);</span>
+<span class="nc" id="L1315">            greenTransparentAlpha = chunk.getInt2(2);</span>
+<span class="nc" id="L1316">            blueTransparentAlpha = chunk.getInt2(4);</span>
+
+<span class="nc bnc" id="L1318" title="All 2 branches missed.">            if (!suppressAlpha) {</span>
+<span class="nc" id="L1319">                outputBands = 4;</span>
+<span class="nc" id="L1320">                postProcess = POST_ADD_RGB_TRANS;</span>
+
+<span class="nc bnc" id="L1322" title="All 2 branches missed.">                if (encodeParam != null) {</span>
+<span class="nc" id="L1323">                    int[] rgbTrans = new int[3];</span>
+<span class="nc" id="L1324">                    rgbTrans[0] = redTransparentAlpha;</span>
+<span class="nc" id="L1325">                    rgbTrans[1] = greenTransparentAlpha;</span>
+<span class="nc" id="L1326">                    rgbTrans[2] = blueTransparentAlpha;</span>
+<span class="nc" id="L1327">                    ((PNGEncodeParam.RGB)encodeParam).setTransparentRGB(rgbTrans);</span>
+<span class="nc" id="L1328">                }</span>
+            }
+<span class="nc bnc" id="L1330" title="All 4 branches missed.">        } else if (colorType == PNG_COLOR_GRAY_ALPHA</span>
+                   || colorType == PNG_COLOR_RGB_ALPHA) {
+            // Error -- GA or RGBA image can't have a tRNS chunk.
+<span class="nc" id="L1333">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder15&quot;);</span>
+<span class="nc" id="L1334">            throw new RuntimeException(msg);</span>
+        }
+<span class="nc" id="L1336">    }</span>
+
+    private void parse_zTXt_chunk(PNGChunk chunk) {
+<span class="nc" id="L1339">        StringBuffer key = new StringBuffer();</span>
+<span class="nc" id="L1340">        StringBuffer value = new StringBuffer();</span>
+        byte b;
+
+<span class="nc" id="L1343">        int textIndex = 0;</span>
+<span class="nc bnc" id="L1344" title="All 2 branches missed.">        while ((b = chunk.getByte(textIndex++)) != 0) {</span>
+<span class="nc" id="L1345">            key.append((char)b);</span>
+        }
+
+        // skip method
+<span class="nc" id="L1349">        textIndex++;</span>
+
+        try {
+<span class="nc" id="L1352">            int length = chunk.getLength() - textIndex;</span>
+<span class="nc" id="L1353">            byte[] data = chunk.getData();</span>
+<span class="nc" id="L1354">            InputStream cis =</span>
+                new ByteArrayInputStream(data, textIndex, length);
+<span class="nc" id="L1356">            InputStream iis = new InflaterInputStream(cis);</span>
+
+            int c;
+<span class="nc bnc" id="L1359" title="All 2 branches missed.">            while ((c = iis.read()) != -1) {</span>
+<span class="nc" id="L1360">                value.append((char)c);</span>
+            }
+
+<span class="nc" id="L1363">            ztextKeys.add(key.toString());</span>
+<span class="nc" id="L1364">            ztextStrings.add(value.toString());</span>
+<span class="nc" id="L1365">        } catch (Exception e) {</span>
+<span class="nc" id="L1366">            e.printStackTrace();</span>
+<span class="nc" id="L1367">        }</span>
+<span class="nc" id="L1368">    }</span>
+
+    private WritableRaster createRaster(int width, int height, int bands,
+                                        int scanlineStride,
+                                        int bitDepth) {
+
+        DataBuffer dataBuffer;
+<span class="nc" id="L1375">        WritableRaster ras = null;</span>
+<span class="nc" id="L1376">        Point origin = new Point(0, 0);</span>
+<span class="nc bnc" id="L1377" title="All 4 branches missed.">        if ((bitDepth &lt; 8) &amp;&amp; (bands == 1)) {</span>
+<span class="nc" id="L1378">            dataBuffer = new DataBufferByte(height * scanlineStride);</span>
+<span class="nc" id="L1379">            ras = Raster.createPackedRaster(dataBuffer,</span>
+                                            width, height,
+                                            bitDepth,
+                                            origin);
+<span class="nc bnc" id="L1383" title="All 2 branches missed.">        } else if (bitDepth &lt;= 8) {</span>
+<span class="nc" id="L1384">            dataBuffer = new DataBufferByte(height * scanlineStride);</span>
+<span class="nc" id="L1385">           ras = Raster.createInterleavedRaster(dataBuffer,</span>
+                                                 width, height,
+                                                 scanlineStride,
+                                                 bands,
+                                                 bandOffsets[bands],
+                                                 origin);
+        } else {
+<span class="nc" id="L1392">            dataBuffer = new DataBufferUShort(height * scanlineStride);</span>
+<span class="nc" id="L1393">            ras = Raster.createInterleavedRaster(dataBuffer,</span>
+                                                 width, height,
+                                                 scanlineStride,
+                                                 bands,
+                                                 bandOffsets[bands],
+                                                 origin);
+        }
+
+<span class="nc" id="L1401">        return ras;</span>
+    }
+
+    // Data filtering methods
+
+    private static void decodeSubFilter(byte[] curr, int count, int bpp) {
+<span class="nc bnc" id="L1407" title="All 2 branches missed.">        for (int i = bpp; i &lt; count; i++) {</span>
+            int val;
+
+<span class="nc" id="L1410">            val = curr[i] &amp; 0xff;</span>
+<span class="nc" id="L1411">            val += curr[i - bpp] &amp; 0xff;</span>
+
+<span class="nc" id="L1413">            curr[i] = (byte)val;</span>
+        }
+<span class="nc" id="L1415">    }</span>
+
+    private static void decodeUpFilter(byte[] curr, byte[] prev,
+                                       int count) {
+<span class="nc bnc" id="L1419" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="nc" id="L1420">            int raw   = curr[i] &amp; 0xff;</span>
+<span class="nc" id="L1421">            int prior = prev[i] &amp; 0xff;</span>
+
+<span class="nc" id="L1423">            curr[i] = (byte)(raw + prior);</span>
+        }
+<span class="nc" id="L1425">    }</span>
+
+    private static void decodeAverageFilter(byte[] curr, byte[] prev,
+                                            int count, int bpp) {
+<span class="nc bnc" id="L1429" title="All 2 branches missed.">        for (int i = 0; i &lt; bpp; i++) {</span>
+<span class="nc" id="L1430">            int raw      = curr[i] &amp; 0xff;</span>
+<span class="nc" id="L1431">            int priorRow = prev[i] &amp; 0xff;</span>
+
+<span class="nc" id="L1433">            curr[i] = (byte)(raw + priorRow / 2);</span>
+        }
+
+<span class="nc bnc" id="L1436" title="All 2 branches missed.">        for (int i = bpp; i &lt; count; i++) {</span>
+<span class="nc" id="L1437">            int raw = curr[i] &amp; 0xff;</span>
+<span class="nc" id="L1438">            int priorPixel = curr[i - bpp] &amp; 0xff;</span>
+<span class="nc" id="L1439">            int priorRow = prev[i] &amp; 0xff;</span>
+
+<span class="nc" id="L1441">            curr[i] = (byte)(raw + (priorPixel + priorRow) / 2);</span>
+        }
+<span class="nc" id="L1443">    }</span>
+
+    private static int paethPredictor(int a, int b, int c) {
+<span class="nc" id="L1446">        int p = a + b - c;</span>
+<span class="nc" id="L1447">        int pa = Math.abs(p - a);</span>
+<span class="nc" id="L1448">        int pb = Math.abs(p - b);</span>
+<span class="nc" id="L1449">        int pc = Math.abs(p - c);</span>
+
+<span class="nc bnc" id="L1451" title="All 4 branches missed.">        if ((pa &lt;= pb) &amp;&amp; (pa &lt;= pc)) {</span>
+<span class="nc" id="L1452">            return a;</span>
+<span class="nc bnc" id="L1453" title="All 2 branches missed.">        } else if (pb &lt;= pc) {</span>
+<span class="nc" id="L1454">            return b;</span>
+        } else {
+<span class="nc" id="L1456">            return c;</span>
+        }
+    }
+
+    private static void decodePaethFilter(byte[] curr, byte[] prev,
+                                          int count, int bpp) {
+        int priorPixel;
+        int priorRowPixel;
+
+<span class="nc bnc" id="L1465" title="All 2 branches missed.">        for (int i = 0; i &lt; bpp; i++) {</span>
+<span class="nc" id="L1466">            int raw = curr[i] &amp; 0xff;</span>
+<span class="nc" id="L1467">            int priorRow = prev[i] &amp; 0xff;</span>
+
+<span class="nc" id="L1469">            curr[i] = (byte)(raw + priorRow);</span>
+        }
+
+<span class="nc bnc" id="L1472" title="All 2 branches missed.">        for (int i = bpp; i &lt; count; i++) {</span>
+<span class="nc" id="L1473">            int raw = curr[i] &amp; 0xff;</span>
+<span class="nc" id="L1474">            priorPixel = curr[i - bpp] &amp; 0xff;</span>
+<span class="nc" id="L1475">            int priorRow = prev[i] &amp; 0xff;</span>
+<span class="nc" id="L1476">            priorRowPixel = prev[i - bpp] &amp; 0xff;</span>
+
+<span class="nc" id="L1478">            curr[i] = (byte)(raw + paethPredictor(priorPixel,</span>
+                                                  priorRow,
+                                                  priorRowPixel));
+        }
+<span class="nc" id="L1482">    }</span>
+
+    private void processPixels(int process,
+                               Raster src, WritableRaster dst,
+                               int xOffset, int step, int y, int width) {
+        int srcX;
+        int dstX;
+
+        // Create an array suitable for holding one pixel
+<span class="nc" id="L1491">        int[] ps = src.getPixel(0, 0, (int[])null);</span>
+<span class="nc" id="L1492">        int[] pd = dst.getPixel(0, 0, (int[])null);</span>
+
+<span class="nc" id="L1494">        dstX = xOffset;</span>
+<span class="nc bnc" id="L1495" title="All 15 branches missed.">        switch (process) {</span>
+        case POST_NONE:
+<span class="nc bnc" id="L1497" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1498">                src.getPixel(srcX, 0, ps);</span>
+<span class="nc" id="L1499">                dst.setPixel(dstX, y, ps);</span>
+<span class="nc" id="L1500">                dstX += step;</span>
+            }
+            break;
+
+        case POST_GAMMA:
+<span class="nc bnc" id="L1505" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1506">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc bnc" id="L1508" title="All 2 branches missed.">                for (int i = 0; i &lt; inputBands; i++) {</span>
+<span class="nc" id="L1509">                    int x = ps[i];</span>
+<span class="nc" id="L1510">                    ps[i] = gammaLut[x];</span>
+                }
+
+<span class="nc" id="L1513">                dst.setPixel(dstX, y, ps);</span>
+<span class="nc" id="L1514">                dstX += step;</span>
+            }
+            break;
+
+        case POST_GRAY_LUT:
+<span class="nc bnc" id="L1519" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1520">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1522">                pd[0] = grayLut[ps[0]];</span>
+
+<span class="nc" id="L1524">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1525">                dstX += step;</span>
+            }
+            break;
+
+        case POST_GRAY_LUT_ADD_TRANS:
+<span class="nc bnc" id="L1530" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1531">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1533">                int val = ps[0];</span>
+<span class="nc" id="L1534">                pd[0] = grayLut[val];</span>
+<span class="nc bnc" id="L1535" title="All 2 branches missed.">                if (val == grayTransparentAlpha) {</span>
+<span class="nc" id="L1536">                    pd[1] = 0;</span>
+                } else {
+<span class="nc" id="L1538">                    pd[1] = maxOpacity;</span>
+                }
+
+<span class="nc" id="L1541">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1542">                dstX += step;</span>
+            }
+            break;
+
+        case POST_PALETTE_TO_RGB:
+<span class="nc bnc" id="L1547" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1548">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1550">                int val = ps[0];</span>
+<span class="nc" id="L1551">                pd[0] = redPalette[val];</span>
+<span class="nc" id="L1552">                pd[1] = greenPalette[val];</span>
+<span class="nc" id="L1553">                pd[2] = bluePalette[val];</span>
+
+<span class="nc" id="L1555">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1556">                dstX += step;</span>
+            }
+            break;
+
+        case POST_PALETTE_TO_RGBA:
+<span class="nc bnc" id="L1561" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1562">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1564">                int val = ps[0];</span>
+<span class="nc" id="L1565">                pd[0] = redPalette[val];</span>
+<span class="nc" id="L1566">                pd[1] = greenPalette[val];</span>
+<span class="nc" id="L1567">                pd[2] = bluePalette[val];</span>
+<span class="nc" id="L1568">                pd[3] = alphaPalette[val];</span>
+
+<span class="nc" id="L1570">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1571">                dstX += step;</span>
+            }
+            break;
+
+        case POST_ADD_GRAY_TRANS:
+<span class="nc bnc" id="L1576" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1577">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1579">                int val = ps[0];</span>
+<span class="nc bnc" id="L1580" title="All 2 branches missed.">                if (performGammaCorrection) {</span>
+<span class="nc" id="L1581">                    val = gammaLut[val];</span>
+                }
+<span class="nc" id="L1583">                pd[0] = val;</span>
+<span class="nc bnc" id="L1584" title="All 2 branches missed.">                if (val == grayTransparentAlpha) {</span>
+<span class="nc" id="L1585">                    pd[1] = 0;</span>
+                } else {
+<span class="nc" id="L1587">                    pd[1] = maxOpacity;</span>
+                }
+
+<span class="nc" id="L1590">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1591">                dstX += step;</span>
+            }
+            break;
+
+        case POST_ADD_RGB_TRANS:
+<span class="nc" id="L1596">            boolean flagGammaCorrection = performGammaCorrection; // local is cheaper</span>
+<span class="nc" id="L1597">            int[] workGammaLut = gammaLut;</span>
+<span class="nc bnc" id="L1598" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1599">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1601">                int r = ps[0];</span>
+<span class="nc" id="L1602">                int g = ps[1];</span>
+<span class="nc" id="L1603">                int b = ps[2];</span>
+<span class="nc bnc" id="L1604" title="All 2 branches missed.">                if (flagGammaCorrection) {</span>
+<span class="nc" id="L1605">                    pd[0] = workGammaLut[r];</span>
+<span class="nc" id="L1606">                    pd[1] = workGammaLut[g];</span>
+<span class="nc" id="L1607">                    pd[2] = workGammaLut[b];</span>
+                } else {
+<span class="nc" id="L1609">                    pd[0] = r;</span>
+<span class="nc" id="L1610">                    pd[1] = g;</span>
+<span class="nc" id="L1611">                    pd[2] = b;</span>
+                }
+<span class="nc bnc" id="L1613" title="All 6 branches missed.">                if ((r == redTransparentAlpha)</span>
+                    &amp;&amp; (g == greenTransparentAlpha)
+                    &amp;&amp; (b == blueTransparentAlpha)) {
+<span class="nc" id="L1616">                    pd[3] = 0;</span>
+                } else {
+<span class="nc" id="L1618">                    pd[3] = maxOpacity;</span>
+                }
+
+<span class="nc" id="L1621">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1622">                dstX += step;</span>
+            }
+            break;
+
+        case POST_REMOVE_GRAY_TRANS:
+<span class="nc bnc" id="L1627" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1628">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1630">                int g = ps[0];</span>
+<span class="nc bnc" id="L1631" title="All 2 branches missed.">                if (performGammaCorrection) {</span>
+<span class="nc" id="L1632">                    pd[0] = gammaLut[g];</span>
+                } else {
+<span class="nc" id="L1634">                    pd[0] = g;</span>
+                }
+
+<span class="nc" id="L1637">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1638">                dstX += step;</span>
+            }
+            break;
+
+        case POST_REMOVE_RGB_TRANS:
+<span class="nc bnc" id="L1643" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1644">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1646">                int r = ps[0];</span>
+<span class="nc" id="L1647">                int g = ps[1];</span>
+<span class="nc" id="L1648">                int b = ps[2];</span>
+<span class="nc bnc" id="L1649" title="All 2 branches missed.">                if (performGammaCorrection) {</span>
+<span class="nc" id="L1650">                    pd[0] = gammaLut[r];</span>
+<span class="nc" id="L1651">                    pd[1] = gammaLut[g];</span>
+<span class="nc" id="L1652">                    pd[2] = gammaLut[b];</span>
+                } else {
+<span class="nc" id="L1654">                    pd[0] = r;</span>
+<span class="nc" id="L1655">                    pd[1] = g;</span>
+<span class="nc" id="L1656">                    pd[2] = b;</span>
+                }
+
+<span class="nc" id="L1659">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1660">                dstX += step;</span>
+            }
+            break;
+
+        case POST_GAMMA_EXP:
+<span class="nc bnc" id="L1665" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1666">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1668">                int val = ps[0];</span>
+<span class="nc" id="L1669">                int alpha = ps[1];</span>
+<span class="nc" id="L1670">                int gamma = gammaLut[val];</span>
+<span class="nc" id="L1671">                pd[0] = gamma;</span>
+<span class="nc" id="L1672">                pd[1] = gamma;</span>
+<span class="nc" id="L1673">                pd[2] = gamma;</span>
+<span class="nc" id="L1674">                pd[3] = alpha;</span>
+
+<span class="nc" id="L1676">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1677">                dstX += step;</span>
+            }
+            break;
+
+        case POST_GRAY_ALPHA_EXP:
+<span class="nc bnc" id="L1682" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1683">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1685">                int val = ps[0];</span>
+<span class="nc" id="L1686">                int alpha = ps[1];</span>
+<span class="nc" id="L1687">                pd[0] = val;</span>
+<span class="nc" id="L1688">                pd[1] = val;</span>
+<span class="nc" id="L1689">                pd[2] = val;</span>
+<span class="nc" id="L1690">                pd[3] = alpha;</span>
+
+<span class="nc" id="L1692">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1693">                dstX += step;</span>
+            }
+            break;
+
+        case POST_ADD_GRAY_TRANS_EXP:
+<span class="nc bnc" id="L1698" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1699">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1701">                int val = ps[0];</span>
+<span class="nc bnc" id="L1702" title="All 2 branches missed.">                if (performGammaCorrection) {</span>
+<span class="nc" id="L1703">                    val = gammaLut[val];</span>
+                }
+<span class="nc" id="L1705">                pd[0] = val;</span>
+<span class="nc" id="L1706">                pd[1] = val;</span>
+<span class="nc" id="L1707">                pd[2] = val;</span>
+<span class="nc bnc" id="L1708" title="All 2 branches missed.">                if (val == grayTransparentAlpha) {</span>
+<span class="nc" id="L1709">                    pd[3] = 0;</span>
+                } else {
+<span class="nc" id="L1711">                    pd[3] = maxOpacity;</span>
+                }
+
+<span class="nc" id="L1714">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1715">                dstX += step;</span>
+            }
+            break;
+
+        case POST_GRAY_LUT_ADD_TRANS_EXP:
+<span class="nc bnc" id="L1720" title="All 2 branches missed.">            for (srcX = 0; srcX &lt; width; srcX++) {</span>
+<span class="nc" id="L1721">                src.getPixel(srcX, 0, ps);</span>
+
+<span class="nc" id="L1723">                int val = ps[0];</span>
+<span class="nc" id="L1724">                int val2 = grayLut[val];</span>
+<span class="nc" id="L1725">                pd[0] = val2;</span>
+<span class="nc" id="L1726">                pd[1] = val2;</span>
+<span class="nc" id="L1727">                pd[2] = val2;</span>
+<span class="nc bnc" id="L1728" title="All 2 branches missed.">                if (val == grayTransparentAlpha) {</span>
+<span class="nc" id="L1729">                    pd[3] = 0;</span>
+                } else {
+<span class="nc" id="L1731">                    pd[3] = maxOpacity;</span>
+                }
+
+<span class="nc" id="L1734">                dst.setPixel(dstX, y, pd);</span>
+<span class="nc" id="L1735">                dstX += step;</span>
+            }
+            break;
+        }
+<span class="nc" id="L1739">    }</span>
+
+    /**
+     * Reads in an image of a given size and returns it as a
+     * WritableRaster.
+     */
+    private void decodePass(WritableRaster imRas,
+                            int xOffset, int yOffset,
+                            int xStep, int yStep,
+                            int passWidth, int passHeight) {
+<span class="nc bnc" id="L1749" title="All 4 branches missed.">        if ((passWidth == 0) || (passHeight == 0)) {</span>
+<span class="nc" id="L1750">            return;</span>
+        }
+
+<span class="nc" id="L1753">        int bytesPerRow = (inputBands * passWidth * bitDepth + 7) / 8;</span>
+<span class="nc bnc" id="L1754" title="All 2 branches missed.">        int eltsPerRow = (bitDepth == 16) ? bytesPerRow / 2 : bytesPerRow;</span>
+<span class="nc" id="L1755">        byte[] curr = new byte[bytesPerRow];</span>
+<span class="nc" id="L1756">        byte[] prior = new byte[bytesPerRow];</span>
+
+        // Create a 1-row tall Raster to hold the data
+<span class="nc" id="L1759">        WritableRaster passRow =</span>
+<span class="nc" id="L1760">            createRaster(passWidth, 1, inputBands,</span>
+                         eltsPerRow,
+                         bitDepth);
+<span class="nc" id="L1763">        DataBuffer dataBuffer = passRow.getDataBuffer();</span>
+<span class="nc" id="L1764">        int type = dataBuffer.getDataType();</span>
+<span class="nc" id="L1765">        byte[] byteData = null;</span>
+<span class="nc" id="L1766">        short[] shortData = null;</span>
+<span class="nc bnc" id="L1767" title="All 2 branches missed.">        if (type == DataBuffer.TYPE_BYTE) {</span>
+<span class="nc" id="L1768">            byteData = ((DataBufferByte)dataBuffer).getData();</span>
+        } else {
+<span class="nc" id="L1770">            shortData = ((DataBufferUShort)dataBuffer).getData();</span>
+        }
+
+        // Decode the (sub)image row-by-row
+        int srcY;
+        int dstY;
+<span class="nc" id="L1776">        for (srcY = 0, dstY = yOffset;</span>
+<span class="nc bnc" id="L1777" title="All 2 branches missed.">             srcY &lt; passHeight;</span>
+<span class="nc" id="L1778">             srcY++, dstY += yStep) {</span>
+            // Read the filter type byte and a row of data
+<span class="nc" id="L1780">            int filter = 0;</span>
+            try {
+<span class="nc" id="L1782">                filter = dataStream.read();</span>
+<span class="nc" id="L1783">                dataStream.readFully(curr, 0, bytesPerRow);</span>
+<span class="nc" id="L1784">            } catch (Exception e) {</span>
+<span class="nc" id="L1785">                e.printStackTrace();</span>
+<span class="nc" id="L1786">            }</span>
+
+<span class="nc bnc" id="L1788" title="All 6 branches missed.">            switch (filter) {</span>
+            case PNG_FILTER_NONE:
+<span class="nc" id="L1790">                break;</span>
+            case PNG_FILTER_SUB:
+<span class="nc" id="L1792">                decodeSubFilter(curr, bytesPerRow, bytesPerPixel);</span>
+<span class="nc" id="L1793">                break;</span>
+            case PNG_FILTER_UP:
+<span class="nc" id="L1795">                decodeUpFilter(curr, prior, bytesPerRow);</span>
+<span class="nc" id="L1796">                break;</span>
+            case PNG_FILTER_AVERAGE:
+<span class="nc" id="L1798">                decodeAverageFilter(curr, prior, bytesPerRow, bytesPerPixel);</span>
+<span class="nc" id="L1799">                break;</span>
+            case PNG_FILTER_PAETH:
+<span class="nc" id="L1801">                decodePaethFilter(curr, prior, bytesPerRow, bytesPerPixel);</span>
+<span class="nc" id="L1802">                break;</span>
+            default:
+                // Error -- unknown filter type
+<span class="nc" id="L1805">                String msg = PropertyUtil.getString(&quot;PNGImageDecoder16&quot;);</span>
+<span class="nc" id="L1806">                throw new RuntimeException(msg);</span>
+            }
+
+            // Copy data into passRow byte by byte
+<span class="nc bnc" id="L1810" title="All 2 branches missed.">            if (bitDepth &lt; 16) {</span>
+<span class="nc" id="L1811">                System.arraycopy(curr, 0, byteData, 0, bytesPerRow);</span>
+            } else {
+<span class="nc" id="L1813">                int idx = 0;</span>
+<span class="nc bnc" id="L1814" title="All 2 branches missed.">                for (int j = 0; j &lt; eltsPerRow; j++) {</span>
+<span class="nc" id="L1815">                    shortData[j] =</span>
+                        (short)((curr[idx] &lt;&lt; 8) | (curr[idx + 1] &amp; 0xff));
+<span class="nc" id="L1817">                    idx += 2;</span>
+                }
+            }
+
+<span class="nc" id="L1821">            processPixels(postProcess,</span>
+                          passRow, imRas, xOffset, xStep, dstY, passWidth);
+
+            // Swap curr and prior
+<span class="nc" id="L1825">            byte[] tmp = prior;</span>
+<span class="nc" id="L1826">            prior = curr;</span>
+<span class="nc" id="L1827">            curr = tmp;</span>
+        }
+<span class="nc" id="L1829">    }</span>
+
+    private void decodeImage(boolean useInterlacing) {
+<span class="nc" id="L1832">        int width = bounds.width;</span>
+<span class="nc" id="L1833">        int height = bounds.height;</span>
+
+<span class="nc bnc" id="L1835" title="All 2 branches missed.">        if (!useInterlacing) {</span>
+<span class="nc" id="L1836">            decodePass(theTile, 0, 0, 1, 1, width, height);</span>
+        } else {
+<span class="nc" id="L1838">            decodePass(theTile, 0, 0, 8, 8, (width + 7) / 8, (height + 7) / 8);</span>
+<span class="nc" id="L1839">            decodePass(theTile, 4, 0, 8, 8, (width + 3) / 8, (height + 7) / 8);</span>
+<span class="nc" id="L1840">            decodePass(theTile, 0, 4, 4, 8, (width + 3) / 4, (height + 3) / 8);</span>
+<span class="nc" id="L1841">            decodePass(theTile, 2, 0, 4, 4, (width + 1) / 4, (height + 3) / 4);</span>
+<span class="nc" id="L1842">            decodePass(theTile, 0, 2, 2, 4, (width + 1) / 2, (height + 1) / 4);</span>
+<span class="nc" id="L1843">            decodePass(theTile, 1, 0, 2, 2, width / 2, (height + 1) / 2);</span>
+<span class="nc" id="L1844">            decodePass(theTile, 0, 1, 1, 2, width, height / 2);</span>
+        }
+<span class="nc" id="L1846">    }</span>
+
+    public WritableRaster copyData(WritableRaster wr) {
+<span class="nc" id="L1849">        GraphicsUtil.copyData(theTile, wr);</span>
+<span class="nc" id="L1850">        return wr;</span>
+    }
+
+    // RenderedImage stuff
+    @Override
+    public Raster getTile(int tileX, int tileY) {
+<span class="nc bnc" id="L1856" title="All 4 branches missed.">        if (tileX != 0 || tileY != 0) {</span>
+            // Error -- bad tile requested
+<span class="nc" id="L1858">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder17&quot;);</span>
+<span class="nc" id="L1859">            throw new IllegalArgumentException(msg);</span>
+        }
+<span class="nc" id="L1861">        return theTile;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

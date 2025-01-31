@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XMPPacketParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp</a> &gt; <span class="el_source">XMPPacketParser.java</span></div><h1>XMPPacketParser.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: XMPPacketParser.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.xmp;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.stream.StreamSource;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.output.ByteArrayOutputStream;
+
+/**
+ * This class is a parser for XMP packets. By default, it tries to locate the first XMP packet
+ * it finds and parses it.
+ * &lt;p&gt;
+ * Important: Before you use this class to look for an XMP packet in some random file, please read
+ * the chapter on &quot;Scanning Files for XMP Packets&quot; in the XMP specification!
+ */
+public final class XMPPacketParser {
+
+    private XMPPacketParser() {
+    }
+
+    private static final byte[] PACKET_HEADER;
+    private static final byte[] PACKET_HEADER_END;
+    private static final byte[] PACKET_TRAILER;
+
+    static {
+        try {
+<span class="nc" id="L52">            PACKET_HEADER = &quot;&lt;?xpacket begin=&quot;.getBytes(&quot;US-ASCII&quot;);</span>
+<span class="nc" id="L53">            PACKET_HEADER_END = &quot;?&gt;&quot;.getBytes(&quot;US-ASCII&quot;);</span>
+<span class="nc" id="L54">            PACKET_TRAILER = &quot;&lt;?xpacket&quot;.getBytes(&quot;US-ASCII&quot;);</span>
+<span class="nc" id="L55">        } catch (UnsupportedEncodingException e) {</span>
+<span class="nc" id="L56">            throw new RuntimeException(&quot;Incompatible JVM! US-ASCII encoding not supported.&quot;);</span>
+<span class="nc" id="L57">        }</span>
+<span class="nc" id="L58">    }</span>
+
+    /**
+     * Locates an XMP packet in a stream, parses it and returns the XMP metadata. If no
+     * XMP packet is found until the stream ends, null is returned. Note: This method
+     * only finds the first XMP packet in a stream. And it cannot determine whether it
+     * has found the right XMP packet if there are multiple packets.
+     * @param in the InputStream to search
+     * @return the parsed XMP metadata or null if no XMP packet is found
+     * @throws IOException if an I/O error occurs
+     * @throws TransformerException if an error occurs while parsing the XMP packet
+     */
+    public static Metadata parse(InputStream in) throws IOException, TransformerException {
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (!in.markSupported()) {</span>
+<span class="nc" id="L72">            in = new java.io.BufferedInputStream(in);</span>
+        }
+<span class="nc" id="L74">        boolean foundXMP = skipAfter(in, PACKET_HEADER);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (!foundXMP) {</span>
+<span class="nc" id="L76">            return null;</span>
+        }
+        //TODO Inspect &quot;begin&quot; attribute!
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        if (!skipAfter(in, PACKET_HEADER_END)) {</span>
+<span class="nc" id="L80">            throw new IOException(&quot;Invalid XMP packet header!&quot;);</span>
+        }
+<span class="nc" id="L82">        ByteArrayOutputStream baout = null;</span>
+        Metadata metadata;
+        try {
+            //TODO think about not buffering this but for example, parse in another thread
+            //ex. using PipedInput/OutputStream
+<span class="nc" id="L87">            baout = new ByteArrayOutputStream();</span>
+            //TODO Do with TeeInputStream when Commons IO 1.4 is available
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (!skipAfter(in, PACKET_TRAILER, baout)) {</span>
+<span class="nc" id="L90">                throw new IOException(&quot;XMP packet not properly terminated!&quot;);</span>
+            }
+<span class="nc" id="L92">            metadata = XMPParser.parseXMP(</span>
+<span class="nc" id="L93">                new StreamSource(new ByteArrayInputStream(baout.toByteArray())));</span>
+        } finally {
+<span class="nc" id="L95">            IOUtils.closeQuietly(baout);</span>
+        }
+<span class="nc" id="L97">        return metadata;</span>
+    }
+
+    private static boolean skipAfter(InputStream in, byte[] match) throws IOException {
+<span class="nc" id="L101">        return skipAfter(in, match, null);</span>
+    }
+
+    private static boolean skipAfter(InputStream in, byte[] match, OutputStream out)
+            throws IOException {
+<span class="nc" id="L106">        int found = 0;</span>
+<span class="nc" id="L107">        int len = match.length;</span>
+        int b;
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        while ((b = in.read()) &gt;= 0) {</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">            if (b == match[found]) {</span>
+<span class="nc" id="L111">                found++;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">                if (found == len) {</span>
+<span class="nc" id="L113">                    return true;</span>
+                }
+            } else {
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                if (out != null) {</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">                    if (found &gt; 0) {</span>
+<span class="nc" id="L118">                        out.write(match, 0, found);</span>
+                    }
+<span class="nc" id="L120">                    out.write(b);</span>
+                }
+<span class="nc" id="L122">                found = 0;</span>
+            }
+        }
+<span class="nc" id="L125">        return false;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

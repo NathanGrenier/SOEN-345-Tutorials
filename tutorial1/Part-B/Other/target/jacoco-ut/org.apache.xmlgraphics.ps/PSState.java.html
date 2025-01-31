@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSState.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">PSState.java</span></div><h1>PSState.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSState.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+import java.awt.Color;
+import java.awt.geom.AffineTransform;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.List;
+
+import org.apache.xmlgraphics.java2d.color.ColorUtil;
+
+/**
+ * This class holds the current state of the PostScript interpreter.
+ *
+ * @version $Id: PSState.java 1804124 2017-08-04 14:13:54Z ssteiner $
+ */
+public class PSState implements Serializable {
+
+    /** Default for setdash */
+    public static final String DEFAULT_DASH = &quot;[] 0&quot;;
+    /** Default color in PostScript */
+<span class="fc" id="L40">    public static final Color DEFAULT_RGB_COLOR = Color.black;</span>
+    private static final long serialVersionUID = -3862731539801753248L;
+
+<span class="fc" id="L43">    private AffineTransform transform = new AffineTransform();</span>
+<span class="fc" id="L44">    private List transformConcatList = new java.util.ArrayList();</span>
+
+    private int linecap;
+    private int linejoin;
+    private float miterLimit;
+<span class="fc" id="L49">    private double linewidth = 1.0f;</span>
+<span class="fc" id="L50">    private String dashpattern = DEFAULT_DASH;</span>
+<span class="fc" id="L51">    private Color color = DEFAULT_RGB_COLOR;</span>
+
+    //Font state
+    private String fontname;
+    private float fontsize;
+
+    /**
+     * Default constructor
+     */
+<span class="fc" id="L60">    public PSState() {</span>
+        //nop
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Copy constructor
+     * @param org the original to copy from
+     * @param copyTransforms true if the list of matrix concats should be cloned, too
+     */
+<span class="fc" id="L69">    public PSState(PSState org, boolean copyTransforms) {</span>
+<span class="fc" id="L70">        this.transform = (AffineTransform)org.transform.clone();</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (copyTransforms) {</span>
+<span class="nc" id="L72">            this.transformConcatList.addAll(org.transformConcatList);</span>
+        }
+<span class="fc" id="L74">        this.linecap = org.linecap;</span>
+<span class="fc" id="L75">        this.linejoin = org.linejoin;</span>
+<span class="fc" id="L76">        this.miterLimit = org.miterLimit;</span>
+<span class="fc" id="L77">        this.linewidth = org.linewidth;</span>
+<span class="fc" id="L78">        this.dashpattern = org.dashpattern;</span>
+<span class="fc" id="L79">        this.color = org.color;</span>
+<span class="fc" id="L80">        this.fontname = org.fontname;</span>
+<span class="fc" id="L81">        this.fontsize = org.fontsize;</span>
+<span class="fc" id="L82">    }</span>
+
+    /**
+     * Returns the transform.
+     * @return the current transformation matrix
+     */
+    public AffineTransform getTransform() {
+<span class="nc" id="L89">        return this.transform;</span>
+    }
+
+    /**
+     * Check the current transform.
+     * The transform for the current state is the combination of all
+     * transforms in the current state. The parameter is compared
+     * against this current transform.
+     *
+     * @param tf the transform the check against
+     * @return true if the new transform is different then the current transform
+     */
+    public boolean checkTransform(AffineTransform tf) {
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        return !tf.equals(this.transform);</span>
+    }
+
+    /**
+     * Concats the given transformation matrix with the current one.
+     * @param transform The new transformation matrix
+     */
+    public void concatMatrix(AffineTransform transform) {
+<span class="fc" id="L110">        this.transformConcatList.add(transform);</span>
+<span class="fc" id="L111">        this.transform.concatenate(transform);</span>
+<span class="fc" id="L112">    }</span>
+
+    /**
+     * Establishes the specified line cap.
+     * @param value line cap (0, 1 or 2) as defined by the setlinecap command
+     * @return true if the line cap changed compared to the previous setting
+     */
+    public boolean useLineCap(int value) {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (linecap != value) {</span>
+<span class="nc" id="L121">            linecap = value;</span>
+<span class="nc" id="L122">            return true;</span>
+        } else {
+<span class="nc" id="L124">            return false;</span>
+        }
+    }
+
+    /**
+     * Establishes the specified line join.
+     * @param value line join (0, 1 or 2) as defined by the setlinejoin command
+     * @return true if the line join changed compared to the previous setting
+     */
+    public boolean useLineJoin(int value) {
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        if (linejoin != value) {</span>
+<span class="nc" id="L135">            linejoin = value;</span>
+<span class="nc" id="L136">            return true;</span>
+        } else {
+<span class="nc" id="L138">            return false;</span>
+        }
+    }
+
+    /**
+     * Establishes the specified miter limit.
+     * @param value the miter limit as defined by the setmiterlimit command
+     * @return true if the miter limit changed compared to the previous setting
+     */
+    public boolean useMiterLimit(float value) {
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        if (miterLimit != value) {</span>
+<span class="nc" id="L149">            miterLimit = value;</span>
+<span class="nc" id="L150">            return true;</span>
+        } else {
+<span class="nc" id="L152">            return false;</span>
+        }
+    }
+
+    /**
+     * Establishes the specified line width.
+     * @param value line width as defined by the setlinewidth command
+     * @return true if the line width changed compared to the previous setting
+     */
+    public boolean useLineWidth(double value) {
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        if (linewidth != value) {</span>
+<span class="nc" id="L163">            linewidth = value;</span>
+<span class="nc" id="L164">            return true;</span>
+        } else {
+<span class="nc" id="L166">            return false;</span>
+        }
+    }
+
+    /**
+     * Establishes the specified dash.
+     * @param pattern dash pattern as defined by the setdash command
+     * @return true if the dash pattern changed compared to the previous setting
+     */
+    public boolean useDash(String pattern) {
+<span class="nc bnc" id="L176" title="All 2 branches missed.">        if (!dashpattern.equals(pattern)) {</span>
+<span class="nc" id="L177">            dashpattern = pattern;</span>
+<span class="nc" id="L178">            return true;</span>
+        } else {
+<span class="nc" id="L180">            return false;</span>
+        }
+    }
+
+    /**
+     * Establishes the specified color (RGB).
+     * @param value color as defined by the setrgbcolor command
+     * @return true if the color changed compared to the previous setting
+     */
+    public boolean useColor(Color value) {
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">        if (!ColorUtil.isSameColor(color, value)) {</span>
+<span class="nc" id="L191">            color = value;</span>
+<span class="nc" id="L192">            return true;</span>
+        } else {
+<span class="fc" id="L194">            return false;</span>
+        }
+    }
+
+    /**
+     * Establishes the specified font and size.
+     * @param name name of the font for the &quot;F&quot; command (see FOP Std Proc Set)
+     * @param size size of the font
+     * @return true if the font changed compared to the previous setting
+     */
+    public boolean useFont(String name, float size) {
+<span class="nc bnc" id="L205" title="All 2 branches missed.">        if (name == null) {</span>
+<span class="nc" id="L206">            throw new NullPointerException(&quot;font name must not be null&quot;);</span>
+        }
+<span class="nc bnc" id="L208" title="All 6 branches missed.">        if (fontname == null || !fontname.equals(name) || fontsize != size) {</span>
+<span class="nc" id="L209">            fontname = name;</span>
+<span class="nc" id="L210">            fontsize = size;</span>
+<span class="nc" id="L211">            return true;</span>
+        } else {
+<span class="nc" id="L213">            return false;</span>
+        }
+    }
+
+    /**
+     * Reestablishes the graphics state represented by this instance by issueing the
+     * necessary commands.
+     * @param gen The generator to use for output
+     * @exception IOException In case of an I/O problem
+     */
+    public void reestablish(PSGenerator gen) throws IOException {
+<span class="nc bnc" id="L224" title="All 2 branches missed.">        for (Object aTransformConcatList : transformConcatList) {</span>
+<span class="nc" id="L225">            gen.concatMatrix((AffineTransform) aTransformConcatList);</span>
+<span class="nc" id="L226">        }</span>
+<span class="nc" id="L227">        gen.useLineCap(linecap);</span>
+<span class="nc" id="L228">        gen.useLineWidth(linewidth);</span>
+<span class="nc" id="L229">        gen.useDash(dashpattern);</span>
+<span class="nc" id="L230">        gen.useColor(color);</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">        if (fontname != null) {</span>
+<span class="nc" id="L232">            gen.useFont(fontname, fontsize);</span>
+        }
+<span class="nc" id="L234">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,1461 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">AbstractGraphics2D.java</span></div><h1>AbstractGraphics2D.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: AbstractGraphics2D.java 1739071 2016-04-14 12:30:21Z ssteiner $ */
+
+package org.apache.xmlgraphics.java2d;
+
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Paint;
+import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.Stroke;
+import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Arc2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ImageObserver;
+import java.text.AttributedCharacterIterator;
+import java.util.Map;
+
+// CSOFF: NeedBraces
+// CSOFF: ParameterName
+// CSOFF: WhitespaceAround
+
+/**
+ * This extension of the &lt;tt&gt;java.awt.Graphics2D&lt;/tt&gt; abstract class
+ * is still abstract, but it implements a lot of the &lt;tt&gt;Graphics2D&lt;/tt&gt;
+ * method in a way that concrete implementations can reuse.
+ *
+ * This class uses a &lt;tt&gt;GraphicContext&lt;/tt&gt; to store the state of
+ * its various attributes that control the rendering, such as the
+ * current &lt;tt&gt;Font&lt;/tt&gt;, &lt;tt&gt;Paint&lt;/tt&gt; or clip.
+ *
+ * Concrete implementations can focus on implementing the rendering
+ * methods, such as &lt;tt&gt;drawShape&lt;/tt&gt;. As a convenience, rendering
+ * methods that can be expressed with other rendering methods (e.g.,
+ * &lt;tt&gt;drawRect&lt;/tt&gt; can be expressed as &lt;tt&gt;draw(new Rectangle(..))&lt;/tt&gt;),
+ * are implemented by &lt;tt&gt;AbstractGraphics2D&lt;/tt&gt;
+ *
+ * @version $Id: AbstractGraphics2D.java 1739071 2016-04-14 12:30:21Z ssteiner $
+ * @see org.apache.xmlgraphics.java2d.GraphicContext
+ *
+ * Originally authored by Vincent Hardy.
+ */
+public abstract class AbstractGraphics2D extends Graphics2D implements Cloneable {
+    /**
+     * Current state of the Graphic Context. The GraphicsContext
+     * class manages the state of this &lt;tt&gt;Graphics2D&lt;/tt&gt; graphic context
+     * attributes.
+     */
+    protected GraphicContext gc;
+
+    /**
+     * Text handling strategy.
+     */
+    protected boolean textAsShapes;
+
+    /**
+     * Protection agains infinite recursion
+     */
+    protected boolean inPossibleRecursion;
+
+    /**
+     * @param textAsShapes if true, all text is turned into shapes in the
+     *        convertion. No text is output.
+     *
+     */
+<span class="fc" id="L97">    public AbstractGraphics2D(boolean textAsShapes) {</span>
+<span class="fc" id="L98">        this.textAsShapes = textAsShapes;</span>
+<span class="fc" id="L99">    }</span>
+
+    /**
+     * Creates a new AbstractGraphics2D from an existing instance.
+     * @param g the AbstractGraphics2D whose properties should be copied
+     */
+<span class="nc" id="L105">    public AbstractGraphics2D(AbstractGraphics2D g) {</span>
+<span class="nc" id="L106">        this.gc = (GraphicContext)g.gc.clone();</span>
+<span class="nc" id="L107">        this.gc.validateTransformStack();</span>
+<span class="nc" id="L108">        this.textAsShapes = g.textAsShapes;</span>
+<span class="nc" id="L109">    }</span>
+
+    /**
+     * Translates the origin of the graphics context to the point
+     * (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in the current coordinate system.
+     * Modifies this graphics context so that its new origin corresponds
+     * to the point (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in this graphics context's
+     * original coordinate system.  All coordinates used in subsequent
+     * rendering operations on this graphics context will be relative
+     * to this new origin.
+     * @param  x   the &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param  y   the &lt;i&gt;y&lt;/i&gt; coordinate.
+     */
+    public void translate(int x, int y) {
+<span class="nc" id="L123">        gc.translate(x, y);</span>
+<span class="nc" id="L124">    }</span>
+
+    /**
+     * Gets this graphics context's current color.
+     * @return    this graphics context's current color.
+     * @see       java.awt.Color
+     * @see       java.awt.Graphics#setColor
+     */
+    public Color getColor() {
+<span class="fc" id="L133">        return gc.getColor();</span>
+    }
+
+    /**
+     * Sets this graphics context's current color to the specified
+     * color. All subsequent graphics operations using this graphics
+     * context use this specified color.
+     * @param     c   the new rendering color.
+     * @see       java.awt.Color
+     * @see       java.awt.Graphics#getColor
+     */
+    public void setColor(Color c) {
+<span class="nc" id="L145">        gc.setColor(c);</span>
+<span class="nc" id="L146">    }</span>
+
+    /**
+     * Sets the paint mode of this graphics context to overwrite the
+     * destination with this graphics context's current color.
+     * This sets the logical pixel operation function to the paint or
+     * overwrite mode.  All subsequent rendering operations will
+     * overwrite the destination with the current color.
+     */
+    public void setPaintMode() {
+<span class="nc" id="L156">        gc.setComposite(AlphaComposite.SrcOver);</span>
+<span class="nc" id="L157">    }</span>
+
+    /**
+     * Gets the current font.
+     * @return    this graphics context's current font.
+     * @see       java.awt.Font
+     * @see       java.awt.Graphics#setFont
+     */
+    public Font getFont() {
+<span class="fc" id="L166">        return gc.getFont();</span>
+    }
+
+    /**
+     * Sets this graphics context's font to the specified font.
+     * All subsequent text operations using this graphics context
+     * use this font.
+     * @param  font   the font.
+     * @see     java.awt.Graphics#getFont
+     */
+    public void setFont(Font font) {
+<span class="nc" id="L177">        gc.setFont(font);</span>
+<span class="nc" id="L178">    }</span>
+
+    /**
+     * Returns the bounding rectangle of the current clipping area.
+     * This method refers to the user clip, which is independent of the
+     * clipping associated with device bounds and window visibility.
+     * If no clip has previously been set, or if the clip has been
+     * cleared using &lt;code&gt;setClip(null)&lt;/code&gt;, this method returns
+     * &lt;code&gt;null&lt;/code&gt;.
+     * The coordinates in the rectangle are relative to the coordinate
+     * system origin of this graphics context.
+     * @return      the bounding rectangle of the current clipping area,
+     *              or &lt;code&gt;null&lt;/code&gt; if no clip is set.
+     * @see         java.awt.Graphics#getClip
+     * @see         java.awt.Graphics#clipRect
+     * @see         java.awt.Graphics#setClip(int, int, int, int)
+     * @see         java.awt.Graphics#setClip(Shape)
+     * @since       JDK1.1
+     */
+    public Rectangle getClipBounds() {
+<span class="nc" id="L198">        return gc.getClipBounds();</span>
+    }
+
+
+    /**
+     * Intersects the current clip with the specified rectangle.
+     * The resulting clipping area is the intersection of the current
+     * clipping area and the specified rectangle.  If there is no
+     * current clipping area, either because the clip has never been
+     * set, or the clip has been cleared using &lt;code&gt;setClip(null)&lt;/code&gt;,
+     * the specified rectangle becomes the new clip.
+     * This method sets the user clip, which is independent of the
+     * clipping associated with device bounds and window visibility.
+     * This method can only be used to make the current clip smaller.
+     * To set the current clip larger, use any of the setClip methods.
+     * Rendering operations have no effect outside of the clipping area.
+     * @param x the x coordinate of the rectangle to intersect the clip with
+     * @param y the y coordinate of the rectangle to intersect the clip with
+     * @param width the width of the rectangle to intersect the clip with
+     * @param height the height of the rectangle to intersect the clip with
+     * @see #setClip(int, int, int, int)
+     * @see #setClip(Shape)
+     */
+    public void clipRect(int x, int y, int width, int height) {
+<span class="nc" id="L222">        gc.clipRect(x, y, width, height);</span>
+<span class="nc" id="L223">    }</span>
+
+
+    /**
+     * Sets the current clip to the rectangle specified by the given
+     * coordinates.  This method sets the user clip, which is
+     * independent of the clipping associated with device bounds
+     * and window visibility.
+     * Rendering operations have no effect outside of the clipping area.
+     * @param       x the &lt;i&gt;x&lt;/i&gt; coordinate of the new clip rectangle.
+     * @param       y the &lt;i&gt;y&lt;/i&gt; coordinate of the new clip rectangle.
+     * @param       width the width of the new clip rectangle.
+     * @param       height the height of the new clip rectangle.
+     * @see         java.awt.Graphics#clipRect
+     * @see         java.awt.Graphics#setClip(Shape)
+     * @since       JDK1.1
+     */
+    public void setClip(int x, int y, int width, int height) {
+<span class="nc" id="L241">        gc.setClip(x, y, width, height);</span>
+<span class="nc" id="L242">    }</span>
+
+
+    /**
+     * Gets the current clipping area.
+     * This method returns the user clip, which is independent of the
+     * clipping associated with device bounds and window visibility.
+     * If no clip has previously been set, or if the clip has been
+     * cleared using &lt;code&gt;setClip(null)&lt;/code&gt;, this method returns
+     * &lt;code&gt;null&lt;/code&gt;.
+     * @return      a &lt;code&gt;Shape&lt;/code&gt; object representing the
+     *              current clipping area, or &lt;code&gt;null&lt;/code&gt; if
+     *              no clip is set.
+     * @see         java.awt.Graphics#getClipBounds()
+     * @see         java.awt.Graphics#clipRect(int, int, int, int)
+     * @see         java.awt.Graphics#setClip(int, int, int, int)
+     * @see         java.awt.Graphics#setClip(Shape)
+     * @since       JDK1.1
+     */
+    public Shape getClip() {
+<span class="fc" id="L262">        return gc.getClip();</span>
+    }
+
+
+    /**
+     * Sets the current clipping area to an arbitrary clip shape.
+     * Not all objects that implement the &lt;code&gt;Shape&lt;/code&gt;
+     * interface can be used to set the clip.  The only
+     * &lt;code&gt;Shape&lt;/code&gt; objects that are guaranteed to be
+     * supported are &lt;code&gt;Shape&lt;/code&gt; objects that are
+     * obtained via the &lt;code&gt;getClip&lt;/code&gt; method and via
+     * &lt;code&gt;Rectangle&lt;/code&gt; objects.  This method sets the
+     * user clip, which is independent of the clipping associated
+     * with device bounds and window visibility.
+     * @param clip the &lt;code&gt;Shape&lt;/code&gt; to use to set the clip
+     * @see         java.awt.Graphics#getClip()
+     * @see         java.awt.Graphics#clipRect
+     * @see         java.awt.Graphics#setClip(int, int, int, int)
+     * @since       JDK1.1
+     */
+    public void setClip(Shape clip) {
+<span class="nc" id="L283">        gc.setClip(clip);</span>
+<span class="nc" id="L284">    }</span>
+
+
+    /**
+     * Draws a line, using the current color, between the points
+     * &lt;code&gt;(x1,&amp;nbsp;y1)&lt;/code&gt; and &lt;code&gt;(x2,&amp;nbsp;y2)&lt;/code&gt;
+     * in this graphics context's coordinate system.
+     * @param   x1  the first point's &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param   y1  the first point's &lt;i&gt;y&lt;/i&gt; coordinate.
+     * @param   x2  the second point's &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param   y2  the second point's &lt;i&gt;y&lt;/i&gt; coordinate.
+     */
+    public void drawLine(int x1, int y1, int x2, int y2) {
+<span class="nc" id="L297">        Line2D line = new Line2D.Float(x1, y1, x2, y2);</span>
+<span class="nc" id="L298">        draw(line);</span>
+<span class="nc" id="L299">    }</span>
+
+
+    /**
+     * Fills the specified rectangle.
+     * The left and right edges of the rectangle are at
+     * &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;x&amp;nbsp;+&amp;nbsp;width&amp;nbsp;-&amp;nbsp;1&lt;/code&gt;.
+     * The top and bottom edges are at
+     * &lt;code&gt;y&lt;/code&gt; and &lt;code&gt;y&amp;nbsp;+&amp;nbsp;height&amp;nbsp;-&amp;nbsp;1&lt;/code&gt;.
+     * The resulting rectangle covers an area
+     * &lt;code&gt;width&lt;/code&gt; pixels wide by
+     * &lt;code&gt;height&lt;/code&gt; pixels tall.
+     * The rectangle is filled using the graphics context's current color.
+     * @param         x   the &lt;i&gt;x&lt;/i&gt; coordinate
+     *                         of the rectangle to be filled.
+     * @param         y   the &lt;i&gt;y&lt;/i&gt; coordinate
+     *                         of the rectangle to be filled.
+     * @param         width   the width of the rectangle to be filled.
+     * @param         height   the height of the rectangle to be filled.
+     * @see           java.awt.Graphics#clearRect
+     * @see           java.awt.Graphics#drawRect
+     */
+    public void fillRect(int x, int y, int width, int height) {
+<span class="nc" id="L322">        Rectangle rect = new Rectangle(x, y, width, height);</span>
+<span class="nc" id="L323">        fill(rect);</span>
+<span class="nc" id="L324">    }</span>
+
+    public void drawRect(int x, int y, int width, int height) {
+<span class="nc" id="L327">        Rectangle rect = new Rectangle(x, y, width, height);</span>
+<span class="nc" id="L328">        draw(rect);</span>
+<span class="nc" id="L329">    }</span>
+
+
+
+    /**
+     * Clears the specified rectangle by filling it with the background
+     * color of the current drawing surface. This operation does not
+     * use the current paint mode.
+     * &lt;p&gt;
+     * Beginning with Java&amp;nbsp;1.1, the background color
+     * of offscreen images may be system dependent. Applications should
+     * use &lt;code&gt;setColor&lt;/code&gt; followed by &lt;code&gt;fillRect&lt;/code&gt; to
+     * ensure that an offscreen image is cleared to a specific color.
+     * @param       x the &lt;i&gt;x&lt;/i&gt; coordinate of the rectangle to clear.
+     * @param       y the &lt;i&gt;y&lt;/i&gt; coordinate of the rectangle to clear.
+     * @param       width the width of the rectangle to clear.
+     * @param       height the height of the rectangle to clear.
+     * @see         java.awt.Graphics#fillRect(int, int, int, int)
+     * @see         java.awt.Graphics#drawRect
+     * @see         java.awt.Graphics#setColor(java.awt.Color)
+     * @see         java.awt.Graphics#setPaintMode
+     * @see         java.awt.Graphics#setXORMode(java.awt.Color)
+     */
+    public void clearRect(int x, int y, int width, int height) {
+<span class="nc" id="L353">        Paint paint = gc.getPaint();</span>
+<span class="nc" id="L354">        gc.setColor(gc.getBackground());</span>
+<span class="nc" id="L355">        fillRect(x, y, width, height);</span>
+<span class="nc" id="L356">        gc.setPaint(paint);</span>
+<span class="nc" id="L357">    }</span>
+
+    /**
+     * Draws an outlined round-cornered rectangle using this graphics
+     * context's current color. The left and right edges of the rectangle
+     * are at &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;x&amp;nbsp;+&amp;nbsp;width&lt;/code&gt;,
+     * respectively. The top and bottom edges of the rectangle are at
+     * &lt;code&gt;y&lt;/code&gt; and &lt;code&gt;y&amp;nbsp;+&amp;nbsp;height&lt;/code&gt;.
+     * @param      x the &lt;i&gt;x&lt;/i&gt; coordinate of the rectangle to be drawn.
+     * @param      y the &lt;i&gt;y&lt;/i&gt; coordinate of the rectangle to be drawn.
+     * @param      width the width of the rectangle to be drawn.
+     * @param      height the height of the rectangle to be drawn.
+     * @param      arcWidth the horizontal diameter of the arc
+     *                    at the four corners.
+     * @param      arcHeight the vertical diameter of the arc
+     *                    at the four corners.
+     * @see        java.awt.Graphics#fillRoundRect
+     */
+    public void drawRoundRect(int x, int y, int width, int height,
+                              int arcWidth, int arcHeight) {
+<span class="nc" id="L377">        RoundRectangle2D rect = new RoundRectangle2D.Float(x, y, width, height, arcWidth, arcHeight);</span>
+<span class="nc" id="L378">        draw(rect);</span>
+<span class="nc" id="L379">    }</span>
+
+
+    /**
+     * Fills the specified rounded corner rectangle with the current color.
+     * The left and right edges of the rectangle
+     * are at &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;x&amp;nbsp;+&amp;nbsp;width&amp;nbsp;-&amp;nbsp;1&lt;/code&gt;,
+     * respectively. The top and bottom edges of the rectangle are at
+     * &lt;code&gt;y&lt;/code&gt; and &lt;code&gt;y&amp;nbsp;+&amp;nbsp;height&amp;nbsp;-&amp;nbsp;1&lt;/code&gt;.
+     * @param       x the &lt;i&gt;x&lt;/i&gt; coordinate of the rectangle to be filled.
+     * @param       y the &lt;i&gt;y&lt;/i&gt; coordinate of the rectangle to be filled.
+     * @param       width the width of the rectangle to be filled.
+     * @param       height the height of the rectangle to be filled.
+     * @param       arcWidth the horizontal diameter
+     *                     of the arc at the four corners.
+     * @param       arcHeight the vertical diameter
+     *                     of the arc at the four corners.
+     * @see         java.awt.Graphics#drawRoundRect
+     */
+    public void fillRoundRect(int x, int y, int width, int height,
+                              int arcWidth, int arcHeight) {
+<span class="nc" id="L400">        RoundRectangle2D rect = new RoundRectangle2D.Float(x, y, width, height, arcWidth, arcHeight);</span>
+<span class="nc" id="L401">        fill(rect);</span>
+<span class="nc" id="L402">    }</span>
+
+
+    /**
+     * Draws the outline of an oval.
+     * The result is a circle or ellipse that fits within the
+     * rectangle specified by the &lt;code&gt;x&lt;/code&gt;, &lt;code&gt;y&lt;/code&gt;,
+     * &lt;code&gt;width&lt;/code&gt;, and &lt;code&gt;height&lt;/code&gt; arguments.
+     * &lt;p&gt;
+     * The oval covers an area that is
+     * &lt;code&gt;width&amp;nbsp;+&amp;nbsp;1&lt;/code&gt; pixels wide
+     * and &lt;code&gt;height&amp;nbsp;+&amp;nbsp;1&lt;/code&gt; pixels tall.
+     * @param       x the &lt;i&gt;x&lt;/i&gt; coordinate of the upper left
+     *                     corner of the oval to be drawn.
+     * @param       y the &lt;i&gt;y&lt;/i&gt; coordinate of the upper left
+     *                     corner of the oval to be drawn.
+     * @param       width the width of the oval to be drawn.
+     * @param       height the height of the oval to be drawn.
+     * @see         java.awt.Graphics#fillOval
+     */
+    public void drawOval(int x, int y, int width, int height) {
+<span class="nc" id="L423">        Ellipse2D oval = new Ellipse2D.Float(x, y, width, height);</span>
+<span class="nc" id="L424">        draw(oval);</span>
+<span class="nc" id="L425">    }</span>
+
+
+    /**
+     * Fills an oval bounded by the specified rectangle with the
+     * current color.
+     * @param       x the &lt;i&gt;x&lt;/i&gt; coordinate of the upper left corner
+     *                     of the oval to be filled.
+     * @param       y the &lt;i&gt;y&lt;/i&gt; coordinate of the upper left corner
+     *                     of the oval to be filled.
+     * @param       width the width of the oval to be filled.
+     * @param       height the height of the oval to be filled.
+     * @see         java.awt.Graphics#drawOval
+     */
+    public void fillOval(int x, int y, int width, int height) {
+<span class="nc" id="L440">        Ellipse2D oval = new Ellipse2D.Float(x, y, width, height);</span>
+<span class="nc" id="L441">        fill(oval);</span>
+<span class="nc" id="L442">    }</span>
+
+
+    /**
+     * Draws the outline of a circular or elliptical arc
+     * covering the specified rectangle.
+     * &lt;p&gt;
+     * The resulting arc begins at &lt;code&gt;startAngle&lt;/code&gt; and extends
+     * for &lt;code&gt;arcAngle&lt;/code&gt; degrees, using the current color.
+     * Angles are interpreted such that 0&amp;nbsp;degrees
+     * is at the 3&amp;nbsp;o'clock position.
+     * A positive value indicates a counter-clockwise rotation
+     * while a negative value indicates a clockwise rotation.
+     * &lt;p&gt;
+     * The center of the arc is the center of the rectangle whose origin
+     * is (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) and whose size is specified by the
+     * &lt;code&gt;width&lt;/code&gt; and &lt;code&gt;height&lt;/code&gt; arguments.
+     * &lt;p&gt;
+     * The resulting arc covers an area
+     * &lt;code&gt;width&amp;nbsp;+&amp;nbsp;1&lt;/code&gt; pixels wide
+     * by &lt;code&gt;height&amp;nbsp;+&amp;nbsp;1&lt;/code&gt; pixels tall.
+     * &lt;p&gt;
+     * The angles are specified relative to the non-square extents of
+     * the bounding rectangle such that 45 degrees always falls on the
+     * line from the center of the ellipse to the upper right corner of
+     * the bounding rectangle. As a result, if the bounding rectangle is
+     * noticeably longer in one axis than the other, the angles to the
+     * start and end of the arc segment will be skewed farther along the
+     * longer axis of the bounds.
+     * @param        x the &lt;i&gt;x&lt;/i&gt; coordinate of the
+     *                    upper-left corner of the arc to be drawn.
+     * @param        y the &lt;i&gt;y&lt;/i&gt;  coordinate of the
+     *                    upper-left corner of the arc to be drawn.
+     * @param        width the width of the arc to be drawn.
+     * @param        height the height of the arc to be drawn.
+     * @param        startAngle the beginning angle.
+     * @param        arcAngle the angular extent of the arc,
+     *                    relative to the start angle.
+     * @see         java.awt.Graphics#fillArc
+     */
+    public void drawArc(int x, int y, int width, int height,
+                        int startAngle, int arcAngle) {
+<span class="nc" id="L484">        Arc2D arc = new Arc2D.Float(x, y, width, height, startAngle, arcAngle, Arc2D.OPEN);</span>
+<span class="nc" id="L485">        draw(arc);</span>
+<span class="nc" id="L486">    }</span>
+
+
+    /**
+     * Fills a circular or elliptical arc covering the specified rectangle.
+     * &lt;p&gt;
+     * The resulting arc begins at &lt;code&gt;startAngle&lt;/code&gt; and extends
+     * for &lt;code&gt;arcAngle&lt;/code&gt; degrees.
+     * Angles are interpreted such that 0&amp;nbsp;degrees
+     * is at the 3&amp;nbsp;o'clock position.
+     * A positive value indicates a counter-clockwise rotation
+     * while a negative value indicates a clockwise rotation.
+     * &lt;p&gt;
+     * The center of the arc is the center of the rectangle whose origin
+     * is (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) and whose size is specified by the
+     * &lt;code&gt;width&lt;/code&gt; and &lt;code&gt;height&lt;/code&gt; arguments.
+     * &lt;p&gt;
+     * The resulting arc covers an area
+     * &lt;code&gt;width&amp;nbsp;+&amp;nbsp;1&lt;/code&gt; pixels wide
+     * by &lt;code&gt;height&amp;nbsp;+&amp;nbsp;1&lt;/code&gt; pixels tall.
+     * &lt;p&gt;
+     * The angles are specified relative to the non-square extents of
+     * the bounding rectangle such that 45 degrees always falls on the
+     * line from the center of the ellipse to the upper right corner of
+     * the bounding rectangle. As a result, if the bounding rectangle is
+     * noticeably longer in one axis than the other, the angles to the
+     * start and end of the arc segment will be skewed farther along the
+     * longer axis of the bounds.
+     * @param        x the &lt;i&gt;x&lt;/i&gt; coordinate of the
+     *                    upper-left corner of the arc to be filled.
+     * @param        y the &lt;i&gt;y&lt;/i&gt;  coordinate of the
+     *                    upper-left corner of the arc to be filled.
+     * @param        width the width of the arc to be filled.
+     * @param        height the height of the arc to be filled.
+     * @param        startAngle the beginning angle.
+     * @param        arcAngle the angular extent of the arc,
+     *                    relative to the start angle.
+     * @see         java.awt.Graphics#drawArc
+     */
+    public void fillArc(int x, int y, int width, int height,
+                        int startAngle, int arcAngle) {
+<span class="nc" id="L527">        Arc2D arc = new Arc2D.Float(x, y, width, height, startAngle, arcAngle, Arc2D.PIE);</span>
+<span class="nc" id="L528">        fill(arc);</span>
+<span class="nc" id="L529">    }</span>
+
+
+    /**
+     * Draws a sequence of connected lines defined by
+     * arrays of &lt;i&gt;x&lt;/i&gt; and &lt;i&gt;y&lt;/i&gt; coordinates.
+     * Each pair of (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) coordinates defines a point.
+     * The figure is not closed if the first point
+     * differs from the last point.
+     * @param       xPoints an array of &lt;i&gt;x&lt;/i&gt; points
+     * @param       yPoints an array of &lt;i&gt;y&lt;/i&gt; points
+     * @param       nPoints the total number of points
+     * @see         java.awt.Graphics#drawPolygon(int[], int[], int)
+     * @since       JDK1.1
+     */
+    public void drawPolyline(int[] xPoints, int[] yPoints,
+                             int nPoints) {
+<span class="nc bnc" id="L546" title="All 2 branches missed.">        if (nPoints &gt; 0) {</span>
+<span class="nc" id="L547">            GeneralPath path = new GeneralPath();</span>
+<span class="nc" id="L548">            path.moveTo(xPoints[0], yPoints[0]);</span>
+<span class="nc bnc" id="L549" title="All 2 branches missed.">            for (int i = 1; i &lt; nPoints; i++) {</span>
+<span class="nc" id="L550">                path.lineTo(xPoints[i], yPoints[i]);</span>
+            }
+
+<span class="nc" id="L553">            draw(path);</span>
+        }
+<span class="nc" id="L555">    }</span>
+
+    /**
+     * Draws a closed polygon defined by
+     * arrays of &lt;i&gt;x&lt;/i&gt; and &lt;i&gt;y&lt;/i&gt; coordinates.
+     * Each pair of (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) coordinates defines a point.
+     * &lt;p&gt;
+     * This method draws the polygon defined by &lt;code&gt;nPoint&lt;/code&gt; line
+     * segments, where the first &lt;code&gt;nPoint&amp;nbsp;-&amp;nbsp;1&lt;/code&gt;
+     * line segments are line segments from
+     * &lt;code&gt;(xPoints[i&amp;nbsp;-&amp;nbsp;1],&amp;nbsp;yPoints[i&amp;nbsp;-&amp;nbsp;1])&lt;/code&gt;
+     * to &lt;code&gt;(xPoints[i],&amp;nbsp;yPoints[i])&lt;/code&gt;, for
+     * 1&amp;nbsp;&amp;le;&amp;nbsp;&lt;i&gt;i&lt;/i&gt;&amp;nbsp;&amp;le;&amp;nbsp;&lt;code&gt;nPoints&lt;/code&gt;.
+     * The figure is automatically closed by drawing a line connecting
+     * the final point to the first point, if those points are different.
+     * @param        xPoints   a an array of &lt;code&gt;x&lt;/code&gt; coordinates.
+     * @param        yPoints   a an array of &lt;code&gt;y&lt;/code&gt; coordinates.
+     * @param        nPoints   a the total number of points.
+     * @see          java.awt.Graphics#fillPolygon(int[],int[],int)
+     * @see          java.awt.Graphics#drawPolyline
+     */
+    public void drawPolygon(int[] xPoints, int[] yPoints,
+                            int nPoints) {
+<span class="nc" id="L578">        Polygon polygon = new Polygon(xPoints, yPoints, nPoints);</span>
+<span class="nc" id="L579">        draw(polygon);</span>
+<span class="nc" id="L580">    }</span>
+
+
+    /**
+     * Fills a closed polygon defined by
+     * arrays of &lt;i&gt;x&lt;/i&gt; and &lt;i&gt;y&lt;/i&gt; coordinates.
+     * &lt;p&gt;
+     * This method draws the polygon defined by &lt;code&gt;nPoint&lt;/code&gt; line
+     * segments, where the first &lt;code&gt;nPoint&amp;nbsp;-&amp;nbsp;1&lt;/code&gt;
+     * line segments are line segments from
+     * &lt;code&gt;(xPoints[i&amp;nbsp;-&amp;nbsp;1],&amp;nbsp;yPoints[i&amp;nbsp;-&amp;nbsp;1])&lt;/code&gt;
+     * to &lt;code&gt;(xPoints[i],&amp;nbsp;yPoints[i])&lt;/code&gt;, for
+     * 1&amp;nbsp;&amp;le;&amp;nbsp;&lt;i&gt;i&lt;/i&gt;&amp;nbsp;&amp;le;&amp;nbsp;&lt;code&gt;nPoints&lt;/code&gt;.
+     * The figure is automatically closed by drawing a line connecting
+     * the final point to the first point, if those points are different.
+     * &lt;p&gt;
+     * The area inside the polygon is defined using an
+     * even-odd fill rule, also known as the alternating rule.
+     * @param        xPoints   a an array of &lt;code&gt;x&lt;/code&gt; coordinates.
+     * @param        yPoints   a an array of &lt;code&gt;y&lt;/code&gt; coordinates.
+     * @param        nPoints   a the total number of points.
+     * @see          java.awt.Graphics#drawPolygon(int[], int[], int)
+     */
+    public void fillPolygon(int[] xPoints, int[] yPoints,
+                            int nPoints) {
+<span class="nc" id="L605">        Polygon polygon = new Polygon(xPoints, yPoints, nPoints);</span>
+<span class="nc" id="L606">        fill(polygon);</span>
+<span class="nc" id="L607">    }</span>
+
+    /**
+     * Draws the text given by the specified string, using this
+     * graphics context's current font and color. The baseline of the
+     * first character is at position (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in this
+     * graphics context's coordinate system.
+     * @param       str      the string to be drawn.
+     * @param       x        the &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param       y        the &lt;i&gt;y&lt;/i&gt; coordinate.
+     * @see         java.awt.Graphics#drawBytes
+     * @see         java.awt.Graphics#drawChars
+     */
+    public void drawString(String str, int x, int y) {
+<span class="nc" id="L621">        drawString(str, (float)x, (float)y);</span>
+<span class="nc" id="L622">    }</span>
+
+    /**
+     * Generic implementation for drawing attributed strings using TextLayout.
+     *
+     * @param iterator the iterator whose text is to be rendered
+     * @param x        the x coordinate where the iterator's text is to be rendered
+     * @param y        the y coordinate where the iterator's text is to be rendered
+     * @see java.awt.Graphics2D#drawString (java.text.AttributedCharacterIterator,
+     *      float, float)
+     */
+    public void drawString(AttributedCharacterIterator iterator, float x, float y) {
+<span class="nc bnc" id="L634" title="All 2 branches missed.">        if (inPossibleRecursion) {</span>
+<span class="nc" id="L635">            System.err.println(&quot;Called itself: drawString(AttributedCharacterIterator)&quot;);</span>
+        } else {
+<span class="nc" id="L637">            inPossibleRecursion = true;</span>
+<span class="nc" id="L638">            TextLayout layout = new TextLayout(iterator, getFontRenderContext());</span>
+<span class="nc" id="L639">            layout.draw(this, x, y);</span>
+<span class="nc" id="L640">            inPossibleRecursion = false;</span>
+        }
+<span class="nc" id="L642">    }</span>
+
+    /**
+     * Draws the text given by the specified iterator, using this
+     * graphics context's current color. The iterator has to specify a font
+     * for each character. The baseline of the
+     * first character is at position (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in this
+     * graphics context's coordinate system.
+     * @param       iterator the iterator whose text is to be drawn
+     * @param       x        the &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param       y        the &lt;i&gt;y&lt;/i&gt; coordinate.
+     * @see         java.awt.Graphics#drawBytes
+     * @see         java.awt.Graphics#drawChars
+     */
+    public void drawString(AttributedCharacterIterator iterator,
+                           int x, int y) {
+<span class="nc" id="L658">        drawString(iterator, (float)x, (float)y);</span>
+<span class="nc" id="L659">    }</span>
+
+    /**
+     * Draws as much of the specified image as is currently available.
+     * The image is drawn with its top-left corner at
+     * (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in this graphics context's coordinate
+     * space.  Transparent pixels are drawn in the specified
+     * background color.
+     * &lt;p&gt;
+     * This operation is equivalent to filling a rectangle of the
+     * width and height of the specified image with the given color and then
+     * drawing the image on top of it, but possibly more efficient.
+     * &lt;p&gt;
+     * This method returns immediately in all cases, even if the
+     * complete image has not yet been loaded, and it has not been dithered
+     * and converted for the current output device.
+     * &lt;p&gt;
+     * If the image has not yet been completely loaded, then
+     * &lt;code&gt;drawImage&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;. As more of
+     * the image becomes available, the process that draws the image notifies
+     * the specified image observer.
+     * @param    img    the specified image to be drawn.
+     * @param    x      the &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param    y      the &lt;i&gt;y&lt;/i&gt; coordinate.
+     * @param    bgcolor the background color to paint under the
+     *                         non-opaque portions of the image.
+     * @param    observer    object to be notified as more of
+     *                          the image is converted.
+     * @see      java.awt.Image
+     * @see      java.awt.image.ImageObserver
+     * @see      java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
+     */
+    public boolean drawImage(Image img, int x, int y,
+                             Color bgcolor,
+                             ImageObserver observer) {
+<span class="nc" id="L694">        return drawImage(img, x, y, img.getWidth(null), img.getHeight(null),</span>
+                         bgcolor, observer);
+    }
+
+
+    /**
+     * Draws as much of the specified image as has already been scaled
+     * to fit inside the specified rectangle.
+     * &lt;p&gt;
+     * The image is drawn inside the specified rectangle of this
+     * graphics context's coordinate space, and is scaled if
+     * necessary. Transparent pixels are drawn in the specified
+     * background color.
+     * This operation is equivalent to filling a rectangle of the
+     * width and height of the specified image with the given color and then
+     * drawing the image on top of it, but possibly more efficient.
+     * &lt;p&gt;
+     * This method returns immediately in all cases, even if the
+     * entire image has not yet been scaled, dithered, and converted
+     * for the current output device.
+     * If the current output representation is not yet complete then
+     * &lt;code&gt;drawImage&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;. As more of
+     * the image becomes available, the process that draws the image notifies
+     * the specified image observer.
+     * &lt;p&gt;
+     * A scaled version of an image will not necessarily be
+     * available immediately just because an unscaled version of the
+     * image has been constructed for this output device.  Each size of
+     * the image may be cached separately and generated from the original
+     * data in a separate image production sequence.
+     * @param    img       the specified image to be drawn.
+     * @param    x         the &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param    y         the &lt;i&gt;y&lt;/i&gt; coordinate.
+     * @param    width     the width of the rectangle.
+     * @param    height    the height of the rectangle.
+     * @param    bgcolor   the background color to paint under the
+     *                         non-opaque portions of the image.
+     * @param    observer    object to be notified as more of
+     *                          the image is converted.
+     * @see      java.awt.Image
+     * @see      java.awt.image.ImageObserver
+     * @see      java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
+     */
+    public boolean drawImage(Image img, int x, int y,
+                             int width, int height,
+                             Color bgcolor,
+                             ImageObserver observer) {
+<span class="nc" id="L741">        Paint paint = gc.getPaint();</span>
+<span class="nc" id="L742">        gc.setPaint(bgcolor);</span>
+<span class="nc" id="L743">        fillRect(x, y, width, height);</span>
+<span class="nc" id="L744">        gc.setPaint(paint);</span>
+<span class="nc" id="L745">        drawImage(img, x, y, width, height, observer);</span>
+
+<span class="nc" id="L747">        return true;</span>
+    }
+
+    /**
+     * Draws as much of the specified area of the specified image as is
+     * currently available, scaling it on the fly to fit inside the
+     * specified area of the destination drawable surface. Transparent pixels
+     * do not affect whatever pixels are already there.
+     * &lt;p&gt;
+     * This method returns immediately in all cases, even if the
+     * image area to be drawn has not yet been scaled, dithered, and converted
+     * for the current output device.
+     * If the current output representation is not yet complete then
+     * &lt;code&gt;drawImage&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;. As more of
+     * the image becomes available, the process that draws the image notifies
+     * the specified image observer.
+     * &lt;p&gt;
+     * This method always uses the unscaled version of the image
+     * to render the scaled rectangle and performs the required
+     * scaling on the fly. It does not use a cached, scaled version
+     * of the image for this operation. Scaling of the image from source
+     * to destination is performed such that the first coordinate
+     * of the source rectangle is mapped to the first coordinate of
+     * the destination rectangle, and the second source coordinate is
+     * mapped to the second destination coordinate. The subimage is
+     * scaled and flipped as needed to preserve those mappings.
+     * @param       img the specified image to be drawn
+     * @param       dx1 the &lt;i&gt;x&lt;/i&gt; coordinate of the first corner of the
+     *                    destination rectangle.
+     * @param       dy1 the &lt;i&gt;y&lt;/i&gt; coordinate of the first corner of the
+     *                    destination rectangle.
+     * @param       dx2 the &lt;i&gt;x&lt;/i&gt; coordinate of the second corner of the
+     *                    destination rectangle.
+     * @param       dy2 the &lt;i&gt;y&lt;/i&gt; coordinate of the second corner of the
+     *                    destination rectangle.
+     * @param       sx1 the &lt;i&gt;x&lt;/i&gt; coordinate of the first corner of the
+     *                    source rectangle.
+     * @param       sy1 the &lt;i&gt;y&lt;/i&gt; coordinate of the first corner of the
+     *                    source rectangle.
+     * @param       sx2 the &lt;i&gt;x&lt;/i&gt; coordinate of the second corner of the
+     *                    source rectangle.
+     * @param       sy2 the &lt;i&gt;y&lt;/i&gt; coordinate of the second corner of the
+     *                    source rectangle.
+     * @param       observer object to be notified as more of the image is
+     *                    scaled and converted.
+     * @see         java.awt.Image
+     * @see         java.awt.image.ImageObserver
+     * @see         java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
+     * @since       JDK1.1
+     */
+    public boolean drawImage(Image img,
+                             int dx1, int dy1, int dx2, int dy2,
+                             int sx1, int sy1, int sx2, int sy2,
+                             ImageObserver observer) {
+<span class="nc" id="L801">        BufferedImage src = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);</span>
+<span class="nc" id="L802">        Graphics2D g = src.createGraphics();</span>
+<span class="nc" id="L803">        g.drawImage(img, 0, 0, null);</span>
+<span class="nc" id="L804">        g.dispose();</span>
+
+<span class="nc" id="L806">        src = src.getSubimage(sx1, sy1, sx2 - sx1, sy2 - sy1);</span>
+
+<span class="nc" id="L808">        return drawImage(src, dx1, dy1, dx2 - dx1, dy2 - dy1, observer);</span>
+    }
+
+
+    /**
+     * Draws as much of the specified area of the specified image as is
+     * currently available, scaling it on the fly to fit inside the
+     * specified area of the destination drawable surface.
+     * &lt;p&gt;
+     * Transparent pixels are drawn in the specified background color.
+     * This operation is equivalent to filling a rectangle of the
+     * width and height of the specified image with the given color and then
+     * drawing the image on top of it, but possibly more efficient.
+     * &lt;p&gt;
+     * This method returns immediately in all cases, even if the
+     * image area to be drawn has not yet been scaled, dithered, and converted
+     * for the current output device.
+     * If the current output representation is not yet complete then
+     * &lt;code&gt;drawImage&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;. As more of
+     * the image becomes available, the process that draws the image notifies
+     * the specified image observer.
+     * &lt;p&gt;
+     * This method always uses the unscaled version of the image
+     * to render the scaled rectangle and performs the required
+     * scaling on the fly. It does not use a cached, scaled version
+     * of the image for this operation. Scaling of the image from source
+     * to destination is performed such that the first coordinate
+     * of the source rectangle is mapped to the first coordinate of
+     * the destination rectangle, and the second source coordinate is
+     * mapped to the second destination coordinate. The subimage is
+     * scaled and flipped as needed to preserve those mappings.
+     * @param       img the specified image to be drawn
+     * @param       dx1 the &lt;i&gt;x&lt;/i&gt; coordinate of the first corner of the
+     *                    destination rectangle.
+     * @param       dy1 the &lt;i&gt;y&lt;/i&gt; coordinate of the first corner of the
+     *                    destination rectangle.
+     * @param       dx2 the &lt;i&gt;x&lt;/i&gt; coordinate of the second corner of the
+     *                    destination rectangle.
+     * @param       dy2 the &lt;i&gt;y&lt;/i&gt; coordinate of the second corner of the
+     *                    destination rectangle.
+     * @param       sx1 the &lt;i&gt;x&lt;/i&gt; coordinate of the first corner of the
+     *                    source rectangle.
+     * @param       sy1 the &lt;i&gt;y&lt;/i&gt; coordinate of the first corner of the
+     *                    source rectangle.
+     * @param       sx2 the &lt;i&gt;x&lt;/i&gt; coordinate of the second corner of the
+     *                    source rectangle.
+     * @param       sy2 the &lt;i&gt;y&lt;/i&gt; coordinate of the second corner of the
+     *                    source rectangle.
+     * @param       bgcolor the background color to paint under the
+     *                    non-opaque portions of the image.
+     * @param       observer object to be notified as more of the image is
+     *                    scaled and converted.
+     * @see         java.awt.Image
+     * @see         java.awt.image.ImageObserver
+     * @see         java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
+     * @since       JDK1.1
+     */
+    public boolean drawImage(Image img,
+                             int dx1, int dy1, int dx2, int dy2,
+                             int sx1, int sy1, int sx2, int sy2,
+                             Color bgcolor,
+                             ImageObserver observer) {
+<span class="nc" id="L870">        Paint paint = gc.getPaint();</span>
+<span class="nc" id="L871">        gc.setPaint(bgcolor);</span>
+<span class="nc" id="L872">        fillRect(dx1, dy1, dx2 - dx1, dy2 - dy1);</span>
+<span class="nc" id="L873">        gc.setPaint(paint);</span>
+<span class="nc" id="L874">        return drawImage(img, dx1, dy1, dx2, dy2, sx1, sy1, sx2, sy2, observer);</span>
+    }
+
+
+    /**
+     * Renders an image, applying a transform from image space into user space
+     * before drawing.
+     * The transformation from user space into device space is done with
+     * the current &lt;code&gt;Transform&lt;/code&gt; in the &lt;code&gt;Graphics2D&lt;/code&gt;.
+     * The specified transformation is applied to the image before the
+     * transform attribute in the &lt;code&gt;Graphics2D&lt;/code&gt; context is applied.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;, and &lt;code&gt;Composite&lt;/code&gt; attributes.
+     * Note that no rendering is done if the specified transform is
+     * noninvertible.
+     * @param img the &lt;code&gt;Image&lt;/code&gt; to be rendered
+     * @param xform the transformation from image space into user space
+     * @param obs the {@link ImageObserver}
+     * to be notified as more of the &lt;code&gt;Image&lt;/code&gt;
+     * is converted
+     * @return &lt;code&gt;true&lt;/code&gt; if the &lt;code&gt;Image&lt;/code&gt; is
+     * fully loaded and completely rendered;
+     * &lt;code&gt;false&lt;/code&gt; if the &lt;code&gt;Image&lt;/code&gt; is still being loaded.
+     * @see #transform
+     * @see #setTransform
+     * @see #setComposite
+     * @see #clip
+     * @see #setClip(Shape)
+     */
+    public boolean drawImage(Image img,
+                             AffineTransform xform,
+                             ImageObserver obs) {
+<span class="nc" id="L906">        boolean retVal = true;</span>
+<span class="nc bnc" id="L907" title="All 2 branches missed.">        if (xform == null) {</span>
+<span class="nc" id="L908">            xform = new AffineTransform();</span>
+        }
+<span class="nc bnc" id="L910" title="All 2 branches missed.">        if (xform.getDeterminant() != 0) {</span>
+<span class="nc" id="L911">            AffineTransform inverseTransform = null;</span>
+            try {
+<span class="nc" id="L913">                inverseTransform = xform.createInverse();</span>
+<span class="nc" id="L914">            }   catch (NoninvertibleTransformException e) {</span>
+                                // Should never happen since we checked the
+                                // matrix determinant
+<span class="nc" id="L917">                throw new RuntimeException(e);</span>
+<span class="nc" id="L918">            }</span>
+
+<span class="nc" id="L920">            gc.transform(xform);</span>
+<span class="nc" id="L921">            retVal = drawImage(img, 0, 0, null);</span>
+<span class="nc" id="L922">            gc.transform(inverseTransform);</span>
+<span class="nc" id="L923">        } else {</span>
+<span class="nc" id="L924">            AffineTransform savTransform = new AffineTransform(gc.getTransform());</span>
+<span class="nc" id="L925">            gc.transform(xform);</span>
+<span class="nc" id="L926">            retVal = drawImage(img, 0, 0, null);</span>
+<span class="nc" id="L927">            gc.setTransform(savTransform);</span>
+        }
+
+<span class="nc" id="L930">        return retVal;</span>
+
+    }
+
+
+    /**
+     * Renders a &lt;code&gt;BufferedImage&lt;/code&gt; that is
+     * filtered with a
+     * {@link BufferedImageOp}.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;
+     * and &lt;code&gt;Composite&lt;/code&gt; attributes.  This is equivalent to:
+     * &lt;pre&gt;
+     * img1 = op.filter(img, null);
+     * drawImage(img1, new AffineTransform(1f,0f,0f,1f,x,y), null);
+     * &lt;/pre&gt;
+     * @param img the &lt;code&gt;BufferedImage&lt;/code&gt; to be rendered
+     * @param op the filter to be applied to the image before rendering
+     * @param x the x coordinate in user space where the image is rendered
+     * @param y the y coordinate in user space where the image is rendered
+     * @see #transform
+     * @see #setTransform
+     * @see #setComposite
+     * @see #clip
+     * @see #setClip(Shape)
+     */
+    public void drawImage(BufferedImage img,
+                          BufferedImageOp op,
+                          int x,
+                          int y) {
+<span class="nc" id="L960">        img = op.filter(img, null);</span>
+<span class="nc" id="L961">        drawImage(img, x, y, null);</span>
+<span class="nc" id="L962">    }</span>
+
+
+
+    /**
+     * Renders the text of the specified
+     * {@link GlyphVector} using
+     * the &lt;code&gt;Graphics2D&lt;/code&gt; context's rendering attributes.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;, &lt;code&gt;Paint&lt;/code&gt;, and
+     * &lt;code&gt;Composite&lt;/code&gt; attributes.  The &lt;code&gt;GlyphVector&lt;/code&gt;
+     * specifies individual glyphs from a {@link Font}.
+     * The &lt;code&gt;GlyphVector&lt;/code&gt; can also contain the glyph positions.
+     * This is the fastest way to render a set of characters to the
+     * screen.
+     *
+     * @param g the &lt;code&gt;GlyphVector&lt;/code&gt; to be rendered
+     * @param x the x position in user space where the glyphs should be
+     *        rendered
+     * @param y the y position in user space where the glyphs should be
+     *        rendered
+     *
+     * @see java.awt.Font#createGlyphVector(FontRenderContext, char[])
+     * @see java.awt.font.GlyphVector
+     * @see #setPaint
+     * @see java.awt.Graphics#setColor
+     * @see #setTransform
+     * @see #setComposite
+     * @see #setClip(Shape)
+     */
+    public void drawGlyphVector(GlyphVector g, float x, float y) {
+<span class="nc" id="L993">        Shape glyphOutline = g.getOutline(x, y);</span>
+<span class="nc" id="L994">        fill(glyphOutline);</span>
+<span class="nc" id="L995">    }</span>
+
+    /**
+     * Checks whether or not the specified &lt;code&gt;Shape&lt;/code&gt; intersects
+     * the specified {@link Rectangle}, which is in device
+     * space. If &lt;code&gt;onStroke&lt;/code&gt; is false, this method checks
+     * whether or not the interior of the specified &lt;code&gt;Shape&lt;/code&gt;
+     * intersects the specified &lt;code&gt;Rectangle&lt;/code&gt;.  If
+     * &lt;code&gt;onStroke&lt;/code&gt; is &lt;code&gt;true&lt;/code&gt;, this method checks
+     * whether or not the &lt;code&gt;Stroke&lt;/code&gt; of the specified
+     * &lt;code&gt;Shape&lt;/code&gt; outline intersects the specified
+     * &lt;code&gt;Rectangle&lt;/code&gt;.
+     * The rendering attributes taken into account include the
+     * &lt;code&gt;Clip&lt;/code&gt;, &lt;code&gt;Transform&lt;/code&gt;, and &lt;code&gt;Stroke&lt;/code&gt;
+     * attributes.
+     * @param rect the area in device space to check for a hit
+     * @param s the &lt;code&gt;Shape&lt;/code&gt; to check for a hit
+     * @param onStroke flag used to choose between testing the
+     * stroked or the filled shape.  If the flag is &lt;code&gt;true&lt;/code&gt;, the
+     * &lt;code&gt;Stroke&lt;/code&gt; oultine is tested.  If the flag is
+     * &lt;code&gt;false&lt;/code&gt;, the filled &lt;code&gt;Shape&lt;/code&gt; is tested.
+     * @return &lt;code&gt;true&lt;/code&gt; if there is a hit; &lt;code&gt;false&lt;/code&gt;
+     * otherwise.
+     * @see #setStroke
+     * @see #fill(Shape)
+     * @see #draw(Shape)
+     * @see #transform
+     * @see #setTransform
+     * @see #clip
+     * @see #setClip(Shape)
+     */
+    public boolean hit(Rectangle rect,
+                       Shape s,
+                       boolean onStroke) {
+<span class="nc bnc" id="L1029" title="All 2 branches missed.">        if (onStroke) {</span>
+<span class="nc" id="L1030">            s = gc.getStroke().createStrokedShape(s);</span>
+        }
+
+<span class="nc" id="L1033">        s = gc.getTransform().createTransformedShape(s);</span>
+
+<span class="nc" id="L1035">        return s.intersects(rect);</span>
+    }
+
+    /**
+     * Sets the &lt;code&gt;Composite&lt;/code&gt; for the &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * The &lt;code&gt;Composite&lt;/code&gt; is used in all drawing methods such as
+     * &lt;code&gt;drawImage&lt;/code&gt;, &lt;code&gt;drawString&lt;/code&gt;, &lt;code&gt;draw&lt;/code&gt;,
+     * and &lt;code&gt;fill&lt;/code&gt;.  It specifies how new pixels are to be combined
+     * with the existing pixels on the graphics device during the rendering
+     * process.
+     * &lt;p&gt;If this &lt;code&gt;Graphics2D&lt;/code&gt; context is drawing to a
+     * &lt;code&gt;Component&lt;/code&gt; on the display screen and the
+     * &lt;code&gt;Composite&lt;/code&gt; is a custom object rather than an
+     * instance of the &lt;code&gt;AlphaComposite&lt;/code&gt; class, and if
+     * there is a security manager, its &lt;code&gt;checkPermission&lt;/code&gt;
+     * method is called with an &lt;code&gt;AWTPermission(&quot;readDisplayPixels&quot;)&lt;/code&gt;
+     * permission.
+     * @param comp the &lt;code&gt;Composite&lt;/code&gt; object to be used for rendering
+     * @throws SecurityException
+     *         if a custom &lt;code&gt;Composite&lt;/code&gt; object is being
+     *         used to render to the screen and a security manager
+     *         is set and its &lt;code&gt;checkPermission&lt;/code&gt; method
+     *         does not allow the operation.
+     * @see java.awt.Graphics#setXORMode
+     * @see java.awt.Graphics#setPaintMode
+     * @see java.awt.AlphaComposite
+     */
+    public void setComposite(Composite comp) {
+<span class="fc" id="L1063">        gc.setComposite(comp);</span>
+<span class="fc" id="L1064">    }</span>
+
+
+    /**
+     * Sets the &lt;code&gt;Paint&lt;/code&gt; attribute for the
+     * &lt;code&gt;Graphics2D&lt;/code&gt; context.  Calling this method
+     * with a &lt;code&gt;null&lt;/code&gt; &lt;code&gt;Paint&lt;/code&gt; object does
+     * not have any effect on the current &lt;code&gt;Paint&lt;/code&gt; attribute
+     * of this &lt;code&gt;Graphics2D&lt;/code&gt;.
+     * @param paint the &lt;code&gt;Paint&lt;/code&gt; object to be used to generate
+     * color during the rendering process, or &lt;code&gt;null&lt;/code&gt;
+     * @see java.awt.Graphics#setColor
+     */
+    public void setPaint(Paint paint) {
+<span class="fc" id="L1078">        gc.setPaint(paint);</span>
+<span class="fc" id="L1079">    }</span>
+
+
+    /**
+     * Sets the &lt;code&gt;Stroke&lt;/code&gt; for the &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * @param s the &lt;code&gt;Stroke&lt;/code&gt; object to be used to stroke a
+     * &lt;code&gt;Shape&lt;/code&gt; during the rendering process
+     */
+    public void setStroke(Stroke s) {
+<span class="nc" id="L1088">        gc.setStroke(s);</span>
+<span class="nc" id="L1089">    }</span>
+
+
+    /**
+     * Sets the value of a single preference for the rendering algorithms.
+     * Hint categories include controls for rendering quality and overall
+     * time/quality trade-off in the rendering process.  Refer to the
+     * &lt;code&gt;RenderingHints&lt;/code&gt; class for definitions of some common
+     * keys and values.
+     * @param hintKey the key of the hint to be set.
+     * @param hintValue the value indicating preferences for the specified
+     * hint category.
+     * @see RenderingHints
+     */
+    public void setRenderingHint(RenderingHints.Key hintKey, Object hintValue) {
+<span class="nc" id="L1104">        gc.setRenderingHint(hintKey, hintValue);</span>
+<span class="nc" id="L1105">    }</span>
+
+
+    /**
+     * Returns the value of a single preference for the rendering algorithms.
+     * Hint categories include controls for rendering quality and overall
+     * time/quality trade-off in the rendering process.  Refer to the
+     * &lt;code&gt;RenderingHints&lt;/code&gt; class for definitions of some common
+     * keys and values.
+     * @param hintKey the key corresponding to the hint to get.
+     * @return an object representing the value for the specified hint key.
+     * Some of the keys and their associated values are defined in the
+     * &lt;code&gt;RenderingHints&lt;/code&gt; class.
+     * @see RenderingHints
+     */
+    public Object getRenderingHint(RenderingHints.Key hintKey) {
+<span class="nc" id="L1121">        return gc.getRenderingHint(hintKey);</span>
+    }
+
+
+    /**
+     * Replaces the values of all preferences for the rendering
+     * algorithms with the specified &lt;code&gt;hints&lt;/code&gt;.
+     * The existing values for all rendering hints are discarded and
+     * the new set of known hints and values are initialized from the
+     * specified {@link Map} object.
+     * Hint categories include controls for rendering quality and
+     * overall time/quality trade-off in the rendering process.
+     * Refer to the &lt;code&gt;RenderingHints&lt;/code&gt; class for definitions of
+     * some common keys and values.
+     * @param hints the rendering hints to be set
+     * @see RenderingHints
+     */
+    public void setRenderingHints(Map hints) {
+<span class="nc" id="L1139">        gc.setRenderingHints(hints);</span>
+<span class="nc" id="L1140">    }</span>
+
+
+    /**
+     * Sets the values of an arbitrary number of preferences for the
+     * rendering algorithms.
+     * Only values for the rendering hints that are present in the
+     * specified &lt;code&gt;Map&lt;/code&gt; object are modified.
+     * All other preferences not present in the specified
+     * object are left unmodified.
+     * Hint categories include controls for rendering quality and
+     * overall time/quality trade-off in the rendering process.
+     * Refer to the &lt;code&gt;RenderingHints&lt;/code&gt; class for definitions of
+     * some common keys and values.
+     * @param hints the rendering hints to be set
+     * @see RenderingHints
+     */
+    public void addRenderingHints(Map hints) {
+<span class="nc" id="L1158">        gc.addRenderingHints(hints);</span>
+<span class="nc" id="L1159">    }</span>
+
+
+    /**
+     * Gets the preferences for the rendering algorithms.  Hint categories
+     * include controls for rendering quality and overall time/quality
+     * trade-off in the rendering process.
+     * Returns all of the hint key/value pairs that were ever specified in
+     * one operation.  Refer to the
+     * &lt;code&gt;RenderingHints&lt;/code&gt; class for definitions of some common
+     * keys and values.
+     * @return a reference to an instance of &lt;code&gt;RenderingHints&lt;/code&gt;
+     * that contains the current preferences.
+     * @see RenderingHints
+     */
+    public RenderingHints getRenderingHints() {
+<span class="nc" id="L1175">        return gc.getRenderingHints();</span>
+    }
+
+    /**
+     * Concatenates the current
+     * &lt;code&gt;Graphics2D&lt;/code&gt; &lt;code&gt;Transform&lt;/code&gt;
+     * with a translation transform.
+     * Subsequent rendering is translated by the specified
+     * distance relative to the previous position.
+     * This is equivalent to calling transform(T), where T is an
+     * &lt;code&gt;AffineTransform&lt;/code&gt; represented by the following matrix:
+     * &lt;pre&gt;
+     *          [   1    0    tx  ]
+     *          [   0    1    ty  ]
+     *          [   0    0    1   ]
+     * &lt;/pre&gt;
+     * @param tx the distance to translate along the x-axis
+     * @param ty the distance to translate along the y-axis
+     */
+    public void translate(double tx, double ty) {
+<span class="nc" id="L1195">        gc.translate(tx, ty);</span>
+<span class="nc" id="L1196">    }</span>
+
+
+    /**
+     * Concatenates the current &lt;code&gt;Graphics2D&lt;/code&gt;
+     * &lt;code&gt;Transform&lt;/code&gt; with a rotation transform.
+     * Subsequent rendering is rotated by the specified radians relative
+     * to the previous origin.
+     * This is equivalent to calling &lt;code&gt;transform(R)&lt;/code&gt;, where R is an
+     * &lt;code&gt;AffineTransform&lt;/code&gt; represented by the following matrix:
+     * &lt;pre&gt;
+     *          [   cos(theta)    -sin(theta)    0   ]
+     *          [   sin(theta)     cos(theta)    0   ]
+     *          [       0              0         1   ]
+     * &lt;/pre&gt;
+     * Rotating with a positive angle theta rotates points on the positive
+     * x axis toward the positive y axis.
+     * @param theta the angle of rotation in radians
+     */
+    public void rotate(double theta) {
+<span class="nc" id="L1216">        gc.rotate(theta);</span>
+<span class="nc" id="L1217">    }</span>
+
+
+    /**
+     * Concatenates the current &lt;code&gt;Graphics2D&lt;/code&gt;
+     * &lt;code&gt;Transform&lt;/code&gt; with a translated rotation
+     * transform.  Subsequent rendering is transformed by a transform
+     * which is constructed by translating to the specified location,
+     * rotating by the specified radians, and translating back by the same
+     * amount as the original translation.  This is equivalent to the
+     * following sequence of calls:
+     * &lt;pre&gt;
+     *          translate(x, y);
+     *          rotate(theta);
+     *          translate(-x, -y);
+     * &lt;/pre&gt;
+     * Rotating with a positive angle theta rotates points on the positive
+     * x axis toward the positive y axis.
+     * @param theta the angle of rotation in radians
+     * @param x the x coordinate of the origin of the rotation
+     * @param y the y coordinate of the origin of the rotation
+     */
+    public void rotate(double theta, double x, double y) {
+<span class="nc" id="L1240">        gc.rotate(theta, x, y);</span>
+<span class="nc" id="L1241">    }</span>
+
+
+    /**
+     * Concatenates the current &lt;code&gt;Graphics2D&lt;/code&gt;
+     * &lt;code&gt;Transform&lt;/code&gt; with a scaling transformation
+     * Subsequent rendering is resized according to the specified scaling
+     * factors relative to the previous scaling.
+     * This is equivalent to calling &lt;code&gt;transform(S)&lt;/code&gt;, where S is an
+     * &lt;code&gt;AffineTransform&lt;/code&gt; represented by the following matrix:
+     * &lt;pre&gt;
+     *          [   sx   0    0   ]
+     *          [   0    sy   0   ]
+     *          [   0    0    1   ]
+     * &lt;/pre&gt;
+     * @param sx the amount by which X coordinates in subsequent
+     * rendering operations are multiplied relative to previous
+     * rendering operations.
+     * @param sy the amount by which Y coordinates in subsequent
+     * rendering operations are multiplied relative to previous
+     * rendering operations.
+     */
+    public void scale(double sx, double sy) {
+<span class="nc" id="L1264">        gc.scale(sx, sy);</span>
+<span class="nc" id="L1265">    }</span>
+
+    /**
+     * Concatenates the current &lt;code&gt;Graphics2D&lt;/code&gt;
+     * &lt;code&gt;Transform&lt;/code&gt; with a shearing transform.
+     * Subsequent renderings are sheared by the specified
+     * multiplier relative to the previous position.
+     * This is equivalent to calling &lt;code&gt;transform(SH)&lt;/code&gt;, where SH
+     * is an &lt;code&gt;AffineTransform&lt;/code&gt; represented by the following
+     * matrix:
+     * &lt;pre&gt;
+     *          [   1   shx   0   ]
+     *          [  shy   1    0   ]
+     *          [   0    0    1   ]
+     * &lt;/pre&gt;
+     * @param shx the multiplier by which coordinates are shifted in
+     * the positive X axis direction as a function of their Y coordinate
+     * @param shy the multiplier by which coordinates are shifted in
+     * the positive Y axis direction as a function of their X coordinate
+     */
+    public void shear(double shx, double shy) {
+<span class="nc" id="L1286">        gc.shear(shx, shy);</span>
+<span class="nc" id="L1287">    }</span>
+
+    /**
+     * Composes an &lt;code&gt;AffineTransform&lt;/code&gt; object with the
+     * &lt;code&gt;Transform&lt;/code&gt; in this &lt;code&gt;Graphics2D&lt;/code&gt; according
+     * to the rule last-specified-first-applied.  If the current
+     * &lt;code&gt;Transform&lt;/code&gt; is Cx, the result of composition
+     * with Tx is a new &lt;code&gt;Transform&lt;/code&gt; Cx'.  Cx' becomes the
+     * current &lt;code&gt;Transform&lt;/code&gt; for this &lt;code&gt;Graphics2D&lt;/code&gt;.
+     * Transforming a point p by the updated &lt;code&gt;Transform&lt;/code&gt; Cx' is
+     * equivalent to first transforming p by Tx and then transforming
+     * the result by the original &lt;code&gt;Transform&lt;/code&gt; Cx.  In other
+     * words, Cx'(p) = Cx(Tx(p)).  A copy of the Tx is made, if necessary,
+     * so further modifications to Tx do not affect rendering.
+     * @param tx the &lt;code&gt;AffineTransform&lt;/code&gt; object to be composed with
+     * the current &lt;code&gt;Transform&lt;/code&gt;
+     * @see #setTransform
+     * @see AffineTransform
+     */
+    public void transform(AffineTransform tx) {
+<span class="nc" id="L1307">        gc.transform(tx);</span>
+<span class="nc" id="L1308">    }</span>
+
+    /**
+     * Sets the &lt;code&gt;Transform&lt;/code&gt; in the &lt;code&gt;Graphics2D&lt;/code&gt;
+     * context.
+     * @param tx the &lt;code&gt;AffineTransform&lt;/code&gt; object to be used in the
+     * rendering process
+     * @see #transform
+     * @see AffineTransform
+     */
+    public void setTransform(AffineTransform tx) {
+<span class="fc" id="L1319">        gc.setTransform(tx);</span>
+<span class="fc" id="L1320">    }</span>
+
+
+    /**
+     * Returns a copy of the current &lt;code&gt;Transform&lt;/code&gt; in the
+     * &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * @return the current &lt;code&gt;AffineTransform&lt;/code&gt; in the
+     *             &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * @see #transform
+     * @see #setTransform
+     */
+    public AffineTransform getTransform() {
+<span class="fc" id="L1332">        return gc.getTransform();</span>
+    }
+
+
+    /**
+     * Returns the current &lt;code&gt;Paint&lt;/code&gt; of the
+     * &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * @return the current &lt;code&gt;Graphics2D&lt;/code&gt; &lt;code&gt;Paint&lt;/code&gt;,
+     * which defines a color or pattern.
+     * @see #setPaint
+     * @see java.awt.Graphics#setColor
+     */
+    public Paint getPaint() {
+<span class="fc" id="L1345">        return gc.getPaint();</span>
+    }
+
+
+    /**
+     * Returns the current &lt;code&gt;Composite&lt;/code&gt; in the
+     * &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * @return the current &lt;code&gt;Graphics2D&lt;/code&gt; &lt;code&gt;Composite&lt;/code&gt;,
+     *              which defines a compositing style.
+     * @see #setComposite
+     */
+    public Composite getComposite() {
+<span class="fc" id="L1357">        return gc.getComposite();</span>
+    }
+
+
+    /**
+     * Sets the background color for the &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * The background color is used for clearing a region.
+     * When a &lt;code&gt;Graphics2D&lt;/code&gt; is constructed for a
+     * &lt;code&gt;Component&lt;/code&gt;, the background color is
+     * inherited from the &lt;code&gt;Component&lt;/code&gt;. Setting the background color
+     * in the &lt;code&gt;Graphics2D&lt;/code&gt; context only affects the subsequent
+     * &lt;code&gt;clearRect&lt;/code&gt; calls and not the background color of the
+     * &lt;code&gt;Component&lt;/code&gt;.  To change the background
+     * of the &lt;code&gt;Component&lt;/code&gt;, use appropriate methods of
+     * the &lt;code&gt;Component&lt;/code&gt;.
+     * @param color the background color that isused in
+     * subsequent calls to &lt;code&gt;clearRect&lt;/code&gt;
+     * @see #getBackground
+     * @see java.awt.Graphics#clearRect
+     */
+    public void setBackground(Color color) {
+<span class="nc" id="L1378">        gc.setBackground(color);</span>
+<span class="nc" id="L1379">    }</span>
+
+
+    /**
+     * Returns the background color used for clearing a region.
+     * @return the current &lt;code&gt;Graphics2D&lt;/code&gt; &lt;code&gt;Color&lt;/code&gt;,
+     * which defines the background color.
+     * @see #setBackground
+     */
+    public Color getBackground() {
+<span class="nc" id="L1389">        return gc.getBackground();</span>
+    }
+
+
+    /**
+     * Returns the current &lt;code&gt;Stroke&lt;/code&gt; in the
+     * &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * @return the current &lt;code&gt;Graphics2D&lt;/code&gt; &lt;code&gt;Stroke&lt;/code&gt;,
+     *                 which defines the line style.
+     * @see #setStroke
+     */
+    public Stroke getStroke() {
+<span class="fc" id="L1401">        return gc.getStroke();</span>
+    }
+
+
+    /**
+     * Intersects the current &lt;code&gt;Clip&lt;/code&gt; with the interior of the
+     * specified &lt;code&gt;Shape&lt;/code&gt; and sets the &lt;code&gt;Clip&lt;/code&gt; to the
+     * resulting intersection.  The specified &lt;code&gt;Shape&lt;/code&gt; is
+     * transformed with the current &lt;code&gt;Graphics2D&lt;/code&gt;
+     * &lt;code&gt;Transform&lt;/code&gt; before being intersected with the current
+     * &lt;code&gt;Clip&lt;/code&gt;.  This method is used to make the current
+     * &lt;code&gt;Clip&lt;/code&gt; smaller.
+     * To make the &lt;code&gt;Clip&lt;/code&gt; larger, use &lt;code&gt;setClip&lt;/code&gt;.
+     * The &lt;i&gt;user clip&lt;/i&gt; modified by this method is independent of the
+     * clipping associated with device bounds and visibility.  If no clip has
+     * previously been set, or if the clip has been cleared using
+     * {@link java.awt.Graphics#setClip(Shape) setClip} with a
+     * &lt;code&gt;null&lt;/code&gt; argument, the specified &lt;code&gt;Shape&lt;/code&gt; becomes
+     * the new user clip.
+     * @param s the &lt;code&gt;Shape&lt;/code&gt; to be intersected with the current
+     *          &lt;code&gt;Clip&lt;/code&gt;.  If &lt;code&gt;s&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;,
+     *          this method clears the current &lt;code&gt;Clip&lt;/code&gt;.
+     */
+    public void clip(Shape s) {
+<span class="nc" id="L1425">        gc.clip(s);</span>
+<span class="nc" id="L1426">    }</span>
+
+
+    /**
+     * Get the rendering context of the &lt;code&gt;Font&lt;/code&gt; within this
+     * &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * The {@link FontRenderContext}
+     * encapsulates application hints such as anti-aliasing and
+     * fractional metrics, as well as target device specific information
+     * such as dots-per-inch.  This information should be provided by the
+     * application when using objects that perform typographical
+     * formatting, such as &lt;code&gt;Font&lt;/code&gt; and
+     * &lt;code&gt;TextLayout&lt;/code&gt;.  This information should also be provided
+     * by applications that perform their own layout and need accurate
+     * measurements of various characteristics of glyphs such as advance
+     * and line height when various rendering hints have been applied to
+     * the text rendering.
+     *
+     * @return a reference to an instance of FontRenderContext.
+     * @see java.awt.font.FontRenderContext
+     * @see java.awt.Font#createGlyphVector(FontRenderContext,char[])
+     * @see java.awt.font.TextLayout
+     * @since     JDK1.2
+     */
+    public FontRenderContext getFontRenderContext() {
+<span class="fc" id="L1451">        return gc.getFontRenderContext();</span>
+    }
+
+    /**
+     * @return the {@link GraphicContext} of this &lt;code&gt;Graphics2D&lt;/code&gt;.
+     */
+    public GraphicContext getGraphicContext() {
+<span class="nc" id="L1458">        return gc;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

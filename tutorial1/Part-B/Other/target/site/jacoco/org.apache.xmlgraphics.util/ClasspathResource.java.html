@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClasspathResource.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util</a> &gt; <span class="el_source">ClasspathResource.java</span></div><h1>ClasspathResource.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ClasspathResource.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.util;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
+
+/**
+ * A class to find resources in the classpath by their mime-type specified in
+ * the MANIFEST.
+ * &lt;p&gt;
+ * This class searches for content entries in all META-INF/MANIFEST.MF files. It
+ * will find files with a given Content-Type: attribute. This allows to add
+ * arbitrary resources by content-type just by creating a JAR wrapper and adding
+ * them to the classpath.
+ * &lt;p&gt;
+ * Example:&lt;br&gt;
+ *
+ * &lt;pre&gt;
+ * Name: test.txt
+ * Content-Type: text/plain
+ * &lt;/pre&gt;
+ */
+public final class ClasspathResource {
+
+    /**
+     * Actual Type: Map&amp;lt;String,List&amp;lt;URL&amp;gt;&amp;gt;.
+     */
+    private final Map contentMappings;
+
+    private static final String MANIFEST_PATH = &quot;META-INF/MANIFEST.MF&quot;;
+
+    private static final String CONTENT_TYPE_KEY = &quot;Content-Type&quot;;
+
+    private static ClasspathResource classpathResource;
+
+<span class="fc" id="L64">    private ClasspathResource() {</span>
+<span class="fc" id="L65">        contentMappings = new HashMap();</span>
+<span class="fc" id="L66">        loadManifests();</span>
+<span class="fc" id="L67">    }</span>
+
+    /**
+     * Retrieve the singleton instance of this class.
+     *
+     * @return the ClassPathResource instance.
+     */
+    public static synchronized ClasspathResource getInstance() {
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (classpathResource == null) {</span>
+<span class="fc" id="L76">            classpathResource = new ClasspathResource();</span>
+        }
+<span class="fc" id="L78">        return classpathResource;</span>
+    }
+
+    /* Actual return type: Set&lt;ClassLoader&gt; */
+    private Set getClassLoadersForResources() {
+<span class="fc" id="L83">        Set v = new HashSet();</span>
+        try {
+<span class="fc" id="L85">            ClassLoader l = ClassLoader.getSystemClassLoader();</span>
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">            if (l != null) {</span>
+<span class="fc" id="L87">                v.add(l);</span>
+            }
+<span class="nc" id="L89">        } catch (SecurityException e) {</span>
+            // Ignore
+<span class="fc" id="L91">        }</span>
+        try {
+<span class="fc" id="L93">            ClassLoader l = Thread.currentThread().getContextClassLoader();</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">            if (l != null) {</span>
+<span class="fc" id="L95">                v.add(l);</span>
+            }
+<span class="nc" id="L97">        } catch (SecurityException e) {</span>
+            // Ignore
+<span class="fc" id="L99">        }</span>
+        try {
+<span class="fc" id="L101">            ClassLoader l = ClasspathResource.class.getClassLoader();</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">            if (l != null) {</span>
+<span class="fc" id="L103">                v.add(l);</span>
+            }
+<span class="nc" id="L105">        } catch (SecurityException e) {</span>
+            // Ignore
+<span class="fc" id="L107">        }</span>
+<span class="fc" id="L108">        return v;</span>
+    }
+
+    private void loadManifests() {
+        Enumeration e;
+        try {
+
+<span class="fc bfc" id="L115" title="All 2 branches covered.">            for (Object o1 : getClassLoadersForResources()) {</span>
+<span class="fc" id="L116">                ClassLoader classLoader = (ClassLoader) o1;</span>
+
+<span class="fc" id="L118">                e = classLoader.getResources(MANIFEST_PATH);</span>
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">                while (e.hasMoreElements()) {</span>
+<span class="fc" id="L121">                    final URL u = (URL) e.nextElement();</span>
+                    try {
+<span class="fc" id="L123">                        final Manifest manifest = new Manifest(u.openStream());</span>
+<span class="fc" id="L124">                        final Map entries = manifest.getEntries();</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">                        for (Object o : entries.entrySet()) {</span>
+<span class="fc" id="L126">                            final Map.Entry entry = (Map.Entry) o;</span>
+<span class="fc" id="L127">                            final String name = (String) entry.getKey();</span>
+<span class="fc" id="L128">                            final Attributes attributes = (Attributes) entry</span>
+<span class="fc" id="L129">                                    .getValue();</span>
+<span class="fc" id="L130">                            final String contentType = attributes</span>
+<span class="fc" id="L131">                                    .getValue(CONTENT_TYPE_KEY);</span>
+<span class="fc bfc" id="L132" title="All 2 branches covered.">                            if (contentType != null) {</span>
+<span class="fc" id="L133">                                addToMapping(contentType, name, classLoader);</span>
+                            }
+<span class="fc" id="L135">                        }</span>
+<span class="nc" id="L136">                    } catch (IOException io) {</span>
+                        // TODO: Log.
+<span class="fc" id="L138">                    }</span>
+<span class="fc" id="L139">                }</span>
+<span class="fc" id="L140">            }</span>
+
+<span class="nc" id="L142">        } catch (IOException io) {</span>
+            // TODO: Log.
+<span class="fc" id="L144">        }</span>
+<span class="fc" id="L145">    }</span>
+
+    private void addToMapping(final String contentType, final String name,
+            final ClassLoader classLoader) {
+<span class="fc" id="L149">        List existingFiles = (List) contentMappings.get(contentType);</span>
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (existingFiles == null) {</span>
+<span class="fc" id="L151">            existingFiles = new Vector();</span>
+<span class="fc" id="L152">            contentMappings.put(contentType, existingFiles);</span>
+        }
+<span class="fc" id="L154">        final URL url = classLoader.getResource(name);</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if (url != null) {</span>
+<span class="fc" id="L156">            existingFiles.add(url);</span>
+        }
+<span class="fc" id="L158">    }</span>
+
+    /**
+     * Retrieve a list of resources known to have the given mime-type.
+     *
+     * @param mimeType
+     *            the mime-type to search for.
+     * @return a List&amp;lt;URL&amp;gt;, guaranteed to be != null.
+     */
+    public List listResourcesOfMimeType(final String mimeType) {
+<span class="fc" id="L168">        final List content = (List) contentMappings.get(mimeType);</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">        if (content == null) {</span>
+<span class="fc" id="L170">            return Collections.EMPTY_LIST;</span>
+        } else {
+<span class="fc" id="L172">            return content;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

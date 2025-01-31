@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreloaderEMF.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">PreloaderEMF.java</span></div><h1>PreloaderEMF.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PreloaderEMF.java 1576437 2014-03-11 17:49:35Z vhennebert $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.io.IOException;
+import java.nio.ByteOrder;
+
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+
+import org.apache.xmlgraphics.image.loader.ImageContext;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.ImageSize;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+import org.apache.xmlgraphics.util.UnitConv;
+
+/**
+ * Image preloader for EMF images.
+ */
+<span class="fc" id="L38">public class PreloaderEMF extends AbstractImagePreloader {</span>
+
+    /** Length of the EMF header */
+    protected static final int EMF_SIG_LENGTH = 88;
+
+    /** offset to signature */
+    private static final int SIGNATURE_OFFSET = 40;
+    /** offset to width */
+    private static final int WIDTH_OFFSET = 32;
+    /** offset to height */
+    private static final int HEIGHT_OFFSET = 36;
+    /** offset to horizontal resolution in pixel */
+    private static final int HRES_PIXEL_OFFSET = 72;
+    /** offset to vertical resolution in pixel */
+    private static final int VRES_PIXEL_OFFSET = 76;
+    /** offset to horizontal resolution in mm */
+    private static final int HRES_MM_OFFSET = 80;
+    /** offset to vertical resolution in mm */
+    private static final int VRES_MM_OFFSET = 84;
+
+    /** {@inheritDoc} */
+    public ImageInfo preloadImage(String uri, Source src, ImageContext context)
+                throws IOException, ImageException {
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (!ImageUtil.hasImageInputStream(src)) {</span>
+<span class="nc" id="L62">            return null;</span>
+        }
+<span class="fc" id="L64">        ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
+<span class="fc" id="L65">        byte[] header = getHeader(in, EMF_SIG_LENGTH);</span>
+<span class="pc bpc" id="L66" title="2 of 8 branches missed.">        boolean supported</span>
+            = ((header[SIGNATURE_OFFSET + 0] == (byte) 0x20)
+            &amp;&amp; (header[SIGNATURE_OFFSET + 1] == (byte) 0x45)
+            &amp;&amp; (header[SIGNATURE_OFFSET + 2] == (byte) 0x4D)
+            &amp;&amp; (header[SIGNATURE_OFFSET + 3] == (byte) 0x46));
+
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        if (supported) {</span>
+<span class="fc" id="L73">            ImageInfo info = new ImageInfo(uri, &quot;image/emf&quot;);</span>
+<span class="fc" id="L74">            info.setSize(determineSize(in, context));</span>
+<span class="fc" id="L75">            return info;</span>
+        } else {
+<span class="fc" id="L77">            return null;</span>
+        }
+    }
+
+    private ImageSize determineSize(ImageInputStream in, ImageContext context)
+            throws IOException, ImageException {
+<span class="fc" id="L83">        in.mark();</span>
+<span class="fc" id="L84">        ByteOrder oldByteOrder = in.getByteOrder();</span>
+        try {
+<span class="fc" id="L86">            ImageSize size = new ImageSize();</span>
+
+            // BMP uses little endian notation!
+<span class="fc" id="L89">            in.setByteOrder(ByteOrder.LITTLE_ENDIAN);</span>
+
+            //resolution
+<span class="fc" id="L92">            in.skipBytes(WIDTH_OFFSET);</span>
+<span class="fc" id="L93">            int width = (int)in.readUnsignedInt();</span>
+<span class="fc" id="L94">            int height = (int)in.readUnsignedInt();</span>
+
+<span class="fc" id="L96">            in.skipBytes(HRES_PIXEL_OFFSET - WIDTH_OFFSET - 8);</span>
+<span class="fc" id="L97">            long hresPixel = in.readUnsignedInt();</span>
+<span class="fc" id="L98">            long vresPixel = in.readUnsignedInt();</span>
+<span class="fc" id="L99">            long hresMM = in.readUnsignedInt();</span>
+<span class="fc" id="L100">            long vresMM = in.readUnsignedInt();</span>
+<span class="fc" id="L101">            double resHorz = hresPixel / UnitConv.mm2in(hresMM);</span>
+<span class="fc" id="L102">            double resVert = vresPixel / UnitConv.mm2in(vresMM);</span>
+<span class="fc" id="L103">            size.setResolution(resHorz, resVert);</span>
+
+<span class="fc" id="L105">            width = (int)Math.round(UnitConv.mm2mpt(width / 100f));</span>
+<span class="fc" id="L106">            height = (int)Math.round(UnitConv.mm2mpt(height / 100f));</span>
+<span class="fc" id="L107">            size.setSizeInMillipoints(width, height);</span>
+<span class="fc" id="L108">            size.calcPixelsFromSize();</span>
+
+<span class="fc" id="L110">            return size;</span>
+        } finally {
+<span class="fc" id="L112">            in.setByteOrder(oldByteOrder);</span>
+<span class="fc" id="L113">            in.reset();</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

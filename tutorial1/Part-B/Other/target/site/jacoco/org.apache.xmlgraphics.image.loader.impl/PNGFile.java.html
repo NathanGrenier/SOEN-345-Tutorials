@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGFile.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">PNGFile.java</span></div><h1>PNGFile.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PNGFile.java 1843559 2018-10-11 14:59:17Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.awt.color.ColorSpace;
+import java.awt.color.ICC_ColorSpace;
+import java.awt.color.ICC_Profile;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.IndexColorModel;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.SequenceInputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
+
+import org.apache.xmlgraphics.image.codec.png.PNGChunk;
+import org.apache.xmlgraphics.image.codec.util.PropertyUtil;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+
+// CSOFF: MethodName
+
+/**
+ * Provides methods useful for processing PNG files.
+ */
+class PNGFile implements PNGConstants {
+
+    private ColorModel colorModel;
+    private ICC_Profile iccProfile;
+<span class="fc" id="L55">    private int sRGBRenderingIntent = -1;</span>
+    private int bitDepth;
+    private int colorType;
+    private boolean isTransparent;
+    private int grayTransparentAlpha;
+    private int redTransparentAlpha;
+    private int greenTransparentAlpha;
+    private int blueTransparentAlpha;
+<span class="fc" id="L63">    private List&lt;InputStream&gt; streamVec = new ArrayList&lt;InputStream&gt;();</span>
+    private int paletteEntries;
+    private byte[] redPalette;
+    private byte[] greenPalette;
+    private byte[] bluePalette;
+    private byte[] alphaPalette;
+    private boolean hasPalette;
+    private boolean hasAlphaPalette;
+
+<span class="fc" id="L72">    public PNGFile(InputStream stream, String uri) throws IOException, ImageException {</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if (!stream.markSupported()) {</span>
+<span class="nc" id="L74">            stream = new BufferedInputStream(stream);</span>
+        }
+<span class="fc" id="L76">        DataInputStream distream = new DataInputStream(stream);</span>
+<span class="fc" id="L77">        long magic = distream.readLong();</span>
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if (magic != PNG_SIGNATURE) {</span>
+<span class="nc" id="L79">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder0&quot;);</span>
+<span class="nc" id="L80">            throw new ImageException(msg);</span>
+        }
+        // only some chunks are worth parsing in the current implementation
+        do {
+            try {
+                PNGChunk chunk;
+<span class="fc" id="L86">                String chunkType = PNGChunk.getChunkType(distream);</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">                if (chunkType.equals(PNGChunk.ChunkType.IHDR.name())) {</span>
+<span class="fc" id="L88">                    chunk = PNGChunk.readChunk(distream);</span>
+<span class="fc" id="L89">                    parse_IHDR_chunk(chunk);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">                } else if (chunkType.equals(PNGChunk.ChunkType.PLTE.name())) {</span>
+<span class="fc" id="L91">                    chunk = PNGChunk.readChunk(distream);</span>
+<span class="fc" id="L92">                    parse_PLTE_chunk(chunk);</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">                } else if (chunkType.equals(PNGChunk.ChunkType.IDAT.name())) {</span>
+<span class="fc" id="L94">                    chunk = PNGChunk.readChunk(distream);</span>
+<span class="fc" id="L95">                    streamVec.add(new ByteArrayInputStream(chunk.getData()));</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">                } else if (chunkType.equals(PNGChunk.ChunkType.IEND.name())) {</span>
+                    // chunk = PNGChunk.readChunk(distream);
+<span class="fc" id="L98">                    PNGChunk.skipChunk(distream);</span>
+<span class="fc" id="L99">                    break; // fall through to the bottom</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">                } else if (chunkType.equals(PNGChunk.ChunkType.tRNS.name())) {</span>
+<span class="fc" id="L101">                    chunk = PNGChunk.readChunk(distream);</span>
+<span class="fc" id="L102">                    parse_tRNS_chunk(chunk);</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">                } else if (chunkType.equals(PNGChunk.ChunkType.iCCP.name())) {</span>
+<span class="nc" id="L104">                    chunk = PNGChunk.readChunk(distream);</span>
+<span class="nc" id="L105">                    parse_iCCP_chunk(chunk);</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">                } else if (chunkType.equals(PNGChunk.ChunkType.sRGB.name())) {</span>
+<span class="nc" id="L107">                  chunk = PNGChunk.readChunk(distream);</span>
+<span class="nc" id="L108">                  parse_sRGB_chunk(chunk);</span>
+                } else {
+<span class="fc bfc" id="L110" title="All 2 branches covered.">                    if (Character.isUpperCase(chunkType.charAt(0))) {</span>
+<span class="fc" id="L111">                        throw new ImageException(&quot;PNG unknown critical chunk: &quot; + chunkType);</span>
+                    }
+<span class="fc" id="L113">                    PNGChunk.skipChunk(distream);</span>
+                }
+<span class="fc" id="L115">            } catch (Exception e) {</span>
+<span class="fc" id="L116">                String msg = PropertyUtil.getString(&quot;PNGImageDecoder2&quot;);</span>
+<span class="fc" id="L117">                throw new RuntimeException(msg + &quot; &quot; + uri, e);</span>
+<span class="fc" id="L118">            }</span>
+        } while (true);
+<span class="fc" id="L120">    }</span>
+
+    public ImageRawPNG getImageRawPNG(ImageInfo info) throws ImageException {
+<span class="fc" id="L123">        InputStream seqStream = new SequenceInputStream(Collections.enumeration(streamVec));</span>
+<span class="fc" id="L124">        ColorSpace rgbCS = null;</span>
+<span class="pc bpc" id="L125" title="1 of 6 branches missed.">        switch (colorType) {</span>
+        case PNG_COLOR_GRAY:
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">            if (hasPalette) {</span>
+<span class="nc" id="L128">                throw new ImageException(&quot;Corrupt PNG: color palette is not allowed!&quot;);</span>
+            }
+<span class="fc" id="L130">            colorModel = new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY), false, false,</span>
+                    ColorModel.OPAQUE, DataBuffer.TYPE_BYTE);
+<span class="fc" id="L132">            break;</span>
+        case PNG_COLOR_RGB:
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">            if (iccProfile != null) {</span>
+<span class="nc" id="L135">                rgbCS = new ICC_ColorSpace(iccProfile);</span>
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">            } else if (sRGBRenderingIntent != -1) {</span>
+<span class="nc" id="L137">                rgbCS = ColorSpace.getInstance(ColorSpace.CS_sRGB);</span>
+            } else {
+<span class="fc" id="L139">                rgbCS = ColorSpace.getInstance(ColorSpace.CS_LINEAR_RGB);</span>
+            }
+<span class="fc" id="L141">            colorModel = new ComponentColorModel(rgbCS, false, false, ColorModel.OPAQUE, DataBuffer.TYPE_BYTE);</span>
+<span class="fc" id="L142">            break;</span>
+        case PNG_COLOR_PALETTE:
+<span class="fc bfc" id="L144" title="All 2 branches covered.">            if (hasAlphaPalette) {</span>
+<span class="fc" id="L145">                colorModel = new IndexColorModel(bitDepth, paletteEntries, redPalette, greenPalette,</span>
+                        bluePalette, alphaPalette);
+            } else {
+<span class="fc" id="L148">                colorModel = new IndexColorModel(bitDepth, paletteEntries, redPalette, greenPalette,</span>
+                        bluePalette);
+            }
+<span class="fc" id="L151">            break;</span>
+        case PNG_COLOR_GRAY_ALPHA:
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">            if (hasPalette) {</span>
+<span class="nc" id="L154">                throw new ImageException(&quot;Corrupt PNG: color palette is not allowed!&quot;);</span>
+            }
+<span class="fc" id="L156">            colorModel = new ComponentColorModel(ColorSpace.getInstance(ColorSpace.CS_GRAY), true, false,</span>
+                    ColorModel.TRANSLUCENT, DataBuffer.TYPE_BYTE);
+<span class="fc" id="L158">            break;</span>
+        case PNG_COLOR_RGB_ALPHA:
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">            if (iccProfile != null) {</span>
+<span class="nc" id="L161">                rgbCS = new ICC_ColorSpace(iccProfile);</span>
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">            } else if (sRGBRenderingIntent != -1) {</span>
+<span class="nc" id="L163">                rgbCS = ColorSpace.getInstance(ColorSpace.CS_sRGB);</span>
+            } else {
+<span class="fc" id="L165">                rgbCS = ColorSpace.getInstance(ColorSpace.CS_LINEAR_RGB);</span>
+            }
+<span class="fc" id="L167">            colorModel = new ComponentColorModel(rgbCS, true, false, ColorModel.TRANSLUCENT,</span>
+                    DataBuffer.TYPE_BYTE);
+<span class="fc" id="L169">            break;</span>
+        default:
+<span class="nc" id="L171">            throw new ImageException(&quot;Unsupported color type: &quot; + colorType);</span>
+        }
+        // the iccProfile is still null for now
+<span class="fc" id="L174">        ImageRawPNG rawImage = new ImageRawPNG(info, seqStream, colorModel, bitDepth, iccProfile);</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">        if (isTransparent) {</span>
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">            if (colorType == PNG_COLOR_GRAY) {</span>
+<span class="nc" id="L177">                rawImage.setGrayTransparentAlpha(grayTransparentAlpha);</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">            } else if (colorType == PNG_COLOR_RGB) {</span>
+<span class="fc" id="L179">                rawImage.setRGBTransparentAlpha(redTransparentAlpha, greenTransparentAlpha,</span>
+                        blueTransparentAlpha);
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">            } else if (colorType == PNG_COLOR_PALETTE) {</span>
+<span class="fc" id="L182">                rawImage.setTransparent();</span>
+            } else {
+                //
+            }
+        }
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        if (sRGBRenderingIntent != -1) {</span>
+<span class="nc" id="L188">          rawImage.setRenderingIntent(sRGBRenderingIntent);</span>
+        }
+<span class="fc" id="L190">        return rawImage;</span>
+    }
+
+    private void parse_IHDR_chunk(PNGChunk chunk) {
+<span class="fc" id="L194">        bitDepth = chunk.getInt1(8);</span>
+<span class="fc" id="L195">        colorType = chunk.getInt1(9);</span>
+<span class="fc" id="L196">        int compressionMethod = chunk.getInt1(10);</span>
+<span class="pc bpc" id="L197" title="1 of 2 branches missed.">        if (compressionMethod != 0) {</span>
+<span class="nc" id="L198">            throw new RuntimeException(&quot;Unsupported PNG compression method: &quot; + compressionMethod);</span>
+        }
+<span class="fc" id="L200">        int filterMethod = chunk.getInt1(11);</span>
+<span class="pc bpc" id="L201" title="1 of 2 branches missed.">        if (filterMethod != 0) {</span>
+<span class="nc" id="L202">            throw new RuntimeException(&quot;Unsupported PNG filter method: &quot; + filterMethod);</span>
+        }
+<span class="fc" id="L204">        int interlaceMethod = chunk.getInt1(12);</span>
+<span class="pc bpc" id="L205" title="1 of 2 branches missed.">        if (interlaceMethod != 0) {</span>
+            // this is a limitation of the current implementation
+<span class="nc" id="L207">            throw new RuntimeException(&quot;Unsupported PNG interlace method: &quot; + interlaceMethod);</span>
+        }
+<span class="fc" id="L209">    }</span>
+
+    private void parse_PLTE_chunk(PNGChunk chunk) {
+<span class="fc" id="L212">        paletteEntries = chunk.getLength() / 3;</span>
+<span class="fc" id="L213">        redPalette = new byte[paletteEntries];</span>
+<span class="fc" id="L214">        greenPalette = new byte[paletteEntries];</span>
+<span class="fc" id="L215">        bluePalette = new byte[paletteEntries];</span>
+<span class="fc" id="L216">        hasPalette = true;</span>
+
+<span class="fc" id="L218">        int pltIndex = 0;</span>
+<span class="fc bfc" id="L219" title="All 2 branches covered.">        for (int i = 0; i &lt; paletteEntries; i++) {</span>
+<span class="fc" id="L220">            redPalette[i] = chunk.getByte(pltIndex++);</span>
+<span class="fc" id="L221">            greenPalette[i] = chunk.getByte(pltIndex++);</span>
+<span class="fc" id="L222">            bluePalette[i] = chunk.getByte(pltIndex++);</span>
+        }
+<span class="fc" id="L224">    }</span>
+
+    private void parse_tRNS_chunk(PNGChunk chunk) {
+<span class="fc bfc" id="L227" title="All 2 branches covered.">        if (colorType == PNG_COLOR_PALETTE) {</span>
+<span class="fc" id="L228">            int entries = chunk.getLength();</span>
+<span class="pc bpc" id="L229" title="1 of 2 branches missed.">            if (entries &gt; paletteEntries) {</span>
+                // Error -- mustn't have more alpha than RGB palette entries
+<span class="nc" id="L231">                String msg = PropertyUtil.getString(&quot;PNGImageDecoder14&quot;);</span>
+<span class="nc" id="L232">                throw new RuntimeException(msg);</span>
+            }
+            // Load beginning of palette from the chunk
+<span class="fc" id="L235">            alphaPalette = new byte[paletteEntries];</span>
+<span class="fc bfc" id="L236" title="All 2 branches covered.">            for (int i = 0; i &lt; entries; i++) {</span>
+<span class="fc" id="L237">                alphaPalette[i] = chunk.getByte(i);</span>
+            }
+            // Fill rest of palette with 255
+<span class="fc bfc" id="L240" title="All 2 branches covered.">            for (int i = entries; i &lt; paletteEntries; i++) {</span>
+<span class="fc" id="L241">                alphaPalette[i] = (byte) 255;</span>
+            }
+<span class="fc" id="L243">            hasAlphaPalette = true;</span>
+<span class="pc bpc" id="L244" title="1 of 2 branches missed.">        } else if (colorType == PNG_COLOR_GRAY) {</span>
+<span class="nc" id="L245">            grayTransparentAlpha = chunk.getInt2(0);</span>
+<span class="pc bpc" id="L246" title="1 of 2 branches missed.">        } else if (colorType == PNG_COLOR_RGB) {</span>
+<span class="fc" id="L247">            redTransparentAlpha = chunk.getInt2(0);</span>
+<span class="fc" id="L248">            greenTransparentAlpha = chunk.getInt2(2);</span>
+<span class="fc" id="L249">            blueTransparentAlpha = chunk.getInt2(4);</span>
+<span class="nc bnc" id="L250" title="All 4 branches missed.">        } else if (colorType == PNG_COLOR_GRAY_ALPHA || colorType == PNG_COLOR_RGB_ALPHA) {</span>
+            // Error -- GA or RGBA image can't have a tRNS chunk.
+<span class="nc" id="L252">            String msg = PropertyUtil.getString(&quot;PNGImageDecoder15&quot;);</span>
+<span class="nc" id="L253">            throw new RuntimeException(msg);</span>
+        }
+<span class="fc" id="L255">        isTransparent = true;</span>
+<span class="fc" id="L256">    }</span>
+
+    private void parse_iCCP_chunk(PNGChunk chunk) {
+<span class="nc" id="L259">        int length = chunk.getLength();</span>
+<span class="nc" id="L260">        int textIndex = 0;</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">        while (chunk.getByte(textIndex++) != 0) {</span>
+            //NOP
+        }
+<span class="nc" id="L264">        textIndex++;</span>
+<span class="nc" id="L265">        byte[] profile = new byte[length - textIndex];</span>
+<span class="nc" id="L266">        System.arraycopy(chunk.getData(), textIndex, profile, 0, length - textIndex);</span>
+<span class="nc" id="L267">        ByteArrayInputStream bais = new ByteArrayInputStream(profile);</span>
+<span class="nc" id="L268">        InflaterInputStream iis = new InflaterInputStream(bais, new Inflater());</span>
+        try {
+<span class="nc" id="L270">            iccProfile = ICC_Profile.getInstance(iis);</span>
+<span class="nc" id="L271">        } catch (IOException ioe) {</span>
+            // this is OK; the profile will be null
+<span class="nc" id="L273">        }</span>
+<span class="nc" id="L274">    }</span>
+
+    private void parse_sRGB_chunk(PNGChunk chunk) {
+<span class="nc" id="L277">      sRGBRenderingIntent = chunk.getByte(0);</span>
+<span class="nc" id="L278">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

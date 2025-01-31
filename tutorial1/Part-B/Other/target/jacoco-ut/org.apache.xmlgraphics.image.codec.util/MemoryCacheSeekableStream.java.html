@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MemoryCacheSeekableStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.util</a> &gt; <span class="el_source">MemoryCacheSeekableStream.java</span></div><h1>MemoryCacheSeekableStream.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: MemoryCacheSeekableStream.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.util;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * A subclass of &lt;code&gt;SeekableStream&lt;/code&gt; that may be used to wrap
+ * a regular &lt;code&gt;InputStream&lt;/code&gt;.  Seeking backwards is supported
+ * by means of an in-memory cache.  For greater efficiency,
+ * &lt;code&gt;FileCacheSeekableStream&lt;/code&gt; should be used in
+ * circumstances that allow the creation of a temporary file.
+ *
+ * &lt;p&gt; The &lt;code&gt;mark()&lt;/code&gt; and &lt;code&gt;reset()&lt;/code&gt; methods are
+ * supported.
+ *
+ * &lt;p&gt;&lt;b&gt; This class is not a committed part of the JAI API.  It may
+ * be removed or changed in future releases of JAI.&lt;/b&gt;
+ */
+public final class MemoryCacheSeekableStream extends SeekableStream {
+
+    /** The source input stream. */
+    private InputStream src;
+
+    /** Position of first unread byte. */
+    private long pointer;
+
+    /** Log_2 of the sector size. */
+    private static final int SECTOR_SHIFT = 9;
+
+    /** The sector size. */
+    private static final int SECTOR_SIZE = 1 &lt;&lt; SECTOR_SHIFT;
+
+    /** A mask to determine the offset within a sector. */
+    private static final int SECTOR_MASK = SECTOR_SIZE - 1;
+
+    /** A Vector of source sectors. */
+<span class="fc" id="L58">    private List data = new ArrayList();</span>
+
+    /** Number of sectors stored. */
+//    int sectors = 0;
+
+    /** Number of bytes read. */
+    int length;
+
+    /** True if we've previously reached the end of the source stream */
+    boolean foundEOS;
+
+    /**
+     * Constructs a &lt;code&gt;MemoryCacheSeekableStream&lt;/code&gt; that takes
+     * its source data from a regular &lt;code&gt;InputStream&lt;/code&gt;.
+     * Seeking backwards is supported by means of an in-memory cache.
+     */
+<span class="fc" id="L74">    public MemoryCacheSeekableStream(InputStream src) {</span>
+<span class="fc" id="L75">        this.src = src;</span>
+<span class="fc" id="L76">    }</span>
+
+    /**
+     * Ensures that at least &lt;code&gt;pos&lt;/code&gt; bytes are cached,
+     * or the end of the source is reached.  The return value
+     * is equal to the smaller of &lt;code&gt;pos&lt;/code&gt; and the
+     * length of the source stream.
+     */
+    private long readUntil(long pos) throws IOException {
+        // We've already got enough data cached
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (pos &lt; length) {</span>
+<span class="nc" id="L87">            return pos;</span>
+        }
+        // pos &gt;= length but length isn't getting any bigger, so return it
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        if (foundEOS) {</span>
+<span class="nc" id="L91">            return length;</span>
+        }
+
+<span class="fc" id="L94">        int sector = (int)(pos &gt;&gt; SECTOR_SHIFT);</span>
+
+        // First unread sector
+<span class="fc" id="L97">        int startSector = length &gt;&gt; SECTOR_SHIFT;</span>
+
+        // Read sectors until the desired sector
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (int i = startSector; i &lt;= sector; i++) {</span>
+<span class="fc" id="L101">            byte[] buf = new byte[SECTOR_SIZE];</span>
+<span class="fc" id="L102">            data.add(buf);</span>
+
+            // Read up to SECTOR_SIZE bytes
+<span class="fc" id="L105">            int len = SECTOR_SIZE;</span>
+<span class="fc" id="L106">            int off = 0;</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            while (len &gt; 0) {</span>
+<span class="fc" id="L108">                int nbytes = src.read(buf, off, len);</span>
+                // Found the end-of-stream
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">                if (nbytes == -1) {</span>
+<span class="nc" id="L111">                    foundEOS = true;</span>
+<span class="nc" id="L112">                    return length;</span>
+                }
+<span class="fc" id="L114">                off += nbytes;</span>
+<span class="fc" id="L115">                len -= nbytes;</span>
+
+                // Record new data length
+<span class="fc" id="L118">                length += nbytes;</span>
+<span class="fc" id="L119">            }</span>
+        }
+
+<span class="fc" id="L122">        return length;</span>
+    }
+
+    /**
+     * Returns &lt;code&gt;true&lt;/code&gt; since all
+     * &lt;code&gt;MemoryCacheSeekableStream&lt;/code&gt; instances support seeking
+     * backwards.
+     */
+    public boolean canSeekBackwards() {
+<span class="fc" id="L131">        return true;</span>
+    }
+
+    /**
+     * Returns the current offset in this file.
+     *
+     * @return     the offset from the beginning of the file, in bytes,
+     *             at which the next read occurs.
+     */
+    public long getFilePointer() {
+<span class="nc" id="L141">        return pointer;</span>
+    }
+
+    /**
+     * Sets the file-pointer offset, measured from the beginning of this
+     * file, at which the next read occurs.
+     *
+     * @param      pos   the offset position, measured in bytes from the
+     *                   beginning of the file, at which to set the file
+     *                   pointer.
+     * @exception  IOException  if &lt;code&gt;pos&lt;/code&gt; is less than
+     *                          &lt;code&gt;0&lt;/code&gt; or if an I/O error occurs.
+     */
+    public void seek(long pos) throws IOException {
+<span class="nc bnc" id="L155" title="All 2 branches missed.">        if (pos &lt; 0) {</span>
+<span class="nc" id="L156">            throw new IOException(PropertyUtil.getString(&quot;MemoryCacheSeekableStream0&quot;));</span>
+        }
+<span class="nc" id="L158">        pointer = pos;</span>
+<span class="nc" id="L159">    }</span>
+
+    /**
+     * Reads the next byte of data from the input stream. The value byte is
+     * returned as an &lt;code&gt;int&lt;/code&gt; in the range &lt;code&gt;0&lt;/code&gt; to
+     * &lt;code&gt;255&lt;/code&gt;. If no byte is available because the end of the stream
+     * has been reached, the value &lt;code&gt;-1&lt;/code&gt; is returned. This method
+     * blocks until input data is available, the end of the stream is detected,
+     * or an exception is thrown.
+     *
+     * @return     the next byte of data, or &lt;code&gt;-1&lt;/code&gt; if the end of the
+     *             stream is reached.
+     */
+    public int read() throws IOException {
+<span class="nc" id="L173">        long next = pointer + 1;</span>
+<span class="nc" id="L174">        long pos = readUntil(next);</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (pos &gt;= next) {</span>
+<span class="nc" id="L176">            byte[] buf =</span>
+<span class="nc" id="L177">                (byte[])data.get((int)(pointer &gt;&gt; SECTOR_SHIFT));</span>
+<span class="nc" id="L178">            return buf[(int)(pointer++ &amp; SECTOR_MASK)] &amp; 0xff;</span>
+        } else {
+<span class="nc" id="L180">            return -1;</span>
+        }
+    }
+
+    /**
+     * Reads up to &lt;code&gt;len&lt;/code&gt; bytes of data from the input stream into
+     * an array of bytes.  An attempt is made to read as many as
+     * &lt;code&gt;len&lt;/code&gt; bytes, but a smaller number may be read, possibly
+     * zero. The number of bytes actually read is returned as an integer.
+     *
+     * &lt;p&gt; This method blocks until input data is available, end of file is
+     * detected, or an exception is thrown.
+     *
+     * &lt;p&gt; If &lt;code&gt;b&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;, a
+     * &lt;code&gt;NullPointerException&lt;/code&gt; is thrown.
+     *
+     * &lt;p&gt; If &lt;code&gt;off&lt;/code&gt; is negative, or &lt;code&gt;len&lt;/code&gt; is negative, or
+     * &lt;code&gt;off+len&lt;/code&gt; is greater than the length of the array
+     * &lt;code&gt;b&lt;/code&gt;, then an &lt;code&gt;IndexOutOfBoundsException&lt;/code&gt; is
+     * thrown.
+     *
+     * &lt;p&gt; If &lt;code&gt;len&lt;/code&gt; is zero, then no bytes are read and
+     * &lt;code&gt;0&lt;/code&gt; is returned; otherwise, there is an attempt to read at
+     * least one byte. If no byte is available because the stream is at end of
+     * file, the value &lt;code&gt;-1&lt;/code&gt; is returned; otherwise, at least one
+     * byte is read and stored into &lt;code&gt;b&lt;/code&gt;.
+     *
+     * &lt;p&gt; The first byte read is stored into element &lt;code&gt;b[off]&lt;/code&gt;, the
+     * next one into &lt;code&gt;b[off+1]&lt;/code&gt;, and so on. The number of bytes read
+     * is, at most, equal to &lt;code&gt;len&lt;/code&gt;. Let &lt;i&gt;k&lt;/i&gt; be the number of
+     * bytes actually read; these bytes will be stored in elements
+     * &lt;code&gt;b[off]&lt;/code&gt; through &lt;code&gt;b[off+&lt;/code&gt;&lt;i&gt;k&lt;/i&gt;&lt;code&gt;-1]&lt;/code&gt;,
+     * leaving elements &lt;code&gt;b[off+&lt;/code&gt;&lt;i&gt;k&lt;/i&gt;&lt;code&gt;]&lt;/code&gt; through
+     * &lt;code&gt;b[off+len-1]&lt;/code&gt; unaffected.
+     *
+     * &lt;p&gt; In every case, elements &lt;code&gt;b[0]&lt;/code&gt; through
+     * &lt;code&gt;b[off]&lt;/code&gt; and elements &lt;code&gt;b[off+len]&lt;/code&gt; through
+     * &lt;code&gt;b[b.length-1]&lt;/code&gt; are unaffected.
+     *
+     * &lt;p&gt; If the first byte cannot be read for any reason other than end of
+     * file, then an &lt;code&gt;IOException&lt;/code&gt; is thrown. In particular, an
+     * &lt;code&gt;IOException&lt;/code&gt; is thrown if the input stream has been closed.
+     *
+     * @param      b     the buffer into which the data is read.
+     * @param      off   the start offset in array &lt;code&gt;b&lt;/code&gt;
+     *                   at which the data is written.
+     * @param      len   the maximum number of bytes to read.
+     * @return     the total number of bytes read into the buffer, or
+     *             &lt;code&gt;-1&lt;/code&gt; if there is no more data because the end of
+     *             the stream has been reached.
+     */
+    public int read(byte[] b, int off, int len) throws IOException {
+<span class="pc bpc" id="L232" title="1 of 2 branches missed.">        if (b == null) {</span>
+<span class="nc" id="L233">            throw new NullPointerException();</span>
+        }
+<span class="pc bpc" id="L235" title="3 of 6 branches missed.">        if ((off &lt; 0) || (len &lt; 0) || (off + len &gt; b.length)) {</span>
+<span class="nc" id="L236">            throw new IndexOutOfBoundsException();</span>
+        }
+<span class="pc bpc" id="L238" title="1 of 2 branches missed.">        if (len == 0) {</span>
+<span class="nc" id="L239">            return 0;</span>
+        }
+
+<span class="fc" id="L242">        long pos = readUntil(pointer + len);</span>
+        // End-of-stream
+<span class="pc bpc" id="L244" title="1 of 2 branches missed.">        if (pos &lt;= pointer) {</span>
+<span class="nc" id="L245">            return -1;</span>
+        }
+
+<span class="fc" id="L248">        byte[] buf = (byte[])data.get((int)(pointer &gt;&gt; SECTOR_SHIFT));</span>
+<span class="fc" id="L249">        int nbytes = Math.min(len, SECTOR_SIZE - (int)(pointer &amp; SECTOR_MASK));</span>
+<span class="fc" id="L250">        System.arraycopy(buf, (int)(pointer &amp; SECTOR_MASK),</span>
+                         b, off, nbytes);
+<span class="fc" id="L252">        pointer += nbytes;</span>
+<span class="fc" id="L253">        return nbytes;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

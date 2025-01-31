@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d</a> &gt; <span class="el_source">DefaultGraphics2D.java</span></div><h1>DefaultGraphics2D.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DefaultGraphics2D.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.java2d;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.RenderedImage;
+import java.awt.image.renderable.RenderableImage;
+import java.text.AttributedCharacterIterator;
+
+// CSOFF: WhitespaceAround
+
+/**
+ * This concrete implementation of &lt;tt&gt;AbstractGraphics2D&lt;/tt&gt; is a
+ * simple help to programmers to get started with their own
+ * implementation of &lt;tt&gt;Graphics2D&lt;/tt&gt;.
+ * &lt;tt&gt;DefaultGraphics2D&lt;/tt&gt; implements all the abstract methods
+ * is &lt;tt&gt;AbstractGraphics2D&lt;/tt&gt; and makes it easy to start
+ * implementing a &lt;tt&gt;Graphic2D&lt;/tt&gt; piece-meal.
+ *
+ * @version $Id: DefaultGraphics2D.java 1732018 2016-02-24 04:51:06Z gadams $
+ * @see org.apache.xmlgraphics.java2d.AbstractGraphics2D
+ *
+ * Originally authored by Vincent Hardy.
+ */
+public class DefaultGraphics2D extends AbstractGraphics2D {
+    /**
+     * Default constructor
+     */
+    public DefaultGraphics2D(boolean textAsShapes) {
+<span class="nc" id="L57">        super(textAsShapes);</span>
+<span class="nc" id="L58">    }</span>
+
+    /**
+     * This constructor supports the create method
+     */
+    public DefaultGraphics2D(DefaultGraphics2D g) {
+<span class="nc" id="L64">        super(g);</span>
+<span class="nc" id="L65">    }</span>
+
+    /**
+     * Creates a new &lt;code&gt;Graphics&lt;/code&gt; object that is
+     * a copy of this &lt;code&gt;Graphics&lt;/code&gt; object.
+     * @return     a new graphics context that is a copy of
+     *             this graphics context.
+     */
+    public Graphics create() {
+<span class="nc" id="L74">        return new DefaultGraphics2D(this);</span>
+    }
+
+    /**
+     * Draws as much of the specified image as is currently available.
+     * The image is drawn with its top-left corner at
+     * (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in this graphics context's coordinate
+     * space. Transparent pixels in the image do not affect whatever
+     * pixels are already there.
+     * &lt;p&gt;
+     * This method returns immediately in all cases, even if the
+     * complete image has not yet been loaded, and it has not been dithered
+     * and converted for the current output device.
+     * &lt;p&gt;
+     * If the image has not yet been completely loaded, then
+     * &lt;code&gt;drawImage&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;. As more of
+     * the image becomes available, the process that draws the image notifies
+     * the specified image observer.
+     * @param    img the specified image to be drawn.
+     * @param    x   the &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param    y   the &lt;i&gt;y&lt;/i&gt; coordinate.
+     * @param    observer    object to be notified as more of
+     *                          the image is converted.
+     * @see      java.awt.Image
+     * @see      java.awt.image.ImageObserver
+     * @see      java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
+     */
+    public boolean drawImage(Image img, int x, int y, ImageObserver observer) {
+<span class="nc" id="L102">        System.err.println(&quot;drawImage&quot;);</span>
+<span class="nc" id="L103">        return true;</span>
+    }
+
+    /**
+     * Draws as much of the specified image as has already been scaled
+     * to fit inside the specified rectangle.
+     * &lt;p&gt;
+     * The image is drawn inside the specified rectangle of this
+     * graphics context's coordinate space, and is scaled if
+     * necessary. Transparent pixels do not affect whatever pixels
+     * are already there.
+     * &lt;p&gt;
+     * This method returns immediately in all cases, even if the
+     * entire image has not yet been scaled, dithered, and converted
+     * for the current output device.
+     * If the current output representation is not yet complete, then
+     * &lt;code&gt;drawImage&lt;/code&gt; returns &lt;code&gt;false&lt;/code&gt;. As more of
+     * the image becomes available, the process that draws the image notifies
+     * the image observer by calling its &lt;code&gt;imageUpdate&lt;/code&gt; method.
+     * &lt;p&gt;
+     * A scaled version of an image will not necessarily be
+     * available immediately just because an unscaled version of the
+     * image has been constructed for this output device.  Each size of
+     * the image may be cached separately and generated from the original
+     * data in a separate image production sequence.
+     * @param    img    the specified image to be drawn.
+     * @param    x      the &lt;i&gt;x&lt;/i&gt; coordinate.
+     * @param    y      the &lt;i&gt;y&lt;/i&gt; coordinate.
+     * @param    width  the width of the rectangle.
+     * @param    height the height of the rectangle.
+     * @param    observer    object to be notified as more of
+     *                          the image is converted.
+     * @see      java.awt.Image
+     * @see      java.awt.image.ImageObserver
+     * @see      java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)
+     */
+    public boolean drawImage(Image img, int x, int y,
+                             int width, int height,
+                             ImageObserver observer) {
+<span class="nc" id="L142">        System.out.println(&quot;drawImage&quot;);</span>
+<span class="nc" id="L143">        return true;</span>
+    }
+
+    /**
+     * Disposes of this graphics context and releases
+     * any system resources that it is using.
+     * A &lt;code&gt;Graphics&lt;/code&gt; object cannot be used after
+     * &lt;code&gt;dispose&lt;/code&gt;has been called.
+     * &lt;p&gt;
+     * When a Java program runs, a large number of &lt;code&gt;Graphics&lt;/code&gt;
+     * objects can be created within a short time frame.
+     * Although the finalization process of the garbage collector
+     * also disposes of the same system resources, it is preferable
+     * to manually free the associated resources by calling this
+     * method rather than to rely on a finalization process which
+     * may not run to completion for a long period of time.
+     * &lt;p&gt;
+     * Graphics objects which are provided as arguments to the
+     * &lt;code&gt;paint&lt;/code&gt; and &lt;code&gt;update&lt;/code&gt; methods
+     * of components are automatically released by the system when
+     * those methods return. For efficiency, programmers should
+     * call &lt;code&gt;dispose&lt;/code&gt; when finished using
+     * a &lt;code&gt;Graphics&lt;/code&gt; object only if it was created
+     * directly from a component or another &lt;code&gt;Graphics&lt;/code&gt; object.
+     * @see         java.awt.Graphics#finalize
+     * @see         java.awt.Component#paint
+     * @see         java.awt.Component#update
+     * @see         java.awt.Component#getGraphics
+     * @see         java.awt.Graphics#create()
+     */
+    public void dispose() {
+<span class="nc" id="L174">        System.out.println(&quot;dispose&quot;);</span>
+<span class="nc" id="L175">    }</span>
+
+    /**
+     * Strokes the outline of a &lt;code&gt;Shape&lt;/code&gt; using the settings of the
+     * current &lt;code&gt;Graphics2D&lt;/code&gt; context.  The rendering attributes
+     * applied include the &lt;code&gt;Clip&lt;/code&gt;, &lt;code&gt;Transform&lt;/code&gt;,
+     * &lt;code&gt;Paint&lt;/code&gt;, &lt;code&gt;Composite&lt;/code&gt; and
+     * &lt;code&gt;Stroke&lt;/code&gt; attributes.
+     * @param s the &lt;code&gt;Shape&lt;/code&gt; to be rendered
+     * @see #setStroke(java.awt.Stroke)
+     * @see #setPaint(java.awt.Paint)
+     * @see java.awt.Graphics#setColor
+     * @see #setTransform(AffineTransform)
+     * @see #setClip(Shape)
+     * @see #setComposite(java.awt.Composite)
+     */
+    public void draw(Shape s) {
+<span class="nc" id="L192">        System.out.println(&quot;draw(Shape)&quot;);</span>
+<span class="nc" id="L193">    }</span>
+
+    /**
+     * Renders a {@link RenderedImage},
+     * applying a transform from image
+     * space into user space before drawing.
+     * The transformation from user space into device space is done with
+     * the current &lt;code&gt;Transform&lt;/code&gt; in the &lt;code&gt;Graphics2D&lt;/code&gt;.
+     * The specified transformation is applied to the image before the
+     * transform attribute in the &lt;code&gt;Graphics2D&lt;/code&gt; context is applied.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;, and &lt;code&gt;Composite&lt;/code&gt; attributes. Note
+     * that no rendering is done if the specified transform is
+     * noninvertible.
+     * @param img the image to be rendered
+     * @param xform the transformation from image space into user space
+     * @see #setTransform(AffineTransform)
+     * @see #setComposite(java.awt.Composite)
+     * @see #setClip(Shape)
+     */
+    public void drawRenderedImage(RenderedImage img,
+                                  AffineTransform xform) {
+<span class="nc" id="L215">        System.out.println(&quot;drawRenderedImage&quot;);</span>
+<span class="nc" id="L216">    }</span>
+
+
+    /**
+     * Renders a
+     * {@link RenderableImage},
+     * applying a transform from image space into user space before drawing.
+     * The transformation from user space into device space is done with
+     * the current &lt;code&gt;Transform&lt;/code&gt; in the &lt;code&gt;Graphics2D&lt;/code&gt;.
+     * The specified transformation is applied to the image before the
+     * transform attribute in the &lt;code&gt;Graphics2D&lt;/code&gt; context is applied.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;, and &lt;code&gt;Composite&lt;/code&gt; attributes. Note
+     * that no rendering is done if the specified transform is
+     * noninvertible.
+     *&lt;p&gt;
+     * Rendering hints set on the &lt;code&gt;Graphics2D&lt;/code&gt; object might
+     * be used in rendering the &lt;code&gt;RenderableImage&lt;/code&gt;.
+     * If explicit control is required over specific hints recognized by a
+     * specific &lt;code&gt;RenderableImage&lt;/code&gt;, or if knowledge of which hints
+     * are used is required, then a &lt;code&gt;RenderedImage&lt;/code&gt; should be
+     * obtained directly from the &lt;code&gt;RenderableImage&lt;/code&gt;
+     * and rendered using
+     *{@link #drawRenderedImage(RenderedImage, AffineTransform) drawRenderedImage}.
+     * @param img the image to be rendered
+     * @param xform the transformation from image space into user space
+     * @see #setTransform(AffineTransform)
+     * @see #setComposite(java.awt.Composite)
+     * @see #setClip(Shape)
+     * @see #drawRenderedImage
+     */
+     public void drawRenderableImage(RenderableImage img,
+                                     AffineTransform xform) {
+<span class="nc" id="L249">         System.out.println(&quot;drawRenderableImage&quot;);</span>
+<span class="nc" id="L250">     }</span>
+
+    /**
+     * Renders the text specified by the specified &lt;code&gt;String&lt;/code&gt;,
+     * using the current &lt;code&gt;Font&lt;/code&gt; and &lt;code&gt;Paint&lt;/code&gt; attributes
+     * in the &lt;code&gt;Graphics2D&lt;/code&gt; context.
+     * The baseline of the first character is at position
+     * (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in the User Space.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;, &lt;code&gt;Paint&lt;/code&gt;, &lt;code&gt;Font&lt;/code&gt; and
+     * &lt;code&gt;Composite&lt;/code&gt; attributes. For characters in script systems
+     * such as Hebrew and Arabic, the glyphs can be rendered from right to
+     * left, in which case the coordinate supplied is the location of the
+     * leftmost character on the baseline.
+     * @param s the &lt;code&gt;String&lt;/code&gt; to be rendered
+     * @param x the x coordinate where the &lt;code&gt;String&lt;/code&gt; should be
+     *          rendered
+     * @param y the y coordinate where the &lt;code&gt;String&lt;/code&gt; should be
+     *          rendered
+     * @see #setPaint(java.awt.Paint)
+     * @see java.awt.Graphics#setColor
+     * @see java.awt.Graphics#setFont
+     * @see #setTransform(AffineTransform)
+     * @see #setComposite(java.awt.Composite)
+     * @see #setClip(Shape)
+     */
+    public void drawString(String s, float x, float y) {
+<span class="nc" id="L277">        System.out.println(&quot;drawString(String)&quot;);</span>
+<span class="nc" id="L278">    }</span>
+
+    /**
+     * Renders the text of the specified iterator, using the
+     * &lt;code&gt;Graphics2D&lt;/code&gt; context's current &lt;code&gt;Paint&lt;/code&gt;. The
+     * iterator must specify a font
+     * for each character. The baseline of the
+     * first character is at position (&lt;i&gt;x&lt;/i&gt;,&amp;nbsp;&lt;i&gt;y&lt;/i&gt;) in the
+     * User Space.
+     * The rendering attributes applied include the &lt;code&gt;Clip&lt;/code&gt;,
+     * &lt;code&gt;Transform&lt;/code&gt;, &lt;code&gt;Paint&lt;/code&gt;, and
+     * &lt;code&gt;Composite&lt;/code&gt; attributes.
+     * For characters in script systems such as Hebrew and Arabic,
+     * the glyphs can be rendered from right to left, in which case the
+     * coordinate supplied is the location of the leftmost character
+     * on the baseline.
+     * @param iterator the iterator whose text is to be rendered
+     * @param x the x coordinate where the iterator's text is to be rendered
+     * @param y the y coordinate where the iterator's text is to be rendered
+     * @see #setPaint(java.awt.Paint)
+     * @see java.awt.Graphics#setColor
+     * @see #setTransform(AffineTransform)
+     * @see #setComposite(java.awt.Composite)
+     * @see #setClip(Shape)
+     */
+     public void drawString(AttributedCharacterIterator iterator,
+                            float x, float y) {
+<span class="nc" id="L305">         System.err.println(&quot;drawString(AttributedCharacterIterator)&quot;);</span>
+<span class="nc" id="L306">     }</span>
+
+
+
+    /**
+     * Fills the interior of a &lt;code&gt;Shape&lt;/code&gt; using the settings of the
+     * &lt;code&gt;Graphics2D&lt;/code&gt; context. The rendering attributes applied
+     * include the &lt;code&gt;Clip&lt;/code&gt;, &lt;code&gt;Transform&lt;/code&gt;,
+     * &lt;code&gt;Paint&lt;/code&gt;, and &lt;code&gt;Composite&lt;/code&gt;.
+     * @param s the &lt;code&gt;Shape&lt;/code&gt; to be filled
+     * @see #setPaint(java.awt.Paint)
+     * @see java.awt.Graphics#setColor
+     * @see #setTransform(AffineTransform)
+     * @see #setComposite(java.awt.Composite)
+     * @see #setClip(Shape)
+     */
+    public void fill(Shape s) {
+<span class="nc" id="L323">        System.err.println(&quot;fill&quot;);</span>
+<span class="nc" id="L324">    }</span>
+
+    /**
+     * Returns the device configuration associated with this
+     * &lt;code&gt;Graphics2D&lt;/code&gt;.
+     */
+    public GraphicsConfiguration getDeviceConfiguration() {
+<span class="nc" id="L331">        System.out.println(&quot;getDeviceConviguration&quot;);</span>
+<span class="nc" id="L332">        return null;</span>
+    }
+
+    /**
+     * Used to create proper font metrics
+     */
+    private Graphics2D fmg;
+
+    {
+<span class="nc" id="L341">        BufferedImage bi</span>
+            = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+
+<span class="nc" id="L344">        fmg = bi.createGraphics();</span>
+    }
+
+    /**
+     * Gets the font metrics for the specified font.
+     * @return    the font metrics for the specified font.
+     * @param     f the specified font
+     * @see       java.awt.Graphics#getFont
+     * @see       java.awt.FontMetrics
+     * @see       java.awt.Graphics#getFontMetrics()
+     */
+    public FontMetrics getFontMetrics(Font f) {
+<span class="nc" id="L356">        return fmg.getFontMetrics(f);</span>
+    }
+
+    /**
+     * Sets the paint mode of this graphics context to alternate between
+     * this graphics context's current color and the new specified color.
+     * This specifies that logical pixel operations are performed in the
+     * XOR mode, which alternates pixels between the current color and
+     * a specified XOR color.
+     * &lt;p&gt;
+     * When drawing operations are performed, pixels which are the
+     * current color are changed to the specified color, and vice versa.
+     * &lt;p&gt;
+     * Pixels that are of colors other than those two colors are changed
+     * in an unpredictable but reversible manner; if the same figure is
+     * drawn twice, then all pixels are restored to their original values.
+     * @param     c1 the XOR alternation color
+     */
+    public void setXORMode(Color c1) {
+<span class="nc" id="L375">        System.out.println(&quot;setXORMode&quot;);</span>
+<span class="nc" id="L376">    }</span>
+
+
+    /**
+     * Copies an area of the component by a distance specified by
+     * &lt;code&gt;dx&lt;/code&gt; and &lt;code&gt;dy&lt;/code&gt;. From the point specified
+     * by &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;, this method
+     * copies downwards and to the right.  To copy an area of the
+     * component to the left or upwards, specify a negative value for
+     * &lt;code&gt;dx&lt;/code&gt; or &lt;code&gt;dy&lt;/code&gt;.
+     * If a portion of the source rectangle lies outside the bounds
+     * of the component, or is obscured by another window or component,
+     * &lt;code&gt;copyArea&lt;/code&gt; will be unable to copy the associated
+     * pixels. The area that is omitted can be refreshed by calling
+     * the component's &lt;code&gt;paint&lt;/code&gt; method.
+     * @param       x the &lt;i&gt;x&lt;/i&gt; coordinate of the source rectangle.
+     * @param       y the &lt;i&gt;y&lt;/i&gt; coordinate of the source rectangle.
+     * @param       width the width of the source rectangle.
+     * @param       height the height of the source rectangle.
+     * @param       dx the horizontal distance to copy the pixels.
+     * @param       dy the vertical distance to copy the pixels.
+     */
+    public void copyArea(int x, int y, int width, int height,
+                         int dx, int dy) {
+<span class="nc" id="L400">        System.out.println(&quot;copyArea&quot;);</span>
+<span class="nc" id="L401">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

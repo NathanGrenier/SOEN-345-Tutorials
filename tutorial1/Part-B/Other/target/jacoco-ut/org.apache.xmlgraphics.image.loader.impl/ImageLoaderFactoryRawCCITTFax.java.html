@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageLoaderFactoryRawCCITTFax.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">ImageLoaderFactoryRawCCITTFax.java</span></div><h1>ImageLoaderFactoryRawCCITTFax.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageLoaderFactoryRawCCITTFax.java 1681137 2015-05-22 14:54:05Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.apache.xmlgraphics.image.codec.tiff.TIFFImage;
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.spi.ImageLoader;
+import org.apache.xmlgraphics.util.MimeConstants;
+
+/**
+ * Factory class for the ImageLoader for raw/undecoded CCITT encoded images.
+ */
+<span class="fc" id="L34">public class ImageLoaderFactoryRawCCITTFax extends AbstractImageLoaderFactory {</span>
+
+    /** logger */
+<span class="fc" id="L37">    private transient Log log = LogFactory.getLog(ImageLoaderFactoryRawCCITTFax.class);</span>
+
+<span class="fc" id="L39">    private static final String[] MIMES = new String[] {</span>
+        MimeConstants.MIME_TIFF};
+
+<span class="fc" id="L42">    private static final ImageFlavor[][] FLAVORS = new ImageFlavor[][] {</span>
+        {ImageFlavor.RAW_CCITTFAX}};
+
+
+    /**
+     * Returns the MIME type for a given ImageFlavor if it is from a format that is consumed
+     * without being undecoded. If the ImageFlavor is no raw flavor, an IllegalArgumentException
+     * is thrown.
+     * @param flavor the image flavor
+     * @return the associated MIME type
+     */
+    public static String getMimeForRawFlavor(ImageFlavor flavor) {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        for (int i = 0, ci = FLAVORS.length; i &lt; ci; i++) {</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            for (int j = 0, cj = FLAVORS[i].length; j &lt; cj; j++) {</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                if (FLAVORS[i][j].equals(flavor)) {</span>
+<span class="nc" id="L57">                    return MIMES[i];</span>
+                }
+            }
+        }
+<span class="nc" id="L61">        throw new IllegalArgumentException(&quot;ImageFlavor is not a \&quot;raw\&quot; flavor: &quot; + flavor);</span>
+    }
+
+    /** {@inheritDoc} */
+    public String[] getSupportedMIMETypes() {
+<span class="fc" id="L66">        return MIMES;</span>
+    }
+
+    /** {@inheritDoc} */
+    public ImageFlavor[] getSupportedFlavors(String mime) {
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        for (int i = 0, c = MIMES.length; i &lt; c; i++) {</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">            if (MIMES[i].equals(mime)) {</span>
+<span class="fc" id="L73">                return FLAVORS[i];</span>
+            }
+        }
+<span class="nc" id="L76">        throw new IllegalArgumentException(&quot;Unsupported MIME type: &quot; + mime);</span>
+    }
+
+    /** {@inheritDoc} */
+    public ImageLoader newImageLoader(ImageFlavor targetFlavor) {
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        if (targetFlavor.equals(ImageFlavor.RAW_CCITTFAX)) {</span>
+<span class="fc" id="L82">            return new ImageLoaderRawCCITTFax();</span>
+        } else {
+<span class="nc" id="L84">            throw new IllegalArgumentException(&quot;Unsupported image flavor: &quot; + targetFlavor);</span>
+        }
+    }
+
+    /** {@inheritDoc} */
+    public boolean isAvailable() {
+<span class="fc" id="L90">        return true;</span>
+    }
+
+    /** {@inheritDoc} */
+    public boolean isSupported(ImageInfo imageInfo) {
+<span class="fc" id="L95">        Boolean tiled = (Boolean)imageInfo.getCustomObjects().get(&quot;TIFF_TILED&quot;);</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        if (Boolean.TRUE.equals(tiled)) {</span>
+            //We don't support tiled images
+<span class="nc" id="L98">            log.trace(&quot;Raw CCITT loading not supported for tiled TIFF image&quot;);</span>
+<span class="nc" id="L99">            return false;</span>
+        }
+<span class="fc" id="L101">        Integer compression = (Integer)imageInfo.getCustomObjects().get(&quot;TIFF_COMPRESSION&quot;);</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        if (compression == null) {</span>
+<span class="nc" id="L103">            return false;</span>
+        }
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">        switch (compression) {</span>
+        case TIFFImage.COMP_FAX_G3_1D:
+        case TIFFImage.COMP_FAX_G3_2D:
+        case TIFFImage.COMP_FAX_G4_2D:
+<span class="fc" id="L109">            Integer stripCount = (Integer)imageInfo.getCustomObjects().get(&quot;TIFF_STRIP_COUNT&quot;);</span>
+<span class="pc bpc" id="L110" title="1 of 4 branches missed.">            boolean supported = (stripCount != null &amp;&amp; stripCount == 1);</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">            if (!supported) {</span>
+<span class="fc" id="L112">                log.trace(&quot;Raw CCITT loading not supported for multi-strip TIFF image&quot;);</span>
+            }
+<span class="fc" id="L114">            return supported;</span>
+        default:
+<span class="nc" id="L116">            return false;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

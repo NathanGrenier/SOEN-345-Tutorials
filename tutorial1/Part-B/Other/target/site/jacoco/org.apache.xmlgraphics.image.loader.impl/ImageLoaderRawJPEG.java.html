@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageLoaderRawJPEG.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">ImageLoaderRawJPEG.java</span></div><h1>ImageLoaderRawJPEG.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageLoaderRawJPEG.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.awt.color.ColorSpace;
+import java.awt.color.ICC_Profile;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.util.Map;
+
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+
+import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.apache.xmlgraphics.image.loader.Image;
+import org.apache.xmlgraphics.image.loader.ImageException;
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.ImageSessionContext;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+import org.apache.xmlgraphics.io.XmlSourceUtil;
+import org.apache.xmlgraphics.java2d.color.ColorSpaces;
+import org.apache.xmlgraphics.java2d.color.profile.ColorProfileUtil;
+import org.apache.xmlgraphics.util.MimeConstants;
+
+/**
+ * ImageLoader for JPEG images consumed &quot;raw&quot; (undecoded). Provides a
+ * raw/undecoded stream.
+ */
+public class ImageLoaderRawJPEG extends AbstractImageLoader implements JPEGConstants {
+
+    /** logger */
+<span class="fc" id="L54">    protected static final Log log = LogFactory.getLog(ImageLoaderRawJPEG.class);</span>
+
+    /**
+     * Main constructor.
+     */
+<span class="fc" id="L59">    public ImageLoaderRawJPEG() {</span>
+<span class="fc" id="L60">    }</span>
+
+    /** {@inheritDoc} */
+    public ImageFlavor getTargetFlavor() {
+<span class="nc" id="L64">        return ImageFlavor.RAW_JPEG;</span>
+    }
+
+    /** {@inheritDoc} */
+    public Image loadImage(ImageInfo info, Map hints, ImageSessionContext session)
+                throws ImageException, IOException {
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (!MimeConstants.MIME_JPEG.equals(info.getMimeType())) {</span>
+<span class="nc" id="L71">            throw new IllegalArgumentException(&quot;ImageInfo must be from a image with MIME type: &quot;</span>
+                    + MimeConstants.MIME_JPEG);
+        }
+
+<span class="fc" id="L75">        ColorSpace colorSpace = null;</span>
+<span class="fc" id="L76">        boolean appeFound = false;</span>
+<span class="fc" id="L77">        int sofType = 0;</span>
+<span class="fc" id="L78">        ByteArrayOutputStream iccStream = null;</span>
+
+<span class="fc" id="L80">        Source src = session.needSource(info.getOriginalURI());</span>
+<span class="fc" id="L81">        ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
+<span class="fc" id="L82">        JPEGFile jpeg = new JPEGFile(in);</span>
+<span class="fc" id="L83">        in.mark();</span>
+        try {
+            outer:
+            while (true) {
+                int reclen;
+<span class="fc" id="L88">                int segID = jpeg.readMarkerSegment();</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">                if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L90">                    log.trace(&quot;Seg Marker: &quot; + Integer.toHexString(segID));</span>
+                }
+<span class="pc bpc" id="L92" title="2 of 7 branches missed.">                switch (segID) {</span>
+                case EOI:
+<span class="nc" id="L94">                    log.trace(&quot;EOI found. Stopping.&quot;);</span>
+<span class="nc" id="L95">                    break outer;</span>
+                case SOS:
+<span class="fc" id="L97">                    log.trace(&quot;SOS found. Stopping early.&quot;); //TODO Not sure if this is safe</span>
+<span class="fc" id="L98">                    break outer;</span>
+                case SOI:
+                case NULL:
+<span class="fc" id="L101">                    break;</span>
+                case SOF0: //baseline
+                case SOF1: //extended sequential DCT
+                case SOF2: //progressive (since PDF 1.3)
+                case SOFA: //progressive (since PDF 1.3)
+<span class="fc" id="L106">                    sofType = segID;</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">                    if (log.isTraceEnabled()) {</span>
+<span class="nc" id="L108">                        log.trace(&quot;SOF: &quot; + Integer.toHexString(sofType));</span>
+                    }
+<span class="fc" id="L110">                    in.mark();</span>
+                    try {
+<span class="fc" id="L112">                        reclen = jpeg.readSegmentLength();</span>
+<span class="fc" id="L113">                        in.skipBytes(1); //data precision</span>
+<span class="fc" id="L114">                        in.skipBytes(2); //height</span>
+<span class="fc" id="L115">                        in.skipBytes(2); //width</span>
+<span class="fc" id="L116">                        int numComponents = in.readUnsignedByte();</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">                        if (numComponents == 1) {</span>
+<span class="fc" id="L118">                            colorSpace = ColorSpace.getInstance(</span>
+                              ColorSpace.CS_GRAY);
+<span class="nc bnc" id="L120" title="All 2 branches missed.">                        } else if (numComponents == 3) {</span>
+<span class="nc" id="L121">                            colorSpace = ColorSpace.getInstance(</span>
+                              ColorSpace.CS_LINEAR_RGB);
+<span class="nc bnc" id="L123" title="All 2 branches missed.">                        } else if (numComponents == 4) {</span>
+<span class="nc" id="L124">                            colorSpace = ColorSpaces.getDeviceCMYKColorSpace();</span>
+                        } else {
+<span class="nc" id="L126">                            throw new ImageException(&quot;Unsupported ColorSpace for image &quot;</span>
+                                        + info
+                                        + &quot;. The number of components supported are 1, 3 and 4.&quot;);
+                        }
+                    } finally {
+<span class="fc" id="L131">                        in.reset();</span>
+                    }
+<span class="fc" id="L133">                    in.skipBytes(reclen);</span>
+<span class="fc" id="L134">                    break;</span>
+                case APP2: //ICC (see ICC1V42.pdf)
+<span class="fc" id="L136">                    in.mark();</span>
+                    try {
+<span class="fc" id="L138">                        reclen = jpeg.readSegmentLength();</span>
+                        // Check for ICC profile
+<span class="fc" id="L140">                        byte[] iccString = new byte[11];</span>
+<span class="fc" id="L141">                        in.readFully(iccString);</span>
+<span class="fc" id="L142">                        in.skipBytes(1); //string terminator (null byte)</span>
+
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">                        if (&quot;ICC_PROFILE&quot;.equals(new String(iccString, &quot;US-ASCII&quot;))) {</span>
+<span class="fc" id="L145">                            in.skipBytes(2); //chunk sequence number and total number of chunks</span>
+<span class="fc" id="L146">                            int payloadSize = reclen - 2 - 12 - 2;</span>
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">                            if (ignoreColorProfile(hints)) {</span>
+<span class="nc" id="L148">                                log.debug(&quot;Ignoring ICC profile data in JPEG&quot;);</span>
+<span class="nc" id="L149">                                in.skipBytes(payloadSize);</span>
+                            } else {
+<span class="fc" id="L151">                                byte[] buf = new byte[payloadSize];</span>
+<span class="fc" id="L152">                                in.readFully(buf);</span>
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">                                if (iccStream == null) {</span>
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">                                    if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L155">                                        log.debug(&quot;JPEG has an ICC profile&quot;);</span>
+<span class="nc" id="L156">                                        DataInputStream din = new DataInputStream(new ByteArrayInputStream(buf));</span>
+<span class="nc" id="L157">                                        log.debug(&quot;Declared ICC profile size: &quot; + din.readInt());</span>
+                                    }
+                                    //ICC profiles can be split into several chunks
+                                    //so collect in a byte array output stream
+<span class="fc" id="L161">                                    iccStream = new ByteArrayOutputStream();</span>
+                                }
+<span class="fc" id="L163">                                iccStream.write(buf);</span>
+                            }
+                        }
+                    } finally {
+<span class="fc" id="L167">                        in.reset();</span>
+                    }
+<span class="fc" id="L169">                    in.skipBytes(reclen);</span>
+<span class="fc" id="L170">                    break;</span>
+                case APPE: //Adobe-specific (see 5116.DCT_Filter.pdf)
+<span class="nc" id="L172">                    in.mark();</span>
+                    try {
+<span class="nc" id="L174">                        reclen = jpeg.readSegmentLength();</span>
+                        // Check for Adobe header
+<span class="nc" id="L176">                        byte[] adobeHeader = new byte[5];</span>
+<span class="nc" id="L177">                        in.readFully(adobeHeader);</span>
+
+<span class="nc bnc" id="L179" title="All 2 branches missed.">                        if (&quot;Adobe&quot;.equals(new String(adobeHeader, &quot;US-ASCII&quot;))) {</span>
+                            // The reason for reading the APPE marker is that Adobe Photoshop
+                            // generates CMYK JPEGs with inverted values. The correct thing
+                            // to do would be to interpret the values in the marker, but for now
+                            // only assume that if APPE marker is present and colorspace is CMYK,
+                            // the image is inverted.
+<span class="nc" id="L185">                            appeFound = true;</span>
+                        }
+                    } finally {
+<span class="nc" id="L188">                        in.reset();</span>
+                    }
+<span class="nc" id="L190">                    in.skipBytes(reclen);</span>
+<span class="nc" id="L191">                    break;</span>
+                default:
+<span class="fc" id="L193">                    jpeg.skipCurrentMarkerSegment();</span>
+                }
+<span class="fc" id="L195">            }</span>
+        } finally {
+<span class="fc" id="L197">            in.reset();</span>
+        }
+
+<span class="fc" id="L200">        ICC_Profile iccProfile = buildICCProfile(info, colorSpace, iccStream);</span>
+<span class="pc bpc" id="L201" title="3 of 4 branches missed.">        if (iccProfile == null &amp;&amp; colorSpace == null) {</span>
+<span class="nc" id="L202">            throw new ImageException(&quot;ColorSpace could not be identified for JPEG image &quot; + info);</span>
+        }
+
+<span class="fc" id="L205">        boolean invertImage = false;</span>
+<span class="pc bpc" id="L206" title="3 of 4 branches missed.">        if (appeFound &amp;&amp; colorSpace.getType() == ColorSpace.TYPE_CMYK) {</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L208">                log.debug(&quot;JPEG has an Adobe APPE marker. Note: CMYK Image will be inverted. (&quot;</span>
+<span class="nc" id="L209">                        + info.getOriginalURI() + &quot;)&quot;);</span>
+            }
+<span class="nc" id="L211">            invertImage = true;</span>
+        }
+
+<span class="fc" id="L214">        ImageRawJPEG rawImage = new ImageRawJPEG(info,</span>
+<span class="fc" id="L215">                XmlSourceUtil.needInputStream(src),</span>
+                sofType, colorSpace, iccProfile, invertImage);
+<span class="fc" id="L217">        return rawImage;</span>
+    }
+
+    private ICC_Profile buildICCProfile(ImageInfo info, ColorSpace colorSpace,
+            ByteArrayOutputStream iccStream) throws IOException, ImageException {
+<span class="pc bpc" id="L222" title="2 of 4 branches missed.">        if (iccStream != null &amp;&amp; iccStream.size() &gt; 0) {</span>
+<span class="pc bpc" id="L223" title="1 of 2 branches missed.">            if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L224">                log.debug(&quot;Effective ICC profile size: &quot; + iccStream.size());</span>
+            }
+<span class="fc" id="L226">            final int alignment = 4;</span>
+<span class="fc" id="L227">            int padding = (alignment - (iccStream.size() % alignment)) % alignment;</span>
+<span class="pc bpc" id="L228" title="1 of 2 branches missed.">            if (padding != 0) {</span>
+                try {
+<span class="nc" id="L230">                    iccStream.write(new byte[padding]);</span>
+<span class="nc" id="L231">                } catch (IOException ioe) {</span>
+<span class="nc" id="L232">                    throw new IOException(&quot;Error while aligning ICC stream: &quot; + ioe.getMessage());</span>
+<span class="nc" id="L233">                }</span>
+            }
+
+<span class="fc" id="L236">            ICC_Profile iccProfile = null;</span>
+            try {
+<span class="fc" id="L238">                iccProfile = ColorProfileUtil.getICC_Profile(iccStream.toByteArray());</span>
+<span class="pc bpc" id="L239" title="1 of 2 branches missed.">                if (log.isDebugEnabled()) {</span>
+<span class="nc" id="L240">                    log.debug(&quot;JPEG has an ICC profile: &quot; + iccProfile.toString());</span>
+                }
+<span class="nc" id="L242">            } catch (IllegalArgumentException iae) {</span>
+<span class="nc" id="L243">                log.warn(&quot;An ICC profile is present in the JPEG file but it is invalid (&quot;</span>
+<span class="nc" id="L244">                        + iae.getMessage() + &quot;). The color profile will be ignored. (&quot;</span>
+<span class="nc" id="L245">                        + info.getOriginalURI() + &quot;)&quot;);</span>
+<span class="nc" id="L246">                return null;</span>
+<span class="fc" id="L247">            }</span>
+<span class="pc bpc" id="L248" title="1 of 2 branches missed.">            if (iccProfile.getNumComponents() != colorSpace.getNumComponents()) {</span>
+<span class="nc" id="L249">                log.warn(&quot;The number of components of the ICC profile (&quot;</span>
+<span class="nc" id="L250">                        + iccProfile.getNumComponents()</span>
+                        + &quot;) doesn't match the image (&quot;
+<span class="nc" id="L252">                        + colorSpace.getNumComponents()</span>
+                        + &quot;). Ignoring the ICC color profile.&quot;);
+<span class="nc" id="L254">                return null;</span>
+            } else {
+<span class="fc" id="L256">                return iccProfile;</span>
+            }
+        } else {
+<span class="nc" id="L259">            return null; //no ICC profile available</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

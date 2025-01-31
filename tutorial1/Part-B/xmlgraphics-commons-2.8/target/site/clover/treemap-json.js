@@ -1,6 +1,6 @@
-var treeMapJson = {"id":"Clover database Wed Jan 22 2025 18:17:57 EST0","name":"","data":{
-    "$area":22486.0,"$color":39.660233,"title":
-    " 22486 Elements, 39.7% Coverage"},"children":[{"id":
+var treeMapJson = {"id":"Clover database Fri Jan 31 2025 17:00:05 EST0","name":"","data":{
+    "$area":22486.0,"$color":39.624657,"title":
+    " 22486 Elements, 39.6% Coverage"},"children":[{"id":
       "org.apache.xmlgraphics.xmp.merge22217","name":
       "org.apache.xmlgraphics.xmp.merge","data":{"$area":36.0,"$color":
         8.333334,"title":
@@ -1173,18 +1173,18 @@ var treeMapJson = {"id":"Clover database Wed Jan 22 2025 18:17:57 EST0","name":"
             "title":"TransformType 21 Elements, 14.3% Coverage"},"children":[]}]},
     {"id":"org.apache.xmlgraphics.image.codec.util8526","name":
       "org.apache.xmlgraphics.image.codec.util","data":{"$area":621.0,
-        "$color":26.247988,"title":
-        "org.apache.xmlgraphics.image.codec.util 621 Elements, 26.2% Coverage"},
+        "$color":24.959743,"title":
+        "org.apache.xmlgraphics.image.codec.util 621 Elements, 25% Coverage"},
       "children":[{"id":"FileCacheSeekableStream8526","name":
           "FileCacheSeekableStream","data":{"$area":76.0,"$color":0.0,"path":
             
             "org/apache/xmlgraphics/image/codec/util/FileCacheSeekableStream.html#FileCacheSeekableStream",
             "title":"FileCacheSeekableStream 76 Elements, 0% Coverage"},
           "children":[]},{"id":"ForwardSeekableStream8602","name":
-          "ForwardSeekableStream","data":{"$area":44.0,"$color":59.090908,
+          "ForwardSeekableStream","data":{"$area":44.0,"$color":45.454548,
             "path":
             "org/apache/xmlgraphics/image/codec/util/ForwardSeekableStream.html#ForwardSeekableStream",
-            "title":"ForwardSeekableStream 44 Elements, 59.1% Coverage"},
+            "title":"ForwardSeekableStream 44 Elements, 45.5% Coverage"},
           "children":[]},{"id":"ImageDecodeParam8646","name":
           "ImageDecodeParam","data":{"$area":0.0,"$color":-100.0,"path":
             "org/apache/xmlgraphics/image/codec/util/ImageDecodeParam.html#ImageDecodeParam",
@@ -1211,10 +1211,10 @@ var treeMapJson = {"id":"Clover database Wed Jan 22 2025 18:17:57 EST0","name":"
             "title":"ImageEncoderImpl 12 Elements, 25% Coverage"},"children":
           []},{"id":"ImageInputStreamSeekableStreamAdapter8679","name":
           "ImageInputStreamSeekableStreamAdapter","data":{"$area":15.0,
-            "$color":100.0,"path":
+            "$color":86.666664,"path":
             "org/apache/xmlgraphics/image/codec/util/ImageInputStreamSeekableStreamAdapter.html#ImageInputStreamSeekableStreamAdapter",
             "title":
-            "ImageInputStreamSeekableStreamAdapter 15 Elements, 100% Coverage"},
+            "ImageInputStreamSeekableStreamAdapter 15 Elements, 86.7% Coverage"},
           "children":[]},{"id":"MemoryCacheSeekableStream8694","name":
           "MemoryCacheSeekableStream","data":{"$area":75.0,"$color":
             57.333332,"path":

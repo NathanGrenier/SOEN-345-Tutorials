@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PNGChunk.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.png</a> &gt; <span class="el_source">PNGChunk.java</span></div><h1>PNGChunk.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PNGChunk.java 1732019 2016-02-24 05:01:10Z gadams $ */
+
+package org.apache.xmlgraphics.image.codec.png;
+
+import java.io.DataInputStream;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class PNGChunk {
+    int length;
+    int type;
+    byte[] data;
+    int crc;
+
+    String typeString;
+
+    /** logger */
+<span class="fc" id="L36">    protected static final Log log = LogFactory.getLog(PNGChunk.class);</span>
+
+    /**
+     * See http://en.wikipedia.org/wiki/Portable_Network_Graphics for a light explanation;
+     * See http://www.libpng.org/pub/png/spec/1.2/PNG-Chunks.html for the spec.
+     */
+<span class="fc" id="L42">    public enum ChunkType {</span>
+<span class="fc" id="L43">        IHDR, // IHDR must be the first chunk</span>
+<span class="fc" id="L44">        PLTE, // PLTE contains the palette</span>
+<span class="fc" id="L45">        IDAT, // IDAT contains the image, which may be split among multiple IDAT chunks</span>
+<span class="fc" id="L46">        IEND, // IEND marks the image end</span>
+<span class="fc" id="L47">        bKGD, // bKGD gives the default background color</span>
+<span class="fc" id="L48">        cHRM, // cHRM gives the chromaticity coordinates</span>
+<span class="fc" id="L49">        gAMA, // gAMA specifies gamma</span>
+<span class="fc" id="L50">        hIST, // hIST can store the histogram</span>
+<span class="fc" id="L51">        iCCP, // iCCP is an ICC color profile</span>
+<span class="fc" id="L52">        iTXt, // iTXt contains UTF-8 text</span>
+<span class="fc" id="L53">        pHYs, // pHYs holds the intended pixel size</span>
+<span class="fc" id="L54">        sBIT, // sBIT (significant bits) indicates the color-accuracy</span>
+<span class="fc" id="L55">        sPLT, // sPLT suggests a palette to use</span>
+<span class="fc" id="L56">        sRGB, // sRGB indicates that the standard sRGB color space is used</span>
+<span class="fc" id="L57">        sTER, // sTER stereo-image indicator chunk for stereoscopic images</span>
+<span class="fc" id="L58">        tEXt, // tEXt can store text that can be represented in ISO/IEC 8859-1</span>
+<span class="fc" id="L59">        tIME, // tIME stores the time that the image was last changed</span>
+<span class="fc" id="L60">        tRNS, // tRNS contains transparency information</span>
+<span class="fc" id="L61">        zTXt; // zTXt contains compressed text with the same limits as tEXt</span>
+    }
+
+<span class="fc" id="L64">    public PNGChunk(int length, int type, byte[] data, int crc) {</span>
+<span class="fc" id="L65">        this.length = length;</span>
+<span class="fc" id="L66">        this.type = type;</span>
+<span class="fc" id="L67">        this.data = data;</span>
+<span class="fc" id="L68">        this.crc = crc;</span>
+<span class="fc" id="L69">        this.typeString = typeIntToString(this.type);</span>
+<span class="fc" id="L70">    }</span>
+
+    public int getLength() {
+<span class="fc" id="L73">        return length;</span>
+    }
+
+    public int getType() {
+<span class="nc" id="L77">        return type;</span>
+    }
+
+    public String getTypeString() {
+<span class="nc" id="L81">        return typeString;</span>
+    }
+
+    public byte[] getData() {
+<span class="fc" id="L85">        return data;</span>
+    }
+
+    public byte getByte(int offset) {
+<span class="fc" id="L89">        return data[offset];</span>
+    }
+
+    public int getInt1(int offset) {
+<span class="fc" id="L93">        return data[offset] &amp; 0xff;</span>
+    }
+
+    public int getInt2(int offset) {
+<span class="fc" id="L97">        return ((data[offset] &amp; 0xff) &lt;&lt; 8) | (data[offset + 1] &amp; 0xff);</span>
+    }
+
+    public int getInt4(int offset) {
+<span class="fc" id="L101">        return ((data[offset] &amp; 0xff) &lt;&lt; 24) | ((data[offset + 1] &amp; 0xff) &lt;&lt; 16)</span>
+                | ((data[offset + 2] &amp; 0xff) &lt;&lt; 8) | (data[offset + 3] &amp; 0xff);
+    }
+
+    public String getString4(int offset) {
+<span class="nc" id="L106">        return &quot;&quot; + (char) data[offset] + (char) data[offset + 1] + (char) data[offset + 2]</span>
+                + (char) data[offset + 3];
+    }
+
+    public boolean isType(String typeName) {
+<span class="nc" id="L111">        return typeString.equals(typeName);</span>
+    }
+
+    /**
+     * Reads the next chunk from the input stream.
+     * @param distream the input stream
+     * @return the chunk
+     */
+    public static PNGChunk readChunk(DataInputStream distream) {
+        try {
+<span class="fc" id="L121">            int length = distream.readInt();</span>
+<span class="fc" id="L122">            int type = distream.readInt();</span>
+<span class="fc" id="L123">            byte[] data = new byte[length];</span>
+<span class="fc" id="L124">            distream.readFully(data);</span>
+<span class="fc" id="L125">            int crc = distream.readInt();</span>
+
+<span class="fc" id="L127">            return new PNGChunk(length, type, data, crc);</span>
+<span class="nc" id="L128">        } catch (Exception e) {</span>
+<span class="nc" id="L129">            e.printStackTrace();</span>
+<span class="nc" id="L130">            return null;</span>
+        }
+    }
+
+    /**
+     * Returns the PNG chunk type, a four letter case sensitive ASCII type/name.
+     * @param distream the input stream
+     * @return a four letter case sensitive ASCII type/name
+     */
+    public static String getChunkType(DataInputStream distream) {
+        try {
+<span class="fc" id="L141">            distream.mark(8);</span>
+<span class="fc" id="L142">            /* int length = */distream.readInt();</span>
+<span class="fc" id="L143">            int type = distream.readInt();</span>
+<span class="fc" id="L144">            distream.reset();</span>
+
+<span class="fc" id="L146">            return typeIntToString(type);</span>
+<span class="nc" id="L147">        } catch (Exception e) {</span>
+<span class="nc" id="L148">            e.printStackTrace();</span>
+<span class="nc" id="L149">            return null;</span>
+        }
+    }
+
+    private static String typeIntToString(int type) {
+<span class="fc" id="L154">        String typeString = &quot;&quot;;</span>
+<span class="fc" id="L155">        typeString += (char) (type &gt;&gt; 24);</span>
+<span class="fc" id="L156">        typeString += (char) ((type &gt;&gt; 16) &amp; 0xff);</span>
+<span class="fc" id="L157">        typeString += (char) ((type &gt;&gt; 8) &amp; 0xff);</span>
+<span class="fc" id="L158">        typeString += (char) (type &amp; 0xff);</span>
+<span class="fc" id="L159">        return typeString;</span>
+    }
+
+    /**
+     * Skips the next chunk from the input stream.
+     * @param distream the input stream
+     * @return true if skipping successful, false otherwise
+     */
+    public static boolean skipChunk(DataInputStream distream) {
+        try {
+<span class="fc" id="L169">            int length = distream.readInt();</span>
+<span class="fc" id="L170">            distream.readInt();</span>
+            // is this really faster than reading?
+<span class="fc" id="L172">            int skipped = distream.skipBytes(length);</span>
+<span class="fc" id="L173">            distream.readInt();</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">            if (skipped != length) {</span>
+<span class="nc" id="L175">                log.warn(&quot;Incorrect number of bytes skipped.&quot;);</span>
+<span class="nc" id="L176">                return false;</span>
+            }
+<span class="fc" id="L178">            return true;</span>
+<span class="nc" id="L179">        } catch (Exception e) {</span>
+<span class="nc" id="L180">            log.warn(e.getMessage());</span>
+<span class="nc" id="L181">            return false;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

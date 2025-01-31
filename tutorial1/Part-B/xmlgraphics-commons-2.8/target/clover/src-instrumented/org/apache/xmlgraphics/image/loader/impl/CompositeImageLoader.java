@@ -36,7 +36,7 @@ import org.apache.xmlgraphics.image.loader.spi.ImageLoader;
  * Composite ImageLoader implementation in order to provide fallbacks when one ImageLoader
  * fails due to some limitation.
  */
-public class CompositeImageLoader extends AbstractImageLoader {public static class __CLR4_5_27q77q7m68iyh51{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static <T> T caseInc(int i,java.util.function.Supplier<T> s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1737587872955L,8589935092L,10064,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
+public class CompositeImageLoader extends AbstractImageLoader {public static class __CLR4_5_27q77q7m6lb4zvu{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static <T> T caseInc(int i,java.util.function.Supplier<T> s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1738360798893L,8589935092L,10064,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
 
     /** logger */
     protected static final Log log = LogFactory.getLog(CompositeImageLoader.class);
@@ -47,65 +47,65 @@ public class CompositeImageLoader extends AbstractImageLoader {public static cla
      * Main constructor.
      * @param loaders the contained image loaders
      */
-    public CompositeImageLoader(ImageLoader[] loaders) {try{__CLR4_5_27q77q7m68iyh51.R.inc(10015);
-        __CLR4_5_27q77q7m68iyh51.R.inc(10016);if ((((loaders == null || loaders.length == 0)&&(__CLR4_5_27q77q7m68iyh51.R.iget(10017)!=0|true))||(__CLR4_5_27q77q7m68iyh51.R.iget(10018)==0&false))) {{
-            __CLR4_5_27q77q7m68iyh51.R.inc(10019);throw new IllegalArgumentException("Must at least pass one ImageLoader as parameter");
+    public CompositeImageLoader(ImageLoader[] loaders) {try{__CLR4_5_27q77q7m6lb4zvu.R.inc(10015);
+        __CLR4_5_27q77q7m6lb4zvu.R.inc(10016);if ((((loaders == null || loaders.length == 0)&&(__CLR4_5_27q77q7m6lb4zvu.R.iget(10017)!=0|true))||(__CLR4_5_27q77q7m6lb4zvu.R.iget(10018)==0&false))) {{
+            __CLR4_5_27q77q7m6lb4zvu.R.inc(10019);throw new IllegalArgumentException("Must at least pass one ImageLoader as parameter");
         }
-        }__CLR4_5_27q77q7m68iyh51.R.inc(10020);for (int i = 1, c = loaders.length; (((i < c)&&(__CLR4_5_27q77q7m68iyh51.R.iget(10021)!=0|true))||(__CLR4_5_27q77q7m68iyh51.R.iget(10022)==0&false)); i++) {{
-            __CLR4_5_27q77q7m68iyh51.R.inc(10023);if ((((!loaders[0].getTargetFlavor().equals(loaders[i].getTargetFlavor()))&&(__CLR4_5_27q77q7m68iyh51.R.iget(10024)!=0|true))||(__CLR4_5_27q77q7m68iyh51.R.iget(10025)==0&false))) {{
-                __CLR4_5_27q77q7m68iyh51.R.inc(10026);throw new IllegalArgumentException(
+        }__CLR4_5_27q77q7m6lb4zvu.R.inc(10020);for (int i = 1, c = loaders.length; (((i < c)&&(__CLR4_5_27q77q7m6lb4zvu.R.iget(10021)!=0|true))||(__CLR4_5_27q77q7m6lb4zvu.R.iget(10022)==0&false)); i++) {{
+            __CLR4_5_27q77q7m6lb4zvu.R.inc(10023);if ((((!loaders[0].getTargetFlavor().equals(loaders[i].getTargetFlavor()))&&(__CLR4_5_27q77q7m6lb4zvu.R.iget(10024)!=0|true))||(__CLR4_5_27q77q7m6lb4zvu.R.iget(10025)==0&false))) {{
+                __CLR4_5_27q77q7m6lb4zvu.R.inc(10026);throw new IllegalArgumentException(
                         "All ImageLoaders must produce the same target flavor");
             }
         }}
-        }__CLR4_5_27q77q7m68iyh51.R.inc(10027);this.loaders = loaders;
-    }finally{__CLR4_5_27q77q7m68iyh51.R.flushNeeded();}}
+        }__CLR4_5_27q77q7m6lb4zvu.R.inc(10027);this.loaders = loaders;
+    }finally{__CLR4_5_27q77q7m6lb4zvu.R.flushNeeded();}}
 
     /** {@inheritDoc} */
-    public ImageFlavor getTargetFlavor() {try{__CLR4_5_27q77q7m68iyh51.R.inc(10028);
-        __CLR4_5_27q77q7m68iyh51.R.inc(10029);return loaders[0].getTargetFlavor();
-    }finally{__CLR4_5_27q77q7m68iyh51.R.flushNeeded();}}
+    public ImageFlavor getTargetFlavor() {try{__CLR4_5_27q77q7m6lb4zvu.R.inc(10028);
+        __CLR4_5_27q77q7m6lb4zvu.R.inc(10029);return loaders[0].getTargetFlavor();
+    }finally{__CLR4_5_27q77q7m6lb4zvu.R.flushNeeded();}}
 
     /** {@inheritDoc} */
-    public int getUsagePenalty() {try{__CLR4_5_27q77q7m68iyh51.R.inc(10030);
-        __CLR4_5_27q77q7m68iyh51.R.inc(10031);int maxPenalty = NO_LOADING_PENALTY;
-        __CLR4_5_27q77q7m68iyh51.R.inc(10032);for (int i = 1, c = loaders.length; (((i < c)&&(__CLR4_5_27q77q7m68iyh51.R.iget(10033)!=0|true))||(__CLR4_5_27q77q7m68iyh51.R.iget(10034)==0&false)); i++) {{
-            __CLR4_5_27q77q7m68iyh51.R.inc(10035);maxPenalty = Math.max(maxPenalty, loaders[i].getUsagePenalty());
+    public int getUsagePenalty() {try{__CLR4_5_27q77q7m6lb4zvu.R.inc(10030);
+        __CLR4_5_27q77q7m6lb4zvu.R.inc(10031);int maxPenalty = NO_LOADING_PENALTY;
+        __CLR4_5_27q77q7m6lb4zvu.R.inc(10032);for (int i = 1, c = loaders.length; (((i < c)&&(__CLR4_5_27q77q7m6lb4zvu.R.iget(10033)!=0|true))||(__CLR4_5_27q77q7m6lb4zvu.R.iget(10034)==0&false)); i++) {{
+            __CLR4_5_27q77q7m6lb4zvu.R.inc(10035);maxPenalty = Math.max(maxPenalty, loaders[i].getUsagePenalty());
         }
-        }__CLR4_5_27q77q7m68iyh51.R.inc(10036);return maxPenalty;
-    }finally{__CLR4_5_27q77q7m68iyh51.R.flushNeeded();}}
+        }__CLR4_5_27q77q7m6lb4zvu.R.inc(10036);return maxPenalty;
+    }finally{__CLR4_5_27q77q7m6lb4zvu.R.flushNeeded();}}
 
     /** {@inheritDoc} */
     public Image loadImage(ImageInfo info, Map hints, ImageSessionContext session)
-            throws ImageException, IOException {try{__CLR4_5_27q77q7m68iyh51.R.inc(10037);
-        __CLR4_5_27q77q7m68iyh51.R.inc(10038);ImageException firstException = null;
-        __CLR4_5_27q77q7m68iyh51.R.inc(10039);for (ImageLoader loader : this.loaders) {{
-            __CLR4_5_27q77q7m68iyh51.R.inc(10040);try {
-                __CLR4_5_27q77q7m68iyh51.R.inc(10041);Image img = loader.loadImage(info, hints, session);
-                __CLR4_5_27q77q7m68iyh51.R.inc(10042);if ((((img != null && firstException != null)&&(__CLR4_5_27q77q7m68iyh51.R.iget(10043)!=0|true))||(__CLR4_5_27q77q7m68iyh51.R.iget(10044)==0&false))) {{
-                    __CLR4_5_27q77q7m68iyh51.R.inc(10045);log.debug("First ImageLoader failed (" + firstException.getMessage()
+            throws ImageException, IOException {try{__CLR4_5_27q77q7m6lb4zvu.R.inc(10037);
+        __CLR4_5_27q77q7m6lb4zvu.R.inc(10038);ImageException firstException = null;
+        __CLR4_5_27q77q7m6lb4zvu.R.inc(10039);for (ImageLoader loader : this.loaders) {{
+            __CLR4_5_27q77q7m6lb4zvu.R.inc(10040);try {
+                __CLR4_5_27q77q7m6lb4zvu.R.inc(10041);Image img = loader.loadImage(info, hints, session);
+                __CLR4_5_27q77q7m6lb4zvu.R.inc(10042);if ((((img != null && firstException != null)&&(__CLR4_5_27q77q7m6lb4zvu.R.iget(10043)!=0|true))||(__CLR4_5_27q77q7m6lb4zvu.R.iget(10044)==0&false))) {{
+                    __CLR4_5_27q77q7m6lb4zvu.R.inc(10045);log.debug("First ImageLoader failed (" + firstException.getMessage()
                             + "). Fallback was successful.");
                 }
-                }__CLR4_5_27q77q7m68iyh51.R.inc(10046);return img;
+                }__CLR4_5_27q77q7m6lb4zvu.R.inc(10046);return img;
             } catch (ImageException ie) {
-                __CLR4_5_27q77q7m68iyh51.R.inc(10047);if ((((firstException == null)&&(__CLR4_5_27q77q7m68iyh51.R.iget(10048)!=0|true))||(__CLR4_5_27q77q7m68iyh51.R.iget(10049)==0&false))) {{
-                    __CLR4_5_27q77q7m68iyh51.R.inc(10050);firstException = ie;
+                __CLR4_5_27q77q7m6lb4zvu.R.inc(10047);if ((((firstException == null)&&(__CLR4_5_27q77q7m6lb4zvu.R.iget(10048)!=0|true))||(__CLR4_5_27q77q7m6lb4zvu.R.iget(10049)==0&false))) {{
+                    __CLR4_5_27q77q7m6lb4zvu.R.inc(10050);firstException = ie;
                 }
             }}
         }
-        }__CLR4_5_27q77q7m68iyh51.R.inc(10051);throw firstException;
-    }finally{__CLR4_5_27q77q7m68iyh51.R.flushNeeded();}}
+        }__CLR4_5_27q77q7m6lb4zvu.R.inc(10051);throw firstException;
+    }finally{__CLR4_5_27q77q7m6lb4zvu.R.flushNeeded();}}
 
     /** {@inheritDoc} */
-    public String toString() {try{__CLR4_5_27q77q7m68iyh51.R.inc(10052);
-        __CLR4_5_27q77q7m68iyh51.R.inc(10053);StringBuffer sb = new StringBuffer("[");
-        __CLR4_5_27q77q7m68iyh51.R.inc(10054);for (int i = 0; (((i < this.loaders.length)&&(__CLR4_5_27q77q7m68iyh51.R.iget(10055)!=0|true))||(__CLR4_5_27q77q7m68iyh51.R.iget(10056)==0&false)); i++) {{
-            __CLR4_5_27q77q7m68iyh51.R.inc(10057);if ((((i > 0)&&(__CLR4_5_27q77q7m68iyh51.R.iget(10058)!=0|true))||(__CLR4_5_27q77q7m68iyh51.R.iget(10059)==0&false))) {{
-                __CLR4_5_27q77q7m68iyh51.R.inc(10060);sb.append(",");
+    public String toString() {try{__CLR4_5_27q77q7m6lb4zvu.R.inc(10052);
+        __CLR4_5_27q77q7m6lb4zvu.R.inc(10053);StringBuffer sb = new StringBuffer("[");
+        __CLR4_5_27q77q7m6lb4zvu.R.inc(10054);for (int i = 0; (((i < this.loaders.length)&&(__CLR4_5_27q77q7m6lb4zvu.R.iget(10055)!=0|true))||(__CLR4_5_27q77q7m6lb4zvu.R.iget(10056)==0&false)); i++) {{
+            __CLR4_5_27q77q7m6lb4zvu.R.inc(10057);if ((((i > 0)&&(__CLR4_5_27q77q7m6lb4zvu.R.iget(10058)!=0|true))||(__CLR4_5_27q77q7m6lb4zvu.R.iget(10059)==0&false))) {{
+                __CLR4_5_27q77q7m6lb4zvu.R.inc(10060);sb.append(",");
             }
-            }__CLR4_5_27q77q7m68iyh51.R.inc(10061);sb.append(this.loaders[i].toString());
+            }__CLR4_5_27q77q7m6lb4zvu.R.inc(10061);sb.append(this.loaders[i].toString());
         }
-        }__CLR4_5_27q77q7m68iyh51.R.inc(10062);sb.append("]");
-        __CLR4_5_27q77q7m68iyh51.R.inc(10063);return sb.toString();
-    }finally{__CLR4_5_27q77q7m68iyh51.R.flushNeeded();}}
+        }__CLR4_5_27q77q7m6lb4zvu.R.inc(10062);sb.append("]");
+        __CLR4_5_27q77q7m6lb4zvu.R.inc(10063);return sb.toString();
+    }finally{__CLR4_5_27q77q7m6lb4zvu.R.flushNeeded();}}
 
 }

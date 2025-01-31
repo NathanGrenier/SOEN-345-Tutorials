@@ -85,7 +85,7 @@ var Packages = {
     "text": "util",
     "package": "org.apache.xmlgraphics.image.codec.util",
     "url": "org/apache/xmlgraphics/image/codec/util/pkg-summary.html",
-            "coverage": "26.2%",
+            "coverage": "25%",
         "icon": "aui-icon aui-icon-small aui-iconfont-devtools-folder-closed",
             "li_attr": {"data-is-link": "true"},
         "a_attr": {"href": "org/apache/xmlgraphics/image/codec/util/pkg-summary.html"},

@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleRenderedImage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.codec.util</a> &gt; <span class="el_source">SimpleRenderedImage.java</span></div><h1>SimpleRenderedImage.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: SimpleRenderedImage.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.codec.util;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.image.ColorModel;
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.awt.image.SampleModel;
+import java.awt.image.WritableRaster;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Vector;
+
+// CSOFF: WhitespaceAround
+
+/**
+ * A simple class implemented the &lt;code&gt;RenderedImage&lt;/code&gt;
+ * interface.  Only the &lt;code&gt;getTile()&lt;/code&gt; method needs to be
+ * implemented by subclasses.  The instance variables must also be
+ * filled in properly.
+ *
+ * &lt;p&gt; Normally in JAI &lt;code&gt;PlanarImage&lt;/code&gt; is used for this
+ * purpose, but in the interest of modularity the
+ * use of &lt;code&gt;PlanarImage&lt;/code&gt; has been avoided.
+ *
+ * @version $Id: SimpleRenderedImage.java 1804124 2017-08-04 14:13:54Z ssteiner $
+ */
+public abstract class SimpleRenderedImage implements RenderedImage {
+
+    /** The X coordinate of the image's upper-left pixel. */
+    protected int minX;
+
+    /** The Y coordinate of the image's upper-left pixel. */
+    protected int minY;
+
+    /** The image's width in pixels. */
+    protected int width;
+
+    /** The image's height in pixels. */
+    protected int height;
+
+    /** The width of a tile. */
+    protected int tileWidth;
+
+    /** The height of a tile. */
+    protected int tileHeight;
+
+    /** The X coordinate of the upper-left pixel of tile (0, 0). */
+    protected int tileGridXOffset;
+
+    /** The Y coordinate of the upper-left pixel of tile (0, 0). */
+    protected int tileGridYOffset;
+
+    /** The image's SampleModel. */
+    protected SampleModel sampleModel;
+
+    /** The image's ColorModel. */
+    protected ColorModel colorModel;
+
+    /** The image's sources, stored in a Vector. */
+//    protected List sources = new ArrayList();
+
+    /** A Hashtable containing the image properties. */
+<span class="fc" id="L87">    protected Map properties = new HashMap();</span>
+
+<span class="fc" id="L89">    public SimpleRenderedImage() { }</span>
+
+    /** Returns the X coordinate of the leftmost column of the image. */
+    public int getMinX() {
+<span class="fc" id="L93">        return minX;</span>
+    }
+
+    /**
+     * Returns the X coordinate of the column immediatetely to the
+     * right of the rightmost column of the image.  getMaxX() is
+     * implemented in terms of getMinX() and getWidth() and so does
+     * not need to be implemented by subclasses.
+     */
+    public final int getMaxX() {
+<span class="nc" id="L103">        return getMinX() + getWidth();</span>
+    }
+
+    /** Returns the X coordinate of the uppermost row of the image. */
+    public int getMinY() {
+<span class="fc" id="L108">        return minY;</span>
+    }
+
+    /**
+     * Returns the Y coordinate of the row immediately below the
+     * bottom row of the image.  getMaxY() is implemented in terms of
+     * getMinY() and getHeight() and so does not need to be
+     * implemented by subclasses.
+     */
+    public final int getMaxY() {
+<span class="nc" id="L118">        return getMinY() + getHeight();</span>
+    }
+
+    /** Returns the width of the image. */
+    public int getWidth() {
+<span class="fc" id="L123">        return width;</span>
+    }
+
+    /** Returns the height of the image. */
+    public int getHeight() {
+<span class="fc" id="L128">        return height;</span>
+    }
+
+    /** Returns a Rectangle indicating the image bounds. */
+    public Rectangle getBounds() {
+<span class="nc" id="L133">        return new Rectangle(getMinX(), getMinY(),</span>
+<span class="nc" id="L134">                             getWidth(), getHeight());</span>
+    }
+
+    /** Returns the width of a tile. */
+    public int getTileWidth() {
+<span class="fc" id="L139">        return tileWidth;</span>
+    }
+
+    /** Returns the height of a tile. */
+    public int getTileHeight() {
+<span class="fc" id="L144">        return tileHeight;</span>
+    }
+
+    /**
+     * Returns the X coordinate of the upper-left pixel of tile (0, 0).
+     */
+    public int getTileGridXOffset() {
+<span class="fc" id="L151">        return tileGridXOffset;</span>
+    }
+
+    /**
+     * Returns the Y coordinate of the upper-left pixel of tile (0, 0).
+     */
+    public int getTileGridYOffset() {
+<span class="fc" id="L158">        return tileGridYOffset;</span>
+    }
+
+    /**
+     * Returns the horizontal index of the leftmost column of tiles.
+     * getMinTileX() is implemented in terms of getMinX()
+     * and so does not need to be implemented by subclasses.
+     */
+    public int getMinTileX() {
+<span class="nc" id="L167">        return convertXToTileX(getMinX());</span>
+    }
+
+    /**
+     * Returns the horizontal index of the rightmost column of tiles.
+     * getMaxTileX() is implemented in terms of getMaxX()
+     * and so does not need to be implemented by subclasses.
+     */
+    public int getMaxTileX() {
+<span class="nc" id="L176">        return convertXToTileX(getMaxX() - 1);</span>
+    }
+
+    /**
+     * Returns the number of tiles along the tile grid in the
+     * horizontal direction.  getNumXTiles() is implemented in terms
+     * of getMinTileX() and getMaxTileX() and so does not need to be
+     * implemented by subclasses.
+     */
+    public int getNumXTiles() {
+<span class="nc" id="L186">        return getMaxTileX() - getMinTileX() + 1;</span>
+    }
+
+    /**
+     * Returns the vertical index of the uppermost row of tiles.  getMinTileY()
+     * is implemented in terms of getMinY() and so does not need to be
+     * implemented by subclasses.
+     */
+    public int getMinTileY() {
+<span class="nc" id="L195">        return convertYToTileY(getMinY());</span>
+    }
+
+    /**
+     * Returns the vertical index of the bottom row of tiles.  getMaxTileY()
+     * is implemented in terms of getMaxY() and so does not need to
+     * be implemented by subclasses.
+     */
+    public int getMaxTileY() {
+<span class="nc" id="L204">        return convertYToTileY(getMaxY() - 1);</span>
+    }
+
+    /**
+     * Returns the number of tiles along the tile grid in the vertical
+     * direction.  getNumYTiles() is implemented in terms
+     * of getMinTileY() and getMaxTileY() and so does not need to be
+     * implemented by subclasses.
+     */
+    public int getNumYTiles() {
+<span class="nc" id="L214">        return getMaxTileY() - getMinTileY() + 1;</span>
+    }
+
+    /** Returns the SampleModel of the image. */
+    public SampleModel getSampleModel() {
+<span class="nc" id="L219">        return sampleModel;</span>
+    }
+
+    /** Returns the ColorModel of the image. */
+    public ColorModel getColorModel() {
+<span class="fc" id="L224">        return colorModel;</span>
+    }
+
+    /**
+     * Gets a property from the property set of this image.  If the
+     * property name is not recognized, &lt;code&gt;null&lt;/code&gt; will be returned.
+     *
+     * @param name the name of the property to get, as a
+     * &lt;code&gt;String&lt;/code&gt;.
+     * @return a reference to the property
+     * &lt;code&gt;Object&lt;/code&gt;, or the value &lt;code&gt;null&lt;/code&gt;
+     */
+    public Object getProperty(String name) {
+<span class="nc" id="L237">        name = name.toLowerCase(Locale.getDefault());</span>
+<span class="nc" id="L238">        return properties.get(name);</span>
+    }
+
+    /**
+     * Returns a list of the properties recognized by this image.  If
+     * no properties are available, an empty String[] will be returned.
+     *
+     * @return an array of &lt;code&gt;String&lt;/code&gt;s representing valid
+     *         property names.
+     */
+    public String[] getPropertyNames() {
+<span class="nc" id="L249">        String[] names = new String[properties.size()];</span>
+<span class="nc" id="L250">        properties.keySet().toArray(names);</span>
+<span class="nc" id="L251">        return names;</span>
+    }
+
+    /**
+     * Returns an array of &lt;code&gt;String&lt;/code&gt;s recognized as names by
+     * this property source that begin with the supplied prefix.  If
+     * no property names match, &lt;code&gt;null&lt;/code&gt; will be returned.
+     * The comparison is done in a case-independent manner.
+     *
+     * &lt;p&gt; The default implementation calls
+     * &lt;code&gt;getPropertyNames()&lt;/code&gt; and searches the list of names
+     * for matches.
+     *
+     * @return an array of &lt;code&gt;String&lt;/code&gt;s giving the valid
+     * property names (can be null).
+     */
+    public String[] getPropertyNames(String prefix) {
+<span class="nc" id="L268">        String[] propertyNames = getPropertyNames();</span>
+//        if (propertyNames == null) {
+//            return null;
+//        }
+
+<span class="nc" id="L273">        prefix = prefix.toLowerCase(Locale.getDefault());</span>
+
+<span class="nc" id="L275">        List names = new ArrayList();</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">        for (String propertyName : propertyNames) {</span>
+<span class="nc bnc" id="L277" title="All 2 branches missed.">            if (propertyName.startsWith(prefix)) {</span>
+<span class="nc" id="L278">                names.add(propertyName);</span>
+            }
+        }
+
+<span class="nc bnc" id="L282" title="All 2 branches missed.">        if (names.size() == 0) {</span>
+<span class="nc" id="L283">            return null;</span>
+        }
+
+        // Copy the strings from the Vector over to a String array.
+<span class="nc" id="L287">        String[] prefixNames = new String[names.size()];</span>
+<span class="nc" id="L288">        names.toArray(prefixNames);</span>
+<span class="nc" id="L289">        return prefixNames;</span>
+    }
+
+    // Utility methods.
+
+    /**
+     * Converts a pixel's X coordinate into a horizontal tile index
+     * relative to a given tile grid layout specified by its X offset
+     * and tile width.
+     */
+    public static int convertXToTileX(int x, int tileGridXOffset, int tileWidth) {
+<span class="nc" id="L300">        x -= tileGridXOffset;</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">        if (x &lt; 0) {</span>
+<span class="nc" id="L302">            x += 1 - tileWidth; // Force round to -infinity</span>
+        }
+<span class="nc" id="L304">        return x / tileWidth;</span>
+    }
+
+    /**
+     * Converts a pixel's Y coordinate into a vertical tile index
+     * relative to a given tile grid layout specified by its Y offset
+     * and tile height.
+     */
+    public static int convertYToTileY(int y, int tileGridYOffset, int tileHeight) {
+<span class="nc" id="L313">        y -= tileGridYOffset;</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">        if (y &lt; 0) {</span>
+<span class="nc" id="L315">            y += 1 - tileHeight; // Force round to -infinity</span>
+        }
+<span class="nc" id="L317">        return y / tileHeight;</span>
+    }
+
+    /**
+     * Converts a pixel's X coordinate into a horizontal tile index.
+     * This is a convenience method.  No attempt is made to detect
+     * out-of-range coordinates.
+     *
+     * @param x the X coordinate of a pixel.
+     * @return the X index of the tile containing the pixel.
+     */
+    public int convertXToTileX(int x) {
+<span class="nc" id="L329">        return convertXToTileX(x, getTileGridXOffset(), getTileWidth());</span>
+    }
+
+    /**
+     * Converts a pixel's Y coordinate into a vertical tile index.
+     * This is a convenience method.  No attempt is made to detect
+     * out-of-range coordinates.
+     *
+     * @param y the Y coordinate of a pixel.
+     * @return the Y index of the tile containing the pixel.
+     */
+    public int convertYToTileY(int y) {
+<span class="nc" id="L341">        return convertYToTileY(y, getTileGridYOffset(), getTileHeight());</span>
+    }
+
+    /**
+     * Converts a horizontal tile index into the X coordinate of its
+     * upper left pixel relative to a given tile grid layout specified
+     * by its X offset and tile width.
+     */
+    public static int tileXToX(int tx, int tileGridXOffset, int tileWidth) {
+<span class="nc" id="L350">        return tx * tileWidth + tileGridXOffset;</span>
+    }
+
+    /**
+     * Converts a vertical tile index into the Y coordinate of
+     * its upper left pixel relative to a given tile grid layout
+     * specified by its Y offset and tile height.
+     */
+    public static int tileYToY(int ty, int tileGridYOffset, int tileHeight) {
+<span class="nc" id="L359">        return ty * tileHeight + tileGridYOffset;</span>
+    }
+
+    /**
+     * Converts a horizontal tile index into the X coordinate of its
+     * upper left pixel.  This is a convenience method.  No attempt is made
+     * to detect out-of-range indices.
+     *
+     * @param tx the horizontal index of a tile.
+     * @return the X coordinate of the tile's upper left pixel.
+     */
+    public int tileXToX(int tx) {
+<span class="nc" id="L371">        return tx * tileWidth + tileGridXOffset;</span>
+    }
+
+    /**
+     * Converts a vertical tile index into the Y coordinate of its
+     * upper left pixel.  This is a convenience method.  No attempt is made
+     * to detect out-of-range indices.
+     *
+     * @param ty the vertical index of a tile.
+     * @return the Y coordinate of the tile's upper left pixel.
+     */
+    public int tileYToY(int ty) {
+<span class="nc" id="L383">        return ty * tileHeight + tileGridYOffset;</span>
+    }
+
+    public Vector getSources() {
+<span class="nc" id="L387">        return null;</span>
+    }
+
+    /**
+     * Returns the entire image in a single Raster.  For images with
+     * multiple tiles this will require making a copy.
+     *
+     * &lt;p&gt; The returned Raster is semantically a copy.  This means
+     * that updates to the source image will not be reflected in the
+     * returned Raster.  For non-writable (immutable) source images,
+     * the returned value may be a reference to the image's internal
+     * data.  The returned Raster should be considered non-writable;
+     * any attempt to alter its pixel data (such as by casting it to
+     * WritableRaster or obtaining and modifying its DataBuffer) may
+     * result in undefined behavior.  The copyData method should be
+     * used if the returned Raster is to be modified.
+     *
+     * @return a Raster containing a copy of this image's data.
+     */
+    public Raster getData() {
+<span class="nc" id="L407">        Rectangle rect = new Rectangle(getMinX(), getMinY(),</span>
+<span class="nc" id="L408">                                       getWidth(), getHeight());</span>
+<span class="nc" id="L409">        return getData(rect);</span>
+    }
+
+    /**
+     * Returns an arbitrary rectangular region of the RenderedImage
+     * in a Raster.  The rectangle of interest will be clipped against
+     * the image bounds.
+     *
+     * &lt;p&gt; The returned Raster is semantically a copy.  This means
+     * that updates to the source image will not be reflected in the
+     * returned Raster.  For non-writable (immutable) source images,
+     * the returned value may be a reference to the image's internal
+     * data.  The returned Raster should be considered non-writable;
+     * any attempt to alter its pixel data (such as by casting it to
+     * WritableRaster or obtaining and modifying its DataBuffer) may
+     * result in undefined behavior.  The copyData method should be
+     * used if the returned Raster is to be modified.
+     *
+     * @param bounds the region of the RenderedImage to be returned.
+     */
+    public Raster getData(Rectangle bounds) {
+<span class="nc" id="L430">        int startX = convertXToTileX(bounds.x);</span>
+<span class="nc" id="L431">        int startY = convertYToTileY(bounds.y);</span>
+<span class="nc" id="L432">        int endX = convertXToTileX(bounds.x + bounds.width - 1);</span>
+<span class="nc" id="L433">        int endY = convertYToTileY(bounds.y + bounds.height - 1);</span>
+        Raster tile;
+
+<span class="nc bnc" id="L436" title="All 4 branches missed.">        if ((startX == endX) &amp;&amp; (startY == endY)) {</span>
+<span class="nc" id="L437">            tile = getTile(startX, startY);</span>
+<span class="nc" id="L438">            return tile.createChild(bounds.x, bounds.y,</span>
+                                    bounds.width, bounds.height,
+                                    bounds.x, bounds.y, null);
+        } else {
+            // Create a WritableRaster of the desired size
+<span class="nc" id="L443">            SampleModel sm =</span>
+<span class="nc" id="L444">                sampleModel.createCompatibleSampleModel(bounds.width,</span>
+                                                       bounds.height);
+
+            // Translate it
+<span class="nc" id="L448">            WritableRaster dest =</span>
+<span class="nc" id="L449">                Raster.createWritableRaster(sm, bounds.getLocation());</span>
+
+<span class="nc bnc" id="L451" title="All 2 branches missed.">            for (int j = startY; j &lt;= endY; j++) {</span>
+<span class="nc bnc" id="L452" title="All 2 branches missed.">                for (int i = startX; i &lt;= endX; i++) {</span>
+<span class="nc" id="L453">                    tile = getTile(i, j);</span>
+<span class="nc" id="L454">                    Rectangle intersectRect =</span>
+<span class="nc" id="L455">                        bounds.intersection(tile.getBounds());</span>
+<span class="nc" id="L456">                    Raster liveRaster = tile.createChild(intersectRect.x,</span>
+                                                         intersectRect.y,
+                                                         intersectRect.width,
+                                                         intersectRect.height,
+                                                         intersectRect.x,
+                                                         intersectRect.y,
+                                                         null);
+<span class="nc" id="L463">                    dest.setDataElements(0, 0, liveRaster);</span>
+                }
+            }
+<span class="nc" id="L466">            return dest;</span>
+        }
+    }
+
+    /**
+     * Copies an arbitrary rectangular region of the RenderedImage
+     * into a caller-supplied WritableRaster.  The region to be
+     * computed is determined by clipping the bounds of the supplied
+     * WritableRaster against the bounds of the image.  The supplied
+     * WritableRaster must have a SampleModel that is compatible with
+     * that of the image.
+     *
+     * &lt;p&gt; If the raster argument is null, the entire image will
+     * be copied into a newly-created WritableRaster with a SampleModel
+     * that is compatible with that of the image.
+     *
+     * @param dest a WritableRaster to hold the returned portion of
+     *        the image.
+     * @return a reference to the supplied WritableRaster, or to a
+     *         new WritableRaster if the supplied one was null.
+     */
+    public WritableRaster copyData(WritableRaster dest) {
+        Rectangle bounds;
+        Raster tile;
+
+<span class="nc bnc" id="L491" title="All 2 branches missed.">        if (dest == null) {</span>
+<span class="nc" id="L492">            bounds = getBounds();</span>
+<span class="nc" id="L493">            Point p = new Point(minX, minY);</span>
+            /* A SampleModel to hold the entire image. */
+<span class="nc" id="L495">            SampleModel sm = sampleModel.createCompatibleSampleModel(</span>
+                                         width, height);
+<span class="nc" id="L497">            dest = Raster.createWritableRaster(sm, p);</span>
+<span class="nc" id="L498">        } else {</span>
+<span class="nc" id="L499">            bounds = dest.getBounds();</span>
+        }
+
+<span class="nc" id="L502">        int startX = convertXToTileX(bounds.x);</span>
+<span class="nc" id="L503">        int startY = convertYToTileY(bounds.y);</span>
+<span class="nc" id="L504">        int endX = convertXToTileX(bounds.x + bounds.width - 1);</span>
+<span class="nc" id="L505">        int endY = convertYToTileY(bounds.y + bounds.height - 1);</span>
+
+<span class="nc bnc" id="L507" title="All 2 branches missed.">        for (int j = startY; j &lt;= endY; j++) {</span>
+<span class="nc bnc" id="L508" title="All 2 branches missed.">            for (int i = startX; i &lt;= endX; i++) {</span>
+<span class="nc" id="L509">                tile = getTile(i, j);</span>
+<span class="nc" id="L510">                Rectangle intersectRect =</span>
+<span class="nc" id="L511">                    bounds.intersection(tile.getBounds());</span>
+<span class="nc" id="L512">                Raster liveRaster = tile.createChild(intersectRect.x,</span>
+                                                     intersectRect.y,
+                                                     intersectRect.width,
+                                                     intersectRect.height,
+                                                     intersectRect.x,
+                                                     intersectRect.y,
+                                                     null);
+
+                /*
+                 * WritableRaster.setDataElements takes into account of
+                 * inRaster's minX and minY and add these to x and y. Since
+                 * liveRaster has the origin at the correct location, the
+                 * following call should not again give these coordinates in
+                 * places of x and y.
+                 */
+<span class="nc" id="L527">                dest.setDataElements(0, 0, liveRaster);</span>
+            }
+        }
+<span class="nc" id="L530">        return dest;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

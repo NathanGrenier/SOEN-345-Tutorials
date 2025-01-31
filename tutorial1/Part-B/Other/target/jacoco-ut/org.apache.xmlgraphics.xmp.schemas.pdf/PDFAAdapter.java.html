@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PDFAAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.xmp.schemas.pdf</a> &gt; <span class="el_source">PDFAAdapter.java</span></div><h1>PDFAAdapter.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PDFAAdapter.java 750418 2009-03-05 11:03:54Z vhennebert $ */
+
+package org.apache.xmlgraphics.xmp.schemas.pdf;
+
+import org.apache.xmlgraphics.xmp.Metadata;
+import org.apache.xmlgraphics.xmp.XMPSchemaAdapter;
+import org.apache.xmlgraphics.xmp.XMPSchemaRegistry;
+
+/**
+ * Schema adapter implementation for both the old (deprecated) and the current PDF/A schema.
+ * The old namespace is still needed to make Adobe Acrobat happy.
+ */
+public class PDFAAdapter extends XMPSchemaAdapter {
+
+    private static final String PART = &quot;part&quot;;
+    private static final String AMD = &quot;amd&quot;;
+    private static final String CONFORMANCE = &quot;conformance&quot;;
+
+    /**
+     * Constructs a new adapter for PDF/A around the given metadata object.
+     * @param meta the underlying metadata
+     * @param namespace the namespace to access the schema (must be one of the PDF/A schema
+     *                  namespaces)
+     */
+    public PDFAAdapter(Metadata meta, String namespace) {
+<span class="nc" id="L43">        super(meta, XMPSchemaRegistry.getInstance().getSchema(namespace));</span>
+<span class="nc" id="L44">    }</span>
+
+    /**
+     * Sets the PDF/A version identifier (&quot;part&quot;).
+     * @param value the version identifier (&quot;1&quot; for PDF/A-1)
+     */
+    public void setPart(int value) {
+<span class="nc" id="L51">        setValue(PART, Integer.toString(value));</span>
+<span class="nc" id="L52">    }</span>
+
+    /** @return the PDF/A version identifier */
+    public int getPart() {
+<span class="nc" id="L56">        return Integer.parseInt(getValue(PART));</span>
+    }
+
+    /**
+     * Sets the PDF/A amendment identifier (&quot;amd&quot;).
+     * @param value the amendment identifiert
+     */
+    public void setAmendment(String value) {
+<span class="nc" id="L64">        setValue(AMD, value);</span>
+<span class="nc" id="L65">    }</span>
+
+    /** @return the PDF/A amendment identifier */
+    public String getAmendment() {
+<span class="nc" id="L69">        return getValue(AMD);</span>
+    }
+
+    /**
+     * Sets the PDF/A conformance level.
+     * @param value the conformance level (&quot;A&quot; or &quot;B&quot; for PDF/A-1)
+     */
+    public void setConformance(String value) {
+<span class="nc" id="L77">        setValue(CONFORMANCE, value);</span>
+<span class="nc" id="L78">    }</span>
+
+    /** @return the PDF/A conformance level */
+    public String getConformance() {
+<span class="nc" id="L82">        return getValue(CONFORMANCE);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DSCParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps.dsc</a> &gt; <span class="el_source">DSCParser.java</span></div><h1>DSCParser.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DSCParser.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps.dsc;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.apache.xmlgraphics.ps.DSCConstants;
+import org.apache.xmlgraphics.ps.PSGenerator;
+import org.apache.xmlgraphics.ps.dsc.events.DSCAtend;
+import org.apache.xmlgraphics.ps.dsc.events.DSCComment;
+import org.apache.xmlgraphics.ps.dsc.events.DSCEvent;
+import org.apache.xmlgraphics.ps.dsc.events.DSCHeaderComment;
+import org.apache.xmlgraphics.ps.dsc.events.PostScriptComment;
+import org.apache.xmlgraphics.ps.dsc.events.PostScriptLine;
+import org.apache.xmlgraphics.ps.dsc.events.UnparsedDSCComment;
+import org.apache.xmlgraphics.ps.dsc.tools.DSCTools;
+
+/**
+ * Parser for DSC-compliant PostScript files (DSC = Document Structuring Conventions). The parser
+ * is implemented as a pull parser but has the ability to act as a push parser through the
+ * DSCHandler interface.
+ */
+public class DSCParser implements DSCParserConstants {
+<span class="fc" id="L49">    private static final Log LOG = LogFactory.getLog(DSCParser.class);</span>
+
+    private InputStream in;
+    private BufferedReader reader;
+    private boolean eofFound;
+<span class="fc" id="L54">    private boolean checkEOF = true;</span>
+    private DSCEvent currentEvent;
+    private DSCEvent nextEvent;
+    private DSCListener nestedDocumentHandler;
+    private DSCListener filterListener;
+    private List listeners;
+    private boolean listenersDisabled;
+
+    /**
+     * Creates a new DSC parser.
+     * @param in InputStream to read the PostScript file from
+     *              (the stream is not closed by this class, the caller is responsible for that)
+     * @throws IOException In case of an I/O error
+     * @throws DSCException In case of a violation of the DSC spec
+     */
+<span class="fc" id="L69">    public DSCParser(InputStream in) throws IOException, DSCException {</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (in.markSupported()) {</span>
+<span class="fc" id="L71">            this.in = in;</span>
+        } else {
+            //Decorate for better performance
+<span class="nc" id="L74">            this.in = new java.io.BufferedInputStream(this.in);</span>
+        }
+<span class="fc" id="L76">        String encoding = &quot;US-ASCII&quot;;</span>
+        try {
+<span class="fc" id="L78">            this.reader = new java.io.BufferedReader(</span>
+                    new java.io.InputStreamReader(this.in, encoding));
+<span class="nc" id="L80">        } catch (UnsupportedEncodingException e) {</span>
+<span class="nc" id="L81">            throw new RuntimeException(&quot;Incompatible VM! &quot; + e.getMessage());</span>
+<span class="fc" id="L82">        }</span>
+<span class="fc" id="L83">        parseNext();</span>
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * Returns the InputStream the PostScript code is read from.
+     * @return the InputStream the PostScript code is read from
+     */
+    public InputStream getInputStream() {
+<span class="nc" id="L91">        return this.in;</span>
+    }
+
+    /**
+     * This method is used to write out warning messages for the parsing process. Subclass to
+     * override this method. The default implementation writes to logger.
+     * @param msg the warning message
+     */
+    protected void warn(String msg) {
+<span class="nc" id="L100">        LOG.warn(msg);</span>
+<span class="nc" id="L101">    }</span>
+
+    /**
+     * Reads one line from the input file
+     * @return the line or null if there are no more lines
+     * @throws IOException In case of an I/O error
+     * @throws DSCException In case of a violation of the DSC spec
+     */
+    protected String readLine() throws IOException, DSCException {
+        String line;
+<span class="fc" id="L111">        line = this.reader.readLine();</span>
+<span class="fc" id="L112">        checkLine(line);</span>
+
+<span class="fc" id="L114">        return line;</span>
+    }
+
+    private void checkLine(String line) throws DSCException {
+<span class="fc bfc" id="L118" title="All 2 branches covered.">        if (line == null) {</span>
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">            if (!eofFound) {</span>
+<span class="nc" id="L120">                throw new DSCException(&quot;%%EOF not found. File is not well-formed.&quot;);</span>
+            }
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        } else if (line.length() &gt; 255) {</span>
+<span class="nc" id="L123">            warn(&quot;Line longer than 255 characters. This file is not fully PostScript conforming.&quot;);</span>
+        }
+<span class="fc" id="L125">    }</span>
+
+    private boolean isWhitespace(char c) {
+<span class="pc bpc" id="L128" title="1 of 4 branches missed.">        return c == ' ' || c == '\t';</span>
+    }
+
+    private DSCComment parseDSCLine(String line) throws IOException, DSCException {
+<span class="fc" id="L132">        int colon = line.indexOf(':');</span>
+        String name;
+<span class="fc" id="L134">        StringBuilder value = new StringBuilder();</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">        if (colon &gt; 0) {</span>
+<span class="fc" id="L136">            name = line.substring(2, colon);</span>
+<span class="fc" id="L137">            int startOfValue = colon + 1;</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">            if (startOfValue &lt; line.length()) {</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">                if (isWhitespace(line.charAt(startOfValue))) {</span>
+<span class="fc" id="L140">                    startOfValue++;</span>
+                }
+<span class="fc" id="L142">                value = new StringBuilder(line.substring(startOfValue).trim());</span>
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">                if (value.toString().equals(DSCConstants.ATEND.toString())) {</span>
+<span class="nc" id="L144">                    return new DSCAtend(name);</span>
+                }
+            }
+            String nextLine;
+            while (true) {
+<span class="fc" id="L149">                this.reader.mark(512);</span>
+<span class="fc" id="L150">                nextLine = readLine();</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">                if (nextLine == null) {</span>
+<span class="nc" id="L152">                    break;</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">                } else if (!nextLine.startsWith(&quot;%%+&quot;)) {</span>
+<span class="fc" id="L154">                    break;</span>
+                }
+<span class="fc" id="L156">                value.append(nextLine.substring(3));</span>
+            }
+<span class="fc" id="L158">            this.reader.reset();</span>
+<span class="fc" id="L159">        } else {</span>
+<span class="fc" id="L160">            name = line.substring(2);</span>
+<span class="fc" id="L161">            return parseDSCComment(name, null);</span>
+        }
+<span class="fc" id="L163">        return parseDSCComment(name, value.toString());</span>
+    }
+
+    private DSCComment parseDSCComment(String name, String value) {
+<span class="fc" id="L167">        DSCComment parsed = DSCCommentFactory.createDSCCommentFor(name);</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        if (parsed != null) {</span>
+            try {
+<span class="fc" id="L170">                parsed.parseValue(value);</span>
+<span class="fc" id="L171">                return parsed;</span>
+<span class="nc" id="L172">            } catch (Exception e) {</span>
+                //ignore and fall back to unparsed DSC comment
+            }
+        }
+<span class="fc" id="L176">        UnparsedDSCComment unparsed = new UnparsedDSCComment(name);</span>
+<span class="fc" id="L177">        unparsed.parseValue(value);</span>
+<span class="fc" id="L178">        return unparsed;</span>
+    }
+
+    /**
+     * Starts the parser in push parsing mode sending events to the DSCHandler instance.
+     * @param handler the DSCHandler instance to send the events to
+     * @throws IOException In case of an I/O error
+     * @throws DSCException In case of a violation of the DSC spec
+     */
+    public void parse(DSCHandler handler) throws IOException, DSCException {
+<span class="nc" id="L188">        DSCHeaderComment header = DSCTools.checkAndSkipDSC30Header(this);</span>
+<span class="nc" id="L189">        handler.startDocument(&quot;%!&quot; + header.getComment());</span>
+        DSCEvent event;
+<span class="nc bnc" id="L191" title="All 2 branches missed.">        while (hasNext()) {</span>
+<span class="nc" id="L192">            event = nextEvent();</span>
+<span class="nc bnc" id="L193" title="All 6 branches missed.">            switch (event.getEventType()) {</span>
+            case HEADER_COMMENT:
+<span class="nc" id="L195">                handler.startDocument(&quot;%!&quot; + ((DSCHeaderComment)event).getComment());</span>
+<span class="nc" id="L196">                break;</span>
+            case DSC_COMMENT:
+<span class="nc" id="L198">                handler.handleDSCComment(event.asDSCComment());</span>
+<span class="nc" id="L199">                break;</span>
+            case COMMENT:
+<span class="nc" id="L201">                handler.comment(((PostScriptComment)event).getComment());</span>
+<span class="nc" id="L202">                break;</span>
+            case LINE:
+<span class="nc" id="L204">                handler.line(getLine());</span>
+<span class="nc" id="L205">                break;</span>
+            case EOF:
+<span class="nc" id="L207">                handler.endDocument();</span>
+<span class="nc" id="L208">                break;</span>
+            default:
+<span class="nc" id="L210">                throw new IllegalStateException(&quot;Illegal event type: &quot; + event.getEventType());</span>
+            }
+        }
+<span class="nc" id="L213">    }</span>
+
+    /**
+     * Indicates whether there are additional items.
+     * @return true if there are additonal items, false if the end of the file has been reached
+     */
+    public boolean hasNext() {
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        return (this.nextEvent != null);</span>
+    }
+
+    /**
+     * Steps to the next item indicating the type of event.
+     * @return the type of event (See {@link DSCParserConstants})
+     * @throws IOException In case of an I/O error
+     * @throws DSCException In case of a violation of the DSC spec
+     * @throws NoSuchElementException If an attempt was made to advance beyond the end of the file
+     */
+    public int next() throws IOException, DSCException {
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">        if (hasNext()) {</span>
+<span class="fc" id="L232">            this.currentEvent = nextEvent;</span>
+<span class="fc" id="L233">            parseNext();</span>
+
+<span class="fc" id="L235">            processListeners();</span>
+
+<span class="fc" id="L237">            return this.currentEvent.getEventType();</span>
+        } else {
+<span class="nc" id="L239">            throw new NoSuchElementException(&quot;There are no more events&quot;);</span>
+        }
+    }
+
+    private void processListeners() throws IOException, DSCException {
+<span class="pc bpc" id="L244" title="1 of 2 branches missed.">        if (isListenersDisabled()) {</span>
+<span class="nc" id="L245">            return;</span>
+        }
+<span class="fc bfc" id="L247" title="All 2 branches covered.">        if (this.filterListener != null) {</span>
+            //Filter always comes first
+<span class="fc" id="L249">            this.filterListener.processEvent(this.currentEvent, this);</span>
+        }
+<span class="fc bfc" id="L251" title="All 2 branches covered.">        if (this.listeners != null) {</span>
+<span class="fc bfc" id="L252" title="All 2 branches covered.">            for (Object listener : this.listeners) {</span>
+<span class="fc" id="L253">                ((DSCListener) listener).processEvent(this.currentEvent, this);</span>
+<span class="fc" id="L254">            }</span>
+        }
+<span class="fc" id="L256">    }</span>
+
+    /**
+     * Steps to the next item returning the new event.
+     * @return the new event
+     * @throws IOException In case of an I/O error
+     * @throws DSCException In case of a violation of the DSC spec
+     */
+    public DSCEvent nextEvent() throws IOException, DSCException {
+<span class="fc" id="L265">        next();</span>
+<span class="fc" id="L266">        return getCurrentEvent();</span>
+    }
+
+    /**
+     * Returns the current event.
+     * @return the current event
+     */
+    public DSCEvent getCurrentEvent() {
+<span class="fc" id="L274">        return this.currentEvent;</span>
+    }
+
+    /**
+     * Returns the next event without moving the cursor to the next event.
+     * @return the next event
+     */
+    public DSCEvent peek() {
+<span class="nc" id="L282">        return this.nextEvent;</span>
+    }
+
+    /**
+     * Parses the next event.
+     * @throws IOException In case of an I/O error
+     * @throws DSCException In case of a violation of the DSC spec
+     */
+    protected void parseNext() throws IOException, DSCException {
+<span class="fc" id="L291">        String line = readLine();</span>
+<span class="fc bfc" id="L292" title="All 2 branches covered.">        if (line != null) {</span>
+<span class="pc bpc" id="L293" title="1 of 6 branches missed.">            if (isCheckEOF() &amp;&amp; eofFound &amp;&amp; (line.length() &gt; 0)) {</span>
+<span class="fc" id="L294">                throw new DSCException(&quot;Content found after EOF&quot;);</span>
+            }
+<span class="fc bfc" id="L296" title="All 2 branches covered.">            if (line.startsWith(&quot;%%&quot;)) {</span>
+<span class="fc" id="L297">                DSCComment comment = parseDSCLine(line);</span>
+<span class="fc bfc" id="L298" title="All 2 branches covered.">                if (comment.getEventType() == EOF) {</span>
+<span class="fc" id="L299">                    this.eofFound = true;</span>
+                }
+<span class="fc" id="L301">                this.nextEvent = comment;</span>
+<span class="fc bfc" id="L302" title="All 2 branches covered.">            } else if (line.startsWith(&quot;%!&quot;)) {</span>
+<span class="fc" id="L303">                this.nextEvent = new DSCHeaderComment(line.substring(2));</span>
+<span class="fc bfc" id="L304" title="All 2 branches covered.">            } else if (line.startsWith(&quot;%&quot;)) {</span>
+<span class="fc" id="L305">                this.nextEvent = new PostScriptComment(line.substring(1));</span>
+            } else {
+<span class="fc" id="L307">                this.nextEvent = new PostScriptLine(line);</span>
+            }
+        } else {
+<span class="fc" id="L310">            this.nextEvent = null;</span>
+        }
+<span class="fc" id="L312">    }</span>
+
+    /**
+     * Returns the current PostScript line.
+     * @return the current PostScript line
+     * @throws IllegalStateException if the current event is not a normal PostScript line
+     */
+    public String getLine() {
+<span class="nc bnc" id="L320" title="All 2 branches missed.">        if (this.currentEvent.getEventType() == LINE) {</span>
+<span class="nc" id="L321">            return ((PostScriptLine)this.currentEvent).getLine();</span>
+        } else {
+<span class="nc" id="L323">            throw new IllegalStateException(&quot;Current event is not a PostScript line&quot;);</span>
+        }
+    }
+
+    /**
+     * Advances to the next DSC comment with the given name.
+     * @param name the name of the DSC comment
+     * @return the requested DSC comment or null if the end of the file is reached
+     * @throws IOException In case of an I/O error
+     * @throws DSCException In case of a violation of the DSC spec
+     */
+    public DSCComment nextDSCComment(String name)
+                throws IOException, DSCException {
+<span class="nc" id="L336">        return nextDSCComment(name, null);</span>
+    }
+
+    /**
+     * Advances to the next DSC comment with the given name.
+     * @param name the name of the DSC comment
+     * @param gen PSGenerator to pass the skipped events though to
+     * @return the requested DSC comment or null if the end of the file is reached
+     * @throws IOException In case of an I/O error
+     * @throws DSCException In case of a violation of the DSC spec
+     */
+    public DSCComment nextDSCComment(String name, PSGenerator gen)
+                throws IOException, DSCException {
+<span class="nc bnc" id="L349" title="All 2 branches missed.">        while (hasNext()) {</span>
+<span class="nc" id="L350">            DSCEvent event = nextEvent();</span>
+<span class="nc bnc" id="L351" title="All 2 branches missed.">            if (event.isDSCComment()) {</span>
+<span class="nc" id="L352">                DSCComment comment = event.asDSCComment();</span>
+<span class="nc bnc" id="L353" title="All 2 branches missed.">                if (name.equals(comment.getName())) {</span>
+<span class="nc" id="L354">                    return comment;</span>
+                }
+            }
+<span class="nc bnc" id="L357" title="All 2 branches missed.">            if (gen != null) {</span>
+<span class="nc" id="L358">                event.generate(gen); //Pipe through to PSGenerator</span>
+            }
+<span class="nc" id="L360">        }</span>
+<span class="nc" id="L361">        return null;</span>
+    }
+
+    /**
+     * Advances to the next PostScript comment with the given prefix. This is used to find
+     * comments following the DSC extension mechanism.
+     * &lt;p&gt;
+     * Example: To find FOP's custom comments, pass in &quot;FOP&quot; as a prefix. This will find comments
+     * like &quot;%FOPFontSetup&quot;.
+     * @param prefix the prefix of the extension comment
+     * @param gen PSGenerator to pass the skipped events though to
+     * @return the requested PostScript comment or null if the end of the file is reached
+     * @throws IOException In case of an I/O error
+     * @throws DSCException In case of a violation of the DSC spec
+     */
+    public PostScriptComment nextPSComment(String prefix, PSGenerator gen)
+                    throws IOException, DSCException {
+<span class="nc bnc" id="L378" title="All 2 branches missed.">            while (hasNext()) {</span>
+<span class="nc" id="L379">                DSCEvent event = nextEvent();</span>
+<span class="nc bnc" id="L380" title="All 2 branches missed.">                if (event.isComment()) {</span>
+<span class="nc" id="L381">                    PostScriptComment comment = (PostScriptComment)event;</span>
+<span class="nc bnc" id="L382" title="All 2 branches missed.">                    if (comment.getComment().startsWith(prefix)) {</span>
+<span class="nc" id="L383">                        return comment;</span>
+                    }
+                }
+<span class="nc bnc" id="L386" title="All 2 branches missed.">                if (gen != null) {</span>
+<span class="nc" id="L387">                    event.generate(gen); //Pipe through to PSGenerator</span>
+                }
+<span class="nc" id="L389">            }</span>
+<span class="nc" id="L390">            return null;</span>
+    }
+
+    /**
+     * Sets a filter for DSC events.
+     * @param filter the filter to use or null to disable filtering
+     */
+    public void setFilter(DSCFilter filter) {
+<span class="pc bpc" id="L398" title="1 of 2 branches missed.">        if (filter != null) {</span>
+<span class="fc" id="L399">            this.filterListener = new FilteringEventListener(filter);</span>
+        } else {
+<span class="nc" id="L401">            this.filterListener = null;</span>
+        }
+<span class="fc" id="L403">    }</span>
+
+    /**
+     * Adds a DSC event listener.
+     * @param listener the listener
+     */
+    public void addListener(DSCListener listener) {
+<span class="pc bpc" id="L410" title="1 of 2 branches missed.">        if (listener == null) {</span>
+<span class="nc" id="L411">            throw new NullPointerException(&quot;listener must not be null&quot;);</span>
+        }
+<span class="fc bfc" id="L413" title="All 2 branches covered.">        if (this.listeners == null) {</span>
+<span class="fc" id="L414">            this.listeners = new java.util.ArrayList();</span>
+        }
+<span class="fc" id="L416">        this.listeners.add(listener);</span>
+<span class="fc" id="L417">    }</span>
+
+    /**
+     * Removes a DSC event listener.
+     * @param listener the listener to remove
+     */
+    public void removeListener(DSCListener listener) {
+<span class="nc bnc" id="L424" title="All 2 branches missed.">        if (this.listeners != null) {</span>
+<span class="nc" id="L425">            this.listeners.remove(listener);</span>
+        }
+<span class="nc" id="L427">    }</span>
+
+    /**
+     * Allows to disable all listeners. This can be used to disable any filtering, for example in
+     * nested documents.
+     * @param value true to disable all listeners, false to re-enable them
+     */
+    public void setListenersDisabled(boolean value) {
+<span class="nc" id="L435">        this.listenersDisabled = value;</span>
+<span class="nc" id="L436">    }</span>
+
+    /**
+     * Indicates whether the listeners are currently disabled.
+     * @return true if they are disabled
+     */
+    public boolean isListenersDisabled() {
+<span class="fc" id="L443">        return this.listenersDisabled;</span>
+    }
+
+    /**
+     * Sets a NestedDocumentHandler which is used to skip nested documents like embedded EPS files.
+     * You can also process those parts in a special way.
+     * &lt;p&gt;
+     * It is suggested to use the more generally usable {@link #addListener(DSCListener)} and
+     * {@link #removeListener(DSCListener)} instead. NestedDocumentHandler is internally
+     * mapped onto a {@link DSCListener}.
+     * @param handler the NestedDocumentHandler instance or null to disable the feature
+     */
+    public void setNestedDocumentHandler(final NestedDocumentHandler handler) {
+<span class="nc bnc" id="L456" title="All 2 branches missed.">        if (handler == null) {</span>
+<span class="nc" id="L457">            removeListener(this.nestedDocumentHandler);</span>
+        } else {
+<span class="nc" id="L459">            MyDSCListener l = new MyDSCListener();</span>
+<span class="nc" id="L460">            l.handler = handler;</span>
+<span class="nc" id="L461">            addListener(l);</span>
+        }
+<span class="nc" id="L463">    }</span>
+
+<span class="nc" id="L465">    static class MyDSCListener implements DSCListener {</span>
+        private NestedDocumentHandler handler;
+        public void processEvent(DSCEvent event, DSCParser parser) throws IOException,
+                DSCException {
+<span class="nc" id="L469">            handler.handle(event, parser);</span>
+<span class="nc" id="L470">        }</span>
+    }
+
+    /**
+     * Tells the parser whether to check for content after the EOF comment.
+     * This can be disabled to skip nested documents.
+     * @param value true if the check is enabled
+     */
+    public void setCheckEOF(boolean value) {
+<span class="fc" id="L479">        this.checkEOF = value;</span>
+<span class="fc" id="L480">    }</span>
+
+    /**
+     * Indicates whether the parser is configured to check for content after the EOF comment.
+     * @return true if the check is enabled.
+     */
+    public boolean isCheckEOF() {
+<span class="fc" id="L487">        return this.checkEOF;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

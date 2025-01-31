@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageFormGenerator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps</a> &gt; <span class="el_source">ImageFormGenerator.java</span></div><h1>ImageFormGenerator.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageFormGenerator.java 1881060 2020-08-21 15:38:04Z ssteiner $ */
+
+package org.apache.xmlgraphics.ps;
+
+import java.awt.Dimension;
+import java.awt.color.ColorSpace;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Dimension2D;
+import java.awt.image.RenderedImage;
+import java.io.IOException;
+
+/**
+ * Abstract helper class for generating PostScript forms.
+ */
+public class ImageFormGenerator extends FormGenerator {
+
+    //Mode 1 (RenderedImage)
+    private RenderedImage image;
+
+    //Mode 2 (ImageEncoder)
+    private ImageEncoder encoder;
+    private ColorSpace colorSpace;
+<span class="fc" id="L40">    private int bitsPerComponent = 8;</span>
+
+    private boolean invertImage;
+    private Dimension pixelDimensions;
+
+    /**
+     * Main constructor.
+     * @param formName the form's name
+     * @param title the form's title or null
+     * @param dimensions the form's dimensions in units (usually points)
+     * @param image the image
+     * @param invertImage true if the image shall be inverted
+     */
+    public ImageFormGenerator(String formName, String title,
+            Dimension2D dimensions,
+            RenderedImage image, boolean invertImage) {
+<span class="fc" id="L56">        super(formName, title, dimensions);</span>
+<span class="fc" id="L57">        this.image = image;</span>
+<span class="fc" id="L58">        this.encoder = ImageEncodingHelper.createRenderedImageEncoder(image);</span>
+<span class="fc" id="L59">        this.invertImage = invertImage;</span>
+<span class="fc" id="L60">        this.pixelDimensions = new Dimension(image.getWidth(), image.getHeight());</span>
+<span class="fc" id="L61">    }</span>
+
+    /**
+     * Main constructor.
+     * @param formName the form's name
+     * @param title the form's title or null
+     * @param dimensions the form's dimensions in units (usually points)
+     * @param dimensionsPx the form's dimensions in pixels
+     * @param encoder the image encoder
+     * @param colorSpace the target color space
+     * @param bitsPerComponent the bits per component
+     * @param invertImage true if the image shall be inverted
+     */
+    public ImageFormGenerator(String formName, String title,
+            Dimension2D dimensions, Dimension dimensionsPx,
+            ImageEncoder encoder,
+            ColorSpace colorSpace, int bitsPerComponent, boolean invertImage) {
+<span class="fc" id="L78">        super(formName, title, dimensions);</span>
+<span class="fc" id="L79">        this.pixelDimensions = dimensionsPx;</span>
+<span class="fc" id="L80">        this.encoder = encoder;</span>
+<span class="fc" id="L81">        this.colorSpace = colorSpace;</span>
+<span class="fc" id="L82">        this.bitsPerComponent = bitsPerComponent;</span>
+<span class="fc" id="L83">        this.invertImage = invertImage;</span>
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * Main constructor.
+     * @param formName the form's name
+     * @param title the form's title or null
+     * @param dimensions the form's dimensions in units (usually points)
+     * @param dimensionsPx the form's dimensions in pixels
+     * @param encoder the image encoder
+     * @param colorSpace the target color space
+     * @param invertImage true if the image shall be inverted
+     */
+    public ImageFormGenerator(String formName, String title,
+            Dimension2D dimensions, Dimension dimensionsPx,
+            ImageEncoder encoder,
+            ColorSpace colorSpace, boolean invertImage) {
+<span class="fc" id="L100">        this(formName, title, dimensions, dimensionsPx, encoder, colorSpace, 8, invertImage);</span>
+<span class="fc" id="L101">    }</span>
+
+    /**
+     * Returns the name of the data segment associated with this image form.
+     * @return the data segment name
+     */
+    protected String getDataName() {
+<span class="fc" id="L108">        return getFormName() + &quot;:Data&quot;;</span>
+    }
+
+    private String getAdditionalFilters(PSGenerator gen) {
+<span class="fc" id="L112">        String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if (implicitFilter != null) {</span>
+<span class="nc" id="L114">            return &quot;/ASCII85Decode filter &quot; + implicitFilter + &quot; filter&quot;;</span>
+        } else {
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
+<span class="fc" id="L117">                return &quot;/ASCII85Decode filter&quot;;</span>
+            } else {
+<span class="nc" id="L119">                return &quot;/ASCII85Decode filter /RunLengthDecode filter&quot;;</span>
+            }
+        }
+    }
+
+    /** {@inheritDoc} */
+    protected void generatePaintProc(PSGenerator gen) throws IOException {
+<span class="fc bfc" id="L126" title="All 2 branches covered.">        if (gen.getPSLevel() == 2) {</span>
+<span class="fc" id="L127">            gen.writeln(&quot;    userdict /i 0 put&quot;); //rewind image data</span>
+        } else {
+<span class="fc" id="L129">            gen.writeln(&quot;    &quot; + getDataName() + &quot; 0 setfileposition&quot;); //rewind image data</span>
+        }
+        String dataSource;
+<span class="fc bfc" id="L132" title="All 2 branches covered.">        if (gen.getPSLevel() == 2) {</span>
+<span class="fc" id="L133">            dataSource = &quot;{ &quot; + getDataName() + &quot; i get /i i 1 add store } bind&quot;;</span>
+        } else {
+<span class="fc" id="L135">            dataSource = getDataName();</span>
+<span class="pc bpc" id="L136" title="1 of 2 branches missed.">            if (gen.getPSLevel() &gt;= 3) {</span>
+<span class="fc" id="L137">                String implicitFilter = encoder.getImplicitFilter();</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">                if (implicitFilter == null) {</span>
+<span class="fc" id="L139">                    dataSource += &quot; /FlateDecode filter&quot;;</span>
+                }
+            }
+        }
+<span class="fc" id="L143">        AffineTransform at = new AffineTransform();</span>
+<span class="fc" id="L144">        at.scale(getDimensions().getWidth(), getDimensions().getHeight());</span>
+<span class="fc" id="L145">        gen.concatMatrix(at);</span>
+<span class="fc" id="L146">        PSDictionary imageDict = new PSDictionary();</span>
+<span class="fc" id="L147">        imageDict.put(&quot;/DataSource&quot;, dataSource);</span>
+<span class="fc bfc" id="L148" title="All 2 branches covered.">        if (this.image != null) {</span>
+<span class="fc" id="L149">            PSImageUtils.writeImageCommand(this.image, imageDict, gen);</span>
+        } else {
+<span class="fc" id="L151">            imageDict.put(&quot;/BitsPerComponent&quot;, Integer.toString(this.bitsPerComponent));</span>
+<span class="fc" id="L152">            PSImageUtils.writeImageCommand(imageDict,</span>
+                    this.pixelDimensions, this.colorSpace, this.invertImage,
+                    gen);
+        }
+<span class="fc" id="L156">    }</span>
+
+    /** {@inheritDoc} */
+    protected void generateAdditionalDataStream(PSGenerator gen) throws IOException {
+<span class="fc" id="L160">        gen.writeln(&quot;/&quot; + getDataName() + &quot; currentfile&quot;);</span>
+<span class="fc" id="L161">        gen.writeln(getAdditionalFilters(gen));</span>
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">        if (gen.getPSLevel() == 2) {</span>
+            //Creates a data array from the inline file
+<span class="nc" id="L164">            gen.writeln(&quot;{ /temp exch def [&quot;</span>
+                    + &quot; { temp 16384 string readstring not {exit } if } loop ] } exec&quot;);
+        } else {
+<span class="fc" id="L167">            gen.writeln(&quot;/ReusableStreamDecode filter&quot;);</span>
+        }
+<span class="fc" id="L169">        PSImageUtils.compressAndWriteBitmap(encoder, gen);</span>
+<span class="fc" id="L170">        gen.writeln(&quot;def&quot;);</span>
+<span class="fc" id="L171">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

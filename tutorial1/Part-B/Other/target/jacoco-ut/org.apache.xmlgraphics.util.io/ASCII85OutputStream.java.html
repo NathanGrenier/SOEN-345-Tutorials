@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ASCII85OutputStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.util.io</a> &gt; <span class="el_source">ASCII85OutputStream.java</span></div><h1>ASCII85OutputStream.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ASCII85OutputStream.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.util.io;
+
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+/**
+ * This class applies a ASCII85 encoding to the stream.
+ *
+ * @version $Id: ASCII85OutputStream.java 1804124 2017-08-04 14:13:54Z ssteiner $
+ */
+public class ASCII85OutputStream extends FilterOutputStream
+            implements ASCII85Constants, Finalizable {
+
+    private static final boolean DEBUG = false;
+
+    private int pos;
+    private long buffer;
+    private int posinline;
+    private int bw;
+
+    /** @see java.io.FilterOutputStream **/
+    public ASCII85OutputStream(OutputStream out) {
+<span class="fc" id="L43">        super(out);</span>
+<span class="fc" id="L44">    }</span>
+
+    /** @see java.io.FilterOutputStream **/
+    public void write(int b) throws IOException {
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        if (pos == 0) {</span>
+<span class="fc" id="L49">            buffer += (b &lt;&lt; 24) &amp; 0xff000000L;</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        } else if (pos == 1) {</span>
+<span class="fc" id="L51">            buffer += (b &lt;&lt; 16) &amp; 0xff0000L;</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        } else if (pos == 2) {</span>
+<span class="fc" id="L53">            buffer += (b &lt;&lt; 8) &amp; 0xff00L;</span>
+        } else {
+<span class="fc" id="L55">            buffer += b &amp; 0xffL;</span>
+        }
+<span class="fc" id="L57">        pos++;</span>
+
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (pos &gt; 3) {</span>
+<span class="fc" id="L60">            checkedWrite(convertWord(buffer));</span>
+<span class="fc" id="L61">            buffer = 0;</span>
+<span class="fc" id="L62">            pos = 0;</span>
+        }
+<span class="fc" id="L64">    }</span>
+
+    /* UNUSED ATM
+    private void checkedWrite(int b) throws IOException {
+        if (posinline == 80) {
+            out.write(EOL); bw++;
+            posinline = 0;
+        }
+        checkedWrite(b);
+        posinline++;
+        bw++;
+    }*/
+
+    private void checkedWrite(byte[] buf) throws IOException {
+<span class="fc" id="L78">        checkedWrite(buf, buf.length, false);</span>
+<span class="fc" id="L79">    }</span>
+
+    private void checkedWrite(byte[] buf, boolean nosplit) throws IOException {
+<span class="fc" id="L82">        checkedWrite(buf, buf.length, nosplit);</span>
+<span class="fc" id="L83">    }</span>
+
+    private void checkedWrite(byte[] buf , int len) throws IOException {
+<span class="fc" id="L86">        checkedWrite(buf, len, false);</span>
+<span class="fc" id="L87">    }</span>
+
+    private void checkedWrite(byte[] buf , int len, boolean nosplit) throws IOException {
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if (posinline + len &gt; 80) {</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">            int firstpart = (nosplit ? 0 : len - (posinline + len - 80));</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">            if (firstpart &gt; 0) {</span>
+<span class="nc" id="L93">                out.write(buf, 0, firstpart);</span>
+            }
+<span class="fc" id="L95">            out.write(EOL);</span>
+<span class="fc" id="L96">            bw++;</span>
+<span class="fc" id="L97">            int rest = len - firstpart;</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">            if (rest &gt; 0) {</span>
+<span class="fc" id="L99">                out.write(buf, firstpart, rest);</span>
+            }
+<span class="fc" id="L101">            posinline = rest;</span>
+<span class="fc" id="L102">        } else {</span>
+<span class="fc" id="L103">            out.write(buf, 0, len);</span>
+<span class="fc" id="L104">            posinline += len;</span>
+        }
+<span class="fc" id="L106">        bw += len;</span>
+<span class="fc" id="L107">    }</span>
+
+    /**
+     * This converts a 32 bit value (4 bytes) into 5 bytes using base 85.
+     * each byte in the result starts with zero at the '!' character so
+     * the resulting base85 number fits into printable ascii chars
+     *
+     * @param word the 32 bit unsigned (hence the long datatype) word
+     * @return 5 bytes (or a single byte of the 'z' character for word
+     * values of 0)
+     */
+    private byte[] convertWord(long word) {
+<span class="fc" id="L119">        word = word &amp; 0xffffffff;</span>
+
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (word == 0) {</span>
+<span class="fc" id="L122">            return ZERO_ARRAY;</span>
+        } else {
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">            if (word &lt; 0) {</span>
+<span class="nc" id="L125">                word = -word;</span>
+            }
+<span class="fc" id="L127">            byte c1 =</span>
+                (byte)((word
+                        / POW85[0]) &amp; 0xFF);
+<span class="fc" id="L130">            byte c2 =</span>
+                (byte)(((word - (c1 * POW85[0]))
+                        / POW85[1]) &amp; 0xFF);
+<span class="fc" id="L133">            byte c3 =</span>
+                (byte)(((word - (c1 * POW85[0])
+                              - (c2 * POW85[1]))
+                        / POW85[2]) &amp; 0xFF);
+<span class="fc" id="L137">            byte c4 =</span>
+                (byte)(((word - (c1 * POW85[0])
+                              - (c2 * POW85[1])
+                              - (c3 * POW85[2]))
+                        / POW85[3]) &amp; 0xFF);
+<span class="fc" id="L142">            byte c5 =</span>
+                (byte)(((word - (c1 * POW85[0])
+                              - (c2 * POW85[1])
+                              - (c3 * POW85[2])
+                              - (c4 * POW85[3])))
+                        &amp; 0xFF);
+
+<span class="fc" id="L149">            byte[] ret = {</span>
+                (byte)(c1 + START), (byte)(c2 + START),
+                (byte)(c3 + START), (byte)(c4 + START),
+                (byte)(c5 + START)
+            };
+
+            if (DEBUG) {
+                for (byte aRet : ret) {
+                    if (aRet &lt; 33 || aRet &gt; 117) {
+                        System.out.println(&quot;Illegal char value &quot;
+                                + (int) aRet);
+                    }
+                }
+            }
+<span class="fc" id="L163">            return ret;</span>
+        }
+    }
+
+    /** @see Finalizable **/
+    public void finalizeStream() throws IOException {
+        // now take care of the trailing few bytes.
+        // with n leftover bytes, we append 0 bytes to make a full group of 4
+        // then convert like normal (except not applying the special zero rule)
+        // and write out the first n+1 bytes from the result
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        if (pos &gt; 0) {</span>
+<span class="fc" id="L174">            int rest = pos;</span>
+            /*
+            byte[] lastdata = new byte[4];
+            int i = 0;
+            for (int j = 0; j &lt; 4; j++) {
+                if (j &lt; rest) {
+                    lastdata[j] = data[i++];
+                } else {
+                    lastdata[j] = 0;
+                }
+            }
+
+            long val = ((lastdata[0] &lt;&lt; 24) &amp; 0xff000000L)
+                       + ((lastdata[1] &lt;&lt; 16) &amp; 0xff0000L)
+                       + ((lastdata[2] &lt;&lt; 8) &amp; 0xff00L)
+                       + (lastdata[3] &amp; 0xffL);
+            */
+
+            byte[] conv;
+            // special rule for handling zeros at the end
+<span class="fc bfc" id="L194" title="All 2 branches covered.">            if (buffer != 0) {</span>
+<span class="fc" id="L195">                conv = convertWord(buffer);</span>
+            } else {
+<span class="fc" id="L197">                conv = new byte[5];</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">                for (int j = 0; j &lt; 5; j++) {</span>
+<span class="fc" id="L199">                    conv[j] = (byte)'!';</span>
+                }
+            }
+            // assert rest+1 &lt;= 5
+<span class="fc" id="L203">            checkedWrite(conv, rest + 1);</span>
+        }
+        // finally write the two character end of data marker
+<span class="fc" id="L206">        checkedWrite(EOD, true);</span>
+
+<span class="fc" id="L208">        flush();</span>
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">        if (out instanceof Finalizable) {</span>
+<span class="nc" id="L210">            ((Finalizable)out).finalizeStream();</span>
+        }
+<span class="fc" id="L212">    }</span>
+
+    /** @see java.io.FilterOutputStream **/
+    public void close() throws IOException {
+<span class="fc" id="L216">        finalizeStream();</span>
+<span class="fc" id="L217">        super.close();</span>
+<span class="fc" id="L218">    }</span>
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

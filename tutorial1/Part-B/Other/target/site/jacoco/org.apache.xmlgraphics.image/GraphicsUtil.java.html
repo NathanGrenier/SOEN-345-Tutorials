@@ -1,0 +1,1223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GraphicsUtil.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image</a> &gt; <span class="el_source">GraphicsUtil.java</span></div><h1>GraphicsUtil.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: GraphicsUtil.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image;
+
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.color.ColorSpace;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentSampleModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.DataBufferInt;
+import java.awt.image.DataBufferShort;
+import java.awt.image.DataBufferUShort;
+import java.awt.image.DirectColorModel;
+import java.awt.image.Raster;
+import java.awt.image.RenderedImage;
+import java.awt.image.SampleModel;
+import java.awt.image.SinglePixelPackedSampleModel;
+import java.awt.image.WritableRaster;
+
+import org.apache.xmlgraphics.image.rendered.Any2LsRGBRed;
+import org.apache.xmlgraphics.image.rendered.Any2sRGBRed;
+import org.apache.xmlgraphics.image.rendered.BufferedImageCachableRed;
+import org.apache.xmlgraphics.image.rendered.CachableRed;
+import org.apache.xmlgraphics.image.rendered.RenderedImageCachableRed;
+
+// CSOFF: AvoidNestedBlocks
+// CSOFF: ConstantName
+// CSOFF: MethodName
+// CSOFF: MultipleVariableDeclarations
+// CSOFF: NeedBraces
+// CSOFF: OneStatementPerLine
+// CSOFF: OperatorWrap
+// CSOFF: StaticVariableName
+// CSOFF: WhitespaceAfter
+// CSOFF: WhitespaceAround
+
+/**
+ * Set of utility methods for Graphics.
+ * These generally bypass broken methods in Java2D or provide tweaked
+ * implementations.
+ *
+ * @version $Id: GraphicsUtil.java 1732018 2016-02-24 04:51:06Z gadams $
+ *
+ * Originally authored by Thomas DeWeese.
+ */
+public final class GraphicsUtil {
+
+    private GraphicsUtil() {
+    }
+
+<span class="nc" id="L72">    public static final AffineTransform IDENTITY = new AffineTransform();</span>
+
+    /**
+     * Standard prebuilt Linear_sRGB color model with no alpha */
+<span class="nc" id="L76">    public static final ColorModel Linear_sRGB =</span>
+<span class="nc" id="L77">        new DirectColorModel(ColorSpace.getInstance(</span>
+                             ColorSpace.CS_LINEAR_RGB), 24,
+                             0x00FF0000, 0x0000FF00,
+                             0x000000FF, 0x0, false,
+                             DataBuffer.TYPE_INT);
+    /**
+     * Standard prebuilt Linear_sRGB color model with premultiplied alpha.
+     */
+<span class="nc" id="L85">    public static final ColorModel Linear_sRGB_Pre =</span>
+<span class="nc" id="L86">        new DirectColorModel(ColorSpace.getInstance(</span>
+                             ColorSpace.CS_LINEAR_RGB), 32,
+                             0x00FF0000, 0x0000FF00,
+                             0x000000FF, 0xFF000000, true,
+                             DataBuffer.TYPE_INT);
+    /**
+     * Standard prebuilt Linear_sRGB color model with unpremultiplied alpha.
+     */
+<span class="nc" id="L94">    public static final ColorModel Linear_sRGB_Unpre =</span>
+<span class="nc" id="L95">        new DirectColorModel(ColorSpace.getInstance(</span>
+                             ColorSpace.CS_LINEAR_RGB), 32,
+                             0x00FF0000, 0x0000FF00,
+                             0x000000FF, 0xFF000000, false,
+                             DataBuffer.TYPE_INT);
+
+    /**
+     * Standard prebuilt sRGB color model with no alpha.
+     */
+<span class="nc" id="L104">    public static final ColorModel sRGB =</span>
+<span class="nc" id="L105">        new DirectColorModel(ColorSpace.getInstance(</span>
+                             ColorSpace.CS_sRGB), 24,
+                             0x00FF0000, 0x0000FF00,
+                             0x000000FF, 0x0, false,
+                             DataBuffer.TYPE_INT);
+    /**
+     * Standard prebuilt sRGB color model with premultiplied alpha.
+     */
+<span class="nc" id="L113">    public static final ColorModel sRGB_Pre =</span>
+<span class="nc" id="L114">        new DirectColorModel(ColorSpace.getInstance(</span>
+                             ColorSpace.CS_sRGB), 32,
+                             0x00FF0000, 0x0000FF00,
+                             0x000000FF, 0xFF000000, true,
+                             DataBuffer.TYPE_INT);
+    /**
+     * Standard prebuilt sRGB color model with unpremultiplied alpha.
+     */
+<span class="nc" id="L122">    public static final ColorModel sRGB_Unpre =</span>
+<span class="nc" id="L123">        new DirectColorModel(ColorSpace.getInstance(</span>
+                             ColorSpace.CS_sRGB), 32,
+                             0x00FF0000, 0x0000FF00,
+                             0x000000FF, 0xFF000000, false,
+                             DataBuffer.TYPE_INT);
+
+    /**
+     * Method that returns either Linear_sRGB_Pre or Linear_sRGB_UnPre
+     * based on premult flag.
+     * @param premult True if the ColorModel should have premultiplied alpha.
+     * @return        a ColorMdoel with Linear sRGB colorSpace and
+     *                the alpha channel set in accordance with
+     *                &lt;tt&gt;premult&lt;/tt&gt;
+     */
+    public static ColorModel makeLinear_sRGBCM(boolean premult) {
+<span class="nc bnc" id="L138" title="All 2 branches missed.">         return premult ? Linear_sRGB_Pre : Linear_sRGB_Unpre;</span>
+    }
+
+    /**
+     * Constructs a BufferedImage with a linear sRGB colorModel, and alpha.
+     * @param width   The desired width of the BufferedImage
+     * @param height  The desired height of the BufferedImage
+     * @param premult The desired state of alpha premultiplied
+     * @return        The requested BufferedImage.
+     */
+    public static BufferedImage makeLinearBufferedImage(int width,
+                                                        int height,
+                                                        boolean premult) {
+<span class="nc" id="L151">        ColorModel cm = makeLinear_sRGBCM(premult);</span>
+<span class="nc" id="L152">        WritableRaster wr = cm.createCompatibleWritableRaster(width, height);</span>
+<span class="nc" id="L153">        return new BufferedImage(cm, wr, premult, null);</span>
+    }
+
+    /**
+     * This method will return a CacheableRed that has it's data in
+     * the linear sRGB colorspace. If &lt;tt&gt;src&lt;/tt&gt; is already in
+     * linear sRGB then this method does nothing and returns &lt;tt&gt;src&lt;/tt&gt;.
+     * Otherwise it creates a transform that will convert
+     * &lt;tt&gt;src&lt;/tt&gt;'s output to linear sRGB and returns that CacheableRed.
+     *
+     * @param src The image to convert to linear sRGB.
+     * @return    An equivilant image to &lt;tt&gt;src&lt;/tt&gt; who's data is in
+     *            linear sRGB.
+     */
+    public static CachableRed convertToLsRGB(CachableRed src) {
+<span class="nc" id="L168">        ColorModel cm = src.getColorModel();</span>
+<span class="nc" id="L169">        ColorSpace cs = cm.getColorSpace();</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        if (cs == ColorSpace.getInstance(ColorSpace.CS_LINEAR_RGB)) {</span>
+<span class="nc" id="L171">            return src;</span>
+        }
+
+<span class="nc" id="L174">        return new Any2LsRGBRed(src);</span>
+    }
+
+    /**
+     * This method will return a CacheableRed that has it's data in
+     * the sRGB colorspace. If &lt;tt&gt;src&lt;/tt&gt; is already in
+     * sRGB then this method does nothing and returns &lt;tt&gt;src&lt;/tt&gt;.
+     * Otherwise it creates a transform that will convert
+     * &lt;tt&gt;src&lt;/tt&gt;'s output to sRGB and returns that CacheableRed.
+     *
+     * @param src The image to convert to sRGB.
+     * @return    An equivilant image to &lt;tt&gt;src&lt;/tt&gt; who's data is in sRGB.
+     */
+    public static CachableRed convertTosRGB(CachableRed src) {
+<span class="nc" id="L188">        ColorModel cm = src.getColorModel();</span>
+<span class="nc" id="L189">        ColorSpace cs = cm.getColorSpace();</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">        if (cs == ColorSpace.getInstance(ColorSpace.CS_sRGB)) {</span>
+<span class="nc" id="L191">            return src;</span>
+        }
+
+<span class="nc" id="L194">        return new Any2sRGBRed(src);</span>
+    }
+
+    /**
+     * Convertes any RenderedImage to a CacheableRed.  &lt;p&gt;
+     * If &lt;tt&gt;ri&lt;/tt&gt; is already a CacheableRed it casts it down and
+     * returns it.&lt;p&gt;
+     *
+     * In cases where &lt;tt&gt;ri&lt;/tt&gt; is not already a CacheableRed it
+     * wraps &lt;tt&gt;ri&lt;/tt&gt; with a helper class.  The wrapped
+     * CacheableRed &quot;Pretends&quot; that it has no sources since it has no
+     * way of inteligently handling the dependency/dirty region calls
+     * if it exposed the source.
+     * @param ri The RenderedImage to convert.
+     * @return   a CacheableRed that contains the same data as ri.
+     */
+    public static CachableRed wrap(RenderedImage ri) {
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        if (ri instanceof CachableRed) {</span>
+<span class="nc" id="L212">            return (CachableRed) ri;</span>
+        }
+<span class="nc bnc" id="L214" title="All 2 branches missed.">        if (ri instanceof BufferedImage) {</span>
+<span class="nc" id="L215">            return new BufferedImageCachableRed((BufferedImage)ri);</span>
+        }
+<span class="nc" id="L217">        return new RenderedImageCachableRed(ri);</span>
+    }
+
+    /**
+     * An internal optimized version of copyData designed to work on
+     * Integer packed data with a SinglePixelPackedSampleModel.  Only
+     * the region of overlap between src and dst is copied.
+     *
+     * Calls to this should be preflighted with is_INT_PACK_Data
+     * on both src and dest (requireAlpha can be false).
+     *
+     * @param src The source of the data
+     * @param dst The destination for the data.
+     */
+    public static void copyData_INT_PACK(Raster src, WritableRaster dst) {
+        // System.out.println(&quot;Fast copyData&quot;);
+<span class="nc" id="L233">        int x0 = dst.getMinX();</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">        if (x0 &lt; src.getMinX()) {</span>
+<span class="nc" id="L235">            x0 = src.getMinX();</span>
+        }
+
+<span class="nc" id="L238">        int y0 = dst.getMinY();</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">        if (y0 &lt; src.getMinY()) {</span>
+<span class="nc" id="L240">            y0 = src.getMinY();</span>
+        }
+
+<span class="nc" id="L243">        int x1 = dst.getMinX() + dst.getWidth() - 1;</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">        if (x1 &gt; src.getMinX() + src.getWidth() - 1) {</span>
+<span class="nc" id="L245">            x1 = src.getMinX() + src.getWidth() - 1;</span>
+        }
+
+<span class="nc" id="L248">        int y1 = dst.getMinY() + dst.getHeight() - 1;</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">        if (y1 &gt; src.getMinY() + src.getHeight() - 1) {</span>
+<span class="nc" id="L250">            y1 = src.getMinY() + src.getHeight() - 1;</span>
+        }
+
+<span class="nc" id="L253">        int width  = x1 - x0 + 1;</span>
+<span class="nc" id="L254">        int height = y1 - y0 + 1;</span>
+
+        SinglePixelPackedSampleModel srcSPPSM;
+<span class="nc" id="L257">        srcSPPSM = (SinglePixelPackedSampleModel)src.getSampleModel();</span>
+
+<span class="nc" id="L259">        final int     srcScanStride = srcSPPSM.getScanlineStride();</span>
+<span class="nc" id="L260">        DataBufferInt srcDB         = (DataBufferInt)src.getDataBuffer();</span>
+<span class="nc" id="L261">        final int []  srcPixels     = srcDB.getBankData()[0];</span>
+<span class="nc" id="L262">        final int     srcBase =</span>
+<span class="nc" id="L263">            (srcDB.getOffset()</span>
+<span class="nc" id="L264">             + srcSPPSM.getOffset(x0 - src.getSampleModelTranslateX(),</span>
+<span class="nc" id="L265">                                y0 - src.getSampleModelTranslateY()));</span>
+
+
+        SinglePixelPackedSampleModel dstSPPSM;
+<span class="nc" id="L269">        dstSPPSM = (SinglePixelPackedSampleModel)dst.getSampleModel();</span>
+
+<span class="nc" id="L271">        final int     dstScanStride = dstSPPSM.getScanlineStride();</span>
+<span class="nc" id="L272">        DataBufferInt dstDB         = (DataBufferInt)dst.getDataBuffer();</span>
+<span class="nc" id="L273">        final int []  dstPixels     = dstDB.getBankData()[0];</span>
+<span class="nc" id="L274">        final int     dstBase =</span>
+<span class="nc" id="L275">            (dstDB.getOffset()</span>
+<span class="nc" id="L276">             + dstSPPSM.getOffset(x0 - dst.getSampleModelTranslateX(),</span>
+<span class="nc" id="L277">                                y0 - dst.getSampleModelTranslateY()));</span>
+
+<span class="nc bnc" id="L279" title="All 4 branches missed.">        if ((srcScanStride == dstScanStride)</span>
+            &amp;&amp; (srcScanStride == width)) {
+            // System.out.println(&quot;VERY Fast copyData&quot;);
+
+<span class="nc" id="L283">            System.arraycopy(srcPixels, srcBase, dstPixels, dstBase,</span>
+                             width * height);
+<span class="nc bnc" id="L285" title="All 2 branches missed.">        } else if (width &gt; 128) {</span>
+<span class="nc" id="L286">            int srcSP = srcBase;</span>
+<span class="nc" id="L287">            int dstSP = dstBase;</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">            for (int y = 0; y &lt; height; y++) {</span>
+<span class="nc" id="L289">                System.arraycopy(srcPixels, srcSP, dstPixels, dstSP, width);</span>
+<span class="nc" id="L290">                srcSP += srcScanStride;</span>
+<span class="nc" id="L291">                dstSP += dstScanStride;</span>
+            }
+<span class="nc" id="L293">        } else {</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">            for (int y = 0; y &lt; height; y++) {</span>
+<span class="nc" id="L295">                int srcSP = srcBase + y * srcScanStride;</span>
+<span class="nc" id="L296">                int dstSP = dstBase + y * dstScanStride;</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">                for (int x = 0; x &lt; width; x++) {</span>
+<span class="nc" id="L298">                    dstPixels[dstSP++] = srcPixels[srcSP++];</span>
+                }
+            }
+        }
+<span class="nc" id="L302">    }</span>
+
+    public static void copyData_FALLBACK(Raster src, WritableRaster dst) {
+        // System.out.println(&quot;Fallback copyData&quot;);
+
+<span class="nc" id="L307">        int x0 = dst.getMinX();</span>
+<span class="nc bnc" id="L308" title="All 2 branches missed.">        if (x0 &lt; src.getMinX()) {</span>
+<span class="nc" id="L309">            x0 = src.getMinX();</span>
+        }
+
+<span class="nc" id="L312">        int y0 = dst.getMinY();</span>
+<span class="nc bnc" id="L313" title="All 2 branches missed.">        if (y0 &lt; src.getMinY()) {</span>
+<span class="nc" id="L314">            y0 = src.getMinY();</span>
+        }
+
+<span class="nc" id="L317">        int x1 = dst.getMinX() + dst.getWidth() - 1;</span>
+<span class="nc bnc" id="L318" title="All 2 branches missed.">        if (x1 &gt; src.getMinX() + src.getWidth() - 1) {</span>
+<span class="nc" id="L319">            x1 = src.getMinX() + src.getWidth() - 1;</span>
+        }
+
+<span class="nc" id="L322">        int y1 = dst.getMinY() + dst.getHeight() - 1;</span>
+<span class="nc bnc" id="L323" title="All 2 branches missed.">        if (y1 &gt; src.getMinY() + src.getHeight() - 1) {</span>
+<span class="nc" id="L324">            y1 = src.getMinY() + src.getHeight() - 1;</span>
+        }
+
+<span class="nc" id="L327">        int width  = x1 - x0 + 1;</span>
+<span class="nc" id="L328">        int [] data = null;</span>
+
+<span class="nc bnc" id="L330" title="All 2 branches missed.">        for (int y = y0; y &lt;= y1; y++)  {</span>
+<span class="nc" id="L331">            data = src.getPixels(x0, y, width, 1, data);</span>
+<span class="nc" id="L332">            dst.setPixels(x0, y, width, 1, data);</span>
+        }
+<span class="nc" id="L334">    }</span>
+
+    /**
+     * Copies data from one raster to another. Only the region of
+     * overlap between src and dst is copied.  &lt;tt&gt;Src&lt;/tt&gt; and
+     * &lt;tt&gt;Dst&lt;/tt&gt; must have compatible SampleModels.
+     *
+     * @param src The source of the data
+     * @param dst The destination for the data.
+     */
+    public static void copyData(Raster src, WritableRaster dst) {
+<span class="nc bnc" id="L345" title="All 2 branches missed.">        if (is_INT_PACK_Data(src.getSampleModel(), false)</span>
+<span class="nc bnc" id="L346" title="All 2 branches missed.">            &amp;&amp; is_INT_PACK_Data(dst.getSampleModel(), false)) {</span>
+<span class="nc" id="L347">            copyData_INT_PACK(src, dst);</span>
+<span class="nc" id="L348">            return;</span>
+        }
+
+<span class="nc" id="L351">        copyData_FALLBACK(src, dst);</span>
+<span class="nc" id="L352">    }</span>
+
+    /**
+     * Creates a new raster that has a &lt;b&gt;copy&lt;/b&gt; of the data in
+     * &lt;tt&gt;ras&lt;/tt&gt;.  This is highly optimized for speed.  There is
+     * no provision for changing any aspect of the SampleModel.
+     *
+     * This method should be used when you need to change the contents
+     * of a Raster that you do not &quot;own&quot; (ie the result of a
+     * &lt;tt&gt;getData&lt;/tt&gt; call).
+     * @param ras The Raster to copy.
+     * @return    A writable copy of &lt;tt&gt;ras&lt;/tt&gt;
+     */
+    public static WritableRaster copyRaster(Raster ras) {
+<span class="nc" id="L366">        return copyRaster(ras, ras.getMinX(), ras.getMinY());</span>
+    }
+
+
+    /**
+     * Creates a new raster that has a &lt;b&gt;copy&lt;/b&gt; of the data in
+     * &lt;tt&gt;ras&lt;/tt&gt;.  This is highly optimized for speed.  There is
+     * no provision for changing any aspect of the SampleModel.
+     * However you can specify a new location for the returned raster.
+     *
+     * This method should be used when you need to change the contents
+     * of a Raster that you do not &quot;own&quot; (ie the result of a
+     * &lt;tt&gt;getData&lt;/tt&gt; call).
+     *
+     * @param ras The Raster to copy.
+     *
+     * @param minX The x location for the upper left corner of the
+     *             returned WritableRaster.
+     *
+     * @param minY The y location for the upper left corner of the
+     *             returned WritableRaster.
+     *
+     * @return    A writable copy of &lt;tt&gt;ras&lt;/tt&gt;
+     */
+    public static WritableRaster copyRaster(Raster ras, int minX, int minY) {
+<span class="nc" id="L391">        WritableRaster ret = Raster.createWritableRaster(</span>
+<span class="nc" id="L392">            ras.getSampleModel(),</span>
+             new Point(0, 0));
+<span class="nc" id="L394">        ret = ret.createWritableChild(</span>
+<span class="nc" id="L395">            ras.getMinX() - ras.getSampleModelTranslateX(),</span>
+<span class="nc" id="L396">             ras.getMinY() - ras.getSampleModelTranslateY(),</span>
+<span class="nc" id="L397">             ras.getWidth(), ras.getHeight(),</span>
+             minX, minY, null);
+
+        // Use System.arraycopy to copy the data between the two...
+<span class="nc" id="L401">        DataBuffer srcDB = ras.getDataBuffer();</span>
+<span class="nc" id="L402">        DataBuffer retDB = ret.getDataBuffer();</span>
+<span class="nc bnc" id="L403" title="All 2 branches missed.">        if (srcDB.getDataType() != retDB.getDataType()) {</span>
+<span class="nc" id="L404">            throw new IllegalArgumentException(</span>
+                &quot;New DataBuffer doesn't match original&quot;);
+        }
+<span class="nc" id="L407">        int len   = srcDB.getSize();</span>
+<span class="nc" id="L408">        int banks = srcDB.getNumBanks();</span>
+<span class="nc" id="L409">        int [] offsets = srcDB.getOffsets();</span>
+<span class="nc bnc" id="L410" title="All 2 branches missed.">        for (int b = 0; b &lt; banks; b++) {</span>
+<span class="nc bnc" id="L411" title="All 5 branches missed.">            switch (srcDB.getDataType()) {</span>
+            case DataBuffer.TYPE_BYTE: {
+<span class="nc" id="L413">                DataBufferByte srcDBT = (DataBufferByte)srcDB;</span>
+<span class="nc" id="L414">                DataBufferByte retDBT = (DataBufferByte)retDB;</span>
+<span class="nc" id="L415">                System.arraycopy(srcDBT.getData(b), offsets[b],</span>
+<span class="nc" id="L416">                                 retDBT.getData(b), offsets[b], len);</span>
+<span class="nc" id="L417">                break;</span>
+            }
+            case DataBuffer.TYPE_INT: {
+<span class="nc" id="L420">                DataBufferInt srcDBT = (DataBufferInt)srcDB;</span>
+<span class="nc" id="L421">                DataBufferInt retDBT = (DataBufferInt)retDB;</span>
+<span class="nc" id="L422">                System.arraycopy(srcDBT.getData(b), offsets[b],</span>
+<span class="nc" id="L423">                                 retDBT.getData(b), offsets[b], len);</span>
+<span class="nc" id="L424">                break;</span>
+            }
+            case DataBuffer.TYPE_SHORT: {
+<span class="nc" id="L427">                DataBufferShort srcDBT = (DataBufferShort)srcDB;</span>
+<span class="nc" id="L428">                DataBufferShort retDBT = (DataBufferShort)retDB;</span>
+<span class="nc" id="L429">                System.arraycopy(srcDBT.getData(b), offsets[b],</span>
+<span class="nc" id="L430">                                 retDBT.getData(b), offsets[b], len);</span>
+<span class="nc" id="L431">                break;</span>
+            }
+            case DataBuffer.TYPE_USHORT: {
+<span class="nc" id="L434">                DataBufferUShort srcDBT = (DataBufferUShort)srcDB;</span>
+<span class="nc" id="L435">                DataBufferUShort retDBT = (DataBufferUShort)retDB;</span>
+<span class="nc" id="L436">                System.arraycopy(srcDBT.getData(b), offsets[b],</span>
+<span class="nc" id="L437">                                 retDBT.getData(b), offsets[b], len);</span>
+<span class="nc" id="L438">                break;</span>
+            }
+            default:
+<span class="nc" id="L441">                throw new</span>
+                    UnsupportedOperationException(&quot;unsupported data type: &quot;
+<span class="nc" id="L443">                                                  + srcDB.getDataType());</span>
+            }
+        }
+
+<span class="nc" id="L447">        return ret;</span>
+    }
+
+    /**
+     * Coerces &lt;tt&gt;ras&lt;/tt&gt; to be writable.  The returned Raster continues to
+     * reference the DataBuffer from ras, so modifications to the returned
+     * WritableRaster will be seen in ras.&lt;p&gt;
+     *
+     * This method should only be used if you need a WritableRaster due to
+     * an interface (such as to construct a BufferedImage), but have no
+     * intention of modifying the contents of the returned Raster.  If
+     * you have any doubt about other users of the data in &lt;tt&gt;ras&lt;/tt&gt;,
+     * use copyRaster (above).
+     * @param ras The raster to make writable.
+     * @return    A Writable version of ras (shares DataBuffer with
+     *            &lt;tt&gt;ras&lt;/tt&gt;).
+     */
+    public static WritableRaster makeRasterWritable(Raster ras) {
+<span class="nc" id="L465">        return makeRasterWritable(ras, ras.getMinX(), ras.getMinY());</span>
+    }
+
+    /**
+     * Coerces &lt;tt&gt;ras&lt;/tt&gt; to be writable.  The returned Raster continues to
+     * reference the DataBuffer from ras, so modifications to the returned
+     * WritableRaster will be seen in ras.&lt;p&gt;
+     *
+     * You can specify a new location for the returned WritableRaster, this
+     * is especially useful for constructing BufferedImages which require
+     * the Raster to be at (0,0).
+     *
+     * This method should only be used if you need a WritableRaster due to
+     * an interface (such as to construct a BufferedImage), but have no
+     * intention of modifying the contents of the returned Raster.  If
+     * you have any doubt about other users of the data in &lt;tt&gt;ras&lt;/tt&gt;,
+     * use copyRaster (above).
+     *
+     * @param ras The raster to make writable.
+     *
+     * @param minX The x location for the upper left corner of the
+     *             returned WritableRaster.
+     *
+     * @param minY The y location for the upper left corner of the
+     *             returned WritableRaster.
+     *
+     * @return A Writable version of &lt;tT&gt;ras&lt;/tt&gt; with it's upper left
+     *         hand coordinate set to minX, minY (shares it's DataBuffer
+     *         with &lt;tt&gt;ras&lt;/tt&gt;).
+     */
+    public static WritableRaster makeRasterWritable(Raster ras,
+                                                    int minX, int minY) {
+<span class="nc" id="L497">        WritableRaster ret = Raster.createWritableRaster(</span>
+<span class="nc" id="L498">            ras.getSampleModel(),</span>
+<span class="nc" id="L499">             ras.getDataBuffer(),</span>
+             new Point(0, 0));
+<span class="nc" id="L501">        ret = ret.createWritableChild(</span>
+<span class="nc" id="L502">            ras.getMinX() - ras.getSampleModelTranslateX(),</span>
+<span class="nc" id="L503">             ras.getMinY() - ras.getSampleModelTranslateY(),</span>
+<span class="nc" id="L504">             ras.getWidth(), ras.getHeight(),</span>
+             minX, minY, null);
+<span class="nc" id="L506">        return ret;</span>
+    }
+
+    /**
+     * Create a new ColorModel with it's alpha premultiplied state matching
+     * newAlphaPreMult.
+     * @param cm The ColorModel to change the alpha premult state of.
+     * @param newAlphaPreMult The new state of alpha premult.
+     * @return   A new colorModel that has isAlphaPremultiplied()
+     *           equal to newAlphaPreMult.
+     */
+    public static ColorModel
+        coerceColorModel(ColorModel cm, boolean newAlphaPreMult) {
+<span class="nc bnc" id="L519" title="All 2 branches missed.">        if (cm.isAlphaPremultiplied() == newAlphaPreMult) {</span>
+<span class="nc" id="L520">            return cm;</span>
+        }
+
+        // Easiest way to build proper colormodel for new Alpha state...
+        // Eventually this should switch on known ColorModel types and
+        // only fall back on this hack when the CM type is unknown.
+<span class="nc" id="L526">        WritableRaster wr = cm.createCompatibleWritableRaster(1, 1);</span>
+<span class="nc" id="L527">        return cm.coerceData(wr, newAlphaPreMult);</span>
+    }
+
+    /**
+     * Coerces data within a bufferedImage to match newAlphaPreMult,
+     * Note that this can not change the colormodel of bi so you
+     *
+     * @param wr The raster to change the state of.
+     * @param cm The colormodel currently associated with data in wr.
+     * @param newAlphaPreMult The desired state of alpha Premult for raster.
+     * @return A new colormodel that matches newAlphaPreMult.
+     */
+    public static ColorModel
+        coerceData(WritableRaster wr, ColorModel cm, boolean newAlphaPreMult) {
+
+        // System.out.println(&quot;CoerceData: &quot; + cm.isAlphaPremultiplied() +
+        //                    &quot; Out: &quot; + newAlphaPreMult);
+<span class="nc bnc" id="L544" title="All 2 branches missed.">        if (!cm.hasAlpha()) {</span>
+            // Nothing to do no alpha channel
+<span class="nc" id="L546">            return cm;</span>
+        }
+
+<span class="nc bnc" id="L549" title="All 2 branches missed.">        if (cm.isAlphaPremultiplied() == newAlphaPreMult) {</span>
+            // nothing to do alpha state matches...
+<span class="nc" id="L551">            return cm;</span>
+        }
+
+        // System.out.println(&quot;CoerceData: &quot; + wr.getSampleModel());
+
+<span class="nc bnc" id="L556" title="All 2 branches missed.">        if (newAlphaPreMult) {</span>
+<span class="nc" id="L557">            multiplyAlpha(wr);</span>
+        } else {
+<span class="nc" id="L559">            divideAlpha(wr);</span>
+        }
+
+<span class="nc" id="L562">        return coerceColorModel(cm, newAlphaPreMult);</span>
+    }
+
+    public static void multiplyAlpha(WritableRaster wr) {
+<span class="nc bnc" id="L566" title="All 2 branches missed.">        if (is_BYTE_COMP_Data(wr.getSampleModel())) {</span>
+<span class="nc" id="L567">            mult_BYTE_COMP_Data(wr);</span>
+<span class="nc bnc" id="L568" title="All 2 branches missed.">        } else if (is_INT_PACK_Data(wr.getSampleModel(), true)) {</span>
+<span class="nc" id="L569">            mult_INT_PACK_Data(wr);</span>
+        } else {
+<span class="nc" id="L571">            int [] pixel = null;</span>
+<span class="nc" id="L572">            int    bands = wr.getNumBands();</span>
+<span class="nc" id="L573">            float  norm = 1f / 255f;</span>
+            int x0;
+            int x1;
+            int y0;
+            int y1;
+            int a;
+            int b;
+            float alpha;
+<span class="nc" id="L581">            x0 = wr.getMinX();</span>
+<span class="nc" id="L582">            x1 = x0 + wr.getWidth();</span>
+<span class="nc" id="L583">            y0 = wr.getMinY();</span>
+<span class="nc" id="L584">            y1 = y0 + wr.getHeight();</span>
+<span class="nc bnc" id="L585" title="All 2 branches missed.">            for (int y = y0; y &lt; y1; y++) {</span>
+<span class="nc bnc" id="L586" title="All 2 branches missed.">                for (int x = x0; x &lt; x1; x++) {</span>
+<span class="nc" id="L587">                    pixel = wr.getPixel(x, y, pixel);</span>
+<span class="nc" id="L588">                    a = pixel[bands - 1];</span>
+<span class="nc bnc" id="L589" title="All 4 branches missed.">                    if ((a &gt;= 0) &amp;&amp; (a &lt; 255)) {</span>
+<span class="nc" id="L590">                        alpha = a * norm;</span>
+<span class="nc bnc" id="L591" title="All 2 branches missed.">                        for (b = 0; b &lt; bands - 1; b++) {</span>
+<span class="nc" id="L592">                            pixel[b] = (int)(pixel[b] * alpha + 0.5f);</span>
+                        }
+<span class="nc" id="L594">                        wr.setPixel(x, y, pixel);</span>
+                    }
+                }
+            }
+        }
+<span class="nc" id="L599">    }</span>
+
+    public static void divideAlpha(WritableRaster wr) {
+<span class="nc bnc" id="L602" title="All 2 branches missed.">        if (is_BYTE_COMP_Data(wr.getSampleModel())) {</span>
+<span class="nc" id="L603">            divide_BYTE_COMP_Data(wr);</span>
+<span class="nc bnc" id="L604" title="All 2 branches missed.">        } else if (is_INT_PACK_Data(wr.getSampleModel(), true)) {</span>
+<span class="nc" id="L605">            divide_INT_PACK_Data(wr);</span>
+        } else {
+            int x0;
+            int x1;
+            int y0;
+            int y1;
+            int a;
+            int b;
+            float ialpha;
+<span class="nc" id="L614">            int    bands = wr.getNumBands();</span>
+<span class="nc" id="L615">            int [] pixel = null;</span>
+
+<span class="nc" id="L617">            x0 = wr.getMinX();</span>
+<span class="nc" id="L618">            x1 = x0 + wr.getWidth();</span>
+<span class="nc" id="L619">            y0 = wr.getMinY();</span>
+<span class="nc" id="L620">            y1 = y0 + wr.getHeight();</span>
+<span class="nc bnc" id="L621" title="All 2 branches missed.">            for (int y = y0; y &lt; y1; y++) {</span>
+<span class="nc bnc" id="L622" title="All 2 branches missed.">                for (int x = x0; x &lt; x1; x++) {</span>
+<span class="nc" id="L623">                    pixel = wr.getPixel(x, y, pixel);</span>
+<span class="nc" id="L624">                    a = pixel[bands - 1];</span>
+<span class="nc bnc" id="L625" title="All 4 branches missed.">                    if ((a &gt; 0) &amp;&amp; (a &lt; 255)) {</span>
+<span class="nc" id="L626">                        ialpha = 255 / (float)a;</span>
+<span class="nc bnc" id="L627" title="All 2 branches missed.">                        for (b = 0; b &lt; bands - 1; b++) {</span>
+<span class="nc" id="L628">                            pixel[b] = (int)(pixel[b] * ialpha + 0.5f);</span>
+                        }
+<span class="nc" id="L630">                        wr.setPixel(x, y, pixel);</span>
+                    }
+                }
+            }
+        }
+<span class="nc" id="L635">    }</span>
+
+    /**
+     * Copies data from one bufferedImage to another paying attention
+     * to the state of AlphaPreMultiplied.
+     *
+     * @param src The source
+     * @param dst The destination
+     */
+    public static void
+        copyData(BufferedImage src, BufferedImage dst) {
+<span class="nc" id="L646">        Rectangle srcRect = new Rectangle(0, 0,</span>
+<span class="nc" id="L647">                                          src.getWidth(), src.getHeight());</span>
+<span class="nc" id="L648">        copyData(src, srcRect, dst, new Point(0, 0));</span>
+<span class="nc" id="L649">    }</span>
+
+
+    /**
+     * Copies data from one bufferedImage to another paying attention
+     * to the state of AlphaPreMultiplied.
+     *
+     * @param src The source
+     * @param srcRect The Rectangle of source data to be copied
+     * @param dst The destination
+     * @param destP The Place for the upper left corner of srcRect in dst.
+     */
+    public static void
+        copyData(BufferedImage src, Rectangle srcRect,
+                 BufferedImage dst, Point destP) {
+
+       /*
+        if (srcCS != dstCS)
+            throw new IllegalArgumentException
+                (&quot;Images must be in the same ColorSpace in order &quot;+
+                 &quot;to copy Data between them&quot;);
+        */
+<span class="nc" id="L671">        boolean srcAlpha = src.getColorModel().hasAlpha();</span>
+<span class="nc" id="L672">        boolean dstAlpha = dst.getColorModel().hasAlpha();</span>
+
+        // System.out.println(&quot;Src has: &quot; + srcAlpha +
+        //                    &quot; is: &quot; + src.isAlphaPremultiplied());
+        //
+        // System.out.println(&quot;Dst has: &quot; + dstAlpha +
+        //                    &quot; is: &quot; + dst.isAlphaPremultiplied());
+
+<span class="nc bnc" id="L680" title="All 2 branches missed.">        if (srcAlpha == dstAlpha) {</span>
+<span class="nc bnc" id="L681" title="All 2 branches missed.">            if (!srcAlpha</span>
+<span class="nc bnc" id="L682" title="All 2 branches missed.">                    || src.isAlphaPremultiplied() == dst.isAlphaPremultiplied()) {</span>
+                // They match one another so just copy everything...
+<span class="nc" id="L684">                copyData(src.getRaster(), dst.getRaster());</span>
+<span class="nc" id="L685">                return;</span>
+            }
+        }
+
+        // System.out.println(&quot;Using Slow CopyData&quot;);
+
+<span class="nc" id="L691">        int [] pixel = null;</span>
+<span class="nc" id="L692">        Raster         srcR  = src.getRaster();</span>
+<span class="nc" id="L693">        WritableRaster dstR  = dst.getRaster();</span>
+<span class="nc" id="L694">        int            bands = dstR.getNumBands();</span>
+
+<span class="nc" id="L696">        int dx = destP.x - srcRect.x;</span>
+<span class="nc" id="L697">        int dy = destP.y - srcRect.y;</span>
+
+<span class="nc" id="L699">        int w  = srcRect.width;</span>
+<span class="nc" id="L700">        int x0 = srcRect.x;</span>
+<span class="nc" id="L701">        int y0 = srcRect.y;</span>
+<span class="nc" id="L702">        int y1 = y0 + srcRect.height - 1;</span>
+
+<span class="nc bnc" id="L704" title="All 2 branches missed.">        if (!srcAlpha) {</span>
+            // Src has no alpha dest does so set alpha to 1.0 everywhere.
+            // System.out.println(&quot;Add Alpha&quot;);
+<span class="nc" id="L707">            int [] oPix = new int[bands * w];</span>
+<span class="nc" id="L708">            int out = (w * bands) - 1; // The 2 skips alpha channel</span>
+<span class="nc bnc" id="L709" title="All 2 branches missed.">            while (out &gt;= 0) {</span>
+                // Fill alpha channel with 255's
+<span class="nc" id="L711">                oPix[out] = 255;</span>
+<span class="nc" id="L712">                out -= bands;</span>
+            }
+
+            int b;
+            int in;
+<span class="nc bnc" id="L717" title="All 2 branches missed.">            for (int y = y0; y &lt;= y1; y++) {</span>
+<span class="nc" id="L718">                pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
+<span class="nc" id="L719">                in  = w * (bands - 1) - 1;</span>
+<span class="nc" id="L720">                out = (w * bands) - 2; // The 2 skips alpha channel on last pix</span>
+<span class="nc bnc" id="L721" title="All 2 branches missed.">                switch (bands) {</span>
+                case 4:
+<span class="nc bnc" id="L723" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
+<span class="nc" id="L724">                        oPix[out--] = pixel[in--];</span>
+<span class="nc" id="L725">                        oPix[out--] = pixel[in--];</span>
+<span class="nc" id="L726">                        oPix[out--] = pixel[in--];</span>
+<span class="nc" id="L727">                        out--;</span>
+                    }
+                    break;
+                default:
+<span class="nc bnc" id="L731" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
+<span class="nc bnc" id="L732" title="All 2 branches missed.">                        for (b = 0; b &lt; bands - 1; b++) {</span>
+<span class="nc" id="L733">                            oPix[out--] = pixel[in--];</span>
+                        }
+<span class="nc" id="L735">                        out--;</span>
+                    }
+                }
+<span class="nc" id="L738">                dstR.setPixels(x0 + dx, y + dy, w, 1, oPix);</span>
+            }
+<span class="nc bnc" id="L740" title="All 4 branches missed.">        } else if (dstAlpha &amp;&amp; dst.isAlphaPremultiplied()) {</span>
+            // Src and dest have Alpha but we need to multiply it for dst.
+            // System.out.println(&quot;Mult Case&quot;);
+            int a;
+            int b;
+            int alpha;
+            int in;
+<span class="nc" id="L747">            int fpNorm = (1 &lt;&lt; 24) / 255;</span>
+<span class="nc" id="L748">            int pt5 = 1 &lt;&lt; 23;</span>
+<span class="nc bnc" id="L749" title="All 2 branches missed.">            for (int y = y0; y &lt;= y1; y++) {</span>
+<span class="nc" id="L750">                pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
+<span class="nc" id="L751">                in = bands * w - 1;</span>
+<span class="nc bnc" id="L752" title="All 2 branches missed.">                switch (bands) {</span>
+                case 4:
+<span class="nc bnc" id="L754" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
+<span class="nc" id="L755">                        a = pixel[in];</span>
+<span class="nc bnc" id="L756" title="All 2 branches missed.">                        if (a == 255) {</span>
+<span class="nc" id="L757">                            in -= 4;</span>
+                        } else {
+<span class="nc" id="L759">                            in--;</span>
+<span class="nc" id="L760">                            alpha = fpNorm * a;</span>
+<span class="nc" id="L761">                            pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
+<span class="nc" id="L762">                            in--;</span>
+<span class="nc" id="L763">                            pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
+<span class="nc" id="L764">                            in--;</span>
+<span class="nc" id="L765">                            pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
+<span class="nc" id="L766">                            in--;</span>
+                        }
+                    }
+                    break;
+                default:
+<span class="nc bnc" id="L771" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
+<span class="nc" id="L772">                        a = pixel[in];</span>
+<span class="nc bnc" id="L773" title="All 2 branches missed.">                        if (a == 255) {</span>
+<span class="nc" id="L774">                            in -= bands;</span>
+                        } else {
+<span class="nc" id="L776">                            in--;</span>
+<span class="nc" id="L777">                            alpha = fpNorm * a;</span>
+<span class="nc bnc" id="L778" title="All 2 branches missed.">                            for (b = 0; b &lt; bands - 1; b++) {</span>
+<span class="nc" id="L779">                                pixel[in] = (pixel[in] * alpha + pt5) &gt;&gt;&gt; 24;</span>
+<span class="nc" id="L780">                                in--;</span>
+                            }
+                        }
+                    }
+                }
+<span class="nc" id="L785">                dstR.setPixels(x0 + dx, y + dy, w, 1, pixel);</span>
+            }
+<span class="nc bnc" id="L787" title="All 4 branches missed.">        } else if (dstAlpha &amp;&amp; !dst.isAlphaPremultiplied()) {</span>
+            // Src and dest have Alpha but we need to divide it out for dst.
+            // System.out.println(&quot;Div Case&quot;);
+            int a;
+            int b;
+            int ialpha;
+            int in;
+<span class="nc" id="L794">            int fpNorm = 0x00FF0000;</span>
+<span class="nc" id="L795">            int pt5 = 1 &lt;&lt; 15;</span>
+<span class="nc bnc" id="L796" title="All 2 branches missed.">            for (int y = y0; y &lt;= y1; y++) {</span>
+<span class="nc" id="L797">                pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
+<span class="nc" id="L798">                in = (bands * w) - 1;</span>
+<span class="nc bnc" id="L799" title="All 2 branches missed.">                switch(bands) {</span>
+                case 4:
+<span class="nc bnc" id="L801" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
+<span class="nc" id="L802">                        a = pixel[in];</span>
+<span class="nc bnc" id="L803" title="All 4 branches missed.">                        if ((a &lt;= 0) || (a &gt;= 255)) {</span>
+<span class="nc" id="L804">                            in -= 4;</span>
+                        } else {
+<span class="nc" id="L806">                            in--;</span>
+<span class="nc" id="L807">                            ialpha = fpNorm / a;</span>
+<span class="nc" id="L808">                            pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+<span class="nc" id="L809">                            in--;</span>
+<span class="nc" id="L810">                            pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+<span class="nc" id="L811">                            in--;</span>
+<span class="nc" id="L812">                            pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+<span class="nc" id="L813">                            in--;</span>
+                        }
+                    }
+                    break;
+                default:
+<span class="nc bnc" id="L818" title="All 2 branches missed.">                    while (in &gt;= 0) {</span>
+<span class="nc" id="L819">                        a = pixel[in];</span>
+<span class="nc bnc" id="L820" title="All 4 branches missed.">                        if ((a &lt;= 0) || (a &gt;= 255)) {</span>
+<span class="nc" id="L821">                            in -= bands;</span>
+                        } else {
+<span class="nc" id="L823">                            in--;</span>
+<span class="nc" id="L824">                            ialpha = fpNorm / a;</span>
+<span class="nc bnc" id="L825" title="All 2 branches missed.">                            for (b = 0; b &lt; bands - 1; b++) {</span>
+<span class="nc" id="L826">                                pixel[in] = (pixel[in] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+<span class="nc" id="L827">                                in--;</span>
+                            }
+                        }
+                    }
+                }
+<span class="nc" id="L832">                dstR.setPixels(x0 + dx, y + dy, w, 1, pixel);</span>
+            }
+<span class="nc bnc" id="L834" title="All 2 branches missed.">        } else if (src.isAlphaPremultiplied()) {</span>
+<span class="nc" id="L835">            int [] oPix = new int[bands * w];</span>
+            // Src has alpha dest does not so unpremult and store...
+            // System.out.println(&quot;Remove Alpha, Div Case&quot;);
+            int a;
+            int b;
+            int ialpha;
+            int in;
+            int out;
+<span class="nc" id="L843">            int fpNorm = 0x00FF0000;</span>
+<span class="nc" id="L844">            int pt5 = 1 &lt;&lt; 15;</span>
+<span class="nc bnc" id="L845" title="All 2 branches missed.">            for (int y = y0; y &lt;= y1; y++) {</span>
+<span class="nc" id="L846">                pixel = srcR.getPixels(x0, y, w, 1, pixel);</span>
+<span class="nc" id="L847">                in  = (bands + 1) * w - 1;</span>
+<span class="nc" id="L848">                out = (bands * w) - 1;</span>
+<span class="nc bnc" id="L849" title="All 2 branches missed.">                while (in &gt;= 0) {</span>
+<span class="nc" id="L850">                    a = pixel[in];</span>
+<span class="nc" id="L851">                    in--;</span>
+<span class="nc bnc" id="L852" title="All 2 branches missed.">                    if (a &gt; 0) {</span>
+<span class="nc bnc" id="L853" title="All 2 branches missed.">                        if (a &lt; 255) {</span>
+<span class="nc" id="L854">                            ialpha = fpNorm / a;</span>
+<span class="nc bnc" id="L855" title="All 2 branches missed.">                            for (b = 0; b &lt; bands; b++) {</span>
+<span class="nc" id="L856">                                oPix[out--] = (pixel[in--] * ialpha + pt5) &gt;&gt;&gt; 16;</span>
+                            }
+                        } else {
+<span class="nc bnc" id="L859" title="All 2 branches missed.">                            for (b = 0; b &lt; bands; b++) {</span>
+<span class="nc" id="L860">                                oPix[out--] = pixel[in--];</span>
+                            }
+                        }
+                    } else {
+<span class="nc" id="L864">                        in -= bands;</span>
+<span class="nc bnc" id="L865" title="All 2 branches missed.">                        for (b = 0; b &lt; bands; b++) {</span>
+<span class="nc" id="L866">                            oPix[out--] = 255;</span>
+                        }
+                    }
+                }
+<span class="nc" id="L870">                dstR.setPixels(x0 + dx, y + dy, w, 1, oPix);</span>
+            }
+<span class="nc" id="L872">        } else {</span>
+            // Src has unpremult alpha, dest does not have alpha,
+            // just copy the color channels over.
+<span class="nc" id="L875">            Rectangle dstRect = new Rectangle(destP.x, destP.y,</span>
+                                              srcRect.width, srcRect.height);
+<span class="nc bnc" id="L877" title="All 2 branches missed.">            for (int b = 0; b &lt; bands; b++) {</span>
+<span class="nc" id="L878">                copyBand(srcR, srcRect, b,</span>
+                         dstR, dstRect, b);
+            }
+        }
+<span class="nc" id="L882">    }</span>
+
+    public static void copyBand(Raster         src, int srcBand,
+                                WritableRaster dst, int dstBand) {
+
+<span class="nc" id="L887">        Rectangle sR   = src.getBounds();</span>
+<span class="nc" id="L888">        Rectangle dR   = dst.getBounds();</span>
+<span class="nc" id="L889">        Rectangle cpR  = sR.intersection(dR);</span>
+
+<span class="nc" id="L891">        copyBand(src, cpR, srcBand, dst, cpR, dstBand);</span>
+<span class="nc" id="L892">    }</span>
+
+    public static void copyBand(Raster         src, Rectangle sR, int sBand,
+                                WritableRaster dst, Rectangle dR, int dBand) {
+<span class="nc" id="L896">        int dy = dR.y - sR.y;</span>
+<span class="nc" id="L897">        int dx = dR.x - sR.x;</span>
+<span class="nc" id="L898">        sR = sR.intersection(src.getBounds());</span>
+<span class="nc" id="L899">        dR = dR.intersection(dst.getBounds());</span>
+        int width;
+        int height;
+<span class="nc bnc" id="L902" title="All 2 branches missed.">        if (dR.width  &lt; sR.width) {</span>
+<span class="nc" id="L903">            width  = dR.width;</span>
+        } else {
+<span class="nc" id="L905">            width  = sR.width;</span>
+        }
+<span class="nc bnc" id="L907" title="All 2 branches missed.">        if (dR.height &lt; sR.height) {</span>
+<span class="nc" id="L908">            height = dR.height;</span>
+        } else {
+<span class="nc" id="L910">            height = sR.height;</span>
+        }
+<span class="nc" id="L912">        int x = sR.x + dx;</span>
+<span class="nc" id="L913">        int [] samples = null;</span>
+<span class="nc bnc" id="L914" title="All 2 branches missed.">        for (int y = sR.y; y &lt; sR.y + height; y++) {</span>
+<span class="nc" id="L915">            samples = src.getSamples(sR.x, y, width, 1, sBand, samples);</span>
+<span class="nc" id="L916">            dst.setSamples(x, y + dy, width, 1, dBand, samples);</span>
+        }
+<span class="nc" id="L918">    }</span>
+
+    public static boolean is_INT_PACK_Data(SampleModel sm,
+                                           boolean requireAlpha) {
+        // Check ColorModel is of type DirectColorModel
+<span class="nc bnc" id="L923" title="All 2 branches missed.">        if (!(sm instanceof SinglePixelPackedSampleModel)) {</span>
+<span class="nc" id="L924">            return false;</span>
+        }
+
+        // Check transfer type
+<span class="nc bnc" id="L928" title="All 2 branches missed.">        if (sm.getDataType() != DataBuffer.TYPE_INT) {</span>
+<span class="nc" id="L929">            return false;</span>
+        }
+
+        SinglePixelPackedSampleModel sppsm;
+<span class="nc" id="L933">        sppsm = (SinglePixelPackedSampleModel)sm;</span>
+
+<span class="nc" id="L935">        int [] masks = sppsm.getBitMasks();</span>
+<span class="nc bnc" id="L936" title="All 2 branches missed.">        if (masks.length == 3) {</span>
+<span class="nc bnc" id="L937" title="All 2 branches missed.">            if (requireAlpha) {</span>
+<span class="nc" id="L938">                return false;</span>
+            }
+<span class="nc bnc" id="L940" title="All 2 branches missed.">        } else if (masks.length != 4) {</span>
+<span class="nc" id="L941">            return false;</span>
+        }
+
+<span class="nc bnc" id="L944" title="All 2 branches missed.">        if (masks[0] != 0x00ff0000) {</span>
+<span class="nc" id="L945">            return false;</span>
+        }
+<span class="nc bnc" id="L947" title="All 2 branches missed.">        if (masks[1] != 0x0000ff00) {</span>
+<span class="nc" id="L948">            return false;</span>
+        }
+<span class="nc bnc" id="L950" title="All 2 branches missed.">        if (masks[2] != 0x000000ff) {</span>
+<span class="nc" id="L951">            return false;</span>
+        }
+<span class="nc bnc" id="L953" title="All 4 branches missed.">        if ((masks.length == 4)</span>
+            &amp;&amp; (masks[3] != 0xff000000)) {
+<span class="nc" id="L955">            return false;</span>
+        }
+
+<span class="nc" id="L958">        return true;</span>
+    }
+
+        public static boolean is_BYTE_COMP_Data(SampleModel sm) {
+            // Check ColorModel is of type DirectColorModel
+<span class="nc bnc" id="L963" title="All 2 branches missed.">            if (!(sm instanceof ComponentSampleModel)) {</span>
+<span class="nc" id="L964">                return false;</span>
+            }
+
+            // Check transfer type
+<span class="nc bnc" id="L968" title="All 2 branches missed.">            if (sm.getDataType() != DataBuffer.TYPE_BYTE) {</span>
+<span class="nc" id="L969">                return false;</span>
+            }
+
+<span class="nc" id="L972">            return true;</span>
+        }
+
+    protected static void divide_INT_PACK_Data(WritableRaster wr) {
+        // System.out.println(&quot;Divide Int&quot;);
+
+        SinglePixelPackedSampleModel sppsm;
+<span class="nc" id="L979">        sppsm = (SinglePixelPackedSampleModel)wr.getSampleModel();</span>
+
+<span class="nc" id="L981">        final int width = wr.getWidth();</span>
+
+<span class="nc" id="L983">        final int scanStride = sppsm.getScanlineStride();</span>
+<span class="nc" id="L984">        DataBufferInt db = (DataBufferInt)wr.getDataBuffer();</span>
+<span class="nc" id="L985">        final int base</span>
+<span class="nc" id="L986">            = (db.getOffset()</span>
+<span class="nc" id="L987">               + sppsm.getOffset(wr.getMinX() - wr.getSampleModelTranslateX(),</span>
+<span class="nc" id="L988">                               wr.getMinY() - wr.getSampleModelTranslateY()));</span>
+
+        // Access the pixel data array
+<span class="nc" id="L991">        final int[] pixels = db.getBankData()[0];</span>
+<span class="nc bnc" id="L992" title="All 2 branches missed.">        for (int y = 0; y &lt; wr.getHeight(); y++) {</span>
+<span class="nc" id="L993">            int sp = base + y * scanStride;</span>
+<span class="nc" id="L994">            final int end = sp + width;</span>
+<span class="nc bnc" id="L995" title="All 2 branches missed.">            while (sp &lt; end) {</span>
+<span class="nc" id="L996">                int pixel = pixels[sp];</span>
+<span class="nc" id="L997">                int a = pixel &gt;&gt;&gt; 24;</span>
+<span class="nc bnc" id="L998" title="All 2 branches missed.">                if (a &lt;= 0) {</span>
+<span class="nc" id="L999">                    pixels[sp] = 0x00FFFFFF;</span>
+<span class="nc bnc" id="L1000" title="All 2 branches missed.">                } else if (a &lt; 255) {</span>
+<span class="nc" id="L1001">                    int aFP = (0x00FF0000 / a);</span>
+<span class="nc" id="L1002">                    pixels[sp] =</span>
+                        ((a &lt;&lt; 24)
+                         | (((((pixel &amp; 0xFF0000) &gt;&gt; 16) * aFP) &amp; 0xFF0000))
+                         | (((((pixel &amp; 0x00FF00) &gt;&gt; 8) * aFP) &amp; 0xFF0000) &gt;&gt; 8)
+                         | (((((pixel &amp; 0x0000FF))    * aFP) &amp; 0xFF0000) &gt;&gt; 16));
+                }
+<span class="nc" id="L1008">                sp++;</span>
+<span class="nc" id="L1009">            }</span>
+        }
+<span class="nc" id="L1011">    }</span>
+
+    protected static void mult_INT_PACK_Data(WritableRaster wr) {
+        // System.out.println(&quot;Multiply Int: &quot; + wr);
+
+        SinglePixelPackedSampleModel sppsm;
+<span class="nc" id="L1017">        sppsm = (SinglePixelPackedSampleModel)wr.getSampleModel();</span>
+
+<span class="nc" id="L1019">        final int width = wr.getWidth();</span>
+
+<span class="nc" id="L1021">        final int scanStride = sppsm.getScanlineStride();</span>
+<span class="nc" id="L1022">        DataBufferInt db = (DataBufferInt)wr.getDataBuffer();</span>
+<span class="nc" id="L1023">        final int base</span>
+<span class="nc" id="L1024">            = (db.getOffset()</span>
+<span class="nc" id="L1025">               + sppsm.getOffset(wr.getMinX() - wr.getSampleModelTranslateX(),</span>
+<span class="nc" id="L1026">                               wr.getMinY() - wr.getSampleModelTranslateY()));</span>
+        // Access the pixel data array
+<span class="nc" id="L1028">        final int[] pixels = db.getBankData()[0];</span>
+<span class="nc bnc" id="L1029" title="All 2 branches missed.">        for (int y = 0; y &lt; wr.getHeight(); y++) {</span>
+<span class="nc" id="L1030">            int sp = base + y * scanStride;</span>
+<span class="nc" id="L1031">            final int end = sp + width;</span>
+<span class="nc bnc" id="L1032" title="All 2 branches missed.">            while (sp &lt; end) {</span>
+<span class="nc" id="L1033">                int pixel = pixels[sp];</span>
+<span class="nc" id="L1034">                int a = pixel &gt;&gt;&gt; 24;</span>
+<span class="nc bnc" id="L1035" title="All 4 branches missed.">                if ((a &gt;= 0) &amp;&amp; (a &lt; 255)) {   // this does NOT include a == 255 (0xff) !</span>
+<span class="nc" id="L1036">                    pixels[sp] = ((a &lt;&lt; 24)</span>
+                                  | ((((pixel &amp; 0xFF0000) * a) &gt;&gt; 8) &amp; 0xFF0000)
+                                  | ((((pixel &amp; 0x00FF00) * a) &gt;&gt; 8) &amp; 0x00FF00)
+                                  | ((((pixel &amp; 0x0000FF) * a) &gt;&gt; 8) &amp; 0x0000FF));
+                }
+<span class="nc" id="L1041">                sp++;</span>
+<span class="nc" id="L1042">            }</span>
+        }
+<span class="nc" id="L1044">    }</span>
+
+
+    protected static void divide_BYTE_COMP_Data(WritableRaster wr) {
+        // System.out.println(&quot;Multiply Int: &quot; + wr);
+
+        ComponentSampleModel csm;
+<span class="nc" id="L1051">        csm = (ComponentSampleModel)wr.getSampleModel();</span>
+
+<span class="nc" id="L1053">        final int width = wr.getWidth();</span>
+
+<span class="nc" id="L1055">        final int scanStride = csm.getScanlineStride();</span>
+<span class="nc" id="L1056">        final int pixStride  = csm.getPixelStride();</span>
+<span class="nc" id="L1057">        final int [] bandOff = csm.getBandOffsets();</span>
+
+<span class="nc" id="L1059">        DataBufferByte db = (DataBufferByte)wr.getDataBuffer();</span>
+<span class="nc" id="L1060">        final int base</span>
+<span class="nc" id="L1061">            = (db.getOffset()</span>
+<span class="nc" id="L1062">               + csm.getOffset(wr.getMinX() - wr.getSampleModelTranslateX(),</span>
+<span class="nc" id="L1063">                             wr.getMinY() - wr.getSampleModelTranslateY()));</span>
+
+<span class="nc" id="L1065">        int aOff = bandOff[bandOff.length - 1];</span>
+<span class="nc" id="L1066">        int bands = bandOff.length - 1;</span>
+
+        // Access the pixel data array
+<span class="nc" id="L1069">        final byte[] pixels = db.getBankData()[0];</span>
+<span class="nc bnc" id="L1070" title="All 2 branches missed.">        for (int y = 0; y &lt; wr.getHeight(); y++) {</span>
+<span class="nc" id="L1071">            int sp = base + y * scanStride;</span>
+<span class="nc" id="L1072">            final int end = sp + width * pixStride;</span>
+<span class="nc bnc" id="L1073" title="All 2 branches missed.">            while (sp &lt; end) {</span>
+<span class="nc" id="L1074">              int a = pixels[sp + aOff] &amp; 0xFF;</span>
+<span class="nc bnc" id="L1075" title="All 2 branches missed.">              if (a == 0) {</span>
+<span class="nc bnc" id="L1076" title="All 2 branches missed.">                for (int b = 0; b &lt; bands; b++) {</span>
+<span class="nc" id="L1077">                  pixels[sp + bandOff[b]] = (byte)0xFF;</span>
+                }
+<span class="nc bnc" id="L1079" title="All 2 branches missed.">              } else if (a &lt; 255) {         // this does NOT include a == 255 (0xff) !</span>
+<span class="nc" id="L1080">                int aFP = (0x00FF0000 / a);</span>
+<span class="nc bnc" id="L1081" title="All 2 branches missed.">                for (int b = 0; b &lt; bands; b++) {</span>
+<span class="nc" id="L1082">                  int i = sp + bandOff[b];</span>
+<span class="nc" id="L1083">                  pixels[i] = (byte)(((pixels[i] &amp; 0xFF) * aFP) &gt;&gt;&gt; 16);</span>
+                }
+              }
+<span class="nc" id="L1086">              sp += pixStride;</span>
+<span class="nc" id="L1087">            }</span>
+        }
+<span class="nc" id="L1089">    }</span>
+
+    protected static void mult_BYTE_COMP_Data(WritableRaster wr) {
+        // System.out.println(&quot;Multiply Int: &quot; + wr);
+
+        ComponentSampleModel csm;
+<span class="nc" id="L1095">        csm = (ComponentSampleModel)wr.getSampleModel();</span>
+
+<span class="nc" id="L1097">        final int width = wr.getWidth();</span>
+
+<span class="nc" id="L1099">        final int scanStride = csm.getScanlineStride();</span>
+<span class="nc" id="L1100">        final int pixStride  = csm.getPixelStride();</span>
+<span class="nc" id="L1101">        final int [] bandOff = csm.getBandOffsets();</span>
+
+<span class="nc" id="L1103">        DataBufferByte db = (DataBufferByte)wr.getDataBuffer();</span>
+<span class="nc" id="L1104">        final int base</span>
+<span class="nc" id="L1105">            = (db.getOffset()</span>
+<span class="nc" id="L1106">               + csm.getOffset(wr.getMinX() - wr.getSampleModelTranslateX(),</span>
+<span class="nc" id="L1107">                             wr.getMinY() - wr.getSampleModelTranslateY()));</span>
+
+
+<span class="nc" id="L1110">        int aOff = bandOff[bandOff.length - 1];</span>
+<span class="nc" id="L1111">        int bands = bandOff.length - 1;</span>
+
+        // Access the pixel data array
+<span class="nc" id="L1114">        final byte[] pixels = db.getBankData()[0];</span>
+<span class="nc bnc" id="L1115" title="All 2 branches missed.">        for (int y = 0; y &lt; wr.getHeight(); y++) {</span>
+<span class="nc" id="L1116">            int sp = base + y * scanStride;</span>
+<span class="nc" id="L1117">            final int end = sp + width * pixStride;</span>
+<span class="nc bnc" id="L1118" title="All 2 branches missed.">            while (sp &lt; end) {</span>
+<span class="nc" id="L1119">              int a = pixels[sp + aOff] &amp; 0xFF;</span>
+<span class="nc bnc" id="L1120" title="All 2 branches missed.">              if (a != 0xFF) {</span>
+<span class="nc bnc" id="L1121" title="All 2 branches missed.">                for (int b = 0; b &lt; bands; b++) {</span>
+<span class="nc" id="L1122">                  int i = sp + bandOff[b];</span>
+<span class="nc" id="L1123">                  pixels[i] = (byte)(((pixels[i] &amp; 0xFF) * a) &gt;&gt; 8);</span>
+                }
+              }
+<span class="nc" id="L1126">              sp += pixStride;</span>
+<span class="nc" id="L1127">            }</span>
+        }
+<span class="nc" id="L1129">    }</span>
+
+/*
+  This is skanky debugging code that might be useful in the future:
+
+            if (count == 33) {
+                String label = &quot;sub [&quot; + x + &quot;, &quot; + y + &quot;]: &quot;;
+                org.ImageDisplay.showImage
+                    (label, subBI);
+                org.ImageDisplay.printImage
+                    (label, subBI,
+                     new Rectangle(75-iR.x, 90-iR.y, 32, 32));
+
+            }
+
+
+            // if ((count++ % 50) == 10)
+            //     org.ImageDisplay.showImage(&quot;foo: &quot;, subBI);
+
+
+            Graphics2D realG2D = g2d;
+            while (realG2D instanceof sun.java2d.ProxyGraphics2D) {
+                realG2D = ((sun.java2d.ProxyGraphics2D)realG2D).getDelegate();
+            }
+            if (realG2D instanceof sun.awt.image.BufferedImageGraphics2D) {
+                count++;
+                if (count == 34) {
+                    RenderedImage ri;
+                    ri = ((sun.awt.image.BufferedImageGraphics2D)realG2D).bufImg;
+                    // g2d.setComposite(SVGComposite.OVER);
+                    // org.ImageDisplay.showImage(&quot;Bar: &quot; + count, cr);
+                    org.ImageDisplay.printImage(&quot;Bar: &quot; + count, cr,
+                                                new Rectangle(75, 90, 32, 32));
+
+                    org.ImageDisplay.showImage (&quot;Foo: &quot; + count, ri);
+                    org.ImageDisplay.printImage(&quot;Foo: &quot; + count, ri,
+                                                new Rectangle(75, 90, 32, 32));
+
+                    System.out.println(&quot;BI: &quot;   + ri);
+                    System.out.println(&quot;BISM: &quot; + ri.getSampleModel());
+                    System.out.println(&quot;BICM: &quot; + ri.getColorModel());
+                    System.out.println(&quot;BICM class: &quot; + ri.getColorModel().getClass());
+                    System.out.println(&quot;BICS: &quot; + ri.getColorModel().getColorSpace());
+                    System.out.println
+                        (&quot;sRGB CS: &quot; +
+                         ColorSpace.getInstance(ColorSpace.CS_sRGB));
+                    System.out.println(&quot;G2D info&quot;);
+                    System.out.println(&quot;\tComposite: &quot; + g2d.getComposite());
+                    System.out.println(&quot;\tTransform&quot; + g2d.getTransform());
+                    java.awt.RenderingHints rh = g2d.getRenderingHints();
+                    java.util.Set keys = rh.keySet();
+                    java.util.Iterator iter = keys.iterator();
+                    while (iter.hasNext()) {
+                        Object o = iter.next();
+
+                        System.out.println(&quot;\t&quot; + o.toString() + &quot; -&gt; &quot; +
+                                           rh.get(o).toString());
+                    }
+
+                    ri = cr;
+                    System.out.println(&quot;RI: &quot;   + ri);
+                    System.out.println(&quot;RISM: &quot; + ri.getSampleModel());
+                    System.out.println(&quot;RICM: &quot; + ri.getColorModel());
+                    System.out.println(&quot;RICM class: &quot; + ri.getColorModel().getClass());
+                    System.out.println(&quot;RICS: &quot; + ri.getColorModel().getColorSpace());
+                }
+            }
+*/
+
+    /**
+     * Extracts an alpha raster from a RenderedImage. The method tries to avoid copying data
+     * unnecessarily by checking if the RenderedImage is a BufferedImage which offers suitable
+     * direct methods.
+     * @param image the image
+     * @return the alpha raster
+     */
+    public static Raster getAlphaRaster(RenderedImage image) {
+<span class="nc" id="L1206">        ColorModel cm = image.getColorModel();</span>
+<span class="nc bnc" id="L1207" title="All 4 branches missed.">        if (!cm.hasAlpha() || cm.getTransparency() != ColorModel.TRANSLUCENT) {</span>
+<span class="nc" id="L1208">            throw new IllegalStateException(&quot;Image doesn't have an alpha channel&quot;);</span>
+        }
+        Raster alpha;
+<span class="nc bnc" id="L1211" title="All 2 branches missed.">        if (image instanceof BufferedImage) {</span>
+            //Optimization possible with BufferedImage (No copying)
+<span class="nc" id="L1213">            alpha = ((BufferedImage)image).getAlphaRaster();</span>
+        } else {
+<span class="nc" id="L1215">            WritableRaster wraster = GraphicsUtil.makeRasterWritable(image.getData());</span>
+<span class="nc" id="L1216">            alpha = image.getColorModel().getAlphaRaster(wraster);</span>
+        }
+<span class="nc" id="L1218">        return alpha;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImageRawStream.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">ImageRawStream.java</span></div><h1>ImageRawStream.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ImageRawStream.java 1681137 2015-05-22 14:54:05Z ssteiner $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import org.apache.commons.io.IOUtils;
+
+import org.apache.xmlgraphics.image.loader.ImageFlavor;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.MimeEnabledImageFlavor;
+
+/**
+ * This class is an implementation of the Image interface exposing an InputStream for loading the
+ * raw/undecoded image.
+ */
+public class ImageRawStream extends AbstractImage {
+
+    private ImageFlavor flavor;
+    private InputStreamFactory streamFactory;
+
+    /**
+     * Main constructor.
+     * @param info the image info object
+     * @param flavor the image flavor for the raw image
+     * @param streamFactory the InputStreamFactory that is used to create InputStream instances
+     */
+    public ImageRawStream(ImageInfo info, ImageFlavor flavor, InputStreamFactory streamFactory) {
+<span class="fc" id="L49">        super(info);</span>
+<span class="fc" id="L50">        this.flavor = flavor;</span>
+<span class="fc" id="L51">        setInputStreamFactory(streamFactory);</span>
+<span class="fc" id="L52">    }</span>
+
+    /**
+     * Constructor for a simple InputStream as parameter.
+     * @param info the image info object
+     * @param flavor the image flavor for the raw image
+     * @param in the InputStream with the raw content
+     */
+    public ImageRawStream(ImageInfo info, ImageFlavor flavor, InputStream in) {
+<span class="fc" id="L61">        this(info, flavor, new SingleStreamFactory(in));</span>
+<span class="fc" id="L62">    }</span>
+
+    /** {@inheritDoc} */
+    public ImageFlavor getFlavor() {
+<span class="fc" id="L66">        return this.flavor;</span>
+    }
+
+    /**
+     * Returns the MIME type of the stream data.
+     * @return the MIME type
+     */
+    public String getMimeType() {
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (getFlavor() instanceof MimeEnabledImageFlavor) {</span>
+<span class="nc" id="L75">            return getFlavor().getMimeType();</span>
+        } else {
+            //Undetermined
+<span class="nc" id="L78">            return &quot;application/octet-stream&quot;;</span>
+        }
+    }
+
+    /** {@inheritDoc} */
+    public boolean isCacheable() {
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        return !this.streamFactory.isUsedOnceOnly();</span>
+    }
+
+    /**
+     * Sets the InputStreamFactory to be used by this image. This method allows to replace the
+     * original factory.
+     * @param factory the new InputStreamFactory
+     */
+    public void setInputStreamFactory(InputStreamFactory factory) {
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (this.streamFactory != null) {</span>
+<span class="fc" id="L94">            this.streamFactory.close();</span>
+        }
+<span class="fc" id="L96">        this.streamFactory = factory;</span>
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * Returns a new InputStream to access the raw image.
+     * @return the InputStream
+     */
+    public InputStream createInputStream() {
+<span class="fc" id="L104">        return this.streamFactory.createInputStream();</span>
+    }
+
+    /**
+     * Writes the content of the image to an OutputStream. The OutputStream in NOT closed at the
+     * end.
+     * @param out the OutputStream
+     * @throws IOException if an I/O error occurs
+     */
+    public void writeTo(OutputStream out) throws IOException {
+<span class="nc" id="L114">        InputStream in = createInputStream();</span>
+        try {
+<span class="nc" id="L116">            IOUtils.copy(in, out);</span>
+        } finally {
+<span class="nc" id="L118">            IOUtils.closeQuietly(in);</span>
+        }
+<span class="nc" id="L120">    }</span>
+
+    /**
+     * Represents a factory for InputStream objects. Make sure the class is thread-safe!
+     */
+    public interface InputStreamFactory {
+
+        /**
+         * Indicates whether this factory is only usable once or many times.
+         * @return true if the factory can only be used once
+         */
+        boolean isUsedOnceOnly();
+
+        /**
+         * Creates and returns a new InputStream.
+         * @return the new InputStream
+         */
+        InputStream createInputStream();
+
+        /**
+         * Closes the factory and releases any resources held open during the lifetime of this
+         * object.
+         */
+        void close();
+
+    }
+
+    /**
+     * InputStream factory that can return a pre-constructed InputStream exactly once.
+     */
+    private static class SingleStreamFactory implements InputStreamFactory {
+
+        private InputStream in;
+
+<span class="fc" id="L154">        public SingleStreamFactory(InputStream in) {</span>
+<span class="fc" id="L155">            this.in = in;</span>
+<span class="fc" id="L156">        }</span>
+
+        public synchronized InputStream createInputStream() {
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">            if (this.in != null) {</span>
+<span class="fc" id="L160">                InputStream tempin = this.in;</span>
+<span class="fc" id="L161">                this.in = null; //Don't close, just remove the reference</span>
+<span class="fc" id="L162">                return tempin;</span>
+            } else {
+<span class="nc" id="L164">                throw new IllegalStateException(&quot;Can only create an InputStream once!&quot;);</span>
+            }
+        }
+
+        public synchronized void close() {
+<span class="fc" id="L169">            IOUtils.closeQuietly(this.in);</span>
+<span class="fc" id="L170">            this.in = null;</span>
+<span class="fc" id="L171">        }</span>
+
+        public boolean isUsedOnceOnly() {
+<span class="fc" id="L174">            return true;</span>
+        }
+
+        /** {@inheritDoc} */
+        protected void finalize() {
+<span class="fc" id="L179">            close();</span>
+<span class="fc" id="L180">        }</span>
+
+    }
+
+    /**
+     * InputStream factory that wraps a byte array.
+     */
+    public static class ByteArrayStreamFactory implements InputStreamFactory {
+
+        private byte[] data;
+
+        /**
+         * Main constructor.
+         * @param data the byte array
+         */
+<span class="fc" id="L195">        public ByteArrayStreamFactory(byte[] data) {</span>
+<span class="fc" id="L196">            this.data = data;</span>
+<span class="fc" id="L197">        }</span>
+
+        /** {@inheritDoc} */
+        public InputStream createInputStream() {
+<span class="fc" id="L201">            return new ByteArrayInputStream(data);</span>
+        }
+
+        /** {@inheritDoc} */
+        public void close() {
+            //nop
+<span class="nc" id="L207">        }</span>
+
+        /** {@inheritDoc} */
+        public boolean isUsedOnceOnly() {
+<span class="fc" id="L211">            return false;</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

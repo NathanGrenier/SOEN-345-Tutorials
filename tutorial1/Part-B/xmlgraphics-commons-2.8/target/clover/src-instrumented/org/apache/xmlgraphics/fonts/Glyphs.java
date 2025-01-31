@@ -34,10 +34,10 @@ import org.apache.commons.io.IOUtils;
 /**
  * This class provides a number of constants for glyph management.
  */
-public final class Glyphs {public static class __CLR4_5_200m68iyfki{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static <T> T caseInc(int i,java.util.function.Supplier<T> s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1737587872955L,8589935092L,274,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
+public final class Glyphs {public static class __CLR4_5_200m6lb4x6y{public static com_atlassian_clover.CoverageRecorder R;public static com_atlassian_clover.CloverProfile[] profiles = { };@java.lang.SuppressWarnings("unchecked") public static <I, T extends I> I lambdaInc(final int i,final T l,final int si){java.lang.reflect.InvocationHandler h=new java.lang.reflect.InvocationHandler(){public java.lang.Object invoke(java.lang.Object p,java.lang.reflect.Method m,java.lang.Object[] a) throws Throwable{R.inc(i);R.inc(si);try{return m.invoke(l,a);}catch(java.lang.reflect.InvocationTargetException e){throw e.getCause()!=null?e.getCause():new RuntimeException("Clover failed to invoke instrumented lambda",e);}}};return (I)java.lang.reflect.Proxy.newProxyInstance(l.getClass().getClassLoader(),l.getClass().getInterfaces(),h);}public static <T> T caseInc(int i,java.util.function.Supplier<T> s){R.inc(i);return s.get();}public static void caseInc(int i,Runnable r){R.inc(i);r.run();}static{com_atlassian_clover.CoverageRecorder _R=null;try{com_atlassian_clover.CloverVersionInfo.An_old_version_of_clover_is_on_your_compilation_classpath___Please_remove___Required_version_is___4_5_2();if(20240131180750L!=com_atlassian_clover.CloverVersionInfo.getBuildStamp()){com_atlassian_clover.Clover.l("[CLOVER] WARNING: The Clover version used in instrumentation shall match the runtime version.");com_atlassian_clover.Clover.l("[CLOVER] WARNING: Instr=4.5.2#20240131180750,Runtime="+com_atlassian_clover.CloverVersionInfo.getReleaseNum()+"#"+com_atlassian_clover.CloverVersionInfo.getBuildStamp());}R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getNullRecorder();_R=com_atlassian_clover.Clover.getRecorder("\u002f\u0063\u006f\u0064\u0065\u002f\u0063\u006f\u006e\u0063\u006f\u0072\u0064\u0069\u0061\u002f\u0053\u004f\u0045\u004e\u002d\u0033\u0034\u0035\u002d\u0054\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0073\u002f\u0074\u0075\u0074\u006f\u0072\u0069\u0061\u006c\u0031\u002f\u0050\u0061\u0072\u0074\u002d\u0042\u002f\u0078\u006d\u006c\u0067\u0072\u0061\u0070\u0068\u0069\u0063\u0073\u002d\u0063\u006f\u006d\u006d\u006f\u006e\u0073\u002d\u0032\u002e\u0038\u002f\u0074\u0061\u0072\u0067\u0065\u0074\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002f\u0063\u006c\u006f\u0076\u0065\u0072\u002e\u0064\u0062",1738360798893L,8589935092L,274,profiles,new java.lang.String[]{"clover.distributed.coverage",null});}catch(java.lang.SecurityException e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because it has insufficient security privileges. Please consult the Clover documentation on the security policy file changes required. ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.NoClassDefFoundError e){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised. Are you sure you have Clover in the runtime classpath? ("+e.getClass()+":"+e.getMessage()+")");}catch(java.lang.Throwable t){java.lang.System.err.println("[CLOVER] FATAL ERROR: Clover could not be initialised because of an unexpected error. ("+t.getClass()+":"+t.getMessage()+")");}R=_R;}}public static final com_atlassian_clover.TestNameSniffer __CLR4_5_2_TEST_NAME_SNIFFER=com_atlassian_clover.TestNameSniffer.NULL_INSTANCE;
 
-    private Glyphs() {try{__CLR4_5_200m68iyfki.R.inc(0);
-    }finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+    private Glyphs() {try{__CLR4_5_200m6lb4x6y.R.inc(0);
+    }finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
     /**
      * Glyph name for the "notdef" glyph
@@ -480,28 +480,28 @@ public final class Glyphs {public static class __CLR4_5_200m68iyfki{public stati
 
     private static final Map CHARNAMES_TO_UNICODE;
 
-    static {try{__CLR4_5_200m68iyfki.R.inc(1);
-        __CLR4_5_200m68iyfki.R.inc(2);Map map = new java.util.TreeMap();
-        __CLR4_5_200m68iyfki.R.inc(3);UNICODE_GLYPHS = loadGlyphList("glyphlist.txt", map);
-        __CLR4_5_200m68iyfki.R.inc(4);DINGBATS_GLYPHS = loadGlyphList("zapfdingbats.txt", map);
-        __CLR4_5_200m68iyfki.R.inc(5);CHARNAMES_TO_UNICODE = Collections.unmodifiableMap(map);
+    static {try{__CLR4_5_200m6lb4x6y.R.inc(1);
+        __CLR4_5_200m6lb4x6y.R.inc(2);Map map = new java.util.TreeMap();
+        __CLR4_5_200m6lb4x6y.R.inc(3);UNICODE_GLYPHS = loadGlyphList("glyphlist.txt", map);
+        __CLR4_5_200m6lb4x6y.R.inc(4);DINGBATS_GLYPHS = loadGlyphList("zapfdingbats.txt", map);
+        __CLR4_5_200m6lb4x6y.R.inc(5);CHARNAMES_TO_UNICODE = Collections.unmodifiableMap(map);
 
-        __CLR4_5_200m68iyfki.R.inc(6);map = new java.util.TreeMap();
-        __CLR4_5_200m68iyfki.R.inc(7);addAlternatives(map, new String[] {"Omega", "Omegagreek"});
-        __CLR4_5_200m68iyfki.R.inc(8);addAlternatives(map, new String[] {"Delta", "Deltagreek"});
+        __CLR4_5_200m6lb4x6y.R.inc(6);map = new java.util.TreeMap();
+        __CLR4_5_200m6lb4x6y.R.inc(7);addAlternatives(map, new String[] {"Omega", "Omegagreek"});
+        __CLR4_5_200m6lb4x6y.R.inc(8);addAlternatives(map, new String[] {"Delta", "Deltagreek"});
         //fraction maps to 2044 (FRACTION SLASH) and 2215 (DIVISION SLASH)
-        __CLR4_5_200m68iyfki.R.inc(9);addAlternatives(map, new String[] {"fraction", "divisionslash"});
+        __CLR4_5_200m6lb4x6y.R.inc(9);addAlternatives(map, new String[] {"fraction", "divisionslash"});
         //hyphen maps to 002D (HYPHEN-MINUS) and 00AD (SOFT HYPHEN)
-        __CLR4_5_200m68iyfki.R.inc(10);addAlternatives(map, new String[] {"hyphen", "sfthyphen", "softhyphen", "minus"});
+        __CLR4_5_200m6lb4x6y.R.inc(10);addAlternatives(map, new String[] {"hyphen", "sfthyphen", "softhyphen", "minus"});
         //macron maps to 00AF (MACRON) and 02C9 (MODIFIER LETTER MACRON)
-        __CLR4_5_200m68iyfki.R.inc(11);addAlternatives(map, new String[] {"macron", "overscore"});
+        __CLR4_5_200m6lb4x6y.R.inc(11);addAlternatives(map, new String[] {"macron", "overscore"});
         //mu maps to 00B5 (MICRO SIGN) and 03BC (GREEK SMALL LETTER MU)
-        __CLR4_5_200m68iyfki.R.inc(12);addAlternatives(map, new String[] {"mu", "mu1", "mugreek"});
+        __CLR4_5_200m6lb4x6y.R.inc(12);addAlternatives(map, new String[] {"mu", "mu1", "mugreek"});
         //periodcentered maps to 00B7 (MIDDLE DOT) and 2219 (BULLET OPERATOR)
-        __CLR4_5_200m68iyfki.R.inc(13);addAlternatives(map, new String[]
+        __CLR4_5_200m6lb4x6y.R.inc(13);addAlternatives(map, new String[]
                                     {"periodcentered", "middot", "bulletoperator", "anoteleia"});
         //space maps to 0020 (SPACE) and 00A0 (NO-BREAK SPACE)
-        __CLR4_5_200m68iyfki.R.inc(14);addAlternatives(map, new String[] {"space", "nonbreakingspace", "nbspace"});
+        __CLR4_5_200m6lb4x6y.R.inc(14);addAlternatives(map, new String[] {"space", "nonbreakingspace", "nbspace"});
 
         //Scedilla maps to 015E (and F6C1 in private use area)
         //Tcommaaccent maps to 0162 (LATIN CAPITAL LETTER T WITH CEDILLA)
@@ -510,207 +510,207 @@ public final class Glyphs {public static class __CLR4_5_200m68iyfki{public stati
         //tcommaaccent maps to 0163 and 021b
 
         //map numbers from and to their respective "oldstyle" variant
-        __CLR4_5_200m68iyfki.R.inc(15);addAlternatives(map, new String[] {"zero", "zerooldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(16);addAlternatives(map, new String[] {"one", "oneoldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(17);addAlternatives(map, new String[] {"two", "twooldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(18);addAlternatives(map, new String[] {"three", "threeoldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(19);addAlternatives(map, new String[] {"four", "fouroldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(20);addAlternatives(map, new String[] {"five", "fiveoldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(21);addAlternatives(map, new String[] {"six", "sixoldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(22);addAlternatives(map, new String[] {"seven", "sevenoldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(23);addAlternatives(map, new String[] {"eight", "eightoldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(24);addAlternatives(map, new String[] {"nine", "nineoldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(15);addAlternatives(map, new String[] {"zero", "zerooldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(16);addAlternatives(map, new String[] {"one", "oneoldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(17);addAlternatives(map, new String[] {"two", "twooldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(18);addAlternatives(map, new String[] {"three", "threeoldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(19);addAlternatives(map, new String[] {"four", "fouroldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(20);addAlternatives(map, new String[] {"five", "fiveoldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(21);addAlternatives(map, new String[] {"six", "sixoldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(22);addAlternatives(map, new String[] {"seven", "sevenoldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(23);addAlternatives(map, new String[] {"eight", "eightoldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(24);addAlternatives(map, new String[] {"nine", "nineoldstyle"});
 
         //map currency signs from and to their respective "oldstyle" variant
-        __CLR4_5_200m68iyfki.R.inc(25);addAlternatives(map, new String[] {"cent", "centoldstyle"});
-        __CLR4_5_200m68iyfki.R.inc(26);addAlternatives(map, new String[] {"dollar", "dollaroldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(25);addAlternatives(map, new String[] {"cent", "centoldstyle"});
+        __CLR4_5_200m6lb4x6y.R.inc(26);addAlternatives(map, new String[] {"dollar", "dollaroldstyle"});
 
         //Cyrillic names according Adobe Techninal Note #5013 aka Adobe Standard Cyrillic Font Specification
-        __CLR4_5_200m68iyfki.R.inc(27);addAlternatives(map, new String[] {"Acyrillic",        "afii10017"});
-        __CLR4_5_200m68iyfki.R.inc(28);addAlternatives(map, new String[] {"Becyrillic",    "afii10018"});
-        __CLR4_5_200m68iyfki.R.inc(29);addAlternatives(map, new String[] {"Vecyrillic",    "afii10019"});
-        __CLR4_5_200m68iyfki.R.inc(30);addAlternatives(map, new String[] {"Gecyrillic",    "afii10020"});
-        __CLR4_5_200m68iyfki.R.inc(31);addAlternatives(map, new String[] {"Decyrillic",    "afii10021"});
-        __CLR4_5_200m68iyfki.R.inc(32);addAlternatives(map, new String[] {"Iecyrillic",    "afii10022"});
-        __CLR4_5_200m68iyfki.R.inc(33);addAlternatives(map, new String[] {"Iocyrillic",    "afii10023"});
-        __CLR4_5_200m68iyfki.R.inc(34);addAlternatives(map, new String[] {"Zhecyrillic",    "afii10024"});
-        __CLR4_5_200m68iyfki.R.inc(35);addAlternatives(map, new String[] {"Zecyrillic",    "afii10025"});
-        __CLR4_5_200m68iyfki.R.inc(36);addAlternatives(map, new String[] {"Iicyrillic",    "afii10026"});
-        __CLR4_5_200m68iyfki.R.inc(37);addAlternatives(map, new String[] {"Iishortcyrillic",    "afii10027"});
-        __CLR4_5_200m68iyfki.R.inc(38);addAlternatives(map, new String[] {"Kacyrillic",    "afii10028"});
-        __CLR4_5_200m68iyfki.R.inc(39);addAlternatives(map, new String[] {"Elcyrillic",    "afii10029"});
-        __CLR4_5_200m68iyfki.R.inc(40);addAlternatives(map, new String[] {"Emcyrillic",    "afii10030"});
-        __CLR4_5_200m68iyfki.R.inc(41);addAlternatives(map, new String[] {"Encyrillic",    "afii10031"});
-        __CLR4_5_200m68iyfki.R.inc(42);addAlternatives(map, new String[] {"Ocyrillic",        "afii10032"});
-        __CLR4_5_200m68iyfki.R.inc(43);addAlternatives(map, new String[] {"Pecyrillic",    "afii10033"});
-        __CLR4_5_200m68iyfki.R.inc(44);addAlternatives(map, new String[] {"Ercyrillic",    "afii10034"});
-        __CLR4_5_200m68iyfki.R.inc(45);addAlternatives(map, new String[] {"Escyrillic",    "afii10035"});
-        __CLR4_5_200m68iyfki.R.inc(46);addAlternatives(map, new String[] {"Tecyrillic",    "afii10036"});
-        __CLR4_5_200m68iyfki.R.inc(47);addAlternatives(map, new String[] {"Ucyrillic",        "afii10037"});
-        __CLR4_5_200m68iyfki.R.inc(48);addAlternatives(map, new String[] {"Efcyrillic",    "afii10038"});
-        __CLR4_5_200m68iyfki.R.inc(49);addAlternatives(map, new String[] {"Khacyrillic",    "afii10039"});
-        __CLR4_5_200m68iyfki.R.inc(50);addAlternatives(map, new String[] {"Tsecyrillic",    "afii10040"});
-        __CLR4_5_200m68iyfki.R.inc(51);addAlternatives(map, new String[] {"Checyrillic",    "afii10041"});
-        __CLR4_5_200m68iyfki.R.inc(52);addAlternatives(map, new String[] {"Shacyrillic",    "afii10042"});
-        __CLR4_5_200m68iyfki.R.inc(53);addAlternatives(map, new String[] {"Shchacyrillic",    "afii10043"});
-        __CLR4_5_200m68iyfki.R.inc(54);addAlternatives(map, new String[] {"Hardsigncyrillic",    "afii10044"});
-        __CLR4_5_200m68iyfki.R.inc(55);addAlternatives(map, new String[] {"Yericyrillic",    "afii10045"});
-        __CLR4_5_200m68iyfki.R.inc(56);addAlternatives(map, new String[] {"Softsigncyrillic",    "afii10046"});
-        __CLR4_5_200m68iyfki.R.inc(57);addAlternatives(map, new String[] {"Ereversedcyrillic",    "afii10047"});
-        __CLR4_5_200m68iyfki.R.inc(58);addAlternatives(map, new String[] {"IUcyrillic",    "afii10048"});
-        __CLR4_5_200m68iyfki.R.inc(59);addAlternatives(map, new String[] {"IAcyrillic",    "afii10049"});
+        __CLR4_5_200m6lb4x6y.R.inc(27);addAlternatives(map, new String[] {"Acyrillic",        "afii10017"});
+        __CLR4_5_200m6lb4x6y.R.inc(28);addAlternatives(map, new String[] {"Becyrillic",    "afii10018"});
+        __CLR4_5_200m6lb4x6y.R.inc(29);addAlternatives(map, new String[] {"Vecyrillic",    "afii10019"});
+        __CLR4_5_200m6lb4x6y.R.inc(30);addAlternatives(map, new String[] {"Gecyrillic",    "afii10020"});
+        __CLR4_5_200m6lb4x6y.R.inc(31);addAlternatives(map, new String[] {"Decyrillic",    "afii10021"});
+        __CLR4_5_200m6lb4x6y.R.inc(32);addAlternatives(map, new String[] {"Iecyrillic",    "afii10022"});
+        __CLR4_5_200m6lb4x6y.R.inc(33);addAlternatives(map, new String[] {"Iocyrillic",    "afii10023"});
+        __CLR4_5_200m6lb4x6y.R.inc(34);addAlternatives(map, new String[] {"Zhecyrillic",    "afii10024"});
+        __CLR4_5_200m6lb4x6y.R.inc(35);addAlternatives(map, new String[] {"Zecyrillic",    "afii10025"});
+        __CLR4_5_200m6lb4x6y.R.inc(36);addAlternatives(map, new String[] {"Iicyrillic",    "afii10026"});
+        __CLR4_5_200m6lb4x6y.R.inc(37);addAlternatives(map, new String[] {"Iishortcyrillic",    "afii10027"});
+        __CLR4_5_200m6lb4x6y.R.inc(38);addAlternatives(map, new String[] {"Kacyrillic",    "afii10028"});
+        __CLR4_5_200m6lb4x6y.R.inc(39);addAlternatives(map, new String[] {"Elcyrillic",    "afii10029"});
+        __CLR4_5_200m6lb4x6y.R.inc(40);addAlternatives(map, new String[] {"Emcyrillic",    "afii10030"});
+        __CLR4_5_200m6lb4x6y.R.inc(41);addAlternatives(map, new String[] {"Encyrillic",    "afii10031"});
+        __CLR4_5_200m6lb4x6y.R.inc(42);addAlternatives(map, new String[] {"Ocyrillic",        "afii10032"});
+        __CLR4_5_200m6lb4x6y.R.inc(43);addAlternatives(map, new String[] {"Pecyrillic",    "afii10033"});
+        __CLR4_5_200m6lb4x6y.R.inc(44);addAlternatives(map, new String[] {"Ercyrillic",    "afii10034"});
+        __CLR4_5_200m6lb4x6y.R.inc(45);addAlternatives(map, new String[] {"Escyrillic",    "afii10035"});
+        __CLR4_5_200m6lb4x6y.R.inc(46);addAlternatives(map, new String[] {"Tecyrillic",    "afii10036"});
+        __CLR4_5_200m6lb4x6y.R.inc(47);addAlternatives(map, new String[] {"Ucyrillic",        "afii10037"});
+        __CLR4_5_200m6lb4x6y.R.inc(48);addAlternatives(map, new String[] {"Efcyrillic",    "afii10038"});
+        __CLR4_5_200m6lb4x6y.R.inc(49);addAlternatives(map, new String[] {"Khacyrillic",    "afii10039"});
+        __CLR4_5_200m6lb4x6y.R.inc(50);addAlternatives(map, new String[] {"Tsecyrillic",    "afii10040"});
+        __CLR4_5_200m6lb4x6y.R.inc(51);addAlternatives(map, new String[] {"Checyrillic",    "afii10041"});
+        __CLR4_5_200m6lb4x6y.R.inc(52);addAlternatives(map, new String[] {"Shacyrillic",    "afii10042"});
+        __CLR4_5_200m6lb4x6y.R.inc(53);addAlternatives(map, new String[] {"Shchacyrillic",    "afii10043"});
+        __CLR4_5_200m6lb4x6y.R.inc(54);addAlternatives(map, new String[] {"Hardsigncyrillic",    "afii10044"});
+        __CLR4_5_200m6lb4x6y.R.inc(55);addAlternatives(map, new String[] {"Yericyrillic",    "afii10045"});
+        __CLR4_5_200m6lb4x6y.R.inc(56);addAlternatives(map, new String[] {"Softsigncyrillic",    "afii10046"});
+        __CLR4_5_200m6lb4x6y.R.inc(57);addAlternatives(map, new String[] {"Ereversedcyrillic",    "afii10047"});
+        __CLR4_5_200m6lb4x6y.R.inc(58);addAlternatives(map, new String[] {"IUcyrillic",    "afii10048"});
+        __CLR4_5_200m6lb4x6y.R.inc(59);addAlternatives(map, new String[] {"IAcyrillic",    "afii10049"});
 
-        __CLR4_5_200m68iyfki.R.inc(60);addAlternatives(map, new String[] {"acyrillic",        "afii10065"});
-        __CLR4_5_200m68iyfki.R.inc(61);addAlternatives(map, new String[] {"becyrillic",    "afii10066"});
-        __CLR4_5_200m68iyfki.R.inc(62);addAlternatives(map, new String[] {"vecyrillic",    "afii10067"});
-        __CLR4_5_200m68iyfki.R.inc(63);addAlternatives(map, new String[] {"gecyrillic",    "afii10068"});
-        __CLR4_5_200m68iyfki.R.inc(64);addAlternatives(map, new String[] {"decyrillic",    "afii10069"});
-        __CLR4_5_200m68iyfki.R.inc(65);addAlternatives(map, new String[] {"iecyrillic",    "afii10070"});
-        __CLR4_5_200m68iyfki.R.inc(66);addAlternatives(map, new String[] {"iocyrillic",    "afii10071"});
-        __CLR4_5_200m68iyfki.R.inc(67);addAlternatives(map, new String[] {"zhecyrillic",    "afii10072"});
-        __CLR4_5_200m68iyfki.R.inc(68);addAlternatives(map, new String[] {"zecyrillic",    "afii10073"});
-        __CLR4_5_200m68iyfki.R.inc(69);addAlternatives(map, new String[] {"iicyrillic",    "afii10074"});
-        __CLR4_5_200m68iyfki.R.inc(70);addAlternatives(map, new String[] {"iishortcyrillic",    "afii10075"});
-        __CLR4_5_200m68iyfki.R.inc(71);addAlternatives(map, new String[] {"kacyrillic",    "afii10076"});
-        __CLR4_5_200m68iyfki.R.inc(72);addAlternatives(map, new String[] {"elcyrillic",    "afii10077"});
-        __CLR4_5_200m68iyfki.R.inc(73);addAlternatives(map, new String[] {"emcyrillic",    "afii10078"});
-        __CLR4_5_200m68iyfki.R.inc(74);addAlternatives(map, new String[] {"encyrillic",    "afii10079"});
-        __CLR4_5_200m68iyfki.R.inc(75);addAlternatives(map, new String[] {"ocyrillic",        "afii10080"});
-        __CLR4_5_200m68iyfki.R.inc(76);addAlternatives(map, new String[] {"pecyrillic",    "afii10081"});
-        __CLR4_5_200m68iyfki.R.inc(77);addAlternatives(map, new String[] {"ercyrillic",    "afii10082"});
-        __CLR4_5_200m68iyfki.R.inc(78);addAlternatives(map, new String[] {"escyrillic",    "afii10083"});
-        __CLR4_5_200m68iyfki.R.inc(79);addAlternatives(map, new String[] {"tecyrillic",    "afii10084"});
-        __CLR4_5_200m68iyfki.R.inc(80);addAlternatives(map, new String[] {"ucyrillic",        "afii10085"});
-        __CLR4_5_200m68iyfki.R.inc(81);addAlternatives(map, new String[] {"efcyrillic",    "afii10086"});
-        __CLR4_5_200m68iyfki.R.inc(82);addAlternatives(map, new String[] {"khacyrillic",    "afii10087"});
-        __CLR4_5_200m68iyfki.R.inc(83);addAlternatives(map, new String[] {"tsecyrillic",    "afii10088"});
-        __CLR4_5_200m68iyfki.R.inc(84);addAlternatives(map, new String[] {"checyrillic",    "afii10089"});
-        __CLR4_5_200m68iyfki.R.inc(85);addAlternatives(map, new String[] {"shacyrillic",    "afii10090"});
-        __CLR4_5_200m68iyfki.R.inc(86);addAlternatives(map, new String[] {"shchacyrillic",    "afii10091"});
-        __CLR4_5_200m68iyfki.R.inc(87);addAlternatives(map, new String[] {"hardsigncyrillic",    "afii10092"});
-        __CLR4_5_200m68iyfki.R.inc(88);addAlternatives(map, new String[] {"yericyrillic",    "afii10093"});
-        __CLR4_5_200m68iyfki.R.inc(89);addAlternatives(map, new String[] {"softsigncyrillic",    "afii10094"});
-        __CLR4_5_200m68iyfki.R.inc(90);addAlternatives(map, new String[] {"ereversedcyrillic",    "afii10095"});
-        __CLR4_5_200m68iyfki.R.inc(91);addAlternatives(map, new String[] {"iucyrillic",    "afii10096"});
-        __CLR4_5_200m68iyfki.R.inc(92);addAlternatives(map, new String[] {"iacyrillic",    "afii10097"});
+        __CLR4_5_200m6lb4x6y.R.inc(60);addAlternatives(map, new String[] {"acyrillic",        "afii10065"});
+        __CLR4_5_200m6lb4x6y.R.inc(61);addAlternatives(map, new String[] {"becyrillic",    "afii10066"});
+        __CLR4_5_200m6lb4x6y.R.inc(62);addAlternatives(map, new String[] {"vecyrillic",    "afii10067"});
+        __CLR4_5_200m6lb4x6y.R.inc(63);addAlternatives(map, new String[] {"gecyrillic",    "afii10068"});
+        __CLR4_5_200m6lb4x6y.R.inc(64);addAlternatives(map, new String[] {"decyrillic",    "afii10069"});
+        __CLR4_5_200m6lb4x6y.R.inc(65);addAlternatives(map, new String[] {"iecyrillic",    "afii10070"});
+        __CLR4_5_200m6lb4x6y.R.inc(66);addAlternatives(map, new String[] {"iocyrillic",    "afii10071"});
+        __CLR4_5_200m6lb4x6y.R.inc(67);addAlternatives(map, new String[] {"zhecyrillic",    "afii10072"});
+        __CLR4_5_200m6lb4x6y.R.inc(68);addAlternatives(map, new String[] {"zecyrillic",    "afii10073"});
+        __CLR4_5_200m6lb4x6y.R.inc(69);addAlternatives(map, new String[] {"iicyrillic",    "afii10074"});
+        __CLR4_5_200m6lb4x6y.R.inc(70);addAlternatives(map, new String[] {"iishortcyrillic",    "afii10075"});
+        __CLR4_5_200m6lb4x6y.R.inc(71);addAlternatives(map, new String[] {"kacyrillic",    "afii10076"});
+        __CLR4_5_200m6lb4x6y.R.inc(72);addAlternatives(map, new String[] {"elcyrillic",    "afii10077"});
+        __CLR4_5_200m6lb4x6y.R.inc(73);addAlternatives(map, new String[] {"emcyrillic",    "afii10078"});
+        __CLR4_5_200m6lb4x6y.R.inc(74);addAlternatives(map, new String[] {"encyrillic",    "afii10079"});
+        __CLR4_5_200m6lb4x6y.R.inc(75);addAlternatives(map, new String[] {"ocyrillic",        "afii10080"});
+        __CLR4_5_200m6lb4x6y.R.inc(76);addAlternatives(map, new String[] {"pecyrillic",    "afii10081"});
+        __CLR4_5_200m6lb4x6y.R.inc(77);addAlternatives(map, new String[] {"ercyrillic",    "afii10082"});
+        __CLR4_5_200m6lb4x6y.R.inc(78);addAlternatives(map, new String[] {"escyrillic",    "afii10083"});
+        __CLR4_5_200m6lb4x6y.R.inc(79);addAlternatives(map, new String[] {"tecyrillic",    "afii10084"});
+        __CLR4_5_200m6lb4x6y.R.inc(80);addAlternatives(map, new String[] {"ucyrillic",        "afii10085"});
+        __CLR4_5_200m6lb4x6y.R.inc(81);addAlternatives(map, new String[] {"efcyrillic",    "afii10086"});
+        __CLR4_5_200m6lb4x6y.R.inc(82);addAlternatives(map, new String[] {"khacyrillic",    "afii10087"});
+        __CLR4_5_200m6lb4x6y.R.inc(83);addAlternatives(map, new String[] {"tsecyrillic",    "afii10088"});
+        __CLR4_5_200m6lb4x6y.R.inc(84);addAlternatives(map, new String[] {"checyrillic",    "afii10089"});
+        __CLR4_5_200m6lb4x6y.R.inc(85);addAlternatives(map, new String[] {"shacyrillic",    "afii10090"});
+        __CLR4_5_200m6lb4x6y.R.inc(86);addAlternatives(map, new String[] {"shchacyrillic",    "afii10091"});
+        __CLR4_5_200m6lb4x6y.R.inc(87);addAlternatives(map, new String[] {"hardsigncyrillic",    "afii10092"});
+        __CLR4_5_200m6lb4x6y.R.inc(88);addAlternatives(map, new String[] {"yericyrillic",    "afii10093"});
+        __CLR4_5_200m6lb4x6y.R.inc(89);addAlternatives(map, new String[] {"softsigncyrillic",    "afii10094"});
+        __CLR4_5_200m6lb4x6y.R.inc(90);addAlternatives(map, new String[] {"ereversedcyrillic",    "afii10095"});
+        __CLR4_5_200m6lb4x6y.R.inc(91);addAlternatives(map, new String[] {"iucyrillic",    "afii10096"});
+        __CLR4_5_200m6lb4x6y.R.inc(92);addAlternatives(map, new String[] {"iacyrillic",    "afii10097"});
 
-        __CLR4_5_200m68iyfki.R.inc(93);addAlternatives(map, new String[] {"Gheupturncyrillic",    "afii10050"});
-        __CLR4_5_200m68iyfki.R.inc(94);addAlternatives(map, new String[] {"Djecyrillic",    "afii10051"});
-        __CLR4_5_200m68iyfki.R.inc(95);addAlternatives(map, new String[] {"Gjecyrillic",    "afii10052"});
-        __CLR4_5_200m68iyfki.R.inc(96);addAlternatives(map, new String[] {"Ecyrillic",        "afii10053"});
-        __CLR4_5_200m68iyfki.R.inc(97);addAlternatives(map, new String[] {"Dzecyrillic",    "afii10054"});
-        __CLR4_5_200m68iyfki.R.inc(98);addAlternatives(map, new String[] {"Icyrillic",        "afii10055"});
-        __CLR4_5_200m68iyfki.R.inc(99);addAlternatives(map, new String[] {"Yicyrillic",    "afii10056"});
-        __CLR4_5_200m68iyfki.R.inc(100);addAlternatives(map, new String[] {"Jecyrillic",    "afii10057"});
-        __CLR4_5_200m68iyfki.R.inc(101);addAlternatives(map, new String[] {"Ljecyrillic",    "afii10058"});
-        __CLR4_5_200m68iyfki.R.inc(102);addAlternatives(map, new String[] {"Njecyrillic",    "afii10059"});
-        __CLR4_5_200m68iyfki.R.inc(103);addAlternatives(map, new String[] {"Tshecyrillic",    "afii10060"});
-        __CLR4_5_200m68iyfki.R.inc(104);addAlternatives(map, new String[] {"Kjecyrillic",    "afii10061"});
-        __CLR4_5_200m68iyfki.R.inc(105);addAlternatives(map, new String[] {"Ushortcyrillic",    "afii10062"});
+        __CLR4_5_200m6lb4x6y.R.inc(93);addAlternatives(map, new String[] {"Gheupturncyrillic",    "afii10050"});
+        __CLR4_5_200m6lb4x6y.R.inc(94);addAlternatives(map, new String[] {"Djecyrillic",    "afii10051"});
+        __CLR4_5_200m6lb4x6y.R.inc(95);addAlternatives(map, new String[] {"Gjecyrillic",    "afii10052"});
+        __CLR4_5_200m6lb4x6y.R.inc(96);addAlternatives(map, new String[] {"Ecyrillic",        "afii10053"});
+        __CLR4_5_200m6lb4x6y.R.inc(97);addAlternatives(map, new String[] {"Dzecyrillic",    "afii10054"});
+        __CLR4_5_200m6lb4x6y.R.inc(98);addAlternatives(map, new String[] {"Icyrillic",        "afii10055"});
+        __CLR4_5_200m6lb4x6y.R.inc(99);addAlternatives(map, new String[] {"Yicyrillic",    "afii10056"});
+        __CLR4_5_200m6lb4x6y.R.inc(100);addAlternatives(map, new String[] {"Jecyrillic",    "afii10057"});
+        __CLR4_5_200m6lb4x6y.R.inc(101);addAlternatives(map, new String[] {"Ljecyrillic",    "afii10058"});
+        __CLR4_5_200m6lb4x6y.R.inc(102);addAlternatives(map, new String[] {"Njecyrillic",    "afii10059"});
+        __CLR4_5_200m6lb4x6y.R.inc(103);addAlternatives(map, new String[] {"Tshecyrillic",    "afii10060"});
+        __CLR4_5_200m6lb4x6y.R.inc(104);addAlternatives(map, new String[] {"Kjecyrillic",    "afii10061"});
+        __CLR4_5_200m6lb4x6y.R.inc(105);addAlternatives(map, new String[] {"Ushortcyrillic",    "afii10062"});
 
-        __CLR4_5_200m68iyfki.R.inc(106);addAlternatives(map, new String[] {"Dzhecyrillic",    "afii10145"});
-        __CLR4_5_200m68iyfki.R.inc(107);addAlternatives(map, new String[] {"Yatcyrillic",    "afii10146"});
-        __CLR4_5_200m68iyfki.R.inc(108);addAlternatives(map, new String[] {"Fitacyrillic",    "afii10147"});
-        __CLR4_5_200m68iyfki.R.inc(109);addAlternatives(map, new String[] {"Izhitsacyrillic",    "afii10148"});
+        __CLR4_5_200m6lb4x6y.R.inc(106);addAlternatives(map, new String[] {"Dzhecyrillic",    "afii10145"});
+        __CLR4_5_200m6lb4x6y.R.inc(107);addAlternatives(map, new String[] {"Yatcyrillic",    "afii10146"});
+        __CLR4_5_200m6lb4x6y.R.inc(108);addAlternatives(map, new String[] {"Fitacyrillic",    "afii10147"});
+        __CLR4_5_200m6lb4x6y.R.inc(109);addAlternatives(map, new String[] {"Izhitsacyrillic",    "afii10148"});
 
-        __CLR4_5_200m68iyfki.R.inc(110);addAlternatives(map, new String[] {"gheupturncyrillic",    "afii10098"});
-        __CLR4_5_200m68iyfki.R.inc(111);addAlternatives(map, new String[] {"djecyrillic",    "afii10099"});
-        __CLR4_5_200m68iyfki.R.inc(112);addAlternatives(map, new String[] {"gjecyrillic",    "afii10100"});
-        __CLR4_5_200m68iyfki.R.inc(113);addAlternatives(map, new String[] {"ecyrillic",        "afii10101"});
-        __CLR4_5_200m68iyfki.R.inc(114);addAlternatives(map, new String[] {"dzecyrillic",    "afii10102"});
-        __CLR4_5_200m68iyfki.R.inc(115);addAlternatives(map, new String[] {"icyrillic",        "afii10103"});
-        __CLR4_5_200m68iyfki.R.inc(116);addAlternatives(map, new String[] {"yicyrillic",    "afii10104"});
-        __CLR4_5_200m68iyfki.R.inc(117);addAlternatives(map, new String[] {"jecyrillic",    "afii10105"});
-        __CLR4_5_200m68iyfki.R.inc(118);addAlternatives(map, new String[] {"ljecyrillic",    "afii10106"});
-        __CLR4_5_200m68iyfki.R.inc(119);addAlternatives(map, new String[] {"njecyrillic",    "afii10107"});
-        __CLR4_5_200m68iyfki.R.inc(120);addAlternatives(map, new String[] {"tshecyrillic",    "afii10108"});
-        __CLR4_5_200m68iyfki.R.inc(121);addAlternatives(map, new String[] {"kjecyrillic",    "afii10109"});
-        __CLR4_5_200m68iyfki.R.inc(122);addAlternatives(map, new String[] {"ushortcyrillic",    "afii10110"});
+        __CLR4_5_200m6lb4x6y.R.inc(110);addAlternatives(map, new String[] {"gheupturncyrillic",    "afii10098"});
+        __CLR4_5_200m6lb4x6y.R.inc(111);addAlternatives(map, new String[] {"djecyrillic",    "afii10099"});
+        __CLR4_5_200m6lb4x6y.R.inc(112);addAlternatives(map, new String[] {"gjecyrillic",    "afii10100"});
+        __CLR4_5_200m6lb4x6y.R.inc(113);addAlternatives(map, new String[] {"ecyrillic",        "afii10101"});
+        __CLR4_5_200m6lb4x6y.R.inc(114);addAlternatives(map, new String[] {"dzecyrillic",    "afii10102"});
+        __CLR4_5_200m6lb4x6y.R.inc(115);addAlternatives(map, new String[] {"icyrillic",        "afii10103"});
+        __CLR4_5_200m6lb4x6y.R.inc(116);addAlternatives(map, new String[] {"yicyrillic",    "afii10104"});
+        __CLR4_5_200m6lb4x6y.R.inc(117);addAlternatives(map, new String[] {"jecyrillic",    "afii10105"});
+        __CLR4_5_200m6lb4x6y.R.inc(118);addAlternatives(map, new String[] {"ljecyrillic",    "afii10106"});
+        __CLR4_5_200m6lb4x6y.R.inc(119);addAlternatives(map, new String[] {"njecyrillic",    "afii10107"});
+        __CLR4_5_200m6lb4x6y.R.inc(120);addAlternatives(map, new String[] {"tshecyrillic",    "afii10108"});
+        __CLR4_5_200m6lb4x6y.R.inc(121);addAlternatives(map, new String[] {"kjecyrillic",    "afii10109"});
+        __CLR4_5_200m6lb4x6y.R.inc(122);addAlternatives(map, new String[] {"ushortcyrillic",    "afii10110"});
 
-        __CLR4_5_200m68iyfki.R.inc(123);addAlternatives(map, new String[] {"dzhecyrillic",    "afii10193"});
-        __CLR4_5_200m68iyfki.R.inc(124);addAlternatives(map, new String[] {"yatcyrillic",    "afii10194"});
-        __CLR4_5_200m68iyfki.R.inc(125);addAlternatives(map, new String[] {"fitacyrillic",    "afii10195"});
-        __CLR4_5_200m68iyfki.R.inc(126);addAlternatives(map, new String[] {"izhitsacyrillic",    "afii10196"});
+        __CLR4_5_200m6lb4x6y.R.inc(123);addAlternatives(map, new String[] {"dzhecyrillic",    "afii10193"});
+        __CLR4_5_200m6lb4x6y.R.inc(124);addAlternatives(map, new String[] {"yatcyrillic",    "afii10194"});
+        __CLR4_5_200m6lb4x6y.R.inc(125);addAlternatives(map, new String[] {"fitacyrillic",    "afii10195"});
+        __CLR4_5_200m6lb4x6y.R.inc(126);addAlternatives(map, new String[] {"izhitsacyrillic",    "afii10196"});
 
-        __CLR4_5_200m68iyfki.R.inc(127);CHARNAME_ALTERNATIVES = Collections.unmodifiableMap(map);
-    }finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+        __CLR4_5_200m6lb4x6y.R.inc(127);CHARNAME_ALTERNATIVES = Collections.unmodifiableMap(map);
+    }finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
-    private static void addAlternatives(Map map, String[] alternatives) {try{__CLR4_5_200m68iyfki.R.inc(128);
-        __CLR4_5_200m68iyfki.R.inc(129);for (int i = 0, c = alternatives.length; (((i < c)&&(__CLR4_5_200m68iyfki.R.iget(130)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(131)==0&false)); i++) {{
-            __CLR4_5_200m68iyfki.R.inc(132);String[] alt = new String[c - 1];
-            __CLR4_5_200m68iyfki.R.inc(133);int idx = 0;
-            __CLR4_5_200m68iyfki.R.inc(134);for (int j = 0; (((j < c)&&(__CLR4_5_200m68iyfki.R.iget(135)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(136)==0&false)); j++) {{
-                __CLR4_5_200m68iyfki.R.inc(137);if ((((i != j)&&(__CLR4_5_200m68iyfki.R.iget(138)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(139)==0&false))) {{
-                    __CLR4_5_200m68iyfki.R.inc(140);alt[idx] = alternatives[j];
-                    __CLR4_5_200m68iyfki.R.inc(141);idx++;
+    private static void addAlternatives(Map map, String[] alternatives) {try{__CLR4_5_200m6lb4x6y.R.inc(128);
+        __CLR4_5_200m6lb4x6y.R.inc(129);for (int i = 0, c = alternatives.length; (((i < c)&&(__CLR4_5_200m6lb4x6y.R.iget(130)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(131)==0&false)); i++) {{
+            __CLR4_5_200m6lb4x6y.R.inc(132);String[] alt = new String[c - 1];
+            __CLR4_5_200m6lb4x6y.R.inc(133);int idx = 0;
+            __CLR4_5_200m6lb4x6y.R.inc(134);for (int j = 0; (((j < c)&&(__CLR4_5_200m6lb4x6y.R.iget(135)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(136)==0&false)); j++) {{
+                __CLR4_5_200m6lb4x6y.R.inc(137);if ((((i != j)&&(__CLR4_5_200m6lb4x6y.R.iget(138)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(139)==0&false))) {{
+                    __CLR4_5_200m6lb4x6y.R.inc(140);alt[idx] = alternatives[j];
+                    __CLR4_5_200m6lb4x6y.R.inc(141);idx++;
                 }
             }}
-            }__CLR4_5_200m68iyfki.R.inc(142);map.put(alternatives[i], alt);
+            }__CLR4_5_200m6lb4x6y.R.inc(142);map.put(alternatives[i], alt);
         }
-    }}finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+    }}finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
-    private static String[] loadGlyphList(String filename, Map charNameToUnicodeMap) {try{__CLR4_5_200m68iyfki.R.inc(143);
-        __CLR4_5_200m68iyfki.R.inc(144);List lines = new java.util.ArrayList();
-        __CLR4_5_200m68iyfki.R.inc(145);InputStream in = Glyphs.class.getResourceAsStream(filename);
-        __CLR4_5_200m68iyfki.R.inc(146);if ((((in == null)&&(__CLR4_5_200m68iyfki.R.iget(147)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(148)==0&false))) {{
-            __CLR4_5_200m68iyfki.R.inc(149);throw new RuntimeException("Cannot load " + filename
+    private static String[] loadGlyphList(String filename, Map charNameToUnicodeMap) {try{__CLR4_5_200m6lb4x6y.R.inc(143);
+        __CLR4_5_200m6lb4x6y.R.inc(144);List lines = new java.util.ArrayList();
+        __CLR4_5_200m6lb4x6y.R.inc(145);InputStream in = Glyphs.class.getResourceAsStream(filename);
+        __CLR4_5_200m6lb4x6y.R.inc(146);if ((((in == null)&&(__CLR4_5_200m6lb4x6y.R.iget(147)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(148)==0&false))) {{
+            __CLR4_5_200m6lb4x6y.R.inc(149);throw new RuntimeException("Cannot load " + filename
                     + ". The Glyphs class cannot properly be initialized!");
         }
-        }__CLR4_5_200m68iyfki.R.inc(150);try {
-            __CLR4_5_200m68iyfki.R.inc(151);BufferedReader reader = new BufferedReader(new InputStreamReader(in, "US-ASCII"));
-            __CLR4_5_200m68iyfki.R.inc(152);String line;
-            __CLR4_5_200m68iyfki.R.inc(153);try {
-                __CLR4_5_200m68iyfki.R.inc(154);while ((line = reader.readLine()) != null) {{
-                    __CLR4_5_200m68iyfki.R.inc(157);if ((((!line.startsWith("#"))&&(__CLR4_5_200m68iyfki.R.iget(158)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(159)==0&false))) {{
-                        __CLR4_5_200m68iyfki.R.inc(160);lines.add(line);
+        }__CLR4_5_200m6lb4x6y.R.inc(150);try {
+            __CLR4_5_200m6lb4x6y.R.inc(151);BufferedReader reader = new BufferedReader(new InputStreamReader(in, "US-ASCII"));
+            __CLR4_5_200m6lb4x6y.R.inc(152);String line;
+            __CLR4_5_200m6lb4x6y.R.inc(153);try {
+                __CLR4_5_200m6lb4x6y.R.inc(154);while ((line = reader.readLine()) != null) {{
+                    __CLR4_5_200m6lb4x6y.R.inc(157);if ((((!line.startsWith("#"))&&(__CLR4_5_200m6lb4x6y.R.iget(158)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(159)==0&false))) {{
+                        __CLR4_5_200m6lb4x6y.R.inc(160);lines.add(line);
                     }
                 }}
             }} finally {
-                __CLR4_5_200m68iyfki.R.inc(161);reader.close();
+                __CLR4_5_200m6lb4x6y.R.inc(161);reader.close();
             }
         } catch (UnsupportedEncodingException uee) {
-            __CLR4_5_200m68iyfki.R.inc(162);throw new RuntimeException("Incompatible JVM! US-ASCII encoding is not supported."
+            __CLR4_5_200m6lb4x6y.R.inc(162);throw new RuntimeException("Incompatible JVM! US-ASCII encoding is not supported."
                     + " The Glyphs class cannot properly be initialized!");
         } catch (IOException ioe) {
-            __CLR4_5_200m68iyfki.R.inc(163);throw new RuntimeException("I/O error while loading " + filename
+            __CLR4_5_200m6lb4x6y.R.inc(163);throw new RuntimeException("I/O error while loading " + filename
                     + ". The Glyphs class cannot properly be initialized!");
         } finally {
-            __CLR4_5_200m68iyfki.R.inc(164);IOUtils.closeQuietly(in);
+            __CLR4_5_200m6lb4x6y.R.inc(164);IOUtils.closeQuietly(in);
         }
-        __CLR4_5_200m68iyfki.R.inc(165);String[] arr = new String[lines.size() * 2];
-        __CLR4_5_200m68iyfki.R.inc(166);int pos = 0;
-        __CLR4_5_200m68iyfki.R.inc(167);StringBuffer buf = new StringBuffer();
-        __CLR4_5_200m68iyfki.R.inc(168);for (Object line1 : lines) {{
-            __CLR4_5_200m68iyfki.R.inc(169);String line = (String) line1;
-            __CLR4_5_200m68iyfki.R.inc(170);int semicolon = line.indexOf(';');
-            __CLR4_5_200m68iyfki.R.inc(171);if ((((semicolon <= 0)&&(__CLR4_5_200m68iyfki.R.iget(172)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(173)==0&false))) {{
-                __CLR4_5_200m68iyfki.R.inc(174);continue;
+        __CLR4_5_200m6lb4x6y.R.inc(165);String[] arr = new String[lines.size() * 2];
+        __CLR4_5_200m6lb4x6y.R.inc(166);int pos = 0;
+        __CLR4_5_200m6lb4x6y.R.inc(167);StringBuffer buf = new StringBuffer();
+        __CLR4_5_200m6lb4x6y.R.inc(168);for (Object line1 : lines) {{
+            __CLR4_5_200m6lb4x6y.R.inc(169);String line = (String) line1;
+            __CLR4_5_200m6lb4x6y.R.inc(170);int semicolon = line.indexOf(';');
+            __CLR4_5_200m6lb4x6y.R.inc(171);if ((((semicolon <= 0)&&(__CLR4_5_200m6lb4x6y.R.iget(172)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(173)==0&false))) {{
+                __CLR4_5_200m6lb4x6y.R.inc(174);continue;
             }
-            }__CLR4_5_200m68iyfki.R.inc(175);String charName = line.substring(0, semicolon);
-            __CLR4_5_200m68iyfki.R.inc(176);String rawUnicode = line.substring(semicolon + 1);
-            __CLR4_5_200m68iyfki.R.inc(177);buf.setLength(0);
+            }__CLR4_5_200m6lb4x6y.R.inc(175);String charName = line.substring(0, semicolon);
+            __CLR4_5_200m6lb4x6y.R.inc(176);String rawUnicode = line.substring(semicolon + 1);
+            __CLR4_5_200m6lb4x6y.R.inc(177);buf.setLength(0);
 
-            __CLR4_5_200m68iyfki.R.inc(178);StringTokenizer tokenizer = new StringTokenizer(rawUnicode, " ", false);
-            __CLR4_5_200m68iyfki.R.inc(179);while ((((tokenizer.hasMoreTokens())&&(__CLR4_5_200m68iyfki.R.iget(180)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(181)==0&false))) {{
-                __CLR4_5_200m68iyfki.R.inc(182);String token = tokenizer.nextToken();
-                assert (((token.length() == 4)&&(__CLR4_5_200m68iyfki.R.iget(183)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(184)==0&false));
-                __CLR4_5_200m68iyfki.R.inc(185);buf.append(hexToChar(token));
+            __CLR4_5_200m6lb4x6y.R.inc(178);StringTokenizer tokenizer = new StringTokenizer(rawUnicode, " ", false);
+            __CLR4_5_200m6lb4x6y.R.inc(179);while ((((tokenizer.hasMoreTokens())&&(__CLR4_5_200m6lb4x6y.R.iget(180)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(181)==0&false))) {{
+                __CLR4_5_200m6lb4x6y.R.inc(182);String token = tokenizer.nextToken();
+                assert (((token.length() == 4)&&(__CLR4_5_200m6lb4x6y.R.iget(183)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(184)==0&false));
+                __CLR4_5_200m6lb4x6y.R.inc(185);buf.append(hexToChar(token));
             }
 
-            }__CLR4_5_200m68iyfki.R.inc(186);String unicode = buf.toString();
-            __CLR4_5_200m68iyfki.R.inc(187);arr[pos] = unicode;
-            __CLR4_5_200m68iyfki.R.inc(188);pos++;
-            __CLR4_5_200m68iyfki.R.inc(189);arr[pos] = charName;
-            __CLR4_5_200m68iyfki.R.inc(190);pos++;
-            assert (((!charNameToUnicodeMap.containsKey(charName))&&(__CLR4_5_200m68iyfki.R.iget(191)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(192)==0&false));
-            __CLR4_5_200m68iyfki.R.inc(193);charNameToUnicodeMap.put(charName, unicode);
+            }__CLR4_5_200m6lb4x6y.R.inc(186);String unicode = buf.toString();
+            __CLR4_5_200m6lb4x6y.R.inc(187);arr[pos] = unicode;
+            __CLR4_5_200m6lb4x6y.R.inc(188);pos++;
+            __CLR4_5_200m6lb4x6y.R.inc(189);arr[pos] = charName;
+            __CLR4_5_200m6lb4x6y.R.inc(190);pos++;
+            assert (((!charNameToUnicodeMap.containsKey(charName))&&(__CLR4_5_200m6lb4x6y.R.iget(191)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(192)==0&false));
+            __CLR4_5_200m6lb4x6y.R.inc(193);charNameToUnicodeMap.put(charName, unicode);
         }
-        }__CLR4_5_200m68iyfki.R.inc(194);return arr;
-    }finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+        }__CLR4_5_200m6lb4x6y.R.inc(194);return arr;
+    }finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
-    private static char hexToChar(String hex) {try{__CLR4_5_200m68iyfki.R.inc(195);
-        __CLR4_5_200m68iyfki.R.inc(196);return (char)Integer.parseInt(hex, 16);
-    }finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+    private static char hexToChar(String hex) {try{__CLR4_5_200m6lb4x6y.R.inc(195);
+        __CLR4_5_200m6lb4x6y.R.inc(196);return (char)Integer.parseInt(hex, 16);
+    }finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
     /**
      * Return the glyphname from a character,
@@ -719,74 +719,74 @@ public final class Glyphs {public static class __CLR4_5_200m68iyfki{public stati
      * @param ch glyph to evaluate
      * @return the name of the glyph
      */
-    public static String charToGlyphName(char ch) {try{__CLR4_5_200m68iyfki.R.inc(197);
-        __CLR4_5_200m68iyfki.R.inc(198);return stringToGlyph(Character.toString(ch));
-    }finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+    public static String charToGlyphName(char ch) {try{__CLR4_5_200m6lb4x6y.R.inc(197);
+        __CLR4_5_200m6lb4x6y.R.inc(198);return stringToGlyph(Character.toString(ch));
+    }finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
     /**
      * Returns a String containing the Unicode sequence the given glyph name represents.
      * @param glyphName the glyph name
      * @return the Unicode sequence of the glyph (or null if the glyph name is unknown)
      */
-    public static String getUnicodeSequenceForGlyphName(String glyphName) {try{__CLR4_5_200m68iyfki.R.inc(199);
+    public static String getUnicodeSequenceForGlyphName(String glyphName) {try{__CLR4_5_200m6lb4x6y.R.inc(199);
         //Mapping: see http://www.adobe.com/devnet/opentype/archives/glyph.html
         //Step 1
-        __CLR4_5_200m68iyfki.R.inc(200);int period = glyphName.indexOf('.');
-        __CLR4_5_200m68iyfki.R.inc(201);if ((((period >= 0)&&(__CLR4_5_200m68iyfki.R.iget(202)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(203)==0&false))) {{
-            __CLR4_5_200m68iyfki.R.inc(204);glyphName = glyphName.substring(0, period);
+        __CLR4_5_200m6lb4x6y.R.inc(200);int period = glyphName.indexOf('.');
+        __CLR4_5_200m6lb4x6y.R.inc(201);if ((((period >= 0)&&(__CLR4_5_200m6lb4x6y.R.iget(202)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(203)==0&false))) {{
+            __CLR4_5_200m6lb4x6y.R.inc(204);glyphName = glyphName.substring(0, period);
         }
 
         //Step 2
-        }__CLR4_5_200m68iyfki.R.inc(205);StringBuffer sb = new StringBuffer();
-        __CLR4_5_200m68iyfki.R.inc(206);StringTokenizer tokenizer = new StringTokenizer(glyphName, "_", false);
-        __CLR4_5_200m68iyfki.R.inc(207);while ((((tokenizer.hasMoreTokens())&&(__CLR4_5_200m68iyfki.R.iget(208)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(209)==0&false))) {{
-            __CLR4_5_200m68iyfki.R.inc(210);String token = tokenizer.nextToken();
+        }__CLR4_5_200m6lb4x6y.R.inc(205);StringBuffer sb = new StringBuffer();
+        __CLR4_5_200m6lb4x6y.R.inc(206);StringTokenizer tokenizer = new StringTokenizer(glyphName, "_", false);
+        __CLR4_5_200m6lb4x6y.R.inc(207);while ((((tokenizer.hasMoreTokens())&&(__CLR4_5_200m6lb4x6y.R.iget(208)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(209)==0&false))) {{
+            __CLR4_5_200m6lb4x6y.R.inc(210);String token = tokenizer.nextToken();
             //Step 3
-            __CLR4_5_200m68iyfki.R.inc(211);String sequence = (String)CHARNAMES_TO_UNICODE.get(token);
-            __CLR4_5_200m68iyfki.R.inc(212);if ((((sequence == null)&&(__CLR4_5_200m68iyfki.R.iget(213)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(214)==0&false))) {{
-                __CLR4_5_200m68iyfki.R.inc(215);if ((((token.startsWith("uni"))&&(__CLR4_5_200m68iyfki.R.iget(216)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(217)==0&false))) {{
-                    __CLR4_5_200m68iyfki.R.inc(218);int len = token.length();
-                    __CLR4_5_200m68iyfki.R.inc(219);int pos = 3;
-                    __CLR4_5_200m68iyfki.R.inc(220);while ((((pos + 4 <= len)&&(__CLR4_5_200m68iyfki.R.iget(221)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(222)==0&false))) {{
-                        __CLR4_5_200m68iyfki.R.inc(223);try {
-                            __CLR4_5_200m68iyfki.R.inc(224);sb.append(hexToChar(token.substring(pos, pos + 4)));
+            __CLR4_5_200m6lb4x6y.R.inc(211);String sequence = (String)CHARNAMES_TO_UNICODE.get(token);
+            __CLR4_5_200m6lb4x6y.R.inc(212);if ((((sequence == null)&&(__CLR4_5_200m6lb4x6y.R.iget(213)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(214)==0&false))) {{
+                __CLR4_5_200m6lb4x6y.R.inc(215);if ((((token.startsWith("uni"))&&(__CLR4_5_200m6lb4x6y.R.iget(216)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(217)==0&false))) {{
+                    __CLR4_5_200m6lb4x6y.R.inc(218);int len = token.length();
+                    __CLR4_5_200m6lb4x6y.R.inc(219);int pos = 3;
+                    __CLR4_5_200m6lb4x6y.R.inc(220);while ((((pos + 4 <= len)&&(__CLR4_5_200m6lb4x6y.R.iget(221)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(222)==0&false))) {{
+                        __CLR4_5_200m6lb4x6y.R.inc(223);try {
+                            __CLR4_5_200m6lb4x6y.R.inc(224);sb.append(hexToChar(token.substring(pos, pos + 4)));
                         } catch (NumberFormatException nfe) {
-                            __CLR4_5_200m68iyfki.R.inc(225);return null;
+                            __CLR4_5_200m6lb4x6y.R.inc(225);return null;
                         }
-                        __CLR4_5_200m68iyfki.R.inc(226);pos += 4;
+                        __CLR4_5_200m6lb4x6y.R.inc(226);pos += 4;
                     }
-                }} }else {__CLR4_5_200m68iyfki.R.inc(227);if ((((token.startsWith("u"))&&(__CLR4_5_200m68iyfki.R.iget(228)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(229)==0&false))) {{
-                    __CLR4_5_200m68iyfki.R.inc(230);if ((((token.length() > 5)&&(__CLR4_5_200m68iyfki.R.iget(231)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(232)==0&false))) {{
+                }} }else {__CLR4_5_200m6lb4x6y.R.inc(227);if ((((token.startsWith("u"))&&(__CLR4_5_200m6lb4x6y.R.iget(228)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(229)==0&false))) {{
+                    __CLR4_5_200m6lb4x6y.R.inc(230);if ((((token.length() > 5)&&(__CLR4_5_200m6lb4x6y.R.iget(231)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(232)==0&false))) {{
                         //TODO: Unicode scalar values greater than FFFF are currently not supported
-                        __CLR4_5_200m68iyfki.R.inc(233);return null;
+                        __CLR4_5_200m6lb4x6y.R.inc(233);return null;
                     }
-                    }__CLR4_5_200m68iyfki.R.inc(234);if ((((token.length() < 5)&&(__CLR4_5_200m68iyfki.R.iget(235)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(236)==0&false))) {{
+                    }__CLR4_5_200m6lb4x6y.R.inc(234);if ((((token.length() < 5)&&(__CLR4_5_200m6lb4x6y.R.iget(235)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(236)==0&false))) {{
                         /*
                          * This is not in the form of 'u1234' --probably a
                          * non-official glyph name that isn't listed in the
                          * unicode map.
                          */
-                        __CLR4_5_200m68iyfki.R.inc(237);return null;
+                        __CLR4_5_200m6lb4x6y.R.inc(237);return null;
                     }
-                    }__CLR4_5_200m68iyfki.R.inc(238);try {
-                        __CLR4_5_200m68iyfki.R.inc(239);sb.append(hexToChar(token.substring(1, 5)));
+                    }__CLR4_5_200m6lb4x6y.R.inc(238);try {
+                        __CLR4_5_200m6lb4x6y.R.inc(239);sb.append(hexToChar(token.substring(1, 5)));
                     } catch (NumberFormatException nfe) {
-                        __CLR4_5_200m68iyfki.R.inc(240);return null;
+                        __CLR4_5_200m6lb4x6y.R.inc(240);return null;
                     }
                 } }else {{
                     //ignore (empty string)
                 }
             }}} }else {{
-                __CLR4_5_200m68iyfki.R.inc(241);sb.append(sequence);
+                __CLR4_5_200m6lb4x6y.R.inc(241);sb.append(sequence);
             }
         }}
 
-        }__CLR4_5_200m68iyfki.R.inc(242);if ((((sb.length() == 0)&&(__CLR4_5_200m68iyfki.R.iget(243)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(244)==0&false))) {{
-            __CLR4_5_200m68iyfki.R.inc(245);return null;
+        }__CLR4_5_200m6lb4x6y.R.inc(242);if ((((sb.length() == 0)&&(__CLR4_5_200m6lb4x6y.R.iget(243)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(244)==0&false))) {{
+            __CLR4_5_200m6lb4x6y.R.inc(245);return null;
         } }else {{
-            __CLR4_5_200m68iyfki.R.inc(246);return sb.toString();
+            __CLR4_5_200m6lb4x6y.R.inc(246);return sb.toString();
         }
-    }}finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+    }}finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
     /**
      * Return the glyphname from a string,
@@ -799,14 +799,14 @@ public final class Glyphs {public static class __CLR4_5_200m68iyfki{public stati
      *          first Unicode code point it finds.
      */
     @Deprecated
-    public static String glyphToString(String name) {try{__CLR4_5_200m68iyfki.R.inc(247);
-        __CLR4_5_200m68iyfki.R.inc(248);for (int i = 0; (((i < UNICODE_GLYPHS.length)&&(__CLR4_5_200m68iyfki.R.iget(249)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(250)==0&false)); i += 2) {{
-            __CLR4_5_200m68iyfki.R.inc(251);if ((((UNICODE_GLYPHS[i + 1].equals(name))&&(__CLR4_5_200m68iyfki.R.iget(252)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(253)==0&false))) {{
-                __CLR4_5_200m68iyfki.R.inc(254);return UNICODE_GLYPHS[i];
+    public static String glyphToString(String name) {try{__CLR4_5_200m6lb4x6y.R.inc(247);
+        __CLR4_5_200m6lb4x6y.R.inc(248);for (int i = 0; (((i < UNICODE_GLYPHS.length)&&(__CLR4_5_200m6lb4x6y.R.iget(249)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(250)==0&false)); i += 2) {{
+            __CLR4_5_200m6lb4x6y.R.inc(251);if ((((UNICODE_GLYPHS[i + 1].equals(name))&&(__CLR4_5_200m6lb4x6y.R.iget(252)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(253)==0&false))) {{
+                __CLR4_5_200m6lb4x6y.R.inc(254);return UNICODE_GLYPHS[i];
             }
         }}
-        }__CLR4_5_200m68iyfki.R.inc(255);return "";
-    }finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+        }__CLR4_5_200m6lb4x6y.R.inc(255);return "";
+    }finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
     /**
      * Return the string representation of a glyphname,
@@ -815,27 +815,27 @@ public final class Glyphs {public static class __CLR4_5_200m68iyfki{public stati
      * @param name name of the glyph
      * @return the string representation (or an empty String if no match was found)
      */
-    public static String stringToGlyph(String name) {try{__CLR4_5_200m68iyfki.R.inc(256);
-        __CLR4_5_200m68iyfki.R.inc(257);for (int i = 0; (((i < UNICODE_GLYPHS.length)&&(__CLR4_5_200m68iyfki.R.iget(258)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(259)==0&false)); i += 2) {{
-            __CLR4_5_200m68iyfki.R.inc(260);if ((((UNICODE_GLYPHS[i].equals(name))&&(__CLR4_5_200m68iyfki.R.iget(261)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(262)==0&false))) {{
-                __CLR4_5_200m68iyfki.R.inc(263);return UNICODE_GLYPHS[i + 1];
+    public static String stringToGlyph(String name) {try{__CLR4_5_200m6lb4x6y.R.inc(256);
+        __CLR4_5_200m6lb4x6y.R.inc(257);for (int i = 0; (((i < UNICODE_GLYPHS.length)&&(__CLR4_5_200m6lb4x6y.R.iget(258)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(259)==0&false)); i += 2) {{
+            __CLR4_5_200m6lb4x6y.R.inc(260);if ((((UNICODE_GLYPHS[i].equals(name))&&(__CLR4_5_200m6lb4x6y.R.iget(261)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(262)==0&false))) {{
+                __CLR4_5_200m6lb4x6y.R.inc(263);return UNICODE_GLYPHS[i + 1];
             }
         }}
-        }__CLR4_5_200m68iyfki.R.inc(264);for (int i = 0; (((i < DINGBATS_GLYPHS.length)&&(__CLR4_5_200m68iyfki.R.iget(265)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(266)==0&false)); i += 2) {{
-            __CLR4_5_200m68iyfki.R.inc(267);if ((((DINGBATS_GLYPHS[i].equals(name))&&(__CLR4_5_200m68iyfki.R.iget(268)!=0|true))||(__CLR4_5_200m68iyfki.R.iget(269)==0&false))) {{
-                __CLR4_5_200m68iyfki.R.inc(270);return DINGBATS_GLYPHS[i + 1];
+        }__CLR4_5_200m6lb4x6y.R.inc(264);for (int i = 0; (((i < DINGBATS_GLYPHS.length)&&(__CLR4_5_200m6lb4x6y.R.iget(265)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(266)==0&false)); i += 2) {{
+            __CLR4_5_200m6lb4x6y.R.inc(267);if ((((DINGBATS_GLYPHS[i].equals(name))&&(__CLR4_5_200m6lb4x6y.R.iget(268)!=0|true))||(__CLR4_5_200m6lb4x6y.R.iget(269)==0&false))) {{
+                __CLR4_5_200m6lb4x6y.R.inc(270);return DINGBATS_GLYPHS[i + 1];
             }
         }}
-        }__CLR4_5_200m68iyfki.R.inc(271);return "";
-    }finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+        }__CLR4_5_200m6lb4x6y.R.inc(271);return "";
+    }finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
     /**
      * Returns an array of char names which can serve as alternatives for the given one.
      * @param charName the character name to search alternatives for
      * @return an array of char names or null if no alternatives are available
      */
-    public static String[] getCharNameAlternativesFor(String charName) {try{__CLR4_5_200m68iyfki.R.inc(272);
-        __CLR4_5_200m68iyfki.R.inc(273);return (String[])CHARNAME_ALTERNATIVES.get(charName);
-    }finally{__CLR4_5_200m68iyfki.R.flushNeeded();}}
+    public static String[] getCharNameAlternativesFor(String charName) {try{__CLR4_5_200m6lb4x6y.R.inc(272);
+        __CLR4_5_200m6lb4x6y.R.inc(273);return (String[])CHARNAME_ALTERNATIVES.get(charName);
+    }finally{__CLR4_5_200m6lb4x6y.R.flushNeeded();}}
 
 }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultNestedDocumentHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.ps.dsc</a> &gt; <span class="el_source">DefaultNestedDocumentHandler.java</span></div><h1>DefaultNestedDocumentHandler.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: DefaultNestedDocumentHandler.java 1614048 2014-07-28 15:16:47Z vhennebert $ */
+
+package org.apache.xmlgraphics.ps.dsc;
+
+import java.io.IOException;
+
+import org.apache.xmlgraphics.ps.DSCConstants;
+import org.apache.xmlgraphics.ps.PSGenerator;
+import org.apache.xmlgraphics.ps.dsc.events.DSCComment;
+import org.apache.xmlgraphics.ps.dsc.events.DSCEvent;
+
+/**
+ * {@link DSCListener} implementation which automatically skips data
+ * between Begin/EndDocument and Begin/EndData.
+ */
+public class DefaultNestedDocumentHandler implements DSCParserConstants,
+        NestedDocumentHandler, DSCListener {
+
+    private PSGenerator gen;
+
+    /**
+     * Creates a new instance.
+     * @param gen PSGenerator to pass through the skipped content
+     */
+<span class="nc" id="L42">    public DefaultNestedDocumentHandler(PSGenerator gen) {</span>
+<span class="nc" id="L43">        this.gen = gen;</span>
+<span class="nc" id="L44">    }</span>
+
+    /** {@inheritDoc} */
+    public void handle(DSCEvent event, DSCParser parser) throws IOException, DSCException {
+<span class="nc" id="L48">        processEvent(event, parser);</span>
+<span class="nc" id="L49">    }</span>
+
+    /** {@inheritDoc} */
+    public void processEvent(DSCEvent event, DSCParser parser) throws IOException, DSCException {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (event.isDSCComment()) {</span>
+<span class="nc" id="L54">            DSCComment comment = event.asDSCComment();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            if (DSCConstants.BEGIN_DOCUMENT.equals(comment.getName())) {</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                if (gen != null) {</span>
+<span class="nc" id="L57">                    comment.generate(gen);</span>
+                }
+<span class="nc" id="L59">                boolean checkEOF = parser.isCheckEOF();</span>
+<span class="nc" id="L60">                parser.setCheckEOF(false);</span>
+<span class="nc" id="L61">                parser.setListenersDisabled(true);</span>
+<span class="nc" id="L62">                comment = parser.nextDSCComment(DSCConstants.END_DOCUMENT, gen);</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">                if (comment == null) {</span>
+<span class="nc" id="L64">                    throw new DSCException(&quot;File is not DSC-compliant: Didn't find an &quot;</span>
+                            + DSCConstants.END_DOCUMENT);
+                }
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                if (gen != null) {</span>
+<span class="nc" id="L68">                    comment.generate(gen);</span>
+                }
+<span class="nc" id="L70">                parser.setCheckEOF(checkEOF);</span>
+<span class="nc" id="L71">                parser.setListenersDisabled(false);</span>
+<span class="nc" id="L72">                parser.next();</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">            } else if (DSCConstants.BEGIN_DATA.equals(comment.getName())) {</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                if (gen != null) {</span>
+<span class="nc" id="L75">                    comment.generate(gen);</span>
+                }
+<span class="nc" id="L77">                boolean checkEOF = parser.isCheckEOF();</span>
+<span class="nc" id="L78">                parser.setCheckEOF(false);</span>
+<span class="nc" id="L79">                parser.setListenersDisabled(true);</span>
+<span class="nc" id="L80">                comment = parser.nextDSCComment(DSCConstants.END_DATA, gen);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                if (comment == null) {</span>
+<span class="nc" id="L82">                    throw new DSCException(&quot;File is not DSC-compliant: Didn't find an &quot;</span>
+                            + DSCConstants.END_DATA);
+                }
+<span class="nc bnc" id="L85" title="All 2 branches missed.">                if (gen != null) {</span>
+<span class="nc" id="L86">                    comment.generate(gen);</span>
+                }
+<span class="nc" id="L88">                parser.setCheckEOF(checkEOF);</span>
+<span class="nc" id="L89">                parser.setListenersDisabled(false);</span>
+<span class="nc" id="L90">                parser.next();</span>
+            }
+        }
+<span class="nc" id="L93">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

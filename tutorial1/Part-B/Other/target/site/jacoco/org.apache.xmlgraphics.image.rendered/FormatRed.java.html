@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FormatRed.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.rendered</a> &gt; <span class="el_source">FormatRed.java</span></div><h1>FormatRed.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: FormatRed.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.image.rendered;
+
+import java.awt.Point;
+import java.awt.Transparency;
+import java.awt.color.ColorSpace;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.ComponentSampleModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DirectColorModel;
+import java.awt.image.Raster;
+import java.awt.image.SampleModel;
+import java.awt.image.SinglePixelPackedSampleModel;
+import java.awt.image.WritableRaster;
+
+import org.apache.xmlgraphics.image.GraphicsUtil;
+
+// CSOFF: NeedBraces
+// CSOFF: WhitespaceAfter
+// CSOFF: WhitespaceAround
+
+/**
+ * This allows you to specify the ColorModel, Alpha premult and/or
+ * SampleModel to be used for output.  If the input image lacks
+ * Alpha and alpha is included in output then it is filled with
+ * alpha=1.  In all other cases bands are simply copied.
+ *
+ * @version $Id: FormatRed.java 1732018 2016-02-24 04:51:06Z gadams $
+ *
+ * Originally authored by Thomas DeWeese.
+ */
+public class FormatRed extends AbstractRed {
+
+    public static CachableRed construct(CachableRed src, ColorModel cm) {
+<span class="nc" id="L55">        ColorModel srcCM = src.getColorModel();</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if ((cm.hasAlpha() != srcCM.hasAlpha())</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">            || (cm.isAlphaPremultiplied() != srcCM.isAlphaPremultiplied())) {</span>
+<span class="nc" id="L58">            return new FormatRed(src, cm);</span>
+        }
+
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        if (cm.getNumComponents() != srcCM.getNumComponents()) {</span>
+<span class="nc" id="L62">            throw new IllegalArgumentException(</span>
+                &quot;Incompatible ColorModel given&quot;);
+        }
+
+
+<span class="nc bnc" id="L67" title="All 4 branches missed.">        if ((srcCM instanceof ComponentColorModel)</span>
+            &amp;&amp; (cm    instanceof ComponentColorModel)) {
+<span class="nc" id="L69">            return src;</span>
+        }
+
+<span class="nc bnc" id="L72" title="All 4 branches missed.">        if ((srcCM instanceof DirectColorModel)</span>
+            &amp;&amp; (cm    instanceof DirectColorModel)) {
+<span class="nc" id="L74">            return src;</span>
+        }
+
+<span class="nc" id="L77">        return new FormatRed(src, cm);</span>
+    }
+
+    /**
+     * Construct an instance of CachableRed around a BufferedImage.
+     */
+    public FormatRed(CachableRed cr, SampleModel sm) {
+<span class="nc" id="L84">        super(cr, cr.getBounds(),</span>
+<span class="nc" id="L85">              makeColorModel(cr, sm), sm,</span>
+<span class="nc" id="L86">              cr.getTileGridXOffset(),</span>
+<span class="nc" id="L87">              cr.getTileGridYOffset(),</span>
+              null);
+<span class="nc" id="L89">    }</span>
+
+    public FormatRed(CachableRed cr, ColorModel cm) {
+<span class="nc" id="L92">        super(cr, cr.getBounds(),</span>
+<span class="nc" id="L93">              cm, makeSampleModel(cr, cm),</span>
+<span class="nc" id="L94">              cr.getTileGridXOffset(),</span>
+<span class="nc" id="L95">              cr.getTileGridYOffset(),</span>
+              null);
+<span class="nc" id="L97">    }</span>
+
+    /**
+     * fetch the source image for this node.
+     */
+    public CachableRed getSource() {
+<span class="nc" id="L103">        return (CachableRed)getSources().get(0);</span>
+    }
+
+    public Object getProperty(String name) {
+<span class="nc" id="L107">        return getSource().getProperty(name);</span>
+    }
+
+    public String [] getPropertyNames() {
+<span class="nc" id="L111">        return getSource().getPropertyNames();</span>
+    }
+
+    public WritableRaster copyData(WritableRaster wr) {
+<span class="nc" id="L115">        ColorModel  cm    = getColorModel();</span>
+<span class="nc" id="L116">        CachableRed cr    = getSource();</span>
+<span class="nc" id="L117">        ColorModel  srcCM = cr.getColorModel();</span>
+<span class="nc" id="L118">        SampleModel srcSM = cr.getSampleModel();</span>
+<span class="nc" id="L119">        srcSM = srcSM.createCompatibleSampleModel(wr.getWidth(),</span>
+<span class="nc" id="L120">                                                  wr.getHeight());</span>
+        WritableRaster srcWR;
+<span class="nc" id="L122">        srcWR = Raster.createWritableRaster(srcSM, new Point(wr.getMinX(),</span>
+<span class="nc" id="L123">                                                             wr.getMinY()));</span>
+<span class="nc" id="L124">        getSource().copyData(srcWR);</span>
+
+<span class="nc" id="L126">        BufferedImage srcBI = new BufferedImage(</span>
+<span class="nc" id="L127">            srcCM, srcWR.createWritableTranslatedChild(0, 0),</span>
+<span class="nc" id="L128">             srcCM.isAlphaPremultiplied(), null);</span>
+<span class="nc" id="L129">        BufferedImage dstBI = new BufferedImage(</span>
+<span class="nc" id="L130">            cm, wr.createWritableTranslatedChild(0, 0),</span>
+<span class="nc" id="L131">             cm.isAlphaPremultiplied(), null);</span>
+
+<span class="nc" id="L133">        GraphicsUtil.copyData(srcBI, dstBI);</span>
+
+<span class="nc" id="L135">        return wr;</span>
+    }
+
+    public static SampleModel makeSampleModel(CachableRed cr, ColorModel cm) {
+<span class="nc" id="L139">        SampleModel srcSM = cr.getSampleModel();</span>
+<span class="nc" id="L140">        return cm.createCompatibleSampleModel(srcSM.getWidth(),</span>
+<span class="nc" id="L141">                                              srcSM.getHeight());</span>
+    }
+
+    public static ColorModel makeColorModel(CachableRed cr, SampleModel sm) {
+<span class="nc" id="L145">        ColorModel srcCM = cr.getColorModel();</span>
+<span class="nc" id="L146">        ColorSpace cs    = srcCM.getColorSpace();</span>
+
+<span class="nc" id="L148">        int bands = sm.getNumBands();</span>
+
+        int bits;
+<span class="nc" id="L151">        int dt = sm.getDataType();</span>
+<span class="nc bnc" id="L152" title="All 5 branches missed.">        switch (dt) {</span>
+<span class="nc" id="L153">        case DataBuffer.TYPE_BYTE:   bits = 8;  break;</span>
+<span class="nc" id="L154">        case DataBuffer.TYPE_SHORT:  bits = 16; break;</span>
+<span class="nc" id="L155">        case DataBuffer.TYPE_USHORT: bits = 16; break;</span>
+<span class="nc" id="L156">        case DataBuffer.TYPE_INT:    bits = 32; break;</span>
+        default:
+<span class="nc" id="L158">            throw new IllegalArgumentException(</span>
+                &quot;Unsupported DataBuffer type: &quot; + dt);
+        }
+
+<span class="nc" id="L162">        boolean hasAlpha = srcCM.hasAlpha();</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (hasAlpha) {</span>
+            // if Src has Alpha then our out bands must
+            // either be one less than the source (no out alpha)
+            // or equal (still has alpha)
+<span class="nc bnc" id="L167" title="All 2 branches missed.">            if (bands == srcCM.getNumComponents() - 1) {</span>
+<span class="nc" id="L168">                hasAlpha = false;</span>
+<span class="nc bnc" id="L169" title="All 2 branches missed.">            } else if (bands != srcCM.getNumComponents()) {</span>
+<span class="nc" id="L170">                throw new IllegalArgumentException(</span>
+                    &quot;Incompatible number of bands in and out&quot;);
+            }
+        } else {
+<span class="nc bnc" id="L174" title="All 2 branches missed.">            if (bands == srcCM.getNumComponents() + 1) {</span>
+<span class="nc" id="L175">                hasAlpha = true;</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">            } else if (bands != srcCM.getNumComponents()) {</span>
+<span class="nc" id="L177">                throw new IllegalArgumentException(</span>
+                    &quot;Incompatible number of bands in and out&quot;);
+            }
+        }
+
+<span class="nc" id="L182">        boolean preMult  = srcCM.isAlphaPremultiplied();</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        if (!hasAlpha) {</span>
+<span class="nc" id="L184">            preMult = false;</span>
+        }
+
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        if (sm instanceof ComponentSampleModel) {</span>
+<span class="nc" id="L188">            int [] bitsPer = new int[bands];</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">            for (int i = 0; i &lt; bands; i++) {</span>
+<span class="nc" id="L190">                bitsPer[i] = bits;</span>
+            }
+
+<span class="nc" id="L193">            return new ComponentColorModel(</span>
+                cs, bitsPer, hasAlpha, preMult,
+<span class="nc bnc" id="L195" title="All 2 branches missed.">                 hasAlpha ? Transparency.TRANSLUCENT : Transparency.OPAQUE,</span>
+                 dt);
+<span class="nc bnc" id="L197" title="All 2 branches missed.">        } else if (sm instanceof SinglePixelPackedSampleModel) {</span>
+            SinglePixelPackedSampleModel sppsm;
+<span class="nc" id="L199">            sppsm = (SinglePixelPackedSampleModel)sm;</span>
+<span class="nc" id="L200">            int[] masks  = sppsm.getBitMasks();</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">            if (bands == 4) {</span>
+<span class="nc" id="L202">                return new DirectColorModel(</span>
+                    cs, bits, masks[0], masks[1], masks[2], masks[3],
+                     preMult, dt);
+<span class="nc bnc" id="L205" title="All 2 branches missed.">            } else if (bands == 3) {</span>
+<span class="nc" id="L206">                return new DirectColorModel(</span>
+                    cs, bits, masks[0], masks[1], masks[2], 0x0,
+                     preMult, dt);
+            } else {
+<span class="nc" id="L210">                throw new IllegalArgumentException(</span>
+                    &quot;Incompatible number of bands out for ColorModel&quot;);
+            }
+        }
+<span class="nc" id="L214">        throw new IllegalArgumentException(</span>
+            &quot;Unsupported SampleModel Type&quot;);
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

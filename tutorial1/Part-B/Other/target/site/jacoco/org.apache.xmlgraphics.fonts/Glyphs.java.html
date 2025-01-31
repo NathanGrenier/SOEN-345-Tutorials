@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Glyphs.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.fonts</a> &gt; <span class="el_source">Glyphs.java</span></div><h1>Glyphs.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: Glyphs.java 1804124 2017-08-04 14:13:54Z ssteiner $ */
+
+package org.apache.xmlgraphics.fonts;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import org.apache.commons.io.IOUtils;
+
+/**
+ * This class provides a number of constants for glyph management.
+ */
+public final class Glyphs {
+
+    private Glyphs() {
+    }
+
+    /**
+     * Glyph name for the &quot;notdef&quot; glyph
+     */
+    public static final String NOTDEF = &quot;.notdef&quot;;
+
+    /**
+     * Glyph names for Mac encoding
+     * @deprecated That array was supposed to represent the standard Macintosh ordering
+     *      of glyphs in a TrueType font (it does NOT correspond to the MacRoman encoding).
+     *      In addition some entries are incorrect.
+     */
+    @Deprecated
+<span class="fc" id="L54">    public static final String[] MAC_GLYPH_NAMES = {</span>
+        /* 0x00 */
+        Glyphs.NOTDEF, &quot;.null&quot;, &quot;CR&quot;, &quot;space&quot;, &quot;exclam&quot;, &quot;quotedbl&quot;, &quot;numbersign&quot;,
+                &quot;dollar&quot;, &quot;percent&quot;, &quot;ampersand&quot;, &quot;quotesingle&quot;, &quot;parenleft&quot;,
+                &quot;parenright&quot;, &quot;asterisk&quot;, &quot;plus&quot;, &quot;comma&quot;, /* 0x10 */
+        &quot;hyphen&quot;, &quot;period&quot;, &quot;slash&quot;, &quot;zero&quot;, &quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;,
+                  &quot;five&quot;, &quot;six&quot;, &quot;seven&quot;, &quot;eight&quot;, &quot;nine&quot;, &quot;colon&quot;,
+                  &quot;semicolon&quot;, &quot;less&quot;, /* 0x20 */
+        &quot;equal&quot;, &quot;greater&quot;, &quot;question&quot;, &quot;at&quot;, &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;,
+                 &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;, &quot;L&quot;, /* 0x30 */
+        &quot;M&quot;, &quot;N&quot;, &quot;O&quot;, &quot;P&quot;, &quot;Q&quot;, &quot;R&quot;, &quot;S&quot;, &quot;T&quot;, &quot;U&quot;, &quot;V&quot;, &quot;W&quot;, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;,
+             &quot;bracketleft&quot;, &quot;backslash&quot;, /* 0x40 */
+        &quot;bracketright&quot;, &quot;asciicircum&quot;, &quot;underscore&quot;, &quot;grave&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;,
+                        &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;, &quot;k&quot;, &quot;l&quot;,
+                        /* 0x50 */
+        &quot;m&quot;, &quot;n&quot;, &quot;o&quot;, &quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;s&quot;, &quot;t&quot;, &quot;u&quot;, &quot;v&quot;, &quot;w&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;,
+             &quot;braceleft&quot;, &quot;bar&quot;, /* 0x60 */
+        &quot;braceright&quot;, &quot;asciitilde&quot;, &quot;Adieresis&quot;, &quot;Aring&quot;, &quot;Ccedilla&quot;,
+                      &quot;Eacute&quot;, &quot;Ntilde&quot;, &quot;Odieresis&quot;, &quot;Udieresis&quot;, &quot;aacute&quot;,
+                      &quot;agrave&quot;, &quot;acircumflex&quot;, &quot;adieresis&quot;, &quot;atilde&quot;,
+                      &quot;aring&quot;, &quot;ccedilla&quot;, /* 0x70 */
+        &quot;eacute&quot;, &quot;egrave&quot;, &quot;ecircumflex&quot;, &quot;edieresis&quot;, &quot;iacute&quot;, &quot;igrave&quot;,
+                  &quot;icircumflex&quot;, &quot;idieresis&quot;, &quot;ntilde&quot;, &quot;oacute&quot;, &quot;ograve&quot;,
+                  &quot;ocircumflex&quot;, &quot;odieresis&quot;, &quot;otilde&quot;, &quot;uacute&quot;, &quot;ugrave&quot;,
+                  /* 0x80 */
+        &quot;ucircumflex&quot;, &quot;udieresis&quot;, &quot;dagger&quot;, &quot;degree&quot;, &quot;cent&quot;, &quot;sterling&quot;,
+                       &quot;section&quot;, &quot;bullet&quot;, &quot;paragraph&quot;, &quot;germandbls&quot;,
+                       &quot;registered&quot;, &quot;copyright&quot;, &quot;trademark&quot;, &quot;acute&quot;,
+                       &quot;dieresis&quot;, &quot;notequal&quot;, /* 0x90 */
+        &quot;AE&quot;, &quot;Oslash&quot;, &quot;infinity&quot;, &quot;plusminus&quot;, &quot;lessequal&quot;, &quot;greaterequal&quot;,
+              &quot;yen&quot;, &quot;mu&quot;, &quot;partialdiff&quot;, &quot;Sigma&quot;, &quot;Pi&quot;, &quot;pi&quot;, &quot;integral&quot;,
+              &quot;ordfeminine&quot;, &quot;ordmasculine&quot;, &quot;Omega&quot;, /* 0xa0 */
+        &quot;ae&quot;, &quot;oslash&quot;, &quot;questiondown&quot;, &quot;exclamdown&quot;, &quot;logicalnot&quot;,
+              &quot;radical&quot;, &quot;florin&quot;, &quot;approxequal&quot;, &quot;Delta&quot;, &quot;guillemotleft&quot;,
+              &quot;guillemotright&quot;, &quot;ellipsis&quot;, &quot;nbspace&quot;, &quot;Agrave&quot;, &quot;Atilde&quot;,
+              &quot;Otilde&quot;, /* 0xb0 */
+        &quot;OE&quot;, &quot;oe&quot;, &quot;endash&quot;, &quot;emdash&quot;, &quot;quotedblleft&quot;, &quot;quotedblright&quot;,
+              &quot;quoteleft&quot;, &quot;quoteright&quot;, &quot;divide&quot;, &quot;lozenge&quot;, &quot;ydieresis&quot;,
+              &quot;Ydieresis&quot;, &quot;fraction&quot;, &quot;currency&quot;, &quot;guilsinglleft&quot;,
+              &quot;guilsinglright&quot;, /* 0xc0 */
+        &quot;fi&quot;, &quot;fl&quot;, &quot;daggerdbl&quot;, &quot;periodcentered&quot;, &quot;quotesinglbase&quot;,
+              &quot;quotedblbase&quot;, &quot;perthousand&quot;, &quot;Acircumflex&quot;, &quot;Ecircumflex&quot;,
+              &quot;Aacute&quot;, &quot;Edieresis&quot;, &quot;Egrave&quot;, &quot;Iacute&quot;, &quot;Icircumflex&quot;,
+              &quot;Idieresis&quot;, &quot;Igrave&quot;, /* 0xd0 */
+        &quot;Oacute&quot;, &quot;Ocircumflex&quot;, &quot;applelogo&quot;, &quot;Ograve&quot;, &quot;Uacute&quot;,
+                  &quot;Ucircumflex&quot;, &quot;Ugrave&quot;, &quot;dotlessi&quot;, &quot;circumflex&quot;, &quot;tilde&quot;,
+                  &quot;macron&quot;, &quot;breve&quot;, &quot;dotaccent&quot;, &quot;ring&quot;, &quot;cedilla&quot;,
+                  &quot;hungarumlaut&quot;, /* 0xe0 */
+        &quot;ogonek&quot;, &quot;caron&quot;, &quot;Lslash&quot;, &quot;lslash&quot;, &quot;Scaron&quot;, &quot;scaron&quot;, &quot;Zcaron&quot;,
+                  &quot;zcaron&quot;, &quot;brokenbar&quot;, &quot;Eth&quot;, &quot;eth&quot;, &quot;Yacute&quot;, &quot;yacute&quot;,
+                  &quot;Thorn&quot;, &quot;thorn&quot;, &quot;minus&quot;, /* 0xf0 */
+        &quot;multiply&quot;, &quot;onesuperior&quot;, &quot;twosuperior&quot;, &quot;threesuperior&quot;, &quot;onehalf&quot;,
+                    &quot;onequarter&quot;, &quot;threequarters&quot;, &quot;franc&quot;, &quot;Gbreve&quot;,
+                    &quot;gbreve&quot;, &quot;Idot&quot;, &quot;Scedilla&quot;, &quot;scedilla&quot;, &quot;Cacute&quot;,
+                    &quot;cacute&quot;, &quot;Ccaron&quot;, /* 0x100 */
+        &quot;ccaron&quot;, &quot;dmacron&quot;
+    };
+
+    /**
+     * Glyph names for tex8r encoding
+     */
+<span class="fc" id="L115">    public static final String[] TEX8R_GLYPH_NAMES = {</span>
+        // 0x00
+        NOTDEF, &quot;dotaccent&quot;, &quot;fi&quot;, &quot;fl&quot;, &quot;fraction&quot;, &quot;hungarumlaut&quot;,
+                   &quot;Lslash&quot;, &quot;lslash&quot;, &quot;ogonek&quot;, &quot;ring&quot;, &quot;.notdef&quot;, &quot;breve&quot;,
+                   &quot;minus&quot;, &quot;.notdef&quot;, &quot;Zcaron&quot;, &quot;zcaron&quot;, // 0x10
+        &quot;caron&quot;, &quot;dotlessi&quot;, &quot;dotlessj&quot;, &quot;ff&quot;, &quot;ffi&quot;, &quot;ffl&quot;, &quot;.notdef&quot;,
+                 &quot;.notdef&quot;, NOTDEF, NOTDEF, NOTDEF, NOTDEF,
+                 NOTDEF, NOTDEF, &quot;grave&quot;, &quot;quotesingle&quot;, // 0x20
+        &quot;space&quot;, &quot;exclam&quot;, &quot;quotedbl&quot;, &quot;numbersign&quot;, &quot;dollar&quot;, &quot;percent&quot;,
+                 &quot;ampersand&quot;, &quot;quoteright&quot;, &quot;parenleft&quot;, &quot;parenright&quot;,
+                 &quot;asterisk&quot;, &quot;plus&quot;, &quot;comma&quot;, &quot;hyphen&quot;, &quot;period&quot;, &quot;slash&quot;,
+                 // 0x30
+        &quot;zero&quot;, &quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;, &quot;six&quot;, &quot;seven&quot;,
+                &quot;eight&quot;, &quot;nine&quot;, &quot;colon&quot;, &quot;semicolon&quot;, &quot;less&quot;, &quot;equal&quot;,
+                &quot;greater&quot;, &quot;question&quot;, // 0x40
+        &quot;at&quot;, &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;I&quot;, &quot;J&quot;, &quot;K&quot;, &quot;L&quot;,
+              &quot;M&quot;, &quot;N&quot;, &quot;O&quot;, // 0x50
+        &quot;P&quot;, &quot;Q&quot;, &quot;R&quot;, &quot;S&quot;, &quot;T&quot;, &quot;U&quot;, &quot;V&quot;, &quot;W&quot;, &quot;X&quot;, &quot;Y&quot;, &quot;Z&quot;, &quot;bracketleft&quot;,
+             &quot;backslash&quot;, &quot;bracketright&quot;, &quot;asciicircum&quot;, &quot;underscore&quot;, // 0x60
+        &quot;quoteleft&quot;, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;, &quot;k&quot;,
+                     &quot;l&quot;, &quot;m&quot;, &quot;n&quot;, &quot;o&quot;, // 0x70
+        &quot;p&quot;, &quot;q&quot;, &quot;r&quot;, &quot;s&quot;, &quot;t&quot;, &quot;u&quot;, &quot;v&quot;, &quot;w&quot;, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;, &quot;braceleft&quot;,
+             &quot;bar&quot;, &quot;braceright&quot;, &quot;asciitilde&quot;, NOTDEF, // 0x80
+        &quot;Euro&quot;, NOTDEF, &quot;quotesinglbase&quot;, &quot;florin&quot;, &quot;quotedblbase&quot;,
+                &quot;ellipsis&quot;, &quot;dagger&quot;, &quot;daggerdbl&quot;, &quot;circumflex&quot;,
+                &quot;perthousand&quot;, &quot;Scaron&quot;, &quot;guilsinglleft&quot;, &quot;OE&quot;, NOTDEF,
+                NOTDEF, NOTDEF, // 0x90
+        NOTDEF, NOTDEF, NOTDEF, &quot;quotedblleft&quot;, &quot;quotedblright&quot;,
+                   &quot;bullet&quot;, &quot;endash&quot;, &quot;emdash&quot;, &quot;tilde&quot;, &quot;trademark&quot;,
+                   &quot;scaron&quot;, &quot;guilsinglright&quot;, &quot;oe&quot;, NOTDEF, NOTDEF,
+                   &quot;Ydieresis&quot;, // 0xA0
+        NOTDEF, &quot;exclamdown&quot;, &quot;cent&quot;, &quot;sterling&quot;, &quot;currency&quot;, &quot;yen&quot;,
+                   &quot;brokenbar&quot;, &quot;section&quot;, &quot;dieresis&quot;, &quot;copyright&quot;,
+                   &quot;ordfeminine&quot;, &quot;guillemotleft&quot;, &quot;logicalnot&quot;, &quot;hyphen&quot;,
+                   &quot;registered&quot;, &quot;macron&quot;, // 0xB0
+        &quot;degree&quot;, &quot;plusminus&quot;, &quot;twosuperior&quot;, &quot;threesuperior&quot;, &quot;acute&quot;, &quot;mu&quot;,
+                  &quot;paragraph&quot;, &quot;periodcentered&quot;, &quot;cedilla&quot;, &quot;onesuperior&quot;,
+                  &quot;ordmasculine&quot;, &quot;guillemotright&quot;, &quot;onequarter&quot;, &quot;onehalf&quot;,
+                  &quot;threequarters&quot;, &quot;questiondown&quot;, // 0xC0
+        &quot;Agrave&quot;, &quot;Aacute&quot;, &quot;Acircumflex&quot;, &quot;Atilde&quot;, &quot;Adieresis&quot;, &quot;Aring&quot;,
+                  &quot;AE&quot;, &quot;Ccedilla&quot;, &quot;Egrave&quot;, &quot;Eacute&quot;, &quot;Ecircumflex&quot;,
+                  &quot;Edieresis&quot;, &quot;Igrave&quot;, &quot;Iacute&quot;, &quot;Icircumflex&quot;,
+                  &quot;Idieresis&quot;, // 0xD0
+        &quot;Eth&quot;, &quot;Ntilde&quot;, &quot;Ograve&quot;, &quot;Oacute&quot;, &quot;Ocircumflex&quot;, &quot;Otilde&quot;,
+               &quot;Odieresis&quot;, &quot;multiply&quot;, &quot;Oslash&quot;, &quot;Ugrave&quot;, &quot;Uacute&quot;,
+               &quot;Ucircumflex&quot;, &quot;Udieresis&quot;, &quot;Yacute&quot;, &quot;Thorn&quot;, &quot;germandbls&quot;,
+               // 0xE0
+        &quot;agrave&quot;, &quot;aacute&quot;, &quot;acircumflex&quot;, &quot;atilde&quot;, &quot;adieresis&quot;, &quot;aring&quot;,
+                  &quot;ae&quot;, &quot;ccedilla&quot;, &quot;egrave&quot;, &quot;eacute&quot;, &quot;ecircumflex&quot;,
+                  &quot;edieresis&quot;, &quot;igrave&quot;, &quot;iacute&quot;, &quot;icircumflex&quot;,
+                  &quot;idieresis&quot;, // 0xF0
+        &quot;eth&quot;, &quot;ntilde&quot;, &quot;ograve&quot;, &quot;oacute&quot;, &quot;ocircumflex&quot;, &quot;otilde&quot;,
+               &quot;odieresis&quot;, &quot;divide&quot;, &quot;oslash&quot;, &quot;ugrave&quot;, &quot;uacute&quot;,
+               &quot;ucircumflex&quot;, &quot;udieresis&quot;, &quot;yacute&quot;, &quot;thorn&quot;, &quot;ydieresis&quot;
+    };
+
+    /**
+     * The characters in WinAnsiEncoding
+     */
+<span class="fc" id="L174">    public static final char[] WINANSI_ENCODING = {</span>
+        // not used until char 32
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0, // 0x20
+        ' ', '\u0021', '\&quot;', '\u0023', '$', '%', '&amp;', '\'', '(', ')', '*', '+', ',',
+             '\u002d', '\u002e', '/', // 0x30
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '&lt;', '=',
+             '&gt;', '?', '@', // 0x40
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+             'O', // 0x50
+        'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '\u005b', '\\',
+             '\u005d', '^', '_', // 0x60
+        '\u2018', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+             'n', 'o', // 0x70
+        'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '\u007b', '\u007c', '\u007d',
+             '\u007e', '\u2022', // 0x80
+        '\u20ac', '\u2022', '\u201a', '\u0192', '\u201e', '\u2026', '\u2020',
+             '\u2021', '\u02c6', '\u2030', '\u0160', '\u2039', '\u0152', '\u2022',
+             '\u017d', '\u2022', // 0x90
+        '\u2022', '\u2018',                             // quoteleft
+        '\u2019',                                       // quoteright
+        '\u201c',                                       // quotedblleft
+        '\u201d',                                       // quotedblright
+        '\u2022',                                       // bullet
+        '\u2013',                                       // endash
+        '\u2014',                                       // emdash
+        '~',
+        '\u2122',                                       // trademark
+        '\u0161', '\u203a', '\u0153', '\u2022', '\u017e', '\u0178', // 0xA0
+             ' ', '\u00a1', '\u00a2', '\u00a3', '\u00a4', '\u00a5',
+             '\u00a6', '\u00a7', '\u00a8', '\u00a9', '\u00aa', '\u00ab',
+             '\u00ac', '\u00ad',  '\u00ae', '\u00af', // 0xb0
+        '\u00b0', '\u00b1', '\u00b2', '\u00b3', '\u00b4',
+             '\u00b5',                      // This is hand-coded, the rest is assumption
+        '\u00b6',                           // and *might* not be correct...
+        '\u00b7', '\u00b8', '\u00b9', '\u00ba', '\u00bb', '\u00bc', '\u00bd',
+             '\u00be', '\u00bf', // 0xc0
+        '\u00c0', '\u00c1', '\u00c2', '\u00c3', '\u00c4', '\u00c5', // Aring
+        '\u00c6',                                            // AE
+        '\u00c7', '\u00c8', '\u00c9', '\u00ca', '\u00cb', '\u00cc',
+             '\u00cd', '\u00ce', '\u00cf', // 0xd0
+        '\u00d0', '\u00d1', '\u00d2', '\u00d3', '\u00d4', '\u00d5',
+             '\u00d6', '\u00d7', '\u00d8',    // Oslash
+        '\u00d9', '\u00da', '\u00db', '\u00dc', '\u00dd', '\u00de',
+             '\u00df', // 0xe0
+        '\u00e0', '\u00e1', '\u00e2', '\u00e3', '\u00e4', '\u00e5', // aring
+        '\u00e6',                                            // ae
+        '\u00e7', '\u00e8', '\u00e9', '\u00ea', '\u00eb', '\u00ec',
+             '\u00ed', '\u00ee', '\u00ef', // 0xf0
+        '\u00f0', '\u00f1', '\u00f2', '\u00f3', '\u00f4', '\u00f5',
+             '\u00f6', '\u00f7', '\u00f8', '\u00f9', '\u00fa', '\u00fb',
+             '\u00fc', '\u00fd', '\u00fe', '\u00ff'
+    };
+
+    /**
+     * The characters in AdobeStandardCyrillicEncoding
+     */
+<span class="fc" id="L231">    public static final char[] ADOBECYRILLIC_ENCODING = {</span>
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        ' ',        //space
+        '\u0021',    //exclam
+        '\&quot;',        //quotedbl
+        '\u0023',    //numbersign
+        '$',        //dollar
+        '%',        //percent
+        '&amp;',        //ampersand
+        '\'',        //quotesingle
+        '(',        //parenleft
+        ')',        //parenright
+        '*',        //asterisk
+        '+',        //plus
+        ',',        //comma
+        '\u002d',    //hyphen
+        '\u002e',    //period
+        '/',        //slash
+
+        '0',        //zero
+        '1',        //one
+        '2',        //two
+        '3',        //three
+        '4',        //four
+        '5',        //five
+        '6',        //six
+        '7',        //seven
+        '8',        //eight
+        '9',        //nine
+        ':',        //colon
+        ';',        //semicolon
+        '&lt;',        //less
+        '=',        //equal
+        '&gt;',        //greater
+        '?',        //question
+
+        '@',        //at
+        'A',        //A
+        'B',        //B
+        'C',        //C
+        'D',        //D
+        'E',        //E
+        'F',        //F
+        'G',        //G
+        'H',        //H
+        'I',        //I
+        'J',        //J
+        'K',        //K
+        'L',        //L
+        'M',        //M
+        'N',        //N
+        'O',        //O
+
+        'P',        //P
+        'Q',        //Q
+        'R',        //R
+        'S',        //S
+        'T',        //T
+        'U',        //U
+        'V',        //V
+        'W',        //W
+        'X',        //X
+        'Y',        //Y
+        'Z',        //Z
+        '\u005b',    //bracketleft
+        '\\',        //backslash
+        '\u005d',    //bracketright
+        '^',        //asciicircum
+        '_',        //underscore
+
+        '\u0060',    //grave
+        'a',        //a
+        'b',        //b
+        'c',        //c
+        'd',        //d
+        'e',        //e
+        'f',        //f
+        'g',        //g
+        'h',        //h
+        'i',        //i
+        'j',        //j
+        'k',        //k
+        'l',        //l
+        'm',        //m
+        'n',        //n
+        'o',        //o
+
+        'p',        //p
+        'q',        //q
+        'r',        //r
+        's',        //s
+        't',        //t
+        'u',        //u
+        'v',        //v
+        'w',        //w
+        'x',        //x
+        'y',        //y
+        'z',        //z
+        '\u007b',    //braceleft
+        '\u007c',    //bar
+        '\u007d',    //braceright
+        '\u007e',    //asciitilde
+        0,
+
+        '\u0402',    //afii10051
+        '\u0403',    //afii10052
+        '\u201a',    //quotesinglebase
+        '\u0453',    //afii10100
+        '\u201e',    //quotedblbase
+        '\u2026',    //ellipsis
+        '\u2020',    //dagger
+        '\u2021',    //daggerdbl
+        '\u20ac',    //euro
+        '\u2030',    //perthousand
+        '\u0409',    //afii10058
+        '\u2039',    //guilsignlleft
+        '\u040a',    //afii10059
+        '\u040c',    //afii10061
+        '\u040b',    //afii10060
+        '\u040f',    //afii10045
+
+        '\u0452',    //afii10099
+        '\u2018',    //quoteleft
+        '\u2019',    //quoteright
+        '\u201c',    //quotedblleft
+        '\u201d',    //quotedblright
+        '\u2022',    //bullet
+        '\u2013',    //endash
+        '\u2014',    //emdash
+        0,
+        '\u2122',    //trademark
+        '\u0459',    //afii10106
+        '\u203a',    //guilsinglright
+        '\u045a',    //afii10107
+        '\u045c',    //afii10109
+        '\u045b',    //afii10108
+        '\u045f',    //afii10193
+
+        '\u00a0',    //nbspace
+        '\u040e',    //afii10062
+        '\u045e',    //afii10110
+        '\u0408',    //afii10057
+        '\u00a4',    //currency
+        '\u0490',    //afii10050
+        '\u00a6',    //brokenbar
+        '\u00a7',    //section
+        '\u0401',    //afii10023
+        '\u00a9',    //copyright
+        '\u0404',    //afii10053
+        '\u00ab',    //guillemotleft
+        '\u00ac',    //logicalnot
+        '\u00ad',    //softhyphen
+        '\u00ae',    //registered
+        '\u0407',    //afii10056
+
+        '\u00b0',    //degree
+        '\u00b1',    //plusminus
+        '\u0406',    //afii10055
+        '\u0456',    //afii10103
+        '\u0491',    //afii10098
+        '\u00b5',    //mu
+        '\u00b6',    //paragraph
+        '\u00b7',    //periodcentered
+        '\u0451',    //afii10071
+        '\u2116',    //afii61352
+        '\u0454',    //afii10101
+        '\u00bb',    //guillemotright
+        '\u0458',    //afii10105
+        '\u0405',    //afii10054
+        '\u0455',    //afii10102
+        '\u0457',    //afii10104
+
+        '\u0410',    //afii10017
+        '\u0411',    //afii10018
+        '\u0412',    //afii10019
+        '\u0413',    //afii10020
+        '\u0414',    //afii10021
+        '\u0415',    //afii10022
+        '\u0416',    //afii10024
+        '\u0417',    //afii10025
+        '\u0418',    //afii10026
+        '\u0419',    //afii10027
+        '\u041a',    //afii10028
+        '\u041b',    //afii10029
+        '\u041c',    //afii10030
+        '\u041d',    //afii10031
+        '\u041e',    //afii10032
+        '\u041f',    //afii10033
+
+        '\u0420',    //afii10034
+        '\u0421',    //afii10035
+        '\u0422',    //afii10036
+        '\u0423',    //afii10037
+        '\u0424',    //afii10038
+        '\u0425',    //afii10039
+        '\u0426',    //afii10040
+        '\u0427',    //afii10041
+        '\u0428',    //afii10042
+        '\u0429',    //afii10043
+        '\u042a',    //afii10044
+        '\u042b',    //afii10045
+        '\u042c',    //afii10046
+        '\u042d',    //afii10047
+        '\u042e',    //afii10048
+        '\u042f',    //afii10049
+
+        '\u0430',    //afii10065
+        '\u0431',    //afii10066
+        '\u0432',    //afii10067
+        '\u0433',    //afii10068
+        '\u0434',    //afii10069
+        '\u0435',    //afii10070
+        '\u0436',    //afii10072
+        '\u0437',    //afii10073
+        '\u0438',    //afii10074
+        '\u0439',    //afii10075
+        '\u043a',    //afii10076
+        '\u043b',    //afii10077
+        '\u043c',    //afii10078
+        '\u043d',    //afii10079
+        '\u043e',    //afii10080
+        '\u043f',    //afii10081
+
+        '\u0440',    //afii10082
+        '\u0441',    //afii10083
+        '\u0442',    //afii10084
+        '\u0443',    //afii10085
+        '\u0444',    //afii10086
+        '\u0445',    //afii10087
+        '\u0446',    //afii10088
+        '\u0447',    //afii10089
+        '\u0448',    //afii10090
+        '\u0449',    //afii10091
+        '\u044a',    //afii10092
+        '\u044b',    //afii10093
+        '\u044c',    //afii10094
+        '\u044d',    //afii10095
+        '\u044e',    //afii10096
+        '\u044f',    //afii10097
+    };
+
+    /**
+     * List of unicode glyphs
+     */
+    private static final String[] UNICODE_GLYPHS;
+    private static final String[] DINGBATS_GLYPHS;
+
+    private static final Map CHARNAME_ALTERNATIVES;
+
+    private static final Map CHARNAMES_TO_UNICODE;
+
+    static {
+<span class="fc" id="L484">        Map map = new java.util.TreeMap();</span>
+<span class="fc" id="L485">        UNICODE_GLYPHS = loadGlyphList(&quot;glyphlist.txt&quot;, map);</span>
+<span class="fc" id="L486">        DINGBATS_GLYPHS = loadGlyphList(&quot;zapfdingbats.txt&quot;, map);</span>
+<span class="fc" id="L487">        CHARNAMES_TO_UNICODE = Collections.unmodifiableMap(map);</span>
+
+<span class="fc" id="L489">        map = new java.util.TreeMap();</span>
+<span class="fc" id="L490">        addAlternatives(map, new String[] {&quot;Omega&quot;, &quot;Omegagreek&quot;});</span>
+<span class="fc" id="L491">        addAlternatives(map, new String[] {&quot;Delta&quot;, &quot;Deltagreek&quot;});</span>
+        //fraction maps to 2044 (FRACTION SLASH) and 2215 (DIVISION SLASH)
+<span class="fc" id="L493">        addAlternatives(map, new String[] {&quot;fraction&quot;, &quot;divisionslash&quot;});</span>
+        //hyphen maps to 002D (HYPHEN-MINUS) and 00AD (SOFT HYPHEN)
+<span class="fc" id="L495">        addAlternatives(map, new String[] {&quot;hyphen&quot;, &quot;sfthyphen&quot;, &quot;softhyphen&quot;, &quot;minus&quot;});</span>
+        //macron maps to 00AF (MACRON) and 02C9 (MODIFIER LETTER MACRON)
+<span class="fc" id="L497">        addAlternatives(map, new String[] {&quot;macron&quot;, &quot;overscore&quot;});</span>
+        //mu maps to 00B5 (MICRO SIGN) and 03BC (GREEK SMALL LETTER MU)
+<span class="fc" id="L499">        addAlternatives(map, new String[] {&quot;mu&quot;, &quot;mu1&quot;, &quot;mugreek&quot;});</span>
+        //periodcentered maps to 00B7 (MIDDLE DOT) and 2219 (BULLET OPERATOR)
+<span class="fc" id="L501">        addAlternatives(map, new String[]</span>
+                                    {&quot;periodcentered&quot;, &quot;middot&quot;, &quot;bulletoperator&quot;, &quot;anoteleia&quot;});
+        //space maps to 0020 (SPACE) and 00A0 (NO-BREAK SPACE)
+<span class="fc" id="L504">        addAlternatives(map, new String[] {&quot;space&quot;, &quot;nonbreakingspace&quot;, &quot;nbspace&quot;});</span>
+
+        //Scedilla maps to 015E (and F6C1 in private use area)
+        //Tcommaaccent maps to 0162 (LATIN CAPITAL LETTER T WITH CEDILLA)
+        //  and 021a (LATIN CAPITAL LETTER T WITH COMMA BELOW)
+        //scedilla maps to 015f (LATIN SMALL LETTER S WITH CEDILLA) (and F6C2 in private use area)
+        //tcommaaccent maps to 0163 and 021b
+
+        //map numbers from and to their respective &quot;oldstyle&quot; variant
+<span class="fc" id="L513">        addAlternatives(map, new String[] {&quot;zero&quot;, &quot;zerooldstyle&quot;});</span>
+<span class="fc" id="L514">        addAlternatives(map, new String[] {&quot;one&quot;, &quot;oneoldstyle&quot;});</span>
+<span class="fc" id="L515">        addAlternatives(map, new String[] {&quot;two&quot;, &quot;twooldstyle&quot;});</span>
+<span class="fc" id="L516">        addAlternatives(map, new String[] {&quot;three&quot;, &quot;threeoldstyle&quot;});</span>
+<span class="fc" id="L517">        addAlternatives(map, new String[] {&quot;four&quot;, &quot;fouroldstyle&quot;});</span>
+<span class="fc" id="L518">        addAlternatives(map, new String[] {&quot;five&quot;, &quot;fiveoldstyle&quot;});</span>
+<span class="fc" id="L519">        addAlternatives(map, new String[] {&quot;six&quot;, &quot;sixoldstyle&quot;});</span>
+<span class="fc" id="L520">        addAlternatives(map, new String[] {&quot;seven&quot;, &quot;sevenoldstyle&quot;});</span>
+<span class="fc" id="L521">        addAlternatives(map, new String[] {&quot;eight&quot;, &quot;eightoldstyle&quot;});</span>
+<span class="fc" id="L522">        addAlternatives(map, new String[] {&quot;nine&quot;, &quot;nineoldstyle&quot;});</span>
+
+        //map currency signs from and to their respective &quot;oldstyle&quot; variant
+<span class="fc" id="L525">        addAlternatives(map, new String[] {&quot;cent&quot;, &quot;centoldstyle&quot;});</span>
+<span class="fc" id="L526">        addAlternatives(map, new String[] {&quot;dollar&quot;, &quot;dollaroldstyle&quot;});</span>
+
+        //Cyrillic names according Adobe Techninal Note #5013 aka Adobe Standard Cyrillic Font Specification
+<span class="fc" id="L529">        addAlternatives(map, new String[] {&quot;Acyrillic&quot;,        &quot;afii10017&quot;});</span>
+<span class="fc" id="L530">        addAlternatives(map, new String[] {&quot;Becyrillic&quot;,    &quot;afii10018&quot;});</span>
+<span class="fc" id="L531">        addAlternatives(map, new String[] {&quot;Vecyrillic&quot;,    &quot;afii10019&quot;});</span>
+<span class="fc" id="L532">        addAlternatives(map, new String[] {&quot;Gecyrillic&quot;,    &quot;afii10020&quot;});</span>
+<span class="fc" id="L533">        addAlternatives(map, new String[] {&quot;Decyrillic&quot;,    &quot;afii10021&quot;});</span>
+<span class="fc" id="L534">        addAlternatives(map, new String[] {&quot;Iecyrillic&quot;,    &quot;afii10022&quot;});</span>
+<span class="fc" id="L535">        addAlternatives(map, new String[] {&quot;Iocyrillic&quot;,    &quot;afii10023&quot;});</span>
+<span class="fc" id="L536">        addAlternatives(map, new String[] {&quot;Zhecyrillic&quot;,    &quot;afii10024&quot;});</span>
+<span class="fc" id="L537">        addAlternatives(map, new String[] {&quot;Zecyrillic&quot;,    &quot;afii10025&quot;});</span>
+<span class="fc" id="L538">        addAlternatives(map, new String[] {&quot;Iicyrillic&quot;,    &quot;afii10026&quot;});</span>
+<span class="fc" id="L539">        addAlternatives(map, new String[] {&quot;Iishortcyrillic&quot;,    &quot;afii10027&quot;});</span>
+<span class="fc" id="L540">        addAlternatives(map, new String[] {&quot;Kacyrillic&quot;,    &quot;afii10028&quot;});</span>
+<span class="fc" id="L541">        addAlternatives(map, new String[] {&quot;Elcyrillic&quot;,    &quot;afii10029&quot;});</span>
+<span class="fc" id="L542">        addAlternatives(map, new String[] {&quot;Emcyrillic&quot;,    &quot;afii10030&quot;});</span>
+<span class="fc" id="L543">        addAlternatives(map, new String[] {&quot;Encyrillic&quot;,    &quot;afii10031&quot;});</span>
+<span class="fc" id="L544">        addAlternatives(map, new String[] {&quot;Ocyrillic&quot;,        &quot;afii10032&quot;});</span>
+<span class="fc" id="L545">        addAlternatives(map, new String[] {&quot;Pecyrillic&quot;,    &quot;afii10033&quot;});</span>
+<span class="fc" id="L546">        addAlternatives(map, new String[] {&quot;Ercyrillic&quot;,    &quot;afii10034&quot;});</span>
+<span class="fc" id="L547">        addAlternatives(map, new String[] {&quot;Escyrillic&quot;,    &quot;afii10035&quot;});</span>
+<span class="fc" id="L548">        addAlternatives(map, new String[] {&quot;Tecyrillic&quot;,    &quot;afii10036&quot;});</span>
+<span class="fc" id="L549">        addAlternatives(map, new String[] {&quot;Ucyrillic&quot;,        &quot;afii10037&quot;});</span>
+<span class="fc" id="L550">        addAlternatives(map, new String[] {&quot;Efcyrillic&quot;,    &quot;afii10038&quot;});</span>
+<span class="fc" id="L551">        addAlternatives(map, new String[] {&quot;Khacyrillic&quot;,    &quot;afii10039&quot;});</span>
+<span class="fc" id="L552">        addAlternatives(map, new String[] {&quot;Tsecyrillic&quot;,    &quot;afii10040&quot;});</span>
+<span class="fc" id="L553">        addAlternatives(map, new String[] {&quot;Checyrillic&quot;,    &quot;afii10041&quot;});</span>
+<span class="fc" id="L554">        addAlternatives(map, new String[] {&quot;Shacyrillic&quot;,    &quot;afii10042&quot;});</span>
+<span class="fc" id="L555">        addAlternatives(map, new String[] {&quot;Shchacyrillic&quot;,    &quot;afii10043&quot;});</span>
+<span class="fc" id="L556">        addAlternatives(map, new String[] {&quot;Hardsigncyrillic&quot;,    &quot;afii10044&quot;});</span>
+<span class="fc" id="L557">        addAlternatives(map, new String[] {&quot;Yericyrillic&quot;,    &quot;afii10045&quot;});</span>
+<span class="fc" id="L558">        addAlternatives(map, new String[] {&quot;Softsigncyrillic&quot;,    &quot;afii10046&quot;});</span>
+<span class="fc" id="L559">        addAlternatives(map, new String[] {&quot;Ereversedcyrillic&quot;,    &quot;afii10047&quot;});</span>
+<span class="fc" id="L560">        addAlternatives(map, new String[] {&quot;IUcyrillic&quot;,    &quot;afii10048&quot;});</span>
+<span class="fc" id="L561">        addAlternatives(map, new String[] {&quot;IAcyrillic&quot;,    &quot;afii10049&quot;});</span>
+
+<span class="fc" id="L563">        addAlternatives(map, new String[] {&quot;acyrillic&quot;,        &quot;afii10065&quot;});</span>
+<span class="fc" id="L564">        addAlternatives(map, new String[] {&quot;becyrillic&quot;,    &quot;afii10066&quot;});</span>
+<span class="fc" id="L565">        addAlternatives(map, new String[] {&quot;vecyrillic&quot;,    &quot;afii10067&quot;});</span>
+<span class="fc" id="L566">        addAlternatives(map, new String[] {&quot;gecyrillic&quot;,    &quot;afii10068&quot;});</span>
+<span class="fc" id="L567">        addAlternatives(map, new String[] {&quot;decyrillic&quot;,    &quot;afii10069&quot;});</span>
+<span class="fc" id="L568">        addAlternatives(map, new String[] {&quot;iecyrillic&quot;,    &quot;afii10070&quot;});</span>
+<span class="fc" id="L569">        addAlternatives(map, new String[] {&quot;iocyrillic&quot;,    &quot;afii10071&quot;});</span>
+<span class="fc" id="L570">        addAlternatives(map, new String[] {&quot;zhecyrillic&quot;,    &quot;afii10072&quot;});</span>
+<span class="fc" id="L571">        addAlternatives(map, new String[] {&quot;zecyrillic&quot;,    &quot;afii10073&quot;});</span>
+<span class="fc" id="L572">        addAlternatives(map, new String[] {&quot;iicyrillic&quot;,    &quot;afii10074&quot;});</span>
+<span class="fc" id="L573">        addAlternatives(map, new String[] {&quot;iishortcyrillic&quot;,    &quot;afii10075&quot;});</span>
+<span class="fc" id="L574">        addAlternatives(map, new String[] {&quot;kacyrillic&quot;,    &quot;afii10076&quot;});</span>
+<span class="fc" id="L575">        addAlternatives(map, new String[] {&quot;elcyrillic&quot;,    &quot;afii10077&quot;});</span>
+<span class="fc" id="L576">        addAlternatives(map, new String[] {&quot;emcyrillic&quot;,    &quot;afii10078&quot;});</span>
+<span class="fc" id="L577">        addAlternatives(map, new String[] {&quot;encyrillic&quot;,    &quot;afii10079&quot;});</span>
+<span class="fc" id="L578">        addAlternatives(map, new String[] {&quot;ocyrillic&quot;,        &quot;afii10080&quot;});</span>
+<span class="fc" id="L579">        addAlternatives(map, new String[] {&quot;pecyrillic&quot;,    &quot;afii10081&quot;});</span>
+<span class="fc" id="L580">        addAlternatives(map, new String[] {&quot;ercyrillic&quot;,    &quot;afii10082&quot;});</span>
+<span class="fc" id="L581">        addAlternatives(map, new String[] {&quot;escyrillic&quot;,    &quot;afii10083&quot;});</span>
+<span class="fc" id="L582">        addAlternatives(map, new String[] {&quot;tecyrillic&quot;,    &quot;afii10084&quot;});</span>
+<span class="fc" id="L583">        addAlternatives(map, new String[] {&quot;ucyrillic&quot;,        &quot;afii10085&quot;});</span>
+<span class="fc" id="L584">        addAlternatives(map, new String[] {&quot;efcyrillic&quot;,    &quot;afii10086&quot;});</span>
+<span class="fc" id="L585">        addAlternatives(map, new String[] {&quot;khacyrillic&quot;,    &quot;afii10087&quot;});</span>
+<span class="fc" id="L586">        addAlternatives(map, new String[] {&quot;tsecyrillic&quot;,    &quot;afii10088&quot;});</span>
+<span class="fc" id="L587">        addAlternatives(map, new String[] {&quot;checyrillic&quot;,    &quot;afii10089&quot;});</span>
+<span class="fc" id="L588">        addAlternatives(map, new String[] {&quot;shacyrillic&quot;,    &quot;afii10090&quot;});</span>
+<span class="fc" id="L589">        addAlternatives(map, new String[] {&quot;shchacyrillic&quot;,    &quot;afii10091&quot;});</span>
+<span class="fc" id="L590">        addAlternatives(map, new String[] {&quot;hardsigncyrillic&quot;,    &quot;afii10092&quot;});</span>
+<span class="fc" id="L591">        addAlternatives(map, new String[] {&quot;yericyrillic&quot;,    &quot;afii10093&quot;});</span>
+<span class="fc" id="L592">        addAlternatives(map, new String[] {&quot;softsigncyrillic&quot;,    &quot;afii10094&quot;});</span>
+<span class="fc" id="L593">        addAlternatives(map, new String[] {&quot;ereversedcyrillic&quot;,    &quot;afii10095&quot;});</span>
+<span class="fc" id="L594">        addAlternatives(map, new String[] {&quot;iucyrillic&quot;,    &quot;afii10096&quot;});</span>
+<span class="fc" id="L595">        addAlternatives(map, new String[] {&quot;iacyrillic&quot;,    &quot;afii10097&quot;});</span>
+
+<span class="fc" id="L597">        addAlternatives(map, new String[] {&quot;Gheupturncyrillic&quot;,    &quot;afii10050&quot;});</span>
+<span class="fc" id="L598">        addAlternatives(map, new String[] {&quot;Djecyrillic&quot;,    &quot;afii10051&quot;});</span>
+<span class="fc" id="L599">        addAlternatives(map, new String[] {&quot;Gjecyrillic&quot;,    &quot;afii10052&quot;});</span>
+<span class="fc" id="L600">        addAlternatives(map, new String[] {&quot;Ecyrillic&quot;,        &quot;afii10053&quot;});</span>
+<span class="fc" id="L601">        addAlternatives(map, new String[] {&quot;Dzecyrillic&quot;,    &quot;afii10054&quot;});</span>
+<span class="fc" id="L602">        addAlternatives(map, new String[] {&quot;Icyrillic&quot;,        &quot;afii10055&quot;});</span>
+<span class="fc" id="L603">        addAlternatives(map, new String[] {&quot;Yicyrillic&quot;,    &quot;afii10056&quot;});</span>
+<span class="fc" id="L604">        addAlternatives(map, new String[] {&quot;Jecyrillic&quot;,    &quot;afii10057&quot;});</span>
+<span class="fc" id="L605">        addAlternatives(map, new String[] {&quot;Ljecyrillic&quot;,    &quot;afii10058&quot;});</span>
+<span class="fc" id="L606">        addAlternatives(map, new String[] {&quot;Njecyrillic&quot;,    &quot;afii10059&quot;});</span>
+<span class="fc" id="L607">        addAlternatives(map, new String[] {&quot;Tshecyrillic&quot;,    &quot;afii10060&quot;});</span>
+<span class="fc" id="L608">        addAlternatives(map, new String[] {&quot;Kjecyrillic&quot;,    &quot;afii10061&quot;});</span>
+<span class="fc" id="L609">        addAlternatives(map, new String[] {&quot;Ushortcyrillic&quot;,    &quot;afii10062&quot;});</span>
+
+<span class="fc" id="L611">        addAlternatives(map, new String[] {&quot;Dzhecyrillic&quot;,    &quot;afii10145&quot;});</span>
+<span class="fc" id="L612">        addAlternatives(map, new String[] {&quot;Yatcyrillic&quot;,    &quot;afii10146&quot;});</span>
+<span class="fc" id="L613">        addAlternatives(map, new String[] {&quot;Fitacyrillic&quot;,    &quot;afii10147&quot;});</span>
+<span class="fc" id="L614">        addAlternatives(map, new String[] {&quot;Izhitsacyrillic&quot;,    &quot;afii10148&quot;});</span>
+
+<span class="fc" id="L616">        addAlternatives(map, new String[] {&quot;gheupturncyrillic&quot;,    &quot;afii10098&quot;});</span>
+<span class="fc" id="L617">        addAlternatives(map, new String[] {&quot;djecyrillic&quot;,    &quot;afii10099&quot;});</span>
+<span class="fc" id="L618">        addAlternatives(map, new String[] {&quot;gjecyrillic&quot;,    &quot;afii10100&quot;});</span>
+<span class="fc" id="L619">        addAlternatives(map, new String[] {&quot;ecyrillic&quot;,        &quot;afii10101&quot;});</span>
+<span class="fc" id="L620">        addAlternatives(map, new String[] {&quot;dzecyrillic&quot;,    &quot;afii10102&quot;});</span>
+<span class="fc" id="L621">        addAlternatives(map, new String[] {&quot;icyrillic&quot;,        &quot;afii10103&quot;});</span>
+<span class="fc" id="L622">        addAlternatives(map, new String[] {&quot;yicyrillic&quot;,    &quot;afii10104&quot;});</span>
+<span class="fc" id="L623">        addAlternatives(map, new String[] {&quot;jecyrillic&quot;,    &quot;afii10105&quot;});</span>
+<span class="fc" id="L624">        addAlternatives(map, new String[] {&quot;ljecyrillic&quot;,    &quot;afii10106&quot;});</span>
+<span class="fc" id="L625">        addAlternatives(map, new String[] {&quot;njecyrillic&quot;,    &quot;afii10107&quot;});</span>
+<span class="fc" id="L626">        addAlternatives(map, new String[] {&quot;tshecyrillic&quot;,    &quot;afii10108&quot;});</span>
+<span class="fc" id="L627">        addAlternatives(map, new String[] {&quot;kjecyrillic&quot;,    &quot;afii10109&quot;});</span>
+<span class="fc" id="L628">        addAlternatives(map, new String[] {&quot;ushortcyrillic&quot;,    &quot;afii10110&quot;});</span>
+
+<span class="fc" id="L630">        addAlternatives(map, new String[] {&quot;dzhecyrillic&quot;,    &quot;afii10193&quot;});</span>
+<span class="fc" id="L631">        addAlternatives(map, new String[] {&quot;yatcyrillic&quot;,    &quot;afii10194&quot;});</span>
+<span class="fc" id="L632">        addAlternatives(map, new String[] {&quot;fitacyrillic&quot;,    &quot;afii10195&quot;});</span>
+<span class="fc" id="L633">        addAlternatives(map, new String[] {&quot;izhitsacyrillic&quot;,    &quot;afii10196&quot;});</span>
+
+<span class="fc" id="L635">        CHARNAME_ALTERNATIVES = Collections.unmodifiableMap(map);</span>
+<span class="fc" id="L636">    }</span>
+
+    private static void addAlternatives(Map map, String[] alternatives) {
+<span class="fc bfc" id="L639" title="All 2 branches covered.">        for (int i = 0, c = alternatives.length; i &lt; c; i++) {</span>
+<span class="fc" id="L640">            String[] alt = new String[c - 1];</span>
+<span class="fc" id="L641">            int idx = 0;</span>
+<span class="fc bfc" id="L642" title="All 2 branches covered.">            for (int j = 0; j &lt; c; j++) {</span>
+<span class="fc bfc" id="L643" title="All 2 branches covered.">                if (i != j) {</span>
+<span class="fc" id="L644">                    alt[idx] = alternatives[j];</span>
+<span class="fc" id="L645">                    idx++;</span>
+                }
+            }
+<span class="fc" id="L648">            map.put(alternatives[i], alt);</span>
+        }
+<span class="fc" id="L650">    }</span>
+
+    private static String[] loadGlyphList(String filename, Map charNameToUnicodeMap) {
+<span class="fc" id="L653">        List lines = new java.util.ArrayList();</span>
+<span class="fc" id="L654">        InputStream in = Glyphs.class.getResourceAsStream(filename);</span>
+<span class="pc bpc" id="L655" title="1 of 2 branches missed.">        if (in == null) {</span>
+<span class="nc" id="L656">            throw new RuntimeException(&quot;Cannot load &quot; + filename</span>
+                    + &quot;. The Glyphs class cannot properly be initialized!&quot;);
+        }
+        try {
+<span class="fc" id="L660">            BufferedReader reader = new BufferedReader(new InputStreamReader(in, &quot;US-ASCII&quot;));</span>
+            String line;
+            try {
+<span class="fc bfc" id="L663" title="All 2 branches covered.">                while ((line = reader.readLine()) != null) {</span>
+<span class="fc bfc" id="L664" title="All 2 branches covered.">                    if (!line.startsWith(&quot;#&quot;)) {</span>
+<span class="fc" id="L665">                        lines.add(line);</span>
+                    }
+                }
+            } finally {
+<span class="fc" id="L669">                reader.close();</span>
+            }
+<span class="nc" id="L671">        } catch (UnsupportedEncodingException uee) {</span>
+<span class="nc" id="L672">            throw new RuntimeException(&quot;Incompatible JVM! US-ASCII encoding is not supported.&quot;</span>
+                    + &quot; The Glyphs class cannot properly be initialized!&quot;);
+<span class="nc" id="L674">        } catch (IOException ioe) {</span>
+<span class="nc" id="L675">            throw new RuntimeException(&quot;I/O error while loading &quot; + filename</span>
+                    + &quot;. The Glyphs class cannot properly be initialized!&quot;);
+        } finally {
+<span class="fc" id="L678">            IOUtils.closeQuietly(in);</span>
+        }
+<span class="fc" id="L680">        String[] arr = new String[lines.size() * 2];</span>
+<span class="fc" id="L681">        int pos = 0;</span>
+<span class="fc" id="L682">        StringBuffer buf = new StringBuffer();</span>
+<span class="fc bfc" id="L683" title="All 2 branches covered.">        for (Object line1 : lines) {</span>
+<span class="fc" id="L684">            String line = (String) line1;</span>
+<span class="fc" id="L685">            int semicolon = line.indexOf(';');</span>
+<span class="pc bpc" id="L686" title="1 of 2 branches missed.">            if (semicolon &lt;= 0) {</span>
+<span class="nc" id="L687">                continue;</span>
+            }
+<span class="fc" id="L689">            String charName = line.substring(0, semicolon);</span>
+<span class="fc" id="L690">            String rawUnicode = line.substring(semicolon + 1);</span>
+<span class="fc" id="L691">            buf.setLength(0);</span>
+
+<span class="fc" id="L693">            StringTokenizer tokenizer = new StringTokenizer(rawUnicode, &quot; &quot;, false);</span>
+<span class="fc bfc" id="L694" title="All 2 branches covered.">            while (tokenizer.hasMoreTokens()) {</span>
+<span class="fc" id="L695">                String token = tokenizer.nextToken();</span>
+<span class="pc bpc" id="L696" title="1 of 2 branches missed.">                assert token.length() == 4;</span>
+<span class="fc" id="L697">                buf.append(hexToChar(token));</span>
+<span class="fc" id="L698">            }</span>
+
+<span class="fc" id="L700">            String unicode = buf.toString();</span>
+<span class="fc" id="L701">            arr[pos] = unicode;</span>
+<span class="fc" id="L702">            pos++;</span>
+<span class="fc" id="L703">            arr[pos] = charName;</span>
+<span class="fc" id="L704">            pos++;</span>
+<span class="pc bpc" id="L705" title="1 of 2 branches missed.">            assert !charNameToUnicodeMap.containsKey(charName);</span>
+<span class="fc" id="L706">            charNameToUnicodeMap.put(charName, unicode);</span>
+<span class="fc" id="L707">        }</span>
+<span class="fc" id="L708">        return arr;</span>
+    }
+
+    private static char hexToChar(String hex) {
+<span class="fc" id="L712">        return (char)Integer.parseInt(hex, 16);</span>
+    }
+
+    /**
+     * Return the glyphname from a character,
+     * eg, charToGlyphName('\\') returns &quot;backslash&quot;
+     *
+     * @param ch glyph to evaluate
+     * @return the name of the glyph
+     */
+    public static String charToGlyphName(char ch) {
+<span class="nc" id="L723">        return stringToGlyph(Character.toString(ch));</span>
+    }
+
+    /**
+     * Returns a String containing the Unicode sequence the given glyph name represents.
+     * @param glyphName the glyph name
+     * @return the Unicode sequence of the glyph (or null if the glyph name is unknown)
+     */
+    public static String getUnicodeSequenceForGlyphName(String glyphName) {
+        //Mapping: see http://www.adobe.com/devnet/opentype/archives/glyph.html
+        //Step 1
+<span class="fc" id="L734">        int period = glyphName.indexOf('.');</span>
+<span class="pc bpc" id="L735" title="1 of 2 branches missed.">        if (period &gt;= 0) {</span>
+<span class="nc" id="L736">            glyphName = glyphName.substring(0, period);</span>
+        }
+
+        //Step 2
+<span class="fc" id="L740">        StringBuffer sb = new StringBuffer();</span>
+<span class="fc" id="L741">        StringTokenizer tokenizer = new StringTokenizer(glyphName, &quot;_&quot;, false);</span>
+<span class="fc bfc" id="L742" title="All 2 branches covered.">        while (tokenizer.hasMoreTokens()) {</span>
+<span class="fc" id="L743">            String token = tokenizer.nextToken();</span>
+            //Step 3
+<span class="fc" id="L745">            String sequence = (String)CHARNAMES_TO_UNICODE.get(token);</span>
+<span class="fc bfc" id="L746" title="All 2 branches covered.">            if (sequence == null) {</span>
+<span class="fc bfc" id="L747" title="All 2 branches covered.">                if (token.startsWith(&quot;uni&quot;)) {</span>
+<span class="fc" id="L748">                    int len = token.length();</span>
+<span class="fc" id="L749">                    int pos = 3;</span>
+<span class="fc bfc" id="L750" title="All 2 branches covered.">                    while (pos + 4 &lt;= len) {</span>
+                        try {
+<span class="fc" id="L752">                            sb.append(hexToChar(token.substring(pos, pos + 4)));</span>
+<span class="nc" id="L753">                        } catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L754">                            return null;</span>
+<span class="fc" id="L755">                        }</span>
+<span class="fc" id="L756">                        pos += 4;</span>
+                    }
+<span class="fc bfc" id="L758" title="All 2 branches covered.">                } else if (token.startsWith(&quot;u&quot;)) {</span>
+<span class="pc bpc" id="L759" title="1 of 2 branches missed.">                    if (token.length() &gt; 5) {</span>
+                        //TODO: Unicode scalar values greater than FFFF are currently not supported
+<span class="nc" id="L761">                        return null;</span>
+                    }
+<span class="pc bpc" id="L763" title="1 of 2 branches missed.">                    if (token.length() &lt; 5) {</span>
+                        /*
+                         * This is not in the form of 'u1234' --probably a
+                         * non-official glyph name that isn't listed in the
+                         * unicode map.
+                         */
+<span class="nc" id="L769">                        return null;</span>
+                    }
+                    try {
+<span class="fc" id="L772">                        sb.append(hexToChar(token.substring(1, 5)));</span>
+<span class="nc" id="L773">                    } catch (NumberFormatException nfe) {</span>
+<span class="nc" id="L774">                        return null;</span>
+<span class="fc" id="L775">                    }</span>
+                } else {
+                    //ignore (empty string)
+                }
+            } else {
+<span class="fc" id="L780">                sb.append(sequence);</span>
+            }
+<span class="fc" id="L782">        }</span>
+
+<span class="fc bfc" id="L784" title="All 2 branches covered.">        if (sb.length() == 0) {</span>
+<span class="fc" id="L785">            return null;</span>
+        } else {
+<span class="fc" id="L787">            return sb.toString();</span>
+        }
+    }
+
+    /**
+     * Return the glyphname from a string,
+     * eg, glyphToString(&quot;\\&quot;) returns &quot;backslash&quot;
+     *
+     * @param name glyph to evaluate
+     * @return the name of the glyph
+     * TODO: javadocs for glyphToString and stringToGlyph are confused
+     * @deprecated User getUnicodeCodePointsForGlyphName instead. This method only returns the
+     *          first Unicode code point it finds.
+     */
+    @Deprecated
+    public static String glyphToString(String name) {
+<span class="nc bnc" id="L803" title="All 2 branches missed.">        for (int i = 0; i &lt; UNICODE_GLYPHS.length; i += 2) {</span>
+<span class="nc bnc" id="L804" title="All 2 branches missed.">            if (UNICODE_GLYPHS[i + 1].equals(name)) {</span>
+<span class="nc" id="L805">                return UNICODE_GLYPHS[i];</span>
+            }
+        }
+<span class="nc" id="L808">        return &quot;&quot;;</span>
+    }
+
+    /**
+     * Return the string representation of a glyphname,
+     * eg stringToGlyph(&quot;backslash&quot;) returns &quot;\\&quot;
+     *
+     * @param name name of the glyph
+     * @return the string representation (or an empty String if no match was found)
+     */
+    public static String stringToGlyph(String name) {
+<span class="nc bnc" id="L819" title="All 2 branches missed.">        for (int i = 0; i &lt; UNICODE_GLYPHS.length; i += 2) {</span>
+<span class="nc bnc" id="L820" title="All 2 branches missed.">            if (UNICODE_GLYPHS[i].equals(name)) {</span>
+<span class="nc" id="L821">                return UNICODE_GLYPHS[i + 1];</span>
+            }
+        }
+<span class="nc bnc" id="L824" title="All 2 branches missed.">        for (int i = 0; i &lt; DINGBATS_GLYPHS.length; i += 2) {</span>
+<span class="nc bnc" id="L825" title="All 2 branches missed.">            if (DINGBATS_GLYPHS[i].equals(name)) {</span>
+<span class="nc" id="L826">                return DINGBATS_GLYPHS[i + 1];</span>
+            }
+        }
+<span class="nc" id="L829">        return &quot;&quot;;</span>
+    }
+
+    /**
+     * Returns an array of char names which can serve as alternatives for the given one.
+     * @param charName the character name to search alternatives for
+     * @return an array of char names or null if no alternatives are available
+     */
+    public static String[] getCharNameAlternativesFor(String charName) {
+<span class="fc" id="L838">        return (String[])CHARNAME_ALTERNATIVES.get(charName);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

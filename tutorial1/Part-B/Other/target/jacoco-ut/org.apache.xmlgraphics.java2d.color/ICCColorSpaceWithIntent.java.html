@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ICCColorSpaceWithIntent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.color</a> &gt; <span class="el_source">ICCColorSpaceWithIntent.java</span></div><h1>ICCColorSpaceWithIntent.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: ICCColorSpaceWithIntent.java 1732018 2016-02-24 04:51:06Z gadams $ */
+
+package org.apache.xmlgraphics.java2d.color;
+
+import java.awt.color.ColorSpace;
+import java.awt.color.ICC_ColorSpace;
+import java.awt.color.ICC_Profile;
+
+/**
+ * This class extends the ICCColorSpace class by providing
+ * convenience methods to convert to sRGB using various
+ * methods, forcing a given intent, such as perceptual or
+ * relative colorimetric. It also additionally holds the name
+ * and source URI of the color profile.
+ */
+public class ICCColorSpaceWithIntent extends ICC_ColorSpace implements ColorSpaceOrigin {
+
+    private static final long serialVersionUID = -3338065900662625221L;
+
+<span class="nc" id="L37">    static final ColorSpace SRGB = ColorSpace.getInstance(ColorSpace.CS_sRGB);</span>
+
+    private RenderingIntent intent;
+    private String profileName;
+    private String profileURI;
+
+    /**
+     * Creates a new ICC-based color space.
+     * @param p the color profile
+     * @param intent the overriding rendering intent (use {@link RenderingIntent#AUTO}
+     *          to preserve the profile's)
+     * @param profileName the color profile name
+     * @param profileURI the source URI of the color profile
+     */
+    public ICCColorSpaceWithIntent(ICC_Profile p, RenderingIntent intent,
+            String profileName, String profileURI) {
+<span class="nc" id="L53">        super(p);</span>
+
+<span class="nc" id="L55">        this.intent = intent;</span>
+
+        /**
+         * Apply the requested intent into the profile
+         */
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (intent != RenderingIntent.AUTO) {</span>
+<span class="nc" id="L61">            byte[] hdr = p.getData(ICC_Profile.icSigHead);</span>
+<span class="nc" id="L62">            hdr[ICC_Profile.icHdrRenderingIntent] = (byte)intent.getIntegerValue();</span>
+        }
+
+<span class="nc" id="L65">        this.profileName = profileName;</span>
+<span class="nc" id="L66">        this.profileURI = profileURI;</span>
+<span class="nc" id="L67">    }</span>
+
+    /**
+     * Returns the sRGB value obtained by forcing the
+     * conversion method to the intent passed to the
+     * constructor.
+     * @param values the color values in the local color space
+     * @return the sRGB values
+     */
+    public float[] intendedToRGB(float[] values) {
+<span class="nc bnc" id="L77" title="All 5 branches missed.">        switch(intent) {</span>
+        case ABSOLUTE_COLORIMETRIC:
+<span class="nc" id="L79">            return absoluteColorimetricToRGB(values);</span>
+        case PERCEPTUAL:
+        case AUTO:
+<span class="nc" id="L82">            return perceptualToRGB(values);</span>
+        case RELATIVE_COLORIMETRIC:
+<span class="nc" id="L84">            return relativeColorimetricToRGB(values);</span>
+        case SATURATION:
+<span class="nc" id="L86">            return saturationToRGB(values);</span>
+        default:
+<span class="nc" id="L88">            throw new RuntimeException(&quot;invalid intent:&quot; + intent);</span>
+        }
+    }
+
+    /**
+     * Perceptual conversion is the method implemented by the
+     * base class's toRGB method
+     * @param values the color values in the local color space
+     * @return the sRGB values
+     */
+    private float[] perceptualToRGB(float[] values) {
+<span class="nc" id="L99">        return toRGB(values);</span>
+    }
+
+    /**
+     * Relative colorimetric needs to happen through CIEXYZ
+     * conversion.
+     * @param values the color values in the local color space
+     * @return the sRGB values
+     */
+    private float[] relativeColorimetricToRGB(float[] values) {
+<span class="nc" id="L109">        float[] ciexyz = toCIEXYZ(values);</span>
+<span class="nc" id="L110">        return SRGB.fromCIEXYZ(ciexyz);</span>
+    }
+
+    /**
+     * Absolute colorimetric. NOT IMPLEMENTED.
+     * Temporarily returns same as perceptual.
+     * @param values the color values in the local color space
+     * @return the sRGB values
+     */
+    private float[] absoluteColorimetricToRGB(float[] values) {
+<span class="nc" id="L120">        return perceptualToRGB(values);</span>
+    }
+
+    /**
+     * Saturation. NOT IMPLEMENTED. Temporarily returns same
+     * as perceptual.
+     * @param values the color values in the local color space
+     * @return the sRGB values
+     */
+    private float[] saturationToRGB(float[] values) {
+<span class="nc" id="L130">        return perceptualToRGB(values);</span>
+    }
+
+    /** {@inheritDoc} */
+    public String getProfileName() {
+<span class="nc" id="L135">        return this.profileName;</span>
+    }
+
+    /** {@inheritDoc} */
+    public String getProfileURI() {
+<span class="nc" id="L140">        return this.profileURI;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

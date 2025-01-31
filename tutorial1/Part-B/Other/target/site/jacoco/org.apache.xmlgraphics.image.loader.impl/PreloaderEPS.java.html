@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PreloaderEPS.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.image.loader.impl</a> &gt; <span class="el_source">PreloaderEPS.java</span></div><h1>PreloaderEPS.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PreloaderEPS.java 1610846 2014-07-15 20:44:18Z vhennebert $ */
+
+package org.apache.xmlgraphics.image.loader.impl;
+
+import java.awt.geom.Rectangle2D;
+import java.io.IOException;
+import java.nio.ByteOrder;
+
+import javax.imageio.stream.ImageInputStream;
+import javax.xml.transform.Source;
+
+import org.apache.xmlgraphics.image.loader.ImageContext;
+import org.apache.xmlgraphics.image.loader.ImageInfo;
+import org.apache.xmlgraphics.image.loader.ImageSize;
+import org.apache.xmlgraphics.image.loader.util.ImageInputStreamAdapter;
+import org.apache.xmlgraphics.image.loader.util.ImageUtil;
+import org.apache.xmlgraphics.ps.DSCConstants;
+import org.apache.xmlgraphics.ps.dsc.DSCException;
+import org.apache.xmlgraphics.ps.dsc.DSCParser;
+import org.apache.xmlgraphics.ps.dsc.DSCParserConstants;
+import org.apache.xmlgraphics.ps.dsc.events.DSCComment;
+import org.apache.xmlgraphics.ps.dsc.events.DSCCommentBoundingBox;
+import org.apache.xmlgraphics.ps.dsc.events.DSCEvent;
+import org.apache.xmlgraphics.util.MimeConstants;
+
+/**
+ * Image preloader for EPS images (Encapsulated PostScript).
+ */
+<span class="fc" id="L46">public class PreloaderEPS extends AbstractImagePreloader {</span>
+
+    /** Key for binary header object used in custom objects of the ImageInfo class. */
+<span class="fc" id="L49">    public static final Object EPS_BINARY_HEADER = EPSBinaryFileHeader.class;</span>
+    /** Key for bounding box used in custom objects of the ImageInfo class. */
+<span class="fc" id="L51">    public static final Object EPS_BOUNDING_BOX = Rectangle2D.class;</span>
+
+    /** {@inheritDoc} */
+    public ImageInfo preloadImage(String uri, Source src, ImageContext context)
+            throws IOException {
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (!ImageUtil.hasImageInputStream(src)) {</span>
+<span class="nc" id="L57">            return null;</span>
+        }
+<span class="fc" id="L59">        ImageInputStream in = ImageUtil.needImageInputStream(src);</span>
+<span class="fc" id="L60">        in.mark();</span>
+<span class="fc" id="L61">        ByteOrder originalByteOrder = in.getByteOrder();</span>
+<span class="fc" id="L62">        in.setByteOrder(ByteOrder.LITTLE_ENDIAN);</span>
+<span class="fc" id="L63">        EPSBinaryFileHeader binaryHeader = null;</span>
+        try {
+<span class="fc" id="L65">            long magic = in.readUnsignedInt();</span>
+<span class="fc" id="L66">            magic &amp;= 0xFFFFFFFFL; //Work-around for bug in Java 1.4.2</span>
+            // Check if binary header
+<span class="fc" id="L68">            boolean supported = false;</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            if (magic == 0xC6D3D0C5L) {</span>
+<span class="fc" id="L70">                supported = true; //binary EPS</span>
+
+<span class="fc" id="L72">                binaryHeader = readBinaryFileHeader(in);</span>
+<span class="fc" id="L73">                in.reset();</span>
+<span class="fc" id="L74">                in.mark(); //Mark start of file again</span>
+<span class="fc" id="L75">                in.seek(binaryHeader.psStart);</span>
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">            } else if (magic == 0x53502125L) { //&quot;%!PS&quot; in little endian</span>
+<span class="fc" id="L78">                supported = true; //ascii EPS</span>
+<span class="fc" id="L79">                in.reset();</span>
+<span class="fc" id="L80">                in.mark(); //Mark start of file again</span>
+            } else {
+<span class="fc" id="L82">                in.reset();</span>
+            }
+
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            if (supported) {</span>
+<span class="fc" id="L86">                ImageInfo info = new ImageInfo(uri, MimeConstants.MIME_EPS);</span>
+<span class="fc" id="L87">                boolean success = determineSize(in, context, info);</span>
+<span class="fc" id="L88">                in.reset(); //Need to go back to start of file</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">                if (!success) {</span>
+                    //No BoundingBox found, so probably no EPS
+<span class="nc" id="L91">                    return null;</span>
+                }
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">                if (in.getStreamPosition() != 0) {</span>
+<span class="nc" id="L94">                    throw new IllegalStateException(&quot;Need to be at the start of the file here&quot;);</span>
+                }
+<span class="fc bfc" id="L96" title="All 2 branches covered.">                if (binaryHeader != null) {</span>
+<span class="fc" id="L97">                    info.getCustomObjects().put(EPS_BINARY_HEADER, binaryHeader);</span>
+                }
+<span class="fc" id="L99">                return info;</span>
+            } else {
+<span class="fc" id="L101">                return null;</span>
+            }
+        } finally {
+<span class="fc" id="L104">            in.setByteOrder(originalByteOrder);</span>
+        }
+    }
+
+    private EPSBinaryFileHeader readBinaryFileHeader(ImageInputStream in) throws IOException {
+<span class="fc" id="L109">        EPSBinaryFileHeader offsets = new EPSBinaryFileHeader();</span>
+<span class="fc" id="L110">        offsets.psStart = in.readUnsignedInt();</span>
+<span class="fc" id="L111">        offsets.psLength = in.readUnsignedInt();</span>
+<span class="fc" id="L112">        offsets.wmfStart = in.readUnsignedInt();</span>
+<span class="fc" id="L113">        offsets.wmfLength = in.readUnsignedInt();</span>
+<span class="fc" id="L114">        offsets.tiffStart = in.readUnsignedInt();</span>
+<span class="fc" id="L115">        offsets.tiffLength = in.readUnsignedInt();</span>
+<span class="fc" id="L116">        return offsets;</span>
+    }
+
+    private boolean determineSize(ImageInputStream in, ImageContext context, ImageInfo info)
+            throws IOException {
+
+<span class="fc" id="L122">        in.mark();</span>
+        try {
+<span class="fc" id="L124">            Rectangle2D bbox = null;</span>
+            DSCParser parser;
+            try {
+<span class="fc" id="L127">                parser = new DSCParser(new ImageInputStreamAdapter(in));</span>
+                outerLoop:
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">                while (parser.hasNext()) {</span>
+<span class="fc" id="L130">                    DSCEvent event = parser.nextEvent();</span>
+<span class="fc bfc" id="L131" title="All 3 branches covered.">                    switch (event.getEventType()) {</span>
+                    case DSCParserConstants.HEADER_COMMENT:
+                    case DSCParserConstants.COMMENT:
+                        //ignore
+<span class="fc" id="L135">                        break;</span>
+                    case DSCParserConstants.DSC_COMMENT:
+<span class="fc" id="L137">                        DSCComment comment = event.asDSCComment();</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">                        if (comment instanceof DSCCommentBoundingBox) {</span>
+<span class="fc" id="L139">                            DSCCommentBoundingBox bboxComment = (DSCCommentBoundingBox)comment;</span>
+<span class="pc bpc" id="L140" title="1 of 4 branches missed.">                            if (DSCConstants.BBOX.equals(bboxComment.getName()) &amp;&amp; bbox == null) {</span>
+<span class="fc" id="L141">                                bbox = (Rectangle2D)bboxComment.getBoundingBox().clone();</span>
+                                //BoundingBox is good but HiRes is better so continue
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">                            } else if (DSCConstants.HIRES_BBOX.equals(bboxComment.getName())) {</span>
+<span class="fc" id="L144">                                bbox = (Rectangle2D)bboxComment.getBoundingBox().clone();</span>
+                                //HiRefBBox is great so stop
+<span class="fc" id="L146">                                break outerLoop;</span>
+                            }
+<span class="fc" id="L148">                        }</span>
+                        break;
+                    default:
+                        //No more header so stop
+<span class="fc" id="L152">                        break outerLoop;</span>
+                    }
+<span class="fc" id="L154">                }</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">                if (bbox == null) {</span>
+<span class="nc" id="L156">                    return false;</span>
+                }
+<span class="nc" id="L158">            } catch (DSCException e) {</span>
+<span class="nc" id="L159">                throw new IOException(&quot;Error while parsing EPS file: &quot; + e.getMessage());</span>
+<span class="fc" id="L160">            }</span>
+
+<span class="fc" id="L162">            ImageSize size = new ImageSize();</span>
+<span class="fc" id="L163">            size.setSizeInMillipoints(</span>
+<span class="fc" id="L164">                    (int)Math.round(bbox.getWidth() * 1000),</span>
+<span class="fc" id="L165">                    (int)Math.round(bbox.getHeight() * 1000));</span>
+<span class="fc" id="L166">            size.setResolution(context.getSourceResolution());</span>
+<span class="fc" id="L167">            size.calcPixelsFromSize();</span>
+<span class="fc" id="L168">            info.setSize(size);</span>
+<span class="fc" id="L169">            info.getCustomObjects().put(EPS_BOUNDING_BOX, bbox);</span>
+<span class="fc" id="L170">            return true;</span>
+        } finally {
+<span class="fc" id="L172">            in.reset();</span>
+        }
+    }
+
+    /**
+     * Holder class for various pointers to the contents of the EPS file.
+     */
+<span class="fc" id="L179">    public static class EPSBinaryFileHeader {</span>
+
+        private long psStart;
+        private long psLength;
+        private long wmfStart;
+        private long wmfLength;
+        private long tiffStart;
+        private long tiffLength;
+
+        /**
+         * Returns the start offset of the PostScript section.
+         * @return the start offset
+         */
+        public long getPSStart() {
+<span class="fc" id="L193">            return psStart;</span>
+        }
+
+        /**
+         * Returns the length of the PostScript section.
+         * @return the length of the PostScript section (in bytes)
+         */
+        public long getPSLength() {
+<span class="fc" id="L201">            return psLength;</span>
+        }
+
+        /**
+         * Indicates whether the EPS has a WMF preview.
+         * @return true if there is a WMF preview
+         */
+        public boolean hasWMFPreview() {
+<span class="nc bnc" id="L209" title="All 2 branches missed.">            return (wmfStart != 0);</span>
+        }
+
+        /**
+         * Returns the start offset of the WMF preview.
+         * @return the start offset (or 0 if there's no WMF preview)
+         */
+        public long getWMFStart() {
+<span class="nc" id="L217">            return wmfStart;</span>
+        }
+
+        /**
+         * Returns the length of the WMF preview.
+         * @return the length of the WMF preview (in bytes)
+         */
+        public long getWMFLength() {
+<span class="nc" id="L225">            return wmfLength;</span>
+        }
+
+        /**
+         * Indicates whether the EPS has a TIFF preview.
+         * @return true if there is a TIFF preview
+         */
+        public boolean hasTIFFPreview() {
+<span class="nc bnc" id="L233" title="All 2 branches missed.">            return (tiffStart != 0);</span>
+        }
+
+        /**
+         * Returns the start offset of the TIFF preview.
+         * @return the start offset (or 0 if there's no TIFF preview)
+         */
+        public long getTIFFStart() {
+<span class="nc" id="L241">            return tiffStart;</span>
+        }
+
+        /**
+         * Returns the length of the TIFF preview.
+         * @return the length of the TIFF preview (in bytes)
+         */
+        public long getTIFFLength() {
+<span class="nc" id="L249">            return tiffLength;</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

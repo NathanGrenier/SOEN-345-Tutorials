@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PSDocumentGraphics2D.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.apache.xmlgraphics:xmlgraphics-commons</a> &gt; <a href="index.source.html" class="el_package">org.apache.xmlgraphics.java2d.ps</a> &gt; <span class="el_source">PSDocumentGraphics2D.java</span></div><h1>PSDocumentGraphics2D.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* $Id: PSDocumentGraphics2D.java 1681108 2015-05-22 13:26:12Z ssteiner $ */
+
+package org.apache.xmlgraphics.java2d.ps;
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+import org.apache.xmlgraphics.ps.DSCConstants;
+
+/**
+ * This class is a wrapper for the &lt;tt&gt;PSGraphics2D&lt;/tt&gt; that
+ * is used to create a full document around the PostScript rendering from
+ * &lt;tt&gt;PSGraphics2D&lt;/tt&gt;.
+ *
+ * @version $Id: PSDocumentGraphics2D.java 1681108 2015-05-22 13:26:12Z ssteiner $
+ * @see org.apache.xmlgraphics.java2d.ps.PSGraphics2D
+ *
+ * Originally authored by Keiron Liddle.
+ */
+public class PSDocumentGraphics2D extends AbstractPSDocumentGraphics2D {
+
+    /**
+     * Create a new AbstractPSDocumentGraphics2D.
+     * This is used to create a new PostScript document, the height,
+     * width and output stream can be setup later.
+     * For use by the transcoder which needs font information
+     * for the bridge before the document size is known.
+     * The resulting document is written to the stream after rendering.
+     *
+     * @param textAsShapes set this to true so that text will be rendered
+     * using curves and not the font.
+     */
+    public PSDocumentGraphics2D(boolean textAsShapes) {
+<span class="nc" id="L51">        super(textAsShapes);</span>
+<span class="nc" id="L52">    }</span>
+
+    /**
+     * Create a new AbstractPSDocumentGraphics2D.
+     * This is used to create a new PostScript document of the given height
+     * and width.
+     * The resulting document is written to the stream after rendering.
+     *
+     * @param textAsShapes set this to true so that text will be rendered
+     * using curves and not the font.
+     * @param stream the stream that the final document should be written to.
+     * @param width the width of the document
+     * @param height the height of the document
+     * @throws IOException an io exception if there is a problem
+     *         writing to the output stream
+     */
+    public PSDocumentGraphics2D(boolean textAsShapes, OutputStream stream,
+                                 int width, int height) throws IOException {
+<span class="nc" id="L70">        this(textAsShapes);</span>
+<span class="nc" id="L71">        setupDocument(stream, width, height);</span>
+<span class="nc" id="L72">    }</span>
+
+    /** {@inheritDoc} */
+    public void nextPage() throws IOException {
+<span class="nc" id="L76">        closePage();</span>
+<span class="nc" id="L77">    }</span>
+
+    /** {@inheritDoc} */
+    protected void writeFileHeader() throws IOException {
+<span class="nc" id="L81">        final Long pagewidth = (long) this.width;</span>
+<span class="nc" id="L82">        final Long pageheight = (long) this.height;</span>
+
+        //PostScript Header
+<span class="nc" id="L85">        gen.writeln(DSCConstants.PS_ADOBE_30);</span>
+<span class="nc" id="L86">        gen.writeDSCComment(DSCConstants.CREATOR,</span>
+                    new String[] {&quot;Apache XML Graphics Commons&quot;
+                        + &quot;: PostScript Generator for Java2D&quot;});
+<span class="nc" id="L89">        gen.writeDSCComment(DSCConstants.CREATION_DATE,</span>
+                    new Object[] {new java.util.Date()});
+<span class="nc" id="L91">        gen.writeDSCComment(DSCConstants.PAGES, DSCConstants.ATEND);</span>
+<span class="nc" id="L92">        gen.writeDSCComment(DSCConstants.BBOX, new Object[]</span>
+                {ZERO, ZERO, pagewidth, pageheight});
+<span class="nc" id="L94">        gen.writeDSCComment(DSCConstants.LANGUAGE_LEVEL, gen.getPSLevel());</span>
+<span class="nc" id="L95">        gen.writeDSCComment(DSCConstants.END_COMMENTS);</span>
+
+        //Defaults
+<span class="nc" id="L98">        gen.writeDSCComment(DSCConstants.BEGIN_DEFAULTS);</span>
+<span class="nc" id="L99">        gen.writeDSCComment(DSCConstants.END_DEFAULTS);</span>
+
+        //Prolog
+<span class="nc" id="L102">        gen.writeDSCComment(DSCConstants.BEGIN_PROLOG);</span>
+<span class="nc" id="L103">        gen.writeDSCComment(DSCConstants.END_PROLOG);</span>
+
+        //Setup
+<span class="nc" id="L106">        gen.writeDSCComment(DSCConstants.BEGIN_SETUP);</span>
+<span class="nc" id="L107">        writeProcSets();</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (customTextHandler instanceof PSTextHandler) {</span>
+<span class="nc" id="L109">            ((PSTextHandler)customTextHandler).writeSetup();</span>
+        }
+<span class="nc" id="L111">        gen.writeDSCComment(DSCConstants.END_SETUP);</span>
+<span class="nc" id="L112">    }</span>
+
+    /** {@inheritDoc} */
+    protected void writePageHeader() throws IOException {
+<span class="nc" id="L116">        Integer pageNumber = this.pagecount;</span>
+<span class="nc" id="L117">        gen.writeDSCComment(DSCConstants.PAGE, new Object[]</span>
+<span class="nc" id="L118">                {pageNumber.toString(), pageNumber});</span>
+<span class="nc" id="L119">        gen.writeDSCComment(DSCConstants.PAGE_BBOX, new Object[]</span>
+<span class="nc" id="L120">                {ZERO, ZERO, width, height});</span>
+<span class="nc" id="L121">        gen.writeDSCComment(DSCConstants.BEGIN_PAGE_SETUP);</span>
+<span class="nc" id="L122">        gen.writeln(&quot;&lt;&lt;&quot;);</span>
+<span class="nc" id="L123">        gen.writeln(&quot;/PageSize [&quot; + width + &quot; &quot; + height + &quot;]&quot;);</span>
+<span class="nc" id="L124">        gen.writeln(&quot;/ImagingBBox null&quot;);</span>
+<span class="nc" id="L125">        gen.writeln(&quot;&gt;&gt; setpagedevice&quot;);</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">        if (customTextHandler instanceof PSTextHandler) {</span>
+<span class="nc" id="L127">            ((PSTextHandler)customTextHandler).writePageSetup();</span>
+        }
+<span class="nc" id="L129">    }</span>
+
+    /** {@inheritDoc} */
+    protected void writePageTrailer() throws IOException {
+<span class="nc" id="L133">        gen.showPage();</span>
+<span class="nc" id="L134">    }</span>
+
+    /**
+     * This constructor supports the create method
+     * @param g the PostScript document graphics to make a copy of
+     */
+    public PSDocumentGraphics2D(PSDocumentGraphics2D g) {
+<span class="nc" id="L141">        super(g);</span>
+<span class="nc" id="L142">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
