@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -20,6 +21,7 @@
     <release.version>2.5.2</release.version>
     <surefire.version>2.18.1</surefire.version>
     <jdk.path>${env.JAVA_HOME}</jdk.path>
+    <pitest.version>1.7.3</pitest.version>
   </properties>
 
   <licenses>
@@ -100,6 +102,20 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${surefire.version}</version>
         </plugin>
+        <plugin>
+          <groupId>org.pitest</groupId>
+          <artifactId>pitest-maven</artifactId>
+          <version>${pitest.version}</version>
+          <executions>
+            <execution>
+              <id>pit-report</id>
+              <phase>test</phase>
+              <goals>
+                <goal>mutationCoverage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -139,6 +155,20 @@
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
         </configuration>
       </plugin>
+      <!-- <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>${pitest.version}</version>
+        <executions>
+          <execution>
+            <id>pit-report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>mutationCoverage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin> -->
     </plugins>
     <resources>
       <resource>
@@ -172,7 +202,7 @@
       </testResource>
     </testResources>
   </build>
-  
+
   <profiles>
     <profile>
       <id>custom-javac</id>
@@ -198,7 +228,7 @@
         </pluginManagement>
       </build>
     </profile>
-  </profiles>  
+  </profiles>
 
   <reporting>
     <plugins>
