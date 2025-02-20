@@ -54,6 +54,11 @@ public class RemoteDBTest {
         remoteDB.setTestIterator(iteratorMock);
 
         // Mock iteratorMock.hasNext() to return true
+        when(iteratorMock.hasNext()).thenReturn(true);
+
+        // test that you receive the first record in the DB. e.g. Paul McCartney
+        String record = remoteDB.getNextRecord();
+        assertEquals("paul@concordia.ca", record);
 
         // continue testing with the remaining 3 records
         record = remoteDB.getNextRecord();
