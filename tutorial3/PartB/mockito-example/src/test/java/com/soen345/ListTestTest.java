@@ -44,6 +44,6 @@ public class ListTestTest {
         List<String> list = mock(List.class);
         Mockito.when(list.get(Mockito.anyInt())).thenReturn("this is an int");
         assertEquals("this is an int", list.get(0));
-        assertEquals("this is an int", list.get(1));
+        assertEquals("this is an int", list.get(999));
     }
 }

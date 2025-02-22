@@ -1,18 +1,11 @@
 package com.concordia.soen345.mocking;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.BDDMockito.given;
 
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +18,7 @@ import org.junit.jupiter.api.Test;
 public class RemoteDBTest {
     private Iterator<String> iteratorMock;
 
+    @SuppressWarnings("unchecked")
     @BeforeEach
     public void setupMocks() {
         // Here you need to mock the iterator class
@@ -70,7 +64,8 @@ public class RemoteDBTest {
 
         // NOTE: Test that the last return value will continue to be returned for
         // the remaining invocations to getNextRecord()
-        // TODO:
+        record = remoteDB.getNextRecord();
+        assertEquals("john@concordia.ca", record);
 
         // Now mock iteratorMock.hasNext() to return false (we have returned all
         // records)
